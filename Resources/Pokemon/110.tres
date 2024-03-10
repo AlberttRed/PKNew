@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://cjd1k1q4cwqi4"]
+
+[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_mc7m0"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_6satc"]
+[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="2_htheg"]
+[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_f13qq"]
+[ext_resource type="Resource" uid="uid://0qhj5bvapu6l" path="res://Resources/Types/04.tres" id="3_uwoij"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nytoa"]
+atlas = ExtResource("1_mc7m0")
+region = Rect2(1504, 11796, 160, 114)
+margin = Rect2(0, 46, 0, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cox8f"]
+atlas = ExtResource("1_mc7m0")
+region = Rect2(1840, 11824, 160, 114)
+margin = Rect2(0, 46, 0, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gths"]
+atlas = ExtResource("1_mc7m0")
+region = Rect2(4, 5560, 142, 146)
+margin = Rect2(8, 6, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_islv1"]
+atlas = ExtResource("1_mc7m0")
+region = Rect2(948, 5528, 142, 146)
+margin = Rect2(8, 6, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf2uu"]
+atlas = ExtResource("2_6satc")
+region = Rect2(4, 4, 0, 0)
+margin = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orr3k"]
+atlas = ExtResource("3_f13qq")
+region = Rect2(260, 268, 118, 44)
+margin = Rect2(4, 18, 10, 20)
+
+[resource]
+resource_name = "110 - Weezing"
+script = ExtResource("2_htheg")
+id = 110
+internal_name = "weezing"
+Name = "Weezing"
+type_a = ExtResource("3_uwoij")
+base_exprience = 172
+height = 12.0
+weight = 95.0
+is_default = true
+abilities = ["26", "256", "1"]
+forms = []
+held_items_id = ["205"]
+held_items_rarity = [5.0]
+learn_type = ["4", "1", "4", "4", "3", "1", "4", "4", "4", "4", "4", "4", "1", "4", "1", "1", "4", "1", "1", "1", "4", "1", "4", "1", "4", "4", "4", "4", "4", "3", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "3", "4", "4", "4", "4", "3", "1", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "1", "4", "1", "4", "4", "4"]
+learn_lvl = [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 39, 49, 0, 43, 1, 1, 0, 1, 0, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 58, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 19, 0, 50, 0, 0, 0]
+learn_move_id = ["29", "33", "34", "36", "53", "60", "63", "85", "87", "92", "99", "102", "103", "104", "108", "114", "117", "120", "123", "124", "126", "139", "148", "153", "156", "164", "168", "173", "174", "180", "182", "184", "188", "192", "194", "203", "205", "207", "213", "214", "216", "218", "220", "237", "240", "241", "247", "253", "257", "259", "261", "262", "263", "269", "290", "351", "360", "363", "371", "372", "390", "399", "416", "441", "445", "458", "474", "482", "491", "496", "499", "510", "562", "590", "599", "611"]
+hp_base = 65
+attack_base = 90
+defense_base = 120
+special_attack_base = 85
+special_defense_base = 70
+speed_base = 60
+total_base = 0
+hp_effort_EVs = 0
+attack_effort_EVs = 0
+defense_effort_EVs = 2
+special_effort_attack_EVs = 0
+special_effort_defense_EVs = 0
+speed_effort_EVs = 0
+gender_rate = 4
+capture_rate = 60
+base_happiness = 50
+is_baby = false
+hatch_counter = 20
+has_gender_differences = false
+forms_switchable = false
+growth_rate_id = 1
+egg_group_a_id = 0
+egg_group_b_id = 0
+evol_method = []
+evol_lvl = []
+evol_pokemon_id = []
+description = "Posee una capacidad de succión inferior a la del
+Weezing de Galar, pero las toxinas que genera
+son más potentes."
+habitat_id = 1
+battlerPlayerY = 0
+battlerEnemyY = 0
+battlerAltitude = 0
+icon_sprite = SubResource("AtlasTexture_orr3k")
+footprint_sprite = SubResource("AtlasTexture_nf2uu")
+battle_front_sprite = SubResource("AtlasTexture_islv1")
+battle_back_sprite = SubResource("AtlasTexture_cox8f")
+battle_front_shiny_sprite = SubResource("AtlasTexture_0gths")
+battle_back_shiny_sprite = SubResource("AtlasTexture_nytoa")

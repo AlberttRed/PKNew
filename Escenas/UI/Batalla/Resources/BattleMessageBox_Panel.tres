@@ -1,0 +1,7 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cehlbd06rgssm"]
+
+[ext_resource type="Texture2D" uid="uid://cuh117bgdohhg" path="res://Escenas/UI/Batalla/Resources/Sprites/battleMessage.png" id="1_d3msw"]
+
+[resource]
+texture = ExtResource("1_d3msw")
+region_rect = Rect2(0, 0, 512, 96)

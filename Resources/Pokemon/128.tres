@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://cgnsegkfrgf6d"]
+
+[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_ijp6o"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_7dk8e"]
+[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_gyyrn"]
+[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="4_mgdwx"]
+[ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="5_xcuqr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgpcr"]
+atlas = ExtResource("1_ijp6o")
+region = Rect2(740, 16380, 160, 100)
+margin = Rect2(0, 60, 0, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8w25"]
+atlas = ExtResource("1_ijp6o")
+region = Rect2(324, 16404, 160, 100)
+margin = Rect2(0, 60, 0, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1do3"]
+atlas = ExtResource("1_ijp6o")
+region = Rect2(1220, 15316, 138, 120)
+margin = Rect2(12, 20, 22, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u28hm"]
+atlas = ExtResource("1_ijp6o")
+region = Rect2(1840, 15340, 138, 120)
+margin = Rect2(12, 20, 22, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkb28"]
+atlas = ExtResource("2_7dk8e")
+region = Rect2(132, 596, 18, 16)
+margin = Rect2(8, 8, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ny3g"]
+atlas = ExtResource("3_gyyrn")
+region = Rect2(364, 1100, 110, 38)
+margin = Rect2(10, 20, 18, 26)
+
+[resource]
+resource_name = "128 - Tauros"
+script = ExtResource("4_mgdwx")
+id = 128
+internal_name = "tauros"
+Name = "Tauros"
+type_a = ExtResource("5_xcuqr")
+base_exprience = 172
+height = 14.0
+weight = 884.0
+is_default = true
+abilities = ["22", "83", "125"]
+forms = []
+held_items_id = []
+held_items_rarity = []
+learn_type = ["1", "4", "1", "4", "1", "4", "1", "1", "4", "1", "1", "3", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "3", "4", "1", "4", "4", "3", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "3", "4", "3", "3", "4", "3", "4", "4", "4", "4", "4", "4", "1", "1", "1", "1", "4", "3", "4", "4", "4", "4", "4", "4", "1", "4", "4"]
+learn_lvl = [21, 0, 13, 0, 1, 0, 51, 43, 0, 28, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 38, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 15, 55, 29, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0]
+learn_move_id = ["23", "29", "30", "32", "33", "34", "36", "37", "38", "39", "43", "53", "57", "58", "59", "63", "70", "76", "85", "87", "89", "90", "91", "92", "99", "102", "104", "116", "117", "126", "130", "156", "157", "164", "168", "173", "174", "179", "180", "182", "184", "192", "196", "200", "201", "203", "207", "213", "214", "216", "218", "224", "228", "231", "237", "240", "241", "247", "249", "250", "253", "263", "270", "272", "279", "283", "290", "317", "351", "352", "363", "370", "371", "372", "416", "428", "431", "442", "444", "445", "496", "510", "514", "523", "526", "528", "590"]
+hp_base = 75
+attack_base = 100
+defense_base = 95
+special_attack_base = 40
+special_defense_base = 70
+speed_base = 110
+total_base = 0
+hp_effort_EVs = 0
+attack_effort_EVs = 1
+defense_effort_EVs = 0
+special_effort_attack_EVs = 0
+special_effort_defense_EVs = 0
+speed_effort_EVs = 1
+gender_rate = 0
+capture_rate = 45
+base_happiness = 50
+is_baby = false
+hatch_counter = 20
+has_gender_differences = false
+forms_switchable = false
+growth_rate_id = "1"
+egg_group_a_id = "5"
+egg_group_b_id = 0
+evol_method = []
+evol_lvl = []
+evol_pokemon_id = []
+description = "Los Tauros que habitan en la región de Galar son
+de temperamento irascible y no permiten que los
+humanos monten en su lomo."
+habitat_id = 1
+battlerPlayerY = 0
+battlerEnemyY = 0
+battlerAltitude = 0
+icon_sprite = SubResource("AtlasTexture_2ny3g")
+footprint_sprite = SubResource("AtlasTexture_bkb28")
+battle_front_sprite = SubResource("AtlasTexture_u28hm")
+battle_back_sprite = SubResource("AtlasTexture_p8w25")
+battle_front_shiny_sprite = SubResource("AtlasTexture_t1do3")
+battle_back_shiny_sprite = SubResource("AtlasTexture_mgpcr")

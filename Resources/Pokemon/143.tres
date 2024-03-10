@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://dempgubriylgf"]
+
+[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_c1mja"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_bd35b"]
+[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_cicyr"]
+[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="4_7vqah"]
+[ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="5_l5hu8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar3bf"]
+atlas = ExtResource("1_c1mja")
+region = Rect2(908, 16448, 160, 98)
+margin = Rect2(0, 62, 0, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ajvc"]
+atlas = ExtResource("1_c1mja")
+region = Rect2(1464, 16448, 160, 98)
+margin = Rect2(0, 62, 0, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq6ww"]
+atlas = ExtResource("1_c1mja")
+region = Rect2(412, 13372, 128, 138)
+margin = Rect2(16, 10, 32, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5hef"]
+atlas = ExtResource("1_c1mja")
+region = Rect2(1716, 13320, 128, 138)
+margin = Rect2(16, 10, 32, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87fhd"]
+atlas = ExtResource("2_bd35b")
+region = Rect2(4, 272, 22, 24)
+margin = Rect2(4, 4, 10, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3c8i"]
+atlas = ExtResource("3_cicyr")
+region = Rect2(964, 728, 112, 42)
+margin = Rect2(10, 18, 16, 22)
+
+[resource]
+resource_name = "143 - Snorlax"
+script = ExtResource("4_7vqah")
+id = 143
+internal_name = "snorlax"
+Name = "Snorlax"
+type_a = ExtResource("5_l5hu8")
+base_exprience = 189
+height = 21.0
+weight = 4600.0
+is_default = true
+abilities = ["17", "47", "82"]
+forms = []
+held_items_id = ["127", "211"]
+held_items_rarity = [100.0, 100.0]
+learn_type = ["4", "4", "4", "4", "4", "2", "4", "1", "1", "1", "4", "1", "1", "3", "4", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "1", "1", "4", "4", "4", "4", "2", "4", "4", "1", "4", "1", "4", "4", "1", "4", "1", "4", "1", "4", "4", "4", "3", "4", "4", "2", "1", "4", "4", "4", "4", "4", "4", "4", "2", "4", "4", "4", "1", "4", "4", "4", "4", "4", "1", "1", "4", "4", "4", "3", "4", "4", "1", "3", "4", "3", "4", "1", "1", "4", "4", "1", "4", "4", "2", "3", "3", "4", "1", "3", "4", "3", "3", "4", "4", "1", "2", "4", "1", "4", "4", "4", "4", "4", "4", "2", "4", "4"]
+learn_lvl = [0, 0, 0, 0, 0, 0, 0, 1, 1, 35, 0, 48, 16, 0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 41, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 36, 0, 1, 0, 22, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 37, 42, 0, 0, 44, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 52, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+learn_move_id = ["5", "6", "7", "8", "9", "18", "25", "29", "33", "34", "36", "38", "44", "53", "55", "56", "57", "58", "59", "61", "63", "66", "68", "69", "70", "76", "85", "87", "89", "90", "91", "92", "94", "99", "102", "103", "104", "106", "111", "115", "117", "118", "120", "122", "126", "130", "133", "149", "156", "157", "164", "173", "174", "175", "182", "187", "189", "192", "196", "200", "201", "203", "204", "205", "207", "213", "214", "216", "218", "223", "227", "228", "237", "240", "241", "242", "244", "247", "249", "250", "253", "254", "256", "263", "264", "270", "276", "278", "280", "281", "289", "290", "304", "317", "335", "343", "351", "352", "359", "363", "374", "380", "387", "402", "411", "416", "428", "431", "441", "442", "445", "479", "484", "495", "496", "498", "510", "514", "523", "526", "528", "535", "562", "590", "612"]
+hp_base = 160
+attack_base = 110
+defense_base = 65
+special_attack_base = 65
+special_defense_base = 110
+speed_base = 30
+total_base = 0
+hp_effort_EVs = 2
+attack_effort_EVs = 0
+defense_effort_EVs = 0
+special_effort_attack_EVs = 0
+special_effort_defense_EVs = 0
+speed_effort_EVs = 0
+gender_rate = 1
+capture_rate = 25
+base_happiness = 50
+is_baby = false
+hatch_counter = 40
+has_gender_differences = false
+forms_switchable = false
+growth_rate_id = "1"
+egg_group_a_id = "1"
+egg_group_b_id = 0
+evol_method = []
+evol_lvl = []
+evol_pokemon_id = []
+description = "Este Pokémon tiene un estómago a prueba de
+bomba, por lo que es capaz de ingerir incluso
+comida podrida o mohosa."
+habitat_id = 1
+battlerPlayerY = 0
+battlerEnemyY = 0
+battlerAltitude = 0
+icon_sprite = SubResource("AtlasTexture_m3c8i")
+footprint_sprite = SubResource("AtlasTexture_87fhd")
+battle_front_sprite = SubResource("AtlasTexture_b5hef")
+battle_back_sprite = SubResource("AtlasTexture_1ajvc")
+battle_front_shiny_sprite = SubResource("AtlasTexture_eq6ww")
+battle_back_shiny_sprite = SubResource("AtlasTexture_ar3bf")

@@ -1,0 +1,9 @@
+[gd_resource type="DynamicFont" load_steps=2 format=3]
+
+[ext_resource type="DynamicFontData" uid="uid://dy13rned2pnp7" path="res://Escenas/UI/Fonts/pkmnems.ttf" id="1"]
+
+
+[resource]
+size = 22
+font_data = ExtResource( 1 )
+

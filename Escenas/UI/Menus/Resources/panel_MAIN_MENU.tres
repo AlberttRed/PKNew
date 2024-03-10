@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture" uid="uid://d4kflb2fog3kh" path="res://Escenas/UI/Menus/Resources/choice 1_old.png" id="1"]
+
+
+[resource]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 48, 48 )
+margin_left = 32.0
+margin_right = 32.0
+margin_top = 32.0
+margin_bottom = 32.0
+

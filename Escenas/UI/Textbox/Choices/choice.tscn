@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://co08ksrvsm8lg"]
+
+[ext_resource type="Texture2D" uid="uid://bd7c5m6ia6ppn" path="res://Escenas/UI/Textbox/Choices/Resources/selarrow.png" id="1_qep8p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ulqxp"]
+texture = ExtResource("1_qep8p")
+margin_left = 12.0
+expand_margin_top = 2.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 14, 32)
+draw_center = false
+
+[node name="Choice" type="Panel"]
+texture_filter = 2
+offset_right = 73.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_ulqxp")
+
+[node name="ChoiceText" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 1.0
+offset_right = 75.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 26
+text = "Sí"
+
+[node name="ChoiceText2" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 1.0
+offset_right = 75.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 26
+text = "Sí"

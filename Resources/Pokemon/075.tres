@@ -1,0 +1,96 @@
+[gd_resource type="Resource" script_class="Pokemon" load_steps=13 format=3 uid="uid://cw6fctxierm3f"]
+
+[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_boeoe"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_bt35f"]
+[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_yok2g"]
+[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="4_b68ck"]
+[ext_resource type="Resource" uid="uid://dhburvcqxnam0" path="res://Resources/Types/06.tres" id="5_71oov"]
+[ext_resource type="Resource" uid="uid://bg5akexgaovle" path="res://Resources/Types/05.tres" id="6_y1vu1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr2ya"]
+atlas = ExtResource("1_boeoe")
+region = Rect2(1088, 12880, 160, 110)
+margin = Rect2(0, 50, 0, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bacem"]
+atlas = ExtResource("1_boeoe")
+region = Rect2(172, 12952, 160, 110)
+margin = Rect2(0, 50, 0, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aahq4"]
+atlas = ExtResource("1_boeoe")
+region = Rect2(1188, 20368, 154, 88)
+margin = Rect2(4, 36, 6, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sudq"]
+atlas = ExtResource("1_boeoe")
+region = Rect2(1352, 20368, 154, 88)
+margin = Rect2(4, 36, 6, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5g6m"]
+atlas = ExtResource("2_bt35f")
+region = Rect2(164, 500, 20, 20)
+margin = Rect2(6, 8, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snjeq"]
+atlas = ExtResource("3_yok2g")
+region = Rect2(1116, 420, 116, 44)
+margin = Rect2(6, 18, 12, 20)
+
+[resource]
+resource_name = "75 - Graveler"
+script = ExtResource("4_b68ck")
+id = 75
+internal_name = "graveler"
+Name = "Graveler"
+type_a = ExtResource("5_71oov")
+type_b = ExtResource("6_y1vu1")
+base_exprience = 137
+height = 10.0
+weight = 1050.0
+is_default = true
+abilities = ["69", "5", "8"]
+forms = []
+held_items_id = ["206", "215"]
+held_items_rarity = [5.0, 5.0]
+learn_type = ["4", "4", "3", "1", "4", "1", "4", "4", "4", "3", "4", "4", "4", "4", "1", "1", "4", "4", "4", "4", "4", "4", "1", "1", "4", "4", "1", "4", "1", "4", "4", "4", "4", "4", "2", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "1", "4", "4", "4", "3", "4", "4", "4", "4", "3", "4", "4", "1", "4", "3", "3", "4", "1", "2", "4", "4", "4", "3", "1", "4", "3", "4", "4", "1", "4", "4", "2", "1", "4", "4", "4", "1", "4", "4"]
+learn_lvl = [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 16, 36, 0, 0, 0, 0, 0, 0, 29, 1, 0, 0, 21, 0, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 37, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 49, 0, 0, 0, 27, 0, 0, 0, 36, 0, 0]
+learn_move_id = ["5", "7", "9", "28", "29", "33", "34", "36", "38", "53", "66", "68", "69", "70", "88", "89", "90", "91", "92", "99", "102", "104", "106", "111", "117", "118", "120", "126", "153", "156", "157", "164", "173", "174", "175", "182", "184", "189", "201", "203", "205", "207", "213", "214", "216", "218", "222", "223", "237", "241", "246", "249", "263", "264", "267", "276", "280", "290", "300", "317", "334", "335", "341", "350", "359", "360", "363", "374", "389", "397", "411", "414", "431", "442", "444", "445", "446", "469", "479", "484", "496", "510", "523", "590", "612"]
+hp_base = 55
+attack_base = 95
+defense_base = 115
+special_attack_base = 45
+special_defense_base = 45
+speed_base = 35
+total_base = 0
+hp_effort_EVs = 0
+attack_effort_EVs = 0
+defense_effort_EVs = 2
+special_effort_attack_EVs = 0
+special_effort_defense_EVs = 0
+speed_effort_EVs = 0
+gender_rate = 4
+capture_rate = 120
+base_happiness = 70
+is_baby = false
+hatch_counter = 15
+has_gender_differences = false
+forms_switchable = false
+growth_rate_id = "4"
+egg_group_a_id = "10"
+egg_group_b_id = 0
+evol_method = []
+evol_lvl = []
+evol_pokemon_id = []
+description = "Se le suele ver rodando montaña abajo. No evita
+los obstáculos, sino que los arrolla."
+habitat_id = 1
+battlerPlayerY = 0
+battlerEnemyY = 0
+battlerAltitude = 0
+icon_sprite = SubResource("AtlasTexture_snjeq")
+footprint_sprite = SubResource("AtlasTexture_t5g6m")
+battle_front_sprite = SubResource("AtlasTexture_7sudq")
+battle_back_sprite = SubResource("AtlasTexture_bacem")
+battle_front_shiny_sprite = SubResource("AtlasTexture_aahq4")
+battle_back_shiny_sprite = SubResource("AtlasTexture_lr2ya")

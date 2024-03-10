@@ -1,0 +1,94 @@
+[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://drxufoceqwyln"]
+
+[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_rqef5"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_rcyd7"]
+[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_om1pe"]
+[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="4_nhl34"]
+[ext_resource type="Resource" uid="uid://ces0u5nv45fpj" path="res://Resources/Types/13.tres" id="5_t4vqh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w88y"]
+atlas = ExtResource("1_rqef5")
+region = Rect2(1184, 26808, 104, 80)
+margin = Rect2(28, 80, 56, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3grg"]
+atlas = ExtResource("1_rqef5")
+region = Rect2(480, 26808, 104, 80)
+margin = Rect2(28, 80, 56, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc3v6"]
+atlas = ExtResource("1_rqef5")
+region = Rect2(1428, 29292, 62, 60)
+margin = Rect2(48, 50, 98, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv5uh"]
+atlas = ExtResource("1_rqef5")
+region = Rect2(1264, 29304, 62, 60)
+margin = Rect2(48, 50, 98, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hccs8"]
+atlas = ExtResource("2_rcyd7")
+region = Rect2(4, 4, 0, 0)
+margin = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frw4j"]
+atlas = ExtResource("3_om1pe")
+region = Rect2(396, 2076, 88, 32)
+margin = Rect2(18, 22, 40, 32)
+
+[resource]
+resource_name = "100 - Voltorb"
+script = ExtResource("4_nhl34")
+id = 100
+internal_name = "voltorb"
+Name = "Voltorb"
+type_a = ExtResource("5_t4vqh")
+base_exprience = 66
+height = 5.0
+weight = 104.0
+is_default = true
+abilities = ["43", "9", "106"]
+forms = []
+held_items_id = []
+held_items_rarity = []
+learn_type = ["4", "1", "4", "4", "1", "1", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "1", "4", "4", "1", "1", "4", "1", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "1", "4", "4", "4", "4", "4", "1", "4", "4", "1", "4", "4", "3", "2", "4", "2", "3", "4", "1", "4", "3", "1", "1", "1", "1", "3", "4", "4", "4", "4", "4", "1", "4"]
+learn_lvl = [0, 1, 0, 0, 17, 9, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 29, 0, 0, 22, 36, 0, 43, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 21, 0, 0, 0, 0, 0, 41, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 36, 37, 26, 29, 0, 0, 0, 0, 0, 0, 10, 0]
+learn_move_id = ["29", "33", "36", "38", "49", "84", "85", "86", "87", "92", "97", "99", "100", "102", "103", "104", "113", "115", "117", "120", "129", "148", "153", "156", "164", "168", "173", "174", "182", "192", "203", "205", "207", "209", "214", "216", "218", "237", "240", "243", "259", "263", "268", "269", "270", "277", "278", "290", "319", "324", "351", "360", "363", "389", "393", "435", "451", "486", "492", "496", "521", "527", "528", "590", "598", "604"]
+hp_base = 40
+attack_base = 30
+defense_base = 50
+special_attack_base = 55
+special_defense_base = 55
+speed_base = 100
+total_base = 0
+hp_effort_EVs = 0
+attack_effort_EVs = 0
+defense_effort_EVs = 0
+special_effort_attack_EVs = 0
+special_effort_defense_EVs = 0
+speed_effort_EVs = 1
+gender_rate = -1
+capture_rate = 190
+base_happiness = 70
+is_baby = false
+hatch_counter = 20
+has_gender_differences = false
+forms_switchable = false
+growth_rate_id = "2"
+egg_group_a_id = "10"
+egg_group_b_id = 0
+evol_method = []
+evol_lvl = []
+evol_pokemon_id = []
+description = "Se dice que se camufla como una Poké Ball.
+Al más mínimo estímulo se autodestruirá."
+habitat_id = 1
+battlerPlayerY = 0
+battlerEnemyY = 0
+battlerAltitude = 0
+icon_sprite = SubResource("AtlasTexture_frw4j")
+footprint_sprite = SubResource("AtlasTexture_hccs8")
+battle_front_sprite = SubResource("AtlasTexture_xv5uh")
+battle_back_sprite = SubResource("AtlasTexture_n3grg")
+battle_front_shiny_sprite = SubResource("AtlasTexture_tc3v6")
+battle_back_shiny_sprite = SubResource("AtlasTexture_8w88y")

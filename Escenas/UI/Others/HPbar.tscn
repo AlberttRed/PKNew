@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ta05jv33ns50"]
+
+[ext_resource type="Script" path="res://Escenas/UI/Others/HPbar.gd" id="1_lywt1"]
+[ext_resource type="Texture2D" uid="uid://ymyg408f4s7m" path="res://Sprites/Pictures/HPbar_background.png" id="3_1t77b"]
+[ext_resource type="Texture2D" uid="uid://bhehj7u2tr1uf" path="res://Sprites/Pictures/HPbar_overlay.png" id="3_q3l73"]
+[ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="4_df7g3"]
+[ext_resource type="Texture2D" uid="uid://cxptje7t11epq" path="res://Sprites/Pictures/HPbar_progress.png" id="5_3p84r"]
+
+[node name="health_bar" type="Node2D"]
+script = ExtResource("1_lywt1")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="."]
+offset_left = 11.1186
+offset_top = 10.3219
+offset_right = 61.1186
+offset_bottom = 33.3219
+theme = ExtResource("4_df7g3")
+text = "45/45"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("3_1t77b")
+texture_over = ExtResource("3_q3l73")
+texture_progress = ExtResource("5_3p84r")
+texture_progress_offset = Vector2(32, 0)
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,0 +1,2516 @@
+[gd_scene load_steps=80 format=3 uid="uid://dkjekvml5fqpp"]
+
+[ext_resource type="Texture2D" uid="uid://d2i5gus8tvoi" path="res://Escenas/UI/Menus/Resources/partybg.PNG" id="1_ew7hq"]
+[ext_resource type="Script" path="res://Escenas/UI/Menus/2 - Party/PARTY.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dhhhrgpxjqs0m" path="res://Escenas/UI/Menus/Resources/partyPanelRound.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://br1wcbty0sihu" path="res://Escenas/UI/Menus/Resources/partyPanelRoundSel.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ngraee8t1sem" path="res://Escenas/UI/Menus/Resources/partyPanelRoundFnt.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ddwbe6qsu8yqo" path="res://Escenas/UI/Menus/Resources/partyPanelRoundSelFnt.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bytcw8mm87lsx" path="res://Escenas/UI/Menus/Resources/partyPanelRoundSwap.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bhwpv71rjuehm" path="res://Escenas/UI/Menus/Resources/partyPanelRoundSelSwap.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://c63bjwkcpr1fj" path="res://Escenas/UI/Menus/Resources/partyPanelRect.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://cn07e1bn3xx4r" path="res://Escenas/UI/Menus/Resources/partyPanelRectSel.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://duw780vwf4a0g" path="res://Escenas/UI/Menus/Resources/partyPanelBlank.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://drsjnxwsw1303" path="res://Escenas/UI/Menus/Resources/partyPanelRectFnt.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://ch6utj8qsdwjd" path="res://Escenas/UI/Menus/Resources/partyPanelRectSelFnt.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://bpxsiqqkol2sm" path="res://Escenas/UI/Menus/Resources/partyPanelRectSwap.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://cir5wh26i3pxl" path="res://Escenas/UI/Menus/Resources/partyCancel.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://dvk3qjfw5vfa5" path="res://Escenas/UI/Menus/Resources/partyCancelSelNarrow.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://dxjprukv0p71t" path="res://Escenas/UI/Menus/Resources/selarrow.png" id="17"]
+[ext_resource type="FontFile" path="res://Escenas/UI/Fonts/df_party_lletraGran.tres" id="18_114xy"]
+[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="19"]
+[ext_resource type="FontFile" path="res://Escenas/UI/Fonts/df_party_lletraPetita.tres" id="19_sa8ru"]
+[ext_resource type="Texture2D" uid="uid://xw4mbww10chu" path="res://Escenas/UI/Menus/Resources/partyBall.PNG" id="22"]
+[ext_resource type="Texture2D" uid="uid://v58562kai84n" path="res://Escenas/UI/Menus/Resources/female_icon.png" id="24"]
+[ext_resource type="Animation" uid="uid://t6ntll21cvet" path="res://Animaciones/UI/PARTY_pkmn_icon.tres" id="26"]
+[ext_resource type="Texture2D" uid="uid://cp3p5plvvv4sj" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="26_nib22"]
+[ext_resource type="Animation" uid="uid://bhdmwp0krjlkw" path="res://Animaciones/UI/PARTY_pkmn_icon_updown.tres" id="27"]
+[ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="29"]
+[ext_resource type="Animation" uid="uid://bs3ia4xub3d1f" path="res://Animaciones/UI/next_animation.tres" id="30"]
+[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/RichTextLabel.tscn" id="31"]
+[ext_resource type="PackedScene" uid="uid://sp0h1eaqfqlh" path="res://Escenas/UI/Others/LABEL.tscn" id="32"]
+[ext_resource type="Texture2D" uid="uid://danwumq4xmbxq" path="res://Escenas/UI/Menus/Resources/summary1.png" id="32_20m35"]
+[ext_resource type="PackedScene" path="res://Escenas/UI/Fonts/font_summary_LetraBlanca.tscn" id="34"]
+[ext_resource type="Texture2D" uid="uid://b6hiwscxkv33j" path="res://Escenas/UI/Menus/Resources/summaryball00.png" id="35"]
+[ext_resource type="Texture2D" uid="uid://c8kpj8jre1qao" path="res://Escenas/UI/Menus/Resources/male_icon.png" id="36"]
+[ext_resource type="PackedScene" path="res://Escenas/UI/Fonts/font_summary_LetraNegra.tscn" id="37"]
+[ext_resource type="Texture2D" uid="uid://cbto5m75tk38f" path="res://Sprites/Iconos/icon025.png" id="38"]
+[ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="39"]
+[ext_resource type="Texture2D" uid="uid://ccbva4mg5505l" path="res://Escenas/UI/Menus/Resources/summary2.PNG" id="39_p8nao"]
+[ext_resource type="Texture2D" uid="uid://vp3788sffcg4" path="res://Escenas/UI/Menus/Resources/summary3.PNG" id="40_1h4dg"]
+[ext_resource type="Texture2D" uid="uid://bqy27j631k2qe" path="res://Escenas/UI/Menus/Resources/summary4.png" id="41_xg58t"]
+[ext_resource type="Texture2D" uid="uid://cj41hphayr3y0" path="res://Escenas/UI/Menus/Resources/summary5.png" id="42_vf0ii"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oj2bc"]
+texture = ExtResource("1_ew7hq")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxTexture" id="2"]
+texture = ExtResource("3")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="3"]
+texture = ExtResource("4")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="4"]
+texture = ExtResource("5")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="5"]
+texture = ExtResource("6")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="6"]
+texture = ExtResource("7")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="7"]
+texture = ExtResource("8")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="8"]
+texture = ExtResource("9")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="9"]
+texture = ExtResource("10")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="10"]
+texture = ExtResource("11")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="11"]
+texture = ExtResource("12")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="12"]
+texture = ExtResource("13")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="13"]
+texture = ExtResource("14")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="14"]
+texture = ExtResource("8")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="StyleBoxTexture" id="15"]
+texture = ExtResource("15")
+region_rect = Rect2(0, 0, 112, 48)
+
+[sub_resource type="StyleBoxTexture" id="16"]
+texture = ExtResource("16")
+region_rect = Rect2(0, 0, 112, 48)
+
+[sub_resource type="StyleBoxEmpty" id="17"]
+
+[sub_resource type="StyleBoxTexture" id="18"]
+texture = ExtResource("17")
+expand_margin_top = 2.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 14, 32)
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xxuhc"]
+texture = ExtResource("3")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u1qhq"]
+_data = {
+"PARTY_pkmn_icon": ExtResource("26"),
+"PARTY_pkmn_icon_updown": ExtResource("27")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dn8fn"]
+texture = ExtResource("9")
+region_rect = Rect2(0, 0, 256, 98)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75o4p"]
+_data = {
+"PARTY_pkmn_icon": ExtResource("26"),
+"PARTY_pkmn_icon_updown": ExtResource("27")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tvltn"]
+_data = {
+"PARTY_pkmn_icon": ExtResource("26"),
+"PARTY_pkmn_icon_updown": ExtResource("27")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3h16"]
+_data = {
+"PARTY_pkmn_icon": ExtResource("26"),
+"PARTY_pkmn_icon_updown": ExtResource("27")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_raaxq"]
+_data = {
+"PARTY_pkmn_icon": ExtResource("26"),
+"PARTY_pkmn_icon_updown": ExtResource("27")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lf368"]
+_data = {
+"PARTY_pkmn_icon": ExtResource("26"),
+"PARTY_pkmn_icon_updown": ExtResource("27")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_il6w1"]
+texture = ExtResource("15")
+region_rect = Rect2(0, 0, 112, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3m2bu"]
+texture = ExtResource("26_nib22")
+region_rect = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1eve6"]
+_data = {
+"Idle": ExtResource("30")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d82kq"]
+
+[sub_resource type="FontFile" id="43"]
+fallbacks = Array[Font]([ExtResource("19")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ev6ym"]
+texture = ExtResource("32_20m35")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fk2ns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slrel"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_amjfa"]
+texture = ExtResource("39_p8nao")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8itae"]
+texture = ExtResource("40_1h4dg")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p3amy"]
+texture = ExtResource("41_xg58t")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wv2sn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u2ecf"]
+texture = ExtResource("42_vf0ii")
+region_rect = Rect2(0, 0, 512, 384)
+
+[node name="PARTY" type="Panel"]
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_oj2bc")
+script = ExtResource("2")
+style_rounded_normal = SubResource("2")
+style_rounded_normal_sel = SubResource("3")
+style_rounded_fainted = SubResource("4")
+style_rounded_fainted_sel = SubResource("5")
+style_rounded_swap = SubResource("6")
+style_rounded_swap_sel = SubResource("7")
+style_square_normal = SubResource("8")
+style_square_normal_sel = SubResource("9")
+style_square_empty = SubResource("10")
+style_square_fainted = SubResource("11")
+style_square_fainted_sel = SubResource("12")
+style_square_swap = SubResource("13")
+style_square_swap_sel = SubResource("14")
+style_salir = SubResource("15")
+style_salir_sel = SubResource("16")
+style_actions_empty = SubResource("17")
+style_actions_selected = SubResource("18")
+metadata/_edit_lock_ = true
+
+[node name="PKMN_0" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 98.0
+focus_neighbor_right = NodePath("../PKMN_1")
+focus_neighbor_bottom = NodePath("../PKMN_2")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xxuhc")
+metadata/_edit_lock_ = true
+
+[node name="Nombre" type="Label" parent="PKMN_0"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.408
+offset_right = 180.0
+offset_bottom = 66.408
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Outline" type="Label" parent="PKMN_0/Nombre"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 46.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Nivel" type="Label" parent="PKMN_0"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 105.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Outline" type="Label" parent="PKMN_0/Nivel"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="HP" type="Label" parent="PKMN_0"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 64.0
+offset_right = 248.0
+offset_bottom = 110.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="Outline" type="Label" parent="PKMN_0/HP"]
+layout_mode = 0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="ball" type="Sprite2D" parent="PKMN_0"]
+position = Vector2(31.6, 28)
+texture = ExtResource("22")
+
+[node name="pkmn" type="Sprite2D" parent="PKMN_0"]
+position = Vector2(59.6, 32)
+texture = ExtResource("38")
+hframes = 2
+frame = 1
+
+[node name="gender" type="Sprite2D" parent="PKMN_0"]
+position = Vector2(229, 32)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_0"]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_u1qhq")
+}
+
+[node name="PKMN_1" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 16.0
+offset_right = 512.0
+offset_bottom = 114.0
+focus_neighbor_left = NodePath("../PKMN_0")
+focus_neighbor_bottom = NodePath("../PKMN_3")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
+metadata/_edit_lock_ = true
+
+[node name="Nombre" type="Label" parent="PKMN_1"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.408
+offset_right = 180.0
+offset_bottom = 66.408
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Outline" type="Label" parent="PKMN_1/Nombre"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 46.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Nivel" type="Label" parent="PKMN_1"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 105.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Outline" type="Label" parent="PKMN_1/Nivel"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="HP" type="Label" parent="PKMN_1"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 64.0
+offset_right = 248.0
+offset_bottom = 110.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="Outline" type="Label" parent="PKMN_1/HP"]
+layout_mode = 0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="ball" type="Sprite2D" parent="PKMN_1"]
+position = Vector2(31.6, 28)
+texture = ExtResource("22")
+
+[node name="pkmn" type="Sprite2D" parent="PKMN_1"]
+position = Vector2(59.6, 32)
+texture = ExtResource("38")
+hframes = 2
+frame = 1
+
+[node name="gender" type="Sprite2D" parent="PKMN_1"]
+position = Vector2(229, 32)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_1"]
+libraries = {
+"": SubResource("AnimationLibrary_75o4p")
+}
+
+[node name="PKMN_2" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 256.0
+offset_bottom = 194.0
+focus_neighbor_top = NodePath("../PKMN_0")
+focus_neighbor_right = NodePath("../PKMN_3")
+focus_neighbor_bottom = NodePath("../PKMN_4")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
+metadata/_edit_lock_ = true
+
+[node name="Nombre" type="Label" parent="PKMN_2"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.408
+offset_right = 180.0
+offset_bottom = 66.408
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Outline" type="Label" parent="PKMN_2/Nombre"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 46.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Nivel" type="Label" parent="PKMN_2"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 105.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Outline" type="Label" parent="PKMN_2/Nivel"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="HP" type="Label" parent="PKMN_2"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 64.0
+offset_right = 248.0
+offset_bottom = 110.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="Outline" type="Label" parent="PKMN_2/HP"]
+layout_mode = 0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="ball" type="Sprite2D" parent="PKMN_2"]
+position = Vector2(31.6, 28)
+texture = ExtResource("22")
+
+[node name="pkmn" type="Sprite2D" parent="PKMN_2"]
+position = Vector2(57.6, 34)
+texture = ExtResource("38")
+hframes = 2
+
+[node name="gender" type="Sprite2D" parent="PKMN_2"]
+position = Vector2(229, 32)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_2"]
+libraries = {
+"": SubResource("AnimationLibrary_tvltn")
+}
+
+[node name="PKMN_3" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 112.0
+offset_right = 512.0
+offset_bottom = 210.0
+focus_neighbor_left = NodePath("../PKMN_2")
+focus_neighbor_top = NodePath("../PKMN_1")
+focus_neighbor_bottom = NodePath("../PKMN_5")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
+metadata/_edit_lock_ = true
+
+[node name="Nombre" type="Label" parent="PKMN_3"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.408
+offset_right = 180.0
+offset_bottom = 66.408
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Outline" type="Label" parent="PKMN_3/Nombre"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 46.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Nivel" type="Label" parent="PKMN_3"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 105.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Outline" type="Label" parent="PKMN_3/Nivel"]
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="HP" type="Label" parent="PKMN_3"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 64.0
+offset_right = 248.0
+offset_bottom = 110.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="Outline" type="Label" parent="PKMN_3/HP"]
+layout_mode = 0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="ball" type="Sprite2D" parent="PKMN_3"]
+position = Vector2(31.6, 28)
+texture = ExtResource("22")
+
+[node name="pkmn" type="Sprite2D" parent="PKMN_3"]
+position = Vector2(57.6, 34)
+texture = ExtResource("38")
+hframes = 2
+frame = 1
+
+[node name="gender" type="Sprite2D" parent="PKMN_3"]
+position = Vector2(229, 32)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_3"]
+libraries = {
+"": SubResource("AnimationLibrary_i3h16")
+}
+
+[node name="PKMN_4" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 256.0
+offset_bottom = 290.0
+focus_neighbor_top = NodePath("../PKMN_2")
+focus_neighbor_right = NodePath("../PKMN_5")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
+metadata/_edit_lock_ = true
+
+[node name="Nombre" type="Label" parent="PKMN_4"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.408
+offset_right = 180.0
+offset_bottom = 66.408
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Outline" type="Label" parent="PKMN_4/Nombre"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 46.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Nivel" type="Label" parent="PKMN_4"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 105.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Outline" type="Label" parent="PKMN_4/Nivel"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="HP" type="Label" parent="PKMN_4"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 64.0
+offset_right = 248.0
+offset_bottom = 110.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="Outline" type="Label" parent="PKMN_4/HP"]
+layout_mode = 0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="ball" type="Sprite2D" parent="PKMN_4"]
+position = Vector2(31.6, 28)
+texture = ExtResource("22")
+
+[node name="pkmn" type="Sprite2D" parent="PKMN_4"]
+position = Vector2(57.6, 34)
+texture = ExtResource("38")
+hframes = 2
+
+[node name="gender" type="Sprite2D" parent="PKMN_4"]
+position = Vector2(229, 32)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_4"]
+libraries = {
+"": SubResource("AnimationLibrary_raaxq")
+}
+
+[node name="PKMN_5" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 208.0
+offset_right = 512.0
+offset_bottom = 306.0
+focus_neighbor_left = NodePath("../PKMN_4")
+focus_neighbor_top = NodePath("../PKMN_3")
+focus_neighbor_bottom = NodePath("../Salir")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
+metadata/_edit_lock_ = true
+
+[node name="Nombre" type="Label" parent="PKMN_5"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.408
+offset_right = 180.0
+offset_bottom = 66.408
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Outline" type="Label" parent="PKMN_5/Nombre"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 46.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Nivel" type="Label" parent="PKMN_5"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 105.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Outline" type="Label" parent="PKMN_5/Nivel"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19_sa8ru")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="HP" type="Label" parent="PKMN_5"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 64.0
+offset_right = 248.0
+offset_bottom = 110.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="Outline" type="Label" parent="PKMN_5/HP"]
+layout_mode = 0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="ball" type="Sprite2D" parent="PKMN_5"]
+position = Vector2(31.6, 28)
+texture = ExtResource("22")
+
+[node name="pkmn" type="Sprite2D" parent="PKMN_5"]
+position = Vector2(57.6, 34)
+texture = ExtResource("38")
+hframes = 2
+
+[node name="gender" type="Sprite2D" parent="PKMN_5"]
+position = Vector2(229, 32)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_5"]
+libraries = {
+"": SubResource("AnimationLibrary_lf368")
+}
+
+[node name="Salir" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 325.0
+offset_right = 510.0
+offset_bottom = 377.0
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_il6w1")
+metadata/_edit_lock_ = true
+
+[node name="Nombre2" type="Label" parent="Salir"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 14.0
+offset_right = 104.0
+offset_bottom = 44.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "SALIR"
+horizontal_alignment = 1
+
+[node name="Outline" type="Label" parent="Salir/Nombre2"]
+layout_mode = 0
+offset_right = 94.0
+offset_bottom = 30.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_fonts/font = ExtResource("18_114xy")
+theme_override_font_sizes/font_size = 26
+text = "SALIR"
+horizontal_alignment = 1
+
+[node name="MSG" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 318.0
+offset_right = 370.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_3m2bu")
+metadata/_edit_lock_ = true
+
+[node name="next" type="Sprite2D" parent="MSG"]
+position = Vector2(491, 69)
+texture = ExtResource("29")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MSG/next"]
+reset_on_save = false
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_1eve6")
+}
+
+[node name="Timer 2" type="Timer" parent="MSG"]
+wait_time = 0.05
+one_shot = true
+
+[node name="Label" parent="MSG" instance=ExtResource("31")]
+layout_mode = 0
+offset_left = 13.899
+offset_top = 20.848
+offset_right = 521.899
+offset_bottom = 97.848
+text = "Elige a un Pokémon."
+
+[node name="ACTIONS" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 368.445
+offset_top = 202.893
+offset_right = 512.445
+offset_bottom = 383.893
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_3m2bu")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ACTIONS"]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 14.0
+offset_top = 16.0
+offset_right = -14.0
+offset_bottom = 165.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="DATOS" type="Panel" parent="ACTIONS/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+
+[node name="DATOS" parent="ACTIONS/VBoxContainer/DATOS" instance=ExtResource("32")]
+custom_minimum_size = Vector2(101, 0)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("19")
+text = "DATOS"
+vertical_alignment = 1
+text_font = SubResource("43")
+
+[node name="MOVER" type="Panel" parent="ACTIONS/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+
+[node name="MOVER" parent="ACTIONS/VBoxContainer/MOVER" instance=ExtResource("32")]
+custom_minimum_size = Vector2(101, 0)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("19")
+text = "MOVER"
+vertical_alignment = 1
+text_font = SubResource("43")
+
+[node name="OBJETO" type="Panel" parent="ACTIONS/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+
+[node name="OBJETO" parent="ACTIONS/VBoxContainer/OBJETO" instance=ExtResource("32")]
+custom_minimum_size = Vector2(101, 0)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("19")
+text = "OBJETO"
+vertical_alignment = 1
+text_font = SubResource("43")
+
+[node name="SALIR" type="Panel" parent="ACTIONS/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+
+[node name="SALIR" parent="ACTIONS/VBoxContainer/SALIR" instance=ExtResource("32")]
+custom_minimum_size = Vector2(101, 0)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("19")
+text = "SALIR"
+vertical_alignment = 1
+text_font = SubResource("43")
+
+[node name="SUMMARY" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SUMMARY_1" type="Panel" parent="SUMMARY"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ev6ym")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_1"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 216.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "DATOS"
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_1/Titulo"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "DATOS"
+
+[node name="Nombre" parent="SUMMARY/SUMMARY_1" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 194.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Nombre" index="0"]
+layout_mode = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_1"]
+position = Vector2(29, 76)
+texture = ExtResource("35")
+
+[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_1"]
+position = Vector2(183, 77)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("36")
+
+[node name="Nivel" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 46.185
+offset_top = 96.174
+offset_right = 237.185
+offset_bottom = 124.174
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Nivel" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_1"]
+position = Vector2(99.7798, 204.815)
+texture = ExtResource("38")
+
+[node name="lObjeto" parent="SUMMARY/SUMMARY_1" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 324.0
+offset_right = 168.0
+offset_bottom = 355.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/lObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="dObjeto" parent="SUMMARY/SUMMARY_1" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 357.21
+offset_right = 168.0
+offset_bottom = 388.21
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/dObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="Labels" type="VBoxContainer" parent="SUMMARY/SUMMARY_1"]
+layout_mode = 0
+offset_left = 237.548
+offset_top = 83.1698
+offset_right = 477.548
+offset_bottom = 269.17
+
+[node name="lNumDex" parent="SUMMARY/SUMMARY_1/Labels" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Nº Dex"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Labels/lNumDex" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Nº Dex"
+
+[node name="lEspecie" parent="SUMMARY/SUMMARY_1/Labels" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Especie"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Labels/lEspecie" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Especie"
+
+[node name="lTipo" parent="SUMMARY/SUMMARY_1/Labels" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Tipo"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Labels/lTipo" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Tipo"
+
+[node name="lEO" parent="SUMMARY/SUMMARY_1/Labels" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "EO"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Labels/lEO" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "EO"
+
+[node name="lID" parent="SUMMARY/SUMMARY_1/Labels" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Nº ID"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Labels/lID" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Nº ID"
+
+[node name="lExperiencia" parent="SUMMARY/SUMMARY_1/Labels" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Puntos de Experiencia"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/Labels/lExperiencia" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Puntos de Experiencia"
+
+[node name="dNumDex" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 370.413
+offset_top = 83.9602
+offset_right = 503.413
+offset_bottom = 109.96
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "025"
+horizontal_alignment = 1
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/dNumDex" index="0"]
+layout_direction = 2
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "025"
+horizontal_alignment = 1
+
+[node name="dEspecie" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 116.0
+offset_right = 501.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+horizontal_alignment = 1
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/dEspecie" index="0"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+horizontal_alignment = 1
+
+[node name="Tipos" type="HBoxContainer" parent="SUMMARY/SUMMARY_1"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.842
+offset_top = 145.158
+offset_right = -11.158
+offset_bottom = -209.843
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="pTipo1" type="Panel" parent="SUMMARY/SUMMARY_1/Tipos"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fk2ns")
+
+[node name="dTipo1" type="Sprite2D" parent="SUMMARY/SUMMARY_1/Tipos/pTipo1"]
+position = Vector2(32, 14)
+texture = ExtResource("39")
+vframes = 24
+
+[node name="pTipo2" type="Panel" parent="SUMMARY/SUMMARY_1/Tipos"]
+visible = false
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slrel")
+
+[node name="dTipo2" type="Sprite2D" parent="SUMMARY/SUMMARY_1/Tipos/pTipo2"]
+position = Vector2(32, 14)
+texture = ExtResource("39")
+vframes = 24
+
+[node name="dEO" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 180.0
+offset_right = 501.0
+offset_bottom = 206.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Rojo"
+horizontal_alignment = 1
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/dEO" index="0"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Rojo"
+horizontal_alignment = 1
+
+[node name="dID" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 213.0
+offset_right = 501.0
+offset_bottom = 239.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "55720"
+horizontal_alignment = 1
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/dID" index="0"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "55720"
+horizontal_alignment = 1
+
+[node name="dExperiencia" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 369.706
+offset_top = 274.869
+offset_right = 502.706
+offset_bottom = 300.869
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "250047"
+horizontal_alignment = 1
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/dExperiencia" index="0"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "250047"
+horizontal_alignment = 1
+
+[node name="lSigNivel" parent="SUMMARY/SUMMARY_1" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 309.0
+offset_right = 478.0
+offset_bottom = 336.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Para subir de nivel"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/lSigNivel" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Para subir de nivel"
+
+[node name="dSigNivel" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 368.078
+offset_top = 342.281
+offset_right = 501.078
+offset_bottom = 368.281
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "12097"
+horizontal_alignment = 1
+
+[node name="Outline" parent="SUMMARY/SUMMARY_1/dSigNivel" index="0"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "12097"
+horizontal_alignment = 1
+
+[node name="SUMMARY_2" type="Panel" parent="SUMMARY"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_amjfa")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_2"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 216.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "NOTAS ENTRENADOR"
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_2/Titulo"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "NOTAS ENTRENADOR"
+
+[node name="Nombre" parent="SUMMARY/SUMMARY_2" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 194.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/Nombre" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_2"]
+position = Vector2(29, 76)
+texture = ExtResource("35")
+
+[node name="Nivel" parent="SUMMARY/SUMMARY_2" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 46.185
+offset_top = 96.174
+offset_right = 237.185
+offset_bottom = 124.174
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/Nivel" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_2"]
+position = Vector2(99.7798, 204.815)
+texture = ExtResource("38")
+
+[node name="lObjeto" parent="SUMMARY/SUMMARY_2" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 324.0
+offset_right = 168.0
+offset_bottom = 355.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/lObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="dObjeto" parent="SUMMARY/SUMMARY_2" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 357.21
+offset_right = 168.0
+offset_bottom = 388.21
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/dObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="Labels" type="VBoxContainer" parent="SUMMARY/SUMMARY_2"]
+layout_mode = 0
+offset_left = 242.048
+offset_top = 83.365
+offset_right = 482.048
+offset_bottom = 203.365
+
+[node name="LabelNaturaleza" parent="SUMMARY/SUMMARY_2/Labels" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Naturaleza"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/Labels/LabelNaturaleza" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Naturaleza"
+
+[node name="FechaCaptura" parent="SUMMARY/SUMMARY_2/Labels" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "18 de Nov. de 2018"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/Labels/FechaCaptura" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "18 de Nov. de 2018"
+
+[node name="RutaCaptura" parent="SUMMARY/SUMMARY_2/Labels" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Intro"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/Labels/RutaCaptura" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Intro"
+
+[node name="NivelCaptura" parent="SUMMARY/SUMMARY_2/Labels" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Encontrado con Nv. 63."
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/Labels/NivelCaptura" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Encontrado con Nv. 63."
+
+[node name="DescNaturaleza" parent="SUMMARY/SUMMARY_2" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 245.0
+offset_right = 505.0
+offset_bottom = 291.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Muy persistente."
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/DescNaturaleza" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Muy persistente."
+
+[node name="Naturaleza" parent="SUMMARY/SUMMARY_2" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 360.452
+offset_top = 84.99
+offset_right = 600.452
+offset_bottom = 110.99
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Seria."
+
+[node name="Outline" parent="SUMMARY/SUMMARY_2/Naturaleza" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Seria."
+
+[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_2"]
+position = Vector2(183, 77)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("36")
+
+[node name="SUMMARY_3" type="Panel" parent="SUMMARY"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8itae")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_3"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 216.0
+offset_bottom = 48.0
+text = "CARACTERÍSTICAS"
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_3/Titulo"]
+layout_mode = 0
+text = "CARACTERÍSTICAS"
+
+[node name="Nombre" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 194.0
+offset_bottom = 96.0
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/Nombre" index="0"]
+layout_mode = 0
+
+[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_3"]
+position = Vector2(29, 76)
+texture = ExtResource("35")
+
+[node name="Nivel" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 46.185
+offset_top = 96.174
+offset_right = 237.185
+offset_bottom = 124.174
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/Nivel" index="0"]
+layout_mode = 0
+
+[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_3"]
+position = Vector2(99.7798, 204.815)
+texture = ExtResource("38")
+
+[node name="lObjeto" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 324.0
+offset_right = 168.0
+offset_bottom = 355.0
+text = "Objeto"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/lObjeto" index="0"]
+layout_mode = 0
+text = "Objeto
+"
+
+[node name="dObjeto" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 357.21
+offset_right = 168.0
+offset_bottom = 388.21
+text = "Ninguno"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dObjeto" index="0"]
+layout_mode = 0
+text = "Ninguno
+"
+
+[node name="lPS" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 80.0
+offset_right = 351.0
+offset_bottom = 106.0
+text = "PS"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/lPS" index="0"]
+layout_mode = 0
+text = "PS"
+
+[node name="Labels" type="VBoxContainer" parent="SUMMARY/SUMMARY_3"]
+layout_mode = 0
+offset_left = 247.665
+offset_top = 123.806
+offset_right = 487.665
+offset_bottom = 309.806
+
+[node name="lAtaque" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
+layout_mode = 2
+text = "Ataque"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lAtaque" index="0"]
+layout_mode = 0
+text = "Ataque"
+
+[node name="lDefensa" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
+layout_mode = 2
+text = "Defensa"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lDefensa" index="0"]
+layout_mode = 0
+text = "Defensa"
+
+[node name="lAtEsp" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
+layout_mode = 2
+text = "At. Esp."
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lAtEsp" index="0"]
+layout_mode = 0
+text = "At. Esp."
+
+[node name="lDefEsp" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
+layout_mode = 2
+text = "Def. Esp."
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lDefEsp" index="0"]
+layout_mode = 0
+text = "Def. Esp."
+
+[node name="lVelocidad" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
+layout_mode = 2
+text = "Velocidad"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lVelocidad" index="0"]
+layout_mode = 0
+text = "Velocidad"
+
+[node name="dPS" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 328.53
+offset_top = 75.785
+offset_right = 461.53
+offset_bottom = 101.785
+text = "122/122"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dPS" index="0"]
+layout_mode = 0
+text = "122/122"
+
+[node name="dAtaque" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 123.943
+offset_right = 456.0
+offset_bottom = 149.943
+text = "88"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dAtaque" index="0"]
+layout_mode = 0
+text = "88"
+
+[node name="dDefensa" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 390.378
+offset_top = 155.969
+offset_right = 456.378
+offset_bottom = 181.969
+text = "59"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dDefensa" index="0"]
+layout_mode = 0
+text = "59"
+
+[node name="dAtEsp" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 188.0
+offset_right = 456.0
+offset_bottom = 214.0
+text = "78"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dAtEsp" index="0"]
+layout_mode = 0
+text = "78"
+
+[node name="dDefEsp" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 390.85
+offset_top = 219.756
+offset_right = 456.85
+offset_bottom = 245.756
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dDefEsp" index="0"]
+layout_mode = 0
+
+[node name="dVelocidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 390.283
+offset_top = 252.039
+offset_right = 456.283
+offset_bottom = 278.039
+text = "134"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dVelocidad" index="0"]
+layout_mode = 0
+text = "134"
+
+[node name="lHbailidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 224.039
+offset_top = 287.986
+offset_right = 464.039
+offset_bottom = 314.986
+text = "Habilidad"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/lHbailidad" index="0"]
+layout_mode = 0
+text = "Habilidad"
+
+[node name="dHabilidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 363.311
+offset_top = 288.297
+offset_right = 507.311
+offset_bottom = 314.297
+text = "Elec. Estática"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/dHabilidad" index="0"]
+layout_mode = 0
+text = "Elec. Estática"
+
+[node name="DescHabilidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+layout_mode = 0
+anchor_bottom = 1.0
+offset_left = 224.0
+offset_top = 320.0
+offset_right = 511.0
+offset_bottom = -17.0
+grow_vertical = 2
+text = "Paraliza con el contacto."
+max_lines_visible = 2
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/DescHabilidad" index="0"]
+layout_mode = 0
+text = "Paraliza con el contacto."
+max_lines_visible = 2
+
+[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_3"]
+position = Vector2(183, 77)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("36")
+
+[node name="SUMMARY_4" type="Panel" parent="SUMMARY"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_p3amy")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_4"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 216.0
+offset_bottom = 48.0
+text = "MOVIMIENTOS"
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_4/Titulo"]
+layout_mode = 0
+text = "MOVIMIENTOS"
+
+[node name="Nombre" parent="SUMMARY/SUMMARY_4" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 194.0
+offset_bottom = 96.0
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Nombre" index="0"]
+layout_mode = 0
+
+[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_4"]
+position = Vector2(29, 76)
+texture = ExtResource("35")
+
+[node name="Nivel" parent="SUMMARY/SUMMARY_4" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 46.185
+offset_top = 96.174
+offset_right = 237.185
+offset_bottom = 124.174
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Nivel" index="0"]
+layout_mode = 0
+
+[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_4"]
+position = Vector2(99.7798, 204.815)
+texture = ExtResource("38")
+
+[node name="lObjeto" parent="SUMMARY/SUMMARY_4" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 324.0
+offset_right = 168.0
+offset_bottom = 355.0
+text = "Objeto"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/lObjeto" index="0"]
+layout_mode = 0
+text = "Objeto"
+
+[node name="dObjeto" parent="SUMMARY/SUMMARY_4" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 356.999
+offset_right = 168.0
+offset_bottom = 387.999
+text = "Ninguno"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/dObjeto" index="0"]
+layout_mode = 0
+text = "Ninguno"
+
+[node name="Move1" type="Panel" parent="SUMMARY/SUMMARY_4"]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 96.0
+offset_right = 492.0
+offset_bottom = 160.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wv2sn")
+
+[node name="Tipo" type="Sprite2D" parent="SUMMARY/SUMMARY_4/Move1"]
+position = Vector2(37, 17)
+texture = ExtResource("39")
+vframes = 24
+frame = 14
+
+[node name="Ataque" parent="SUMMARY/SUMMARY_4/Move1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 73.231
+offset_top = 4.564
+offset_right = 243.231
+offset_bottom = 30.564
+text = "Agilidad"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move1/Ataque" index="0"]
+layout_mode = 0
+text = "Agilidad"
+
+[node name="lPP" parent="SUMMARY/SUMMARY_4/Move1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 37.0
+offset_right = 178.0
+offset_bottom = 63.0
+text = "PP"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move1/lPP" index="0"]
+layout_mode = 0
+text = "PP"
+
+[node name="dPP" parent="SUMMARY/SUMMARY_4/Move1" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 112.192
+offset_top = 37.0
+offset_right = 217.192
+offset_bottom = 63.0
+text = "30/30"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move1/dPP" index="0"]
+layout_mode = 0
+text = "30/30"
+
+[node name="Move2" type="Panel" parent="SUMMARY/SUMMARY_4"]
+layout_mode = 0
+offset_left = 242.502
+offset_top = 160.678
+offset_right = 491.502
+offset_bottom = 224.678
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wv2sn")
+
+[node name="Tipo" type="Sprite2D" parent="SUMMARY/SUMMARY_4/Move2"]
+position = Vector2(37, 17)
+texture = ExtResource("39")
+vframes = 24
+frame = 13
+
+[node name="Ataque" parent="SUMMARY/SUMMARY_4/Move2" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 73.231
+offset_top = 4.564
+offset_right = 243.231
+offset_bottom = 30.564
+text = "Chispazo"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move2/Ataque" index="0"]
+layout_mode = 0
+text = "Chispazo"
+
+[node name="lPP" parent="SUMMARY/SUMMARY_4/Move2" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 37.0
+offset_right = 178.0
+offset_bottom = 63.0
+text = "PP"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move2/lPP" index="0"]
+layout_mode = 0
+text = "PP"
+
+[node name="dPP" parent="SUMMARY/SUMMARY_4/Move2" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 112.192
+offset_top = 37.0
+offset_right = 217.192
+offset_bottom = 63.0
+text = "15/15"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move2/dPP" index="0"]
+layout_mode = 0
+text = "15/15"
+
+[node name="Move3" type="Panel" parent="SUMMARY/SUMMARY_4"]
+layout_mode = 0
+offset_left = 242.502
+offset_top = 225.025
+offset_right = 491.502
+offset_bottom = 289.025
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wv2sn")
+
+[node name="Tipo" type="Sprite2D" parent="SUMMARY/SUMMARY_4/Move3"]
+position = Vector2(37, 17)
+texture = ExtResource("39")
+vframes = 24
+frame = 14
+
+[node name="Ataque" parent="SUMMARY/SUMMARY_4/Move3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 73.231
+offset_top = 4.564
+offset_right = 243.231
+offset_bottom = 30.564
+text = "Pantalla Luz"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move3/Ataque" index="0"]
+layout_mode = 0
+text = "Pantalla Luz"
+
+[node name="lPP" parent="SUMMARY/SUMMARY_4/Move3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 37.0
+offset_right = 178.0
+offset_bottom = 63.0
+text = "PP"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move3/lPP" index="0"]
+layout_mode = 0
+text = "PP"
+
+[node name="dPP" parent="SUMMARY/SUMMARY_4/Move3" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 112.192
+offset_top = 37.0
+offset_right = 217.192
+offset_bottom = 63.0
+text = "30/30"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move3/dPP" index="0"]
+layout_mode = 0
+text = "30/30"
+
+[node name="Move4" type="Panel" parent="SUMMARY/SUMMARY_4"]
+layout_mode = 0
+offset_left = 243.399
+offset_top = 289.196
+offset_right = 492.399
+offset_bottom = 353.196
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wv2sn")
+
+[node name="Tipo" type="Sprite2D" parent="SUMMARY/SUMMARY_4/Move4"]
+position = Vector2(37, 17)
+texture = ExtResource("39")
+vframes = 24
+frame = 13
+
+[node name="Ataque" parent="SUMMARY/SUMMARY_4/Move4" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 73.231
+offset_top = 4.564
+offset_right = 243.231
+offset_bottom = 30.564
+text = "Trueno"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move4/Ataque" index="0"]
+layout_mode = 0
+text = "Trueno"
+
+[node name="lPP" parent="SUMMARY/SUMMARY_4/Move4" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 37.0
+offset_right = 178.0
+offset_bottom = 63.0
+text = "PP"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move4/lPP" index="0"]
+layout_mode = 0
+text = "PP"
+
+[node name="dPP" parent="SUMMARY/SUMMARY_4/Move4" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 112.192
+offset_top = 37.0
+offset_right = 217.192
+offset_bottom = 63.0
+text = "10/10"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_4/Move4/dPP" index="0"]
+layout_mode = 0
+text = "10/10"
+
+[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_4"]
+position = Vector2(183, 77)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("36")
+
+[node name="SUMMARY_5" type="Panel" parent="SUMMARY"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_u2ecf")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_5"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 216.0
+offset_bottom = 48.0
+text = "CINTAS"
+
+[node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_5/Titulo"]
+layout_mode = 0
+text = "CINTAS"
+
+[node name="Nombre" parent="SUMMARY/SUMMARY_5" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 106.0
+offset_bottom = 91.0
+
+[node name="Outline" parent="SUMMARY/SUMMARY_5/Nombre" index="0"]
+layout_mode = 0
+
+[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_5"]
+position = Vector2(29, 76)
+texture = ExtResource("35")
+
+[node name="Nivel" parent="SUMMARY/SUMMARY_5" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 46.185
+offset_top = 96.174
+offset_right = 237.185
+offset_bottom = 124.174
+
+[node name="Outline" parent="SUMMARY/SUMMARY_5/Nivel" index="0"]
+layout_mode = 0
+
+[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_5"]
+position = Vector2(99.7798, 204.815)
+texture = ExtResource("38")
+
+[node name="lObjeto" parent="SUMMARY/SUMMARY_5" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 324.0
+offset_right = 168.0
+offset_bottom = 355.0
+text = "Objeto"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_5/lObjeto" index="0"]
+layout_mode = 0
+text = "Objeto"
+
+[node name="dObjeto" parent="SUMMARY/SUMMARY_5" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 357.21
+offset_right = 168.0
+offset_bottom = 388.21
+text = "Ninguno"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_5/dObjeto" index="0"]
+layout_mode = 0
+text = "Ninguno"
+
+[node name="lCintas" parent="SUMMARY/SUMMARY_5" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 235.694
+offset_top = 345.549
+offset_right = 385.694
+offset_bottom = 371.549
+text = "Núm. de Cintas:"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_5/lCintas" index="0"]
+layout_mode = 0
+text = "Núm. de Cintas:"
+
+[node name="dCintas" parent="SUMMARY/SUMMARY_5" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 346.0
+offset_right = 545.0
+offset_bottom = 372.0
+text = "0"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_5/dCintas" index="0"]
+layout_mode = 0
+text = "0"
+
+[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_5"]
+position = Vector2(183, 77)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("36")
+
+[connection signal="focus_entered" from="PKMN_0" to="." method="_on_PKMN_focus_entered"]
+[connection signal="focus_entered" from="PKMN_1" to="." method="_on_PKMN_focus_entered"]
+[connection signal="focus_entered" from="PKMN_2" to="." method="_on_PKMN_focus_entered"]
+[connection signal="focus_entered" from="PKMN_3" to="." method="_on_PKMN_focus_entered"]
+[connection signal="focus_entered" from="PKMN_4" to="." method="_on_PKMN_focus_entered"]
+[connection signal="focus_entered" from="PKMN_5" to="." method="_on_PKMN_focus_entered"]
+[connection signal="focus_entered" from="Salir" to="." method="_on_Salir_focus_entered"]
+[connection signal="focus_entered" from="ACTIONS/VBoxContainer/DATOS" to="." method="_on_actions_focus_entered"]
+[connection signal="focus_entered" from="ACTIONS/VBoxContainer/MOVER" to="." method="_on_actions_focus_entered"]
+[connection signal="focus_entered" from="ACTIONS/VBoxContainer/OBJETO" to="." method="_on_actions_focus_entered"]
+[connection signal="focus_entered" from="ACTIONS/VBoxContainer/SALIR" to="." method="_on_actions_focus_entered"]
+
+[editable path="SUMMARY/SUMMARY_1/Nombre"]
+[editable path="SUMMARY/SUMMARY_1/Nivel"]
+[editable path="SUMMARY/SUMMARY_1/lObjeto"]
+[editable path="SUMMARY/SUMMARY_1/dObjeto"]
+[editable path="SUMMARY/SUMMARY_1/Labels/lNumDex"]
+[editable path="SUMMARY/SUMMARY_1/Labels/lEspecie"]
+[editable path="SUMMARY/SUMMARY_1/Labels/lTipo"]
+[editable path="SUMMARY/SUMMARY_1/Labels/lEO"]
+[editable path="SUMMARY/SUMMARY_1/Labels/lID"]
+[editable path="SUMMARY/SUMMARY_1/Labels/lExperiencia"]
+[editable path="SUMMARY/SUMMARY_1/dNumDex"]
+[editable path="SUMMARY/SUMMARY_1/dEspecie"]
+[editable path="SUMMARY/SUMMARY_1/dEO"]
+[editable path="SUMMARY/SUMMARY_1/dID"]
+[editable path="SUMMARY/SUMMARY_1/dExperiencia"]
+[editable path="SUMMARY/SUMMARY_1/lSigNivel"]
+[editable path="SUMMARY/SUMMARY_1/dSigNivel"]
+[editable path="SUMMARY/SUMMARY_2/Nombre"]
+[editable path="SUMMARY/SUMMARY_2/Nivel"]
+[editable path="SUMMARY/SUMMARY_2/lObjeto"]
+[editable path="SUMMARY/SUMMARY_2/dObjeto"]
+[editable path="SUMMARY/SUMMARY_2/Labels/LabelNaturaleza"]
+[editable path="SUMMARY/SUMMARY_2/Labels/FechaCaptura"]
+[editable path="SUMMARY/SUMMARY_2/Labels/RutaCaptura"]
+[editable path="SUMMARY/SUMMARY_2/Labels/NivelCaptura"]
+[editable path="SUMMARY/SUMMARY_2/DescNaturaleza"]
+[editable path="SUMMARY/SUMMARY_2/Naturaleza"]
+[editable path="SUMMARY/SUMMARY_3/Nombre"]
+[editable path="SUMMARY/SUMMARY_3/Nivel"]
+[editable path="SUMMARY/SUMMARY_3/lObjeto"]
+[editable path="SUMMARY/SUMMARY_3/dObjeto"]
+[editable path="SUMMARY/SUMMARY_3/lPS"]
+[editable path="SUMMARY/SUMMARY_3/Labels/lAtaque"]
+[editable path="SUMMARY/SUMMARY_3/Labels/lDefensa"]
+[editable path="SUMMARY/SUMMARY_3/Labels/lAtEsp"]
+[editable path="SUMMARY/SUMMARY_3/Labels/lDefEsp"]
+[editable path="SUMMARY/SUMMARY_3/Labels/lVelocidad"]
+[editable path="SUMMARY/SUMMARY_3/dPS"]
+[editable path="SUMMARY/SUMMARY_3/dAtaque"]
+[editable path="SUMMARY/SUMMARY_3/dDefensa"]
+[editable path="SUMMARY/SUMMARY_3/dAtEsp"]
+[editable path="SUMMARY/SUMMARY_3/dDefEsp"]
+[editable path="SUMMARY/SUMMARY_3/dVelocidad"]
+[editable path="SUMMARY/SUMMARY_3/lHbailidad"]
+[editable path="SUMMARY/SUMMARY_3/dHabilidad"]
+[editable path="SUMMARY/SUMMARY_3/DescHabilidad"]
+[editable path="SUMMARY/SUMMARY_4/Nombre"]
+[editable path="SUMMARY/SUMMARY_4/Nivel"]
+[editable path="SUMMARY/SUMMARY_4/lObjeto"]
+[editable path="SUMMARY/SUMMARY_4/dObjeto"]
+[editable path="SUMMARY/SUMMARY_4/Move1/Ataque"]
+[editable path="SUMMARY/SUMMARY_4/Move1/lPP"]
+[editable path="SUMMARY/SUMMARY_4/Move1/dPP"]
+[editable path="SUMMARY/SUMMARY_4/Move2/Ataque"]
+[editable path="SUMMARY/SUMMARY_4/Move2/lPP"]
+[editable path="SUMMARY/SUMMARY_4/Move2/dPP"]
+[editable path="SUMMARY/SUMMARY_4/Move3/Ataque"]
+[editable path="SUMMARY/SUMMARY_4/Move3/lPP"]
+[editable path="SUMMARY/SUMMARY_4/Move3/dPP"]
+[editable path="SUMMARY/SUMMARY_4/Move4/Ataque"]
+[editable path="SUMMARY/SUMMARY_4/Move4/lPP"]
+[editable path="SUMMARY/SUMMARY_4/Move4/dPP"]
+[editable path="SUMMARY/SUMMARY_5/Nombre"]
+[editable path="SUMMARY/SUMMARY_5/Nivel"]
+[editable path="SUMMARY/SUMMARY_5/lObjeto"]
+[editable path="SUMMARY/SUMMARY_5/dObjeto"]
+[editable path="SUMMARY/SUMMARY_5/lCintas"]
+[editable path="SUMMARY/SUMMARY_5/dCintas"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://x6ictefcpgja"
+path="res://.godot/imported/Title GBA.ogg-9c1cf39578ba3632d6891e31cdcdab0e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Intro/Title GBA.ogg"
+dest_files=["res://.godot/imported/Title GBA.ogg-9c1cf39578ba3632d6891e31cdcdab0e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

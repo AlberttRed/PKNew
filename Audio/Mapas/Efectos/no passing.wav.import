@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cems3vgg3n72i"
+path="res://.godot/imported/no passing.wav-59b4093b826ae61f5579c28df7c1c618.sample"
+
+[deps]
+
+source_file="res://Audio/Mapas/Efectos/no passing.wav"
+dest_files=["res://.godot/imported/no passing.wav-59b4093b826ae61f5579c28df7c1c618.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

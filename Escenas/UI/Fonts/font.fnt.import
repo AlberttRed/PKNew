@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://lje1yjihr7f8"
+path="res://.godot/imported/font.fnt-5aecc8845edfa0a063bcf176b511343d.fontdata"
+
+[deps]
+
+source_file="res://Escenas/UI/Fonts/font.fnt"
+dest_files=["res://.godot/imported/font.fnt-5aecc8845edfa0a063bcf176b511343d.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b70xdbdard0pc"]
+
+[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_qi0ke"]
+[ext_resource type="Resource" uid="uid://b5h0i8wbbp1lp" path="res://Resources/Types/14.tres" id="2_iiykn"]
+
+[resource]
+resource_name = "377 - Anticura"
+script = ExtResource("1_qi0ke")
+internal_name = "heal-block"
+Name = "Anticura"
+id = 377
+description = "Este movimiento no se puede usar, por lo que sería
+mejor olvidarlo, aunque eso implique que no se pueda
+recordar posteriormente."
+type = ExtResource("2_iiykn")
+power = 0
+accuracy = 100
+pp = 15
+effect_chance = 0
+priority = 0
+damage_class_id = 1
+effect_entries = "Prevents target from restoring its HP for five turns. For the next five turns, the target may not use any moves that only restore HP, and move effects that heal the target are disabled.  Moves that steal HP may still be used, but will only inflict damage and not heal the target."
+stat_change_ids = []
+stat_change_valors = []
+target_id = 11
+meta_ailment_id = 15
+meta_category_id = 1
+meta_min_hits = 1
+meta_max_hits = 1
+meta_min_turns = 5
+meta_max_turns = 5
+meta_drain = 0
+meta_healing = 0
+meta_crit_rate = 0
+meta_ailment_chance = 0
+meta_flinch_chance = 0
+meta_stat_chance = 0
+contact_flag = false
+move_effect = 1

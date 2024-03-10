@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c0kpnt8lsbddo"]
+
+[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_20qjg"]
+[ext_resource type="Resource" uid="uid://0qhj5bvapu6l" path="res://Resources/Types/04.tres" id="2_2yspv"]
+
+[resource]
+resource_name = "342 - Cola Veneno"
+script = ExtResource("1_20qjg")
+internal_name = "poison-tail"
+Name = "Cola Veneno"
+id = 342
+description = "Puede envenenar y dar un golpe crítico."
+type = ExtResource("2_2yspv")
+power = 50
+accuracy = 100
+pp = 25
+effect_chance = 10
+priority = 0
+damage_class_id = 2
+effect_entries = "Has an increased chance for a critical hit and a $effect_chance% chance to poison the target. Inflicts regular damage.  User's critical hit rate is one level higher when using this move. Has a $effect_chance% chance to poison the target."
+stat_change_ids = []
+stat_change_valors = []
+target_id = 10
+meta_ailment_id = 5
+meta_category_id = 4
+meta_min_hits = 1
+meta_max_hits = 1
+meta_min_turns = 1
+meta_max_turns = 1
+meta_drain = 0
+meta_healing = 0
+meta_crit_rate = 1
+meta_ailment_chance = 10
+meta_flinch_chance = 0
+meta_stat_chance = 0
+contact_flag = false
+move_effect = 1

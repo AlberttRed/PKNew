@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3ghw6lnmom5a"]
+
+[ext_resource type="Script" path="res://Scripts/Event/Event Commands/cmd_FadeToBlack.gd" id="1_rarx2"]
+
+[node name="cmd_FadeToBlack" type="Node"]
+script = ExtResource("1_rarx2")

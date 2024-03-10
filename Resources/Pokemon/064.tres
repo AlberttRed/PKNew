@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://dsw3prjibjsk5"]
+
+[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_5dk7l"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_1f8uf"]
+[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_vrt20"]
+[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="4_myydk"]
+[ext_resource type="Resource" uid="uid://b5h0i8wbbp1lp" path="res://Resources/Types/14.tres" id="5_gpshx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmud5"]
+atlas = ExtResource("1_5dk7l")
+region = Rect2(1172, 10672, 160, 118)
+margin = Rect2(0, 42, 0, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbqq5"]
+atlas = ExtResource("1_5dk7l")
+region = Rect2(4, 10928, 160, 118)
+margin = Rect2(0, 42, 0, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbwv0"]
+atlas = ExtResource("1_5dk7l")
+region = Rect2(956, 14552, 144, 120)
+margin = Rect2(6, 22, 16, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddule"]
+atlas = ExtResource("1_5dk7l")
+region = Rect2(1260, 14624, 144, 120)
+margin = Rect2(6, 22, 16, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s602x"]
+atlas = ExtResource("2_1f8uf")
+region = Rect2(372, 264, 18, 30)
+margin = Rect2(6, 2, 14, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eber0"]
+atlas = ExtResource("3_vrt20")
+region = Rect2(4, 476, 116, 42)
+margin = Rect2(8, 18, 12, 22)
+
+[resource]
+resource_name = "64 - Kadabra"
+script = ExtResource("4_myydk")
+id = 64
+internal_name = "kadabra"
+Name = "Kadabra"
+type_a = ExtResource("5_gpshx")
+base_exprience = 140
+height = 13.0
+weight = 565.0
+is_default = true
+abilities = ["28", "39", "98"]
+forms = []
+held_items_id = ["225"]
+held_items_rarity = [5.0]
+learn_type = ["4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "1", "4", "4", "4", "4", "4", "4", "1", "1", "4", "1", "1", "4", "4", "1", "4", "1", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "1", "1", "3", "4", "3", "4", "4", "4", "3", "4", "4", "3", "1", "4", "4", "4", "4", "4", "4", "4", "1", "3", "4", "4", "4", "4", "3", "4", "1", "3", "3", "4", "1", "4", "4"]
+learn_lvl = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 27, 0, 0, 0, 0, 0, 0, 1, 38, 0, 1, 19, 0, 0, 31, 0, 42, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 43, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 24, 0, 0]
+learn_move_id = ["5", "7", "8", "9", "25", "29", "34", "36", "38", "50", "60", "66", "68", "69", "86", "91", "92", "93", "94", "99", "100", "101", "102", "104", "105", "113", "115", "117", "118", "129", "130", "134", "138", "148", "149", "156", "161", "164", "168", "171", "173", "174", "182", "192", "203", "207", "213", "214", "216", "218", "219", "223", "227", "231", "237", "240", "241", "244", "247", "248", "259", "263", "264", "269", "271", "272", "277", "278", "282", "285", "289", "290", "324", "347", "351", "356", "357", "363", "373", "374", "384", "385", "409", "412", "427", "428", "433", "445", "447", "451", "472", "473", "477", "478", "492", "496", "502", "590", "605"]
+hp_base = 40
+attack_base = 35
+defense_base = 30
+special_attack_base = 120
+special_defense_base = 70
+speed_base = 105
+total_base = 0
+hp_effort_EVs = 0
+attack_effort_EVs = 0
+defense_effort_EVs = 0
+special_effort_attack_EVs = 2
+special_effort_defense_EVs = 0
+speed_effort_EVs = 0
+gender_rate = 2
+capture_rate = 100
+base_happiness = 50
+is_baby = false
+hatch_counter = 20
+has_gender_differences = true
+forms_switchable = false
+growth_rate_id = "4"
+egg_group_a_id = "8"
+egg_group_b_id = 0
+evol_method = []
+evol_lvl = []
+evol_pokemon_id = []
+description = "La potencia de su telequinesis es inmensa.
+Acumula poder psíquico en la estrella de la
+frente como preparativo de cara a su evolución."
+habitat_id = 1
+battlerPlayerY = 0
+battlerEnemyY = 0
+battlerAltitude = 0
+icon_sprite = SubResource("AtlasTexture_eber0")
+footprint_sprite = SubResource("AtlasTexture_s602x")
+battle_front_sprite = SubResource("AtlasTexture_ddule")
+battle_back_sprite = SubResource("AtlasTexture_lbqq5")
+battle_front_shiny_sprite = SubResource("AtlasTexture_kbwv0")
+battle_back_shiny_sprite = SubResource("AtlasTexture_bmud5")

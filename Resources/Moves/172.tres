@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dlqwidc56hf0e"]
+
+[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_wyt5d"]
+[ext_resource type="Resource" uid="uid://d3pw7574qhbn3" path="res://Resources/Types/10.tres" id="2_0srk2"]
+
+[resource]
+resource_name = "172 - Rueda Fuego"
+script = ExtResource("1_wyt5d")
+internal_name = "flame-wheel"
+Name = "Rueda Fuego"
+id = 172
+description = "Ataca envuelto en fuego. Puede causar quemaduras. "
+type = ExtResource("2_0srk2")
+power = 60
+accuracy = 100
+pp = 25
+effect_chance = 10
+priority = 0
+damage_class_id = 2
+effect_entries = "Has a $effect_chance% chance to burn the target.  Lets frozen Pokémon thaw themselves. Inflicts regular damage.  Has a $effect_chance% chance to burn the target.  Frozen Pokémon may use this move, in which case they will thaw."
+stat_change_ids = []
+stat_change_valors = []
+target_id = 10
+meta_ailment_id = 4
+meta_category_id = 4
+meta_min_hits = 1
+meta_max_hits = 1
+meta_min_turns = 1
+meta_max_turns = 1
+meta_drain = 0
+meta_healing = 0
+meta_crit_rate = 0
+meta_ailment_chance = 10
+meta_flinch_chance = 0
+meta_stat_chance = 0
+contact_flag = false
+move_effect = 1

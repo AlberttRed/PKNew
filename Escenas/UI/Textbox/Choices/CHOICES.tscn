@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3hp5o2kge4fg"]
+
+[ext_resource type="Texture2D" uid="uid://c31yeh24woqwt" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="1_rrlxn"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/CHOICES.gd" id="2_tqecu"]
+[ext_resource type="Texture2D" uid="uid://bd7c5m6ia6ppn" path="res://Escenas/UI/Textbox/Choices/Resources/selarrow.png" id="3_6vm7l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kommp"]
+texture = ExtResource("1_rrlxn")
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 32.0
+margin_bottom = 32.0
+region_rect = Rect2(0, 0, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qyer4"]
+texture = ExtResource("3_6vm7l")
+margin_left = 12.0
+expand_margin_top = 2.0
+axis_stretch_vertical = 2
+region_rect = Rect2(0, 0, 14, 32)
+draw_center = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hl4cp"]
+
+[node name="CHOICES" type="Panel"]
+offset_left = 404.0
+offset_top = 227.0
+offset_right = 505.0
+offset_bottom = 284.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kommp")
+script = ExtResource("2_tqecu")
+style_selected = SubResource("StyleBoxTexture_qyer4")
+style_empty = SubResource("StyleBoxEmpty_hl4cp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2

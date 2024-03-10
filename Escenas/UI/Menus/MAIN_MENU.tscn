@@ -1,0 +1,203 @@
+[gd_scene load_steps=9 format=3 uid="uid://cg0kncuwkhf3k"]
+
+[ext_resource type="StyleBox" path="res://Escenas/UI/Menus/Resources/panel_MAIN_MENU.tres" id="1_wfvsi"]
+[ext_resource type="Script" path="res://Escenas/UI/Menus/MAIN_MENU.gd" id="2_ause3"]
+[ext_resource type="FontFile" path="res://Escenas/UI/Fonts/new_dynamicfont.tres" id="2_c8ow2"]
+[ext_resource type="Texture2D" uid="uid://hixjronh8nrm" path="res://Escenas/UI/Menus/Resources/selarrow.png" id="2_uvu8h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5rj8s"]
+texture = ExtResource("2_uvu8h")
+margin_left = 12.0
+expand_margin_top = 3.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 14, 32)
+draw_center = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6llyv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mr78l"]
+texture = ExtResource("2_uvu8h")
+margin_left = 12.0
+expand_margin_top = 3.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(0, 0, 14, 32)
+draw_center = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5ds6"]
+
+[node name="MAIN_MENU" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 373.0
+offset_top = -1.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_wfvsi")
+script = ExtResource("2_ause3")
+style_selected = SubResource("StyleBoxTexture_5rj8s")
+style_empty = SubResource("StyleBoxEmpty_6llyv")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 241.0
+metadata/_edit_lock_ = true
+
+[node name="Pokedex" type="Panel" parent="VBoxContainer"]
+offset_right = 111.0
+offset_bottom = 29.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_mr78l")
+
+[node name="Label" type="Label" parent="VBoxContainer/Pokedex"]
+custom_minimum_size = Vector2i(97, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_fonts/font = ExtResource("2_c8ow2")
+theme_override_font_sizes/font_size = 24
+text = "POKéDEX"
+vertical_alignment = 1
+
+[node name="Pokemon" type="Panel" parent="VBoxContainer"]
+offset_top = 33.0
+offset_right = 111.0
+offset_bottom = 62.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o5ds6")
+
+[node name="Label" type="Label" parent="VBoxContainer/Pokemon"]
+custom_minimum_size = Vector2i(97, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_fonts/font = ExtResource("2_c8ow2")
+theme_override_font_sizes/font_size = 24
+text = "POKéMON"
+vertical_alignment = 1
+
+[node name="Mochila" type="Panel" parent="VBoxContainer"]
+offset_top = 66.0
+offset_right = 111.0
+offset_bottom = 95.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o5ds6")
+
+[node name="Label" type="Label" parent="VBoxContainer/Mochila"]
+custom_minimum_size = Vector2i(97, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_fonts/font = ExtResource("2_c8ow2")
+theme_override_font_sizes/font_size = 24
+text = "MOCHILA"
+vertical_alignment = 1
+
+[node name="Player" type="Panel" parent="VBoxContainer"]
+offset_top = 99.0
+offset_right = 111.0
+offset_bottom = 128.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o5ds6")
+
+[node name="Label" type="Label" parent="VBoxContainer/Player"]
+custom_minimum_size = Vector2i(97, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_fonts/font = ExtResource("2_c8ow2")
+theme_override_font_sizes/font_size = 24
+text = "JUGADOR"
+vertical_alignment = 1
+
+[node name="Guardar" type="Panel" parent="VBoxContainer"]
+offset_top = 132.0
+offset_right = 111.0
+offset_bottom = 161.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o5ds6")
+
+[node name="Label" type="Label" parent="VBoxContainer/Guardar"]
+custom_minimum_size = Vector2i(97, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_fonts/font = ExtResource("2_c8ow2")
+theme_override_font_sizes/font_size = 24
+text = "GUARDAR"
+vertical_alignment = 1
+
+[node name="Opciones" type="Panel" parent="VBoxContainer"]
+offset_top = 165.0
+offset_right = 111.0
+offset_bottom = 194.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o5ds6")
+
+[node name="Label" type="Label" parent="VBoxContainer/Opciones"]
+custom_minimum_size = Vector2i(97, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_fonts/font = ExtResource("2_c8ow2")
+theme_override_font_sizes/font_size = 24
+text = "OPCIONES"
+vertical_alignment = 1
+
+[node name="Salir" type="Panel" parent="VBoxContainer"]
+offset_top = 198.0
+offset_right = 111.0
+offset_bottom = 227.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o5ds6")
+
+[node name="Label" type="Label" parent="VBoxContainer/Salir"]
+custom_minimum_size = Vector2i(97, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_fonts/font = ExtResource("2_c8ow2")
+theme_override_font_sizes/font_size = 24
+text = "SALIR"
+vertical_alignment = 1

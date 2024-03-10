@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bppv4km3r4exp"]
+
+[ext_resource type="Script" path="res://Scripts/Event/Event Commands/cmd_move.gd" id="1_uqqip"]
+
+[node name="cmd_move" type="Node"]
+script = ExtResource("1_uqqip")

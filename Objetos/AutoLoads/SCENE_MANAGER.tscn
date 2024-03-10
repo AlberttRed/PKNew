@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://de3q1517d5jfm"]
+
+[ext_resource type="Script" path="res://Scripts/AutoLoads/SCENE_MANAGER.gd" id="1_f4cv2"]
+[ext_resource type="PackedScene" uid="uid://8qp0j6uye30u" path="res://Escenas/Mapas/Pueblo Paleta/Pueblo Paleta.tscn" id="2_oi75r"]
+[ext_resource type="Animation" uid="uid://d13qjmg5g40fp" path="res://Animaciones/Overworld/General/FadeToBlack.tres" id="3_12epv"]
+[ext_resource type="Animation" uid="uid://s10l5huqcog" path="res://Animaciones/Overworld/General/FadeToNormal.tres" id="4_8au3q"]
+
+[sub_resource type="Animation" id="Animation_stqkf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqr54"]
+_data = {
+"FadeToBlack": ExtResource("3_12epv"),
+"FadeToNormal": ExtResource("4_8au3q"),
+"RESET": SubResource("Animation_stqkf")
+}
+
+[node name="SceneManager" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_f4cv2")
+current_scene = ExtResource("2_oi75r")
+initial_position = Vector2(-320, -96)
+
+[node name="LoadedScenes" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+root_node = NodePath("../ScreenTransition")
+libraries = {
+"": SubResource("AnimationLibrary_bqr54")
+}
+
+[node name="Eventos" type="Node2D" parent="."]
+z_index = -1
+y_sort_enabled = true

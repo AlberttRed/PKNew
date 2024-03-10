@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dbi8x4x6g1nhl"]
+
+[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_rusdi"]
+[ext_resource type="Resource" uid="uid://dekni3p3d2804" path="res://Resources/Types/12.tres" id="2_7mbhh"]
+
+[resource]
+resource_name = "147 - Espora"
+script = ExtResource("1_rusdi")
+internal_name = "spore"
+Name = "Espora"
+id = 147
+description = "Esparce esporas que inducen al sueño."
+type = ExtResource("2_7mbhh")
+power = 0
+accuracy = 100
+pp = 15
+effect_chance = 0
+priority = 0
+damage_class_id = 1
+effect_entries = "Puts the target to sleep. Puts the target to sleep."
+stat_change_ids = []
+stat_change_valors = []
+target_id = 10
+meta_ailment_id = 2
+meta_category_id = 1
+meta_min_hits = 1
+meta_max_hits = 1
+meta_min_turns = 2
+meta_max_turns = 4
+meta_drain = 0
+meta_healing = 0
+meta_crit_rate = 0
+meta_ailment_chance = 0
+meta_flinch_chance = 0
+meta_stat_chance = 0
+contact_flag = false
+move_effect = 1

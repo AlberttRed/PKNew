@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://xp0h07awrdj3"]
+
+[ext_resource type="Script" path="res://Scripts/Battle IAs/BattleIA_Easy.gd" id="1_em4pf"]
+
+[resource]
+script = ExtResource("1_em4pf")

@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://08dr8fiwcu28"]
+
+[ext_resource type="Texture2D" uid="uid://bp1ce6mvmobri" path="res://Escenas/UI/Textbox/Resources/speech hgss 1.png" id="1_a5ebh"]
+
+[resource]
+texture = ExtResource("1_a5ebh")
+texture_margin_left = 23.2424
+texture_margin_top = 20.675
+texture_margin_right = 43.7823
+texture_margin_bottom = 14.0536
+region_rect = Rect2(0, 0, 96, 48)

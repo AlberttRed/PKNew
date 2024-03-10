@@ -1,0 +1,38 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://7lykff48tweg"]
+
+[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_0dd5x"]
+[ext_resource type="Resource" uid="uid://b5h0i8wbbp1lp" path="res://Resources/Types/14.tres" id="2_m68aq"]
+
+[resource]
+resource_name = "95 - Hipnosis"
+script = ExtResource("1_0dd5x")
+internal_name = "hypnosis"
+Name = "Hipnosis"
+id = 95
+description = "Ataque hipnótico que hace dormir profundamente al
+objetivo."
+type = ExtResource("2_m68aq")
+power = 0
+accuracy = 60
+pp = 20
+effect_chance = 0
+priority = 0
+damage_class_id = 1
+effect_entries = "Puts the target to sleep. Puts the target to sleep."
+stat_change_ids = []
+stat_change_valors = []
+target_id = 10
+meta_ailment_id = 2
+meta_category_id = 1
+meta_min_hits = 1
+meta_max_hits = 1
+meta_min_turns = 2
+meta_max_turns = 4
+meta_drain = 0
+meta_healing = 0
+meta_crit_rate = 0
+meta_ailment_chance = 0
+meta_flinch_chance = 0
+meta_stat_chance = 0
+contact_flag = false
+move_effect = 1
