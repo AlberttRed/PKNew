@@ -7,7 +7,7 @@ var player_default_sprite = preload("res://Sprites/Overworlds/Characters/trchar0
 var player_name : String = "RED"
 var trainer: Battler
 var medals : Array[int] = []
-var player_id : int = randi() % 999999 + 1
+var player_id : int = 1234#randi() % 999999 + 1
 var actual_position : Vector2
 var ITEMS : Array[int] = []
 

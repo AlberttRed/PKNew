@@ -76,8 +76,7 @@ func use(to: Array[BattlePokemon]):
 	
 	#await pokemon.applyPreviousEffects()
 	
-	GUI.battle.msgBox.showMoveMessage(pokemon, self)
-	await GUI.battle.msgBox.textDisplayed
+	await GUI.battle.msgBox.showMoveMessage(pokemon, self)
 	
 	for i in range(num_hits):
 
@@ -301,7 +300,6 @@ func modifyStats(target : BattlePokemon):
 		elif value < 0:
 			await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target)
 		await GUI.battle.msgBox.showStatsMessage(target, stat-1, value)
-		await GUI.battle.msgBox.finished
 
 func causeAilment(target : BattlePokemon):
 	if calculateAilmentChance():
@@ -309,7 +307,6 @@ func causeAilment(target : BattlePokemon):
 		print("Done!")
 		target.changeStatus(pokemon, ailmentType)
 		await GUI.battle.msgBox.showAilmentMessage_Move(target, ailmentType)
-		await GUI.battle.msgBox.finished
 		return
 	print("But failed")
 	

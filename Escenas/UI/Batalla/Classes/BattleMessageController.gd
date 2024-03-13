@@ -40,13 +40,13 @@ func showEffectivnessMessage(_target : BattlePokemon, _STAB : int):
 func showMoveMessage(_user : BattlePokemon, _move : BattleMove):
 	var type = ""
 	if _user.controllable:
-		GUI.battle.showMessage("¡" + _user.Name + " ha usado " + _move.Name + "!", false)
+		await GUI.battle.showMessage("¡" + _user.Name + " ha usado " + _move.Name + "!", false, 0.5)
 	else:
 		if GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.TRAINER:
 			type = " enemigo"
 		else:
 			type = " salvaje"
-		GUI.battle.showMessage("¡" + _user.Name + type + " ha usado " + _move.Name + "!", false)
+		await GUI.battle.showMessage("¡" + _user.Name + type + " ha usado " + _move.Name + "!", false, 0.5)
 		
 #Missatge que es mostra quan es modifiquen stats
 func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):
@@ -69,19 +69,19 @@ func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int
 		name = "del " + _target.Name + " salvaje"
 	
 	if _stat == CONST.STATS.ATA:
-		GUI.battle.showMessage("¡El ataque " + name + " " + text + "!", false, 2.0)
+		await GUI.battle.showMessage("¡El ataque " + name + " " + text + "!", false, 2.0)
 	elif _stat == CONST.STATS.DEF:
-		GUI.battle.showMessage("¡La defensa " + name + " " + text + "!", false, 2.0)
+		await GUI.battle.showMessage("¡La defensa " + name + " " + text + "!", false, 2.0)
 	elif _stat == CONST.STATS.ATAESP:
-		GUI.battle.showMessage("¡El ataque especial " + name + " " + text + "!", false, 2.0)	
+		await GUI.battle.showMessage("¡El ataque especial " + name + " " + text + "!", false, 2.0)	
 	elif _stat == CONST.STATS.DEFESP:
-		GUI.battle.showMessage("¡La defensa especial " + name + " " + text + "!", false, 2.0)	
+		await GUI.battle.showMessage("¡La defensa especial " + name + " " + text + "!", false, 2.0)	
 	elif _stat == CONST.STATS.VEL:
-		GUI.battle.showMessage("¡La velocidad " + name + " " + text + "!", false, 2.0)	
+		await GUI.battle.showMessage("¡La velocidad " + name + " " + text + "!", false, 2.0)	
 	elif _stat == CONST.STATS.ACC:
-		GUI.battle.showMessage("¡La precisión " + name + " " + text + "!", false, 2.0)	
+		await GUI.battle.showMessage("¡La precisión " + name + " " + text + "!", false, 2.0)	
 	elif _stat == CONST.STATS.EVA:
-		GUI.battle.showMessage("¡La evasión " + name + " " + text + "!", false, 2.0)		
+		await GUI.battle.showMessage("¡La evasión " + name + " " + text + "!", false, 2.0)		
 		
 		
 #Misatges que surten en el moment q es fa un atac i el pk rival queda paralitzat, dormit etc.
@@ -95,13 +95,13 @@ func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS)
 		name = _target.Name + " salvaje"
 	
 	if _ailment == CONST.AILMENTS.PARALYSIS:
-		GUI.battle.showMessage("¡" + name + " está paralizado! ¡Quizás no pueda moverse!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " está paralizado! ¡Quizás no pueda moverse!", false, 2.0)
 	elif _ailment == CONST.AILMENTS.SLEEP:
-		GUI.battle.showMessage("¡" + name + " se durmió!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " se durmió!", false, 2.0)
 	elif _ailment == CONST.AILMENTS.FREEZE:
-		GUI.battle.showMessage("¡" + name + " se ha congelado!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " se ha congelado!", false, 2.0)
 	elif _ailment == CONST.AILMENTS.BURN:
-		GUI.battle.showMessage("¡" + name + " ha sido quemado!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " ha sido quemado!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.POISON:
 #		GUI.battle.showMessage("¡La velocidad de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.CONFUSION:
@@ -123,14 +123,13 @@ func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS)
 #	elif _ailment == CONST.AILMENTS.NO_TYPE_IMMUNITY:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 	elif _ailment == CONST.AILMENTS.LEECH_SEED:
-		GUI.battle.showMessage("¡" + name + " fue infectado!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " fue infectado!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.EMBARGO:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.PERISH_SONG:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.INGRAIN:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
-	await GUI.battle.msgBox.finished
 #Misatges que surten quan un pkmn intenta fe run moviment i no pot per culpa de l'ailment
 #(el foc o el verí resten vida, o o el paralizar o dormir no deixen atacar etc)
 func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : CONST.AILMENTS):
@@ -143,13 +142,13 @@ func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : CONST.AILMENT
 		name = _target.Name + " salvaje"
 	
 	if _ailment == CONST.AILMENTS.PARALYSIS:
-		GUI.battle.showMessage("¡" + name + " está paralizado! ¡No se puede mover!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " está paralizado! ¡No se puede mover!", false, 2.0)
 	elif _ailment == CONST.AILMENTS.SLEEP:
-		GUI.battle.showMessage("¡" + name + " se durmió!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " se durmió!", false, 2.0)
 	elif _ailment == CONST.AILMENTS.FREEZE:
-		GUI.battle.showMessage("¡" + name + " está congelado!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " está congelado!", false, 2.0)
 	elif _ailment == CONST.AILMENTS.BURN:
-		GUI.battle.showMessage("¡" + name + " se resiente de la quemadura!", false, 2.0)
+		await GUI.battle.showMessage("¡" + name + " se resiente de la quemadura!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.POISON:
 #		GUI.battle.showMessage("¡La velocidad de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.CONFUSION:
@@ -171,7 +170,7 @@ func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : CONST.AILMENT
 #	elif _ailment == CONST.AILMENTS.NO_TYPE_IMMUNITY:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 	elif _ailment == CONST.AILMENTS.LEECH_SEED:
-		GUI.battle.showMessage("¡Las drenadoras restaron salud a " + name + "!", false, 2.0)
+		await GUI.battle.showMessage("¡Las drenadoras restaron salud a " + name + "!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.EMBARGO:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.PERISH_SONG:
@@ -180,23 +179,26 @@ func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : CONST.AILMENT
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 
 
-func show_msgBattle(text:String, showIcon : bool = true, _waitTime : float = 0.0):
-	msgBox.show_msgBattle(text, showIcon, _waitTime)
-	
+func show_msgBattle(text:String, showIcon : bool = true, _waitTime : float = 0.0, waitInput = false):
+	msgBox.show_msgBattle(text, showIcon, _waitTime, waitInput)
+	await finished
 #Missatge que es mostra quan es debilita un pokemon
 func showDefeatedPKMNMessage(_defeatedPKMN : BattlePokemon):
 	var type = ""
 	if _defeatedPKMN.controllable:
-		GUI.battle.showMessage("¡" + _defeatedPKMN.Name + " se debilitó!", false)
+		await GUI.battle.showMessageInput("¡" + _defeatedPKMN.Name + " se debilitó!", false)
 	else:
 		if GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.TRAINER:
 			type = " enemigo"
 		else:
 			type = " salvaje"
-		GUI.battle.showMessage("¡El " + _defeatedPKMN.Name + type + " se debilitó!", false)
-	await GUI.battle.msgBox.finished
+		await GUI.battle.showMessageInput("¡El " + _defeatedPKMN.Name + type + " se debilitó!", false)
 	
-	
+#Missatge que es mostra quan es guanya experiencia al derrotar un pokemon
+func showGainedEXPMessage(_pokemonTarget : BattlePokemon, expGained : int):
+	print("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!")
+	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!", false)
+
 	
 func accept_msg():
 	print("accept")

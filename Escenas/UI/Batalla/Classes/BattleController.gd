@@ -31,8 +31,8 @@ func initBattle():
 	UI = GUI.battle.initUI(self)
 	stage = CONST.BATTLE_STAGES.SELECT_ACTION
 	
-	UI.showMessage("¡Un " + activePokemons[1].Name + " salvaje te corta el paso!")
-	await UI.msgBox.finished
+	await UI.showMessageInput("¡Un " + activePokemons[1].Name + " salvaje te corta el paso!")
+	#await UI.msgBox.finished
 	#await UI.msgClosed
 	
 	takeTurn()
@@ -56,6 +56,11 @@ func takeTurn():
 			if !p.fainted:
 				p.doAction()
 				await p.actionFinished
+			#Only give exp if pokemon is from player
+			if p.controllable:
+				for e in p.listEnemies:
+					if e.fainted:
+						await e.giveExpAtDefeat()
 			
 	#endTurn()
 	#takeTurn()

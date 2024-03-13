@@ -1,7 +1,7 @@
 extends Node
 class_name Battler
 
-@export var type : CONST.BATTLER_TYPES = CONST.BATTLER_TYPES.TRAINER
+@export var type : CONST.BATTLER_TYPES
 @export var battleIA : Resource = null
 @export var Name: String
 @export var battle_front_sprite: Texture

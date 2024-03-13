@@ -226,7 +226,7 @@ func show_msgBattleOLD(text, _stop = null, _obj = null, _sig = null, _close = tr
 	finished.emit()
 
 
-func show_msgBattle(text : String, showIcon : bool = true, _waitTime : float = 0.0):
+func show_msgBattleold2(text : String, showIcon : bool = true, _waitTime : float = 0.0):
 	if _waitTime > 0.0:
 		stop = _waitTime
 	else:
@@ -277,4 +277,56 @@ func show_msgBattle(text : String, showIcon : bool = true, _waitTime : float = 0
 		wait(stop)
 		await finishedWaiting
 		#msgBox.hide()
+	finished.emit()
+
+
+func show_msgBattle(text : String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
+	if _waitTime > 0.0:
+		stop = _waitTime
+	else:
+		stop = null
+
+	text_completed = false
+	if (text.is_empty()):
+		print("sierrate")
+		msgBox.hide()
+		return
+	msgBox.show()	
+	if !showIcon:
+		next.hide()
+	skp=0
+	text = autoclip(text)
+	msg = text
+	label.text = text
+	label2.text = text
+
+	label.scroll_following = true
+	label2.scroll_following = true
+	label.visible_characters = 0
+	label2.visible_characters = 0
+	label.scroll_to_line(0)
+	label2.scroll_to_line(0)
+	#var count = label.get_total_character_count()-1
+	char_percent = 1.0 / label.get_total_character_count()
+	#print("char_percent ", char_percent)
+
+	timer.start()
+	await textDisplayed
+	
+	if stop != null:
+		wait(stop)
+		await finishedWaiting
+		
+	if waitInput:
+		if showIcon:
+			next.show()
+
+		if !animationPlayer.is_playing():
+			animationPlayer.play("Idle")
+
+		await accept
+
+		animationPlayer.stop()		
+		next.hide()
+
 	finished.emit()

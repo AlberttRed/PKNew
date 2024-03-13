@@ -100,7 +100,7 @@ var experienceGroup:PokemonExperienceGroup:
 	get:
 		return PokemonExperienceGroup.new(base.growth_rate_id)
 		
-var trainer_id:int = 45645634567
+var trainer_id:int = 1234
 var original_trainer : String = "Red" #De moment posem Red a piñon
 
 var totalExp : int = 0 # Es la quantitat d'experiencia que ha acumulat fins ara el pokemon
@@ -239,10 +239,11 @@ func create(_randomize_stats : bool = true, _pkmn_id : int = -1, _level : int = 
 	return self
 	
 func _ready():
-	print(base)
+	print("loading" + base.Name)
 	add_user_signal("hp_updated")
 #	if base != null:
 #		init_pokemon()
+	totalExp = actualLevelExpBase
 	if randomize_pokemon || randomize_stats:
 		randomize_pkmn()
 #	print("patata")
@@ -298,6 +299,7 @@ func randomize_pkmn():
 	
 		ability_id = randi_range(1, 232)
 		nature_id = randi_range(1, 25)
+		totalExp = actualLevelExpBase
 	
 	if randomize_pokemon || randomize_stats:
 		hp_EVs = randi_range(0, 252)
@@ -468,8 +470,18 @@ func hasAlly():
 func hasFullHealth():
 	return hp_actual == hp_total
 	
+func updateStats():
+	pass
 
-
+func levelUP():
+	var previousHP:float = hp_total
+	level += 1
+	updateStats()
+	var newHP:float = hp_total
+	var incrHP:float = (newHP - previousHP) / previousHP * 100.0
+	var hpAdd = ceil(hp_actual * (incrHP/100.0))
+	hp_actual =  hp_actual + hpAdd
+	print("a")
 #
 #func hasMove(move_id):
 #	for m in movements:

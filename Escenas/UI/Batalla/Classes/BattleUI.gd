@@ -97,8 +97,8 @@ func initDoubleBattleUI():
 	$enemyBase/PokemonB.position = CONST.BATTLE.FRONT_POKEMONB_SPRITE_POS
 
 func clearSingleBattleUI():
-	battleController.activePokemons[0].clearHPBarUI($playerBase/HPBarA)
-	battleController.activePokemons[1].clearHPBarUI($enemyBase/HPBarA)
+	battleController.activePokemons[0].HPbar.clearUI()
+	battleController.activePokemons[1].HPbar.clearUI()
 
 func clearDoubleBattleUI():
 	pass
@@ -127,11 +127,14 @@ func setPanelActionsText(text:String):
 	$PanelActions/Label.text = text
 	$PanelActions/Label/Label2.text = text
 			
-func showMessage(text:String, showIcon : bool = true, _waitTime : float = 0.0):
+func showMessage(text:String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
 	showPanel($PanelMessageBox)
-	await msgBox.show_msgBattle(text, showIcon, _waitTime)
-	#await msgBox.finished
-	#msgClosed.emit()
+	await msgBox.show_msgBattle(text, showIcon, _waitTime, waitInput)
+
+func showMessageInput(text:String, showIcon : bool = true):
+	showPanel($PanelMessageBox)
+	await msgBox.show_msgBattle(text, showIcon, 0.0, true)
+
 	
 func showActionsPanel():
 	setPanelActionsText("¿Qué debería hacer \n" + battleController.active_pokemon.Name + "?")

@@ -20,8 +20,7 @@ func applyPreviousEffects():
 			if valor <= (0.25):
 				target.canAttack = false
 				await BattleAnimationList.new().getAilmentAnimation(ailment).doAnimation(target)
-				GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
-				await GUI.battle.msgBox.finished
+				await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
 
 		if ailment == CONST.AILMENTS.CONFUSION:
 			pass
@@ -37,13 +36,11 @@ func applyLaterEffects():
 	if ailment == CONST.AILMENTS.POISON:
 		var value : int = int(target.hp_total / 8)
 		await target.take_damage(value)
-		GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
-		await GUI.battle.msgBox.finished
+		await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
 	if ailment == CONST.AILMENTS.LEECH_SEED:
 		#Drenadoras roba un 1/8 de la vida total de l'objectiu
 		var value : int = int(target.hp_total / 8)
 		await target.take_damage(value)
 		await pokemon.heal(value)
 	
-		GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
-		await GUI.battle.msgBox.finished
+		await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)

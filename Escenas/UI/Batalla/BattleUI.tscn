@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dmdm304dmklh8"]
+[gd_scene load_steps=45 format=3 uid="uid://dmdm304dmklh8"]
 
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="1_35cnb"]
 [ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleUI.gd" id="1_syfy0"]
@@ -25,10 +25,12 @@
 [ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="12_mjuc7"]
 [ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Animaciones/Batalla/Moves/Battle_AilmentAnimations.res" id="15_l48co"]
 [ext_resource type="Texture2D" uid="uid://dqkmrnqhdrcvb" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFoeBoxS.png" id="18_fvfel"]
-[ext_resource type="Texture2D" uid="uid://dqhrc65l8u6am" path="res://Sprites/Pictures/HPbar_background.png" id="22_upt8c"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="19_osmde"]
+[ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="22_22p8p"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="22_igskh"]
+[ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="23_vhkif"]
 [ext_resource type="AnimationLibrary" uid="uid://btf1cle7g0a06" path="res://Objetos/Animaciones/Batalla/Moves/Battle_CommonAnimations.res" id="23_vixyq"]
-[ext_resource type="Texture2D" uid="uid://cdus0uhl7tnql" path="res://Sprites/Pictures/HPbar_overlay.png" id="23_wncfw"]
-[ext_resource type="Texture2D" uid="uid://x2gt17sm1nc5" path="res://Sprites/Pictures/HPbar_progress.png" id="24_fn5km"]
+[ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="24_g5pq7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb151"]
 texture = ExtResource("4_l76bn")
@@ -477,6 +479,7 @@ libraries = {
 z_index = 4
 position = Vector2(526, -3)
 texture = ExtResource("9_u5nbs")
+script = ExtResource("19_osmde")
 metadata/_edit_lock_ = true
 
 [node name="Name" type="BoxContainer" parent="playerBase/HPBarA"]
@@ -515,7 +518,6 @@ region_rect = Rect2(0, 16, 44, 16)
 
 [node name="health_bar" parent="playerBase/HPBarA" instance=ExtResource("12_mjuc7")]
 position = Vector2(0, 1)
-metadata/_edit_lock_ = true
 
 [node name="lblHP" parent="playerBase/HPBarA/health_bar" index="0"]
 offset_left = 37.2831
@@ -528,24 +530,22 @@ offset_right = 105.992
 offset_bottom = 31.7979
 
 [node name="exp_bar" type="Node2D" parent="playerBase/HPBarA"]
-visible = false
-position = Vector2(-55, 36)
+position = Vector2(-55, 36.25)
+script = ExtResource("22_igskh")
 metadata/_edit_vertical_guides_ = [-205.084]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="playerBase/HPBarA/exp_bar"]
-offset_left = -26.0082
-offset_top = -8.20206
-offset_right = 105.992
-offset_bottom = 31.7979
+offset_left = -39.0
+offset_top = -7.0
+offset_right = 161.0
+offset_bottom = 10.0
 scale = Vector2(1, 0.960005)
+max_value = 0.0
 step = 0.1
-value = 100.0
 stretch_margin_left = 1
-texture_under = ExtResource("22_upt8c")
-texture_over = ExtResource("23_wncfw")
-texture_progress = ExtResource("24_fn5km")
-texture_progress_offset = Vector2(32, 0)
-tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+texture_under = ExtResource("22_22p8p")
+texture_over = ExtResource("23_vhkif")
+texture_progress = ExtResource("24_g5pq7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/HPBarA/exp_bar"]
 
@@ -603,6 +603,7 @@ libraries = {
 [node name="HPBarA" type="Sprite2D" parent="enemyBase"]
 position = Vector2(-144, -45)
 texture = ExtResource("18_fvfel")
+script = ExtResource("19_osmde")
 metadata/_edit_lock_ = true
 
 [node name="Name" type="BoxContainer" parent="enemyBase/HPBarA"]
@@ -671,6 +672,7 @@ offset_bottom = 31.5661
 [connection signal="focus_exited" from="PanelMoves/Moves/Move3" to="." method="_on_move_focus_exited"]
 [connection signal="focus_entered" from="PanelMoves/Moves/Move4" to="." method="_on_move_focus_entered"]
 [connection signal="focus_exited" from="PanelMoves/Moves/Move4" to="." method="_on_move_focus_exited"]
+[connection signal="value_changed" from="playerBase/HPBarA/exp_bar/TextureProgressBar" to="playerBase/HPBarA/exp_bar" method="_on_value_changed"]
 
 [editable path="PanelMessageBox"]
 [editable path="playerBase/HPBarA/health_bar"]

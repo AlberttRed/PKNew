@@ -5,18 +5,22 @@ signal updated
 var total_hp :int = 0
 var actual_hp :int = 0
 
-func setHPBar(pokemon : BattlePokemon):
-	pokemon.updateHP.connect(Callable(self, "on_health_changes"))
+@onready var lblHP:Label = $lblHP
+@onready var progressBar:TextureProgressBar = $TextureProgressBar
+
+func init(pokemon : BattlePokemon):
+	#pokemon.updateHP.connect(Callable(self, "on_health_changes"))
+	updateUI(pokemon)
+	
+#	percentage = float(pokemon_target.hp_actual) / float(pokemon_target.hp_total)
+#	$health.scale = Vector2(percentage, 1)
+func updateUI(pokemon : BattlePokemon):
 	actual_hp = pokemon.hp_actual
 	total_hp = pokemon.hp_total
 	$TextureProgressBar.max_value = total_hp
 	$TextureProgressBar.value = actual_hp
 	$lblHP.text = str(actual_hp) + "/" + str(total_hp)
-	pokemon.HPbar = self
 	update_color()
-#	percentage = float(pokemon_target.hp_actual) / float(pokemon_target.hp_total)
-#	$health.scale = Vector2(percentage, 1)
-	
 	
 func update_color():
 	var percentage = float($TextureProgressBar.value) / float($TextureProgressBar.max_value)
@@ -53,4 +57,4 @@ func clear(pokemon):
 	actual_hp = 0
 	$TextureProgressBar.value = 0
 	$TextureProgressBar.max_value = 0
-	pokemon.updateHP.disconnect(Callable(self, "on_health_changes"))
+	#pokemon.updateHP.disconnect(Callable(self, "on_health_changes"))

@@ -1,8 +1,10 @@
 class_name BattlePokemon
 
 signal updateHP
+signal updateEXP
 signal actionSelected
 signal actionFinished
+signal levelChanged
 
 var instance : PokemonInstance
 
@@ -93,13 +95,22 @@ var battlerAltitude: int:
 #var trainer: Battler:
 	#get:
 		#return instance.trainer
-var isWild: bool:
+var isWild: bool
+
+var totalExp : int: # Es la quantitat d'experiencia que ha acumulat fins ara el pokemon
 	get:
-		return side.type == CONST.BATTLE_TYPES.WILD
+		return instance.totalExp
+	set(_totalExp):
+		instance.totalExp = _totalExp
+var actualLevelExpBase : int: # Es l'experiencia base necessaria per arribar al nivell actual
+	get:
+		return instance.actualLevelExpBase
+var nextLevelExpBase:int:
+	get:
+		return instance.nextLevelExpBase
 
 var sprite : Texture2D
 var HPbar : Node2D = null
-var statusUI : Node2D = null
 var battleNode : Node2D = null
 var animPlayer : AnimationPlayer
 
@@ -270,7 +281,7 @@ func getExpGained(opponent : BattlePokemon):
 		
 	if instance.trainer_id != GAME_DATA.player_id:
 		t = 1.5
-	return (b * lf / t) * (1 / s) * e * a * t
+	return floor(floor(floor(floor((b * lf / 7) * (1 / s)) * e) * a) * t)
 	
 func take_damage(amount):
 	await BattleAnimationList.new().getCommonAnimation("PokemonHit").doAnimation(self)
@@ -301,37 +312,11 @@ func initPokemonUI(pokemonNode : Node2D, hPBarNode : Node2D):
 	initSprite(side.type)
 	pokemonNode.get_node("Sprite").texture = sprite
 	setSpritePosition(pokemonNode.get_node("Sprite"))
-	initHPBarUI(hPBarNode)
+	HPbar = hPBarNode
+	HPbar.init(self)
+	HPbar.updateUI()
 	
 	
-func initHPBarUI(hPBarNode : Node2D):
-	hPBarNode.get_node("Name/lblName").text = Name
-	hPBarNode.get_node("lblLevel").text = "Nv" + str(level)
-	#hPBarNode.get_node("lblHP").text = str(pokemonInstance.hp_actual) + "/" + str(pokemonInstance.hp_total)
-	if gender == CONST.GENEROS.HEMBRA:
-		hPBarNode.get_node("Name/lblGender").text = "♀"
-		hPBarNode.get_node("Name/lblGender").set("Label/colors/font_color", Color(0.97254902124405, 0.34509804844856, 0.15686275064945))
-	elif gender == CONST.GENEROS.MACHO:
-		hPBarNode.get_node("Name/lblGender").text = "♂"
-		hPBarNode.get_node("Name/lblGender").set("Label/colors/font_color", Color(0.18823529779911, 0.37647059559822, 0.84705883264542))
-	
-	else:
-		hPBarNode.get_node("Name/lblGender").text = ""
-	
-	statusUI = hPBarNode.get_node("Status")
-	
-	updateStatusUI()
-	
-	hPBarNode.get_node("health_bar").setHPBar(self)
-	
-
-func clearHPBarUI(hPBarNode : Node2D):
-	hPBarNode.get_node("Name/lblName").text = ""
-	hPBarNode.get_node("lblLevel").text = ""
-	hPBarNode.get_node("Name/lblGender").text = ""
-	statusUI.hide()
-	hPBarNode.get_node("health_bar").clear(self)
-
 func setSpritePosition(sprite : Sprite2D):
 	var y_position = 0
 	var initial_pos :int = 0
@@ -425,7 +410,7 @@ func changeStatus(_attacker : BattlePokemon, _status : CONST.AILMENTS):
 		removeStatus(BattleAilmentEffect.new(true, _status, _attacker, self))
 
 		
-	updateStatusUI()
+	HPbar.updateStatusUI()
 
 func applyPreviousEffects():
 	for effect in activeEffectsFlags:
@@ -435,30 +420,26 @@ func applyLaterEffects():
 	for effect in activeEffectsFlags:
 		await effect.applyLaterEffects()
 
-func updateStatusUI():
-	if status != CONST.STATUS.OK:
-		statusUI.visible = true
-		statusUI.region_rect = Rect2(0, 16*(status-1), 44, 16)
-	else:
-		statusUI.visible = false
-
 func setDefeated():
 	#Mostro animació pokemon debilitat
 	# TO DO
-	giveExpAtDefeat()
 	#Mostro missatge pokemon debilitat
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
 	
 func giveExpAtDefeat():
 	for p:BattlePokemon in listPokemonBattledAgainst:
-		var exp = p.getExpGained(self)
-		print("¡" + p.Name + " ha ganado " + str(exp) + " Puntos de Experiencia!")
+		var expGained = p.getExpGained(self)
+		await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
+		print("kik")
+		p.HPbar.updateEXP(p.totalExp+expGained)
+		await p.HPbar.updated
+		print("lel")
 	#Give Exp to all PKMNs with Exp. All equipped
 	for par:BattleParticipant in side.opponentSide.participants:
 		for p:BattlePokemon in par.getPKMNwithExpAll():
-			var exp = p.getExpGained(self)
-			print("¡" + p.Name + " ha ganado " + str(exp) + " Puntos de Experiencia!")
-	
+			var expGained = p.getExpGained(self)
+			p.totalExp += expGained
+			await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 	
 func addEffect(effect : BattleEffect):
 	activeEffectsFlags.push_back(effect)
@@ -470,7 +451,12 @@ func removeStatus(effect : BattleAilmentEffect):
 			delete = e
 			break
 	activeEffectsFlags.erase(delete)
-		
+
+func levelUP():
+	instance.levelUP()
+	HPbar.updateUI()
+	levelChanged.emit()
+
 	
 func queue_free():
 	participant.queue_free()

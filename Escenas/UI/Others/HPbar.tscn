@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://ta05jv33ns50"]
 
-[ext_resource type="Script" path="res://Escenas/UI/Others/HPbar.gd" id="1_lywt1"]
-[ext_resource type="Texture2D" uid="uid://ymyg408f4s7m" path="res://Sprites/Pictures/HPbar_background.png" id="3_1t77b"]
-[ext_resource type="Texture2D" uid="uid://bhehj7u2tr1uf" path="res://Sprites/Pictures/HPbar_overlay.png" id="3_q3l73"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="1_lywt1"]
+[ext_resource type="Texture2D" uid="uid://dqhrc65l8u6am" path="res://Sprites/Pictures/HPbar_background.png" id="3_1t77b"]
+[ext_resource type="Texture2D" uid="uid://cdus0uhl7tnql" path="res://Sprites/Pictures/HPbar_overlay.png" id="3_q3l73"]
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="4_df7g3"]
-[ext_resource type="Texture2D" uid="uid://cxptje7t11epq" path="res://Sprites/Pictures/HPbar_progress.png" id="5_3p84r"]
+[ext_resource type="Texture2D" uid="uid://x2gt17sm1nc5" path="res://Sprites/Pictures/HPbar_progress.png" id="5_3p84r"]
 
 [node name="health_bar" type="Node2D"]
 script = ExtResource("1_lywt1")

@@ -9,6 +9,7 @@ func _init(_participant : Battler, _controllable : bool):
 	print(_participant.battleIA)
 	for p in _participant.party:
 		var bp = BattlePokemon.new(p, _participant.battleIA)
+		bp.isWild = _participant.type == CONST.BATTLER_TYPES.WILD_POKEMON
 		bp.controllable = _controllable
 		bp.participant = self
 		pokemonTeam.push_back(bp)
