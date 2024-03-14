@@ -3,6 +3,7 @@ extends CanvasLayer
 
 signal input
 signal selected_choice
+signal accept
 
 var next = false
 
@@ -14,6 +15,7 @@ var next = false
 @onready var party = $PARTY
 #onready var bag = get_node("BAG")
 @onready var transition = $TRANSITION
+@onready var levelUp = $LEVELUP
 
 var choices_options = null
 
@@ -139,12 +141,13 @@ func show_party():
 	menu.set_process(true)
 	
 func _input(event):
-	if $MSG.visible and !chs.visible and msg.text_completed:
+	#if ($MSG.visible and !chs.visible and msg.text_completed):
+	if (visible):
 		if event.is_action_pressed("ui_accept"):
 			Input.action_release("ui_accept")
 			INPUT.ui_accept.free_state()
-			print("ajajajaj")
-			msg.accept.emit()
+			print("GUI accept")
+			accept.emit()
 #
 #func start_battle(double, trainer1, trainer2, trainer3 = null, trainer4 = null):#wild_encounter(id, level):
 #	battle.show()

@@ -69,7 +69,7 @@ func updateEXP(exp):
 		pokemon.totalExp = end
 		if expBar.isNewLevel():
 			#expBar.levelUP.emit()
-			pokemon.levelUP()
+			await pokemon.levelUP()
 			#await pokemon.levelChanged
 			print("AAAAAAAAAA" +str(pokemon.totalExp))
 	updated.emit()	

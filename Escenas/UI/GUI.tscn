@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6s1oa8tssbi1"]
+[gd_scene load_steps=9 format=3 uid="uid://c6s1oa8tssbi1"]
 
 [ext_resource type="Script" path="res://Escenas/UI/GUI.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG.tscn" id="3"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cg0kncuwkhf3k" path="res://Escenas/UI/Menus/MAIN_MENU.tscn" id="4_xq6r8"]
 [ext_resource type="PackedScene" uid="uid://dmdm304dmklh8" path="res://Escenas/UI/Batalla/BattleUI.tscn" id="6_8knxp"]
 [ext_resource type="PackedScene" uid="uid://qp2b8byf71vg" path="res://Escenas/UI/Others/TRANSITION.tscn" id="7_k1aad"]
+[ext_resource type="PackedScene" uid="uid://bqjj24te0tb7r" path="res://Escenas/UI/Textbox/LevelUP/LEVELUP.tscn" id="8_k55ks"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1")
@@ -28,4 +29,8 @@ visible = false
 [node name="BATTLE" parent="." instance=ExtResource("6_8knxp")]
 visible = false
 
+[node name="LEVELUP" parent="." instance=ExtResource("8_k55ks")]
+visible = false
+
 [editable path="TRANSITION"]
+[editable path="LEVELUP"]

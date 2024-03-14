@@ -45,45 +45,54 @@ var types : Array[Type] :
 		return [base.type_a as Type, base.type_b as Type]
 	set(value):
 		types = value 	
+
+var status = CONST.STATUS.OK
+
 var hp_actual: int = 0 
 var hp_total : int = 0:
 	get:
 		#return int(10.0 + (float(level) / 100.0 * ((float(base.hp_base) * 2.0) + float(hp_IVs) + float(hp_EVs) ) ) + float(level) ) 
 		print(int(float(hp_EVs) / 4.0))
 		print(str(int( (float(level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + level + 10 )) 
-		return int( (float(level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + level + 10
+		#return int( (float(level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + level + 10
+		return getHPStat(level)
 	set(value):
 		hp_total = value 
-var status = CONST.STATUS.OK
 var attack : int: 
 	get:
-		return int(float(int( 5.0 + (( float(level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
+		#return int(float(int( 5.0 + (( float(level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
+		return getAttackStat(level)
 	set(value):
 		attack = value 
-var speed : int:
-	get:
-		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + float(speed_EVs) ) ) ) )) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
-		return int(float(int( 5.0 + (( float(level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
-	set(value):
-		speed = value 
 var defense : int: 
 	get:
 		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + float(defense_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
-		return int(float(int( 5.0 + (( float(level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
+		#return int(float(int( 5.0 + (( float(level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
+		return getDefenseStat(level)
 	set(value):
 		defense = value 
 var special_attack : int:
 	get:
 		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + float(spAttack_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
-		return int(float(int( 5.0 + (( float(level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
+		#return int(float(int( 5.0 + (( float(level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
+		return getSpAttackStat(level)
 	set(value):
 		special_attack = value 
 var special_defense : int:
 	get:
 		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + float(spDefense_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
-		return int(float(int( 5.0 + (( float(level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
+		#return int(float(int( 5.0 + (( float(level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
+		return getSpDefenseStat(level)
 	set(value):
 		special_defense = value 
+var speed : int:
+	get:
+		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + float(speed_EVs) ) ) ) )) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
+		#return int(float(int( 5.0 + (( float(level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
+		return getSpeedStat(level)
+	set(value):
+		speed = value 
+
 var battlerPlayerY: int:
 	get:
 		return base.battlerPlayerY
@@ -482,7 +491,29 @@ func levelUP():
 	var hpAdd = ceil(hp_actual * (incrHP/100.0))
 	hp_actual =  hp_actual + hpAdd
 	print("a")
-#
+
+func getHPStat(_level:int):
+	return int( (float(_level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + _level + 10
+
+func getAttackStat(_level:int):
+	return int(float(int( 5.0 + (( float(_level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
+
+	
+func getDefenseStat(_level:int):
+	return int(float(int( 5.0 + (( float(_level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
+
+
+func getSpAttackStat(_level:int):
+	return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
+
+
+func getSpDefenseStat(_level:int):
+	return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
+
+
+func getSpeedStat(_level:int):
+	return int(float(int( 5.0 + (( float(_level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
+
 #func hasMove(move_id):
 #	for m in movements:
 #		if m.id == move_id:

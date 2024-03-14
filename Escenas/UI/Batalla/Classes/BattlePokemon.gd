@@ -431,7 +431,7 @@ func giveExpAtDefeat():
 		var expGained = p.getExpGained(self)
 		await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 		print("kik")
-		p.HPbar.updateEXP(p.totalExp+expGained)
+		p.HPbar.updateEXP(p.totalExp+expGained+200)
 		await p.HPbar.updated
 		print("lel")
 	#Give Exp to all PKMNs with Exp. All equipped
@@ -455,6 +455,8 @@ func removeStatus(effect : BattleAilmentEffect):
 func levelUP():
 	instance.levelUP()
 	HPbar.updateUI()
+	await GUI.battle.msgBox.showLevelUpMessage(self, level)
+	await GUI.battle.msgBox.showLevelUpStats(self)
 	levelChanged.emit()
 
 	

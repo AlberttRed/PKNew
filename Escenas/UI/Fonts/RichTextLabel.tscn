@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4ex854x6yq5d"]
 
-[ext_resource type="FontFile" uid="uid://odn2mkfd4lap" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="1"]
 [ext_resource type="Script" path="res://Escenas/UI/Fonts/RichTextLabel.gd" id="2"]
 [ext_resource type="FontFile" path="res://Escenas/UI/Textbox/Resources/HGSS_Font_Style.tres" id="3"]
 
@@ -27,6 +27,7 @@ outline_color = Color(0.658824, 0.721569, 0.721569, 1)
 text_font = ExtResource("3")
 
 [node name="Outline" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_right = 508.0
 offset_bottom = 77.0
 grow_horizontal = 0

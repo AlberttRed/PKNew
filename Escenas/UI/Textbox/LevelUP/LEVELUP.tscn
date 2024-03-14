@@ -1,0 +1,526 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqjj24te0tb7r"]
+
+[ext_resource type="Texture2D" uid="uid://ds2qgg6nf0bky" path="res://Sprites/UI/Textbox/choice dp.png" id="1_pm1k3"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/LevelUP/LEVELUP.gd" id="2_g4n0e"]
+[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="2_lq8l3"]
+[ext_resource type="Script" path="res://Escenas/UI/Fonts/RichTextLabel.gd" id="4_p7po6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3nmwb"]
+texture = ExtResource("1_pm1k3")
+texture_margin_left = 27.972
+texture_margin_top = 12.432
+texture_margin_right = 27.8369
+texture_margin_bottom = 12.0266
+region_rect = Rect2(4, 4, 40, 40)
+
+[sub_resource type="Theme" id="Theme_vl5hy"]
+default_font = ExtResource("2_lq8l3")
+default_font_size = 26
+Label/colors/font_color = Color(0.345098, 0.345098, 0.313726, 1)
+Label/colors/font_outline_color = Color(0.658824, 0.721569, 0.721569, 1)
+Label/colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 4
+Label/constants/shadow_offset_y = 4
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/Size = 19
+RichTextLabel/colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+RichTextLabel/colors/font_outline_color = Color(0.658824, 0.721569, 0.721569, 1)
+RichTextLabel/colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 2
+RichTextLabel/constants/shadow_offset_y = 0
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 4
+RichTextLabel/constants/table_v_separation = 3
+
+[node name="LEVELUP" type="Panel"]
+z_index = 2
+offset_left = 296.0
+offset_top = 128.0
+offset_right = 508.0
+offset_bottom = 313.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_3nmwb")
+script = ExtResource("2_g4n0e")
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stats" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.58
+
+[node name="HP" type="RichTextLabel" parent="HBoxContainer/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "PS Máx."
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/Stats/HP"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "PS Máx.
+"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+
+[node name="Attack" type="RichTextLabel" parent="HBoxContainer/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "Ataque"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/Stats/Attack"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "Ataque"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+
+[node name="Defense" type="RichTextLabel" parent="HBoxContainer/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "Defensa"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/Stats/Defense"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "Defensa"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+
+[node name="SpAttack" type="RichTextLabel" parent="HBoxContainer/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "At. Esp."
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/Stats/SpAttack"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "At. Esp."
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+
+[node name="SpDefense" type="RichTextLabel" parent="HBoxContainer/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "Def. Esp."
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/Stats/SpDefense"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "Def. Esp."
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+
+[node name="Speed" type="RichTextLabel" parent="HBoxContainer/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "Veloc."
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/Stats/Speed"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "Veloc."
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+visible_characters_behavior = 1
+structured_text_bidi_override = 5
+
+[node name="StatsValues" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HPValue" type="RichTextLabel" parent="HBoxContainer/StatsValues"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/StatsValues/HPValue"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+
+[node name="AttackValue" type="RichTextLabel" parent="HBoxContainer/StatsValues"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/StatsValues/AttackValue"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+
+[node name="DefenseValue" type="RichTextLabel" parent="HBoxContainer/StatsValues"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/StatsValues/DefenseValue"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+
+[node name="SpAttackValue" type="RichTextLabel" parent="HBoxContainer/StatsValues"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/StatsValues/SpAttackValue"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+
+[node name="SpDefenseValue" type="RichTextLabel" parent="HBoxContainer/StatsValues"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/StatsValues/SpDefenseValue"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+
+[node name="SpeedValue" type="RichTextLabel" parent="HBoxContainer/StatsValues"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5
+script = ExtResource("4_p7po6")
+
+[node name="Outline" type="RichTextLabel" parent="HBoxContainer/StatsValues/SpeedValue"]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 56.0
+size_flags_stretch_ratio = 5.0
+auto_translate = false
+theme = SubResource("Theme_vl5hy")
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 7
+theme_override_fonts/normal_font = ExtResource("2_lq8l3")
+theme_override_font_sizes/normal_font_size = 26
+text = "+  2"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+structured_text_bidi_override = 5

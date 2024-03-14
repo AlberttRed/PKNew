@@ -154,11 +154,11 @@ func autoclip(text=""):
 	writing = false
 	return text
 
-	
-func _input(event):
-	if visible and !GUI.chs.visible and text_completed:
-		if event.is_action_pressed("ui_accept"):
-			Input.action_release("ui_accept")
-			INPUT.ui_accept.free_state()
-			print("ajajajaj")
-			accept.emit()
+	#
+#func _input(event):
+	#if visible and !GUI.chs.visible and text_completed:
+		#if event.is_action_pressed("ui_accept"):
+			#Input.action_release("ui_accept")
+			#INPUT.ui_accept.free_state()
+			#print("ajajajaj")
+			#accept.emit()

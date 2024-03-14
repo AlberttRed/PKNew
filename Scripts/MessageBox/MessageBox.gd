@@ -88,7 +88,7 @@ func show_msg(text, _stop = null, _obj = null, _sig = null, _close = true):
 		if !animationPlayer.is_playing():
 			animationPlayer.play("Idle")
 
-		await accept
+		await GUI.accept
 
 		animationPlayer.stop()		
 		next.hide()
@@ -212,7 +212,7 @@ func show_msgBattleOLD(text, _stop = null, _obj = null, _sig = null, _close = tr
 		if !animationPlayer.is_playing():
 			animationPlayer.play("Idle")
 
-		await accept
+		await GUI.accept
 
 		animationPlayer.stop()		
 		next.hide()
@@ -266,7 +266,7 @@ func show_msgBattleold2(text : String, showIcon : bool = true, _waitTime : float
 		if !animationPlayer.is_playing():
 			animationPlayer.play("Idle")
 
-		await accept
+		await GUI.accept
 
 		animationPlayer.stop()		
 		next.hide()
@@ -324,7 +324,7 @@ func show_msgBattle(text : String, showIcon : bool = true, _waitTime : float = 0
 		if !animationPlayer.is_playing():
 			animationPlayer.play("Idle")
 
-		await accept
+		await GUI.accept
 
 		animationPlayer.stop()		
 		next.hide()

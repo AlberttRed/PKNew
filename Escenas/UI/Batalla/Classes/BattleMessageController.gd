@@ -19,7 +19,7 @@ var msg:
 
 func _init(_panel : Panel):
 	msgBox = MessageBox.new(_panel)
-	accept.connect(Callable(self, "accept_msg"))
+	#accept.connect(Callable(self, "accept_msg"))
 	msgBox.textDisplayed.connect(Callable(self, "msg_TextDisplayed"))
 	msgBox.finished.connect(Callable(self, "msg_Finished"))
 
@@ -199,10 +199,22 @@ func showGainedEXPMessage(_pokemonTarget : BattlePokemon, expGained : int):
 	print("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!")
 	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!", false)
 
+func showLevelUpMessage(_pokemonTarget : BattlePokemon, level : int):
+	print("¡" + _pokemonTarget.Name + " subió al nivel " + str(level) + "!")
+	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " subió al nivel " + str(level) + "!", false)
+
+func showLevelUpStats(pokemon:BattlePokemon):
+	var levelUpPanel:Panel = GUI.levelUp
+	await levelUpPanel.showStatsIncrement(pokemon.instance)
+	await levelUpPanel.showLevelStats(pokemon.instance)
 	
-func accept_msg():
-	print("accept")
-	msgBox.accept.emit()
+	#
+#func accept_msg():
+	#print("accept")
+	##msgBox.accept.emit()
+	#GUI.accept.emit()
+	##GUI.levelUp.accept.emit()
+
 
 func msg_TextDisplayed():
 	print("displayed")

@@ -108,20 +108,17 @@ func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		Input.action_release("ui_accept")
 		INPUT.ui_accept.free_state()
-		if $PanelMessageBox.visible and !GUI.chs.visible and msgBox.text_completed:
-				msgBox.accept.emit()
-		elif onActionsPanel():
+		if onActionsPanel():
 				print("Action selected")
 				actionSignalSelected.emit()
 		elif onMovesPanel():
-				print("A")
+				print("Move selected")
 				battleController.active_pokemon.selected_action = BattleMoveChoice.new(battleController.active_pokemon.selected_move, [])
 				moveSelected.emit()
 	elif event.is_action_pressed("ui_cancel"):
 		if onMovesPanel():
 			hideMovesPanel()
 			cmdLuchar.grab_focus()
-				#battleController.activePokemons[0].take_damage(5)
 			
 func setPanelActionsText(text:String):
 	$PanelActions/Label.text = text
