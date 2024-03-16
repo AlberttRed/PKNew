@@ -28,6 +28,7 @@ func initBattle():
 	enemySide.opponentSide = playerSide
 
 	initActivePokemons()
+	await GUI.initBattleTransition()
 	UI = GUI.battle.initUI(self)
 	stage = CONST.BATTLE_STAGES.SELECT_ACTION
 	
@@ -35,7 +36,7 @@ func initBattle():
 	#await UI.msgBox.finished
 	#await UI.msgClosed
 	
-	takeTurn()
+	await takeTurn()
 
 func takeTurn():
 	if stage == CONST.BATTLE_STAGES.SELECT_ACTION:
@@ -70,7 +71,7 @@ func takeTurn():
 		takeTurn()
 	else:
 		print("c'est fini")
-		endBattle()
+		await endBattle()
 	
 func initActivePokemons():
 	var pk_per_side : int = 0
@@ -193,7 +194,10 @@ func endTurn():
 	#turnPokemonOrder.clear()
 	
 func endBattle():
+	await GUI.fadeIn(1.3)
 	UI.clear()
+	await GUI.get_tree().create_timer(1).timeout
+	await GUI.fadeOut(3)
 	
 func queue_free():
 	rules = null

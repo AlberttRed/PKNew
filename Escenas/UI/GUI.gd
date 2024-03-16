@@ -142,12 +142,13 @@ func show_party():
 	
 func _input(event):
 	#if ($MSG.visible and !chs.visible and msg.text_completed):
-	if (visible):
+	if (isVisible()):
 		if event.is_action_pressed("ui_accept"):
 			Input.action_release("ui_accept")
 			INPUT.ui_accept.free_state()
 			print("GUI accept")
 			accept.emit()
+
 #
 #func start_battle(double, trainer1, trainer2, trainer3 = null, trainer4 = null):#wild_encounter(id, level):
 #	battle.show()
@@ -169,4 +170,25 @@ func _input(event):
 #
 func play_transition(animation : String):
 	transition.play(animation)
+	await transition.finished 
+	
+func fadeOut(speed:int=1.0):
+	transition.animationPlayer.speed_scale = speed
+	transition.play("Transitions/FadeToNormal")
+	await transition.finished 
+	transition.animationPlayer.speed_scale = 1.0
+	
+func fadeIn(speed:int=1.0):
+	print("aaa")
+	transition.animationPlayer.speed_scale = speed #set_speed_scale
+	transition.play("Transitions/FadeToBlack")
+	await transition.finished 
+	transition.animationPlayer.speed_scale = 1.0
+	
+func initBattleTransition():
+	GUI.transition.play("Transitions/Battle_WildTransition")
+	await transition.finished 
+	
+func resetTransitionScreen():
+	GUI.transition.play("RESET")
 	await transition.finished 

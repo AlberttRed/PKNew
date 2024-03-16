@@ -24,10 +24,10 @@ visible = false
 [node name="CHOICES" parent="." instance=ExtResource("3_hwenn")]
 visible = false
 
-[node name="TRANSITION" parent="." instance=ExtResource("7_k1aad")]
-
 [node name="BATTLE" parent="." instance=ExtResource("6_8knxp")]
 visible = false
+
+[node name="TRANSITION" parent="." instance=ExtResource("7_k1aad")]
 
 [node name="LEVELUP" parent="." instance=ExtResource("8_k55ks")]
 visible = false

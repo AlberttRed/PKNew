@@ -207,7 +207,11 @@ func showLevelUpStats(pokemon:BattlePokemon):
 	var levelUpPanel:Panel = GUI.levelUp
 	await levelUpPanel.showStatsIncrement(pokemon.instance)
 	await levelUpPanel.showLevelStats(pokemon.instance)
-	
+
+func showExitMessage():
+	print("¡Escapaste sin problemas!")
+	await GUI.battle.showMessageInput("¡Escapaste sin problemas!", false)
+
 	#
 #func accept_msg():
 	#print("accept")

@@ -66,6 +66,7 @@ func interact_at_collide():
 func _input(event):
 	if event.is_action_pressed("ui_accept") and !GUI.isVisible():
 		print("A")
+
 #		print(GLOBAL.actual_map.map_connections_list[0].active_tilemap.position)
 #		print(GLOBAL.actual_map.map_connections_list[0].global_position)
 		

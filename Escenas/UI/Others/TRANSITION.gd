@@ -1,12 +1,13 @@
 extends Panel
 
 signal finished
+@onready var animationPlayer:AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	hide()
 	
 	
 func play(animation : String):
-	$AnimationPlayer.play(animation)
-	await $AnimationPlayer.animation_finished
+	animationPlayer.play(animation)
+	await animationPlayer.animation_finished
 	finished.emit()

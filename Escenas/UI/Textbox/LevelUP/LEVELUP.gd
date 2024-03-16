@@ -24,13 +24,13 @@ func showStatsIncrement(pokemon:PokemonInstance):
 	
 func showLevelStats(pokemon:PokemonInstance):
 	show()
-	statsValues[CONST.STATS.HP].setText(str(pokemon.getHPStat(pokemon.level)))
-	statsValues[CONST.STATS.ATA].setText(str(pokemon.getAttackStat(pokemon.level)))
-	statsValues[CONST.STATS.DEF].setText(str(pokemon.getDefenseStat(pokemon.level)))
-	statsValues[CONST.STATS.ATAESP].setText(str(pokemon.getAttackStat(pokemon.level)))
-	statsValues[CONST.STATS.DEFESP].setText(str(pokemon.getSpDefenseStat(pokemon.level)))
-	statsValues[CONST.STATS.VEL].setText(str(pokemon.getSpeedStat(pokemon.level)))
-	
+	statsValues[CONST.STATS.HP].setText("[right]%s[/right]" % pokemon.getHPStat(pokemon.level))
+	statsValues[CONST.STATS.ATA].setText("[right]%s[/right]" % pokemon.getAttackStat(pokemon.level))
+	statsValues[CONST.STATS.DEF].setText("[right]%s[/right]" % pokemon.getDefenseStat(pokemon.level))
+	statsValues[CONST.STATS.ATAESP].setText("[right]%s[/right]" % pokemon.getAttackStat(pokemon.level))
+	statsValues[CONST.STATS.DEFESP].setText("[right]%s[/right]" % pokemon.getSpDefenseStat(pokemon.level))
+	statsValues[CONST.STATS.VEL].setText("[right]%s[/right]" % pokemon.getSpeedStat(pokemon.level))
+
 	await GUI.accept
 	
 	hide()

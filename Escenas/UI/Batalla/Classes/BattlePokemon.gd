@@ -209,14 +209,18 @@ func selectAction():
 		
 func doAction():
 	if selected_action.type == CONST.BATTLE_ACTIONS.LUCHAR: # is BattleMoveChoice: #LUCHAR
-			await doMove(selected_action)
+		await doMove(selected_action)
+		actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.POKEMON: #is BattleSwitchChoice: #POKEMON
 		pass
+		actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.MOCHILA: # is BattleItemChoice: #MOCHILA
 		pass
-	else: #HUIR
-		pass
-	actionFinished.emit()
+		actionFinished.emit()
+	elif selected_action.type == CONST.BATTLE_ACTIONS.HUIR: #HUIR
+		await tryExit()
+		await GUI.battle.battleController.endBattle()
+	
 		
 func selectMove():
 	if controllable:
@@ -253,8 +257,8 @@ func useBag():
 	pass
 	
 func exitBattle():
+	selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.HUIR, 6)
 	actionSelected.emit()
-	pass
 	
 # S'aplica la fórmula de les primeres 4 generacions	
 func getExpGained(opponent : BattlePokemon):
@@ -459,6 +463,8 @@ func levelUP():
 	await GUI.battle.msgBox.showLevelUpStats(self)
 	levelChanged.emit()
 
+func tryExit():
+	await GUI.battle.msgBox.showExitMessage()
 	
 func queue_free():
 	participant.queue_free()

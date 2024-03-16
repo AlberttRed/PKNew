@@ -660,6 +660,14 @@ offset_top = -8.43386
 offset_right = 105.509
 offset_bottom = 31.5661
 
+[node name="back" type="Panel" parent="."]
+z_index = -1
+layout_mode = 0
+offset_top = 288.0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = ExtResource("3_7u5r2")
+
 [connection signal="focus_entered" from="PanelActions/Commands/Luchar" to="." method="_on_action_focus_entered"]
 [connection signal="focus_exited" from="PanelActions/Commands/Luchar" to="." method="_on_action_focus_exited"]
 [connection signal="focus_entered" from="PanelActions/Commands/Pokemon" to="." method="_on_action_focus_entered"]

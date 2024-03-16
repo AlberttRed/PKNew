@@ -27,7 +27,7 @@
 [ext_resource type="Animation" uid="uid://bhdmwp0krjlkw" path="res://Animaciones/UI/PARTY_pkmn_icon_updown.tres" id="27"]
 [ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="29"]
 [ext_resource type="Animation" uid="uid://bs3ia4xub3d1f" path="res://Animaciones/UI/next_animation.tres" id="30"]
-[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/RichTextLabel.tscn" id="31"]
+[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="31"]
 [ext_resource type="PackedScene" uid="uid://sp0h1eaqfqlh" path="res://Escenas/UI/Others/LABEL.tscn" id="32"]
 [ext_resource type="Texture2D" uid="uid://danwumq4xmbxq" path="res://Escenas/UI/Menus/Resources/summary1.png" id="32_20m35"]
 [ext_resource type="PackedScene" path="res://Escenas/UI/Fonts/font_summary_LetraBlanca.tscn" id="34"]

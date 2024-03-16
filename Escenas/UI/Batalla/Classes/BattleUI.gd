@@ -60,6 +60,7 @@ func initUI(_battleController):
 	
 	set_process_input(true)
 	show()
+	GUI.resetTransitionScreen()
 	return self
 	
 func clear():

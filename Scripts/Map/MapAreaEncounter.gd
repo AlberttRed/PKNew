@@ -56,8 +56,8 @@ func getPokemonEncounter():
 	
 	bc.playerSide = bs_player.initSide()
 	bc.enemySide = bs_enemy.initSide()
-	await GUI.transition.play("Transitions/Battle_WildTransition")
-	bc.initBattle()
+	
+	await bc.initBattle()
 	
 	
 
