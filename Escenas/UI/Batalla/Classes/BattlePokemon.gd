@@ -209,6 +209,7 @@ func selectAction():
 		
 func doAction():
 	if selected_action.type == CONST.BATTLE_ACTIONS.LUCHAR: # is BattleMoveChoice: #LUCHAR
+		side.restartEscapeAttempts()
 		await doMove(selected_action)
 		actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.POKEMON: #is BattleSwitchChoice: #POKEMON
@@ -218,9 +219,10 @@ func doAction():
 		pass
 		actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.HUIR: #HUIR
-		await tryExit()
-		await GUI.battle.battleController.endBattle()
-	
+		if await tryEscapeFromBattle():
+			await GUI.battle.battleController.endBattle()
+		else:
+			actionFinished.emit()
 		
 func selectMove():
 	if controllable:
@@ -425,8 +427,18 @@ func applyLaterEffects():
 		await effect.applyLaterEffects()
 
 func setDefeated():
+	var defeat_position:int = 0
+	if controllable:
+		defeat_position = 75
+	else:
+		defeat_position = 48
 	#Mostro animació pokemon debilitat
-	# TO DO
+	var anim: Animation = animPlayer.get_animation("Common/Battle_DefeatedPKMN")
+	var track_id: int = anim.find_track("Sprite:material:shader_parameter/cutoff", 0)
+	var key_id: int = anim.track_find_key(track_id, 0.0)
+	anim.track_set_key_value(track_id, key_id, defeat_position)
+	animPlayer.play("Common/Battle_DefeatedPKMN")
+	await animPlayer.animation_finished
 	#Mostro missatge pokemon debilitat
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
 	
@@ -463,8 +475,24 @@ func levelUP():
 	await GUI.battle.msgBox.showLevelUpStats(self)
 	levelChanged.emit()
 
-func tryExit():
-	await GUI.battle.msgBox.showExitMessage()
+#Calculate the chances to escapte from the battle and its success
+func tryEscapeFromBattle():
+	var playerSpeed = speed
+	side.escapeAttempts += 1
+	var success:bool = true
+	for e in listEnemies:
+		var enemySpeed:float = e.speed
+		if playerSpeed > enemySpeed:
+			success = true
+		else:
+			var speedChances:float = floor(((playerSpeed * 128.0 / enemySpeed) + 30.0) * side.escapeAttempts)
+			randomize()
+			var rand:int = randi() % 256
+			success = rand < fmod(speedChances, 256)
+		if !success:
+			break
+	await GUI.battle.msgBox.showExitMessage(success)
+	return success
 	
 func queue_free():
 	participant.queue_free()

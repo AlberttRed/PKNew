@@ -81,7 +81,7 @@ func initSingleBattleUI():
 	$playerBase/PokemonA.position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
 	$playerBase/PokemonB.visible = false
 	
-	$enemyBase/PokemonA.position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
+	#$enemyBase/PokemonA.position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
 	$enemyBase/PokemonB.visible = false
 	
 	battleController.activePokemons[0].initPokemonUI($playerBase/PokemonA, $playerBase/HPBarA)
@@ -98,9 +98,9 @@ func initDoubleBattleUI():
 	$enemyBase/PokemonB.position = CONST.BATTLE.FRONT_POKEMONB_SPRITE_POS
 
 func clearSingleBattleUI():
-	battleController.activePokemons[0].HPbar.clearUI()
-	battleController.activePokemons[1].HPbar.clearUI()
-
+	for p in battleController.activePokemons:
+		p.HPbar.clearUI()
+		p.animPlayer.play("RESET")
 func clearDoubleBattleUI():
 	pass
 	
@@ -203,7 +203,8 @@ func _on_action_focus_entered():
 		actionSignalSelected = exitBattle
 
 func _on_action_focus_exited():
-	battleController.active_pokemon.selected_action = null
+	if battleController.active_pokemon.controllable:
+		battleController.active_pokemon.selected_action = null
 	cmdLuchar.get("theme_override_styles/panel").region_rect.position.x = 0
 	cmdPokemon.get("theme_override_styles/panel").region_rect.position.x = 0
 	cmdMochila.get("theme_override_styles/panel").region_rect.position.x = 0

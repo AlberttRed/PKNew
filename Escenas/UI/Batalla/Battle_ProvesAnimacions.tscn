@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dwy7yag0fj5cp"]
+[gd_scene load_steps=48 format=3 uid="uid://dwy7yag0fj5cp"]
 
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="1_35cnb"]
 [ext_resource type="StyleBox" uid="uid://cehlbd06rgssm" path="res://Escenas/UI/Batalla/Resources/BattleMessageBox_Panel.tres" id="2_fy25v"]
@@ -8,16 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG.tscn" id="4_j0igc"]
 [ext_resource type="Texture2D" uid="uid://vxedaqbf3pad" path="res://Escenas/UI/Batalla/Resources/Sprites/battleCommandButtons.png" id="4_l76bn"]
 [ext_resource type="Texture2D" uid="uid://4suianjdpdca" path="res://Sprites/Batalla/Battlebacks/playerbaseField.png" id="5_lp8mc"]
-[ext_resource type="Texture2D" uid="uid://cox508buio8dr" path="res://Sprites/Batalla/Battlers/007b.png" id="6_oimg1"]
+[ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="6_oimg1"]
 [ext_resource type="Texture2D" uid="uid://jp48dg7huvv" path="res://Sprites/Batalla/Battlebacks/enemybaseField.png" id="6_yaj7x"]
-[ext_resource type="Texture2D" uid="uid://beua1ofq3tf3b" path="res://Sprites/Batalla/Battlers/456b.png" id="7_1f5vj"]
-[ext_resource type="Texture2D" uid="uid://c3lj86glxqu4t" path="res://Sprites/Batalla/Battlers/567.png" id="9_2td6s"]
+[ext_resource type="Texture2D" uid="uid://dbto76y0cchev" path="res://Sprites/Batalla/456b.png" id="7_1f5vj"]
+[ext_resource type="Texture2D" uid="uid://bpjm37rtjwm8e" path="res://Sprites/Batalla/567.png" id="9_2td6s"]
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="9_u5nbs"]
-[ext_resource type="Texture2D" uid="uid://x5ubxjgs8sa4" path="res://Sprites/Batalla/Battlers/019.png" id="10_db7kv"]
+[ext_resource type="Texture2D" uid="uid://pbvisvp5jwv4" path="res://Sprites/Batalla/019.png" id="10_db7kv"]
 [ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="10_gjl27"]
 [ext_resource type="FontFile" uid="uid://rdvuqsu77j27" path="res://Escenas/UI/Fonts/pkmnemn.ttf" id="10_o3o5j"]
 [ext_resource type="Texture2D" uid="uid://coiimjb2x6u06" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFightButtons.png" id="10_wa1kd"]
-[ext_resource type="Texture2D" uid="uid://5revk4xcm4dy" path="res://Sprites/Batalla/Battlers/battle_shadow.png" id="10_yvtq8"]
+[ext_resource type="Texture2D" uid="uid://bmucqisxae21h" path="res://Sprites/Batalla/battle_shadow.png" id="10_yvtq8"]
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="11_a22gy"]
 [ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="11_mjwwj"]
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="11_ne00b"]
@@ -25,8 +25,8 @@
 [ext_resource type="Material" uid="uid://lju5c8l8g7m3" path="res://Objetos/Animaciones/Batalla/Resources/shader_white.tres" id="13_ui7l2"]
 [ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Animaciones/Batalla/Moves/Battle_AilmentAnimations.res" id="14_3hiq6"]
 [ext_resource type="Texture2D" uid="uid://dqkmrnqhdrcvb" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFoeBoxS.png" id="18_fvfel"]
-[ext_resource type="Material" uid="uid://bc0b1qdw5igmo" path="res://Objetos/Animaciones/Batalla/Resources/shader_material.tres" id="22_fjri7"]
 [ext_resource type="AnimationLibrary" uid="uid://btf1cle7g0a06" path="res://Objetos/Animaciones/Batalla/Moves/Battle_CommonAnimations.res" id="23_vixyq"]
+[ext_resource type="Shader" path="res://Escenas/UI/Batalla/PKMNDefeated.gdshader" id="25_cf0hm"]
 [ext_resource type="Texture2D" uid="uid://b885sbd6lqnnc" path="res://Sprites/Batalla/Moves Animations/eb601.png" id="25_sac00"]
 [ext_resource type="AnimationLibrary" uid="uid://2mrp3w2yg84c" path="res://Objetos/Animaciones/Batalla/Moves/Battle_MovesAnimations.res" id="27_q4f0d"]
 
@@ -101,6 +101,31 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 region_rect = Rect2(0, 0, 384, 874)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ouusc"]
+shader = ExtResource("25_cf0hm")
+shader_parameter/cutoff = 50.0
+shader_parameter/VIEWPORT_HEIGHT = 384.0
+
+[sub_resource type="Animation" id="Animation_oagxi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asufp"]
+_data = {
+"RESET": SubResource("Animation_oagxi")
+}
+
 [sub_resource type="Theme" id="Theme_mb2ww"]
 default_font = ExtResource("10_gjl27")
 default_font_size = 26
@@ -172,6 +197,54 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:material:shader")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("25_cf0hm")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite:material:shader_parameter/cutoff")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [50.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite:material:shader_parameter/VIEWPORT_HEIGHT")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [384.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4aqf6"]
@@ -457,13 +530,13 @@ position = Vector2(256, -16)
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="playerBase/PokemonA"]
+material = SubResource("ShaderMaterial_ouusc")
 texture = ExtResource("6_oimg1")
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/PokemonA"]
 libraries = {
-"Ailments": ExtResource("14_3hiq6"),
-"Common": ExtResource("23_vixyq")
+"": SubResource("AnimationLibrary_asufp"),
+"Battle_CommonAnimations": ExtResource("23_vixyq")
 }
 
 [node name="PokemonB" type="Node2D" parent="playerBase"]
@@ -546,9 +619,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="PokemonA" type="Node2D" parent="enemyBase"]
-material = ExtResource("22_fjri7")
-position = Vector2(128, -16)
-metadata/_edit_lock_ = true
+position = Vector2(128, 30)
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/PokemonA"]
 z_index = 1
@@ -563,7 +634,8 @@ region_rect = Rect2(0, 0, 96, 4)
 
 [node name="Shadow" type="Sprite2D" parent="enemyBase/PokemonA"]
 visible = false
-position = Vector2(0, 80)
+position = Vector2(2, 32)
+scale = Vector2(1.125, 1)
 texture = ExtResource("10_yvtq8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase/PokemonA"]

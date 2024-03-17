@@ -208,10 +208,14 @@ func showLevelUpStats(pokemon:BattlePokemon):
 	await levelUpPanel.showStatsIncrement(pokemon.instance)
 	await levelUpPanel.showLevelStats(pokemon.instance)
 
-func showExitMessage():
-	print("¡Escapaste sin problemas!")
-	await GUI.battle.showMessageInput("¡Escapaste sin problemas!", false)
-
+func showExitMessage(success:bool):
+	var msg:String = ""
+	if success:
+		msg = "¡Escapaste sin problemas!"
+	else:
+		msg = "¡No puedes huir!"
+	print(msg)
+	await GUI.battle.showMessageInput(msg, false)
 	#
 #func accept_msg():
 	#print("accept")

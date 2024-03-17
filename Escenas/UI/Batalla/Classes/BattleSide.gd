@@ -10,6 +10,7 @@ var activePokemons : Array[BattlePokemon] # Indica els pokemons que estan actius
 var activeFieldEffectsFlags : Array[CONST.MOVE_EFFECTS] = []
 
 var defeated : bool = false # Indica si tots els pokemons del Side han estat derrotats, per tant el Side ha perdut
+var escapeAttempts:int #Player attemps to exit the battle. If a Move is selected, the attemps counter will restart
 
 func _init(_type : CONST.BATTLE_SIDES):
 	type = _type
@@ -24,7 +25,7 @@ func addParticipant(_participant : Battler, _controllable : bool):
 func initSide():
 	
 	assert(!participants.is_empty(), "No s'ha carregat cap Participant per el side")
-
+	escapeAttempts = 0
 	loadParty()
 	
 	return self
@@ -56,6 +57,9 @@ func isDefeated():
 		if !p.fainted:
 			return false
 	return true
+	
+func restartEscapeAttempts():
+	escapeAttempts = 0
 
 func queue_free():
 	if participants != null:

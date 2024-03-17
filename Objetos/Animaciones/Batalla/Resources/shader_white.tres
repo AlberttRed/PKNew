@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://lju5c8l8g7m3"]
 
-[ext_resource type="Texture2D" uid="uid://chkysa4cdbc6q" path="res://Sprites/Batalla/Moves Animations/OverlayStatDown.png" id="1_c32uf"]
+[ext_resource type="Texture2D" uid="uid://cq2mxmr25t0ov" path="res://Sprites/Batalla/Moves Animations/OverlayHeal.png" id="1_g6wji"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -34,5 +34,5 @@ shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/whitening = 0.4
 shader_parameter/frame_size = 5
 shader_parameter/frames = 8
-shader_parameter/anim_time = -1.0
-shader_parameter/frame1 = ExtResource("1_c32uf")
+shader_parameter/anim_time = 1.0
+shader_parameter/frame1 = ExtResource("1_g6wji")
