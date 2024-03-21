@@ -68,7 +68,12 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	pokemon = _pokemon	
 	
 	effect = BattleMoveEffects.new().getMoveEffect(self)
-	animation = BattleAnimationList.new().getMoveAnimation(self)
+	var n = instance.internalName.to_upper()
+	if load("res://Animaciones/Batalla/Moves/Classes/" + str(n) + ".gd") != null:
+		animation = preload("res://Animaciones/Batalla/Moves/Classes/TACKLE.gd").new(self)
+	else:
+		animation = BattleAnimationList.new().getMoveAnimation(self)
+	
 
 func use(to: Array[BattlePokemon]):
 	
@@ -84,8 +89,8 @@ func use(to: Array[BattlePokemon]):
 
 	#await pokemon.applyLaterEffects()
 		
-func doAnimation():
-	pass
+func doAnimation(target):
+	await animation.doAnimation(target)
 	
 func is_physic_category():
 	return damage_class == CONST.DAMAGE_CLASS.FISICO
@@ -311,8 +316,8 @@ func causeAilment(target : BattlePokemon):
 	print("But failed")
 	
 func showAnimation(target : BattlePokemon):
-	animation.doAnimation(target)
-
+	pass
+	
 func print_move():
 	print(" ------ " + str(Name) + " " + str(pp_actual) + "/" + str(pp_total) + " PP ------ ")
 

@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://scg1ib4m4srk"]
+
+[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattlePokemon.gd" id="1_jhpcm"]
+[ext_resource type="Texture2D" uid="uid://bmucqisxae21h" path="res://Sprites/Batalla/battle_shadow.png" id="3_hdvp8"]
+[ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="3_y4gnn"]
+[ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Batalla/Animaciones/Moves/Battle_AilmentAnimations.res" id="4_e2kvf"]
+[ext_resource type="AnimationLibrary" uid="uid://6y11gonugprj" path="res://Objetos/Batalla/Animaciones/Moves/GLOBAL.res" id="6_7us2i"]
+[ext_resource type="AnimationLibrary" uid="uid://casxsbdqp031y" path="res://Objetos/Batalla/Animaciones/Moves/Battle_PokemonAnimations.res" id="6_uk2ec"]
+[ext_resource type="AnimationLibrary" uid="uid://2mrp3w2yg84c" path="res://Objetos/Batalla/Animaciones/Moves/Battle_MovesAnimations.res" id="7_106f4"]
+
+[sub_resource type="Animation" id="Animation_6moud"]
+resource_name = "aaaa"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7jj6"]
+_data = {
+"aaaa": SubResource("Animation_6moud")
+}
+
+[node name="PokemonPlayerA" type="Node2D"]
+position = Vector2(256, -16)
+script = ExtResource("1_jhpcm")
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_y4gnn")
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2, 32)
+scale = Vector2(1.125, 1.125)
+texture = ExtResource("3_hdvp8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u7jj6"),
+"Ailments": ExtResource("4_e2kvf"),
+"GLOBAL": ExtResource("6_7us2i"),
+"Moves": ExtResource("7_106f4"),
+"Pokemon": ExtResource("6_uk2ec")
+}

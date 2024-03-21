@@ -26,6 +26,9 @@ var animController : BattleAnimationList
 #var actionSignals : Array[Signal] = [selectMove, changePokemon, useBag, exitBattle]
 var actionSignalSelected : Signal
 
+var pkmnPlayerNodes : Array[Node2D]
+var pkmnEnemyNodes : Array[Node2D]
+
 @onready var cmdLuchar : Panel = $PanelActions/Commands/Luchar
 @onready var cmdPokemon : Panel = $PanelActions/Commands/Pokemon
 @onready var cmdMochila : Panel = $PanelActions/Commands/Mochila
@@ -36,15 +39,24 @@ var actionSignalSelected : Signal
 @onready var pnlMove3 : Panel = $PanelMoves/Moves/Move3
 @onready var pnlMove4 : Panel = $PanelMoves/Moves/Move4
 
-
+@onready var playerParty : Node2D = $playerBase/PlayerParty
+@onready var enemyParty : Node2D = $enemyBase/EnemyParty
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pkmnPlayerNodes.push_back($playerBase/PokemonPlayerA)
+	pkmnPlayerNodes.push_back($playerBase/PokemonPlayerB)
+	pkmnEnemyNodes.push_back($enemyBase/PokemonEnemyA)
+	pkmnEnemyNodes.push_back($enemyBase/PokemonEnemyA)
 	set_process_input(false)
 	
 
 func initUI(_battleController):
 	battleController = _battleController
+	
+	#updateUINodes()
+	
+	initPartiesUI()
 	
 	if battleController.rules.mode == CONST.BATTLE_MODES.SINGLE:
 		initSingleBattleUI()
@@ -78,14 +90,20 @@ func clear():
 	animController = null
 	
 func initSingleBattleUI():
-	$playerBase/PokemonA.position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
-	$playerBase/PokemonB.visible = false
+	$playerBase/PokemonPlayerA.visible = false
+	$enemyBase/PokemonEnemyA.visible = false
 	
-	#$enemyBase/PokemonA.position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
-	$enemyBase/PokemonB.visible = false
+	battleController.activePokemons[0].position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
+	battleController.activePokemons[1].position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
+	battleController.activePokemons[0].get_node("Shadow").visible=false
+	battleController.activePokemons[0].reparent($playerBase)
+	battleController.activePokemons[1].reparent($enemyBase)
+	battleController.activePokemons[0].visible = true
+	battleController.activePokemons[1].visible = true
+
 	
-	battleController.activePokemons[0].initPokemonUI($playerBase/PokemonA, $playerBase/HPBarA)
-	battleController.activePokemons[1].initPokemonUI($enemyBase/PokemonA, $enemyBase/HPBarA)
+	battleController.activePokemons[0].initPokemonUI($playerBase/HPBarA)
+	battleController.activePokemons[1].initPokemonUI($enemyBase/HPBarA)
 	
 	
 func initDoubleBattleUI():
@@ -101,13 +119,41 @@ func clearSingleBattleUI():
 	for p in battleController.activePokemons:
 		p.HPbar.clearUI()
 		p.animPlayer.play("RESET")
+		p.queue_free()
+		
+	for p in playerParty.get_children():
+		p.queue_free()
+		
+	for p in enemyParty.get_children():
+		p.queue_free()
+		
 func clearDoubleBattleUI():
 	pass
 	
+func updateUINodes():
+	for i:int in range(battleController.sides[0].activePokemons.size()):
+		battleController.sides[0].activePokemons[i].battleNode = pkmnPlayerNodes[i]
+
+	for i:int in range(battleController.sides[1].activePokemons.size()):
+		battleController.sides[1].activePokemons[i].battleNode = pkmnEnemyNodes[i]
+
+
+
+func 	initPartiesUI():
+	for p in battleController.playerSide.pokemonParty:
+		p.visible = false
+		playerParty.add_child(p)
+		
+	for p in battleController.enemySide.pokemonParty:
+		p.visible = false
+		enemyParty.add_child(p)
+		
+
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		Input.action_release("ui_accept")
+		#battleController.active_pokemon.doAnimation()
 		INPUT.ui_accept.free_state()
 		if onActionsPanel():
 				print("Action selected")

@@ -66,7 +66,8 @@ func interact_at_collide():
 func _input(event):
 	if event.is_action_pressed("ui_accept") and !GUI.isVisible():
 		print("A")
-
+		$AnimationPlayer.play("aaaa")
+		await $AnimationPlayer.animation_finished
 #		print(GLOBAL.actual_map.map_connections_list[0].active_tilemap.position)
 #		print(GLOBAL.actual_map.map_connections_list[0].global_position)
 		
@@ -142,3 +143,5 @@ func set_through(state):
 	set_collision_mask_value(2, !state)
 
 					
+func doAnimation(anim:String):
+	print("aaaaaaaaaa")

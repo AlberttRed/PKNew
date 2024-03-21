@@ -8,7 +8,7 @@ func _init(_move : BattleMove, _pokemon : BattlePokemon):
 	super._init(_pokemon)
 	move = _move
 	
-func doAnimation():
+func doAnimation(target):
 	assert(false, "Please override doAnimation()` in the derived script.")
 
 

@@ -27,9 +27,11 @@ func initBattle():
 	playerSide.opponentSide = enemySide
 	enemySide.opponentSide = playerSide
 
-	initActivePokemons()
+	
 	await GUI.initBattleTransition()
+	initActivePokemons()
 	UI = GUI.battle.initUI(self)
+	
 	stage = CONST.BATTLE_STAGES.SELECT_ACTION
 	
 	await UI.showMessageInput("¡Un " + activePokemons[1].Name + " salvaje te corta el paso!")
@@ -103,8 +105,8 @@ func print_active_pokemons():
 		p.print_moves()
 		
 func updateActivePokemons():
-	var enemies = sides[1].activePokemons#.duplicate()
-	var allies =  sides[0].activePokemons#.duplicate()
+	var enemies:Array[BattlePokemon] = sides[1].activePokemons#.duplicate()
+	var allies:Array[BattlePokemon] =  sides[0].activePokemons#.duplicate()
 	
 	activePokemons = allies + enemies
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b6jd5v84qimwd"]
+[gd_scene load_steps=55 format=3 uid="uid://b6jd5v84qimwd"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_xby2u"]
 [ext_resource type="Texture2D" uid="uid://b8v3bj2nw2qd" path="res://Sprites/Overworlds/Characters/trchar000.png" id="2_1dqiu"]
@@ -454,6 +454,23 @@ tracks/1/keys = {
 "values": []
 }
 
+[sub_resource type="Animation" id="Animation_fil3n"]
+resource_name = "aaaa"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [""],
+"method": &"doAnimation"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0jgqw"]
 _data = {
 "IdleDown": SubResource("Animation_tg222"),
@@ -472,7 +489,8 @@ _data = {
 "WalkDown": SubResource("Animation_2et1i"),
 "WalkLeft": SubResource("Animation_8xjyb"),
 "WalkRight": SubResource("Animation_c6jr7"),
-"WalkUp": SubResource("Animation_i7psf")
+"WalkUp": SubResource("Animation_i7psf"),
+"aaaa": SubResource("Animation_fil3n")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gkksw"]
@@ -663,95 +681,97 @@ nature_id = 19
 [node name="pkm2" parent="Trainer" index="1"]
 randomize_pokemon = true
 base = ExtResource("5_jcpso")
-level = 89
-hp_EVs = 229
-attack_EVs = 165
-defense_EVs = 185
-spAttack_EVs = 197
-spDefense_EVs = 189
-speed_EVs = 96
-hp_IVs = 22
-attack_IVs = 5
-defense_IVs = 17
-spAttack_IVs = 19
-spDefense_IVs = 16
-speed_IVs = 26
-ability_id = 54
-nature_id = 22
+level = 100
+gender = 1
+hp_EVs = 249
+attack_EVs = 226
+defense_EVs = 116
+spAttack_EVs = 220
+spDefense_EVs = 115
+speed_EVs = 250
+hp_IVs = 2
+attack_IVs = 14
+defense_IVs = 19
+spAttack_IVs = 9
+spDefense_IVs = 4
+speed_IVs = 13
+ability_id = 186
+nature_id = 17
 
 [node name="pkm3" parent="Trainer" index="2"]
 randomize_pokemon = true
 base = ExtResource("6_hf6ja")
-level = 17
-hp_EVs = 21
-attack_EVs = 86
-defense_EVs = 18
-spAttack_EVs = 203
-spDefense_EVs = 161
-speed_EVs = 80
-hp_IVs = 6
-attack_IVs = 27
-defense_IVs = 30
-spAttack_IVs = 1
-spDefense_IVs = 8
-speed_IVs = 2
-ability_id = 34
-nature_id = 21
+level = 47
+hp_EVs = 172
+attack_EVs = 187
+defense_EVs = 241
+spAttack_EVs = 163
+spDefense_EVs = 201
+speed_EVs = 141
+hp_IVs = 30
+attack_IVs = 1
+defense_IVs = 9
+spAttack_IVs = 13
+spDefense_IVs = 13
+speed_IVs = 31
+ability_id = 172
+nature_id = 19
 
 [node name="pkm4" parent="Trainer" index="3"]
 randomize_pokemon = true
 base = ExtResource("7_tqt53")
-level = 60
-hp_EVs = 235
-attack_EVs = 89
-defense_EVs = 221
-spAttack_EVs = 17
-spDefense_EVs = 125
-speed_EVs = 169
-attack_IVs = 28
-spAttack_IVs = 19
-spDefense_IVs = 16
-speed_IVs = 13
-ability_id = 119
-nature_id = 21
+level = 87
+hp_EVs = 142
+attack_EVs = 226
+defense_EVs = 39
+spAttack_EVs = 75
+spDefense_EVs = 33
+speed_EVs = 113
+hp_IVs = 14
+attack_IVs = 15
+defense_IVs = 9
+spAttack_IVs = 8
+spDefense_IVs = 30
+speed_IVs = 16
+ability_id = 41
+nature_id = 1
 
 [node name="pkm5" parent="Trainer" index="4"]
 randomize_pokemon = true
 base = ExtResource("7_tqt53")
-level = 55
-hp_EVs = 105
-attack_EVs = 155
-defense_EVs = 146
-spAttack_EVs = 234
-spDefense_EVs = 84
-speed_EVs = 62
-hp_IVs = 17
-attack_IVs = 13
-defense_IVs = 8
-spAttack_IVs = 11
-spDefense_IVs = 27
-speed_IVs = 28
-ability_id = 131
-nature_id = 18
+level = 50
+gender = 1
+hp_EVs = 126
+attack_EVs = 164
+defense_EVs = 127
+spAttack_EVs = 195
+spDefense_EVs = 167
+speed_EVs = 153
+hp_IVs = 15
+defense_IVs = 16
+spAttack_IVs = 5
+spDefense_IVs = 24
+speed_IVs = 15
+ability_id = 149
+nature_id = 16
 
 [node name="pkm6" parent="Trainer" index="5"]
 randomize_pokemon = true
 base = ExtResource("7_tqt53")
-level = 7
-gender = 1
-hp_EVs = 195
-attack_EVs = 32
-defense_EVs = 42
-spAttack_EVs = 151
-spDefense_EVs = 24
-speed_EVs = 123
-hp_IVs = 31
-attack_IVs = 18
-defense_IVs = 21
-spAttack_IVs = 18
-spDefense_IVs = 22
-speed_IVs = 5
-ability_id = 51
-nature_id = 15
+level = 45
+hp_EVs = 82
+attack_EVs = 157
+defense_EVs = 228
+spAttack_EVs = 128
+spDefense_EVs = 176
+speed_EVs = 153
+hp_IVs = 22
+attack_IVs = 12
+defense_IVs = 13
+spAttack_IVs = 2
+spDefense_IVs = 12
+speed_IVs = 3
+ability_id = 144
+nature_id = 5
 
 [editable path="Trainer"]

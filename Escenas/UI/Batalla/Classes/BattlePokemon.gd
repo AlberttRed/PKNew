@@ -1,3 +1,4 @@
+extends Node2D
 class_name BattlePokemon
 
 signal updateHP
@@ -125,10 +126,11 @@ var canAttack : bool = true
 var activeEffectsFlags : Array[BattleEffect] = [] #Array[CONST.MOVE_EFFECTS] = []
 
 var battleStatsMod : Array[int] = [0,2,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
-	
-func _init(_pokemon : PokemonInstance, _IA: BattleIA):
+
+#func _init(_pokemon : PokemonInstance, _IA: BattleIA):
+func create(_pokemon : PokemonInstance, _IA: BattleIA):
 	instance = _pokemon
-	
+	name = instance.Name
 	#Name = _pokemon.Name
 	#level = _pokemon.level
 	#types = _pokemon.types
@@ -164,7 +166,7 @@ func _init(_pokemon : PokemonInstance, _IA: BattleIA):
 	if _IA != null:
 		if !_IA.pokemon_assigned():
 			_IA.assign_pokemon(self)
-	
+
 	IA = _IA
 		
 		
@@ -312,12 +314,12 @@ func initSprite(type : CONST.BATTLE_SIDES):
 	elif type == CONST.BATTLE_SIDES.ENEMY:
 		sprite = front_sprite
 		
-func initPokemonUI(pokemonNode : Node2D, hPBarNode : Node2D):
-	battleNode = pokemonNode
-	animPlayer = pokemonNode.get_node("AnimationPlayer")
+func initPokemonUI(hPBarNode : Node2D):
+	animPlayer = get_node("AnimationPlayer")
 	initSprite(side.type)
-	pokemonNode.get_node("Sprite").texture = sprite
-	setSpritePosition(pokemonNode.get_node("Sprite"))
+	get_node("Sprite").texture = sprite
+	setSpritePosition(get_node("Sprite"))
+	animPlayer.play("GLOBAL/RESET")
 	HPbar = hPBarNode
 	HPbar.init(self)
 	HPbar.updateUI()
@@ -433,11 +435,11 @@ func setDefeated():
 	else:
 		defeat_position = 48
 	#Mostro animació pokemon debilitat
-	var anim: Animation = animPlayer.get_animation("Common/Battle_DefeatedPKMN")
+	var anim: Animation = animPlayer.get_animation("Pokemon/DEFEATED")
 	var track_id: int = anim.find_track("Sprite:material:shader_parameter/cutoff", 0)
 	var key_id: int = anim.track_find_key(track_id, 0.0)
 	anim.track_set_key_value(track_id, key_id, defeat_position)
-	animPlayer.play("Common/Battle_DefeatedPKMN")
+	animPlayer.play("Pokemon/DEFEATED")
 	await animPlayer.animation_finished
 	#Mostro missatge pokemon debilitat
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
@@ -493,17 +495,21 @@ func tryEscapeFromBattle():
 			break
 	await GUI.battle.msgBox.showExitMessage(success)
 	return success
-	
-func queue_free():
-	participant.queue_free()
-	side.queue_free()
-	if listAllies != null:
-		for p in listAllies:
-			p.queue_free()
-	listAllies.clear()
-	
-	if listEnemies != null:
-		for p in listEnemies:
-			p.queue_free()
-	listEnemies.clear()
-	free()
+	#
+#func queue_free():
+	#participant.queue_free()
+	#side.queue_free()
+	#if listAllies != null:
+		#for p in listAllies:
+			#p.queue_free()
+	#listAllies.clear()
+	#
+	#if listEnemies != null:
+		#for p in listEnemies:
+			#p.queue_free()
+	#listEnemies.clear()
+	#free()
+
+func doAnimation(animName:String):
+	print("lololol")
+	await load("res://Animaciones/Batalla/Pokemon/Classes/"+str(animName)+".gd").new(self).doAnimation()

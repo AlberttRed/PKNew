@@ -31,21 +31,21 @@ class MoveAnimation_000 extends BattleMoveAnimation:
 class CommonAnimation_PokemonHit extends BattleCommonAnimation:
 	
 	func doAnimation(_target : BattlePokemon):
-		_target.animPlayer.play("Common/Battle_PokemonHit")
+		_target.animPlayer.play("Pokemon/HIT")#("Common/Battle_PokemonHit")
 		await _target.animPlayer.animation_finished
 
 #Animació que es mostra quan a un pokémon li pugen els stats
 class CommonAnimation_StatUp extends BattleCommonAnimation:
 	
 	func doAnimation(_target : BattlePokemon):
-		_target.animPlayer.play("Common/Battle_StatUp")
+		_target.animPlayer.play("Pokemon/STATUP")#("Common/Battle_StatUp")
 		await _target.animPlayer.animation_finished
 
 #Animació que es mostra quan a un pokemon li baixen els stats
 class CommonAnimation_StatDown extends BattleCommonAnimation:
 	
 	func doAnimation(_target : BattlePokemon):
-		_target.animPlayer.play("Common/Battle_StatDown")
+		_target.animPlayer.play("Pokemon/STATDOWN")#("Common/Battle_StatDown")
 		await _target.animPlayer.animation_finished
 
 #Animació que es mostra quan un pokemon es cura
@@ -69,8 +69,8 @@ class AilmentAnimation_001 extends BattleAilmentAnimation:
 		var spr2 = Sprite2D.new()
 		spr1.name = "Sprite2D"
 		spr2.name = "Sprite2D2"
-		_target.battleNode.get_node("Sprite").add_child(spr1)
-		_target.battleNode.get_node("Sprite").add_child(spr2)
+		_target.get_node("Sprite").add_child(spr1)
+		_target.get_node("Sprite").add_child(spr2)
 		
 		_target.animPlayer.play("Ailments/Paralyzed")
 		await _target.animPlayer.animation_finished

@@ -10,6 +10,12 @@ var id  : int :
 	set(value):
 		id = value 
 
+var internalName : String :
+	get:
+		return base.internal_name
+	set(value):
+		internalName = value 
+
 var Name : String :
 	get:
 		return base.Name

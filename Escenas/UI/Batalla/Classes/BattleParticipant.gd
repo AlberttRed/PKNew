@@ -8,7 +8,9 @@ func _init(_participant : Battler, _controllable : bool):
 	controllable = _controllable
 	print(_participant.battleIA)
 	for p in _participant.party:
-		var bp = BattlePokemon.new(p, _participant.battleIA)
+		var bp = load("res://Objetos/Batalla/Nodes/BattlePokemonNode.tscn").instantiate()
+		bp.create(p, _participant.battleIA)
+		#var bp = BattlePokemon.new(p, _participant.battleIA)
 		bp.isWild = _participant.type == CONST.BATTLER_TYPES.WILD_POKEMON
 		bp.controllable = _controllable
 		bp.participant = self
