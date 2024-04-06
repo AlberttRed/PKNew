@@ -9,7 +9,7 @@ var pokemon : BattlePokemon
 
 func init(_pokemon : BattlePokemon):
 	pokemon = _pokemon
-	healthBar.init(pokemon)
+	healthBar.init(pokemon.instance)
 	if has_node("exp_bar"):
 		expBar = $exp_bar
 		expBar.init(pokemon)
@@ -30,7 +30,7 @@ func updateUI():
 		get_node("Name/lblGender").text = ""
 	
 	updateStatusUI()
-	healthBar.updateUI(pokemon)
+	healthBar.updateUI(pokemon.instance)
 	if expBar!=null:
 		expBar.updateUI(pokemon)
 

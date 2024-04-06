@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://dkjekvml5fqpp"]
+[gd_scene load_steps=94 format=3 uid="uid://dkjekvml5fqpp"]
 
 [ext_resource type="Texture2D" uid="uid://d2i5gus8tvoi" path="res://Escenas/UI/Menus/Resources/partybg.PNG" id="1_ew7hq"]
 [ext_resource type="Script" path="res://Escenas/UI/Menus/2 - Party/PARTY.gd" id="2"]
@@ -20,11 +20,16 @@
 [ext_resource type="FontFile" path="res://Escenas/UI/Fonts/df_party_lletraGran.tres" id="18_114xy"]
 [ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="19"]
 [ext_resource type="FontFile" path="res://Escenas/UI/Fonts/df_party_lletraPetita.tres" id="19_sa8ru"]
+[ext_resource type="Texture2D" uid="uid://cfr1vpq8pfv7x" path="res://Sprites/Pictures/statuses.PNG" id="20_u36pf"]
 [ext_resource type="Texture2D" uid="uid://xw4mbww10chu" path="res://Escenas/UI/Menus/Resources/partyBall.PNG" id="22"]
 [ext_resource type="Texture2D" uid="uid://v58562kai84n" path="res://Escenas/UI/Menus/Resources/female_icon.png" id="24"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="25_vurcs"]
 [ext_resource type="Animation" uid="uid://t6ntll21cvet" path="res://Animaciones/UI/PARTY_pkmn_icon.tres" id="26"]
 [ext_resource type="Texture2D" uid="uid://cp3p5plvvv4sj" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="26_nib22"]
+[ext_resource type="Texture2D" uid="uid://lmdx6hpah1a2" path="res://Sprites/Pictures/HPparty_background.png" id="26_wbpl5"]
 [ext_resource type="Animation" uid="uid://bhdmwp0krjlkw" path="res://Animaciones/UI/PARTY_pkmn_icon_updown.tres" id="27"]
+[ext_resource type="Texture2D" uid="uid://w4le6cwl56bx" path="res://Sprites/Pictures/HPparty_overlay.png" id="27_6lnox"]
+[ext_resource type="Texture2D" uid="uid://hjo0fxuci6wj" path="res://Sprites/Pictures/HPparty_progress.png" id="28_p1ki6"]
 [ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="29"]
 [ext_resource type="Animation" uid="uid://bs3ia4xub3d1f" path="res://Animaciones/UI/next_animation.tres" id="30"]
 [ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="31"]
@@ -38,8 +43,16 @@
 [ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="39"]
 [ext_resource type="Texture2D" uid="uid://ccbva4mg5505l" path="res://Escenas/UI/Menus/Resources/summary2.PNG" id="39_p8nao"]
 [ext_resource type="Texture2D" uid="uid://vp3788sffcg4" path="res://Escenas/UI/Menus/Resources/summary3.PNG" id="40_1h4dg"]
+[ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="40_f8fc6"]
 [ext_resource type="Texture2D" uid="uid://bqy27j631k2qe" path="res://Escenas/UI/Menus/Resources/summary4.png" id="41_xg58t"]
 [ext_resource type="Texture2D" uid="uid://cj41hphayr3y0" path="res://Escenas/UI/Menus/Resources/summary5.png" id="42_vf0ii"]
+[ext_resource type="Texture2D" uid="uid://nmbu8413mkjl" path="res://Sprites/Pictures/EXPsummary_background.png" id="44_0vaoq"]
+[ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="45_0ap10"]
+[ext_resource type="Texture2D" uid="uid://d181nfjfvlqo7" path="res://Sprites/Pictures/EXPsummary_overlay.png" id="45_yx00i"]
+[ext_resource type="Texture2D" uid="uid://dyssdsut0bkqw" path="res://Sprites/Pictures/EXPsummary_progress.png" id="46_kss2v"]
+[ext_resource type="Texture2D" uid="uid://ctnjnkfpilrj8" path="res://Sprites/Pictures/HPsummary_background.png" id="46_licca"]
+[ext_resource type="Texture2D" uid="uid://cdb6j2ubvprkw" path="res://Sprites/Pictures/HPsummary_overlay.png" id="47_tfkpk"]
+[ext_resource type="Texture2D" uid="uid://jwxxv6ieuia1" path="res://Sprites/Pictures/HPsummary_progress.png" id="48_fc5h1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oj2bc"]
 texture = ExtResource("1_ew7hq")
@@ -103,17 +116,14 @@ region_rect = Rect2(0, 0, 112, 48)
 
 [sub_resource type="StyleBoxTexture" id="16"]
 texture = ExtResource("16")
-region_rect = Rect2(0, 0, 112, 48)
+region_rect = Rect2(0, 0, 112, 36)
 
-[sub_resource type="StyleBoxEmpty" id="17"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6llyv"]
 
-[sub_resource type="StyleBoxTexture" id="18"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0gflp"]
 texture = ExtResource("17")
-expand_margin_top = 2.0
 axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 region_rect = Rect2(0, 0, 14, 32)
-draw_center = false
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xxuhc"]
 texture = ExtResource("3")
@@ -165,6 +175,10 @@ region_rect = Rect2(0, 0, 112, 48)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3m2bu"]
 texture = ExtResource("26_nib22")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
 region_rect = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1eve6"]
@@ -202,6 +216,14 @@ region_rect = Rect2(0, 0, 512, 384)
 texture = ExtResource("40_1h4dg")
 region_rect = Rect2(0, 0, 512, 384)
 
+[sub_resource type="LabelSettings" id="LabelSettings_e6ab3"]
+line_spacing = 10.0
+font = ExtResource("19")
+font_size = 26
+font_color = Color(0.25098, 0.25098, 0.25098, 1)
+shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+shadow_offset = Vector2(0, 2)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p3amy"]
 texture = ExtResource("41_xg58t")
 region_rect = Rect2(0, 0, 512, 384)
@@ -232,8 +254,8 @@ style_square_swap = SubResource("13")
 style_square_swap_sel = SubResource("14")
 style_salir = SubResource("15")
 style_salir_sel = SubResource("16")
-style_actions_empty = SubResource("17")
-style_actions_selected = SubResource("18")
+style_actions_empty = SubResource("StyleBoxEmpty_6llyv")
+style_actions_selected = SubResource("StyleBoxTexture_0gflp")
 metadata/_edit_lock_ = true
 
 [node name="PKMN_0" type="Panel" parent="."]
@@ -294,12 +316,22 @@ theme_override_fonts/font = ExtResource("19_sa8ru")
 theme_override_font_sizes/font_size = 22
 text = "Nv.25"
 
-[node name="HP" type="Label" parent="PKMN_0"]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 64.0
-offset_right = 248.0
-offset_bottom = 110.0
+[node name="Status" type="Sprite2D" parent="PKMN_0"]
+position = Vector2(107, 76)
+texture = ExtResource("20_u36pf")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="health_bar" type="Node2D" parent="PKMN_0"]
+position = Vector2(64, 8)
+script = ExtResource("25_vurcs")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="PKMN_0/health_bar"]
+offset_left = 97.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 103.0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
@@ -307,7 +339,7 @@ theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
 
-[node name="Outline" type="Label" parent="PKMN_0/HP"]
+[node name="Outline" type="Label" parent="PKMN_0/health_bar/lblHP"]
 layout_mode = 0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 2
@@ -316,12 +348,27 @@ theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PKMN_0/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("26_wbpl5")
+texture_over = ExtResource("27_6lnox")
+texture_progress = ExtResource("28_p1ki6")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_0/health_bar"]
+
 [node name="ball" type="Sprite2D" parent="PKMN_0"]
 position = Vector2(31.6, 28)
 texture = ExtResource("22")
 
 [node name="pkmn" type="Sprite2D" parent="PKMN_0"]
-position = Vector2(59.6, 32)
+position = Vector2(57.6, 34)
 texture = ExtResource("38")
 hframes = 2
 frame = 1
@@ -397,12 +444,22 @@ theme_override_fonts/font = ExtResource("19_sa8ru")
 theme_override_font_sizes/font_size = 22
 text = "Nv.25"
 
-[node name="HP" type="Label" parent="PKMN_1"]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 64.0
-offset_right = 248.0
-offset_bottom = 110.0
+[node name="Status" type="Sprite2D" parent="PKMN_1"]
+position = Vector2(107, 76)
+texture = ExtResource("20_u36pf")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="health_bar" type="Node2D" parent="PKMN_1"]
+position = Vector2(64, 8)
+script = ExtResource("25_vurcs")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="PKMN_1/health_bar"]
+offset_left = 97.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 103.0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
@@ -410,7 +467,7 @@ theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
 
-[node name="Outline" type="Label" parent="PKMN_1/HP"]
+[node name="Outline" type="Label" parent="PKMN_1/health_bar/lblHP"]
 layout_mode = 0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 2
@@ -418,6 +475,21 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PKMN_1/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("26_wbpl5")
+texture_over = ExtResource("27_6lnox")
+texture_progress = ExtResource("28_p1ki6")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_1/health_bar"]
 
 [node name="ball" type="Sprite2D" parent="PKMN_1"]
 position = Vector2(31.6, 28)
@@ -499,12 +571,16 @@ theme_override_fonts/font = ExtResource("19_sa8ru")
 theme_override_font_sizes/font_size = 22
 text = "Nv.25"
 
-[node name="HP" type="Label" parent="PKMN_2"]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 64.0
-offset_right = 248.0
-offset_bottom = 110.0
+[node name="health_bar" type="Node2D" parent="PKMN_2"]
+position = Vector2(64, 8)
+script = ExtResource("25_vurcs")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="PKMN_2/health_bar"]
+offset_left = 97.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 103.0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
@@ -512,7 +588,7 @@ theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
 
-[node name="Outline" type="Label" parent="PKMN_2/HP"]
+[node name="Outline" type="Label" parent="PKMN_2/health_bar/lblHP"]
 layout_mode = 0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 2
@@ -520,6 +596,21 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PKMN_2/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("26_wbpl5")
+texture_over = ExtResource("27_6lnox")
+texture_progress = ExtResource("28_p1ki6")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_2/health_bar"]
 
 [node name="ball" type="Sprite2D" parent="PKMN_2"]
 position = Vector2(31.6, 28)
@@ -539,6 +630,12 @@ texture = ExtResource("24")
 libraries = {
 "": SubResource("AnimationLibrary_tvltn")
 }
+
+[node name="Status" type="Sprite2D" parent="PKMN_2"]
+position = Vector2(107, 76)
+texture = ExtResource("20_u36pf")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
 
 [node name="PKMN_3" type="Panel" parent="."]
 layout_mode = 0
@@ -603,12 +700,22 @@ theme_override_fonts/font = ExtResource("19_sa8ru")
 theme_override_font_sizes/font_size = 22
 text = "Nv.25"
 
-[node name="HP" type="Label" parent="PKMN_3"]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 64.0
-offset_right = 248.0
-offset_bottom = 110.0
+[node name="Status" type="Sprite2D" parent="PKMN_3"]
+position = Vector2(107, 76)
+texture = ExtResource("20_u36pf")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="health_bar" type="Node2D" parent="PKMN_3"]
+position = Vector2(64, 8)
+script = ExtResource("25_vurcs")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="PKMN_3/health_bar"]
+offset_left = 97.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 103.0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
@@ -616,7 +723,7 @@ theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
 
-[node name="Outline" type="Label" parent="PKMN_3/HP"]
+[node name="Outline" type="Label" parent="PKMN_3/health_bar/lblHP"]
 layout_mode = 0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 2
@@ -624,6 +731,21 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PKMN_3/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("26_wbpl5")
+texture_over = ExtResource("27_6lnox")
+texture_progress = ExtResource("28_p1ki6")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_3/health_bar"]
 
 [node name="ball" type="Sprite2D" parent="PKMN_3"]
 position = Vector2(31.6, 28)
@@ -704,12 +826,22 @@ theme_override_fonts/font = ExtResource("19_sa8ru")
 theme_override_font_sizes/font_size = 22
 text = "Nv.25"
 
-[node name="HP" type="Label" parent="PKMN_4"]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 64.0
-offset_right = 248.0
-offset_bottom = 110.0
+[node name="Status" type="Sprite2D" parent="PKMN_4"]
+position = Vector2(107, 76)
+texture = ExtResource("20_u36pf")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="health_bar" type="Node2D" parent="PKMN_4"]
+position = Vector2(64, 8)
+script = ExtResource("25_vurcs")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="PKMN_4/health_bar"]
+offset_left = 97.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 103.0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
@@ -717,7 +849,7 @@ theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
 
-[node name="Outline" type="Label" parent="PKMN_4/HP"]
+[node name="Outline" type="Label" parent="PKMN_4/health_bar/lblHP"]
 layout_mode = 0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 2
@@ -725,6 +857,21 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PKMN_4/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("26_wbpl5")
+texture_over = ExtResource("27_6lnox")
+texture_progress = ExtResource("28_p1ki6")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_4/health_bar"]
 
 [node name="ball" type="Sprite2D" parent="PKMN_4"]
 position = Vector2(31.6, 28)
@@ -734,6 +881,7 @@ texture = ExtResource("22")
 position = Vector2(57.6, 34)
 texture = ExtResource("38")
 hframes = 2
+frame = 1
 
 [node name="gender" type="Sprite2D" parent="PKMN_4"]
 position = Vector2(229, 32)
@@ -806,12 +954,22 @@ theme_override_fonts/font = ExtResource("19_sa8ru")
 theme_override_font_sizes/font_size = 22
 text = "Nv.25"
 
-[node name="HP" type="Label" parent="PKMN_5"]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 64.0
-offset_right = 248.0
-offset_bottom = 110.0
+[node name="Status" type="Sprite2D" parent="PKMN_5"]
+position = Vector2(107, 76)
+texture = ExtResource("20_u36pf")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="health_bar" type="Node2D" parent="PKMN_5"]
+position = Vector2(64, 8)
+script = ExtResource("25_vurcs")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="PKMN_5/health_bar"]
+offset_left = 97.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 103.0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
@@ -819,7 +977,7 @@ theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
 
-[node name="Outline" type="Label" parent="PKMN_5/HP"]
+[node name="Outline" type="Label" parent="PKMN_5/health_bar/lblHP"]
 layout_mode = 0
 theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 theme_override_constants/shadow_offset_x = 2
@@ -827,6 +985,21 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("18_114xy")
 theme_override_font_sizes/font_size = 26
 text = "58/58"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PKMN_5/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("26_wbpl5")
+texture_over = ExtResource("27_6lnox")
+texture_progress = ExtResource("28_p1ki6")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PKMN_5/health_bar"]
 
 [node name="ball" type="Sprite2D" parent="PKMN_5"]
 position = Vector2(31.6, 28)
@@ -916,6 +1089,7 @@ offset_bottom = 97.848
 text = "Elige a un Pokémon."
 
 [node name="ACTIONS" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 368.445
 offset_top = 202.893
@@ -942,6 +1116,16 @@ size_flags_vertical = 7
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
 
+[node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/DATOS"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = -2.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_0gflp")
+
 [node name="DATOS" parent="ACTIONS/VBoxContainer/DATOS" instance=ExtResource("32")]
 custom_minimum_size = Vector2(101, 0)
 layout_mode = 0
@@ -965,6 +1149,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 7
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+
+[node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/MOVER"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = -2.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6llyv")
 
 [node name="MOVER" parent="ACTIONS/VBoxContainer/MOVER" instance=ExtResource("32")]
 custom_minimum_size = Vector2(101, 0)
@@ -990,6 +1184,16 @@ size_flags_vertical = 7
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
 
+[node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/OBJETO"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = -2.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6llyv")
+
 [node name="OBJETO" parent="ACTIONS/VBoxContainer/OBJETO" instance=ExtResource("32")]
 custom_minimum_size = Vector2(101, 0)
 layout_mode = 0
@@ -1014,6 +1218,16 @@ size_flags_vertical = 7
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
 
+[node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/SALIR"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = -2.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6llyv")
+
 [node name="SALIR" parent="ACTIONS/VBoxContainer/SALIR" instance=ExtResource("32")]
 custom_minimum_size = Vector2(101, 0)
 layout_mode = 0
@@ -1035,8 +1249,125 @@ text_font = SubResource("43")
 layout_mode = 3
 anchors_preset = 0
 
-[node name="SUMMARY_1" type="Panel" parent="SUMMARY"]
+[node name="GENERAL" type="Control" parent="SUMMARY"]
 visible = false
+z_index = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Nombre" parent="SUMMARY/GENERAL" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 194.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="SUMMARY/GENERAL/Nombre" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Genero" type="Sprite2D" parent="SUMMARY/GENERAL"]
+position = Vector2(183, 77)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("36")
+
+[node name="Pokeball" type="Sprite2D" parent="SUMMARY/GENERAL"]
+position = Vector2(29, 76)
+texture = ExtResource("35")
+
+[node name="Nivel" parent="SUMMARY/GENERAL" instance=ExtResource("37")]
+layout_mode = 0
+offset_left = 46.185
+offset_top = 96.174
+offset_right = 237.185
+offset_bottom = 124.174
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="SUMMARY/GENERAL/Nivel" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+
+[node name="Status" type="Sprite2D" parent="SUMMARY/GENERAL"]
+position = Vector2(145, 107)
+texture = ExtResource("40_f8fc6")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="Sprite" type="Sprite2D" parent="SUMMARY/GENERAL"]
+position = Vector2(99.7798, 204.815)
+texture = ExtResource("38")
+
+[node name="lObjeto" parent="SUMMARY/GENERAL" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 324.0
+offset_right = 168.0
+offset_bottom = 355.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="Outline" parent="SUMMARY/GENERAL/lObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="dObjeto" parent="SUMMARY/GENERAL" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 357.21
+offset_right = 168.0
+offset_bottom = 388.21
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="Outline" parent="SUMMARY/GENERAL/dObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="SUMMARY_1" type="Panel" parent="SUMMARY"]
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 384.0
@@ -1066,109 +1397,6 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("19")
 theme_override_font_sizes/font_size = 26
 text = "DATOS"
-
-[node name="Nombre" parent="SUMMARY/SUMMARY_1" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 65.0
-offset_right = 194.0
-offset_bottom = 96.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Outline" parent="SUMMARY/SUMMARY_1/Nombre" index="0"]
-layout_mode = 0
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_1"]
-position = Vector2(29, 76)
-texture = ExtResource("35")
-
-[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_1"]
-position = Vector2(183, 77)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("36")
-
-[node name="Nivel" parent="SUMMARY/SUMMARY_1" instance=ExtResource("37")]
-layout_mode = 0
-offset_left = 46.185
-offset_top = 96.174
-offset_right = 237.185
-offset_bottom = 124.174
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Outline" parent="SUMMARY/SUMMARY_1/Nivel" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_1"]
-position = Vector2(99.7798, 204.815)
-texture = ExtResource("38")
-
-[node name="lObjeto" parent="SUMMARY/SUMMARY_1" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 324.0
-offset_right = 168.0
-offset_bottom = 355.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Objeto"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_1/lObjeto" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Objeto"
-
-[node name="dObjeto" parent="SUMMARY/SUMMARY_1" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 357.21
-offset_right = 168.0
-offset_bottom = 388.21
-theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Ninguno"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_1/dObjeto" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Ninguno"
 
 [node name="Labels" type="VBoxContainer" parent="SUMMARY/SUMMARY_1"]
 layout_mode = 0
@@ -1532,6 +1760,27 @@ theme_override_font_sizes/font_size = 26
 text = "12097"
 horizontal_alignment = 1
 
+[node name="exp_bar" type="Node2D" parent="SUMMARY/SUMMARY_1"]
+position = Vector2(357, 376)
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SUMMARY/SUMMARY_1/exp_bar"]
+offset_left = -39.0
+offset_top = -7.0
+offset_right = 161.0
+offset_bottom = 10.0
+scale = Vector2(1, 0.960005)
+max_value = 0.0
+step = 0.1
+stretch_margin_left = 1
+texture_under = ExtResource("44_0vaoq")
+texture_over = ExtResource("45_yx00i")
+texture_progress = ExtResource("46_kss2v")
+tint_progress = Color(0.27451, 0.552941, 0.960784, 1)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SUMMARY/SUMMARY_1/exp_bar"]
+
 [node name="SUMMARY_2" type="Panel" parent="SUMMARY"]
 visible = false
 layout_mode = 0
@@ -1545,7 +1794,7 @@ layout_mode = 0
 offset_left = 25.0
 offset_top = 20.0
 offset_right = 216.0
-offset_bottom = 48.0
+offset_bottom = 46.0
 theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
 theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
 theme_override_constants/shadow_offset_x = 0
@@ -1563,106 +1812,6 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("19")
 theme_override_font_sizes/font_size = 26
 text = "NOTAS ENTRENADOR"
-
-[node name="Nombre" parent="SUMMARY/SUMMARY_2" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 65.0
-offset_right = 194.0
-offset_bottom = 96.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Outline" parent="SUMMARY/SUMMARY_2/Nombre" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_2"]
-position = Vector2(29, 76)
-texture = ExtResource("35")
-
-[node name="Nivel" parent="SUMMARY/SUMMARY_2" instance=ExtResource("37")]
-layout_mode = 0
-offset_left = 46.185
-offset_top = 96.174
-offset_right = 237.185
-offset_bottom = 124.174
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Outline" parent="SUMMARY/SUMMARY_2/Nivel" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-
-[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_2"]
-position = Vector2(99.7798, 204.815)
-texture = ExtResource("38")
-
-[node name="lObjeto" parent="SUMMARY/SUMMARY_2" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 324.0
-offset_right = 168.0
-offset_bottom = 355.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Objeto"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_2/lObjeto" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Objeto"
-
-[node name="dObjeto" parent="SUMMARY/SUMMARY_2" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 357.21
-offset_right = 168.0
-offset_bottom = 388.21
-theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Ninguno"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_2/dObjeto" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("19")
-theme_override_font_sizes/font_size = 26
-text = "Ninguno"
 
 [node name="Labels" type="VBoxContainer" parent="SUMMARY/SUMMARY_2"]
 layout_mode = 0
@@ -1803,11 +1952,6 @@ theme_override_fonts/font = ExtResource("19")
 theme_override_font_sizes/font_size = 26
 text = "Seria."
 
-[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_2"]
-position = Vector2(183, 77)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("36")
-
 [node name="SUMMARY_3" type="Panel" parent="SUMMARY"]
 visible = false
 layout_mode = 0
@@ -1818,243 +1962,447 @@ metadata/_edit_lock_ = true
 
 [node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_3"]
 layout_mode = 0
-offset_left = 25.0
+offset_left = 24.0
 offset_top = 20.0
-offset_right = 216.0
-offset_bottom = 48.0
+offset_right = 215.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "CARACTERÍSTICAS"
 
 [node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_3/Titulo"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "CARACTERÍSTICAS"
 
-[node name="Nombre" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 65.0
-offset_right = 194.0
-offset_bottom = 96.0
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/Nombre" index="0"]
-layout_mode = 0
-
-[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_3"]
-position = Vector2(29, 76)
-texture = ExtResource("35")
-
-[node name="Nivel" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
-layout_mode = 0
-offset_left = 46.185
-offset_top = 96.174
-offset_right = 237.185
-offset_bottom = 124.174
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/Nivel" index="0"]
-layout_mode = 0
-
-[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_3"]
-position = Vector2(99.7798, 204.815)
-texture = ExtResource("38")
-
-[node name="lObjeto" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 324.0
-offset_right = 168.0
-offset_bottom = 355.0
-text = "Objeto"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/lObjeto" index="0"]
-layout_mode = 0
-text = "Objeto
-"
-
-[node name="dObjeto" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 357.21
-offset_right = 168.0
-offset_bottom = 388.21
-text = "Ninguno"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/dObjeto" index="0"]
-layout_mode = 0
-text = "Ninguno
-"
-
 [node name="lPS" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 240.0
+layout_mode = 2
+offset_left = 246.0
 offset_top = 80.0
-offset_right = 351.0
-offset_bottom = 106.0
+offset_right = 342.0
+offset_bottom = 103.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PS"
+metadata/_edit_lock_ = true
 
 [node name="Outline" parent="SUMMARY/SUMMARY_3/lPS" index="0"]
 layout_mode = 0
-text = "PS"
-
-[node name="Labels" type="VBoxContainer" parent="SUMMARY/SUMMARY_3"]
-layout_mode = 0
-offset_left = 247.665
-offset_top = 123.806
-offset_right = 487.665
-offset_bottom = 309.806
-
-[node name="lAtaque" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
-layout_mode = 2
-text = "Ataque"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lAtaque" index="0"]
-layout_mode = 0
-text = "Ataque"
-
-[node name="lDefensa" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
-layout_mode = 2
-text = "Defensa"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lDefensa" index="0"]
-layout_mode = 0
-text = "Defensa"
-
-[node name="lAtEsp" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
-layout_mode = 2
-text = "At. Esp."
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lAtEsp" index="0"]
-layout_mode = 0
-text = "At. Esp."
-
-[node name="lDefEsp" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
-layout_mode = 2
-text = "Def. Esp."
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lDefEsp" index="0"]
-layout_mode = 0
-text = "Def. Esp."
-
-[node name="lVelocidad" parent="SUMMARY/SUMMARY_3/Labels" instance=ExtResource("34")]
-layout_mode = 2
-text = "Velocidad"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_3/Labels/lVelocidad" index="0"]
-layout_mode = 0
-text = "Velocidad"
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "PS
+"
 
 [node name="dPS" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 328.53
-offset_top = 75.785
-offset_right = 461.53
-offset_bottom = 101.785
-text = "122/122"
+offset_left = 394.0
+offset_top = 80.0
+offset_right = 478.0
+offset_bottom = 100.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "150/150"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
 
 [node name="Outline" parent="SUMMARY/SUMMARY_3/dPS" index="0"]
+layout_direction = 3
 layout_mode = 0
-text = "122/122"
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "150/150"
+horizontal_alignment = 2
 
-[node name="dAtaque" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+[node name="health_bar" type="Node2D" parent="SUMMARY/SUMMARY_3"]
+position = Vector2(289, 63)
+script = ExtResource("25_vurcs")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="SUMMARY/SUMMARY_3/health_bar"]
+visible = false
+offset_left = 11.1186
+offset_top = 10.3219
+offset_right = 61.1186
+offset_bottom = 33.3219
+theme = ExtResource("45_0ap10")
+text = "45/45"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SUMMARY/SUMMARY_3/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("46_licca")
+texture_over = ExtResource("47_tfkpk")
+texture_progress = ExtResource("48_fc5h1")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SUMMARY/SUMMARY_3/health_bar"]
+
+[node name="LabelStats" type="VBoxContainer" parent="SUMMARY/SUMMARY_3"]
 layout_mode = 0
-offset_left = 390.0
-offset_top = 123.943
+offset_left = 246.0
+offset_top = 125.0
+offset_right = 342.0
+offset_bottom = 281.0
+metadata/_edit_lock_ = true
+
+[node name="lAtaque" parent="SUMMARY/SUMMARY_3/LabelStats" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ataque"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/LabelStats/lAtaque" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Ataque"
+
+[node name="lDefensa" parent="SUMMARY/SUMMARY_3/LabelStats" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Defensa"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/LabelStats/lDefensa" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Defensa"
+
+[node name="lAtEsp" parent="SUMMARY/SUMMARY_3/LabelStats" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "At. Esp."
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/LabelStats/lAtEsp" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "At. Esp."
+
+[node name="lDefEsp" parent="SUMMARY/SUMMARY_3/LabelStats" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Def. Esp."
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/LabelStats/lDefEsp" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Def. Esp."
+
+[node name="Velocidad" parent="SUMMARY/SUMMARY_3/LabelStats" instance=ExtResource("34")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Velocidad"
+
+[node name="Outline" parent="SUMMARY/SUMMARY_3/LabelStats/Velocidad" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Velocidad"
+
+[node name="ValueStats" type="VBoxContainer" parent="SUMMARY/SUMMARY_3"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 125.0
 offset_right = 456.0
-offset_bottom = 149.943
-text = "88"
+offset_bottom = 281.0
 
-[node name="Outline" parent="SUMMARY/SUMMARY_3/dAtaque" index="0"]
-layout_mode = 0
-text = "88"
+[node name="dAtaque" parent="SUMMARY/SUMMARY_3/ValueStats" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="dDefensa" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+[node name="Outline" parent="SUMMARY/SUMMARY_3/ValueStats/dAtaque" index="0"]
+layout_direction = 3
 layout_mode = 0
-offset_left = 390.378
-offset_top = 155.969
-offset_right = 456.378
-offset_bottom = 181.969
-text = "59"
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="Outline" parent="SUMMARY/SUMMARY_3/dDefensa" index="0"]
-layout_mode = 0
-text = "59"
+[node name="dDefensa" parent="SUMMARY/SUMMARY_3/ValueStats" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="dAtEsp" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+[node name="Outline" parent="SUMMARY/SUMMARY_3/ValueStats/dDefensa" index="0"]
+layout_direction = 3
 layout_mode = 0
-offset_left = 390.0
-offset_top = 188.0
-offset_right = 456.0
-offset_bottom = 214.0
-text = "78"
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="Outline" parent="SUMMARY/SUMMARY_3/dAtEsp" index="0"]
-layout_mode = 0
-text = "78"
+[node name="dAtEsp" parent="SUMMARY/SUMMARY_3/ValueStats" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="dDefEsp" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+[node name="Outline" parent="SUMMARY/SUMMARY_3/ValueStats/dAtEsp" index="0"]
+layout_direction = 3
 layout_mode = 0
-offset_left = 390.85
-offset_top = 219.756
-offset_right = 456.85
-offset_bottom = 245.756
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="Outline" parent="SUMMARY/SUMMARY_3/dDefEsp" index="0"]
-layout_mode = 0
+[node name="dDefEsp" parent="SUMMARY/SUMMARY_3/ValueStats" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="dVelocidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+[node name="Outline" parent="SUMMARY/SUMMARY_3/ValueStats/dDefEsp" index="0"]
+layout_direction = 3
 layout_mode = 0
-offset_left = 390.283
-offset_top = 252.039
-offset_right = 456.283
-offset_bottom = 278.039
-text = "134"
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="Outline" parent="SUMMARY/SUMMARY_3/dVelocidad" index="0"]
-layout_mode = 0
-text = "134"
+[node name="dVelocidad" parent="SUMMARY/SUMMARY_3/ValueStats" instance=ExtResource("37")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
 
-[node name="lHbailidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
+[node name="Outline" parent="SUMMARY/SUMMARY_3/ValueStats/dVelocidad" index="0"]
+layout_direction = 3
 layout_mode = 0
-offset_left = 224.039
-offset_top = 287.986
-offset_right = 464.039
-offset_bottom = 314.986
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="lHabilidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("34")]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 288.0
+offset_right = 371.0
+offset_bottom = 319.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Habilidad"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="SUMMARY/SUMMARY_3/lHbailidad" index="0"]
+[node name="Outline" parent="SUMMARY/SUMMARY_3/lHabilidad" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Habilidad"
 
 [node name="dHabilidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 363.311
-offset_top = 288.297
-offset_right = 507.311
-offset_bottom = 314.297
+offset_left = 360.0
+offset_top = 288.0
+offset_right = 504.0
+offset_bottom = 308.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Elec. Estática"
+metadata/_edit_lock_ = true
 
 [node name="Outline" parent="SUMMARY/SUMMARY_3/dHabilidad" index="0"]
+layout_direction = 2
 layout_mode = 0
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Elec. Estática"
 
-[node name="DescHabilidad" parent="SUMMARY/SUMMARY_3" instance=ExtResource("37")]
+[node name="DescHabilidad" type="Label" parent="SUMMARY/SUMMARY_3"]
 layout_mode = 0
-anchor_bottom = 1.0
-offset_left = 224.0
-offset_top = 320.0
-offset_right = 511.0
-offset_bottom = -17.0
-grow_vertical = 2
+offset_left = 222.0
+offset_top = 322.0
+offset_right = 501.0
+offset_bottom = 379.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Paraliza con el contacto."
+label_settings = SubResource("LabelSettings_e6ab3")
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 1
 max_lines_visible = 2
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="SUMMARY/SUMMARY_3/DescHabilidad" index="0"]
+[node name="Outline" type="Label" parent="SUMMARY/SUMMARY_3/DescHabilidad"]
+layout_direction = 2
 layout_mode = 0
+offset_right = 279.0
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/line_spacing = 10
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Paraliza con el contacto."
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 2
 max_lines_visible = 2
-
-[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_3"]
-position = Vector2(183, 77)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("36")
 
 [node name="SUMMARY_4" type="Panel" parent="SUMMARY"]
 visible = false
@@ -2069,64 +2417,24 @@ layout_mode = 0
 offset_left = 25.0
 offset_top = 20.0
 offset_right = 216.0
-offset_bottom = 48.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "MOVIMIENTOS"
 
 [node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_4/Titulo"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "MOVIMIENTOS"
-
-[node name="Nombre" parent="SUMMARY/SUMMARY_4" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 65.0
-offset_right = 194.0
-offset_bottom = 96.0
-
-[node name="Outline" parent="SUMMARY/SUMMARY_4/Nombre" index="0"]
-layout_mode = 0
-
-[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_4"]
-position = Vector2(29, 76)
-texture = ExtResource("35")
-
-[node name="Nivel" parent="SUMMARY/SUMMARY_4" instance=ExtResource("37")]
-layout_mode = 0
-offset_left = 46.185
-offset_top = 96.174
-offset_right = 237.185
-offset_bottom = 124.174
-
-[node name="Outline" parent="SUMMARY/SUMMARY_4/Nivel" index="0"]
-layout_mode = 0
-
-[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_4"]
-position = Vector2(99.7798, 204.815)
-texture = ExtResource("38")
-
-[node name="lObjeto" parent="SUMMARY/SUMMARY_4" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 324.0
-offset_right = 168.0
-offset_bottom = 355.0
-text = "Objeto"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_4/lObjeto" index="0"]
-layout_mode = 0
-text = "Objeto"
-
-[node name="dObjeto" parent="SUMMARY/SUMMARY_4" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 356.999
-offset_right = 168.0
-offset_bottom = 387.999
-text = "Ninguno"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_4/dObjeto" index="0"]
-layout_mode = 0
-text = "Ninguno"
 
 [node name="Move1" type="Panel" parent="SUMMARY/SUMMARY_4"]
 layout_mode = 0
@@ -2144,96 +2452,168 @@ frame = 14
 
 [node name="Ataque" parent="SUMMARY/SUMMARY_4/Move1" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 73.231
-offset_top = 4.564
-offset_right = 243.231
-offset_bottom = 30.564
+offset_left = 72.0
+offset_top = 6.0
+offset_right = 263.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Agilidad"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move1/Ataque" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Agilidad"
 
 [node name="lPP" parent="SUMMARY/SUMMARY_4/Move1" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 37.0
-offset_right = 178.0
-offset_bottom = 63.0
+offset_left = 101.0
+offset_top = 38.0
+offset_right = 292.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move1/lPP" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="dPP" parent="SUMMARY/SUMMARY_4/Move1" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 112.192
-offset_top = 37.0
-offset_right = 217.192
-offset_bottom = 63.0
+offset_left = 162.0
+offset_top = 38.0
+offset_right = 353.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "30/30"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move1/dPP" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "30/30"
 
 [node name="Move2" type="Panel" parent="SUMMARY/SUMMARY_4"]
 layout_mode = 0
-offset_left = 242.502
-offset_top = 160.678
-offset_right = 491.502
-offset_bottom = 224.678
+offset_left = 243.0
+offset_top = 160.0
+offset_right = 492.0
+offset_bottom = 224.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wv2sn")
 
 [node name="Tipo" type="Sprite2D" parent="SUMMARY/SUMMARY_4/Move2"]
 position = Vector2(37, 17)
 texture = ExtResource("39")
 vframes = 24
-frame = 13
+frame = 14
 
 [node name="Ataque" parent="SUMMARY/SUMMARY_4/Move2" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 73.231
-offset_top = 4.564
-offset_right = 243.231
-offset_bottom = 30.564
-text = "Chispazo"
+offset_left = 72.0
+offset_top = 6.0
+offset_right = 263.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Agilidad"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move2/Ataque" index="0"]
 layout_mode = 0
-text = "Chispazo"
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Agilidad"
 
 [node name="lPP" parent="SUMMARY/SUMMARY_4/Move2" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 37.0
-offset_right = 178.0
-offset_bottom = 63.0
+offset_left = 101.0
+offset_top = 38.0
+offset_right = 292.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move2/lPP" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="dPP" parent="SUMMARY/SUMMARY_4/Move2" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 112.192
-offset_top = 37.0
-offset_right = 217.192
-offset_bottom = 63.0
-text = "15/15"
+offset_left = 162.0
+offset_top = 38.0
+offset_right = 353.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "30/30"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move2/dPP" index="0"]
 layout_mode = 0
-text = "15/15"
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "30/30"
 
 [node name="Move3" type="Panel" parent="SUMMARY/SUMMARY_4"]
 layout_mode = 0
-offset_left = 242.502
-offset_top = 225.025
-offset_right = 491.502
-offset_bottom = 289.025
+offset_left = 243.0
+offset_top = 224.0
+offset_right = 492.0
+offset_bottom = 288.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wv2sn")
 
 [node name="Tipo" type="Sprite2D" parent="SUMMARY/SUMMARY_4/Move3"]
@@ -2244,94 +2624,161 @@ frame = 14
 
 [node name="Ataque" parent="SUMMARY/SUMMARY_4/Move3" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 73.231
-offset_top = 4.564
-offset_right = 243.231
-offset_bottom = 30.564
-text = "Pantalla Luz"
+offset_left = 72.0
+offset_top = 6.0
+offset_right = 263.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Agilidad"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move3/Ataque" index="0"]
 layout_mode = 0
-text = "Pantalla Luz"
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Agilidad"
 
 [node name="lPP" parent="SUMMARY/SUMMARY_4/Move3" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 37.0
-offset_right = 178.0
-offset_bottom = 63.0
+offset_left = 101.0
+offset_top = 38.0
+offset_right = 292.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move3/lPP" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="dPP" parent="SUMMARY/SUMMARY_4/Move3" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 112.192
-offset_top = 37.0
-offset_right = 217.192
-offset_bottom = 63.0
+offset_left = 162.0
+offset_top = 38.0
+offset_right = 353.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "30/30"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move3/dPP" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "30/30"
 
 [node name="Move4" type="Panel" parent="SUMMARY/SUMMARY_4"]
 layout_mode = 0
-offset_left = 243.399
-offset_top = 289.196
-offset_right = 492.399
-offset_bottom = 353.196
+offset_left = 243.0
+offset_top = 288.0
+offset_right = 492.0
+offset_bottom = 352.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wv2sn")
 
 [node name="Tipo" type="Sprite2D" parent="SUMMARY/SUMMARY_4/Move4"]
 position = Vector2(37, 17)
 texture = ExtResource("39")
 vframes = 24
-frame = 13
+frame = 14
 
 [node name="Ataque" parent="SUMMARY/SUMMARY_4/Move4" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 73.231
-offset_top = 4.564
-offset_right = 243.231
-offset_bottom = 30.564
-text = "Trueno"
+offset_left = 72.0
+offset_top = 6.0
+offset_right = 263.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Agilidad"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move4/Ataque" index="0"]
 layout_mode = 0
-text = "Trueno"
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "Agilidad"
 
 [node name="lPP" parent="SUMMARY/SUMMARY_4/Move4" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 37.0
-offset_right = 178.0
-offset_bottom = 63.0
+offset_left = 101.0
+offset_top = 38.0
+offset_right = 292.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move4/lPP" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "PP"
 
 [node name="dPP" parent="SUMMARY/SUMMARY_4/Move4" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 112.192
-offset_top = 37.0
-offset_right = 217.192
-offset_bottom = 63.0
-text = "10/10"
+offset_left = 162.0
+offset_top = 38.0
+offset_right = 353.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "30/30"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_4/Move4/dPP" index="0"]
 layout_mode = 0
-text = "10/10"
-
-[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_4"]
-position = Vector2(183, 77)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("36")
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
+text = "30/30"
 
 [node name="SUMMARY_5" type="Panel" parent="SUMMARY"]
 visible = false
@@ -2346,93 +2793,74 @@ layout_mode = 0
 offset_left = 25.0
 offset_top = 20.0
 offset_right = 216.0
-offset_bottom = 48.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "CINTAS"
 
 [node name="Titulo" type="Label" parent="SUMMARY/SUMMARY_5/Titulo"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "CINTAS"
-
-[node name="Nombre" parent="SUMMARY/SUMMARY_5" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 65.0
-offset_right = 106.0
-offset_bottom = 91.0
-
-[node name="Outline" parent="SUMMARY/SUMMARY_5/Nombre" index="0"]
-layout_mode = 0
-
-[node name="Pokeball" type="Sprite2D" parent="SUMMARY/SUMMARY_5"]
-position = Vector2(29, 76)
-texture = ExtResource("35")
-
-[node name="Nivel" parent="SUMMARY/SUMMARY_5" instance=ExtResource("37")]
-layout_mode = 0
-offset_left = 46.185
-offset_top = 96.174
-offset_right = 237.185
-offset_bottom = 124.174
-
-[node name="Outline" parent="SUMMARY/SUMMARY_5/Nivel" index="0"]
-layout_mode = 0
-
-[node name="Sprite" type="Sprite2D" parent="SUMMARY/SUMMARY_5"]
-position = Vector2(99.7798, 204.815)
-texture = ExtResource("38")
-
-[node name="lObjeto" parent="SUMMARY/SUMMARY_5" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 324.0
-offset_right = 168.0
-offset_bottom = 355.0
-text = "Objeto"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_5/lObjeto" index="0"]
-layout_mode = 0
-text = "Objeto"
-
-[node name="dObjeto" parent="SUMMARY/SUMMARY_5" instance=ExtResource("34")]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 357.21
-offset_right = 168.0
-offset_bottom = 388.21
-text = "Ninguno"
-
-[node name="Outline" parent="SUMMARY/SUMMARY_5/dObjeto" index="0"]
-layout_mode = 0
-text = "Ninguno"
 
 [node name="lCintas" parent="SUMMARY/SUMMARY_5" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 235.694
-offset_top = 345.549
-offset_right = 385.694
-offset_bottom = 371.549
+offset_left = 235.0
+offset_top = 345.0
+offset_right = 426.0
+offset_bottom = 373.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Núm. de Cintas:"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_5/lCintas" index="0"]
 layout_mode = 0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "Núm. de Cintas:"
 
 [node name="dCintas" parent="SUMMARY/SUMMARY_5" instance=ExtResource("37")]
 layout_mode = 0
-offset_left = 440.0
-offset_top = 346.0
-offset_right = 545.0
-offset_bottom = 372.0
+offset_left = 437.0
+offset_top = 345.0
+offset_right = 487.0
+offset_bottom = 373.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "0"
 
 [node name="Outline" parent="SUMMARY/SUMMARY_5/dCintas" index="0"]
 layout_mode = 0
+offset_right = 50.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("19")
+theme_override_font_sizes/font_size = 26
 text = "0"
-
-[node name="Genero" type="Sprite2D" parent="SUMMARY/SUMMARY_5"]
-position = Vector2(183, 77)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("36")
 
 [connection signal="focus_entered" from="PKMN_0" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_1" to="." method="_on_PKMN_focus_entered"]
@@ -2445,11 +2873,12 @@ texture = ExtResource("36")
 [connection signal="focus_entered" from="ACTIONS/VBoxContainer/MOVER" to="." method="_on_actions_focus_entered"]
 [connection signal="focus_entered" from="ACTIONS/VBoxContainer/OBJETO" to="." method="_on_actions_focus_entered"]
 [connection signal="focus_entered" from="ACTIONS/VBoxContainer/SALIR" to="." method="_on_actions_focus_entered"]
+[connection signal="value_changed" from="SUMMARY/SUMMARY_1/exp_bar/TextureProgressBar" to="SUMMARY/SUMMARY_1/exp_bar" method="_on_value_changed"]
 
-[editable path="SUMMARY/SUMMARY_1/Nombre"]
-[editable path="SUMMARY/SUMMARY_1/Nivel"]
-[editable path="SUMMARY/SUMMARY_1/lObjeto"]
-[editable path="SUMMARY/SUMMARY_1/dObjeto"]
+[editable path="SUMMARY/GENERAL/Nombre"]
+[editable path="SUMMARY/GENERAL/Nivel"]
+[editable path="SUMMARY/GENERAL/lObjeto"]
+[editable path="SUMMARY/GENERAL/dObjeto"]
 [editable path="SUMMARY/SUMMARY_1/Labels/lNumDex"]
 [editable path="SUMMARY/SUMMARY_1/Labels/lEspecie"]
 [editable path="SUMMARY/SUMMARY_1/Labels/lTipo"]
@@ -2463,39 +2892,26 @@ texture = ExtResource("36")
 [editable path="SUMMARY/SUMMARY_1/dExperiencia"]
 [editable path="SUMMARY/SUMMARY_1/lSigNivel"]
 [editable path="SUMMARY/SUMMARY_1/dSigNivel"]
-[editable path="SUMMARY/SUMMARY_2/Nombre"]
-[editable path="SUMMARY/SUMMARY_2/Nivel"]
-[editable path="SUMMARY/SUMMARY_2/lObjeto"]
-[editable path="SUMMARY/SUMMARY_2/dObjeto"]
 [editable path="SUMMARY/SUMMARY_2/Labels/LabelNaturaleza"]
 [editable path="SUMMARY/SUMMARY_2/Labels/FechaCaptura"]
 [editable path="SUMMARY/SUMMARY_2/Labels/RutaCaptura"]
 [editable path="SUMMARY/SUMMARY_2/Labels/NivelCaptura"]
 [editable path="SUMMARY/SUMMARY_2/DescNaturaleza"]
 [editable path="SUMMARY/SUMMARY_2/Naturaleza"]
-[editable path="SUMMARY/SUMMARY_3/Nombre"]
-[editable path="SUMMARY/SUMMARY_3/Nivel"]
-[editable path="SUMMARY/SUMMARY_3/lObjeto"]
-[editable path="SUMMARY/SUMMARY_3/dObjeto"]
 [editable path="SUMMARY/SUMMARY_3/lPS"]
-[editable path="SUMMARY/SUMMARY_3/Labels/lAtaque"]
-[editable path="SUMMARY/SUMMARY_3/Labels/lDefensa"]
-[editable path="SUMMARY/SUMMARY_3/Labels/lAtEsp"]
-[editable path="SUMMARY/SUMMARY_3/Labels/lDefEsp"]
-[editable path="SUMMARY/SUMMARY_3/Labels/lVelocidad"]
 [editable path="SUMMARY/SUMMARY_3/dPS"]
-[editable path="SUMMARY/SUMMARY_3/dAtaque"]
-[editable path="SUMMARY/SUMMARY_3/dDefensa"]
-[editable path="SUMMARY/SUMMARY_3/dAtEsp"]
-[editable path="SUMMARY/SUMMARY_3/dDefEsp"]
-[editable path="SUMMARY/SUMMARY_3/dVelocidad"]
-[editable path="SUMMARY/SUMMARY_3/lHbailidad"]
+[editable path="SUMMARY/SUMMARY_3/LabelStats/lAtaque"]
+[editable path="SUMMARY/SUMMARY_3/LabelStats/lDefensa"]
+[editable path="SUMMARY/SUMMARY_3/LabelStats/lAtEsp"]
+[editable path="SUMMARY/SUMMARY_3/LabelStats/lDefEsp"]
+[editable path="SUMMARY/SUMMARY_3/LabelStats/Velocidad"]
+[editable path="SUMMARY/SUMMARY_3/ValueStats/dAtaque"]
+[editable path="SUMMARY/SUMMARY_3/ValueStats/dDefensa"]
+[editable path="SUMMARY/SUMMARY_3/ValueStats/dAtEsp"]
+[editable path="SUMMARY/SUMMARY_3/ValueStats/dDefEsp"]
+[editable path="SUMMARY/SUMMARY_3/ValueStats/dVelocidad"]
+[editable path="SUMMARY/SUMMARY_3/lHabilidad"]
 [editable path="SUMMARY/SUMMARY_3/dHabilidad"]
-[editable path="SUMMARY/SUMMARY_3/DescHabilidad"]
-[editable path="SUMMARY/SUMMARY_4/Nombre"]
-[editable path="SUMMARY/SUMMARY_4/Nivel"]
-[editable path="SUMMARY/SUMMARY_4/lObjeto"]
-[editable path="SUMMARY/SUMMARY_4/dObjeto"]
 [editable path="SUMMARY/SUMMARY_4/Move1/Ataque"]
 [editable path="SUMMARY/SUMMARY_4/Move1/lPP"]
 [editable path="SUMMARY/SUMMARY_4/Move1/dPP"]
@@ -2508,9 +2924,5 @@ texture = ExtResource("36")
 [editable path="SUMMARY/SUMMARY_4/Move4/Ataque"]
 [editable path="SUMMARY/SUMMARY_4/Move4/lPP"]
 [editable path="SUMMARY/SUMMARY_4/Move4/dPP"]
-[editable path="SUMMARY/SUMMARY_5/Nombre"]
-[editable path="SUMMARY/SUMMARY_5/Nivel"]
-[editable path="SUMMARY/SUMMARY_5/lObjeto"]
-[editable path="SUMMARY/SUMMARY_5/dObjeto"]
 [editable path="SUMMARY/SUMMARY_5/lCintas"]
 [editable path="SUMMARY/SUMMARY_5/dCintas"]

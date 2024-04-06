@@ -16,7 +16,7 @@ class_name Battler
 
 var tilesVisibility
 
-@onready var party : Array = [] #: Array = get_children() # setget ,get_party
+@onready var party : Array[PokemonInstance] = [] #: Array = get_children() # setget ,get_party
 
 func create(_type : CONST.BATTLER_TYPES, _party : Array, _IA,  _name : String = "", _battle_front_sprite : Texture = null, _battle_back_sprite : Texture = null, _before_battle_message : String = "", _init_battle_message: String = "", _end_battle_message: String = "", _is_defeated : bool = false, _double_battle: bool = false, _is_playable: bool = false, _partner : NodePath = NodePath("")):
 	type = _type
@@ -62,6 +62,8 @@ func has_pokemon(pk):
 		if p == pk:
 			return true
 	return false
+	
+	
 
 	
 func print_pokemon_team():

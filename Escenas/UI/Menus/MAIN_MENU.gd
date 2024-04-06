@@ -4,7 +4,7 @@ extends Panel
 @export var style_selected: StyleBox
 @export var style_empty: StyleBox
 
-@onready var entries = [$VBoxContainer/Pokedex,$VBoxContainer/Pokemon,$VBoxContainer/Mochila,$VBoxContainer/Player,$VBoxContainer/Guardar,$VBoxContainer/Opciones,$VBoxContainer/Salir]
+@onready var entries:Array[Control] = [$VBoxContainer/Pokedex,$VBoxContainer/Pokemon,$VBoxContainer/Mochila,$VBoxContainer/Player,$VBoxContainer/Guardar,$VBoxContainer/Opciones,$VBoxContainer/Salir]
 
 var signals = ["pokedex","pokemon","bag","player","save","option","exit"]
 var start
@@ -26,46 +26,55 @@ signal exit
 #	add_user_signal("option")
 #	add_user_signal("exit")
 
+var index:int = 0
+
 func _ready():
 	hide()
-	connect("exit", Callable(self, "hide"))
 
-var index = 0
+func selectOption():
+	emit_signal(signals[index])
 
-func _process(_delta):
-	if visible:
-		if (INPUT.ui_down.is_action_just_pressed()): #Input.is_action_pressed("ui_down"):#
-			var i = index
-			while (i < entries.size()-1):
-				i+=1
-				if (entries[i].is_visible()):
-					index=i
-					break
-			update_styles()
-		if (INPUT.ui_up.is_action_just_pressed()):#Input.is_action_pressed("ui_up"):#(INPUT.up.is_action_just_pressed()):
-			var i = index
-			while (i > 0):
-				i-=1
-				if (entries[i].is_visible()):
-					index=i
-					break
-			update_styles()
-		
-		if (INPUT.ui_accept.is_action_just_pressed()):#Input.is_action_pressed("ui_accept"):#(INPUT.ui_accept.is_action_just_pressed()):
-			emit_signal(signals[index])
-		if (INPUT.ui_cancel.is_action_just_pressed()):#Input.is_action_pressed("ui_cancel"):#(INPUT.ui_cancel.is_action_just_pressed()):
-			emit_signal("exit")
-		if (INPUT.ui_start.is_action_just_released() or start):#Input.is_action_pressed("ui_cancel"):#(INPUT.ui_cancel.is_action_just_pressed()):
-			start = true
-			if (INPUT.ui_start.is_action_just_pressed()):#Input.is_action_pressed("ui_cancel"):#(INPUT.ui_cancel.is_action_just_pressed()):
-				emit_signal("exit")
-	#	if Input.is_action_pressed("ui_start"):#(INPUT.ui_cancel.is_action_just_pressed()):
-	#		emit_signal("exit")
+func open():
+	print("open start menu")
+	GUI.accept.connect(Callable(self, "selectOption"))
+	GUI.cancel.connect(Callable(self, "close"))
+	GUI.start.connect(Callable(self, "close"))
+	GUI.up.connect(Callable(self, "moveUp"))
+	GUI.down.connect(Callable(self, "moveDown"))
+	show()
+	
+func close():
+	print("close start menu")
+	GUI.accept.disconnect(Callable(self, "selectOption"))
+	GUI.cancel.disconnect(Callable(self, "close"))
+	GUI.start.disconnect(Callable(self, "close"))
+	GUI.up.disconnect(Callable(self, "moveUp"))
+	GUI.down.disconnect(Callable(self, "moveDown"))
+	hide()
+	exit.emit()
 
-		
+func moveUp():
+	var i = index
+	while (i > 0):
+		i-=1
+		if (entries[i].is_visible()):
+			index=i
+			break
+	update_styles()
+	
+func moveDown():
+	var i = index
+	while (i < entries.size()-1):
+		i+=1
+		if (entries[i].is_visible()):
+			index=i
+			break
+	update_styles()
+	
 func update_styles():
 	for p in range(entries.size()):
 		if (p==index):
-			entries[p].add_theme_stylebox_override("panel", style_selected)
+			entries[p].get_node("Arrow").add_theme_stylebox_override("panel", style_selected)
 		else:
-			entries[p].add_theme_stylebox_override("panel",style_empty)
+			entries[p].get_node("Arrow").add_theme_stylebox_override("panel",style_empty)
+	

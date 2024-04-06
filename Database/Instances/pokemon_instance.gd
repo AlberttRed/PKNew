@@ -123,9 +123,9 @@ var nextLevelExpBase : int: # Es l'experiencia base necessaria per arribar al se
 		else:
 			return totalExp
 
-var fecha_captura: String = "18 de Nov. de 2018" 
-var ruta_captura: String = "Ruta 1" 
-var nivel_captura: int = 5 
+var capture_date: String = "18 de Nov. de 2018" 
+var capture_route: String = "Ruta 1" 
+var capture_level: int = 5 
 
 var ability_slot: int = 0 #Al crear un pokemon,se li donarà aleatoriament l'slot. Aixo es així perque quan evoluciona, es manté l'slot, pero pot ser que l'evolució tingui un altre hablitat en aquell slot, per tant li canviarà l'habilitat
 
@@ -166,6 +166,11 @@ var battle_back_sprite:
 			return base.battle_back_sprite
 	set(value):
 		battle_back_sprite = value
+		
+var fainted : bool = false :
+	get:
+		return hp_actual == 0
+		
 var EVs = []
 var IVs = []
 var personality = "" #setget set_personality,get_personality

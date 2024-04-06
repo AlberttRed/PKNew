@@ -8,18 +8,20 @@ var actual_hp :int = 0
 @onready var lblHP:Label = $lblHP
 @onready var progressBar:TextureProgressBar = $TextureProgressBar
 
-func init(pokemon : BattlePokemon):
+func init(pokemon : PokemonInstance):
 	#pokemon.updateHP.connect(Callable(self, "on_health_changes"))
 	updateUI(pokemon)
 	
 #	percentage = float(pokemon_target.hp_actual) / float(pokemon_target.hp_total)
 #	$health.scale = Vector2(percentage, 1)
-func updateUI(pokemon : BattlePokemon):
+func updateUI(pokemon : PokemonInstance):
 	actual_hp = pokemon.hp_actual
 	total_hp = pokemon.hp_total
 	$TextureProgressBar.max_value = total_hp
 	$TextureProgressBar.value = actual_hp
 	$lblHP.text = str(actual_hp) + "/" + str(total_hp)
+	if($lblHP.has_node("Outline")):
+		$lblHP.get_node("Outline").text = str(actual_hp) + "/" + str(total_hp)
 	update_color()
 	
 func update_color():

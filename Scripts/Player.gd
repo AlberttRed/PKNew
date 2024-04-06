@@ -13,7 +13,7 @@ func _ready():
 	#SIGNALS.PLAYER.connect("moved_signal", Callable(self, "checkEncounterType"))
 	moved_signal.connect(Callable(self, "checkEnteredTile"))
 	turned_signal.connect(Callable(self, "checkEnteredTile"))
-	GAME_DATA.party = trainer.get_children()
+	GAME_DATA.party = trainer.party#get_children()
 	
 func _physics_process(delta):
 	
@@ -66,8 +66,6 @@ func interact_at_collide():
 func _input(event):
 	if event.is_action_pressed("ui_accept") and !GUI.isVisible():
 		print("A")
-		$AnimationPlayer.play("aaaa")
-		await $AnimationPlayer.animation_finished
 #		print(GLOBAL.actual_map.map_connections_list[0].active_tilemap.position)
 #		print(GLOBAL.actual_map.map_connections_list[0].global_position)
 		
@@ -99,6 +97,7 @@ func _input(event):
 #		GUI.show_msg("Hola que tal em dic Albert, l'altre dia vaig anar a comprar el pa i la veritat es que mec.", null, null, null, [], true)
 #		await GUI.input
 	elif event.is_action_pressed("ui_start") and !GUI.isVisible():
+		print("jej")
 		GUI.show_menu()
 
 func set_running(state):

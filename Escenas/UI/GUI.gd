@@ -3,7 +3,14 @@ extends CanvasLayer
 
 signal input
 signal selected_choice
+
 signal accept
+signal cancel
+signal start
+signal left
+signal right
+signal up
+signal down
 
 var next = false
 
@@ -24,7 +31,7 @@ func _ready():
 #	$INTRO.connect("new_game", GAME_DATA, "new_game")
 #	add_user_signal("finished")
 #	add_user_signal("input")
-	menu.connect("pokemon", Callable(self, "show_party"))
+	menu.pokemon.connect(Callable(self, "show_party"))
 #	menu.connect("save", self, "save")
 #	menu.connect("bag", self, "show_bag")
 	pass
@@ -92,11 +99,11 @@ func clear_choices():
 
 func show_menu():
 	menu.start = false
-	menu.show()
+	menu.open()
 	#menu.set_process(true)
 	await menu.exit
 	#yield(menu,"exit")
-	menu.set_process(false)
+	#menu.set_process(false)
 
 func isVisible():
 	return msg.is_visible() || chs.is_visible() || menu.is_visible() || party.is_visible() || battle.is_visible() || transition.is_visible()# || $INTRO.is_visible() || bag.is_visible() || transition.is_visible()#|| options.is_visible()
@@ -129,16 +136,15 @@ func isVisible():
 #
 func show_party():
 	print("miau")
-	menu.hide()
-	menu.set_process(false)
-	party.show_party()
-	party.set_process(true)
+	menu.close()
+	party.open()
+	#party.set_process(true)
 	await party.exit
 	#yield(party,"salir")
-	party.hide_party()
-	party.set_process(false)
-	menu.show()
-	menu.set_process(true)
+	#party.hide_party()
+	#party.set_process(false)
+	menu.open()
+
 	
 func _input(event):
 	#if ($MSG.visible and !chs.visible and msg.text_completed):
@@ -148,8 +154,40 @@ func _input(event):
 			INPUT.ui_accept.free_state()
 			print("GUI accept")
 			accept.emit()
-
-#
+		if event.is_action_pressed("ui_cancel"):
+			Input.action_release("ui_cancel")
+			INPUT.ui_cancel.free_state()
+			print("GUI cancel")
+			cancel.emit()
+		if event.is_action_pressed("ui_start"):
+			Input.action_release("ui_start")
+			INPUT.ui_start.free_state()
+			print("GUI start")
+			if (INPUT.ui_start.is_action_just_released()):
+				start.emit()
+		if event.is_action_pressed("ui_up"):
+			Input.action_release("ui_up")
+			INPUT.ui_up.free_state()
+			print("GUI up")
+			up.emit()
+		if event.is_action_pressed("ui_down"):
+			Input.action_release("ui_down")
+			INPUT.ui_down.free_state()
+			print("GUI down")
+			down.emit()
+		if event.is_action_pressed("ui_right"):
+			Input.action_release("ui_right")
+			INPUT.ui_right.free_state()
+			print("GUI right")
+			right.emit()
+		if event.is_action_pressed("ui_left"):
+			Input.action_release("ui_left")
+			INPUT.ui_left.free_state()
+			print("GUI left")
+			left.emit()
+				
+				
+				
 #func start_battle(double, trainer1, trainer2, trainer3 = null, trainer4 = null):#wild_encounter(id, level):
 #	battle.show()
 #	battle.start_battle(double, trainer1, trainer2, trainer3, trainer4)
