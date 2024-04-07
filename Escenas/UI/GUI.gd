@@ -12,6 +12,7 @@ signal right
 signal up
 signal down
 
+
 var next = false
 
 @onready var msg = MessageBox.new($MSG)
@@ -136,6 +137,7 @@ func isVisible():
 #
 func show_party():
 	print("miau")
+	await GUI.fadeIn(3)
 	menu.close()
 	party.open()
 	#party.set_process(true)

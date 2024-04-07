@@ -11,7 +11,9 @@ var player_id : int = 1234#randi() % 999999 + 1
 var actual_position : Vector2
 var ITEMS : Array[int] = []
 
-var party : Array[PokemonInstance] = []
+var party : Array[PokemonInstance] = []:
+	get:
+		return GLOBAL.PLAYER.trainer.party
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

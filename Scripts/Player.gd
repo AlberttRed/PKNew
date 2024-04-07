@@ -13,7 +13,7 @@ func _ready():
 	#SIGNALS.PLAYER.connect("moved_signal", Callable(self, "checkEncounterType"))
 	moved_signal.connect(Callable(self, "checkEnteredTile"))
 	turned_signal.connect(Callable(self, "checkEnteredTile"))
-	GAME_DATA.party = trainer.party#get_children()
+	#GAME_DATA.party = trainer.party#get_children()
 	
 func _physics_process(delta):
 	
