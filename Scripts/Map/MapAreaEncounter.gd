@@ -48,19 +48,17 @@ func getPokemonEncounter():
 	
 	var br : BattleRules = BattleRules.new(CONST.BATTLE_TYPES.WILD, CONST.BATTLE_MODES.SINGLE)	
 	var bc : BattleController = BattleController.new(br)
-	var bs_player : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.PLAYER)
-	var bs_enemy : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.ENEMY)
+	#var bs_player : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.PLAYER)
+	#var bs_enemy : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.ENEMY)
 	
-	bs_player.addParticipant(GLOBAL.PLAYER.trainer, true)
-	bs_enemy.addParticipant(enemyBattler, false)
+	bc.playerSide.addParticipant(GLOBAL.PLAYER.trainer, true)
+	bc.enemySide.addParticipant(enemyBattler, false)
 	
-	bc.playerSide = bs_player.initSide()
-	bc.enemySide = bs_enemy.initSide()
+	bc.playerSide.initSide()
+	bc.enemySide.initSide()
 	
 	await bc.initBattle()
 	
-	
-
 
 func getPokemon():
 	randomize()

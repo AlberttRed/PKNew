@@ -1,20 +1,27 @@
+extends Node2D
 class_name BattleSide
 	
-var type : CONST.BATTLE_SIDES = CONST.BATTLE_SIDES.NONE
+@export var type : CONST.BATTLE_SIDES = CONST.BATTLE_SIDES.NONE
+@export var opponentSide : BattleSide
 
-var opponentSide : BattleSide
 var participants : Array[BattleParticipant] # Numero d' "Entrenadors" del Side
-var pokemonParty : Array[BattlePokemon] # La party que tindrà el side en el combat, formada per pokemons del/s BattleParticipant/s
-var activePokemons : Array[BattlePokemon] # Indica els pokemons que estan actius en el combat lluitant per aquell side
-
+var pokemonParty : Array[BattlePokemon]: # La party que tindrà el side en el combat, formada per pokemons del/s BattleParticipant/s
+	get:
+		var pokemonList: Array[BattlePokemon]
+		pokemonList.assign($Party.get_children())
+		pokemonList = activePokemons + pokemonList
+		return pokemonList
+var activePokemons : Array[BattlePokemon]: # Indica els pokemons que estan actius en el combat lluitant per aquell side
+	get:
+		return loadActivePokemons()
 var activeFieldEffectsFlags : Array[CONST.MOVE_EFFECTS] = []
 
 var defeated : bool = false # Indica si tots els pokemons del Side han estat derrotats, per tant el Side ha perdut
 var escapeAttempts:int #Player attemps to exit the battle. If a Move is selected, the attemps counter will restart
 
-func _init(_type : CONST.BATTLE_SIDES):
-	type = _type
-	
+#func _init(_type : CONST.BATTLE_SIDES):
+	#type = _type
+	#
 func addParticipant(_participant : Battler, _controllable : bool):
 	print("ia " + str(_participant.battleIA))
 	var p : BattleParticipant = BattleParticipant.new(_participant, _controllable)
@@ -23,12 +30,9 @@ func addParticipant(_participant : Battler, _controllable : bool):
 	
 
 func initSide():
-	
 	assert(!participants.is_empty(), "No s'ha carregat cap Participant per el side")
 	escapeAttempts = 0
 	loadParty()
-	
-	return self
 	
 func hasWorkingFieldEffect(e):
 	return activeFieldEffectsFlags.has(e)
@@ -45,9 +49,18 @@ func loadParty():
 		for pk in part.pokemonTeam:
 			if i != num_pk:
 				pk.inBattleParty = true
-				pokemonParty.push_back(pk)
+				$Party.add_child(pk)
+				#pokemonParty.push_back(pk)
 				i += 1
 		i = 0
+		
+func loadActivePokemons():
+	var list:Array[BattlePokemon]
+	for n in get_children():
+		if n is BattlePokemon and n.visible:
+			list.push_back(n)
+	return list
+			
 
 func isDefeated():
 	print("party ")
@@ -61,20 +74,9 @@ func isDefeated():
 func restartEscapeAttempts():
 	escapeAttempts = 0
 
-func queue_free():
-	if participants != null:
-		for p in participants:
-			p.queue_free()
+func clear():
 	participants.clear()
-	
-	if pokemonParty != null:
-		for p in pokemonParty:
-			p.queue_free()
 	pokemonParty.clear()
-	
-	if activePokemons != null:
-		for p in activePokemons:
-			p.queue_free()
 	activePokemons.clear()
-	free()
+
 	

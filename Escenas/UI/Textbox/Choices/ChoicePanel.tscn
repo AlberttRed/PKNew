@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpegpem5d7eqb"]
+
+[ext_resource type="Texture2D" uid="uid://dxjprukv0p71t" path="res://Escenas/UI/Menus/Resources/selarrow.png" id="1_cama3"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.gd" id="1_emp6i"]
+[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="2_kvkhq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d82kq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_enati"]
+texture = ExtResource("1_cama3")
+axis_stretch_horizontal = 1
+region_rect = Rect2(0, 0, 14, 32)
+
+[node name="ChoicePanel" type="Panel"]
+custom_minimum_size = Vector2(116, 34)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+script = ExtResource("1_emp6i")
+
+[node name="Arrow" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = -6.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_enati")
+
+[node name="Text" parent="." instance=ExtResource("2_kvkhq")]
+custom_minimum_size = Vector2(101, 26)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 4.0
+offset_right = 0.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Datos"

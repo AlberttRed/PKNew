@@ -69,7 +69,7 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	
 	effect = BattleMoveEffects.new().getMoveEffect(self)
 	var n = instance.internalName.to_upper()
-	if load("res://Animaciones/Batalla/Moves/Classes/" + str(n) + ".gd") != null:
+	if FileAccess.file_exists("res://Animaciones/Batalla/Moves/Classes/" + str(n) + ".gd") != null:
 		animation = preload("res://Animaciones/Batalla/Moves/Classes/TACKLE.gd").new(self)
 	else:
 		animation = BattleAnimationList.new().getMoveAnimation(self)
@@ -137,12 +137,12 @@ func calculateDamage(to : BattlePokemon,r = null):
 	if has_multiple_targets() and pokemon.listEnemies.size() > 1 :
 		Targets = 0.75
 
-	if GUI.battle.battleController.activeWeather == CONST.WEATHER.LLUVIOSO:
+	if GUI.battle.controller.activeWeather == CONST.WEATHER.LLUVIOSO:
 		if type.id == CONST.TYPES.FUEGO:
 			Weather = 0.5
 		elif type.id == CONST.TYPES.AGUA:
 			Weather = 1.5
-	elif GUI.battle.battleController.activeWeather == CONST.WEATHER.SOLEADO:
+	elif GUI.battle.controller.activeWeather == CONST.WEATHER.SOLEADO:
 		if type.id == CONST.TYPES.FUEGO:
 			Weather = 1.5
 		elif type.id == CONST.TYPES.AGUA:

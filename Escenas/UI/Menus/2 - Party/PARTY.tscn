@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://dkjekvml5fqpp"]
+[gd_scene load_steps=92 format=3 uid="uid://dkjekvml5fqpp"]
 
 [ext_resource type="Texture2D" uid="uid://d2i5gus8tvoi" path="res://Escenas/UI/Menus/Resources/partybg.PNG" id="1_ew7hq"]
 [ext_resource type="Script" path="res://Escenas/UI/Menus/2 - Party/PARTY.gd" id="2"]
@@ -35,7 +35,9 @@
 [ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="31"]
 [ext_resource type="Texture2D" uid="uid://danwumq4xmbxq" path="res://Escenas/UI/Menus/Resources/summary1.png" id="32_20m35"]
 [ext_resource type="PackedScene" path="res://Escenas/UI/Fonts/font_summary_LetraBlanca.tscn" id="34"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/ChoicesContainer.gd" id="34_jh3e5"]
 [ext_resource type="Texture2D" uid="uid://b6hiwscxkv33j" path="res://Escenas/UI/Menus/Resources/summaryball00.png" id="35"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.gd" id="35_8iy16"]
 [ext_resource type="Texture2D" uid="uid://c8kpj8jre1qao" path="res://Escenas/UI/Menus/Resources/male_icon.png" id="36"]
 [ext_resource type="PackedScene" path="res://Escenas/UI/Fonts/font_summary_LetraNegra.tscn" id="37"]
 [ext_resource type="Texture2D" uid="uid://cbto5m75tk38f" path="res://Sprites/Iconos/icon025.png" id="38"]
@@ -52,6 +54,7 @@
 [ext_resource type="Texture2D" uid="uid://ctnjnkfpilrj8" path="res://Sprites/Pictures/HPsummary_background.png" id="46_licca"]
 [ext_resource type="Texture2D" uid="uid://cdb6j2ubvprkw" path="res://Sprites/Pictures/HPsummary_overlay.png" id="47_tfkpk"]
 [ext_resource type="Texture2D" uid="uid://jwxxv6ieuia1" path="res://Sprites/Pictures/HPsummary_progress.png" id="48_fc5h1"]
+[ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG.tscn" id="55_na0po"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oj2bc"]
 texture = ExtResource("1_ew7hq")
@@ -149,7 +152,22 @@ _data = {
 "Idle": ExtResource("30")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_12vyg"]
+texture = ExtResource("26_nib22")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+region_rect = Rect2(0, 0, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_enati"]
+texture = ExtResource("17")
+axis_stretch_horizontal = 1
+region_rect = Rect2(0, 0, 14, 32)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d82kq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lieju"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ev6ym"]
 texture = ExtResource("32_20m35")
@@ -1034,32 +1052,32 @@ theme_override_font_sizes/font_size = 26
 text = "SALIR"
 horizontal_alignment = 1
 
-[node name="MSG" type="Panel" parent="."]
+[node name="FIXED_MSG" type="Panel" parent="."]
 layout_mode = 0
-offset_top = 318.0
+offset_top = 313.0
 offset_right = 370.0
-offset_bottom = 384.0
+offset_bottom = 379.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_3m2bu")
 metadata/_edit_lock_ = true
 
-[node name="next" type="Sprite2D" parent="MSG"]
+[node name="next" type="Sprite2D" parent="FIXED_MSG"]
 position = Vector2(491, 69)
 texture = ExtResource("29")
 hframes = 4
 frame = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MSG/next"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FIXED_MSG/next"]
 reset_on_save = false
 root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_1eve6")
 }
 
-[node name="Timer 2" type="Timer" parent="MSG"]
+[node name="Timer 2" type="Timer" parent="FIXED_MSG"]
 wait_time = 0.05
 one_shot = true
 
-[node name="Label" parent="MSG" instance=ExtResource("31")]
+[node name="Label" parent="FIXED_MSG" instance=ExtResource("31")]
 layout_mode = 0
 offset_left = 13.899
 offset_top = 20.848
@@ -1067,32 +1085,31 @@ offset_right = 521.899
 offset_bottom = 97.848
 text = "Elige a un Pokémon."
 
-[node name="ACTIONS" type="Panel" parent="."]
+[node name="ACTIONS" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 368.445
-offset_top = 202.893
-offset_right = 512.445
-offset_bottom = 383.893
-size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_3m2bu")
-metadata/_edit_lock_ = true
+offset_left = 368.0
+offset_top = 351.0
+offset_right = 512.0
+offset_bottom = 379.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_12vyg")
+script = ExtResource("34_jh3e5")
+stylePanel = SubResource("StyleBoxTexture_12vyg")
+styleArrow = SubResource("StyleBoxTexture_enati")
+styleEmpty = SubResource("StyleBoxEmpty_d82kq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ACTIONS"]
-layout_mode = 0
-anchor_right = 1.0
-offset_left = 14.0
-offset_top = 16.0
-offset_right = -14.0
-offset_bottom = 165.0
-grow_horizontal = 2
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="DATOS" type="Panel" parent="ACTIONS/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(116, 34)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+script = ExtResource("35_8iy16")
 
 [node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/DATOS"]
 layout_mode = 1
@@ -1102,9 +1119,9 @@ offset_top = 2.0
 offset_right = 14.0
 offset_bottom = -6.0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0gflp")
+theme_override_styles/panel = SubResource("StyleBoxTexture_enati")
 
-[node name="Datos" parent="ACTIONS/VBoxContainer/DATOS" instance=ExtResource("31")]
+[node name="Text" parent="ACTIONS/VBoxContainer/DATOS" instance=ExtResource("31")]
 custom_minimum_size = Vector2(101, 26)
 layout_mode = 1
 anchors_preset = 15
@@ -1118,12 +1135,49 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Datos"
 
-[node name="MOVER" type="Panel" parent="ACTIONS/VBoxContainer"]
+[node name="CAMBIO" type="Panel" parent="ACTIONS/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(116, 34)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+script = ExtResource("35_8iy16")
+
+[node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/CAMBIO"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = -6.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_enati")
+
+[node name="Text" parent="ACTIONS/VBoxContainer/CAMBIO" instance=ExtResource("31")]
+custom_minimum_size = Vector2(101, 26)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 4.0
+offset_right = 0.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cambio"
+
+[node name="MOVER" type="Panel" parent="ACTIONS/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(116, 34)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+script = ExtResource("35_8iy16")
 
 [node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/MOVER"]
 layout_mode = 1
@@ -1133,9 +1187,9 @@ offset_top = 2.0
 offset_right = 14.0
 offset_bottom = -6.0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6llyv")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lieju")
 
-[node name="Mover" parent="ACTIONS/VBoxContainer/MOVER" instance=ExtResource("31")]
+[node name="Text" parent="ACTIONS/VBoxContainer/MOVER" instance=ExtResource("31")]
 custom_minimum_size = Vector2(101, 26)
 layout_mode = 1
 anchors_preset = 15
@@ -1150,11 +1204,14 @@ grow_vertical = 2
 text = "Mover"
 
 [node name="OBJETO" type="Panel" parent="ACTIONS/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(116, 34)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+script = ExtResource("35_8iy16")
 
 [node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/OBJETO"]
 layout_mode = 1
@@ -1164,9 +1221,9 @@ offset_top = 2.0
 offset_right = 14.0
 offset_bottom = -6.0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6llyv")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lieju")
 
-[node name="Objeto" parent="ACTIONS/VBoxContainer/OBJETO" instance=ExtResource("31")]
+[node name="Text" parent="ACTIONS/VBoxContainer/OBJETO" instance=ExtResource("31")]
 custom_minimum_size = Vector2(101, 26)
 layout_mode = 1
 anchors_preset = 15
@@ -1181,11 +1238,14 @@ grow_vertical = 2
 text = "Objeto"
 
 [node name="SALIR" type="Panel" parent="ACTIONS/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(116, 34)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d82kq")
+script = ExtResource("35_8iy16")
 
 [node name="Arrow" type="Panel" parent="ACTIONS/VBoxContainer/SALIR"]
 layout_mode = 1
@@ -1195,9 +1255,9 @@ offset_top = 2.0
 offset_right = 14.0
 offset_bottom = -7.0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6llyv")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lieju")
 
-[node name="Salir" parent="ACTIONS/VBoxContainer/SALIR" instance=ExtResource("31")]
+[node name="Text" parent="ACTIONS/VBoxContainer/SALIR" instance=ExtResource("31")]
 custom_minimum_size = Vector2(101, 26)
 layout_mode = 1
 anchors_preset = 15
@@ -2830,6 +2890,17 @@ theme_override_fonts/font = ExtResource("19")
 theme_override_font_sizes/font_size = 26
 text = "0"
 
+[node name="MSG" parent="." instance=ExtResource("55_na0po")]
+visible = false
+layout_mode = 0
+offset_top = 0.0
+offset_bottom = 96.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_3m2bu")
+
+[node name="Label" parent="MSG" index="0"]
+offset_left = 13.899
+offset_right = 490.899
+
 [connection signal="focus_entered" from="PKMN_0/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_1/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_2/Panel" to="." method="_on_PKMN_focus_entered"]
@@ -2837,10 +2908,6 @@ text = "0"
 [connection signal="focus_entered" from="PKMN_4/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_5/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="Salir" to="." method="_on_Salir_focus_entered"]
-[connection signal="focus_entered" from="ACTIONS/VBoxContainer/DATOS" to="." method="_on_actions_focus_entered"]
-[connection signal="focus_entered" from="ACTIONS/VBoxContainer/MOVER" to="." method="_on_actions_focus_entered"]
-[connection signal="focus_entered" from="ACTIONS/VBoxContainer/OBJETO" to="." method="_on_actions_focus_entered"]
-[connection signal="focus_entered" from="ACTIONS/VBoxContainer/SALIR" to="." method="_on_actions_focus_entered"]
 [connection signal="value_changed" from="SUMMARY/SUMMARY_1/exp_bar/TextureProgressBar" to="SUMMARY/SUMMARY_1/exp_bar" method="_on_value_changed"]
 
 [editable path="SUMMARY/GENERAL/Nombre"]
@@ -2894,3 +2961,4 @@ text = "0"
 [editable path="SUMMARY/SUMMARY_4/Move4/dPP"]
 [editable path="SUMMARY/SUMMARY_5/lCintas"]
 [editable path="SUMMARY/SUMMARY_5/dCintas"]
+[editable path="MSG"]

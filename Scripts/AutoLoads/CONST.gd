@@ -739,6 +739,12 @@ class BAG_POCKETS:
 	const BATTLE_ITEMS = 7
 	const KEY_ITEMS = 8
 	
+enum MENU_MODES {
+	MENU = 1,
+	BATTLE = 2,
+	ITEM = 3
+}
+	
 enum ENCOUNTER_METHODS {
 	NONE,
 	LAND,
@@ -754,7 +760,7 @@ enum ENCOUNTER_METHODS {
 	SUPER_ROD,
 	HEADBUTT_LOW,
 	HEADBUTT_HIGH
-	}
+}
 class TILE_TYPE:
 	const NONE = 0
 	const ENCOUNTER = 1

@@ -6,7 +6,7 @@ signal exit
 @export var style_selected: StyleBox
 @export var style_empty: StyleBox
 
-var choice_node = load("res://Escenas/UI/Textbox/Choices/choice.tscn")
+var choice_node = load("res://Escenas/UI/Textbox/Choices/choice_OLD.tscn")
 
 @onready var entries = []  #get_node("VBoxContainer/Pokedex"),get_node("VBoxContainer/Pokemon"),get_node("VBoxContainer/Mochila"),get_node("VBoxContainer/Jugador"),get_node("VBoxContainer/Guardar"),get_node("VBoxContainer/Opciones"),get_node("VBoxContainer/Salir")]
 @onready var container = $VBoxContainer

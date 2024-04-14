@@ -12,13 +12,16 @@ signal right
 signal up
 signal down
 
+signal fadedOut
+signal fadedIn
 
+var fading:bool = false
 var next = false
 
 @onready var msg = MessageBox.new($MSG)
 #onready var options = get_node("OPTIONS")
 @onready var menu = $MAIN_MENU
-@onready var battle = $BATTLE
+@onready var battle:BattleUI = $BATTLE
 @onready var chs = $CHOICES
 @onready var party = $PARTY
 #onready var bag = get_node("BAG")
@@ -41,6 +44,10 @@ func _ready():
 #
 #func _init():
 #	get_node("MSG").Panel = CONST.Window_StyleBoxç
+
+func showMsg(text : String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
+	msg.show_msgBattle(text, showIcon, _waitTime, waitInput)
+	await msg.finished
 
 	
 func show_msg(text="", wait = null, obj = null, sig="", _choices_options = [], _close = true):
@@ -134,23 +141,38 @@ func isVisible():
 #	menu.show()
 #	menu.set_process(true)
 #
-#
-func show_party():
+func isFading():
+	return fading
+
+
+func show_party(mode:CONST.MENU_MODES):
 	print("miau")
 	await GUI.fadeIn(3)
-	menu.close()
-	party.open()
+	if mode == CONST.MENU_MODES.MENU:
+		menu.close()
+	elif mode == CONST.MENU_MODES.BATTLE:
+		GUI.battle.hide()
+		
+	#if menu.visible:
+		#mode = CONST.PARTY_MODES.MENU
+	party.open(mode)
+	#await GUI.fadeOut(3)
 	#party.set_process(true)
 	await party.exit
+	
 	#yield(party,"salir")
 	#party.hide_party()
 	#party.set_process(false)
-	menu.open()
+	if mode == CONST.MENU_MODES.MENU:
+		menu.open()
+	elif mode == CONST.MENU_MODES.BATTLE:
+		GUI.battle.show()
+	await GUI.fadeOut(3)
 
 	
 func _input(event):
 	#if ($MSG.visible and !chs.visible and msg.text_completed):
-	if (isVisible()):
+	if (isVisible() && !isFading()):
 		if event.is_action_pressed("ui_accept"):
 			Input.action_release("ui_accept")
 			INPUT.ui_accept.free_state()
@@ -217,13 +239,16 @@ func fadeOut(speed:int=1.0):
 	transition.play("Transitions/FadeToNormal")
 	await transition.finished 
 	transition.animationPlayer.speed_scale = 1.0
+	fading = false
+	fadedOut.emit()
 	
 func fadeIn(speed:int=1.0):
-	print("aaa")
+	fading = true
 	transition.animationPlayer.speed_scale = speed #set_speed_scale
 	transition.play("Transitions/FadeToBlack")
 	await transition.finished 
 	transition.animationPlayer.speed_scale = 1.0
+	fadedIn.emit()
 	
 func initBattleTransition():
 	GUI.transition.play("Transitions/Battle_WildTransition")

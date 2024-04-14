@@ -249,14 +249,15 @@ func setWalkTimer(state : bool = true):
 
 
 func _on_walk_timer_timeout():
-	await remote_move([randi_range(0, 7)], true) # li passo del 0 al 7 perque son els primers 8 moves del CONST.MOVE_COMMANDS: LEFT, RIGHT, UP, DOWN, TURN_LEFT, TURN_RIGHT, TURN_UP, TURN_DOWN
+	if !GUI.isVisible():
+		await remote_move([randi_range(0, 7)], true) # li passo del 0 al 7 perque son els primers 8 moves del CONST.MOVE_COMMANDS: LEFT, RIGHT, UP, DOWN, TURN_LEFT, TURN_RIGHT, TURN_UP, TURN_DOWN
 	setWalkTimer()
 	
 	
 #Se li informe la llista de moviments a realitzar, i si es tracta d'un moviment aleatori o no	
 func remote_move(movements : Array[RemoteMovement.Directions], randomMovement : bool = false):
 	#print(str(name) + ", current direction: " + str(facing_direction) + ", new dir: " + str(movements))
-
+		
 	remoteMovement.move(movements, randomMovement)
 	#print("a")
 	await remoteMovement.movement_finished

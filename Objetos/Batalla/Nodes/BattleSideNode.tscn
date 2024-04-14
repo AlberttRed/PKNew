@@ -1,0 +1,208 @@
+[gd_scene load_steps=25 format=3 uid="uid://b00rre42t84el"]
+
+[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleSide.gd" id="1_b3xq5"]
+[ext_resource type="Texture2D" uid="uid://4suianjdpdca" path="res://Sprites/Batalla/Battlebacks/playerbaseField.png" id="2_74ecx"]
+[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattlePokemon.gd" id="3_qehyw"]
+[ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="4_0qb0s"]
+[ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Batalla/Animaciones/Moves/Battle_AilmentAnimations.res" id="5_ynb46"]
+[ext_resource type="AnimationLibrary" uid="uid://6y11gonugprj" path="res://Objetos/Batalla/Animaciones/Moves/GLOBAL.res" id="6_5abkt"]
+[ext_resource type="AnimationLibrary" uid="uid://2mrp3w2yg84c" path="res://Objetos/Batalla/Animaciones/Moves/Battle_MovesAnimations.res" id="7_al55e"]
+[ext_resource type="AnimationLibrary" uid="uid://casxsbdqp031y" path="res://Objetos/Batalla/Animaciones/Moves/Battle_PokemonAnimations.res" id="8_vdrry"]
+[ext_resource type="Texture2D" uid="uid://dbto76y0cchev" path="res://Sprites/Batalla/456b.png" id="9_17bg5"]
+[ext_resource type="AnimationLibrary" uid="uid://btf1cle7g0a06" path="res://Objetos/Batalla/Animaciones/Moves/Battle_CommonAnimations.res" id="10_yjthu"]
+[ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="11_fsvpf"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="12_2na15"]
+[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="13_pb385"]
+[ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="14_6t0i4"]
+[ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="15_7yk2a"]
+[ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="16_u0ve1"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="17_6ibhd"]
+[ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="18_pn6qi"]
+[ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="19_1q6o7"]
+[ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="20_2r3ei"]
+
+[sub_resource type="Animation" id="Animation_6moud"]
+resource_name = "aaaa"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7jj6"]
+_data = {
+"aaaa": SubResource("Animation_6moud")
+}
+
+[sub_resource type="Theme" id="Theme_mb2ww"]
+default_font = ExtResource("13_pb385")
+default_font_size = 26
+Label/colors/font_color = Color(0.282353, 0.282353, 0.282353, 1)
+Label/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
+Label/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/Size = 19
+RichTextLabel/colors/default_color = Color(0.282353, 0.282353, 0.282353, 1)
+RichTextLabel/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
+RichTextLabel/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 2
+RichTextLabel/constants/shadow_offset_y = 0
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
+
+[sub_resource type="Theme" id="Theme_1pgp4"]
+default_font = ExtResource("13_pb385")
+default_font_size = 26
+Label/colors/font_color = Color(0.188235, 0.376471, 0.847059, 1)
+Label/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
+Label/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/Size = 19
+RichTextLabel/colors/default_color = Color(0.282353, 0.282353, 0.282353, 1)
+RichTextLabel/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
+RichTextLabel/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 2
+RichTextLabel/constants/shadow_offset_y = 0
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
+
+[node name="battleSide" type="Node2D"]
+z_index = -1
+position = Vector2(-128, 240)
+script = ExtResource("1_b3xq5")
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_74ecx")
+centered = false
+
+[node name="PokemonPlayerA" type="Node2D" parent="."]
+position = Vector2(256, -16)
+script = ExtResource("3_qehyw")
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="PokemonPlayerA"]
+texture = ExtResource("4_0qb0s")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PokemonPlayerA"]
+libraries = {
+"": SubResource("AnimationLibrary_u7jj6"),
+"Ailments": ExtResource("5_ynb46"),
+"GLOBAL": ExtResource("6_5abkt"),
+"Moves": ExtResource("7_al55e"),
+"Pokemon": ExtResource("8_vdrry")
+}
+
+[node name="PokemonPlayerB" type="Node2D" parent="."]
+visible = false
+position = Vector2(288, 0)
+
+[node name="Sprite" type="Sprite2D" parent="PokemonPlayerB"]
+z_index = 2
+position = Vector2(0, 32)
+texture = ExtResource("9_17bg5")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PokemonPlayerB"]
+libraries = {
+"Ailments": ExtResource("5_ynb46"),
+"Common": ExtResource("10_yjthu")
+}
+
+[node name="HPBarA" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(526, -3)
+texture = ExtResource("11_fsvpf")
+script = ExtResource("12_2na15")
+metadata/_edit_lock_ = true
+
+[node name="Name" type="BoxContainer" parent="HPBarA"]
+offset_left = -89.6
+offset_top = -41.2
+offset_right = 4.39999
+offset_bottom = -1.19998
+metadata/_edit_lock_ = true
+
+[node name="lblName" type="Label" parent="HPBarA/Name"]
+layout_mode = 2
+theme = SubResource("Theme_mb2ww")
+text = "Pikachu"
+metadata/_edit_lock_ = true
+
+[node name="lblGender" type="Label" parent="HPBarA/Name"]
+layout_mode = 2
+theme = SubResource("Theme_1pgp4")
+text = "♀"
+metadata/_edit_lock_ = true
+
+[node name="lblLevel" type="Label" parent="HPBarA"]
+offset_left = 65.8297
+offset_top = -30.1561
+offset_right = 126.83
+offset_bottom = -4.15611
+theme = ExtResource("14_6t0i4")
+theme_override_constants/shadow_offset_x = 2
+text = "Nv20"
+metadata/_edit_lock_ = true
+
+[node name="Status" type="Sprite2D" parent="HPBarA"]
+position = Vector2(-50, 1)
+texture = ExtResource("15_7yk2a")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+metadata/_edit_lock_ = true
+
+[node name="health_bar" parent="HPBarA" instance=ExtResource("16_u0ve1")]
+position = Vector2(0, 1)
+metadata/_edit_lock_ = true
+
+[node name="lblHP" parent="HPBarA/health_bar" index="0"]
+offset_left = 37.2831
+offset_right = 87.2831
+metadata/_edit_lock_ = true
+
+[node name="TextureProgressBar" parent="HPBarA/health_bar" index="1"]
+offset_left = -26.0082
+offset_top = -8.20206
+offset_right = 105.992
+offset_bottom = 31.7979
+metadata/_edit_lock_ = true
+
+[node name="exp_bar" type="Node2D" parent="HPBarA"]
+position = Vector2(-55, 36.25)
+script = ExtResource("17_6ibhd")
+metadata/_edit_vertical_guides_ = [-205.084]
+metadata/_edit_lock_ = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HPBarA/exp_bar"]
+offset_left = -39.0
+offset_top = -7.0
+offset_right = 161.0
+offset_bottom = 10.0
+scale = Vector2(1, 0.960005)
+max_value = 0.0
+step = 0.1
+stretch_margin_left = 1
+texture_under = ExtResource("18_pn6qi")
+texture_over = ExtResource("19_1q6o7")
+texture_progress = ExtResource("20_2r3ei")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HPBarA/exp_bar"]
+
+[node name="PlayerParty" type="Node2D" parent="."]
+
+[connection signal="value_changed" from="HPBarA/exp_bar/TextureProgressBar" to="HPBarA/exp_bar" method="_on_value_changed"]
+
+[editable path="HPBarA/health_bar"]

@@ -7,6 +7,8 @@ const msgBox_actionsSize = Vector2(370, 66)
 var style_selected
 var style_empty
 
+enum ACTION_PANEL {NONE, DATOS, CAMBIO, MOVER, OBJETO, SALIR}
+
 @export var style_rounded_normal : StyleBox
 @export var style_rounded_normal_sel : StyleBox
 @export var style_rounded_fainted : StyleBox
@@ -29,11 +31,15 @@ var style_empty
 @export var style_actions_selected : StyleBox
 #"ACTIONS/VBoxContainer/SALIR"
 @onready var pkmns = [$PKMN_0/Panel,$PKMN_1/Panel,$PKMN_2/Panel,$PKMN_3/Panel,$PKMN_4/Panel,$PKMN_5/Panel]
-@onready var actions_chs = [$ACTIONS/VBoxContainer/DATOS,$ACTIONS/VBoxContainer/MOVER,$ACTIONS/VBoxContainer/OBJETO,$ACTIONS/VBoxContainer/SALIR]
+#@onready var actions_chs = [$ACTIONS/VBoxContainer/NONE, $ACTIONS/VBoxContainer/DATOS,$ACTIONS/VBoxContainer/CAMBIO,$ACTIONS/VBoxContainer/MOVER,$ACTIONS/VBoxContainer/OBJETO,$ACTIONS/VBoxContainer/SALIR]
+#@onready var actions_chs = []
 @onready var summary = [$SUMMARY/SUMMARY_1,$SUMMARY/SUMMARY_2,$SUMMARY/SUMMARY_3,$SUMMARY/SUMMARY_4,$SUMMARY/SUMMARY_5]
 @onready var salir = $Salir
-@onready var actions = $ACTIONS
-@onready var msg = $MSG
+@onready var actions:ChoicesContainer = $ACTIONS
+@onready var fixedMsg = $FIXED_MSG
+@onready var msgBox:MessageBox = MessageBox.new($MSG)
+
+var partyMode:CONST.MENU_MODES
 
 #var signals = ["pokedex","pokemon","item","player","save","option","exit"]
 var start
@@ -44,17 +50,24 @@ var movePokemonOriginIndex:int = -1
 var movePokemonTargetIndex:int = -1
 var swapping:bool = false
 
+var index: int = 0 #Index used to move pokemon targets
+var actions_index:int = ACTION_PANEL.NONE #Index used to move between panel actions
+var summary_index = 0 #Index used to move between summaries pages
+var movingIndex: int = 0 #Index used to move between pokemon summaries
+
+
 signal exit
 signal swappedOut
 signal swappedIn
+signal pokemonSelected
 
 func _init():
 	pass
 
 
-
 func _ready():
 	hide()
+	clear_focus()
 	for s in summary:
 		s.hide()
 	actions.hide()
@@ -64,27 +77,29 @@ func _ready():
 	summary[3].get_node("Move4").visible = false
 	#connect("exit", self, "hide")
 
-var index: int = 0 #Index used to move pokemon targets
-var actions_index = 0 #Index used to move between panel actions
-var summary_index = 0 #Index used to move between summaries pages
-var movingIndex: int = 0 #Index used to move between pokemon summaries
-
-func open():
+func open(mode:CONST.MENU_MODES):
+	index = 0
+	partyMode = mode
+	hide_actions()
 	print("open party")
-	for p in pkmns:
-		p.get_node("AnimationPlayer").play("party_animations/RESET")
-	load_pokemon()
-	update_styles()
-	pkmns[0].grab_focus()
-	setMsgText("Elige a un Pokémon.")
-	show()
-	await GUI.fadeOut(3)
 	GUI.accept.connect(Callable(self, "selectOption"))
 	GUI.cancel.connect(Callable(self, "cancelOption"))
 	GUI.left.connect(Callable(self, "moveLeft"))
 	GUI.right.connect(Callable(self, "moveRight"))
 	GUI.up.connect(Callable(self, "moveUp"))
 	GUI.down.connect(Callable(self, "moveDown"))
+	for p in pkmns:
+		p.get_node("AnimationPlayer").play("party_animations/RESET")
+	load_pokemon()
+
+	pkmns[index].grab_focus()
+	setFixedMsgText("Elige a un Pokémon.")
+	update_styles()
+	show()
+	if GUI.isFading():
+		await GUI.fadeOut(3)
+		#await GUI.fadedOut
+	load_focus()
 	
 func close():
 	print("close party")
@@ -94,51 +109,72 @@ func close():
 	GUI.right.disconnect(Callable(self, "moveRight"))
 	GUI.up.disconnect(Callable(self, "moveUp"))
 	GUI.down.disconnect(Callable(self, "moveDown"))
+	await GUI.fadeIn(3)
 	hide()
 	exit.emit()
 	
 func selectOption():
-	if !actions.visible and !$SUMMARY.visible:
-		if get_focus_owner(self).get_name() == "Salir":
+	if !msgBox.is_visible():
+		if !actions.visible and !$SUMMARY.visible:
+			if get_focus_owner(self).get_name() == "Salir":
+				if movingPokemon:
+					cancelMovePokemon()
+				close()
+			else:
+				if partyMode == CONST.MENU_MODES.MENU:
+					if !movingPokemon:
+						show_PartyActions()
+					else:
+						movePokemonTargetIndex = index
+						await swapPokemon()
+				elif partyMode == CONST.MENU_MODES.BATTLE:
+					show_BattleActions()
+					
+		elif actions.visible and !$SUMMARY.visible:
+			if actions.isSelected("DATOS"):
+				show_summaries()
+			elif actions.isSelected("CAMBIO"):
+				if !GAME_DATA.party[index].inBattle:
+					pokemonSelected.emit(GAME_DATA.party[index].battleInstance)
+					close()
+				else:
+					await showMsg(GAME_DATA.party[index].Name + " ya está en el campo de batalla!")
+			elif actions.isSelected("MOVER"):
+				selectMovePokemon()
+			elif actions.isSelected("OBJETO"):
+				print("objeto")
+			elif actions.isSelected("SALIR"):
+				cancelOption()
+		elif $SUMMARY.visible:
+			hide_summaries()
+			
+func showMsg(text:String):
+	if actions.visible:
+		actions.hide()
+	msgBox.position = Vector2(0, 288)
+	msgBox.show_msgBattle(text, false, 0.0, true)
+	await msgBox.finished
+	msgBox.clear_msg()
+	actions.show()
+	
+func cancelOption():
+	if !msgBox.is_visible():
+		if !actions.visible and !$SUMMARY.visible:
 			if movingPokemon:
 				cancelMovePokemon()
-			close()
-		else:
-			if !movingPokemon:
-				show_actions()
+				if get_focus_owner(self).get_name() == "Salir":
+					close()
 			else:
-				movePokemonTargetIndex = index
-				await swapPokemon()
-	elif actions.visible and !$SUMMARY.visible:
-		if actions_index == 0:
-			show_summaries()
-		elif actions_index == 1:
-			print("mover")
-			selectMovePokemon()
-		elif actions_index == 2:
-			print("objeto")
-		elif actions_index == 3:
-			cancelOption()
-	elif $SUMMARY.visible:
-		hide_summaries()
-		
-func cancelOption():
-	if !actions.visible and !$SUMMARY.visible:
-		if movingPokemon:
-			cancelMovePokemon()
-			if get_focus_owner(self).get_name() == "Salir":
-				close()
-		else:
-			if get_focus_owner(self).get_name() == "Salir":
-				close()
-			index = -1
-			salir.grab_focus()
-			update_styles()
-	elif actions.visible and !$SUMMARY.visible:
-		hide_actions()
-		pkmns[index].grab_focus()
-	elif $SUMMARY.visible:
-		hide_summaries()
+				if get_focus_owner(self).get_name() == "Salir":
+					close()
+				index = -1
+				salir.grab_focus()
+				update_styles()
+		elif actions.visible and !$SUMMARY.visible:
+			hide_actions()
+			pkmns[index].grab_focus()
+		elif $SUMMARY.visible:
+			hide_summaries()
 
 func moveRight():
 	if $SUMMARY.visible:
@@ -290,9 +326,9 @@ func update_styles():
 		salir.add_theme_stylebox_override("panel", style_salir_sel)
 
 	
-func setMsgText(text:String, boxSize:Vector2 = msgBox_normalSize):
-	msg.get_node("Label").setText(text)
-	msg.size = boxSize
+func setFixedMsgText(text:String, boxSize:Vector2 = msgBox_normalSize):
+	fixedMsg.get_node("Label").setText(text)
+	fixedMsg.size = boxSize
 
 func load_pokemon():
 	for p in range(GAME_DATA.party.size()):
@@ -331,38 +367,27 @@ func load_pokemon():
 		else:
 			pkmns[p].get_node("gender").texture = null
 			
-	load_focus()
 		
-func update_actions_styles():
-	for p in range(actions_chs.size()):
-		if (p==actions_index):
-			actions_chs[p].get_node("Arrow").add_theme_stylebox_override("panel", style_actions_selected)
-		else:
-			actions_chs[p].get_node("Arrow").add_theme_stylebox_override("panel",style_actions_empty)
-	#msg.get_node("Label").set_text("¿Qué hacer con " + GAME_DATA.party[index].get_name() + "?")
-	##msg.get_node("Label/Label2").text = "¿Qué hacer con " + GAME_DATA.party[index].get_name() + "?"
-	#msg.size = msgBox_actionsSize
-
-func show_actions():
-	setMsgText("¿Qué hacer con " + GAME_DATA.party[index].Name + "?", msgBox_actionsSize)
+func showActions():
+	setFixedMsgText("¿Qué hacer con " + GAME_DATA.party[index].Name + "?", msgBox_actionsSize)
 	pkmns[index].release_focus()
-	#index = -2
 	update_styles()
 	clear_focus()
-	actions_index = 0
-	actions_chs[actions_index].grab_focus()
-	actions.show()
-	update_actions_styles()
-	
+	actions.showContainer()
+
+func show_PartyActions():
+	actions.activeChoices(["DATOS","MOVER","OBJETO","SALIR"])
+	showActions()
+
+func show_BattleActions():
+	actions.activeChoices(["CAMBIO","DATOS","SALIR"])
+	showActions()
+
 func hide_actions():
-	setMsgText("Elige a un Pokémon.")
-	actions.hide()
+	setFixedMsgText("Elige a un Pokémon.")
+	actions.hideContainer()
 	load_focus()
-	actions_chs[actions_index].release_focus()
-	#pkmns[index].grab_focus()
-	update_actions_styles()
 	update_styles()
-	actions_index = 0
 
 func setPanelFocus():
 	var panelName:String = str(get_focus_owner(self).get_parent().get_name())
@@ -371,32 +396,35 @@ func setPanelFocus():
 	update_styles()
 	
 func _on_PKMN_focus_entered():
-	if !swapping:
+	if !swapping && !GUI.isFading():
 		setPanelFocus()
 	
 
 
 func _on_Salir_focus_entered():
-	if !swapping:
+	if !swapping && !GUI.isFading():
 		index = -1
 		update_styles()
 
-
-func _on_actions_focus_entered():
-	match get_focus_owner($ACTIONS/VBoxContainer).get_name():
-		"DATOS":
-			actions_index = 0
-		"MOVER":
-			actions_index = 1
-		"OBJETO":
-			actions_index = 2
-		"SALIR":
-			actions_index = 3
-	update_actions_styles()
-	
+#
+#func _on_actions_focus_entered():
+	#if !GUI.isFading():
+		#match get_focus_owner($ACTIONS/VBoxContainer).get_name():
+			#"DATOS":
+				#actions_index = ACTION_PANEL.DATOS
+			#"CAMBIO":
+				#actions_index = ACTION_PANEL.CAMBIO
+			#"MOVER":
+				#actions_index = ACTION_PANEL.MOVER
+			#"OBJETO":
+				#actions_index = ACTION_PANEL.OBJETO
+			#"SALIR":
+				#actions_index = ACTION_PANEL.SALIR
+		#update_actions_styles()
+	#
 func load_focus():
 	for p in pkmns:
-		p.set_focus_mode(2)
+		p.set_focus_mode(Control.FOCUS_ALL)
 	if GAME_DATA.party.size() == 1:
 		print("LOL")
 		pkmns[0].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
@@ -418,32 +446,36 @@ func load_focus():
 	if GAME_DATA.party.size() == 6:
 		pkmns[4].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[5].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
-		
+	pkmns[index].grab_focus()
 	
 func clear_focus():
 	for p in pkmns:
-		p.set_focus_mode(0)
+		p.set_focus_mode(Control.FOCUS_NONE)
 #		p.set_focus_neighbour(MARGIN_BOTTOM, "")
 #		p.set_focus_neighbour(MARGIN_TOP, "")
 #		p.set_focus_neighbour(MARGIN_LEFT, "")
 #		p.set_focus_neighbour(MARGIN_RIGHT, "")
 	
-func clear_actions_focus():
-	for a in actions_chs:
-		a.set_focus_mode(0)
-		a.set_focus_neighbor(SIDE_BOTTOM, null)
-		a.set_focus_neighbor(SIDE_TOP, null)
-		a.set_focus_neighbor(SIDE_LEFT, null)
-		a.set_focus_neighbor(SIDE_RIGHT, null)
-		
+#func clear_actions_focus():
+	#for a in actions_chs:
+		#a.set_focus_mode(0)
+		#a.set_focus_neighbor(SIDE_BOTTOM, null)
+		#a.set_focus_neighbor(SIDE_TOP, null)
+		#a.set_focus_neighbor(SIDE_LEFT, null)
+		#a.set_focus_neighbor(SIDE_RIGHT, null)
+		#
 func show_summaries():
+	await GUI.fadeIn(3)
 	hide_actions()
+	clear_focus()
 	load_summary(index)
 	movingIndex = index
 	$SUMMARY.visible = true
 	summary[summary_index].show()
+	await GUI.fadeOut(3)
 	
 func hide_summaries():
+	await GUI.fadeIn(3)
 	summary_index = 0
 	pkmns[index].grab_focus()
 	movingIndex = index
@@ -457,6 +489,7 @@ func hide_summaries():
 		s.hide()
 	#show_actions()
 	hide_actions()
+	await GUI.fadeOut(3)
 
 func load_summary(index:int):
 	$SUMMARY/GENERAL.visible = true

@@ -42,7 +42,7 @@ func showMoveMessage(_user : BattlePokemon, _move : BattleMove):
 	if _user.controllable:
 		await GUI.battle.showMessage("¡" + _user.Name + " ha usado " + _move.Name + "!", false, 0.5)
 	else:
-		if GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.TRAINER:
+		if GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
 			type = " enemigo"
 		else:
 			type = " salvaje"
@@ -63,9 +63,9 @@ func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int
 	
 	if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
 		name = "de " + _target.Name
-	elif GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.TRAINER:
+	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
 		name = "del " + _target.Name + " enemigo"
-	elif GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
+	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
 		name = "del " + _target.Name + " salvaje"
 	
 	if _stat == CONST.STATS.ATA:
@@ -89,9 +89,9 @@ func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS)
 	var name = ""
 	if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
 		name = _target.Name
-	elif GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.TRAINER:
+	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
 		name = _target.Name + " enemigo"
-	elif GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
+	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
 		name = _target.Name + " salvaje"
 	
 	if _ailment == CONST.AILMENTS.PARALYSIS:
@@ -136,9 +136,9 @@ func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : CONST.AILMENT
 	var name = ""
 	if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
 		name = _target.Name
-	elif GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.TRAINER:
+	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
 		name = _target.Name + " enemigo"
-	elif GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
+	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
 		name = _target.Name + " salvaje"
 	
 	if _ailment == CONST.AILMENTS.PARALYSIS:
@@ -188,7 +188,7 @@ func showDefeatedPKMNMessage(_defeatedPKMN : BattlePokemon):
 	if _defeatedPKMN.controllable:
 		await GUI.battle.showMessageInput("¡" + _defeatedPKMN.Name + " se debilitó!", false)
 	else:
-		if GUI.battle.battleController.rules.type == CONST.BATTLER_TYPES.TRAINER:
+		if GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
 			type = " enemigo"
 		else:
 			type = " salvaje"

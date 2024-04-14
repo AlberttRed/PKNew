@@ -52,7 +52,6 @@ func addPokemonToParty(p:PokemonInstance):
 	if type == CONST.BATTLE_TYPES.TRAINER:
 		p.trainer = self
 	party.push_back(p)
-
 	
 func is_type(type): return type == "Trainer" or self.is_type(type)
 func    get_type(): return "Trainer"

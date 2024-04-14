@@ -7,6 +7,7 @@ class_name PokemonInstance
 @export var randomize_stats: bool = false
 
 @export var base : Resource
+var battleInstance : BattlePokemon
 
 var pkm_id : int = 0 :
 	get:
@@ -122,6 +123,9 @@ var nextLevelExpBase : int: # Es l'experiencia base necessaria per arribar al se
 			return experienceGroup.calculateExp(level+1)
 		else:
 			return totalExp
+var inBattle : bool:
+	get:
+		return battleInstance != null && battleInstance.inBattle
 
 var capture_date: String = "18 de Nov. de 2018" 
 var capture_route: String = "Ruta 1" 
@@ -181,7 +185,6 @@ var enemies = []
 #var base
 var node
 var hp_bar
-var in_battle = false
 var front_single_position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
 var back_single_position =  CONST.BATTLE.BACK_SINGLE_SPRITE_POS
 var battle_double_position

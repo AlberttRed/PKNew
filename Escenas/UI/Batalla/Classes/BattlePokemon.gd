@@ -11,10 +11,16 @@ var instance : PokemonInstance
 
 var controllable : bool # Indica si el pokemon el controlarà el Jugador o la IA
 var inBattleParty : bool # Indica si el pokemon forma part del party del battle (En el cas d'un combat doble de 2 entrenadors, per saber si ha estat seleccionat per formar par del party conjunt o no
+var inBattle : bool
 var participant : BattleParticipant # Indica a quin participant pertany (entrenador)
 var side : BattleSide: # Indica a quin side forma part el pokemon
 	get:
 		return participant.side
+
+var sideType:CONST.BATTLE_SIDES:
+	get:
+		return participant.side.type
+		
 var listEnemies : Array[BattlePokemon] = []
 var listAllies  : Array[BattlePokemon] = []
 var listPokemonBattledAgainst : Array[BattlePokemon] = [] #Number of pokemon opponents that have participied in the battle to defeat the pokemon
@@ -131,6 +137,7 @@ var battleStatsMod : Array[int] = [0,2,0,0,0,0,0,0]  #Modificadors d'stats. El p
 func create(_pokemon : PokemonInstance, _IA: BattleIA):
 	instance = _pokemon
 	name = instance.Name
+	instance.battleInstance = self
 	#Name = _pokemon.Name
 	#level = _pokemon.level
 	#types = _pokemon.types
@@ -169,6 +176,15 @@ func create(_pokemon : PokemonInstance, _IA: BattleIA):
 
 	IA = _IA
 		
+func init():
+	listAllies.clear()
+	listEnemies.clear()
+	
+func loadPokemon():
+	GUI.battle.loadActivePokemon(self)
+	
+func unloadPokemon():
+	GUI.battle.removeActivePokemon(self)
 		
 func initTurn():
 	if controllable:
@@ -212,53 +228,67 @@ func selectAction():
 func doAction():
 	if selected_action.type == CONST.BATTLE_ACTIONS.LUCHAR: # is BattleMoveChoice: #LUCHAR
 		side.restartEscapeAttempts()
-		await doMove(selected_action)
+		await selected_action.doMove()
 		actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.POKEMON: #is BattleSwitchChoice: #POKEMON
-		pass
+		await selected_action.switchPokemon()
+		#await selected_action.pokemonSwitched
 		actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.MOCHILA: # is BattleItemChoice: #MOCHILA
 		pass
-		actionFinished.emit()
+		#actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.HUIR: #HUIR
 		if await tryEscapeFromBattle():
 			await GUI.battle.battleController.endBattle()
 		else:
 			actionFinished.emit()
-		
-func selectMove():
-	if controllable:
-		print("nse")
-		GUI.battle.showMovesPanel()
-		await GUI.battle.moveSelected
-		print("uea")
-		await GUI.battle.showTargetSelection()
-		#await GUI.battle.targetSelected
-		print("eeee")
-		
-		actionSelected.emit()
-	else:
-		print("IA doing move things")
-		IA.selectMove()
-		
 
-func doMove(choice: BattleMoveChoice):
-	print(Name + " doing move " + choice.move.Name)
-	
-	await applyPreviousEffects()
-	
-	if canAttack:
-		await choice.move.use(choice.target)
-	
-	await applyLaterEffects()
+#func selectMove():
+	#if controllable:
+		#print("nse")
+		#GUI.battle.showMovesPanel()
+		#await GUI.battle.moveSelected
+		#print("uea")
+		#await GUI.battle.showTargetSelection()
+		##await GUI.battle.targetSelected
+		#print("eeee")
+		#
+		#actionSelected.emit()
+	#else:
+		#print("IA doing move things")
+		#IA.selectMove()
+		#
+
+#func doMove(choice: BattleMoveChoice):
+	#print(Name + " doing move " + choice.move.Name)
+	#
+	#await applyPreviousEffects()
+	#
+	#if canAttack:
+		#await choice.move.use(choice.target)
+	#
+	#await applyLaterEffects()
+
+func selectMove():
+	#selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
+	selected_action=BattleMoveChoice.new(self)
+	selected_action.selectMove()
+	await selected_action.moveSelected
+	actionSelected.emit()
 	
 func changePokemon():
-	actionSelected.emit()
-	pass
+	#selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
+	selected_action=BattleSwitchChoice.new(self)
+	await selected_action.showParty()
+	#If a pokemon has been selected, go forward. Else the action still has to be selected
+	if selected_action.switchInPokemon != null:
+		actionSelected.emit()
+
 	
 func useBag():
+	selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.MOCHILA, 6)
 	actionSelected.emit()
-	pass
+
 	
 func exitBattle():
 	selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.HUIR, 6)
@@ -441,6 +471,8 @@ func setDefeated():
 	anim.track_set_key_value(track_id, key_id, defeat_position)
 	animPlayer.play("Pokemon/DEFEATED")
 	await animPlayer.animation_finished
+	inBattle = false
+	GUI.battle.removeActivePokemon(self)
 	#Mostro missatge pokemon debilitat
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
 	
@@ -495,21 +527,18 @@ func tryEscapeFromBattle():
 			break
 	await GUI.battle.msgBox.showExitMessage(success)
 	return success
-	#
-#func queue_free():
-	#participant.queue_free()
-	#side.queue_free()
-	#if listAllies != null:
-		#for p in listAllies:
-			#p.queue_free()
-	#listAllies.clear()
-	#
-	#if listEnemies != null:
-		#for p in listEnemies:
-			#p.queue_free()
-	#listEnemies.clear()
-	#free()
+
+func enterBattle():
+	inBattle = true
+	loadPokemon()
+	
+func quitBattle():
+	inBattle = false
+	unloadPokemon()
 
 func doAnimation(animName:String):
 	print("lololol")
 	await load("res://Animaciones/Batalla/Pokemon/Classes/"+str(animName)+".gd").new(self).doAnimation()
+
+func _to_string():
+	return Name

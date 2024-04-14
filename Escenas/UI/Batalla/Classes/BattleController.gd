@@ -1,9 +1,12 @@
 class_name BattleController
 	
 var rules : BattleRules = null
-var playerSide : BattleSide = null
-var enemySide : BattleSide = null
-
+var playerSide: BattleSide:
+	get:
+		return UI.playerSide
+var enemySide:
+	get:
+		return UI.enemySide
 var sides : Array[BattleSide] = []
 var stage : CONST.BATTLE_STAGES
 
@@ -15,7 +18,9 @@ var turnPokemonOrder : Array[BattlePokemon]
 var activeWeather : CONST.WEATHER = CONST.WEATHER.NONE #Només pot haver-hi un tipus de Weather actiu a la vegada
 
 
-var UI : BattleUI = null
+var UI : BattleUI:
+	get:
+		return GUI.battle
 	
 func _init(_battleRules : BattleRules):
 	rules = _battleRules
@@ -24,13 +29,14 @@ func initBattle():
 
 	assert(playerSide != null or enemySide != null, "No se han configurado los BattleSide para el combate.")
 	sides = [playerSide, enemySide]
-	playerSide.opponentSide = enemySide
-	enemySide.opponentSide = playerSide
+	#playerSide.opponentSide = enemySide
+	#enemySide.opponentSide = playerSide
 
 	
 	await GUI.initBattleTransition()
-	initActivePokemons()
 	UI = GUI.battle.initUI(self)
+	#Temporalment ho fem aixi, quan fem les animacions d'entrada etc es canviarà
+	initActivePokemons()
 	
 	stage = CONST.BATTLE_STAGES.SELECT_ACTION
 	
@@ -42,6 +48,7 @@ func initBattle():
 
 func takeTurn():
 	if stage == CONST.BATTLE_STAGES.SELECT_ACTION:
+		print("active pokemons :" + str(activePokemons))
 		for p in activePokemons:
 			p.initTurn()
 			active_pokemon = p
@@ -90,12 +97,14 @@ func initActivePokemons():
 			for p in s.pokemonParty:
 				#print(p.Name + " fainted? " + str(p.fainted))
 				if !p.fainted and p.inBattleParty and i != pk_per_part:
-					s.activePokemons.push_back(p)
+					#s.activePokemons.push_back(p)
+					#GUI.battle.loadActivePokemon(p)
+					part.bringInPokemon(p)
 					i += 1
 				else:
 					break
 					
-	updateActivePokemons()
+	#updateActivePokemons()
 	print_active_pokemons()
 			
 func print_active_pokemons():
@@ -105,19 +114,23 @@ func print_active_pokemons():
 		p.print_moves()
 		
 func updateActivePokemons():
-	var enemies:Array[BattlePokemon] = sides[1].activePokemons#.duplicate()
-	var allies:Array[BattlePokemon] =  sides[0].activePokemons#.duplicate()
-	
-	activePokemons = allies + enemies
+	#var enemies:Array[BattlePokemon] = sides[1].activePokemons#.duplicate()
+	#var allies:Array[BattlePokemon] =  sides[0].activePokemons#.duplicate()
+	#
+	activePokemons = playerSide.activePokemons + enemySide.activePokemons
+	print("active pokemons: " + str(activePokemons.size()))
 		
-	for p in activePokemons:
-		if p.side.type == CONST.BATTLE_SIDES.PLAYER:
-			p.setEnemies(enemies)
-			p.setAllies(allies)
-		elif p.side.type == CONST.BATTLE_SIDES.ENEMY:
-			print("lololo")
-			p.setEnemies(allies)
-			p.setAllies(enemies)
+	for p:BattlePokemon in activePokemons:
+		p.init()
+
+		#if p.side.type == CONST.BATTLE_SIDES.PLAYER:
+		p.setEnemies(p.side.opponentSide.activePokemons)
+		p.setAllies(p.side.activePokemons)
+		
+		#elif p.side.type == CONST.BATTLE_SIDES.ENEMY:
+			#print("lololo")
+			#p.setEnemies(allies)
+			#p.setAllies(enemies)
 			
 	for p in activePokemons:
 		for e in p.listEnemies:

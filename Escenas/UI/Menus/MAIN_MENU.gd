@@ -8,9 +8,10 @@ extends Panel
 
 var signals = ["pokedex","pokemon","bag","player","save","option","exit"]
 var start
+var menu_mode
 
 signal pokedex
-signal pokemon
+signal pokemon(mode:CONST.MENU_MODES)
 signal bag
 signal player
 signal save
@@ -32,7 +33,7 @@ func _ready():
 	hide()
 
 func selectOption():
-	emit_signal(signals[index])
+	emit_signal(signals[index], CONST.MENU_MODES.MENU)
 
 func open():
 	print("open start menu")

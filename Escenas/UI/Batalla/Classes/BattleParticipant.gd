@@ -8,12 +8,13 @@ func _init(_participant : Battler, _controllable : bool):
 	controllable = _controllable
 	print(_participant.battleIA)
 	for p in _participant.party:
-		var bp = load("res://Objetos/Batalla/Nodes/BattlePokemonNode.tscn").instantiate()
+		var bp:BattlePokemon = load("res://Objetos/Batalla/Nodes/BattlePokemonNode.tscn").instantiate()
 		bp.create(p, _participant.battleIA)
 		#var bp = BattlePokemon.new(p, _participant.battleIA)
 		bp.isWild = _participant.type == CONST.BATTLER_TYPES.WILD_POKEMON
 		bp.controllable = _controllable
 		bp.participant = self
+		bp.visible = false
 		pokemonTeam.push_back(bp)
 
 #Check if at least one pokemon has the Exp. All item equipped
@@ -38,7 +39,19 @@ func getPKMNwithExpAll():
 		if p.instance.hasItemEquipped(12):
 			pkmns.push_back(p)
 	return pkmns
+
+func swapPokemon(enterPokemon:BattlePokemon, exitPokemon:BattlePokemon):
+	GUI.battle.removeActivePokemon(exitPokemon)
+	GUI.battle.loadActivePokemon(enterPokemon)
+	#el BattlePokemon tindra una funció de seapOut o swapIN, que farà l'animació d'entrada/sortida
+	print("SWAPPING BRO")
+
+func bringInPokemon(pokemon:BattlePokemon):
+	pokemon.enterBattle()
 	
+func bringOutOutPokemon(pokemon:BattlePokemon):
+	pokemon.quitBattle()
+
 func queue_free():
 	if pokemonTeam != null:
 		pokemonTeam.clear()

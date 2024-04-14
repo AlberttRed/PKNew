@@ -27,5 +27,9 @@ func getBestMoveChoices() -> BattleMoveChoice:
 	randomize()
 	var move_index = randi_range(0, pokemon.moves.size()-1)
 	var target_index = randi_range(0, pokemon.listEnemies.size()-1)
+	var moveChoice:BattleMoveChoice = BattleMoveChoice.new(pokemon)
+	moveChoice.setMove(pokemon.moves[move_index])
+	moveChoice.setTarget([pokemon.listEnemies[target_index]])
 	
-	return BattleMoveChoice.new(pokemon.moves[move_index], [pokemon.listEnemies[target_index]])
+	return moveChoice
+	#return BattleMoveChoice.new(pokemon.moves[move_index], [pokemon.listEnemies[target_index]])

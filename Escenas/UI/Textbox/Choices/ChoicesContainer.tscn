@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://du3d20hvxfop2"]
+
+[ext_resource type="Texture2D" uid="uid://cp3p5plvvv4sj" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="1_e5126"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/ChoicesContainer.gd" id="2_i1sw3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_12vyg"]
+texture = ExtResource("1_e5126")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+region_rect = Rect2(0, 0, 48, 48)
+
+[node name="ChoicesContainer" type="PanelContainer"]
+offset_left = 368.0
+offset_top = 351.0
+offset_right = 512.0
+offset_bottom = 379.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_12vyg")
+script = ExtResource("2_i1sw3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3

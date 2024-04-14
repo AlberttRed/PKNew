@@ -2,8 +2,8 @@
 
 [ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="1"]
 [ext_resource type="Theme" uid="uid://bugfcogjtje8h" path="res://Escenas/UI/Fonts/fontMessageBox.tres" id="3_1cy13"]
-[ext_resource type="FontFile" uid="uid://odn2mkfd4lap" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="3_mmeu3"]
-[ext_resource type="Texture2D" uid="uid://cqh0doxtkj57s" path="res://Escenas/UI/Textbox/Resources/next.png" id="4"]
+[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="3_mmeu3"]
+[ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="4"]
 [ext_resource type="Animation" uid="uid://beugpt1ql5na2" path="res://Escenas/UI/Textbox/Resources/next_animation.tres" id="5"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5i0nh"]
