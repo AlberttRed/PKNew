@@ -41,7 +41,7 @@ func getPokemonEncounter():
 	selected_level = getLevel()
 
 	var pkmn = PokemonInstance.new().create(true, selected_pokemon.pkmn_id, selected_level)
-
+	pkmn.isWild = true
 	print("A wild " + str(pkmn.Name) + " Lvl. " + str(pkmn.level) + " appeared!")
 	
 	var enemyBattler : Battler = Battler.new().create(CONST.BATTLER_TYPES.WILD_POKEMON, [pkmn], BattleIA_Wild.new())
@@ -54,8 +54,8 @@ func getPokemonEncounter():
 	bc.playerSide.addParticipant(GLOBAL.PLAYER.trainer, true)
 	bc.enemySide.addParticipant(enemyBattler, false)
 	
-	bc.playerSide.initSide()
-	bc.enemySide.initSide()
+	bc.playerSide.initSide(br)
+	bc.enemySide.initSide(br)
 	
 	await bc.initBattle()
 	

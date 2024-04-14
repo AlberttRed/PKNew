@@ -4,14 +4,16 @@ var rules : BattleRules = null
 var playerSide: BattleSide:
 	get:
 		return UI.playerSide
-var enemySide:
+var enemySide: BattleSide:
 	get:
 		return UI.enemySide
 var sides : Array[BattleSide] = []
 var stage : CONST.BATTLE_STAGES
 
-var activePokemons : Array[BattlePokemon] # Indica els pokemons que estan actius en el combat lluitant
-
+var activePokemons : Array[BattlePokemon]: # Indica els pokemons que estan actius en el combat lluitant
+	get:
+		return playerSide.activePokemons + enemySide.activePokemons
+	
 var active_pokemon : BattlePokemon # Indica el pokémon actiu que està fent el turn
 
 var turnPokemonOrder : Array[BattlePokemon]
@@ -32,15 +34,15 @@ func initBattle():
 	#playerSide.opponentSide = enemySide
 	#enemySide.opponentSide = playerSide
 
-	
 	await GUI.initBattleTransition()
 	UI = GUI.battle.initUI(self)
 	#Temporalment ho fem aixi, quan fem les animacions d'entrada etc es canviarà
 	initActivePokemons()
 	
 	stage = CONST.BATTLE_STAGES.SELECT_ACTION
-	
-	await UI.showMessageInput("¡Un " + activePokemons[1].Name + " salvaje te corta el paso!")
+	print("enemy size: " + str(enemySide.activePokemons.size()))
+	if enemySide.activePokemons.size() == 1:
+		await UI.showMessageInput("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!")
 	#await UI.msgBox.finished
 	#await UI.msgClosed
 	
@@ -91,18 +93,21 @@ func initActivePokemons():
 		pk_per_side = 2
 	
 	for s in sides:
-		pk_per_part = pk_per_side / s.participants.size()
-		for part in s.participants:
-			var i : int = 0
-			for p in s.pokemonParty:
-				#print(p.Name + " fainted? " + str(p.fainted))
-				if !p.fainted and p.inBattleParty and i != pk_per_part:
-					#s.activePokemons.push_back(p)
-					#GUI.battle.loadActivePokemon(p)
-					part.bringInPokemon(p)
-					i += 1
-				else:
-					break
+		for p:BattlePokemon in s.activePokemons:
+			p.enterPokemon(p.side.getNextPartyPokemon())
+		#pk_per_part = pk_per_side / s.participants.size()
+		#for part:BattleParticipant in s.participants:
+			#
+			#var i : int = 0
+			#for p in s.pokemonParty:
+				##print(p.Name + " fainted? " + str(p.fainted))
+				#if !p.fainted and p.inBattleParty and i != pk_per_part:
+					##s.activePokemons.push_back(p)
+					##GUI.battle.loadActivePokemon(p)
+					#part.bringInPokemon(p)
+					#i += 1
+				#else:
+					#break
 					
 	#updateActivePokemons()
 	print_active_pokemons()
@@ -112,30 +117,32 @@ func print_active_pokemons():
 		p.print_pokemon()
 		print(" ")
 		p.print_moves()
-		
+		#
 func updateActivePokemons():
-	#var enemies:Array[BattlePokemon] = sides[1].activePokemons#.duplicate()
-	#var allies:Array[BattlePokemon] =  sides[0].activePokemons#.duplicate()
-	#
-	activePokemons = playerSide.activePokemons + enemySide.activePokemons
-	print("active pokemons: " + str(activePokemons.size()))
-		
+	##var enemies:Array[BattlePokemon] = sides[1].activePokemons#.duplicate()
+	##var allies:Array[BattlePokemon] =  sides[0].activePokemons#.duplicate()
+	##
+	##activePokemons = playerSide.activePokemons + enemySide.activePokemons
+	#print("active pokemons: " + str(activePokemons.size()))
+		#
 	for p:BattlePokemon in activePokemons:
-		p.init()
+		p.updateBattleInfo()
+		#p.clear()
+#
+		##if p.side.type == CONST.BATTLE_SIDES.PLAYER:
+		#p.setEnemies(p.side.opponentSide.activePokemons)
+		#p.setAllies(p.side.activePokemons)
+		#
+		##elif p.side.type == CONST.BATTLE_SIDES.ENEMY:
+			##print("lololo")
+			##p.setEnemies(allies)
+			##p.setAllies(enemies)
+			#
+	#for p in activePokemons:
+		#for e in p.listEnemies:
+			#if !p.listPokemonBattledAgainst.has(e):
+				#p.listPokemonBattledAgainst.push_back(e)
 
-		#if p.side.type == CONST.BATTLE_SIDES.PLAYER:
-		p.setEnemies(p.side.opponentSide.activePokemons)
-		p.setAllies(p.side.activePokemons)
-		
-		#elif p.side.type == CONST.BATTLE_SIDES.ENEMY:
-			#print("lololo")
-			#p.setEnemies(allies)
-			#p.setAllies(enemies)
-			
-	for p in activePokemons:
-		for e in p.listEnemies:
-			if !p.listPokemonBattledAgainst.has(e):
-				p.listPokemonBattledAgainst.push_back(e)
 
 #		print("player side: ")
 #		for a in allies:

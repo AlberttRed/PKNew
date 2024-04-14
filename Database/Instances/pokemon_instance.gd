@@ -7,7 +7,7 @@ class_name PokemonInstance
 @export var randomize_stats: bool = false
 
 @export var base : Resource
-var battleInstance : BattlePokemon
+#var battleInstance : BattlePokemon
 
 var pkm_id : int = 0 :
 	get:
@@ -46,6 +46,7 @@ var types : Array[Type] :
 		return [base.type_a as Type, base.type_b as Type]
 	set(value):
 		types = value 	
+var isWild : bool
 
 var status = CONST.STATUS.OK
 
@@ -123,9 +124,11 @@ var nextLevelExpBase : int: # Es l'experiencia base necessaria per arribar al se
 			return experienceGroup.calculateExp(level+1)
 		else:
 			return totalExp
-var inBattle : bool:
-	get:
-		return battleInstance != null && battleInstance.inBattle
+var inBattle : bool
+	#get:
+		#return battleInstance != null && battleInstance.inBattle
+
+var inBattleParty : bool
 
 var capture_date: String = "18 de Nov. de 2018" 
 var capture_route: String = "Ruta 1" 
@@ -551,3 +554,6 @@ func _get_property_list():
 
 func hasItemEquipped(item_id:int):
 	return held_item_id==item_id
+
+func _to_string():
+	return Name

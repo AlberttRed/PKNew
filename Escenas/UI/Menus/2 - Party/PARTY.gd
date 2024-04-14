@@ -135,7 +135,7 @@ func selectOption():
 				show_summaries()
 			elif actions.isSelected("CAMBIO"):
 				if !GAME_DATA.party[index].inBattle:
-					pokemonSelected.emit(GAME_DATA.party[index].battleInstance)
+					pokemonSelected.emit(GAME_DATA.party[index])
 					close()
 				else:
 					await showMsg(GAME_DATA.party[index].Name + " ya está en el campo de batalla!")

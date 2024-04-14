@@ -25,8 +25,8 @@ var animController : BattleAnimationList
 #var actionSignals : Array[Signal] = [selectMove, changePokemon, useBag, exitBattle]
 var actionSignalSelected : Signal
 
-var pkmnPlayerNodes : Array[Node2D]
-var pkmnEnemyNodes : Array[Node2D]
+#var pkmnPlayerNodes : Array[Node2D]
+#var pkmnEnemyNodes : Array[Node2D]
 
 @onready var cmdLuchar : Panel = $PanelActions/Commands/Luchar
 @onready var cmdPokemon : Panel = $PanelActions/Commands/Pokemon
@@ -43,10 +43,10 @@ var pkmnEnemyNodes : Array[Node2D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pkmnPlayerNodes.push_back($playerBase/PokemonPlayerA)
-	pkmnPlayerNodes.push_back($playerBase/PokemonPlayerB)
-	pkmnEnemyNodes.push_back($enemyBase/PokemonEnemyA)
-	pkmnEnemyNodes.push_back($enemyBase/PokemonEnemyA)
+	#pkmnPlayerNodes.push_back($playerBase/PokemonPlayerA)
+	#pkmnPlayerNodes.push_back($playerBase/PokemonPlayerB)
+	#pkmnEnemyNodes.push_back($enemyBase/PokemonEnemyA)
+	#pkmnEnemyNodes.push_back($enemyBase/PokemonEnemyA)
 	set_process_input(false)
 	
 
@@ -105,8 +105,11 @@ func clear():
 	#controller.activePokemons[1].initPokemonUI($enemyBase/HPBarA)
 	
 func initSingleBattleUI():
-	$playerBase/PokemonPlayerA.visible = false
-	$enemyBase/PokemonEnemyA.visible = false
+	pass
+	#playerSide.pokemonSpotA.hide()
+	#enemySide.pokemonSpotA.hide()
+	#$playerBase/PokemonPlayerA.visible = false
+	#$enemyBase/PokemonEnemyA.visible = false
 	#loadActivePokemon(controller.activePokemons[0])
 	#loadActivePokemon(controller.activePokemons[1])
 	
@@ -114,29 +117,30 @@ func loadActivePokemon(pokemon:BattlePokemon):
 	if pokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 			pokemon.position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
-		pokemon.reparent($playerBase)
-		pokemon.get_node("Shadow").visible=false
+		#pokemon.reparent($playerBase)
+		#pokemon.get_node("Shadow").visible=false
 		pokemon.initPokemonUI($playerBase/HPBarA)
 	elif pokemon.sideType == CONST.BATTLE_SIDES.ENEMY:
 		if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 			pokemon.position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
-		pokemon.reparent($enemyBase)
+		#pokemon.reparent($enemyBase)
 		pokemon.get_node("Shadow").visible=true
 		pokemon.initPokemonUI($enemyBase/HPBarA)
 	pokemon.visible = true
-	controller.updateActivePokemons()
+	pokemon.updateBattleInfo()
+	#controller.updateActivePokemons()
 
 func removeActivePokemon(pokemon:BattlePokemon):
 	pokemon.visible = false
 	if pokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		pokemon.reparent($playerBase/Party)
-		pokemon.get_node("Shadow").visible=false
+		#pokemon.get_node("Shadow").visible=false
 		#pokemon.initPokemonUI($playerBase/HPBarA)
 	elif pokemon.sideType == CONST.BATTLE_SIDES.ENEMY:
 		pokemon.reparent($enemyBase/Party)
 		pokemon.get_node("Shadow").visible=false
 		#pokemon.initPokemonUI($enemyBase/HPBarA)
-	controller.updateActivePokemons()
+	#pokemon.updateBattleInfo()
 	
 func initDoubleBattleUI():
 	$playerBase/PokemonA.position = CONST.BATTLE.BACK_POKEMONA_SPRITE_POS
@@ -162,13 +166,13 @@ func clearSingleBattleUI():
 func clearDoubleBattleUI():
 	pass
 	
-func updateUINodes():
-	for i:int in range(controller.sides[0].activePokemons.size()):
-		controller.sides[0].activePokemons[i].battleNode = pkmnPlayerNodes[i]
-
-	for i:int in range(controller.sides[1].activePokemons.size()):
-		controller.sides[1].activePokemons[i].battleNode = pkmnEnemyNodes[i]
+#func updateUINodes():
+	#for i:int in range(controller.sides[0].activePokemons.size()):
+		#controller.sides[0].activePokemons[i].battleNode = pkmnPlayerNodes[i]
 #
+	#for i:int in range(controller.sides[1].activePokemons.size()):
+		#controller.sides[1].activePokemons[i].battleNode = pkmnEnemyNodes[i]
+##
 #
 #
 #func 	initPartiesUI():
