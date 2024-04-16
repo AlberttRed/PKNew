@@ -128,7 +128,7 @@ graph_offset = Vector2(0, 87.5243)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_duyul"]
 size = Vector2(32, 32)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_epvcp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lr1w"]
 _data = {
 "Close_Door": ExtResource("23_b2xco"),
 "Open_Door": ExtResource("24_jcblm")
@@ -1048,7 +1048,7 @@ collision_mask = 21
 
 [node name="AnimationTree" parent="Eventos/Puerta_Rival" index="3"]
 libraries = {
-"Eventos": SubResource("AnimationLibrary_epvcp")
+"Eventos": SubResource("AnimationLibrary_6lr1w")
 }
 
 [node name="Page 1" parent="Eventos/Puerta_Rival/Pages" index="1"]

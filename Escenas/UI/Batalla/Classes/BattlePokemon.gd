@@ -1,4 +1,3 @@
-extends Node2D
 class_name BattlePokemon
 
 signal updateHP
@@ -23,13 +22,14 @@ var sideType:CONST.BATTLE_SIDES:
 	get:
 		return participant.side.type
 		
-var listEnemies : Array[BattlePokemon] = []
-var listAllies  : Array[BattlePokemon] = []
-var listPokemonBattledAgainst : Array[PokemonInstance] = [] #Number of pokemon opponents that have participied in the battle to defeat the pokemon
-
-var IA: BattleIA:
+var listEnemies : Array[BattlePokemon]:
 	get:
-		return participant.IA
+		return side.opponentSide.activePokemons
+var listAllies  : Array[BattlePokemon]:
+	get:
+		return getAllies()
+
+var IA: BattleIA
 
 var Name : String:
 	get:
@@ -138,12 +138,12 @@ var canAttack : bool = true
 var activeEffectsFlags : Array[BattleEffect] = [] #Array[CONST.MOVE_EFFECTS] = []
 
 var battleStatsMod : Array[int] = [0,2,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
+var listPokemonBattledAgainst : Array[BattlePokemon] = [] #Number of pokemon opponents that have participied in the battle to defeat the pokemon
 
 #func _init(_pokemon : PokemonInstance, _IA: BattleIA):
 #func create(_pokemon : PokemonInstance, _IA: BattleIA):
-func init(_pokemon: PokemonInstance):#, _IA: BattleIA):
+func _init(_pokemon: PokemonInstance, _IA: BattleIA = null):
 	instance = _pokemon
-	name = instance.Name
 			#bp.isWild = _participant.type == CONST.BATTLER_TYPES.WILD_POKEMON
 		#bp.controllable = _controllable
 	#instance.battleInstance = self
@@ -178,23 +178,24 @@ func init(_pokemon: PokemonInstance):#, _IA: BattleIA):
 	for m in _pokemon.movements:
 		var battleMove = BattleMove.new(m, self)
 		moves.push_back(battleMove)
-		
-	if IA != null:
-		if !IA.pokemon_assigned():
-			IA.assign_pokemon(self)
 
-	IA = IA
+	setIA(_IA)
+
+func setIA(_IA:BattleIA):
+	if _IA != null:
+		var pkmnIA = _IA.duplicate()
+		if !pkmnIA.pokemon_assigned():
+			pkmnIA.assign_pokemon(self)
+		self.IA = pkmnIA
 		
 func clear():
 	listAllies.clear()
 	listEnemies.clear()
 	
-func setParticipant(participant:BattleParticipant):
-	self.participant = participant
-	participant.assignBattleSpot(self)
 	
 func loadPokemon(pokemon:PokemonInstance):
-	init(pokemon)
+	#init(pokemon)
+	print("loading " + pokemon.Name)
 	print("enemy size: " + str(side.opponentSide.activePokemons.size()))
 	GUI.battle.loadActivePokemon(self)
 	print("enemy size: " + str(side.opponentSide.activePokemons.size()))
@@ -222,13 +223,14 @@ func endTurn():
 
 func updateBattleInfo():
 	clear()
-
+	print("enemy size: " + str(side.opponentSide.activePokemons.size()))
 	#if p.side.type == CONST.BATTLE_SIDES.PLAYER:
 	setEnemies(side.opponentSide.activePokemons)
 	setAllies(side.activePokemons)
-	for e in listEnemies:
-		if !listPokemonBattledAgainst.has(e):
-			listPokemonBattledAgainst.push_back(e)
+	#for e in listEnemies:
+		#if !listPokemonBattledAgainst.has(e):
+			#listPokemonBattledAgainst.push_back(e)
+	print("enemy size: " + str(side.opponentSide.activePokemons.size()))
 
 func setEnemies(_enemies : Array[BattlePokemon]):
 	listEnemies.clear()
@@ -239,6 +241,13 @@ func setAllies(_allies : Array[BattlePokemon]):
 	for a in _allies:
 		if a != self:
 			listAllies.push_back(a)
+			
+func getAllies():
+	var list:Array[BattlePokemon]
+	for a:BattlePokemon in side.activePokemons:
+		if a != self:
+			list.push_back(a)
+	return list
 	
 func selectAction():
 	if controllable:
@@ -365,44 +374,6 @@ func heal(amount):
 	await HPbar.updated
 	updatePokemonState()
 
-func initSprite(type : CONST.BATTLE_SIDES):
-	if type == CONST.BATTLE_SIDES.PLAYER:
-		sprite = back_sprite
-	elif type == CONST.BATTLE_SIDES.ENEMY:
-		sprite = front_sprite
-		
-func initPokemonUI(hPBarNode : Node2D):
-	animPlayer = get_node("AnimationPlayer")
-	initSprite(side.type)
-	get_node("Sprite").texture = sprite
-	setSpritePosition(get_node("Sprite"))
-	animPlayer.play("GLOBAL/RESET")
-	HPbar = hPBarNode
-	HPbar.init(self)
-	HPbar.updateUI()
-	
-	
-func setSpritePosition(sprite : Sprite2D):
-	var y_position = 0
-	var initial_pos :int = 0
-	var battleY : int = 0
-	var altitude : int = 0
-	
-	if side.type == CONST.BATTLE_SIDES.PLAYER:
-		
-		battleY = battlerPlayerY * 2
-	
-	elif side.type == CONST.BATTLE_SIDES.ENEMY:
-		if sprite.texture.get_height() == 160:
-			initial_pos = 0
-		elif sprite.texture.get_height() == 190:
-			initial_pos = 16
-		
-		battleY = battlerEnemyY * 2
-		altitude = battlerAltitude * 2
-		
-	sprite.position.y = y_position - initial_pos + battleY - altitude
-
 func HPpercentageLeft() -> float:
 	return float(hp_actual)/float(hp_total)
 	
@@ -504,7 +475,7 @@ func setDefeated():
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
 	
 func giveExpAtDefeat():
-	for p:PokemonInstance in listPokemonBattledAgainst:
+	for p:PokemonInstance in instance.listPokemonBattledAgainst:
 		var expGained = p.getExpGained(self)
 		await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 		print("kik")
@@ -555,17 +526,6 @@ func tryEscapeFromBattle():
 	await GUI.battle.msgBox.showExitMessage(success)
 	return success
 
-func swapPokemon(enterPokemon:PokemonInstance):
-	quitPokemon()
-	enterPokemon(enterPokemon)
-	
-func enterPokemon(pokemon:PokemonInstance):
-	pokemon.inBattle = true
-	loadPokemon(pokemon)
-	
-func quitPokemon():
-	instance.inBattle = false
-	unloadPokemon()
 
 func doAnimation(animName:String):
 	print("lololol")

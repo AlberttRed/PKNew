@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://4suianjdpdca" path="res://Sprites/Batalla/Battlebacks/playerbaseField.png" id="12_kij8v"]
 [ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="12_mjuc7"]
 [ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="13_il7rh"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattlePokemon.gd" id="13_mltdv"]
 [ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Batalla/Animaciones/Moves/Battle_AilmentAnimations.res" id="15_l48co"]
 [ext_resource type="AnimationLibrary" uid="uid://6y11gonugprj" path="res://Objetos/Batalla/Animaciones/Moves/GLOBAL.res" id="16_d25ld"]
 [ext_resource type="AnimationLibrary" uid="uid://2mrp3w2yg84c" path="res://Objetos/Batalla/Animaciones/Moves/Battle_MovesAnimations.res" id="18_cpt8m"]
@@ -29,6 +28,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://casxsbdqp031y" path="res://Objetos/Batalla/Animaciones/Moves/Battle_PokemonAnimations.res" id="19_2e54j"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="19_osmde"]
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="20_loxkp"]
+[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleSpot.gd" id="20_yu0i4"]
 [ext_resource type="AnimationLibrary" uid="uid://btf1cle7g0a06" path="res://Objetos/Batalla/Animaciones/Moves/Battle_CommonAnimations.res" id="23_vixyq"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="25_tw0vt"]
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="26_tk2h0"]
@@ -494,7 +494,7 @@ z_index = -1
 position = Vector2(-128, 240)
 script = ExtResource("30_y0xkt")
 type = 1
-opponentSide = NodePath("../enemyBase")
+opponentSide = NodePath("")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="playerBase"]
@@ -504,7 +504,7 @@ centered = false
 
 [node name="PokemonA" type="Node2D" parent="playerBase"]
 position = Vector2(256, -16)
-script = ExtResource("13_mltdv")
+script = ExtResource("20_yu0i4")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="playerBase/PokemonA"]
@@ -523,7 +523,7 @@ libraries = {
 [node name="PokemonB" type="Node2D" parent="playerBase"]
 visible = false
 position = Vector2(288, 0)
-script = ExtResource("13_mltdv")
+script = ExtResource("20_yu0i4")
 
 [node name="Sprite" type="Sprite2D" parent="playerBase/PokemonB"]
 z_index = 2
@@ -618,6 +618,88 @@ metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/HPBarA/exp_bar"]
 
+[node name="HPBarB" type="Sprite2D" parent="playerBase"]
+visible = false
+z_index = 1
+position = Vector2(526, -3)
+texture = ExtResource("20_loxkp")
+script = ExtResource("19_osmde")
+metadata/_edit_lock_ = true
+
+[node name="Name" type="BoxContainer" parent="playerBase/HPBarB"]
+offset_left = -89.6
+offset_top = -41.2
+offset_right = 4.39999
+offset_bottom = -1.19998
+metadata/_edit_lock_ = true
+
+[node name="lblName" type="Label" parent="playerBase/HPBarB/Name"]
+layout_mode = 2
+theme = SubResource("Theme_mb2ww")
+text = "Pikachu"
+metadata/_edit_lock_ = true
+
+[node name="lblGender" type="Label" parent="playerBase/HPBarB/Name"]
+layout_mode = 2
+theme = SubResource("Theme_1pgp4")
+text = "♀"
+metadata/_edit_lock_ = true
+
+[node name="lblLevel" type="Label" parent="playerBase/HPBarB"]
+offset_left = 65.8297
+offset_top = -30.1561
+offset_right = 126.83
+offset_bottom = -4.15611
+theme = ExtResource("11_a22gy")
+theme_override_constants/shadow_offset_x = 2
+text = "Nv20"
+metadata/_edit_lock_ = true
+
+[node name="Status" type="Sprite2D" parent="playerBase/HPBarB"]
+position = Vector2(-50, 1)
+texture = ExtResource("11_ne00b")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+metadata/_edit_lock_ = true
+
+[node name="health_bar" parent="playerBase/HPBarB" instance=ExtResource("12_mjuc7")]
+position = Vector2(0, 1)
+metadata/_edit_lock_ = true
+
+[node name="lblHP" parent="playerBase/HPBarB/health_bar" index="0"]
+offset_left = 37.2831
+offset_right = 87.2831
+metadata/_edit_lock_ = true
+
+[node name="TextureProgressBar" parent="playerBase/HPBarB/health_bar" index="1"]
+offset_left = -26.0082
+offset_top = -8.20206
+offset_right = 105.992
+offset_bottom = 31.7979
+metadata/_edit_lock_ = true
+
+[node name="exp_bar" type="Node2D" parent="playerBase/HPBarB"]
+position = Vector2(-55, 36.25)
+script = ExtResource("25_tw0vt")
+metadata/_edit_vertical_guides_ = [-205.084]
+metadata/_edit_lock_ = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="playerBase/HPBarB/exp_bar"]
+offset_left = -39.0
+offset_top = -7.0
+offset_right = 161.0
+offset_bottom = 10.0
+scale = Vector2(1, 0.960005)
+max_value = 0.0
+step = 0.1
+stretch_margin_left = 1
+texture_under = ExtResource("26_tk2h0")
+texture_over = ExtResource("27_cqio0")
+texture_progress = ExtResource("28_q32p6")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/HPBarB/exp_bar"]
+
 [node name="Party" type="Node2D" parent="playerBase"]
 
 [node name="enemyBase" type="Node2D" parent="." node_paths=PackedStringArray("opponentSide")]
@@ -625,7 +707,7 @@ z_index = -1
 position = Vector2(256, 112)
 script = ExtResource("30_y0xkt")
 type = 2
-opponentSide = NodePath("../playerBase")
+opponentSide = NodePath("")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase"]
@@ -636,7 +718,7 @@ metadata/_edit_lock_ = true
 
 [node name="PokemonA" type="Node2D" parent="enemyBase"]
 position = Vector2(128, 30)
-script = ExtResource("13_mltdv")
+script = ExtResource("20_yu0i4")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/PokemonA"]
@@ -660,7 +742,7 @@ libraries = {
 [node name="PokemonB" type="Node2D" parent="enemyBase"]
 visible = false
 position = Vector2(96, -48)
-script = ExtResource("13_mltdv")
+script = ExtResource("20_yu0i4")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/PokemonB"]
@@ -733,6 +815,63 @@ offset_top = -8.43386
 offset_right = 105.509
 offset_bottom = 31.5661
 
+[node name="HPBarB" type="Sprite2D" parent="enemyBase"]
+visible = false
+position = Vector2(-144, -45)
+texture = ExtResource("18_fvfel")
+script = ExtResource("19_osmde")
+metadata/_edit_lock_ = true
+
+[node name="Name" type="BoxContainer" parent="enemyBase/HPBarB"]
+offset_left = -104.838
+offset_top = -30.4085
+offset_right = 7.16205
+offset_bottom = 9.5915
+
+[node name="lblName" type="Label" parent="enemyBase/HPBarB/Name"]
+layout_mode = 2
+theme = SubResource("Theme_klgm5")
+text = "Alomomola"
+metadata/_edit_lock_ = true
+
+[node name="lblGender" type="Label" parent="enemyBase/HPBarB/Name"]
+layout_mode = 2
+theme = SubResource("Theme_rl63v")
+text = "♂"
+metadata/_edit_lock_ = true
+
+[node name="lblLevel" type="Label" parent="enemyBase/HPBarB"]
+offset_left = 47.9226
+offset_top = -18.9308
+offset_right = 108.923
+offset_bottom = 7.06921
+theme = ExtResource("11_a22gy")
+theme_override_constants/shadow_offset_x = 2
+text = "Nv20"
+metadata/_edit_lock_ = true
+
+[node name="Status" type="Sprite2D" parent="enemyBase/HPBarB"]
+position = Vector2(-68, 13)
+texture = ExtResource("11_ne00b")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+metadata/_edit_lock_ = true
+
+[node name="health_bar" parent="enemyBase/HPBarB" instance=ExtResource("12_mjuc7")]
+position = Vector2(-18, 13)
+metadata/_edit_lock_ = true
+
+[node name="lblHP" parent="enemyBase/HPBarB/health_bar" index="0"]
+visible = false
+offset_left = 37.2831
+offset_right = 87.2831
+
+[node name="TextureProgressBar" parent="enemyBase/HPBarB/health_bar" index="1"]
+offset_left = -26.4909
+offset_top = -8.43386
+offset_right = 105.509
+offset_bottom = 31.5661
+
 [node name="Party" type="Node2D" parent="enemyBase"]
 
 [node name="back" type="Panel" parent="."]
@@ -760,7 +899,10 @@ theme_override_styles/panel = ExtResource("3_7u5r2")
 [connection signal="focus_entered" from="PanelMoves/Moves/Move4" to="." method="_on_move_focus_entered"]
 [connection signal="focus_exited" from="PanelMoves/Moves/Move4" to="." method="_on_move_focus_exited"]
 [connection signal="value_changed" from="playerBase/HPBarA/exp_bar/TextureProgressBar" to="playerBase/HPBarA/exp_bar" method="_on_value_changed"]
+[connection signal="value_changed" from="playerBase/HPBarB/exp_bar/TextureProgressBar" to="playerBase/HPBarB/exp_bar" method="_on_value_changed"]
 
 [editable path="PanelMessageBox"]
 [editable path="playerBase/HPBarA/health_bar"]
+[editable path="playerBase/HPBarB/health_bar"]
 [editable path="enemyBase/HPBarA/health_bar"]
+[editable path="enemyBase/HPBarB/health_bar"]

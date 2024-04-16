@@ -30,9 +30,7 @@ func _init(_battleRules : BattleRules):
 func initBattle():
 
 	assert(playerSide != null or enemySide != null, "No se han configurado los BattleSide para el combate.")
-	sides = [playerSide, enemySide]
-	#playerSide.opponentSide = enemySide
-	#enemySide.opponentSide = playerSide
+	setSides()
 
 	await GUI.initBattleTransition()
 	UI = GUI.battle.initUI(self)
@@ -93,8 +91,9 @@ func initActivePokemons():
 		pk_per_side = 2
 	
 	for s in sides:
-		for p:BattlePokemon in s.activePokemons:
+		for p:BattleSpot in s.battleSpots:
 			p.enterPokemon(p.side.getNextPartyPokemon())
+		
 		#pk_per_part = pk_per_side / s.participants.size()
 		#for part:BattleParticipant in s.participants:
 			#
@@ -117,7 +116,14 @@ func print_active_pokemons():
 		p.print_pokemon()
 		print(" ")
 		p.print_moves()
-		#
+
+func updateActivePokemonsInfo():
+	for pokemon:BattlePokemon in activePokemons:	
+		for enemy:BattlePokemon in pokemon.listEnemies:
+			if pokemon != null and enemy != null:
+				if !pokemon.listPokemonBattledAgainst.has(enemy):
+					pokemon.listPokemonBattledAgainst.push_back(enemy)
+
 func updateActivePokemons():
 	##var enemies:Array[BattlePokemon] = sides[1].activePokemons#.duplicate()
 	##var allies:Array[BattlePokemon] =  sides[0].activePokemons#.duplicate()
@@ -143,7 +149,10 @@ func updateActivePokemons():
 			#if !p.listPokemonBattledAgainst.has(e):
 				#p.listPokemonBattledAgainst.push_back(e)
 
-
+func setSides():
+	self.sides = [playerSide, enemySide]
+	self.playerSide.opponentSide = enemySide
+	self.enemySide.opponentSide = playerSide
 #		print("player side: ")
 #		for a in allies:
 #			print(a.Name)

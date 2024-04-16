@@ -112,35 +112,7 @@ func initSingleBattleUI():
 	#$enemyBase/PokemonEnemyA.visible = false
 	#loadActivePokemon(controller.activePokemons[0])
 	#loadActivePokemon(controller.activePokemons[1])
-	
-func loadActivePokemon(pokemon:BattlePokemon):
-	if pokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
-		if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
-			pokemon.position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
-		#pokemon.reparent($playerBase)
-		#pokemon.get_node("Shadow").visible=false
-		pokemon.initPokemonUI($playerBase/HPBarA)
-	elif pokemon.sideType == CONST.BATTLE_SIDES.ENEMY:
-		if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
-			pokemon.position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
-		#pokemon.reparent($enemyBase)
-		pokemon.get_node("Shadow").visible=true
-		pokemon.initPokemonUI($enemyBase/HPBarA)
-	pokemon.visible = true
-	pokemon.updateBattleInfo()
-	#controller.updateActivePokemons()
 
-func removeActivePokemon(pokemon:BattlePokemon):
-	pokemon.visible = false
-	if pokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
-		pokemon.reparent($playerBase/Party)
-		#pokemon.get_node("Shadow").visible=false
-		#pokemon.initPokemonUI($playerBase/HPBarA)
-	elif pokemon.sideType == CONST.BATTLE_SIDES.ENEMY:
-		pokemon.reparent($enemyBase/Party)
-		pokemon.get_node("Shadow").visible=false
-		#pokemon.initPokemonUI($enemyBase/HPBarA)
-	#pokemon.updateBattleInfo()
 	
 func initDoubleBattleUI():
 	$playerBase/PokemonA.position = CONST.BATTLE.BACK_POKEMONA_SPRITE_POS
@@ -155,13 +127,12 @@ func clearSingleBattleUI():
 	for p in controller.activePokemons:
 		p.HPbar.clearUI()
 		p.animPlayer.play("RESET")
-		p.queue_free()
+		p.clear()
+		p.instance = null
 		
-	for p in playerSide.pokemonParty:
-		p.queue_free()
+	for s:BattleSide in controller.sides:
+		s.clear()
 		
-	for p in enemySide.pokemonParty:
-		p.queue_free()
 		
 func clearDoubleBattleUI():
 	pass

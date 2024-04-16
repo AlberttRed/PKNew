@@ -4,16 +4,21 @@ class_name BattleSide
 @export var type : CONST.BATTLE_SIDES = CONST.BATTLE_SIDES.NONE
 @export var opponentSide : BattleSide
 
-@onready var pokemonSpotA:BattlePokemon = $PokemonA
-@onready var pokemonSpotB:BattlePokemon = $PokemonB
+@onready var pokemonSpotA:BattleSpot = $PokemonA
+@onready var pokemonSpotB:BattleSpot = $PokemonB
 
 var participants : Array[BattleParticipant] # Numero d' "Entrenadors" del Side
-var pokemonParty : Array[PokemonInstance] # La party que tindrà el side en el combat, formada per pokemons del/s BattleParticipant/s
+var pokemonParty : Array[BattlePokemon] # La party que tindrà el side en el combat, formada per pokemons del/s BattleParticipant/s
 	#get:
 		#var pokemonList: Array[PokemonInstance]
 		#pokemonList.assign($Party.get_children())
 		#return pokemonList
-var activePokemons : Array[BattlePokemon] # Indica els pokemons que estan actius en el combat lluitant per aquell side
+var battleSpots:Array[BattleSpot]:
+	get:
+		return getBattleSpots()
+var activePokemons : Array[BattlePokemon]: # Indica els pokemons que estan actius en el combat lluitant per aquell side
+	get:
+		return getActivePokemons()
 var activeFieldEffectsFlags : Array[CONST.MOVE_EFFECTS] = []
 
 var defeated : bool = false # Indica si tots els pokemons del Side han estat derrotats, per tant el Side ha perdut
@@ -35,18 +40,26 @@ func initSide(rules: BattleRules):
 	loadParty()
 	if participants.size() == 1:
 		pokemonSpotA.setParticipant(participants[0])
+		pokemonSpotA.setSide(self)
+		pokemonSpotA.HPbar = $HPBarA
 		pokemonSpotA.show()
 		if rules.mode == CONST.BATTLE_MODES.DOUBLE:
 			pokemonSpotB.setParticipant(participants[0])
-			pokemonSpotB.hide()
+			pokemonSpotB.setSide(self)
+			pokemonSpotB.HPbar = $HPBarB
+			pokemonSpotB.show()
 		else:
 			pokemonSpotB.hide()
-	elif participants.size() == 1:
+	elif participants.size() == 2:
 		pokemonSpotA.setParticipant(participants[0])
+		pokemonSpotA.setSide(self)
+		pokemonSpotA.HPbar = $HPBarA
 		pokemonSpotA.show()
 		pokemonSpotB.setParticipant(participants[1])
+		pokemonSpotB.setSide(self)
+		pokemonSpotB.HPbar = $HPBarB
 		pokemonSpotB.show()
-	activePokemons = loadActivePokemons()
+	#activePokemons = getActivePokemons()
 		
 func hasWorkingFieldEffect(e):
 	return activeFieldEffectsFlags.has(e)
@@ -59,8 +72,8 @@ func loadParty():
 	
 	var i : int = 0
 	
-	for part in participants:
-		for pk:PokemonInstance in part.pokemonTeam:
+	for part:BattleParticipant in participants:
+		for pk:BattlePokemon in part.pokemonTeam:
 			if i != num_pk && !pk.fainted:
 				pk.inBattleParty = true
 				#$Party.add_child(pk)
@@ -69,20 +82,28 @@ func loadParty():
 		i = 0
 
 func getNextPartyPokemon():
-	for p:PokemonInstance in pokemonParty:
+	for p:BattlePokemon in pokemonParty:
 		if !p.fainted:
 			return p
 	return null
 	
 
-func loadActivePokemons():
-	var list:Array[BattlePokemon]
-	for n in get_children():
-		if n is BattlePokemon and n.visible:
-			print(name + ": " +n.name)
-			list.push_back(n)
+func getActivePokemons():
+	var list:Array[BattlePokemon] = []
+	for s:BattleSpot in battleSpots:
+		if s.activePokemon != null:
+			list.push_back(s.activePokemon)
+	#for n in get_children():
+		#if n is BattleSpot and n.visible and n.activePokemon != null:
+			#print(name + ": " +n.name)
+			#list.push_back(n.activePokemon)
 	return list
-			
+	
+func getBattleSpots():
+	var list:Array[BattleSpot] = []
+	for p:BattleParticipant in participants:
+		list.append_array(p.battleSpots)
+	return list
 
 func isDefeated():
 	print("party ")
