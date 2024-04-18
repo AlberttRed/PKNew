@@ -19,7 +19,7 @@ func applyPreviousEffects():
 			var valor : float = randf()
 			if valor <= (0.25):
 				target.canAttack = false
-				await BattleAnimationList.new().getAilmentAnimation(ailment).doAnimation(target)
+				await BattleAnimationList.new().getAilmentAnimation(ailment).doAnimation(target.battleSpot)
 				await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
 
 		if ailment == CONST.AILMENTS.CONFUSION:

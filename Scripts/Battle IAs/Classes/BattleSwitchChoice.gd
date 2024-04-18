@@ -2,11 +2,13 @@ class_name BattleSwitchChoice extends BattleChoice
 
 signal pokemonSwitched
 
-var switchInPokemon : PokemonInstance
+var switchInPokemon : BattlePokemon
 var switchOutPokemon : BattlePokemon
+var battleSpot : BattleSpot
 
 func _init(_selectedPokemon : BattlePokemon):
 	self.switchOutPokemon = _selectedPokemon
+	self.battleSpot = _selectedPokemon.battleSpot
 	#target = _target
 	self.priority = 6 # Els canvis de pokemon sempre tenen prioritat 6
 	self.type = CONST.BATTLE_ACTIONS.POKEMON
@@ -16,8 +18,8 @@ func showParty():
 	await GUI.battle.showParty()
 	
 func switchPokemon():
-	switchOutPokemon.swapPokemon(switchInPokemon)
+	battleSpot.swapPokemon(switchInPokemon)
 	await GUI.get_tree().create_timer(1).timeout
 	
-func setSwitchInPokemon(pokemon:PokemonInstance):
-	switchInPokemon = pokemon
+func setSwitchInPokemon(pokemonPartyIndex:int):#pokemon:BattlePokemon):
+	switchInPokemon = switchOutPokemon.participant.pokemonTeam[pokemonPartyIndex] #pokemon

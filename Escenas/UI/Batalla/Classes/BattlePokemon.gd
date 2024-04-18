@@ -12,7 +12,10 @@ var controllable : bool: # Indica si el pokemon el controlarà el Jugador o la I
 	get:
 		return participant.controllable
 var inBattleParty : bool # Indica si el pokemon forma part del party del battle (En el cas d'un combat doble de 2 entrenadors, per saber si ha estat seleccionat per formar par del party conjunt o no
-var inBattle : bool
+var inBattle : bool:
+	set(_inBattle):
+		inBattle = _inBattle
+		instance.inBattle = _inBattle
 var participant : BattleParticipant # Indica a quin participant pertany (entrenador)
 var side : BattleSide: # Indica a quin side forma part el pokemon
 	get:
@@ -123,9 +126,12 @@ var nextLevelExpBase:int:
 		return instance.nextLevelExpBase
 
 var sprite : Texture2D
-var HPbar : Node2D = null
-var battleNode : Node2D = null
-var animPlayer : AnimationPlayer
+var HPbar : Node2D:
+	get:
+		return battleSpot.HPbar
+var animPlayer : AnimationPlayer:
+	get:
+		return battleSpot.animPlayer
 
 var priority : int = 0 # indica quina prioritat té el pkmn dintre el battle en aquell turn. Per saber en quin ordre atacarà
 var moves : Array[BattleMove]
@@ -139,7 +145,7 @@ var activeEffectsFlags : Array[BattleEffect] = [] #Array[CONST.MOVE_EFFECTS] = [
 
 var battleStatsMod : Array[int] = [0,2,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
 var listPokemonBattledAgainst : Array[BattlePokemon] = [] #Number of pokemon opponents that have participied in the battle to defeat the pokemon
-
+var battleSpot: BattleSpot
 #func _init(_pokemon : PokemonInstance, _IA: BattleIA):
 #func create(_pokemon : PokemonInstance, _IA: BattleIA):
 func _init(_pokemon: PokemonInstance, _IA: BattleIA = null):
@@ -173,13 +179,10 @@ func _init(_pokemon: PokemonInstance, _IA: BattleIA = null):
 		fainted = false
 	else:
 		fainted = true
-	
-	
-	for m in _pokemon.movements:
-		var battleMove = BattleMove.new(m, self)
-		moves.push_back(battleMove)
 
 	setIA(_IA)
+	
+	loadMoves()
 
 func setIA(_IA:BattleIA):
 	if _IA != null:
@@ -188,6 +191,14 @@ func setIA(_IA:BattleIA):
 			pkmnIA.assign_pokemon(self)
 		self.IA = pkmnIA
 		
+func setBattleSpot(battleSpot:BattleSpot):
+		self.battleSpot = battleSpot
+
+func loadMoves():
+	for m in instance.movements:
+		var battleMove = BattleMove.new(m, self)
+		moves.push_back(battleMove)
+
 func clear():
 	listAllies.clear()
 	listEnemies.clear()
@@ -275,7 +286,7 @@ func doAction():
 		#actionFinished.emit()
 	elif selected_action.type == CONST.BATTLE_ACTIONS.HUIR: #HUIR
 		if await tryEscapeFromBattle():
-			await GUI.battle.battleController.endBattle()
+			await GUI.battle.controller.endBattle()
 		else:
 			actionFinished.emit()
 
@@ -358,7 +369,7 @@ func getExpGained(opponent : BattlePokemon):
 	return floor(floor(floor(floor((b * lf / 7) * (1 / s)) * e) * a) * t)
 	
 func take_damage(amount):
-	await BattleAnimationList.new().getCommonAnimation("PokemonHit").doAnimation(self)
+	await BattleAnimationList.new().getCommonAnimation("PokemonHit").doAnimation(battleSpot)
 	hp_actual -= amount
 	hp_actual = max(0, hp_actual)
 	HPbar.updateHP(hp_actual)
@@ -367,7 +378,7 @@ func take_damage(amount):
 	#updateHP.emit(hp_actual)
 	
 func heal(amount):
-	await BattleAnimationList.new().getCommonAnimation("Heal").doAnimation(self)
+	await BattleAnimationList.new().getCommonAnimation("Heal").doAnimation(battleSpot)
 	hp_actual += amount
 	hp_actual = max(hp_actual, hp_total)
 	HPbar.updateHP(hp_actual)
@@ -470,12 +481,11 @@ func setDefeated():
 	animPlayer.play("Pokemon/DEFEATED")
 	await animPlayer.animation_finished
 	inBattle = false
-	GUI.battle.removeActivePokemon(self)
 	#Mostro missatge pokemon debilitat
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
 	
 func giveExpAtDefeat():
-	for p:PokemonInstance in instance.listPokemonBattledAgainst:
+	for p:BattlePokemon in listPokemonBattledAgainst:
 		var expGained = p.getExpGained(self)
 		await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 		print("kik")
@@ -484,7 +494,7 @@ func giveExpAtDefeat():
 		print("lel")
 	#Give Exp to all PKMNs with Exp. All equipped
 	for par:BattleParticipant in side.opponentSide.participants:
-		for p:PokemonInstance in par.getPKMNwithExpAll():
+		for p:BattlePokemon in par.getPKMNwithExpAll():
 			var expGained = p.getExpGained(self)
 			p.totalExp += expGained
 			await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
@@ -507,6 +517,9 @@ func levelUP():
 	await GUI.battle.msgBox.showLevelUpStats(self)
 	levelChanged.emit()
 
+func hasItemEquipped(item_id:int):
+	return instance.hasItemEquipped(item_id)
+	
 #Calculate the chances to escapte from the battle and its success
 func tryEscapeFromBattle():
 	var playerSpeed = speed
@@ -526,10 +539,21 @@ func tryEscapeFromBattle():
 	await GUI.battle.msgBox.showExitMessage(success)
 	return success
 
+func enterBattle(update:bool=false):
+	battleSpot.enterPokemon(self, update)
+
+func quitBattle(update:bool=false):
+	battleSpot.quitPokemon(update)
 
 func doAnimation(animName:String):
 	print("lololol")
 	await load("res://Animaciones/Batalla/Pokemon/Classes/"+str(animName)+".gd").new(self).doAnimation()
+
+func playAnimation(animation:String):
+	await battleSpot.playAnimation(animation)
+
+func get_path_to(node:Node2D):
+	return battleSpot.get_path_to(node)
 
 func _to_string():
 	return Name

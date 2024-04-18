@@ -71,6 +71,7 @@ func takeTurn():
 				for e in p.listEnemies:
 					if e.fainted:
 						await e.giveExpAtDefeat()
+						e.battleSpot.removeActivePokemon()
 			
 	#endTurn()
 	#takeTurn()
@@ -92,7 +93,7 @@ func initActivePokemons():
 	
 	for s in sides:
 		for p:BattleSpot in s.battleSpots:
-			p.enterPokemon(p.side.getNextPartyPokemon())
+			p.enterPokemon(p.side.getNextPartyPokemon(), true)
 		
 		#pk_per_part = pk_per_side / s.participants.size()
 		#for part:BattleParticipant in s.participants:

@@ -11,7 +11,8 @@ func _init(target:BattleMove):
 	super(target)
 
 
-func doAnimation(target : BattlePokemon):
+func doAnimation(target : BattleSpot):
+	#var target:BattleSpot = pokemon.battleSpot
 	var animPlayer = origin.animPlayer
 	#var targetAnimPlayer = target.animPlayer
 	var spr1 = Sprite2D.new()
@@ -30,7 +31,7 @@ func doAnimation(target : BattlePokemon):
 	spr1.texture = FRAME_TEXTURE
 	spr1.z_index = 10
 	spr1.visible = false
-	origin.add_child(spr1)
+	origin.battleSpot.add_child(spr1)
 	var animation: Animation = animPlayer.get_animation("Moves/TACKLE")
 
 #### Sprite:position

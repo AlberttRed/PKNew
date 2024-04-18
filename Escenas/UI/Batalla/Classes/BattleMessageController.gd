@@ -195,7 +195,7 @@ func showDefeatedPKMNMessage(_defeatedPKMN : BattlePokemon):
 		await GUI.battle.showMessageInput("¡El " + _defeatedPKMN.Name + type + " se debilitó!", false)
 	
 #Missatge que es mostra quan es guanya experiencia al derrotar un pokemon
-func showGainedEXPMessage(_pokemonTarget : PokemonInstance, expGained : int):
+func showGainedEXPMessage(_pokemonTarget : BattlePokemon, expGained : int):
 	print("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!")
 	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!", false)
 

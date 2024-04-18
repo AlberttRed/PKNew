@@ -75,7 +75,7 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 		animation = BattleAnimationList.new().getMoveAnimation(self)
 	
 
-func use(to: Array[BattlePokemon]):
+func use(to: Array[BattleSpot]):
 	
 	num_hits = getHits()
 	
@@ -301,9 +301,9 @@ func modifyStats(target : BattlePokemon):
 		var value =  statChangeValue[i]
 		target.battleStatsMod[stat-1] += value
 		if value > 0:
-			await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target)
+			await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target.battleSpot)
 		elif value < 0:
-			await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target)
+			await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target.battleSpot)
 		await GUI.battle.msgBox.showStatsMessage(target, stat-1, value)
 
 func causeAilment(target : BattlePokemon):

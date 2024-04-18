@@ -38,8 +38,8 @@ func getExpAllEquipedCount() -> int:
 	return count
 
 #How many pokmeon in the party have Exp. All item equipped
-func getPKMNwithExpAll() -> Array[PokemonInstance]:
-	var pkmns:Array[PokemonInstance] = []
+func getPKMNwithExpAll() -> Array[BattlePokemon]:
+	var pkmns:Array[BattlePokemon] = []
 	for p:BattlePokemon in pokemonTeam:
 		if p.hasItemEquipped(12):
 			pkmns.push_back(p)

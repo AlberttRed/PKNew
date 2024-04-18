@@ -17,6 +17,7 @@ func _ready():
 
 
 func initSprite(type : CONST.BATTLE_SIDES):
+	sprite.visible = true
 	if type == CONST.BATTLE_SIDES.PLAYER:
 		sprite.texture = activePokemon.back_sprite
 	elif type == CONST.BATTLE_SIDES.ENEMY:
@@ -54,6 +55,8 @@ func setSpritePosition():
 	
 func loadActivePokemon(pokemon:BattlePokemon):
 	activePokemon = pokemon
+	activePokemon.setBattleSpot(self)
+	activePokemon.inBattle = true
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		if GUI.battle.controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 			self.position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
@@ -66,20 +69,25 @@ func loadActivePokemon(pokemon:BattlePokemon):
 		$Shadow.visible=true
 	initPokemonUI()
 	self.visible = true
+	GUI.battle.controller.updateActivePokemonsInfo()
 	#pokemon.updateBattleInfo()
 	#controller.updateActivePokemons()
 
-func removeActivePokemon(pokemon:BattlePokemon):
-	pokemon.visible = false
-	if pokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
+func removeActivePokemon():
+	self.visible = false
+	activePokemon.inBattle = false
+	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		pass
 		#pokemon.reparent($playerBase/Party)
 		#pokemon.get_node("Shadow").visible=false
 		#pokemon.initPokemonUI($playerBase/HPBarA)
-	elif pokemon.sideType == CONST.BATTLE_SIDES.ENEMY:
+	elif activePokemon.sideType == CONST.BATTLE_SIDES.ENEMY:
 		#pokemon.reparent($enemyBase/Party)
-		pokemon.get_node("Shadow").visible=false
+		$Shadow.visible=false
 		#pokemon.initPokemonUI($enemyBase/HPBarA)
+	activePokemon.setBattleSpot(null)
+	activePokemon = null
+	GUI.battle.controller.updateActivePokemonsInfo()
 	#pokemon.updateBattleInfo()
 	
 func setParticipant(participant:BattleParticipant):
@@ -93,13 +101,14 @@ func swapPokemon(enterPokemon:BattlePokemon):
 	quitPokemon()
 	enterPokemon(enterPokemon)
 	
-func enterPokemon(pokemon:BattlePokemon):
+func enterPokemon(pokemon:BattlePokemon, update:bool=false):
 	loadActivePokemon(pokemon)
-	activePokemon.inBattle = true
-	GUI.battle.controller.updateActivePokemonsInfo()
+	##AQUI FAREM ANIMACIÓ ENTRADA
 	
-func quitPokemon():
-	activePokemon.inBattle = false
-	activePokemon = null
-	#unloadPokemon()
+func quitPokemon(update:bool=false):
+	removeActivePokemon()
+	##AQUI FAREM ANIMACIÓ SORTIDA
 	
+func playAnimation(animation:String):
+	animPlayer.play(animation)
+	await animPlayer.animation_finished

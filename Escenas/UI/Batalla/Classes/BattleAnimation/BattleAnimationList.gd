@@ -22,7 +22,7 @@ func getAilmentAnimation(_ailment : CONST.AILMENTS) -> BattleAilmentAnimation:
 # --------------------- MOVE ANIMATIONS ---------------------
 
 class MoveAnimation_000 extends BattleMoveAnimation:
-	func doAnimation(_target : BattlePokemon):
+	func doAnimation(_target : BattleSpot):
 		print("Do the animation bro")
 
 # --------------------- COMMON ANIMATIONS ---------------------
@@ -30,28 +30,28 @@ class MoveAnimation_000 extends BattleMoveAnimation:
 #Animació que es mostra quan un pokémon rep mal
 class CommonAnimation_PokemonHit extends BattleCommonAnimation:
 	
-	func doAnimation(_target : BattlePokemon):
+	func doAnimation(_target : BattleSpot):
 		_target.animPlayer.play("Pokemon/HIT")#("Common/Battle_PokemonHit")
 		await _target.animPlayer.animation_finished
 
 #Animació que es mostra quan a un pokémon li pugen els stats
 class CommonAnimation_StatUp extends BattleCommonAnimation:
 	
-	func doAnimation(_target : BattlePokemon):
+	func doAnimation(_target : BattleSpot):
 		_target.animPlayer.play("Pokemon/STATUP")#("Common/Battle_StatUp")
 		await _target.animPlayer.animation_finished
 
 #Animació que es mostra quan a un pokemon li baixen els stats
 class CommonAnimation_StatDown extends BattleCommonAnimation:
 	
-	func doAnimation(_target : BattlePokemon):
-		_target.animPlayer.play("Pokemon/STATDOWN")#("Common/Battle_StatDown")
-		await _target.animPlayer.animation_finished
+	func doAnimation(_target : BattleSpot):
+		await _target.playAnimation("Pokemon/STATDOWN")#("Common/Battle_StatDown")
+		#await _target.animPlayer.animation_finished
 
 #Animació que es mostra quan un pokemon es cura
 class CommonAnimation_Heal extends BattleCommonAnimation:
 	
-	func doAnimation(_target : BattlePokemon):
+	func doAnimation(_target : BattleSpot):
 		_target.animPlayer.play("Common/Battle_Heal")
 		await _target.animPlayer.animation_finished
 ## --------------------- WEATHER ANIMATIONS ---------------------
@@ -64,7 +64,8 @@ class CommonAnimation_Heal extends BattleCommonAnimation:
 
 #CONST.PARALYZE
 class AilmentAnimation_001 extends BattleAilmentAnimation:
-	func doAnimation(_target : BattlePokemon):
+	func doAnimation(_target : BattleSpot):
+		#var target:BattleSpot = _target.battleSpot
 		var spr1 = Sprite2D.new()
 		var spr2 = Sprite2D.new()
 		spr1.name = "Sprite2D"
