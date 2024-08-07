@@ -18,7 +18,7 @@ func showParty():
 	await GUI.battle.showParty()
 	
 func switchPokemon():
-	battleSpot.swapPokemon(switchInPokemon)
+	await battleSpot.swapPokemon(switchInPokemon)
 	await GUI.get_tree().create_timer(1).timeout
 	
 func setSwitchInPokemon(pokemonPartyIndex:int):#pokemon:BattlePokemon):

@@ -1,11 +1,19 @@
-class_name BattleCommonAnimation
+class_name BattleCommonAnimation extends Animation
 
-#var target : BattlePokemon
-var name : String
-func _init(_name : String):
+var root : Object
+var parameters : Dictionary
+#var animName : String
+func _init():#_rootAnimPlayer : AnimationPlayer, _animName : String):
 	print("yep")
-	name = _name
-#
+	#self.animName = _animName
+	#self.rootAnimPlayer = _rootAnimPlayer
+	
+func addParameter(key:String,value:Object):
+	parameters[key] = value
+	
+func getParameter(key:String):
+	return parameters[key]
+
 #func doAnimation(_target : BattlePokemon):
 #	assert(false, "Please override doAnimation()` in the derived script.")
 #

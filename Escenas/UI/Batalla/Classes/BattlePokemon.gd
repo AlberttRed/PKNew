@@ -5,6 +5,7 @@ signal updateEXP
 signal actionSelected
 signal actionFinished
 signal levelChanged
+signal playAnimation
 
 var instance : PokemonInstance
 
@@ -369,7 +370,8 @@ func getExpGained(opponent : BattlePokemon):
 	return floor(floor(floor(floor((b * lf / 7) * (1 / s)) * e) * a) * t)
 	
 func take_damage(amount):
-	await BattleAnimationList.new().getCommonAnimation("PokemonHit").doAnimation(battleSpot)
+	await battleSpot.playAnimation("HIT")
+	#await BattleAnimationList.new().getCommonAnimation("PokemonHit").doAnimation(battleSpot)
 	hp_actual -= amount
 	hp_actual = max(0, hp_actual)
 	HPbar.updateHP(hp_actual)
@@ -378,7 +380,8 @@ func take_damage(amount):
 	#updateHP.emit(hp_actual)
 	
 func heal(amount):
-	await BattleAnimationList.new().getCommonAnimation("Heal").doAnimation(battleSpot)
+	await battleSpot.playAnimation("HEAL")
+	#await BattleAnimationList.new().getCommonAnimation("Heal").doAnimation(battleSpot)
 	hp_actual += amount
 	hp_actual = max(hp_actual, hp_total)
 	HPbar.updateHP(hp_actual)
@@ -445,6 +448,7 @@ func changeStatus(_attacker : BattlePokemon, _status : CONST.AILMENTS):
 		elif _status == CONST.AILMENTS.BURN:
 			status = CONST.STATUS.BURNT
 		elif _status == CONST.AILMENTS.PARALYSIS:
+			await battleSpot.playAnimation("PARALYSIS")
 			status = CONST.STATUS.PARALISIS
 		elif _status == CONST.AILMENTS.FREEZE:
 			status = CONST.STATUS.FROZEN
@@ -545,12 +549,16 @@ func enterBattle(update:bool=false):
 func quitBattle(update:bool=false):
 	battleSpot.quitPokemon(update)
 
-func doAnimation(animName:String):
-	print("lololol")
-	await load("res://Animaciones/Batalla/Pokemon/Classes/"+str(animName)+".gd").new(self).doAnimation()
+#func doAnimation(animName:String):
+	#if FileAccess.file_exists("res://Animaciones/Batalla/Pokemon/Classes/" + str(animName) + ".gd") != null:
+		#var animation:BattlePokemonAnimation = load("res://Animaciones/Batalla/Pokemon/Classes/" + str(animName) + ".gd").new(self)
+		#print("lololol")
+		#await animation.doAnimation()
 
-func playAnimation(animation:String):
-	await battleSpot.playAnimation(animation)
+func doAnimation(animName:String):
+	#var animParams:Dictionary = {'Target':target}
+	playAnimation.emit(animName.to_upper(), {})
+	await SIGNALS.ANIMATION.finished_animation
 
 func get_path_to(node:Node2D):
 	return battleSpot.get_path_to(node)

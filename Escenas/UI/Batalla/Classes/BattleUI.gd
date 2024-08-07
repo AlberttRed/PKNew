@@ -38,6 +38,8 @@ var actionSignalSelected : Signal
 @onready var pnlMove3 : Panel = $PanelMoves/Moves/Move3
 @onready var pnlMove4 : Panel = $PanelMoves/Moves/Move4
 
+@onready var animPlayer : AnimationPlayer = $AnimationPlayer
+
 #@onready var playerParty : Node2D = $playerBase/PlayerParty
 #@onready var enemyParty : Node2D = $enemyBase/EnemyParty
 
@@ -105,7 +107,7 @@ func clear():
 	#controller.activePokemons[1].initPokemonUI($enemyBase/HPBarA)
 	
 func initSingleBattleUI():
-	pass
+	$playerBase/TrainerA.get_node("Sprite").position = CONST.BATTLE.BACK_SINGLE_TRAINER_POS
 	#playerSide.pokemonSpotA.hide()
 	#enemySide.pokemonSpotA.hide()
 	#$playerBase/PokemonPlayerA.visible = false
@@ -334,3 +336,10 @@ func showPanel(_panel : Panel):
 	$PanelMoves.hide()
 	
 	_panel.show()
+
+func playAnimation(animation:String, animParams:Dictionary = {}, _root:Node = self):
+	#if _root != null:
+		#var rootNode:NodePath = animPlayer.get_path_to(_root)
+		#animPlayer.root_node = rootNode
+	animPlayer.root = _root
+	await animPlayer.playAnimation(animation, animParams)

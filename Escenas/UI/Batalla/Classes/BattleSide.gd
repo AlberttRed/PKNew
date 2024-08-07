@@ -3,9 +3,13 @@ class_name BattleSide
 	
 @export var type : CONST.BATTLE_SIDES = CONST.BATTLE_SIDES.NONE
 @export var opponentSide : BattleSide
+@export var isWild : bool = false
 
 @onready var pokemonSpotA:BattleSpot = $PokemonA
 @onready var pokemonSpotB:BattleSpot = $PokemonB
+
+@onready var trainerA:BattleParticipant = $TrainerA
+@onready var trainerB:BattleParticipant = $TrainerB
 
 var participants : Array[BattleParticipant] # Numero d' "Entrenadors" del Side
 var pokemonParty : Array[BattlePokemon] # La party que tindrà el side en el combat, formada per pokemons del/s BattleParticipant/s
@@ -29,9 +33,15 @@ var escapeAttempts:int #Player attemps to exit the battle. If a Move is selected
 	#
 func addParticipant(_participant : Battler, _controllable : bool):
 	print("ia " + str(_participant.battleIA))
-	var p : BattleParticipant = BattleParticipant.new(_participant, _controllable)
-	p.side = self
-	participants.push_back(p)
+	var participant:BattleParticipant
+	if participants.is_empty():
+		participant = trainerA
+	else:
+		participant = trainerB
+	participant.setParticipant(_participant, _controllable)
+	##var p : BattleParticipant = BattleParticipant.new(_participant, _controllable)
+	participant.side = self
+	participants.push_back(participant)
 	
 
 func initSide(rules: BattleRules):
@@ -122,4 +132,7 @@ func clear():
 	pokemonParty.clear()
 	activePokemons.clear()
 
+func showActivePokemons():
+	for p:BattleParticipant in participants:
+		p.bringStarterPokemons()
 	

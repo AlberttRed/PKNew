@@ -1,7 +1,10 @@
-[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://u6x1v7lnb3d4"]
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://u6x1v7lnb3d4"]
 
 [sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_mtgc0"]
 output_port_for_preview = 0
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rihwa"]
+input_name = "point_coord"
 
 [sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_cpfxd"]
 default_input_values = [0, 0.5, 1, 0.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
@@ -55,4 +58,6 @@ nodes/vertex/connections = PackedInt32Array(3, 0, 2, 0)
 nodes/fragment/0/position = Vector2(360, 100)
 nodes/fragment/2/node = SubResource("VisualShaderNodeIf_mtgc0")
 nodes/fragment/2/position = Vector2(80, 80)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_rihwa")
+nodes/fragment/3/position = Vector2(-220, 60)
 nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

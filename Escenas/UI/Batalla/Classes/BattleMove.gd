@@ -2,6 +2,7 @@ class_name BattleMove
 
 signal updateHP
 signal actionSelected
+signal playAnimation
 
 var instance : MoveInstance
 
@@ -69,10 +70,10 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	
 	effect = BattleMoveEffects.new().getMoveEffect(self)
 	var n = instance.internalName.to_upper()
-	if FileAccess.file_exists("res://Animaciones/Batalla/Moves/Classes/" + str(n) + ".gd") != null:
-		animation = preload("res://Animaciones/Batalla/Moves/Classes/TACKLE.gd").new(self)
-	else:
-		animation = BattleAnimationList.new().getMoveAnimation(self)
+	#if FileAccess.file_exists("res://Animaciones/Batalla/Moves/Classes/" + str(n) + ".gd") != null:
+		#animation = preload("res://Animaciones/Batalla/Moves/Classes/TACKLE.gd").new(self)
+	#else:
+		#animation = BattleAnimationList.new().getMoveAnimation(self)
 	
 
 func use(to: Array[BattleSpot]):
@@ -90,7 +91,10 @@ func use(to: Array[BattleSpot]):
 	#await pokemon.applyLaterEffects()
 		
 func doAnimation(target):
-	await animation.doAnimation(target)
+	var animParams:Dictionary = {'Target':target}
+	playAnimation.emit(instance.internalName.to_upper(), animParams)
+	await SIGNALS.ANIMATION.finished_animation
+	#await animation.doAnimation(target)
 	
 func is_physic_category():
 	return damage_class == CONST.DAMAGE_CLASS.FISICO
@@ -297,20 +301,22 @@ func doDamage(target : BattlePokemon, damage : int):
 func modifyStats(target : BattlePokemon):
 	var i = 0
 	var text = ""
-	for stat in statChangeMod:
+	for stat:CONST.STATS in statChangeMod:
 		var value =  statChangeValue[i]
 		target.battleStatsMod[stat-1] += value
 		if value > 0:
-			await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target.battleSpot)
+			await target.battleSpot.playAnimation("STATUP",{'Stat': stat})
+			#await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target.battleSpot)
 		elif value < 0:
-			await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target.battleSpot)
+			await target.battleSpot.playAnimation("STATDOWN",{'Stat': stat})
+			#await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target.battleSpot)
 		await GUI.battle.msgBox.showStatsMessage(target, stat-1, value)
 
 func causeAilment(target : BattlePokemon):
 	if calculateAilmentChance():
 		#if ailmentType == CONST.AILMENTS.BURN or ailmentType == CONST.AILMENTS.FREEZE or ailmentType == CONST.AILMENTS.PARALYSIS or ailmentType == CONST.AILMENTS.POISON or ailmentType == CONST.AILMENTS.SLEEP:
 		print("Done!")
-		target.changeStatus(pokemon, ailmentType)
+		await target.changeStatus(pokemon, ailmentType)
 		await GUI.battle.msgBox.showAilmentMessage_Move(target, ailmentType)
 		return
 	print("But failed")

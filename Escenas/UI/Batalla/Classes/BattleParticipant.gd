@@ -1,13 +1,15 @@
+extends Node2D
 class_name BattleParticipant
 
 var pokemonTeam : Array[BattlePokemon] # El número de pokémons que tindrà el battler, i que per tant controlarà
 var controllable : bool # Indica si el participant el controlarà el Jugador o la IA
 var battleSpots : Array[BattleSpot] # Indica quins "spots" controla el participant (PokemonA/pokemonB)
+@onready var sprite : Sprite2D = $Sprite
 var side : BattleSide
 #var IA: BattleIA
 
 # Given a Battler, load the Participant Party from battler's party. Also assigns an IA to the particpant
-func _init(_participant : Battler, _controllable : bool):
+func setParticipant(_participant : Battler, _controllable : bool):
 	controllable = _controllable
 	#self.IA = _participant.battleIA
 	print(_participant.battleIA)
@@ -54,14 +56,24 @@ func assignBattleSpot(battleSpot:BattleSpot):
 	#GUI.battle.loadActivePokemon(enterPokemon)
 	##el BattlePokemon tindra una funció de seapOut o swapIN, que farà l'animació d'entrada/sortida
 	#print("SWAPPING BRO")
-#
+
+func bringStarterPokemons():
+	await playAnimation("PLAYER_TRAINER")
+		
+func showActivePokemons():
+	for b:BattleSpot in battleSpots:
+		b.enterPokemon(b.activePokemon)
+
+func playAnimation(animation:String, animParams:Dictionary = {}):
+	await GUI.battle.playAnimation(animation, animParams, self)
+
 #func bringInPokemon(pokemon:PokemonInstance, battleSpot:BattlePokemon):
 	#battleSpot.enterPokemon()
 	#
 #func bringOutOutPokemon(pokemon:PokemonInstance, battleSpot:BattlePokemon):
 	#battleSpot.quitPokemon()
 
-func queue_free():
-	if pokemonTeam != null:
-		pokemonTeam.clear()
-	free()
+#func queue_free():
+	#if pokemonTeam != null:
+		#pokemonTeam.clear()
+	#free()

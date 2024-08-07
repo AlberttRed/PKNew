@@ -41,6 +41,9 @@ func initBattle():
 	print("enemy size: " + str(enemySide.activePokemons.size()))
 	if enemySide.activePokemons.size() == 1:
 		await UI.showMessageInput("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!")
+	
+	await showActivePokemons()
+	
 	#await UI.msgBox.finished
 	#await UI.msgClosed
 	
@@ -93,24 +96,17 @@ func initActivePokemons():
 	
 	for s in sides:
 		for p:BattleSpot in s.battleSpots:
-			p.enterPokemon(p.side.getNextPartyPokemon(), true)
-		
-		#pk_per_part = pk_per_side / s.participants.size()
-		#for part:BattleParticipant in s.participants:
-			#
-			#var i : int = 0
-			#for p in s.pokemonParty:
-				##print(p.Name + " fainted? " + str(p.fainted))
-				#if !p.fainted and p.inBattleParty and i != pk_per_part:
-					##s.activePokemons.push_back(p)
-					##GUI.battle.loadActivePokemon(p)
-					#part.bringInPokemon(p)
-					#i += 1
-				#else:
-					#break
-					
-	#updateActivePokemons()
+			p.loadActivePokemon(p.side.getNextPartyPokemon())
+			
 	print_active_pokemons()
+	
+func showActivePokemons():
+	for s:BattleSide in sides:
+		if !s.isWild:
+			s.showActivePokemons()
+		#for p:BattleSpot in s.battleSpots:
+			#await p.enterPokemon(p.activePokemon, true)
+	await SIGNALS.ANIMATION.finished_animation
 			
 func print_active_pokemons():
 	for p in activePokemons:
@@ -243,3 +239,10 @@ func queue_free():
 
 	turnPokemonOrder.clear()
 
+#func doCommonAnimation(root:Object, animName:String):
+	#if FileAccess.file_exists("res://Animaciones/Batalla/General/Classes/" + str(animName) + ".gd") != null:
+		#var animation:BattleCommonAnimation = load("res://Animaciones/Batalla/General/Classes/" + str(animName) + ".gd").new(root.animPlayer, animName)
+		#print("lololol")
+		##animation.addParameter("battleSpot", active_pokemon.battleSpot)
+		#await animation.doAnimation()
+		##await load("res://Animaciones/Batalla/General/Classes/"+str(animName)+".gd").new(animName).doAnimation()

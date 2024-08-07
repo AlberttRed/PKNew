@@ -5,6 +5,7 @@ extends Node
 @onready var CMD = commands.new()
 @onready var SCENE_MANAGER = scene_manager.new()
 @onready var PLAYER = player.new()
+@onready var ANIMATION = animations.new()
 
 class event:
 	pass
@@ -38,7 +39,10 @@ class scene_manager:
 	
 class player:
 	signal collided
-# Called when the node enters the scene tree for the first time.
+
+class animations:
+	signal finished_animation
+	
 func _ready():
 	pass
 #	EVENT = event.new()

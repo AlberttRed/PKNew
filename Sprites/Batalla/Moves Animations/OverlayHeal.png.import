@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk1u1tb1yalsd"
-path="res://.godot/imported/OverlayStatUp.png-81002fc2af96db0d8257c3db4df7d0a3.ctex"
+uid="uid://cl8enkxd6y4qj"
+path="res://.godot/imported/OverlayHeal.png-7a8fe401f0a8c90b7e02650f86096dcc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Batalla/Animations OLD/OverlayStatUp.png"
-dest_files=["res://.godot/imported/OverlayStatUp.png-81002fc2af96db0d8257c3db4df7d0a3.ctex"]
+source_file="res://Sprites/Batalla/Moves Animations/OverlayHeal.png"
+dest_files=["res://.godot/imported/OverlayHeal.png-7a8fe401f0a8c90b7e02650f86096dcc.ctex"]
 
 [params]
 

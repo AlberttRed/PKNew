@@ -3,9 +3,9 @@ extends Node2D
 class_name BattleSpot
 
 @onready var sprite:Sprite2D = $Sprite
-@onready var animPlayer:AnimationPlayer = $AnimationPlayer
+#@onready var animPlayer = $AnimationPlayer
 
-var participant : BattleParticipant # Indica a quin participant pertany (entrenador)
+var participant : BattleParticipant# Indica a quin participant pertany (entrenador)
 var activePokemon:BattlePokemon #Indica quin Pokémon està en aquest spot en aquest moment
 var side:BattleSide
 var HPbar
@@ -17,16 +17,27 @@ func _ready():
 
 
 func initSprite(type : CONST.BATTLE_SIDES):
-	sprite.visible = true
+	sprite.visible = activePokemon.isWild
 	if type == CONST.BATTLE_SIDES.PLAYER:
-		sprite.texture = activePokemon.back_sprite
+		#var sprite2:Texture2D = activePokemon.back_sprite as Texture2D
+		var texture:Texture2D = ImageTexture.new().create_from_image(activePokemon.back_sprite.atlas.get_image().get_region(activePokemon.back_sprite.region))
+		texture.set_size_override(texture.get_size())
+		#var reg = activePokemon.back_sprite.region;
+		#var image = activePokemon.back_sprite.atlas.get_image().get_region(activePokemon.back_sprite.region);
+		#img_tex.create_from_image(activePokemon.back_sprite.atlas.get_image().get_region(activePokemon.back_sprite.region));
+		sprite.texture = texture#activePokemon.back_sprite as Texture2D
 	elif type == CONST.BATTLE_SIDES.ENEMY:
-		sprite.texture = activePokemon.front_sprite
+		#var sprite2:Texture2D = activePokemon.front_sprite as Texture2D
+		var texture:Texture2D = ImageTexture.new().create_from_image(activePokemon.front_sprite.atlas.get_image().get_region(activePokemon.front_sprite.region))
+
+		#img_tex.create_from_image(activePokemon.front_sprite.atlas.get_image().get_region(activePokemon.front_sprite.region));
+		sprite.texture = texture#activePokemon.front_sprite as Texture2D
 		
 func initPokemonUI():
+	playAnimation("RESET")
+	#animPlayer.play("GLOBAL/RESET")
 	initSprite(side.type)
 	setSpritePosition()
-	animPlayer.play("GLOBAL/RESET")
 	HPbar.init(activePokemon)
 	HPbar.updateUI()
 	
@@ -36,8 +47,12 @@ func setSpritePosition():
 	var initial_pos :int = 0
 	var battleY : int = 0
 	var altitude : int = 0
+	var offset = Vector2(0, 0)
 	
 	if side.type == CONST.BATTLE_SIDES.PLAYER:
+		
+		#Afegim 20 perquè en la conversió a ImageTexture queda l'sprite elevat
+		offset = Vector2(0, 20)
 		
 		battleY = activePokemon.battlerPlayerY * 2
 	
@@ -51,10 +66,11 @@ func setSpritePosition():
 		altitude = activePokemon.battlerAltitude * 2
 		
 	sprite.position.y = y_position - initial_pos + battleY - altitude
-
+	sprite.offset = offset
 	
 func loadActivePokemon(pokemon:BattlePokemon):
 	activePokemon = pokemon
+	activePokemon.playAnimation.connect(Callable(self, "playAnimation"))
 	activePokemon.setBattleSpot(self)
 	activePokemon.inBattle = true
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
@@ -70,12 +86,14 @@ func loadActivePokemon(pokemon:BattlePokemon):
 	initPokemonUI()
 	self.visible = true
 	GUI.battle.controller.updateActivePokemonsInfo()
-	#pokemon.updateBattleInfo()
-	#controller.updateActivePokemons()
+	
+	for m:BattleMove in activePokemon.moves:
+		m.playAnimation.connect(Callable(self, "playAnimation"))
 
 func removeActivePokemon():
 	self.visible = false
 	activePokemon.inBattle = false
+	activePokemon.playAnimation.disconnect(Callable(self, "playAnimation"))
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		pass
 		#pokemon.reparent($playerBase/Party)
@@ -86,9 +104,10 @@ func removeActivePokemon():
 		$Shadow.visible=false
 		#pokemon.initPokemonUI($enemyBase/HPBarA)
 	activePokemon.setBattleSpot(null)
+	for m:BattleMove in activePokemon.moves:
+		m.playAnimation.disconnect(Callable(self, "playAnimation"))
 	activePokemon = null
 	GUI.battle.controller.updateActivePokemonsInfo()
-	#pokemon.updateBattleInfo()
 	
 func setParticipant(participant:BattleParticipant):
 	self.participant = participant
@@ -98,17 +117,27 @@ func setSide(_side:BattleSide):
 	self.side = _side
 	
 func swapPokemon(enterPokemon:BattlePokemon):
-	quitPokemon()
-	enterPokemon(enterPokemon)
+	await quitPokemon()
+	loadActivePokemon(enterPokemon)
+	await enterPokemon(enterPokemon)
 	
 func enterPokemon(pokemon:BattlePokemon, update:bool=false):
-	loadActivePokemon(pokemon)
-	##AQUI FAREM ANIMACIÓ ENTRADA
+	#loadActivePokemon(pokemon)
+	if !pokemon.isWild:
+		if side.type == CONST.BATTLE_SIDES.ENEMY:
+			await playAnimation("ENEMY_THROWBALL",{'PokemonName': pokemon.Name})
+		else:
+			#await GUI.battle.showMessage("¡Adelante " + pokemon.Name + "!", false, 0.5)
+			await playAnimation("PLAYER_THROWBALL",{'PokemonName': pokemon.Name})#("PLAYER_THROWBALL")
+		#await animPlayer.playAnimation("IN_BATTLE")
+		#await activePokemon.doAnimation("INOUT_BATTLE")
 	
 func quitPokemon(update:bool=false):
+	await GUI.battle.showMessage("¡" + activePokemon.Name + ", cambio! ¡Vuelve aquí!", false, 0.5)
+	await playAnimation("OUT_BATTLE")
+	#await animPlayer.playAnimation("OUT_BATTLE")
 	removeActivePokemon()
 	##AQUI FAREM ANIMACIÓ SORTIDA
 	
-func playAnimation(animation:String):
-	animPlayer.play(animation)
-	await animPlayer.animation_finished
+func playAnimation(animation:String, animParams:Dictionary = {}):
+	await GUI.battle.playAnimation(animation, animParams, self)

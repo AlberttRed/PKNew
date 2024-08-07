@@ -53,6 +53,7 @@ func getPokemonEncounter():
 	
 	bc.playerSide.addParticipant(GLOBAL.PLAYER.trainer, true)
 	bc.enemySide.addParticipant(enemyBattler, false)
+	bc.enemySide.isWild = true
 	
 	bc.playerSide.initSide(br)
 	bc.enemySide.initSide(br)
