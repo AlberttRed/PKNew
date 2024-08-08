@@ -9,8 +9,8 @@ func _ready():
 	GLOBAL.PLAYER = self
 	$Sprite.texture = GAME_DATA.player_default_sprite
 	anim_state.travel("Walk")
-	SIGNALS.PLAYER.connect("collided", Callable(self, "interact_at_collide"))
-	#SIGNALS.PLAYER.connect("moved_signal", Callable(self, "checkEncounterType"))
+	SignalManager.PLAYER.connect("collided", Callable(self, "interact_at_collide"))
+	#SignalManager.PLAYER.connect("moved_signal", Callable(self, "checkEncounterType"))
 	moved_signal.connect(Callable(self, "checkEnteredTile"))
 	turned_signal.connect(Callable(self, "checkEnteredTile"))
 	#GAME_DATA.party = trainer.party#get_children()
@@ -48,7 +48,7 @@ func interact():
 		GLOBAL.SCENE_MANAGER.exec_event(next_event)
 		#next_event.exec()
 		await next_event.finished
-		#await SIGNALS.EVENT.finished
+		#await SignalManager.EVENT.finished
 		
 func interact_at_collide():
 	set_running(false)
@@ -61,7 +61,7 @@ func interact_at_collide():
 		GLOBAL.SCENE_MANAGER.exec_event(next_event)
 		#next_event.exec()
 		await next_event.finished
-		#await SIGNALS.EVENT.finished	
+		#await SignalManager.EVENT.finished	
 
 func _input(event):
 	if event.is_action_pressed("ui_accept") and !GUI.isVisible():

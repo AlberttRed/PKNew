@@ -26,11 +26,11 @@ func _ready():
 	else:
 		print("setting t")	
 		t = GLOBAL.PLAYER
-	#SIGNALS.CMD.waited.connect(Callable(self, "waited"))
+	#SignalManager.CMD.waited.connect(Callable(self, "waited"))
 
 func exec():
-	SIGNALS.CMD.started.emit()
-	SIGNALS.CMD.waited.connect(Callable(self, "waited"))
+	SignalManager.CMD.started.emit()
+	SignalManager.CMD.waited.connect(Callable(self, "waited"))
 	print(str(name) + " started")
 	
 	if move_commands != []:
@@ -48,14 +48,14 @@ func exec():
 		t.move_from_event = true
 		t.anim_tree.active = true
 		t.set_physics_process(false)
-		await SIGNALS.EVENT.add_cmd_move.emit(self)
+		await SignalManager.EVENT.add_cmd_move.emit(self)
 		await move()
-		SIGNALS.CMD.finished.emit()
+		SignalManager.CMD.finished.emit()
 		
 func force_exec(moves:Array[Directions]):
 	move_commands = moves
-	SIGNALS.CMD.started.emit()
-	SIGNALS.CMD.waited.connect(Callable(self, "waited"))
+	SignalManager.CMD.started.emit()
+	SignalManager.CMD.waited.connect(Callable(self, "waited"))
 	print(str(name) + " started")
 	
 	if move_commands != []:
@@ -73,9 +73,9 @@ func force_exec(moves:Array[Directions]):
 		t.move_from_event = true
 		t.anim_tree.active = true
 		t.set_physics_process(false)
-		await SIGNALS.EVENT.add_cmd_move.emit(self)
+		await SignalManager.EVENT.add_cmd_move.emit(self)
 		await move()
-		SIGNALS.CMD.finished.emit()
+		SignalManager.CMD.finished.emit()
 	
 func _physics_process(delta):
 #	if is_turning_command():
@@ -109,7 +109,7 @@ func move():
 		var time = CONST.InputActions[actual_command].right(4)
 	#	print(time)
 		await wait(time.to_float())
-		SIGNALS.CMD.waited.emit()
+		SignalManager.CMD.waited.emit()
 		#emit_signal("waited_signal")
 	else:
 		var dir = CONST.InputActions[actual_command]
@@ -191,7 +191,7 @@ func finish_cmd_move():
 	t.turned_signal.disconnect(Callable(self, "turned"))
 	t.moved_signal.disconnect(Callable(self, "moved"))
 	t.collision_signal.disconnect(Callable(self, "moved"))
-	SIGNALS.CMD.waited.disconnect(Callable(self, "waited"))
+	SignalManager.CMD.waited.disconnect(Callable(self, "waited"))
 	
 	t.anim_state.travel("Idle")
 	t.is_moving = false
@@ -199,8 +199,8 @@ func finish_cmd_move():
 	t = null
 	#set_physics_process(false)
 	print(str(name) + " finished")
-	SIGNALS.EVENT.delete_cmd_move.emit(self)
-	#SIGNALS.CMD.finished.emit()
+	SignalManager.EVENT.delete_cmd_move.emit(self)
+	#SignalManager.CMD.finished.emit()
 	
 func remote_input(dir, time = 0.2):
 	#print("wait")

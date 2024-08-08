@@ -128,9 +128,13 @@ func restartEscapeAttempts():
 	escapeAttempts = 0
 
 func clear():
+	for p:BattleParticipant in participants:
+		p.clear()
 	participants.clear()
 	pokemonParty.clear()
 	activePokemons.clear()
+
+	
 
 func showActivePokemons():
 	for p:BattleParticipant in participants:

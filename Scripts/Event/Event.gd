@@ -83,33 +83,33 @@ func _process(delta):
 	set_process(false)
 
 func exec():
-	#SIGNALS.EVENT.started.emit()
+	#SignalManager.EVENT.started.emit()
 	started.emit()
 	#GLOBAL.SCENE_MANAGER.add_active_event(self)
 	print("event started")
-	SIGNALS.EVENT.connect("play_animation", Callable(self, "play_animation"))
-	SIGNALS.EVENT.connect("check_pending_moves", Callable(self, "check_pending_moves"))
-	SIGNALS.EVENT.connect("add_cmd_move", Callable(self, "add_cmd_move"))
-	SIGNALS.EVENT.connect("delete_cmd_move", Callable(self, "delete_cmd_move"))
+	SignalManager.EVENT.connect("play_animation", Callable(self, "play_animation"))
+	SignalManager.EVENT.connect("check_pending_moves", Callable(self, "check_pending_moves"))
+	SignalManager.EVENT.connect("add_cmd_move", Callable(self, "add_cmd_move"))
+	SignalManager.EVENT.connect("delete_cmd_move", Callable(self, "delete_cmd_move"))
 	
 	if !Paralelo:
 		GLOBAL.PLAYER.eventOn = true
 	
 	active_page.call_deferred("exec")
 	await active_page.finished
-	#await SIGNALS.EVENT_PAGE.finished
+	#await SignalManager.EVENT_PAGE.finished
 	await check_pending_moves()
 	
 	print("event finished")
-	SIGNALS.EVENT.disconnect("check_pending_moves", Callable(self, "check_pending_moves"))
-	SIGNALS.EVENT.disconnect("add_cmd_move", Callable(self, "add_cmd_move"))
-	SIGNALS.EVENT.disconnect("delete_cmd_move", Callable(self, "delete_cmd_move"))
-	SIGNALS.EVENT.disconnect("play_animation", Callable(self, "play_animation"))
+	SignalManager.EVENT.disconnect("check_pending_moves", Callable(self, "check_pending_moves"))
+	SignalManager.EVENT.disconnect("add_cmd_move", Callable(self, "add_cmd_move"))
+	SignalManager.EVENT.disconnect("delete_cmd_move", Callable(self, "delete_cmd_move"))
+	SignalManager.EVENT.disconnect("play_animation", Callable(self, "play_animation"))
 	GLOBAL.SCENE_MANAGER.delete_active_event(self)
 	
 	finished.emit()
 	get_active_page()
-	#SIGNALS.EVENT.finished.emit()
+	#SignalManager.EVENT.finished.emit()
 	
 	if !Paralelo:
 		GLOBAL.PLAYER.eventOn = false
@@ -122,8 +122,8 @@ func get_active_page():
 	
 	active_page = event_pages.front()
 	
-	GLOBAL.disconnect_signal(SIGNALS.EVENT_PAGE, "load_sprite", Callable(self, "load_sprite"))
-	GLOBAL.disconnect_signal(SIGNALS.EVENT_PAGE, "set_through", Callable(self, "set_through"))
+	GLOBAL.disconnect_signal(SignalManager.EVENT_PAGE, "load_sprite", Callable(self, "load_sprite"))
+	GLOBAL.disconnect_signal(SignalManager.EVENT_PAGE, "set_through", Callable(self, "set_through"))
 	for p in event_pages:
 			if !p.condition1.is_empty():
 				print("CONDITION: " + p.condition1 + ": " + str(EVENTS_CONDITIONS.get_node(p.condition1).get_state()))
@@ -141,11 +141,11 @@ func get_active_page():
 #	active_page.connect("set_through", Callable(self, "set_through"))
 #	active_page.init_page()
 	print("page selected: " + str(active_page.name))
-	SIGNALS.EVENT_PAGE.connect("load_sprite", Callable(self, "load_sprite"))
-	SIGNALS.EVENT_PAGE.connect("set_through", Callable(self, "set_through"))
+	SignalManager.EVENT_PAGE.connect("load_sprite", Callable(self, "load_sprite"))
+	SignalManager.EVENT_PAGE.connect("set_through", Callable(self, "set_through"))
 	active_page.init_page()
-	GLOBAL.disconnect_signal(SIGNALS.EVENT_PAGE, "load_sprite", Callable(self, "load_sprite"))
-	GLOBAL.disconnect_signal(SIGNALS.EVENT_PAGE, "set_through", Callable(self, "set_through"))
+	GLOBAL.disconnect_signal(SignalManager.EVENT_PAGE, "load_sprite", Callable(self, "load_sprite"))
+	GLOBAL.disconnect_signal(SignalManager.EVENT_PAGE, "set_through", Callable(self, "set_through"))
 	
 func add_area2D():
 	var rectangleshape = RectangleShape2D.new()
@@ -195,14 +195,14 @@ func play_animation(animation):
 	animationPlayer.play("Eventos/" + animation.get_name())
 	await animationPlayer.animation_finished
 	#animationPlayer.remove_animation("Eventos/" + animation.get_name())
-	SIGNALS.EVENT.animation_finished.emit()
+	SignalManager.EVENT.animation_finished.emit()
 	
 func check_pending_moves():
 	print("moves active ", cmd_moves_active)
 	while !cmd_moves_active.is_empty():
 		await get_tree().process_frame
 	
-	SIGNALS.EVENT.moves_finished.emit()
+	SignalManager.EVENT.moves_finished.emit()
 	
 func add_cmd_move(cmd):
 	print("added move " + str(cmd.name) + " to " + str(name))

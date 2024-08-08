@@ -7,7 +7,7 @@ func _ready():
 	add_to_group(str(GLOBAL.actual_map.name))
 
 func exec():
-	SIGNALS.CMD.started.emit()
+	SignalManager.CMD.started.emit()
 	print(str(name) + " started")
 	
 	GLOBAL.SCENE_MANAGER.animationPlayer.play("FadeToNormal")
@@ -16,4 +16,4 @@ func exec():
 	GLOBAL.SCENE_MANAGER.faded = false
 	print(str(name) + " finished")
 	GLOBAL.PLAYER.unblock_movement()
-	SIGNALS.CMD.finished.emit()
+	SignalManager.CMD.finished.emit()

@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cjke06i77cedl"]
+
+[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated.gdshader" id="1_e2bb7"]
+
+[resource]
+shader = ExtResource("1_e2bb7")
+shader_parameter/cutoff = 38.994
+shader_parameter/VIEWPORT_HEIGHT = 384.0

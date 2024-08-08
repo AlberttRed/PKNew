@@ -16,7 +16,7 @@ func _ready():
 	add_to_group(str(GLOBAL.actual_map.name))
 	
 func exec():
-	SIGNALS.CMD.started.emit()
+	SignalManager.CMD.started.emit()
 	print(str(name) + " started")
 	print("hola")
 	if nodePath.is_empty():
@@ -27,7 +27,7 @@ func exec():
 	Target.set_through(Through)
 	print("adeu")
 	print(str(name) + " finished")
-	SIGNALS.CMD.finished.emit()
+	SignalManager.CMD.finished.emit()
 #
 #func wait(s):
 #	var timer = Timer.new()

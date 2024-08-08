@@ -20,7 +20,7 @@ func _ready():
 
 func exec():
 	#print("cmd groups ",  get_groups())
-	SIGNALS.CMD.started.emit()
+	SignalManager.CMD.started.emit()
 	print("cmd_msg started")
 	GUI.connect("input", Callable(self, "finish_cmd"))
 	if !choices.is_empty():
@@ -35,10 +35,10 @@ func is_continuous_message():
 	return false
 		
 func add_choice_cmd(c):
-	SIGNALS.CMD.selected_choice.emit(c)
+	SignalManager.CMD.selected_choice.emit(c)
 	
 func finish_cmd():
 	GUI.disconnect("input", Callable(self, "finish_cmd"))
 	GLOBAL.disconnect_signal(GUI, "selected_choice", Callable(self, "add_choice_cmd"))
 	print("cmd_msg finished")
-	SIGNALS.CMD.finished.emit()
+	SignalManager.CMD.finished.emit()

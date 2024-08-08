@@ -10,7 +10,7 @@ func _ready():
 	add_to_group(str(GLOBAL.actual_map.name))
 
 func exec():
-	SIGNALS.CMD.started.emit()
+	SignalManager.CMD.started.emit()
 	print(str(name) + " started")
 	
 	if !variable.is_empty():
@@ -18,7 +18,7 @@ func exec():
 		print("Set " + str(EVENTS_CONDITIONS.get_node(variable).name) + " " + str(state))
 		
 	print(str(name) + " finished")
-	SIGNALS.CMD.finished.emit()
+	SignalManager.CMD.finished.emit()
 #
 #func wait(s):
 #	var timer = Timer.new()

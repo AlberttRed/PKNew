@@ -32,13 +32,13 @@ var initialFrame = null
 
 func init_page():
 	
-	SIGNALS.EVENT_PAGE.load_sprite.emit(image, sprite_cols, sprite_rows, OffsetSprite)
-	SIGNALS.EVENT_PAGE.set_through.emit(Through)
+	SignalManager.EVENT_PAGE.load_sprite.emit(image, sprite_cols, sprite_rows, OffsetSprite)
+	SignalManager.EVENT_PAGE.set_through.emit(Through)
 	
 func exec():
 	index = -1
 	started.emit()
-	#SIGNALS.EVENT_PAGE.started.emit()
+	#SignalManager.EVENT_PAGE.started.emit()
 	print("page started")
 	
 	next_command()
@@ -57,23 +57,23 @@ func next_command():
 	if index < commands.size():
 		if actual_cmd != null:
 			
-			GLOBAL.disconnect_signal(SIGNALS.CMD, "finished", Callable(self, "next_command"))
+			GLOBAL.disconnect_signal(SignalManager.CMD, "finished", Callable(self, "next_command"))
 			if actual_cmd.is_in_group("MSG"):
-				GLOBAL.disconnect_signal(SIGNALS.CMD, "selected_choice", Callable(self, "add_choice_cmd"))
+				GLOBAL.disconnect_signal(SignalManager.CMD, "selected_choice", Callable(self, "add_choice_cmd"))
 		actual_cmd = commands[index] 
 			
 		if actual_cmd.is_in_group("MSG"):
 			if !actual_cmd.choices.is_empty():
-				SIGNALS.CMD.connect("selected_choice", Callable(self, "add_choice_cmd"))
+				SignalManager.CMD.connect("selected_choice", Callable(self, "add_choice_cmd"))
 			
-		SIGNALS.CMD.connect("finished", Callable(self, "next_command"))
+		SignalManager.CMD.connect("finished", Callable(self, "next_command"))
 		actual_cmd.exec()
 	else:
 
-		GLOBAL.disconnect_signal(SIGNALS.CMD, "finished", Callable(self, "next_command"))
+		GLOBAL.disconnect_signal(SignalManager.CMD, "finished", Callable(self, "next_command"))
 		if actual_cmd.is_in_group("MSG"):
-			GLOBAL.disconnect_signal(SIGNALS.CMD, "selected_choice", Callable(self, "add_choice_cmd"))
+			GLOBAL.disconnect_signal(SignalManager.CMD, "selected_choice", Callable(self, "add_choice_cmd"))
 		commands = get_children()
 		print("page finished")
 		finished.emit()
-		#SIGNALS.EVENT_PAGE.finished.emit()
+		#SignalManager.EVENT_PAGE.finished.emit()

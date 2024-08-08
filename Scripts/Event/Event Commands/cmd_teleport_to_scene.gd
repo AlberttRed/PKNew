@@ -15,7 +15,7 @@ func _ready():
 	add_to_group(str(GLOBAL.actual_map.name))
 
 func exec():
-	SIGNALS.CMD.started.emit()
+	SignalManager.CMD.started.emit()
 	print(str(name) + " started")
 	if Scene != null and Player_position != null:
 		var s = load("res://Escenas/Mapas/" + Scene + ".tscn")
@@ -26,4 +26,4 @@ func exec():
 		#await GLOBAL.SCENE_MANAGER.transitioned
 		
 	print(str(name) + " finished")
-	SIGNALS.CMD.finished.emit()
+	SignalManager.CMD.finished.emit()

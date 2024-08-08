@@ -14,9 +14,9 @@ func _ready():
 	add_to_group(str(GLOBAL.actual_map.name))
 
 func exec():
-	SIGNALS.CMD.started.emit()
+	SignalManager.CMD.started.emit()
 	print(str(name) + " started")
 	if Evento != null and Map_XY != null:
 		get_node(Evento).set_position(Map_XY)
 	print(str(name) + " finished")
-	SIGNALS.CMD.finished.emit()
+	SignalManager.CMD.finished.emit()

@@ -150,7 +150,7 @@ func move(delta):
 		is_moving = false
 		move_state == MoveState.IDLE
 		remote_collided_signal.emit(2)
-		SIGNALS.PLAYER.collided.emit()
+		SignalManager.PLAYER.collided.emit()
 		
 #Funció que detecta i retorna el tile que hi ha davant del jugador
 func get_tile(tilemap:TileMap, layer: int, pos: Vector2):

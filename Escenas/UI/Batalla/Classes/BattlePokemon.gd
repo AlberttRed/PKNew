@@ -5,7 +5,6 @@ signal updateEXP
 signal actionSelected
 signal actionFinished
 signal levelChanged
-signal playAnimation
 
 var instance : PokemonInstance
 
@@ -370,7 +369,7 @@ func getExpGained(opponent : BattlePokemon):
 	return floor(floor(floor(floor((b * lf / 7) * (1 / s)) * e) * a) * t)
 	
 func take_damage(amount):
-	await battleSpot.playAnimation("HIT")
+	await playAnimation("HIT")
 	#await BattleAnimationList.new().getCommonAnimation("PokemonHit").doAnimation(battleSpot)
 	hp_actual -= amount
 	hp_actual = max(0, hp_actual)
@@ -380,7 +379,7 @@ func take_damage(amount):
 	#updateHP.emit(hp_actual)
 	
 func heal(amount):
-	await battleSpot.playAnimation("HEAL")
+	await playAnimation("HEAL")
 	#await BattleAnimationList.new().getCommonAnimation("Heal").doAnimation(battleSpot)
 	hp_actual += amount
 	hp_actual = max(hp_actual, hp_total)
@@ -448,7 +447,7 @@ func changeStatus(_attacker : BattlePokemon, _status : CONST.AILMENTS):
 		elif _status == CONST.AILMENTS.BURN:
 			status = CONST.STATUS.BURNT
 		elif _status == CONST.AILMENTS.PARALYSIS:
-			await battleSpot.playAnimation("PARALYSIS")
+			await playAnimation("PARALYSIS")
 			status = CONST.STATUS.PARALISIS
 		elif _status == CONST.AILMENTS.FREEZE:
 			status = CONST.STATUS.FROZEN
@@ -472,18 +471,8 @@ func applyLaterEffects():
 		await effect.applyLaterEffects()
 
 func setDefeated():
-	var defeat_position:int = 0
-	if controllable:
-		defeat_position = 75
-	else:
-		defeat_position = 48
-	#Mostro animació pokemon debilitat
-	var anim: Animation = animPlayer.get_animation("Pokemon/DEFEATED")
-	var track_id: int = anim.find_track("Sprite:material:shader_parameter/cutoff", 0)
-	var key_id: int = anim.track_find_key(track_id, 0.0)
-	anim.track_set_key_value(track_id, key_id, defeat_position)
-	animPlayer.play("Pokemon/DEFEATED")
-	await animPlayer.animation_finished
+	side
+	await playAnimation("DEFEATED",{'Side':sideType})
 	inBattle = false
 	#Mostro missatge pokemon debilitat
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
@@ -555,10 +544,10 @@ func quitBattle(update:bool=false):
 		#print("lololol")
 		#await animation.doAnimation()
 
-func doAnimation(animName:String):
+func playAnimation(animName:String, animParams:Dictionary={}):
 	#var animParams:Dictionary = {'Target':target}
-	playAnimation.emit(animName.to_upper(), {})
-	await SIGNALS.ANIMATION.finished_animation
+	SignalManager.BATTLE.playAnimation.emit(animName.to_upper(),animParams, battleSpot)
+	await SignalManager.ANIMATION.finished_animation
 
 func get_path_to(node:Node2D):
 	return battleSpot.get_path_to(node)

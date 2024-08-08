@@ -29,7 +29,7 @@ func _on_area_2d_body_entered(body):
 			#GLOBAL.SCENE_MANAGER.load_player(self)
 			
 		
-		#SIGNALS.SCENE_MANAGER.load_map_connections.emit(self)
+		#SignalManager.SCENE_MANAGER.load_map_connections.emit(self)
 		#GLOBAL.SCENE_MANAGER.load_map_connections(self)
 		GLOBAL.SCENE_MANAGER.call_deferred("load_map_connections", self)
 		if GLOBAL.previous_map != null:

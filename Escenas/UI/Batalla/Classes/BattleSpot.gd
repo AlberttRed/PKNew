@@ -8,7 +8,7 @@ class_name BattleSpot
 var participant : BattleParticipant# Indica a quin participant pertany (entrenador)
 var activePokemon:BattlePokemon #Indica quin Pokémon està en aquest spot en aquest moment
 var side:BattleSide
-var HPbar
+var HPbar:HPBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,7 +70,7 @@ func setSpritePosition():
 	
 func loadActivePokemon(pokemon:BattlePokemon):
 	activePokemon = pokemon
-	activePokemon.playAnimation.connect(Callable(self, "playAnimation"))
+	#activePokemon.playAnimation.connect(Callable(self, "playAnimation"))
 	activePokemon.setBattleSpot(self)
 	activePokemon.inBattle = true
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
@@ -87,13 +87,13 @@ func loadActivePokemon(pokemon:BattlePokemon):
 	self.visible = true
 	GUI.battle.controller.updateActivePokemonsInfo()
 	
-	for m:BattleMove in activePokemon.moves:
-		m.playAnimation.connect(Callable(self, "playAnimation"))
+	#for m:BattleMove in activePokemon.moves:
+		#m.playAnimation.connect(Callable(self, "playAnimation"))
 
 func removeActivePokemon():
 	self.visible = false
 	activePokemon.inBattle = false
-	activePokemon.playAnimation.disconnect(Callable(self, "playAnimation"))
+	#activePokemon.playAnimation.disconnect(Callable(self, "playAnimation"))
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		pass
 		#pokemon.reparent($playerBase/Party)
@@ -104,8 +104,8 @@ func removeActivePokemon():
 		$Shadow.visible=false
 		#pokemon.initPokemonUI($enemyBase/HPBarA)
 	activePokemon.setBattleSpot(null)
-	for m:BattleMove in activePokemon.moves:
-		m.playAnimation.disconnect(Callable(self, "playAnimation"))
+	#for m:BattleMove in activePokemon.moves:
+		#m.playAnimation.disconnect(Callable(self, "playAnimation"))
 	activePokemon = null
 	GUI.battle.controller.updateActivePokemonsInfo()
 	
@@ -140,4 +140,6 @@ func quitPokemon(update:bool=false):
 	##AQUI FAREM ANIMACIÓ SORTIDA
 	
 func playAnimation(animation:String, animParams:Dictionary = {}):
-	await GUI.battle.playAnimation(animation, animParams, self)
+	SignalManager.BATTLE.playAnimation.emit(animation, animParams, self)
+	await SignalManager.ANIMATION.finished_animation
+	#await GUI.battle.playAnimation(animation, animParams, self)

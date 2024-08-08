@@ -5,7 +5,7 @@ extends BattleCommonAnimation
 const animName = "General/ENEMY_THROWBALL"
 var spr1:Sprite2D
 
-func doAnimation(_root):
+func setAnimation(_root):
 	root = _root
 	spr1 = Sprite2D.new()
 	spr1.name = "Pokeball"

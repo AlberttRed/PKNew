@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dmdm304dmklh8"]
+[gd_scene load_steps=57 format=3 uid="uid://dmdm304dmklh8"]
 
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="1_35cnb"]
 [ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleUI.gd" id="1_syfy0"]
@@ -28,11 +28,9 @@
 [ext_resource type="Texture2D" uid="uid://dbto76y0cchev" path="res://Sprites/Batalla/456b.png" id="18_owoop"]
 [ext_resource type="AnimationLibrary" uid="uid://casxsbdqp031y" path="res://Objetos/Batalla/Animaciones/Moves/Battle_PokemonAnimations.res" id="19_2e54j"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="19_osmde"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleAnimationPlayer.gd" id="20_hygyk"]
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="20_loxkp"]
 [ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleSpot.gd" id="20_yu0i4"]
 [ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated.gdshader" id="22_2sebl"]
-[ext_resource type="AnimationLibrary" uid="uid://btf1cle7g0a06" path="res://Objetos/Batalla/Animaciones/Moves/Battle_CommonAnimations.res" id="23_vixyq"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="25_tw0vt"]
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="26_tk2h0"]
 [ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="27_cqio0"]
@@ -43,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://6cpfkdqyugvc" path="res://Sprites/Pictures/trback001.png" id="37_nlq6k"]
 [ext_resource type="Texture2D" uid="uid://cubck6nvldnr0" path="res://Sprites/Pictures/trainer005.png" id="42_mypoh"]
 [ext_resource type="Texture2D" uid="uid://bswf5x8a3euym" path="res://Sprites/Pictures/trainer006.png" id="43_whljm"]
+[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleAnimationController.gd" id="44_dvxit"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb151"]
 texture = ExtResource("4_l76bn")
@@ -166,68 +165,6 @@ RichTextLabel/constants/shadow_outline_size = 1
 RichTextLabel/constants/table_h_separation = 3
 RichTextLabel/constants/table_v_separation = 3
 
-[sub_resource type="Animation" id="Animation_mn1fx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:material")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../TrainerA/Sprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(262, 93)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../TrainerA/Sprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_6moud"]
-resource_name = "aaaa"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7jj6"]
-_data = {
-"RESET": SubResource("Animation_mn1fx"),
-"aaaa": SubResource("Animation_6moud")
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8nwnv"]
-
 [sub_resource type="Theme" id="Theme_klgm5"]
 default_font = ExtResource("10_gjl27")
 default_font_size = 26
@@ -279,6 +216,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -0.000244141
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_syfy0")
@@ -290,7 +228,8 @@ texture = ExtResource("1_35cnb")
 centered = false
 
 [node name="PanelActions" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -592,13 +531,6 @@ material = SubResource("ShaderMaterial_ouusc")
 texture = ExtResource("18_owoop")
 metadata/_edit_lock_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/PokemonB"]
-libraries = {
-"Ailments": ExtResource("15_l48co"),
-"Common": ExtResource("23_vixyq")
-}
-script = ExtResource("20_hygyk")
-
 [node name="Shadow" type="Sprite2D" parent="playerBase/PokemonB"]
 visible = false
 position = Vector2(-38, 76)
@@ -607,7 +539,7 @@ texture = ExtResource("10_yvtq8")
 
 [node name="HPBarA" type="Sprite2D" parent="playerBase"]
 z_index = 5
-position = Vector2(526, -3)
+position = Vector2(770, -3)
 texture = ExtResource("20_loxkp")
 script = ExtResource("19_osmde")
 metadata/_edit_lock_ = true
@@ -770,18 +702,6 @@ metadata/_edit_lock_ = true
 
 [node name="Party" type="Node2D" parent="playerBase"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/Party"]
-root_node = NodePath("../../PokemonA")
-libraries = {
-"": SubResource("AnimationLibrary_u7jj6"),
-"Ailments": ExtResource("15_l48co"),
-"Battle_GeneralAnimations": ExtResource("17_g43h3"),
-"GLOBAL": ExtResource("16_d25ld"),
-"Moves": ExtResource("18_cpt8m"),
-"Pokemon": ExtResource("19_2e54j")
-}
-script = ExtResource("20_hygyk")
-
 [node name="TrainerA" type="Node2D" parent="playerBase"]
 position = Vector2(0, -109)
 script = ExtResource("35_5kxgh")
@@ -828,16 +748,6 @@ position = Vector2(2, 32)
 scale = Vector2(1.125, 1.125)
 texture = ExtResource("10_yvtq8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase/PokemonA"]
-libraries = {
-"Ailments": ExtResource("15_l48co"),
-"GLOBAL": ExtResource("16_d25ld"),
-"Moves": ExtResource("18_cpt8m"),
-"Pokemon": ExtResource("19_2e54j"),
-"Weather": SubResource("AnimationLibrary_8nwnv")
-}
-script = ExtResource("20_hygyk")
-
 [node name="PokemonB" type="Node2D" parent="enemyBase"]
 visible = false
 position = Vector2(96, -48)
@@ -854,16 +764,9 @@ visible = false
 position = Vector2(0, 96)
 texture = ExtResource("10_yvtq8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase/PokemonB"]
-libraries = {
-"Ailments": ExtResource("15_l48co"),
-"Common": ExtResource("23_vixyq")
-}
-script = ExtResource("20_hygyk")
-
 [node name="HPBarA" type="Sprite2D" parent="enemyBase"]
 z_index = 5
-position = Vector2(-144, -45)
+position = Vector2(-386, -45)
 texture = ExtResource("18_fvfel")
 script = ExtResource("19_osmde")
 metadata/_edit_lock_ = true
@@ -1000,7 +903,7 @@ offset_right = 512.0
 offset_bottom = 384.0
 theme_override_styles/panel = ExtResource("3_7u5r2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationController" type="AnimationPlayer" parent="."]
 libraries = {
 "Battle_AilmentAnimations": ExtResource("15_l48co"),
 "Battle_GeneralAnimations": ExtResource("17_g43h3"),
@@ -1008,7 +911,7 @@ libraries = {
 "Battle_PokemonAnimations": ExtResource("19_2e54j"),
 "GLOBAL": ExtResource("16_d25ld")
 }
-script = ExtResource("20_hygyk")
+script = ExtResource("44_dvxit")
 
 [connection signal="focus_entered" from="PanelActions/Commands/Luchar" to="." method="_on_action_focus_entered"]
 [connection signal="focus_exited" from="PanelActions/Commands/Luchar" to="." method="_on_action_focus_exited"]
@@ -1026,12 +929,8 @@ script = ExtResource("20_hygyk")
 [connection signal="focus_exited" from="PanelMoves/Moves/Move3" to="." method="_on_move_focus_exited"]
 [connection signal="focus_entered" from="PanelMoves/Moves/Move4" to="." method="_on_move_focus_entered"]
 [connection signal="focus_exited" from="PanelMoves/Moves/Move4" to="." method="_on_move_focus_exited"]
-[connection signal="animation_finished" from="playerBase/PokemonB/AnimationPlayer" to="playerBase/PokemonB/AnimationPlayer" method="_on_animation_finished"]
 [connection signal="value_changed" from="playerBase/HPBarA/exp_bar/TextureProgressBar" to="playerBase/HPBarA/exp_bar" method="_on_value_changed"]
 [connection signal="value_changed" from="playerBase/HPBarB/exp_bar/TextureProgressBar" to="playerBase/HPBarB/exp_bar" method="_on_value_changed"]
-[connection signal="animation_finished" from="playerBase/Party/AnimationPlayer" to="playerBase/Party/AnimationPlayer" method="_on_animation_finished"]
-[connection signal="animation_finished" from="enemyBase/PokemonA/AnimationPlayer" to="enemyBase/PokemonA/AnimationPlayer" method="_on_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
 
 [editable path="PanelMessageBox"]
 [editable path="playerBase/HPBarA/health_bar"]

@@ -2,7 +2,6 @@ class_name BattleMove
 
 signal updateHP
 signal actionSelected
-signal playAnimation
 
 var instance : MoveInstance
 
@@ -92,8 +91,9 @@ func use(to: Array[BattleSpot]):
 		
 func doAnimation(target):
 	var animParams:Dictionary = {'Target':target}
-	playAnimation.emit(instance.internalName.to_upper(), animParams)
-	await SIGNALS.ANIMATION.finished_animation
+	SignalManager.BATTLE.playAnimation.emit(instance.internalName.to_upper(), animParams, pokemon.battleSpot)
+	#playAnimation.emit(instance.internalName.to_upper(), animParams)
+	await SignalManager.ANIMATION.finished_animation
 	#await animation.doAnimation(target)
 	
 func is_physic_category():

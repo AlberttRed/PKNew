@@ -23,7 +23,7 @@ var faded = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#SIGNALS.SCENE_MANAGER.connect("load_map_connections", Callable(self, "load_map_connections"))
+	#SignalManager.SCENE_MANAGER.connect("load_map_connections", Callable(self, "load_map_connections"))
 	
 	print("loading map from " + str(name))
 	GLOBAL.SCENE_MANAGER = self
@@ -55,7 +55,7 @@ func transition_to_scene(new_scene, player_pos: Vector2, fade_to_normal: bool):
 #	await animationPlayer.animation_finished
 	print("ñeñeñe")
 	#transitioned.emit()
-	#SIGNALS.SCENE_MANAGER.finished_transition.emit()
+	#SignalManager.SCENE_MANAGER.finished_transition.emit()
 	
 func load_map(map, map_pos = Vector2(0, 0), connection:bool = false):
 	#map.set_owner = self
@@ -143,7 +143,7 @@ func wait_events_to_completion():
 	while !active_events.is_empty():
 		await get_tree().process_frame
 	
-	SIGNALS.SCENE_MANAGER.events_finished.emit()
+	SignalManager.SCENE_MANAGER.events_finished.emit()
 	
 func add_active_event(event):
 	print("added event " + str(event.name) + " to " + str(name))

@@ -104,9 +104,11 @@ func showActivePokemons():
 	for s:BattleSide in sides:
 		if !s.isWild:
 			s.showActivePokemons()
-		#for p:BattleSpot in s.battleSpots:
-			#await p.enterPokemon(p.activePokemon, true)
-	await SIGNALS.ANIMATION.finished_animation
+	await SignalManager.ANIMATION.finished_animation
+	for s:BattleSide in sides:
+		if !s.isWild:
+			for p:BattleSpot in s.battleSpots:
+				await GUI.battle.showHPBarUI(p.HPbar)
 			
 func print_active_pokemons():
 	for p in activePokemons:

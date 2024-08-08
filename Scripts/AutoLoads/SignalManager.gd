@@ -6,6 +6,7 @@ extends Node
 @onready var SCENE_MANAGER = scene_manager.new()
 @onready var PLAYER = player.new()
 @onready var ANIMATION = animations.new()
+@onready var BATTLE:BattleSignals = BattleSignals.new()
 
 class event:
 	pass
@@ -42,6 +43,9 @@ class player:
 
 class animations:
 	signal finished_animation
+	
+class BattleSignals:
+	signal playAnimation
 	
 func _ready():
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://c1wojnk4gqpx0"]
+[gd_scene load_steps=66 format=3 uid="uid://c1wojnk4gqpx0"]
 
 [ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleUI.gd" id="1_y88u2"]
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="2_4n17r"]
@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://dqkmrnqhdrcvb" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFoeBoxS.png" id="35_th2pa"]
 [ext_resource type="Texture2D" uid="uid://cubck6nvldnr0" path="res://Sprites/Pictures/trainer005.png" id="40_1uavv"]
 [ext_resource type="Texture2D" uid="uid://bswf5x8a3euym" path="res://Sprites/Pictures/trainer006.png" id="41_f6lv5"]
+[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNInOut.gdshader" id="41_gkbf1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb151"]
 texture = ExtResource("6_f5daf")
@@ -359,6 +360,18 @@ tracks/19/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath(".:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(770, -3)]
+}
 
 [sub_resource type="Animation" id="Animation_6moud"]
 resource_name = "aaaa"
@@ -419,6 +432,15 @@ RichTextLabel/constants/shadow_offset_y = 0
 RichTextLabel/constants/shadow_outline_size = 1
 RichTextLabel/constants/table_h_separation = 3
 RichTextLabel/constants/table_v_separation = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6mvdf"]
+shader = ExtResource("41_gkbf1")
+shader_parameter/displacement = Vector2(0, 0)
+shader_parameter/velocity = Vector2(1, 1)
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 1.0
+shader_parameter/scale = 0.0
+shader_parameter/pos = 1.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8nwnv"]
 
@@ -763,7 +785,7 @@ texture = ExtResource("13_xdjkr")
 centered = false
 
 [node name="PokemonA" type="Node2D" parent="playerBase"]
-position = Vector2(256, -16)
+position = Vector2(770, -3)
 script = ExtResource("14_ctpen")
 metadata/_edit_lock_ = true
 
@@ -831,10 +853,9 @@ texture = ExtResource("33_f8vih")
 
 [node name="HPBarA" type="Sprite2D" parent="playerBase"]
 z_index = 1
-position = Vector2(526, -3)
+position = Vector2(770, -3)
 texture = ExtResource("22_k631i")
 script = ExtResource("23_0408d")
-metadata/_edit_lock_ = true
 
 [node name="Name" type="BoxContainer" parent="playerBase/HPBarA"]
 offset_left = -89.6
@@ -909,6 +930,15 @@ texture_progress = ExtResource("30_f6qhl")
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/HPBarA/exp_bar"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/HPBarA"]
+libraries = {
+"": SubResource("AnimationLibrary_u7jj6"),
+"Ailments": ExtResource("16_xv8xw"),
+"General": ExtResource("19_ch81s"),
+"Moves": ExtResource("18_tly4n"),
+"Pokemon": ExtResource("19_g4kk5")
+}
 
 [node name="HPBarB" type="Sprite2D" parent="playerBase"]
 visible = false
@@ -1038,6 +1068,7 @@ texture = ExtResource("17_kiipe")
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/PokemonA"]
 z_index = 1
+material = SubResource("ShaderMaterial_6mvdf")
 texture = ExtResource("32_uw6fa")
 region_rect = Rect2(0, 0, 160, 160)
 
@@ -1078,7 +1109,7 @@ libraries = {
 }
 
 [node name="HPBarA" type="Sprite2D" parent="enemyBase"]
-position = Vector2(-144, -45)
+position = Vector2(-386, -45)
 texture = ExtResource("35_th2pa")
 script = ExtResource("23_0408d")
 metadata/_edit_lock_ = true
@@ -1195,7 +1226,7 @@ position = Vector2(331, -29)
 script = ExtResource("33_5u4xe")
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/TrainerA"]
-position = Vector2(78, 93)
+position = Vector2(262, 93)
 texture = ExtResource("40_1uavv")
 
 [node name="TrainerB" type="Node2D" parent="enemyBase"]

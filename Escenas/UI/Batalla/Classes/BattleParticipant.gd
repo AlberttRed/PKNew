@@ -58,14 +58,19 @@ func assignBattleSpot(battleSpot:BattleSpot):
 	#print("SWAPPING BRO")
 
 func bringStarterPokemons():
-	await playAnimation("PLAYER_TRAINER")
+	if side.type == CONST.BATTLE_SIDES.PLAYER:
+		await playAnimation("PLAYER_TRAINER")
+	else:
+		await playAnimation("ENEMY_TRAINER")
 		
 func showActivePokemons():
 	for b:BattleSpot in battleSpots:
 		b.enterPokemon(b.activePokemon)
 
 func playAnimation(animation:String, animParams:Dictionary = {}):
-	await GUI.battle.playAnimation(animation, animParams, self)
+	SignalManager.BATTLE.playAnimation.emit(animation, animParams, self)
+	await SignalManager.ANIMATION.finished_animation
+	#await GUI.battle.playAnimation(animation, animParams, self)
 
 #func bringInPokemon(pokemon:PokemonInstance, battleSpot:BattlePokemon):
 	#battleSpot.enterPokemon()
@@ -73,7 +78,6 @@ func playAnimation(animation:String, animParams:Dictionary = {}):
 #func bringOutOutPokemon(pokemon:PokemonInstance, battleSpot:BattlePokemon):
 	#battleSpot.quitPokemon()
 
-#func queue_free():
-	#if pokemonTeam != null:
-		#pokemonTeam.clear()
-	#free()
+func clear():
+	if pokemonTeam != null:
+		pokemonTeam.clear()

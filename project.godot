@@ -24,7 +24,7 @@ EVENTS_CONDITIONS="*res://Objetos/AutoLoads/EVENTS_CONDITIONS.tscn"
 DB="*res://Database/Data/DBManager.tscn"
 GUI="*res://Escenas/UI/GUI.tscn"
 GAME_DATA="*res://Scripts/AutoLoads/GAME_DATA.gd"
-SIGNALS="*res://Scripts/AutoLoads/SIGNALS.gd"
+SignalManager="*res://Scripts/AutoLoads/SignalManager.gd"
 REMOTE_MOVEMENT="*res://Objetos/RemoteMovement.tscn"
 
 [display]

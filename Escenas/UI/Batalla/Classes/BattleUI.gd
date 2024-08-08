@@ -20,7 +20,7 @@ var controller : BattleController = null
 @onready var enemySide: BattleSide = $enemyBase
 
 var msgBox : BattleMessageController
-var animController : BattleAnimationList
+#var animController : BattleAnimationList
 
 #var actionSignals : Array[Signal] = [selectMove, changePokemon, useBag, exitBattle]
 var actionSignalSelected : Signal
@@ -38,7 +38,7 @@ var actionSignalSelected : Signal
 @onready var pnlMove3 : Panel = $PanelMoves/Moves/Move3
 @onready var pnlMove4 : Panel = $PanelMoves/Moves/Move4
 
-@onready var animPlayer : AnimationPlayer = $AnimationPlayer
+@onready var animController : AnimationPlayer = $AnimationController
 
 #@onready var playerParty : Node2D = $playerBase/PlayerParty
 #@onready var enemyParty : Node2D = $enemyBase/EnemyParty
@@ -51,10 +51,11 @@ func _ready():
 	#pkmnEnemyNodes.push_back($enemyBase/PokemonEnemyA)
 	set_process_input(false)
 	
+	
 
 func initUI(_controller):
 	controller = _controller
-	
+	SignalManager.BATTLE.playAnimation.connect(playAnimation)
 	#updateUINodes()
 	
 	#initPartiesUI()
@@ -65,7 +66,7 @@ func initUI(_controller):
 		initDoubleBattleUI()
 	
 	msgBox = BattleMessageController.new($PanelMessageBox)
-	animController = BattleAnimationList.new()
+	#animController = BattleAnimationList.new()
 	
 	$PanelMessageBox.show()
 	$PanelActions.show()
@@ -87,8 +88,6 @@ func clear():
 	controller.queue_free()
 	playerSide.clear()
 	enemySide.clear()
-	msgBox = null
-	animController = null
 	
 #func initSingleBattleUI():
 	#$playerBase/PokemonPlayerA.visible = false
@@ -108,6 +107,12 @@ func clear():
 	
 func initSingleBattleUI():
 	$playerBase/TrainerA.get_node("Sprite").position = CONST.BATTLE.BACK_SINGLE_TRAINER_POS
+	$playerBase/HPBarA.position = CONST.BATTLE.SINGLE_PLAYERHPBAR_INITIALPOSITION
+	
+	if controller.rules.type == CONST.BATTLE_TYPES.WILD:
+		$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_FINALPOSITION
+	elif controller.rules.type == CONST.BATTLE_TYPES.TRAINER:
+		$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_INITIALPOSITION
 	#playerSide.pokemonSpotA.hide()
 	#enemySide.pokemonSpotA.hide()
 	#$playerBase/PokemonPlayerA.visible = false
@@ -128,7 +133,7 @@ func initDoubleBattleUI():
 func clearSingleBattleUI():
 	for p in controller.activePokemons:
 		p.HPbar.clearUI()
-		p.animPlayer.play("RESET")
+		playAnimation("RESET")
 		p.clear()
 		p.instance = null
 		
@@ -336,10 +341,17 @@ func showPanel(_panel : Panel):
 	$PanelMoves.hide()
 	
 	_panel.show()
+	
+func showHPBarUI(hpBar:HPBar):
+	var side:CONST.BATTLE_SIDES = hpBar.pokemon.battleSpot.side.type
+	await playAnimation("SHOW_HPBAR",{'Side':side},hpBar)
+
+func hideHPBarUI(hpBar:HPBar):
+	await playAnimation("HIDE_HPBAR",{},hpBar)
 
 func playAnimation(animation:String, animParams:Dictionary = {}, _root:Node = self):
 	#if _root != null:
 		#var rootNode:NodePath = animPlayer.get_path_to(_root)
 		#animPlayer.root_node = rootNode
-	animPlayer.root = _root
-	await animPlayer.playAnimation(animation, animParams)
+	animController.root = _root
+	await animController.playAnimation(animation, animParams)

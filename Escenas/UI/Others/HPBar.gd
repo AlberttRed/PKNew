@@ -1,4 +1,4 @@
-extends Node2D
+class_name HPBar extends Node2D
 
 signal updated
 
