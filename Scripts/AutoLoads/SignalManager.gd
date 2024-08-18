@@ -50,5 +50,3 @@ class BattleSignals:
 func _ready():
 	pass
 #	EVENT = event.new()
-
-

@@ -25,8 +25,8 @@ var text_completed = false
 
 @onready var char_percent = null
 
-var label = null
-var label2 = null
+var label:RichTextLabel = null
+var label2:RichTextLabel = null
 var timer : Timer = null
 var next : Sprite2D = null
 var animationPlayer : AnimationPlayer = null

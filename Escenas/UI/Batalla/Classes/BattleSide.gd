@@ -137,6 +137,10 @@ func clear():
 	
 
 func showActivePokemons():
-	for p:BattleParticipant in participants:
-		p.bringStarterPokemons()
+	if !isWild:
+		for p:BattleParticipant in participants:
+			p.bringStarterPokemons()
+		await SignalManager.ANIMATION.finished_animation
+		for p:BattleSpot in battleSpots:
+			await p.showHPBar()
 	

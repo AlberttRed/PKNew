@@ -22,5 +22,3 @@ func setAnimation(_root, animParams:Dictionary):#_init():
 
 func freeAnimation():
 	spr1.queue_free()
-
-

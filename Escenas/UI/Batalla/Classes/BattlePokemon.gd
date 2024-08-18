@@ -482,7 +482,7 @@ func giveExpAtDefeat():
 		var expGained = p.getExpGained(self)
 		await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 		print("kik")
-		p.HPbar.updateEXP(p.totalExp+expGained+200)
+		p.HPbar.updateEXP(p.totalExp+expGained)
 		await p.HPbar.updated
 		print("lel")
 	#Give Exp to all PKMNs with Exp. All equipped

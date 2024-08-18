@@ -254,6 +254,8 @@ func initBattleTransition():
 	GUI.transition.play("Transitions/Battle_WildTransition")
 	await transition.finished 
 	
+	#await GUI.battle.playAnimation("START_BATTLE_GRASS")
+	
 func resetTransitionScreen():
 	GUI.transition.play("RESET")
 	await transition.finished 

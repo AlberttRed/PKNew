@@ -34,7 +34,7 @@ func initSprite(type : CONST.BATTLE_SIDES):
 		sprite.texture = texture#activePokemon.front_sprite as Texture2D
 		
 func initPokemonUI():
-	playAnimation("RESET")
+	#playAnimation("RESET")
 	#animPlayer.play("GLOBAL/RESET")
 	initSprite(side.type)
 	setSpritePosition()
@@ -139,6 +139,9 @@ func quitPokemon(update:bool=false):
 	removeActivePokemon()
 	##AQUI FAREM ANIMACIÓ SORTIDA
 	
+func showHPBar():
+	await GUI.battle.showHPBarUI(HPbar)
+
 func playAnimation(animation:String, animParams:Dictionary = {}):
 	SignalManager.BATTLE.playAnimation.emit(animation, animParams, self)
 	await SignalManager.ANIMATION.finished_animation

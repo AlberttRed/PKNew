@@ -15,5 +15,3 @@ func setAnimation(_root):
 
 func freeAnimation():
 	spr1.queue_free()
-
-

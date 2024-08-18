@@ -21,11 +21,10 @@ func updateUI():
 	#hPBarNode.get_node("lblHP").text = str(pokemonInstance.hp_actual) + "/" + str(pokemonInstance.hp_total)
 	if pokemon.gender == CONST.GENEROS.HEMBRA:
 		get_node("Name/lblGender").text = "♀"
-		get_node("Name/lblGender").set("Label/colors/font_color", Color(0.97254902124405, 0.34509804844856, 0.15686275064945))
+		get_node("Name/lblGender").theme.set("Label/colors/font_color", Color("FF5D2C"))
 	elif pokemon.gender == CONST.GENEROS.MACHO:
 		get_node("Name/lblGender").text = "♂"
-		get_node("Name/lblGender").set("Label/colors/font_color", Color(0.18823529779911, 0.37647059559822, 0.84705883264542))
-	
+		get_node("Name/lblGender").theme.set("Label/colors/font_color", Color("3465DF"))#0.97254902124405, 0.34509804844856, 0.15686275064945))
 	else:
 		get_node("Name/lblGender").text = ""
 	

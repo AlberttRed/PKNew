@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dmdm304dmklh8"]
+[gd_scene load_steps=61 format=3 uid="uid://dmdm304dmklh8"]
 
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="1_35cnb"]
 [ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleUI.gd" id="1_syfy0"]
@@ -211,12 +211,39 @@ RichTextLabel/constants/shadow_outline_size = 1
 RichTextLabel/constants/table_h_separation = 3
 RichTextLabel/constants/table_v_separation = 3
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_rl54q"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_joc23"]
+texture = SubResource("CanvasTexture_rl54q")
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_wk4cv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("back:z_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ltpu"]
+_data = {
+"RESET": SubResource("Animation_wk4cv")
+}
+
 [node name="BATTLE" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -0.000244141
+offset_right = 512.0
+offset_bottom = 384.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_syfy0")
@@ -228,28 +255,30 @@ texture = ExtResource("1_35cnb")
 centered = false
 
 [node name="PanelActions" type="Panel" parent="."]
+visible = false
+z_index = 2
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -96.0
-offset_right = 256.0
+offset_left = -512.0
+offset_top = -480.0
+offset_bottom = -384.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("3_7u5r2")
 metadata/_edit_lock_ = true
 
 [node name="Label" type="RichTextLabel" parent="PanelActions"]
+auto_translate_mode = 2
 layout_mode = 0
 offset_left = 23.0
 offset_top = 23.0
 offset_right = 227.0
 offset_bottom = 72.0
 size_flags_stretch_ratio = 5.0
-auto_translate = false
 theme = ExtResource("4_441j1")
 theme_override_constants/line_separation = 7
 text = "¿Qué debería hacer
@@ -262,16 +291,16 @@ structured_text_bidi_override = 5
 metadata/_edit_lock_ = true
 
 [node name="Label2" type="RichTextLabel" parent="PanelActions/Label"]
+auto_translate_mode = 2
 layout_mode = 0
 offset_right = 204.0
 offset_bottom = 49.0
 size_flags_stretch_ratio = 5.0
-auto_translate = false
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
 theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
 theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
-theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_outline_size = 0
 theme_override_constants/line_separation = 7
 theme_override_fonts/normal_font = ExtResource("10_gjl27")
@@ -328,20 +357,23 @@ focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ey4ts")
 
 [node name="PanelMessageBox" parent="." instance=ExtResource("4_j0igc")]
-layout_mode = 0
+z_index = 2
+layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -96.0
-offset_right = 256.0
-offset_bottom = 0.0
+offset_left = -512.0
+offset_top = -480.0
+offset_right = 0.0
+offset_bottom = -384.0
 grow_horizontal = 2
 grow_vertical = 0
 metadata/_edit_lock_ = true
 
 [node name="Label" parent="PanelMessageBox" index="0"]
+auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -355,29 +387,30 @@ offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_separation = 7
-text = "hhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhh"
+text = ""
 
 [node name="Label2" parent="PanelMessageBox/Label" index="1"]
+auto_translate_mode = 2
 layout_mode = 3
 offset_right = 452.0
 offset_bottom = 56.0
 theme_override_constants/line_separation = 7
-text = "hhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhh"
 
 [node name="next" parent="PanelMessageBox" index="1"]
 metadata/_edit_lock_ = true
 
 [node name="PanelMoves" type="Panel" parent="."]
-layout_mode = 0
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -96.0
-offset_right = 256.0
+offset_left = -512.0
+offset_top = -480.0
+offset_bottom = -384.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("4_1pp74")
@@ -495,7 +528,7 @@ metadata/_edit_lock_ = true
 
 [node name="playerBase" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(-128, 240)
+position = Vector2(476, 240)
 script = ExtResource("30_y0xkt")
 type = 1
 metadata/_edit_lock_ = true
@@ -707,6 +740,7 @@ position = Vector2(0, -109)
 script = ExtResource("35_5kxgh")
 
 [node name="Sprite" type="Sprite2D" parent="playerBase/TrainerA"]
+visible = false
 position = Vector2(262, 93)
 texture = ExtResource("36_bvlcl")
 hframes = 5
@@ -717,13 +751,14 @@ position = Vector2(0, 9)
 script = ExtResource("35_5kxgh")
 
 [node name="Sprite" type="Sprite2D" parent="playerBase/TrainerB"]
+visible = false
 position = Vector2(78, 93)
 texture = ExtResource("37_nlq6k")
 hframes = 5
 
 [node name="enemyBase" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(256, 112)
+position = Vector2(-252, 112)
 script = ExtResource("30_y0xkt")
 type = 2
 metadata/_edit_lock_ = true
@@ -886,6 +921,7 @@ position = Vector2(331, -29)
 script = ExtResource("35_5kxgh")
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/TrainerA"]
+visible = false
 texture = ExtResource("42_mypoh")
 
 [node name="TrainerB" type="Node2D" parent="enemyBase"]
@@ -893,18 +929,19 @@ position = Vector2(331, 102)
 script = ExtResource("35_5kxgh")
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/TrainerB"]
+visible = false
 texture = ExtResource("43_whljm")
 
 [node name="back" type="Panel" parent="."]
-z_index = -1
 layout_mode = 0
 offset_top = 288.0
 offset_right = 512.0
 offset_bottom = 384.0
-theme_override_styles/panel = ExtResource("3_7u5r2")
+theme_override_styles/panel = SubResource("StyleBoxTexture_joc23")
 
 [node name="AnimationController" type="AnimationPlayer" parent="."]
 libraries = {
+"": SubResource("AnimationLibrary_0ltpu"),
 "Battle_AilmentAnimations": ExtResource("15_l48co"),
 "Battle_GeneralAnimations": ExtResource("17_g43h3"),
 "Battle_MovesAnimations": ExtResource("18_cpt8m"),

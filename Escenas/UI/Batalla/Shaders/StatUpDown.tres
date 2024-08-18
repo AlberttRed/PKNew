@@ -1,8 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d11gerbjif732"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d11gerbjif732"]
 
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated.gdshader" id="1_m5ovd"]
+[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/StatUpDown.gdshader" id="1_lkdgm"]
+[ext_resource type="Texture2D" uid="uid://dk116xfkakhg7" path="res://Sprites/Batalla/Moves Animations/OverlayStatDown.png" id="2_sosmq"]
 
 [resource]
-shader = ExtResource("1_m5ovd")
-shader_parameter/cutoff = 38.994
-shader_parameter/VIEWPORT_HEIGHT = 384.0
+shader = ExtResource("1_lkdgm")
+shader_parameter/Direction = Vector2(0, 1)
+shader_parameter/Speed = 0.5
+shader_parameter/overlay = ExtResource("2_sosmq")

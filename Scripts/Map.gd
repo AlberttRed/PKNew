@@ -42,5 +42,3 @@ func get_encounterArea(area_id: int):
 			return a
 	push_error("The encounter area " + CONST.ENCOUNTER_METHODS.keys()[area_id] + " is not setted for map " + str(GLOBAL.actual_map.name))
 	return null
-
-

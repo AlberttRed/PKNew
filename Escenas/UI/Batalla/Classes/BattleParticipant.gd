@@ -61,7 +61,8 @@ func bringStarterPokemons():
 	if side.type == CONST.BATTLE_SIDES.PLAYER:
 		await playAnimation("PLAYER_TRAINER")
 	else:
-		await playAnimation("ENEMY_TRAINER")
+		if !side.isWild:
+			await playAnimation("ENEMY_TRAINER")
 		
 func showActivePokemons():
 	for b:BattleSpot in battleSpots:

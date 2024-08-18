@@ -7,4 +7,3 @@ func _init(_ailment : CONST.AILMENTS):  ## Li passarem també la CONST amb el ti
 
 func doAnimation(_target : BattleSpot):
 	assert(false, "Please override doAnimation()` in the derived script.")
-

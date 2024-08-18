@@ -34,6 +34,9 @@ func playAnimation(name: StringName = "", _animParams:Dictionary = {}, custom_bl
 
 
 func _on_animation_finished(anim_name):
+	finish()
+
+func finish():
 	currentAnimationName=""
 	if currentAnimation!=null and currentAnimation.get_script() != null:
 		currentAnimation.freeAnimation()

@@ -40,7 +40,7 @@ func getAnimation(name:String) -> Animation:
 	var anim : Animation = null
 	for libName:String in get_animation_library_list():
 		var library:AnimationLibrary = get_animation_library(libName)
-		if library!=null && library.has_animation(name):
+		if libName!=null and !libName.is_empty() and library!=null and library.has_animation(name):
 			anim = library.get_animation(name)
 			currentAnimationName = libName+"/"+name
 			#if anim.has_meta("Script"):
@@ -57,6 +57,8 @@ func getAnimation(name:String) -> Animation:
 func _on_animation_finished(player:AnimationPlayer):
 	listPlayingAnimations.erase(player)
 	player.queue_free()
+	for p:BattleAnimationPlayer in listPlayingAnimations:
+		print(p.currentAnimationName)
 	if listPlayingAnimations.is_empty():
 			SignalManager.ANIMATION.finished_animation.emit()
 	
@@ -66,6 +68,14 @@ func _on_animation_finished(player:AnimationPlayer):
 	#currentAnimation = null
 	#if temporary:
 		#queue_free()
+
+func stopAnimation(animName:String):
+	for anim:AnimationPlayer in listPlayingAnimations:
+		if anim.current_animation.contains("/"+animName):
+			anim.stop()
+			anim.finish()
+			#listPlayingAnimations.erase(anim)
+			#anim.queue_free()
 
 func setAnimation():
 	if currentAnimation!=null and currentAnimation.has_method("setAnimation"):

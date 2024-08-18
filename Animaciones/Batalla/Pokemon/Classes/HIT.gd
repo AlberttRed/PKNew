@@ -12,5 +12,3 @@ func _init(pokemon:BattlePokemon):
 func doAnimation():
 	pokemon.animPlayer.play(animName)#("Common/Battle_StatUp")
 	await pokemon.animPlayer.animation_finished
-
-

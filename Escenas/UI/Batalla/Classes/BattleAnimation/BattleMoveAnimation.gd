@@ -12,4 +12,3 @@ func _init():
 	
 func doAnimation(_target : BattleSpot):
 	assert(false, "Please override doAnimation()` in the derived script.")
-

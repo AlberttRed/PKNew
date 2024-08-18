@@ -215,7 +215,8 @@ func showExitMessage(success:bool):
 	else:
 		msg = "¡No puedes huir!"
 	print(msg)
-	await GUI.battle.showMessageInput(msg, false)
+	await GUI.battle.showMessage(msg, false, 1.5)
+	#await GUI.battle.showMessageInput(msg, false)
 	#
 #func accept_msg():
 	#print("accept")
@@ -232,5 +233,7 @@ func msg_Finished():
 	print("finished")
 	finished.emit()
 
-func queue_free():
+func clear():
+	msgBox.label.text = ""
+	msgBox.label2.text = ""
 	msgBox.queue_free()

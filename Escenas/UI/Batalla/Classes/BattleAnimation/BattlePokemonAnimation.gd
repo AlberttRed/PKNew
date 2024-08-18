@@ -10,4 +10,3 @@ func _init():
 
 func doAnimation():
 	assert(false, "Please override doAnimation()` in the BattlePokemonAnimation script.")
-

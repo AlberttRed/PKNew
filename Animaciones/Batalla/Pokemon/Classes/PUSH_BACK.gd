@@ -26,7 +26,3 @@ func setAnimation(_root, animParams:Dictionary):#doAnimation():
 
 func freeAnimation():
 	pass
-
-
-
-

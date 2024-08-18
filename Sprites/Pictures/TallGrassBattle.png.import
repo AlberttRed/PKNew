@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca8mod1oyik6o"
-path="res://.godot/imported/battlebgField.png-62242daef32b01c3ff30e985077651ad.ctex"
+uid="uid://ynuynks1px8n"
+path="res://.godot/imported/TallGrassBattle.png-92add0772179d81fbca6a3afe64138c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Batalla/Battlebacks/battlebgField.png"
-dest_files=["res://.godot/imported/battlebgField.png-62242daef32b01c3ff30e985077651ad.ctex"]
+source_file="res://Sprites/Pictures/TallGrassBattle.png"
+dest_files=["res://.godot/imported/TallGrassBattle.png-92add0772179d81fbca6a3afe64138c5.ctex"]
 
 [params]
 

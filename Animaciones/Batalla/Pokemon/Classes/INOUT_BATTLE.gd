@@ -12,6 +12,3 @@ func _init(pokemon:BattlePokemon):
 func doAnimation():
 	pokemon.playAnimation(animName)
 	await pokemon.animPlayer.animation_finished
-
-
-

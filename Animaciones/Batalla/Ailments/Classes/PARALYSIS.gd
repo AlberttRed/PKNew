@@ -21,4 +21,3 @@ func setAnimation(_root, animParams:Dictionary):
 func freeAnimation():
 	sprRay1.queue_free()
 	sprRay2.queue_free()
-

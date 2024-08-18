@@ -621,5 +621,3 @@ func get_focus_owner(parent):
 			p = c.get_node("Panel")
 		if p.has_focus():
 			return p
-
-

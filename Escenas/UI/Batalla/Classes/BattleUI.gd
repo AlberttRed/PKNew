@@ -59,6 +59,8 @@ func initUI(_controller):
 	#updateUINodes()
 	
 	#initPartiesUI()
+	playerSide.position = CONST.BATTLE.PLAYER_BASE_INITIALPOSITION
+	enemySide.position = CONST.BATTLE.ENEMY_BASE_INITIALPOSITION
 	
 	if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 		initSingleBattleUI()
@@ -69,7 +71,7 @@ func initUI(_controller):
 	#animController = BattleAnimationList.new()
 	
 	$PanelMessageBox.show()
-	$PanelActions.show()
+	$PanelActions.hide()
 	$PanelMoves.hide()
 	
 	set_process_input(true)
@@ -80,7 +82,9 @@ func initUI(_controller):
 func clear():
 	hide()
 	set_process_input(false)
-	msgBox.queue_free()
+	msgBox.clear()
+	playAnimation("RESET")
+	SignalManager.BATTLE.playAnimation.disconnect(playAnimation)
 	if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 		clearSingleBattleUI()
 	elif controller.rules.mode == CONST.BATTLE_MODES.DOUBLE:
@@ -106,13 +110,17 @@ func clear():
 	#controller.activePokemons[1].initPokemonUI($enemyBase/HPBarA)
 	
 func initSingleBattleUI():
+	$playerBase/TrainerA.sprite.visible = true
 	$playerBase/TrainerA.get_node("Sprite").position = CONST.BATTLE.BACK_SINGLE_TRAINER_POS
-	$playerBase/HPBarA.position = CONST.BATTLE.SINGLE_PLAYERHPBAR_INITIALPOSITION
+	$playerBase/HPBarA.position = CONST.BATTLE.SINGLE_PLAYERHPBAR_A_INITIALPOSITION
+	$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_A_INITIALPOSITION
 	
 	if controller.rules.type == CONST.BATTLE_TYPES.WILD:
-		$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_FINALPOSITION
+		pass
+		#$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_FINALPOSITION
 	elif controller.rules.type == CONST.BATTLE_TYPES.TRAINER:
-		$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_INITIALPOSITION
+		$enemyBase/TrainerA.sprite.visible = true
+		$enemyBase/TrainerA.sprite.position = CONST.BATTLE.FRONT_SINGLE_TRAINER_POS
 	#playerSide.pokemonSpotA.hide()
 	#enemySide.pokemonSpotA.hide()
 	#$playerBase/PokemonPlayerA.visible = false
@@ -133,7 +141,6 @@ func initDoubleBattleUI():
 func clearSingleBattleUI():
 	for p in controller.activePokemons:
 		p.HPbar.clearUI()
-		playAnimation("RESET")
 		p.clear()
 		p.instance = null
 		
@@ -355,3 +362,6 @@ func playAnimation(animation:String, animParams:Dictionary = {}, _root:Node = se
 		#animPlayer.root_node = rootNode
 	animController.root = _root
 	await animController.playAnimation(animation, animParams)
+	
+func stopAnimation(animation:String):
+	animController.stopAnimation(animation)

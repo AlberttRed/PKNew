@@ -36,13 +36,17 @@ func initBattle():
 	UI = GUI.battle.initUI(self)
 	#Temporalment ho fem aixi, quan fem les animacions d'entrada etc es canviarà
 	initActivePokemons()
-	
+	await GUI.battle.playAnimation("START_BATTLE_GRASS")
+	#await GUI.battle.playAnimation("RESET")
 	stage = CONST.BATTLE_STAGES.SELECT_ACTION
 	print("enemy size: " + str(enemySide.activePokemons.size()))
-	if enemySide.activePokemons.size() == 1:
-		await UI.showMessageInput("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!")
 	
-	await showActivePokemons()
+	if rules.type == CONST.BATTLE_TYPES.WILD:
+		await startWildBattle()
+	elif rules.type == CONST.BATTLE_TYPES.TRAINER:
+		await startTrainerBattle()
+	
+	#await showActivePokemons()
 	
 	#await UI.msgBox.finished
 	#await UI.msgClosed
@@ -57,7 +61,9 @@ func takeTurn():
 			active_pokemon = p
 			active_pokemon.selectAction()
 			if p.controllable:
+				GUI.battle.playAnimation("SELECT_ACTION",{}, p.battleSpot)
 				await active_pokemon.actionSelected
+				GUI.battle.stopAnimation("SELECT_ACTION")
 			print(p.Name + " selected " + CONST.BATTLE_ACTIONS.keys()[p.selected_action.type])
 			
 		stage = CONST.BATTLE_STAGES.DO_ACTION
@@ -101,14 +107,19 @@ func initActivePokemons():
 	print_active_pokemons()
 	
 func showActivePokemons():
-	for s:BattleSide in sides:
-		if !s.isWild:
-			s.showActivePokemons()
-	await SignalManager.ANIMATION.finished_animation
-	for s:BattleSide in sides:
-		if !s.isWild:
-			for p:BattleSpot in s.battleSpots:
-				await GUI.battle.showHPBarUI(p.HPbar)
+	#for s:BattleSide in sides:
+		#if s.isWild:
+			#for p:BattleSpot in s.battleSpots:
+				#await GUI.battle.showHPBarUI(p.HPbar)
+		#else:
+			#await enemySide.showActivePokemons()
+	#await SignalManager.ANIMATION.finished_animation
+	#for s:BattleSide in sides:
+		#if !s.isWild:
+			#for p:BattleSpot in s.battleSpots:
+				#await GUI.battle.showHPBarUI(p.HPbar)
+	await enemySide.showActivePokemons()
+	await playerSide.showActivePokemons()
 			
 func print_active_pokemons():
 	for p in activePokemons:
@@ -175,6 +186,20 @@ func orderPokemonByActionPriority():
 	
 	turnPokemonOrder.sort_custom(sortChoices)
 	
+func startWildBattle():
+	for p:BattleSpot in enemySide.battleSpots:
+		await p.showHPBar()
+	if enemySide.activePokemons.size() == 1:
+		await GUI.battle.showMessage("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!", false, 1.5)
+		#await UI.showMessageInput("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!")
+	
+	await playerSide.showActivePokemons()
+	
+func startTrainerBattle():
+	pass
+	
+	#await enemySide.showActivePokemons()
+	#await playerSide.showActivePokemons()
 
 #Funció que ordena els actions de cada pokemon actiu segons prioritat, per saber en quin ordre s'executarà cada atac/acció
 func sortChoices(a : BattlePokemon, b : BattlePokemon):
