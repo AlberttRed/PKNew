@@ -46,6 +46,7 @@ class animations:
 	
 class BattleSignals:
 	signal playAnimation
+	signal playMoveAnimation
 	
 func _ready():
 	pass

@@ -2,7 +2,7 @@ extends BattleCommonAnimation
 #----------------------------------------------------
 #	Animació que llança la pokeball de l'entrenador per treure el pokémon
 #----------------------------------------------------
-const animName = "General/PLAYER_THROWBALL"
+const animName = "General/SHOW_HPBAR"
 
 func setAnimation(_root, animParams:Dictionary):#_init():
 	root = _root

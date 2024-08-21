@@ -3,21 +3,36 @@ class_name BattleAnimationPlayer extends AnimationPlayer
 signal finished
 
 var currentAnimationName :String
-var currentAnimation :Animation
+var animation :Animation:
+	set(_currentAnimation):
+		if _currentAnimation != null and !_currentAnimation.resource_name.is_empty():
+			self.get_animation_library("TEMP").add_animation(_currentAnimation.resource_name,_currentAnimation)
+		animation = _currentAnimation
 var animParams :Dictionary
 var root
 
 var temporary: bool = false
 
 func _enter_tree():
+	add_animation_library("TEMP", AnimationLibrary.new())
 	animation_finished.connect(_on_animation_finished)
 	
 func _exit_tree():
 	animation_finished.disconnect(_on_animation_finished)
 
+func setAnimation(_currentAnimation:Animation):
+	animation = _currentAnimation
+	#if _currentAnimation != null and !_currentAnimation.resource_name.is_empty():
+		#self.get_animation_library("TEMP").add_animation(_currentAnimation.resource_name,_currentAnimation)
+	#self.currentAnimation = _currentAnimation
+	
 func playAnimation(name: StringName = "", _animParams:Dictionary = {}, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false):
 	SignalManager.BATTLE.playAnimation.emit(name, animParams, get_node(root_node))
-	
+
+func playMoveAnimation(animation: Animation, _animParams:Dictionary = {}, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false):
+	#self.get_animation_library("TEMP").add_animation(animation.resource_name,animation)
+	SignalManager.BATTLE.playMoveAnimation.emit(animation, animParams, get_node(root_node))
+
 #func getAnimation(name:String) -> Animation:
 	#var anim : Animation = null
 	#for libName:String in get_animation_library_list():
@@ -38,9 +53,9 @@ func _on_animation_finished(anim_name):
 
 func finish():
 	currentAnimationName=""
-	if currentAnimation!=null and currentAnimation.get_script() != null:
-		currentAnimation.freeAnimation()
-	currentAnimation = null
+	if animation!=null and animation.get_script() != null:
+		animation.freeAnimation()
+	animation = null
 	finished.emit(self)
 
 #

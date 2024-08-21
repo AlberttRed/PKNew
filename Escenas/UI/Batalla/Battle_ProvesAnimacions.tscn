@@ -937,6 +937,7 @@ metadata/_edit_vertical_guides_ = [-240.0]
 metadata/_edit_lock_ = true
 
 [node name="BackTransition" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.556863, 0.843137, 0.968627, 1)
 z_index = 12
 scale = Vector2(2048, 1536)
@@ -944,6 +945,7 @@ texture = SubResource("CanvasTexture_egkj0")
 centered = false
 
 [node name="Grass1" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 14
 position = Vector2(0, 0.659)
@@ -951,6 +953,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_tckos")
 
 [node name="Grass2" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
 position = Vector2(0, 0.659)

@@ -2,7 +2,7 @@ extends BattleMoveAnimation
 #----------------------------------------------------
 #	Placaje
 #----------------------------------------------------
-const animName = "Moves/TACKLE"
+const animPath = "res://Animaciones/Batalla/Moves/Anim/TACKLE.res"
 
 const FRAME_TEXTURE:Texture2D = preload("res://Sprites/Batalla/Moves Animations/TackleFrames.png") 
 const FRAME_PLAYER_POS:Vector2 = Vector2(-258,112)
@@ -10,12 +10,14 @@ const FRAME_ENEMY_POS:Vector2 = Vector2(260,-72)
 
 var sprHit:Sprite2D
 
-#func _init(target:BattleMove):
-	#super(target)
+func init(_move :BattleMove):
+	self.move = _move
+	self.animation = load(animPath)
+	return self
 
 func setAnimation(_root, animParams:Dictionary):
 #func doAnimation(target : BattleSpot):
-	var target:BattleSpot = animParams.get('Target')
+	var target:BattleSpot = move.selectedTargets[0]#animParams.get('Target')
 	#var animPlayer = origin.animPlayer
 	#var targetAnimPlayer = target.animPlayer
 	sprHit = Sprite2D.new()
@@ -35,7 +37,7 @@ func setAnimation(_root, animParams:Dictionary):
 	sprHit.z_index = 10
 	sprHit.visible = false
 	_root.add_child(sprHit)
-	var animation: Animation =  self#animPlayer.get_animation(animName)
+	#var animation: Animation =  self#animPlayer.get_animation(animName)
 
 #### Sprite:position
 	var track_index = animation.find_track("Sprite:position", Animation.TYPE_VALUE)

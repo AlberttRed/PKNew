@@ -39,14 +39,14 @@ func showEffectivnessMessage(_target : BattlePokemon, _STAB : int):
 #Missatge que es mostra quan es realitza un atac
 func showMoveMessage(_user : BattlePokemon, _move : BattleMove):
 	var type = ""
-	if _user.controllable:
-		await GUI.battle.showMessage("¡" + _user.Name + " ha usado " + _move.Name + "!", false, 0.5)
-	else:
-		if GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
-			type = " enemigo"
-		else:
-			type = " salvaje"
-		await GUI.battle.showMessage("¡" + _user.Name + type + " ha usado " + _move.Name + "!", false, 0.5)
+	#if _user.controllable:
+		#await GUI.battle.showMessage("¡" + _user.Name + " ha usado " + _move.Name + "!", false, 0.5)
+	#else:
+		#if GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
+			#type = " enemigo"
+		#else:
+			#type = " salvaje"
+	await GUI.battle.showMessage("¡" + _user.battleMessageName + " ha usado " + _move.Name + "!", false, 0.5)
 		
 #Missatge que es mostra quan es modifiquen stats
 func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):

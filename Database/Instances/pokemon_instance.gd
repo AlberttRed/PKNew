@@ -259,7 +259,7 @@ func create(_randomize_stats : bool = true, _pkmn_id : int = -1, _level : int = 
 	return self
 	
 func _ready():
-	print("loading" + base.Name)
+	print("loading " + base.Name)
 	add_user_signal("hp_updated")
 #	if base != null:
 #		init_pokemon()
@@ -364,10 +364,12 @@ func load_moves():
 		moves.push_back(learnable_indexes[idx])
 		moves.push_back(learnable_indexes[idx+1])
 		moves.push_back(learnable_indexes[idx+2])
-		#moves.push_back(learnable_indexes[idx+3])
+		moves.push_back(learnable_indexes[idx+3])
 		
 		learnable_indexes = moves
 	#print(learnable_indexes)
+	if learnable_indexes.size() == 4:
+		learnable_indexes.remove_at(3)
 	#if p.movements.size() == 0 or p.movements == []:
 	for idx in learnable_indexes:
 		print("yep")

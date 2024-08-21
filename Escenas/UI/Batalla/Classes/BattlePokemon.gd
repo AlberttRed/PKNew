@@ -126,12 +126,12 @@ var nextLevelExpBase:int:
 		return instance.nextLevelExpBase
 
 var sprite : Texture2D
-var HPbar : Node2D:
+var HPbar : HPBar:
 	get:
 		return battleSpot.HPbar
-var animPlayer : AnimationPlayer:
-	get:
-		return battleSpot.animPlayer
+#var animPlayer : AnimationPlayer:
+	#get:
+		#return battleSpot.animPlayer
 
 var priority : int = 0 # indica quina prioritat té el pkmn dintre el battle en aquell turn. Per saber en quin ordre atacarà
 var moves : Array[BattleMove]
@@ -143,9 +143,21 @@ var canAttack : bool = true
 
 var activeEffectsFlags : Array[BattleEffect] = [] #Array[CONST.MOVE_EFFECTS] = []
 
-var battleStatsMod : Array[int] = [0,2,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
+var battleStatsMod : Array[int] = [0,0,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
 var listPokemonBattledAgainst : Array[BattlePokemon] = [] #Number of pokemon opponents that have participied in the battle to defeat the pokemon
 var battleSpot: BattleSpot
+
+var battleMessageName: String:
+	get():
+		var msgName:String = ""
+		if controllable:
+			msgName = Name
+		else:	
+			if isWild:
+				msgName = "El " + Name + " salvaje"
+			else:
+				msgName = "El " + Name + " enemigo"
+		return msgName
 #func _init(_pokemon : PokemonInstance, _IA: BattleIA):
 #func create(_pokemon : PokemonInstance, _IA: BattleIA):
 func _init(_pokemon: PokemonInstance, _IA: BattleIA = null):
@@ -218,19 +230,29 @@ func unloadPokemon():
 		
 func initTurn():
 	if controllable:
-		GUI.battle.selectMove.connect(Callable(self, "selectMove"))
-		GUI.battle.changePokemon.connect(Callable(self, "changePokemon"))
-		GUI.battle.useBag.connect(Callable(self, "useBag"))
-		GUI.battle.exitBattle.connect(Callable(self, "exitBattle"))
+		connectActions()
 
 
 func endTurn():
 	if controllable:
-		GUI.battle.selectMove.disconnect(Callable(self, "selectMove"))
-		GUI.battle.changePokemon.disconnect(Callable(self, "changePokemon"))
-		GUI.battle.useBag.disconnect(Callable(self, "useBag"))
-		GUI.battle.exitBattle.disconnect(Callable(self, "exitBattle"))
+		disconnectActions()
 	canAttack = true
+
+func connectActions():
+	GUI.battle.selectMove.connect(Callable(self, "selectMove"))
+	GUI.battle.changePokemon.connect(Callable(self, "changePokemon"))
+	GUI.battle.useBag.connect(Callable(self, "useBag"))
+	GUI.battle.exitBattle.connect(Callable(self, "exitBattle"))
+	
+func disconnectActions():
+	if GUI.battle.selectMove.is_connected(Callable(self, "selectMove")):
+		GUI.battle.selectMove.disconnect(Callable(self, "selectMove"))
+	if GUI.battle.changePokemon.is_connected(Callable(self, "changePokemon")):
+		GUI.battle.changePokemon.disconnect(Callable(self, "changePokemon"))
+	if GUI.battle.useBag.is_connected(Callable(self, "useBag")):
+		GUI.battle.useBag.disconnect(Callable(self, "useBag"))
+	if GUI.battle.exitBattle.is_connected(Callable(self, "exitBattle")):
+		GUI.battle.exitBattle.disconnect(Callable(self, "exitBattle"))
 
 func updateBattleInfo():
 	clear()
@@ -347,7 +369,7 @@ func getExpGained(opponent : BattlePokemon):
 	var b = opponent.instance.base_experience #base exp of fainted pokemon
 	var lf = opponent.level #level of fainted pokemon
 	var e = 1 # TO DO winning pokemon has lucky egg equipped or not
-	var s = 1 # Repartir Exp
+	var s:float = 1.0 # Repartir Exp
 	var t = 1 # if pokemon owner is the original owner or not
 	
 	if !opponent.isWild: 
@@ -357,7 +379,7 @@ func getExpGained(opponent : BattlePokemon):
 		e = 1.5
 	
 	if !participant.hasExpAllEquiped(): 
-		s = opponent.listPokemonBattledAgainst.size()
+		s = float(opponent.listPokemonBattledAgainst.size())
 	else:
 		if opponent.listPokemonBattledAgainst.has(self):
 			s = opponent.listPokemonBattledAgainst.size() * 2
@@ -366,26 +388,27 @@ func getExpGained(opponent : BattlePokemon):
 		
 	if instance.trainer_id != GAME_DATA.player_id:
 		t = 1.5
-	return floor(floor(floor(floor((b * lf / 7) * (1 / s)) * e) * a) * t)
+	
+	return floor(floor(floor(floor((b * lf / 7) * (1.0 / s)) * e) * a) * t)
 	
 func take_damage(amount):
-	await playAnimation("HIT")
-	#await BattleAnimationList.new().getCommonAnimation("PokemonHit").doAnimation(battleSpot)
 	hp_actual -= amount
 	hp_actual = max(0, hp_actual)
 	HPbar.updateHP(hp_actual)
 	await HPbar.updated
-	await updatePokemonState()
+
 	#updateHP.emit(hp_actual)
 	
-func heal(amount):
-	await playAnimation("HEAL")
+func heal(amount):#, type:CONST.HEAL_TYPE): #type MOVE or OBJECT
+	#L'animació de heal es farà desde la funció del move, ailment, o item que toqui
+	#if type == CONST.HEAL_TYPE.ITEM:
+		#await playAnimation("HEAL")
 	#await BattleAnimationList.new().getCommonAnimation("Heal").doAnimation(battleSpot)
 	hp_actual += amount
-	hp_actual = max(hp_actual, hp_total)
+	hp_actual = min(hp_actual, hp_total)
 	HPbar.updateHP(hp_actual)
 	await HPbar.updated
-	updatePokemonState()
+	#updatePokemonState()
 
 func HPpercentageLeft() -> float:
 	return float(hp_actual)/float(hp_total)
@@ -433,7 +456,7 @@ func print_moves():
 		m.print_move()
 
 func updatePokemonState():
-	if HPpercentageLeft() == 0.0:
+	if fainted:
 		#fainted = true
 		print(Name + " fainted!")
 		await setDefeated()
@@ -453,11 +476,13 @@ func changeStatus(_attacker : BattlePokemon, _status : CONST.AILMENTS):
 			status = CONST.STATUS.FROZEN
 		
 		if status != CONST.STATUS.OK:
-			addEffect(BattleAilmentEffect.new(true, _status, _attacker, self))
+			addEffect(load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[_status]+".gd").new(self))
+			#addEffect(BattleMoveAilmentEffect.new(true, _status, _attacker, self))
 		
 	if _status == CONST.AILMENTS.NONE:
 		status = CONST.STATUS.OK
-		removeStatus(BattleAilmentEffect.new(true, _status, _attacker, self))
+		removeStatus(load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[_status]+".gd").new(self))
+		#removeStatus(BattleMoveAilmentEffect.new(true, _status, _attacker, self))
 
 		
 	HPbar.updateStatusUI()
@@ -471,7 +496,7 @@ func applyLaterEffects():
 		await effect.applyLaterEffects()
 
 func setDefeated():
-	side
+	
 	await playAnimation("DEFEATED",{'Side':sideType})
 	inBattle = false
 	#Mostro missatge pokemon debilitat
@@ -482,8 +507,11 @@ func giveExpAtDefeat():
 		var expGained = p.getExpGained(self)
 		await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 		print("kik")
-		p.HPbar.updateEXP(p.totalExp+expGained)
-		await p.HPbar.updated
+		if p.inBattle:
+			p.HPbar.updateEXP(p.totalExp+expGained)
+			await p.HPbar.updated
+		else:
+			p.totalExp += expGained
 		print("lel")
 	#Give Exp to all PKMNs with Exp. All equipped
 	for par:BattleParticipant in side.opponentSide.participants:
@@ -495,7 +523,7 @@ func giveExpAtDefeat():
 func addEffect(effect : BattleEffect):
 	activeEffectsFlags.push_back(effect)
 	
-func removeStatus(effect : BattleAilmentEffect):
+func removeStatus(effect : BattleMoveAilmentEffect):
 	var delete
 	for e in activeEffectsFlags:
 		if e.isStatus:
@@ -554,3 +582,4 @@ func get_path_to(node:Node2D):
 
 func _to_string():
 	return Name
+	

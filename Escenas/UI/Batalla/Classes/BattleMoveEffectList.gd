@@ -28,12 +28,15 @@ class MoveEffect_002 extends BattleMoveEffect:
 		print("CATEGORY AILMENT")
 
 		doAnimation(to)
-		for t in to:
-
+		for bs:BattleSpot in to:
+			var target:BattlePokemon = bs.activePokemon
 			if moveCausesAilment(): 
 				print("Cause ailment!")
 				#Farà animació de cremar, dormir, el que sigui
-				await move.causeAilment(t.activePokemon)
+				if target.status != CONST.STATUS.OK:
+					await GUI.battle.showMessage("¡El ataque de " + move.pokemon.Name + " falló!", false, 1.5)
+				else:
+					await move.causeAilment(target)
 
 	func doAnimation(to):
 		print("jaja lol")

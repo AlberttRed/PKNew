@@ -50,4 +50,3 @@ func calculateFluctuating(level:int):
 		return pow(level, 3) * (14 + level) / 50
 	elif level >= 36 and level <= 100:
 		return pow(level, 3) * (32 + (level / 2)) / 50
-

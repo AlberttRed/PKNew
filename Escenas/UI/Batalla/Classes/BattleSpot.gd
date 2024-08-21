@@ -93,6 +93,10 @@ func loadActivePokemon(pokemon:BattlePokemon):
 func removeActivePokemon():
 	self.visible = false
 	activePokemon.inBattle = false
+	#activePokemon.instance = null
+	activePokemon.clear()
+	activePokemon.disconnectActions()
+	HPbar.clearUI()
 	#activePokemon.playAnimation.disconnect(Callable(self, "playAnimation"))
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		pass
@@ -135,12 +139,16 @@ func enterPokemon(pokemon:BattlePokemon, update:bool=false):
 func quitPokemon(update:bool=false):
 	await GUI.battle.showMessage("¡" + activePokemon.Name + ", cambio! ¡Vuelve aquí!", false, 0.5)
 	await playAnimation("OUT_BATTLE")
+	#await hideHPBar()
 	#await animPlayer.playAnimation("OUT_BATTLE")
 	removeActivePokemon()
 	##AQUI FAREM ANIMACIÓ SORTIDA
 	
 func showHPBar():
 	await GUI.battle.showHPBarUI(HPbar)
+
+func hideHPBar():
+	await GUI.battle.hideHPBarUI(HPbar)
 
 func playAnimation(animation:String, animParams:Dictionary = {}):
 	SignalManager.BATTLE.playAnimation.emit(animation, animParams, self)

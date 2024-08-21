@@ -1,12 +1,14 @@
-[gd_scene load_steps=55 format=3 uid="uid://b6jd5v84qimwd"]
+[gd_scene load_steps=57 format=3 uid="uid://b6jd5v84qimwd"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_xby2u"]
 [ext_resource type="Texture2D" uid="uid://b8v3bj2nw2qd" path="res://Sprites/Overworlds/Characters/trchar000.png" id="2_1dqiu"]
 [ext_resource type="PackedScene" uid="uid://c22wi0px6h3ic" path="res://Objetos/Trainer.tscn" id="3_ad010"]
 [ext_resource type="Resource" uid="uid://dh2bhrexble5f" path="res://Resources/Pokemon/001.tres" id="4_si8k2"]
-[ext_resource type="Resource" uid="uid://s7j2xs620wpq" path="res://Resources/Pokemon/065.tres" id="5_jcpso"]
-[ext_resource type="Resource" uid="uid://d1adxhvlvohva" path="res://Resources/Pokemon/077.tres" id="6_hf6ja"]
-[ext_resource type="Resource" uid="uid://cjd1k1q4cwqi4" path="res://Resources/Pokemon/110.tres" id="7_tqt53"]
+[ext_resource type="Resource" uid="uid://clr20wqayq5dp" path="res://Resources/Pokemon/025.tres" id="5_yjsrq"]
+[ext_resource type="Resource" uid="uid://0libuajxgq7q" path="res://Resources/Pokemon/029.tres" id="6_2tyfx"]
+[ext_resource type="Resource" uid="uid://cw6u8tdqk3g46" path="res://Resources/Pokemon/041.tres" id="7_f55aq"]
+[ext_resource type="Resource" uid="uid://clk6u1qre2p20" path="res://Resources/Pokemon/066.tres" id="8_cupxi"]
+[ext_resource type="Resource" uid="uid://dym3bm6a6y040" path="res://Resources/Pokemon/074.tres" id="9_t0ncu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m30hk"]
 size = Vector2(30, 30)
@@ -632,9 +634,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_0jgqw")
-}
 tree_root = SubResource("AnimationNodeStateMachine_utwpf")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
@@ -679,101 +678,98 @@ ability_id = 25
 nature_id = 19
 
 [node name="pkm2" parent="Trainer" index="1"]
-randomize_pokemon = true
-base = ExtResource("5_jcpso")
-level = 75
-gender = 1
-hp_EVs = 106
-attack_EVs = 132
-defense_EVs = 173
-spAttack_EVs = 79
-spDefense_EVs = 4
-speed_EVs = 185
-hp_IVs = 2
-attack_IVs = 9
-defense_IVs = 31
-spAttack_IVs = 11
-spDefense_IVs = 13
-speed_IVs = 4
-ability_id = 166
-nature_id = 2
-
-[node name="pkm3" parent="Trainer" index="2"]
-randomize_pokemon = true
-base = ExtResource("6_hf6ja")
-level = 95
-gender = 1
-hp_EVs = 219
-attack_EVs = 209
-defense_EVs = 193
-spAttack_EVs = 99
-spDefense_EVs = 147
-speed_EVs = 105
-hp_IVs = 19
-attack_IVs = 4
-defense_IVs = 4
-spAttack_IVs = 25
-spDefense_IVs = 27
-speed_IVs = 6
-ability_id = 194
-nature_id = 24
-
-[node name="pkm4" parent="Trainer" index="3"]
-randomize_pokemon = true
-base = ExtResource("7_tqt53")
-level = 91
-gender = 1
-hp_EVs = 43
-attack_EVs = 108
+base = ExtResource("5_yjsrq")
+level = 7
+gender = 2
+hp_EVs = 160
+attack_EVs = 173
 defense_EVs = 85
-spAttack_EVs = 18
-spDefense_EVs = 155
-speed_EVs = 64
-hp_IVs = 31
-attack_IVs = 5
-defense_IVs = 9
-spAttack_IVs = 11
-spDefense_IVs = 22
-ability_id = 124
-nature_id = 10
-
-[node name="pkm5" parent="Trainer" index="4"]
-randomize_pokemon = true
-base = ExtResource("7_tqt53")
-level = 56
-gender = 1
-hp_EVs = 39
-attack_EVs = 251
-defense_EVs = 19
-spAttack_EVs = 167
-spDefense_EVs = 30
-speed_EVs = 68
-hp_IVs = 25
-attack_IVs = 29
-defense_IVs = 8
-spAttack_IVs = 13
-spDefense_IVs = 13
-ability_id = 85
+spAttack_EVs = 200
+spDefense_EVs = 110
+speed_EVs = 177
+hp_IVs = 2
+attack_IVs = 22
+defense_IVs = 24
+spAttack_IVs = 23
+spDefense_IVs = 1
+speed_IVs = 15
+ability_id = 7
 nature_id = 12
 
-[node name="pkm6" parent="Trainer" index="5"]
-randomize_pokemon = true
-base = ExtResource("7_tqt53")
-level = 36
+[node name="pkm3" parent="Trainer" index="2"]
+base = ExtResource("6_2tyfx")
+level = 6
 gender = 1
-hp_EVs = 155
-attack_EVs = 196
-defense_EVs = 31
-spAttack_EVs = 205
-spDefense_EVs = 211
-speed_EVs = 227
-hp_IVs = 27
-attack_IVs = 19
-defense_IVs = 16
-spAttack_IVs = 24
-spDefense_IVs = 29
-speed_IVs = 23
-ability_id = 229
-nature_id = 1
+hp_EVs = 142
+attack_EVs = 7
+defense_EVs = 4
+spAttack_EVs = 115
+spDefense_EVs = 50
+speed_EVs = 139
+hp_IVs = 5
+attack_IVs = 15
+defense_IVs = 22
+spAttack_IVs = 12
+spDefense_IVs = 15
+speed_IVs = 26
+ability_id = 172
+nature_id = 6
+
+[node name="pkm4" parent="Trainer" index="3"]
+base = ExtResource("7_f55aq")
+level = 5
+gender = 1
+hp_EVs = 89
+attack_EVs = 224
+defense_EVs = 53
+spAttack_EVs = 19
+spDefense_EVs = 150
+speed_EVs = 107
+hp_IVs = 19
+attack_IVs = 18
+defense_IVs = 25
+spAttack_IVs = 11
+spDefense_IVs = 2
+speed_IVs = 15
+ability_id = 231
+nature_id = 11
+
+[node name="pkm5" parent="Trainer" index="4"]
+base = ExtResource("8_cupxi")
+level = 6
+gender = 1
+hp_EVs = 5
+attack_EVs = 33
+defense_EVs = 46
+spAttack_EVs = 251
+spDefense_EVs = 137
+speed_EVs = 211
+hp_IVs = 22
+attack_IVs = 26
+defense_IVs = 8
+spAttack_IVs = 23
+spDefense_IVs = 20
+speed_IVs = 31
+ability_id = 7
+nature_id = 9
+
+[node name="pkm6" parent="Trainer" index="5"]
+base = ExtResource("9_t0ncu")
+level = 8
+gender = 1
+hp_EVs = 218
+attack_EVs = 242
+defense_EVs = 177
+spAttack_EVs = 95
+spDefense_EVs = 115
+speed_EVs = 51
+hp_IVs = 30
+attack_IVs = 14
+defense_IVs = 23
+spAttack_IVs = 2
+spDefense_IVs = 25
+speed_IVs = 1
+ability_id = 166
+nature_id = 11
 
 [editable path="Trainer"]

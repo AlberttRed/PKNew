@@ -373,6 +373,11 @@ enum MOVE_EFFECTS {
 	EXCAVAR = 32
 }
 
+enum HEAL_TYPE {
+	MOVE,
+	ITEM
+}
+
 enum MOVE_CATEGORIES {
 	DAMAGE, #Moviments que "únicament" provoquen mal Ex: Placaje, Golpe Karate, Pistola Agua etc. 
 	AILMENT, # Moviments que "únicament" canvien l'status del pokemon rival. Ex: Onda Trueno, Somnífero... Cal tenir en compte que aqui també inclou atacs que provoquen confusió, o atacs com drenadoras.

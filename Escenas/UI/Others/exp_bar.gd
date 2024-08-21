@@ -8,18 +8,20 @@ var actual_level_exp :int = 0
 var next_level_exp :int = 0
 var actual_exp :int = 0
 
-func init(pokemon : BattlePokemon):
-	pokemon.updateEXP.connect(Callable(self, "on_exp_changes"))
-	levelUP.connect(Callable(pokemon, "levelUP"))
+func init(pokemon : PokemonInstance):
+	clear()
 	updateUI(pokemon)
 	#update_color()
 #	percentage = float(pokemon_target.hp_actual) / float(pokemon_target.hp_total)
 #	$health.scale = Vector2(percentage, 1)
 
-func updateUI(pokemon : BattlePokemon):
+func updateUI(pokemon : PokemonInstance):
 	actual_exp = pokemon.totalExp
 	actual_level_exp = pokemon.actualLevelExpBase
 	next_level_exp = pokemon.nextLevelExpBase
+	print("Min: " + str(actual_level_exp))
+	print("Actual: " + str(actual_exp))
+	print("Max: " + str(next_level_exp))
 	$TextureProgressBar.max_value = next_level_exp
 	$TextureProgressBar.min_value = actual_level_exp
 	$TextureProgressBar.value = actual_exp
@@ -64,15 +66,13 @@ func isNewLevel():
 	return $TextureProgressBar.value == next_level_exp
 
 
-func clear(pokemon):
+func clear():
 	actual_level_exp = 0
 	next_level_exp = 0
 	actual_exp = 0
 	$TextureProgressBar.min_value = 0
 	$TextureProgressBar.value = 0
 	$TextureProgressBar.max_value = 0
-	pokemon.updateEXP.disconnect(Callable(self, "on_exp_changes"))
-	levelUP.disconnect(Callable(pokemon, "levelUP"))
 
 func _on_value_changed(value):
 	if value == next_level_exp:

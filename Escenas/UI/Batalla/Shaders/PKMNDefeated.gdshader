@@ -1,7 +1,7 @@
 shader_type canvas_item;
 uniform float cutoff : hint_range(0, 100);
 uniform float VIEWPORT_HEIGHT = 384.0;
-varying vec2 world_position; 
+varying vec2 world_position;
 
 void vertex() {
 	// Called for every vertex the material is visible on.

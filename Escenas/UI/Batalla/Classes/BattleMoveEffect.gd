@@ -4,8 +4,8 @@ var move : BattleMove
 #func doEffect(to: Array[BattlePokemon]):
 #	assert(false, "Please override doEffect()` in the derived script.")
 
-func _init(_move : BattleMove, _pokemon : BattlePokemon):
-	super._init(_pokemon)
+func _init(_move : BattleMove):
+	super._init(_move.pokemon)
 	move = _move
 	
 func doAnimation(target):

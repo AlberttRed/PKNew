@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://dkjekvml5fqpp"]
+[gd_scene load_steps=93 format=3 uid="uid://dkjekvml5fqpp"]
 
 [ext_resource type="Texture2D" uid="uid://d2i5gus8tvoi" path="res://Escenas/UI/Menus/Resources/partybg.PNG" id="1_ew7hq"]
 [ext_resource type="Script" path="res://Escenas/UI/Menus/2 - Party/PARTY.gd" id="2"]
@@ -48,6 +48,7 @@
 [ext_resource type="Texture2D" uid="uid://bqy27j631k2qe" path="res://Escenas/UI/Menus/Resources/summary4.png" id="41_xg58t"]
 [ext_resource type="Texture2D" uid="uid://cj41hphayr3y0" path="res://Escenas/UI/Menus/Resources/summary5.png" id="42_vf0ii"]
 [ext_resource type="Texture2D" uid="uid://nmbu8413mkjl" path="res://Sprites/Pictures/EXPsummary_background.png" id="44_0vaoq"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="44_1etyu"]
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="45_0ap10"]
 [ext_resource type="Texture2D" uid="uid://d181nfjfvlqo7" path="res://Sprites/Pictures/EXPsummary_overlay.png" id="45_yx00i"]
 [ext_resource type="Texture2D" uid="uid://dyssdsut0bkqw" path="res://Sprites/Pictures/EXPsummary_progress.png" id="46_kss2v"]
@@ -1790,6 +1791,7 @@ horizontal_alignment = 1
 
 [node name="exp_bar" type="Node2D" parent="SUMMARY/SUMMARY_1"]
 position = Vector2(357, 376)
+script = ExtResource("44_1etyu")
 metadata/_edit_vertical_guides_ = [-205.084]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="SUMMARY/SUMMARY_1/exp_bar"]
@@ -2421,9 +2423,9 @@ offset_right = 279.0
 offset_bottom = 57.0
 theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/line_spacing = 10
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 0
-theme_override_constants/line_spacing = 10
 theme_override_fonts/font = ExtResource("19")
 theme_override_font_sizes/font_size = 26
 text = "Paraliza con el contacto."
@@ -2898,8 +2900,12 @@ offset_bottom = 96.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_3m2bu")
 
 [node name="Label" parent="MSG" index="0"]
+auto_translate_mode = 2
 offset_left = 13.899
 offset_right = 490.899
+
+[node name="Label2" parent="MSG/Label" index="1"]
+auto_translate_mode = 2
 
 [connection signal="focus_entered" from="PKMN_0/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_1/Panel" to="." method="_on_PKMN_focus_entered"]

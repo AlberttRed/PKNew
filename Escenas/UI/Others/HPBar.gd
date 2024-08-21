@@ -9,10 +9,13 @@ var pokemon : BattlePokemon
 
 func init(_pokemon : BattlePokemon):
 	pokemon = _pokemon
+	
 	healthBar.init(pokemon.instance)
 	if has_node("exp_bar"):
 		expBar = $exp_bar
-		expBar.init(pokemon)
+		expBar.levelUP.connect(Callable(pokemon, "levelUP"))
+		pokemon.updateEXP.connect(Callable(expBar,"on_exp_changes"))
+		expBar.init(pokemon.instance)
 
 
 func updateUI():
@@ -31,7 +34,7 @@ func updateUI():
 	updateStatusUI()
 	healthBar.updateUI(pokemon.instance)
 	if expBar!=null:
-		expBar.updateUI(pokemon)
+		expBar.updateUI(pokemon.instance)
 
 
 	#$health_bar.init(pokemon)
@@ -45,8 +48,13 @@ func clearUI():
 	get_node("lblLevel").text = ""
 	get_node("Name/lblGender").text = ""
 	statusUI.hide()
-	get_node("health_bar").clear(self)
-
+	get_node("health_bar").clear()
+	if has_node("exp_bar"):
+		if pokemon.updateEXP.is_connected(Callable(get_node("exp_bar"), "on_exp_changes")):
+			pokemon.updateEXP.disconnect(Callable(get_node("exp_bar"), "on_exp_changes"))
+		if get_node("exp_bar").levelUP.is_connected(Callable(pokemon, "levelUP")):
+			get_node("exp_bar").levelUP.disconnect(Callable(pokemon, "levelUP"))
+		get_node("exp_bar").clear()
 
 func updateStatusUI():
 	if pokemon.status != CONST.STATUS.OK:

@@ -2,7 +2,7 @@ extends BattleCommonAnimation
 #----------------------------------------------------
 #	Animació que llança la pokeball de l'entrenador per treure el pokémon
 #----------------------------------------------------
-const animName = "General/PLAYER_THROWBALL"
+const animName = "General/HIDE_HPBAR"
 
 func setAnimation(_root, animParams:Dictionary):#_init():
 	root = _root
@@ -13,9 +13,9 @@ func setAnimation(_root, animParams:Dictionary):#_init():
 	var finalPosition:Vector2
 	
 	if side == CONST.BATTLE_SIDES.PLAYER:
-		finalPosition = finalPosition + Vector2(244, 0)
+		finalPosition = initialPosition + Vector2(244, 0)
 	elif side == CONST.BATTLE_SIDES.ENEMY:
-		finalPosition = finalPosition - Vector2(244, 0)
+		finalPosition = initialPosition - Vector2(244, 0)
 	
 	# Posicion incial
 	var track_index = find_track(".:position", Animation.TYPE_VALUE)

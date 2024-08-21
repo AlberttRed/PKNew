@@ -11,7 +11,16 @@ var root
 
 var temporary: bool = false
 
-func playAnimation(name: StringName = "", _animParams:Dictionary = {}, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false):
+func playAnimation(animation, _animParams:Dictionary = {}, _root:Node = get_parent(), custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false):
+	root = _root
+	if animation is Animation:
+		await _playAnimationByAnimation(animation, custom_blend, custom_speed, from_end)
+	elif animation is String:
+		await _playAnimationByName(animation, _animParams, custom_blend, custom_speed, from_end)
+	else:
+		assert(false, "Invalid 'animation' param for function playAnimation")
+		
+func _playAnimationByName(name: StringName = "", _animParams:Dictionary = {}, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false):
 	var animPlayer : BattleAnimationPlayer = newAnimationPlayer()
 	animParams = _animParams
 	listPlayingAnimations.push_back(animPlayer)
@@ -20,22 +29,40 @@ func playAnimation(name: StringName = "", _animParams:Dictionary = {}, custom_bl
 	root.add_child(animPlayer)
 	animPlayer.finished.connect(_on_animation_finished)
 
-	animPlayer.currentAnimation = getAnimation(name)
+	animPlayer.setAnimation(getAnimation(name))
 
-	if animPlayer.currentAnimation == null:
+	if animPlayer.animation == null:
 		assert(false, "Animation " + name + " does not exist.")
 		return
 		#
-	if animPlayer.currentAnimation.has_method("setAnimation"):#get_script() != null:
-		animPlayer.currentAnimation.setAnimation(root, animParams)
+	if animPlayer.animation.has_method("setAnimation"):#get_script() != null:
+		animPlayer.animation.setAnimation(root, animParams)
 	
-	#if animPlayer.currentAnimation.has_meta("Script"):
-		#animPlayer.currentAnimation.set_script(animPlayer.currentAnimation.get_meta("Script"))
-		#animPlayer.currentAnimation.setAnimation(get_parent(), animParams)
-
 	animPlayer.play(currentAnimationName, custom_blend, custom_speed, from_end)
 	await animPlayer.animation_finished
-	#
+
+func _playAnimationByAnimation(animation: Animation, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false):
+	var animPlayer : BattleAnimationPlayer = newAnimationPlayer()
+	listPlayingAnimations.push_back(animPlayer)
+	#set_process(true)
+
+	root.add_child(animPlayer)
+	animPlayer.finished.connect(_on_animation_finished)
+
+	#animPlayer.setAnimation(animation)
+	animPlayer.animation = animation#getAnimation(name)
+
+	if animPlayer.animation == null:
+		assert(false, "Animation " + name + " does not exist.")
+		return
+		#
+	if animPlayer.animation.has_method("setAnimation"):#get_script() != null:
+		animPlayer.animation.setAnimation(root, animParams)
+	
+	animPlayer.play("TEMP/"+animation.resource_name, custom_blend, custom_speed, from_end)
+	await animPlayer.animation_finished
+
+
 func getAnimation(name:String) -> Animation:
 	var anim : Animation = null
 	for libName:String in get_animation_library_list():

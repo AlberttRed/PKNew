@@ -56,7 +56,7 @@ func initBattle():
 func takeTurn():
 	if stage == CONST.BATTLE_STAGES.SELECT_ACTION:
 		print("active pokemons :" + str(activePokemons))
-		for p in activePokemons:
+		for p:BattlePokemon in activePokemons:
 			p.initTurn()
 			active_pokemon = p
 			active_pokemon.selectAction()

@@ -548,13 +548,14 @@ func load_summary(index:int):
 	summary[0].get_node("dExperiencia").text = str(GAME_DATA.party[index].totalExp)
 	summary[0].get_node("dExperiencia/Outline").text = str(GAME_DATA.party[index].totalExp)
 	
-	summary[0].get_node("dSigNivel").text = str(GAME_DATA.party[index].nextLevelExpBase)
-	summary[0].get_node("dSigNivel/Outline").text = str(GAME_DATA.party[index].nextLevelExpBase)
+	summary[0].get_node("dSigNivel").text = str(GAME_DATA.party[index].nextLevelExpBase - GAME_DATA.party[index].totalExp)
+	summary[0].get_node("dSigNivel/Outline").text = str(GAME_DATA.party[index].nextLevelExpBase - GAME_DATA.party[index].totalExp)
 
-	summary[0].get_node("exp_bar").get_node("TextureProgressBar").max_value = GAME_DATA.party[index].nextLevelExpBase
-	summary[0].get_node("exp_bar").get_node("TextureProgressBar").min_value = GAME_DATA.party[index].actualLevelExpBase
-	summary[0].get_node("exp_bar").get_node("TextureProgressBar").value = GAME_DATA.party[index].totalExp
-	
+	summary[0].get_node("exp_bar").init(GAME_DATA.party[index])
+	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").max_value = GAME_DATA.party[index].nextLevelExpBase
+	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").min_value = GAME_DATA.party[index].actualLevelExpBase
+	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").value = GAME_DATA.party[index].totalExp
+	#
 	# ---- SUMMARY 2 --------
 
 	summary[1].get_node("Naturaleza").text = CONST.NaturesName[GAME_DATA.party[index].nature_id] + "."
@@ -601,6 +602,7 @@ func load_summary(index:int):
 	summary[2].get_node("DescHabilidad").text = CONST.AbilitiesDesc[GAME_DATA.party[index].ability_id]
 	summary[2].get_node("DescHabilidad/Outline").text = CONST.AbilitiesDesc[GAME_DATA.party[index].ability_id]
 	
+	clearMoves()
 	# ---- SUMMARY 3 --------
 	print(str(GAME_DATA.party[index].movements.size()))
 	for i in range(GAME_DATA.party[index].movements.size()):
@@ -621,3 +623,9 @@ func get_focus_owner(parent):
 			p = c.get_node("Panel")
 		if p.has_focus():
 			return p
+
+func clearMoves():
+	summary[3].get_node("Move1").visible = false
+	summary[3].get_node("Move2").visible = false
+	summary[3].get_node("Move3").visible = false
+	summary[3].get_node("Move4").visible = false

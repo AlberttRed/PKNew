@@ -56,6 +56,7 @@ func _ready():
 func initUI(_controller):
 	controller = _controller
 	SignalManager.BATTLE.playAnimation.connect(playAnimation)
+	#SignalManager.BATTLE.playAnimation.connect(Callable(animController, "playMoveAnimation"))
 	#updateUINodes()
 	
 	#initPartiesUI()
@@ -139,14 +140,19 @@ func initDoubleBattleUI():
 	$enemyBase/PokemonB.position = CONST.BATTLE.FRONT_POKEMONB_SPRITE_POS
 
 func clearSingleBattleUI():
-	for p in controller.activePokemons:
-		p.HPbar.clearUI()
-		p.clear()
-		p.instance = null
-		
-	for s:BattleSide in controller.sides:
+	for s in controller.sides:
+		if !s.isDefeated():
+			for p:BattleSpot in s.battleSpots:
+				p.removeActivePokemon()
 		s.clear()
-		
+	#for p in controller.activePokemons:
+		#p.HPbar.clearUI()
+		#p.clear()
+		#p.instance = null
+		#
+	#for s:BattleSide in controller.sides:
+		#s.clear()
+		#
 		
 func clearDoubleBattleUI():
 	pass
@@ -228,17 +234,17 @@ func initMovesPanel():
 	var panels = $PanelMoves/Moves.get_children()
 	var i = 0
 	
+	clearMovePanel(pnlMove1)
+	clearMovePanel(pnlMove2)
+	clearMovePanel(pnlMove3)
+	clearMovePanel(pnlMove4)
+
 	for m in controller.active_pokemon.moves:
 		panels[i].visible = true
 		panels[i].get_node("Label").text = m.Name
 		panels[i].get("theme_override_styles/panel").region_rect.position.y = (46 * (m.type.id-1))
 		i += 1
 		
-	clear_focus_neighbors(pnlMove1)
-	clear_focus_neighbors(pnlMove2)
-	clear_focus_neighbors(pnlMove3)
-	clear_focus_neighbors(pnlMove4)
-	
 	if controller.active_pokemon.moves.size() >= 2:
 		pnlMove1.set_focus_neighbor(SIDE_RIGHT, "../Move2")
 		pnlMove2.set_focus_neighbor(SIDE_LEFT, "../Move1")
@@ -330,7 +336,8 @@ func _on_move_focus_exited():
 	pnlMove3.get("theme_override_styles/panel").region_rect.position.x = 0
 	pnlMove4.get("theme_override_styles/panel").region_rect.position.x = 0
 
-func clear_focus_neighbors(pnl : Panel):
+func clearMovePanel(pnl : Panel):
+	pnl.visible = false
 	pnl.focus_neighbor_top = ""
 	pnl.focus_neighbor_left = ""
 	pnl.focus_neighbor_right = ""
@@ -354,14 +361,15 @@ func showHPBarUI(hpBar:HPBar):
 	await playAnimation("SHOW_HPBAR",{'Side':side},hpBar)
 
 func hideHPBarUI(hpBar:HPBar):
-	await playAnimation("HIDE_HPBAR",{},hpBar)
+	var side:CONST.BATTLE_SIDES = hpBar.pokemon.battleSpot.side.type
+	await playAnimation("HIDE_HPBAR",{'Side':side},hpBar)
 
-func playAnimation(animation:String, animParams:Dictionary = {}, _root:Node = self):
+func playAnimation(animation, animParams:Dictionary = {}, _root:Node = self):
 	#if _root != null:
 		#var rootNode:NodePath = animPlayer.get_path_to(_root)
 		#animPlayer.root_node = rootNode
-	animController.root = _root
-	await animController.playAnimation(animation, animParams)
+	#animController.root = _root
+	await animController.playAnimation(animation, animParams, _root)
 	
 func stopAnimation(animation:String):
 	animController.stopAnimation(animation)

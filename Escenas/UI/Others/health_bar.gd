@@ -54,7 +54,7 @@ func set_count_text(value):
 	$lblHP.text = str(round(value)) + "/" + str(total_hp)
 	update_color()
 
-func clear(pokemon):
+func clear():
 	total_hp = 0
 	actual_hp = 0
 	$TextureProgressBar.value = 0

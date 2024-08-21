@@ -49,7 +49,8 @@ func doMove():
 	await pokemon.applyPreviousEffects()
 	
 	if pokemon.canAttack:
-		await move.use(target)
+		move.selectedTargets = target
+		await move.use()
 	
 	await pokemon.applyLaterEffects()
 	#pokemon.actionFinished
