@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs que només modifiquen stats  CATEGORY CHANGE_STATS
 
 func doEffect():

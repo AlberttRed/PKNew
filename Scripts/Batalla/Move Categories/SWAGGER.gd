@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs que ... CATEGORY SWAGGER
 
 func doEffect():

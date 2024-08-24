@@ -7,7 +7,12 @@ class_name BattleSpot
 
 var participant : BattleParticipant# Indica a quin participant pertany (entrenador)
 var activePokemon:BattlePokemon #Indica quin Pokémon està en aquest spot en aquest moment
-var side:BattleSide
+var side:BattleSide:
+	get:
+		return participant.side
+var opponentSide : BattleSide:
+	get:
+		return side.opponentSide
 var HPbar:HPBar
 
 # Called when the node enters the scene tree for the first time.

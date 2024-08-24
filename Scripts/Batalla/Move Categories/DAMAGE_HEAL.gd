@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs que fan mal i curen CATEGORY DAMAGE_HEAL
 
 func doEffect():
@@ -14,7 +14,7 @@ func doEffect():
 		await move.doHealing(move.pokemon, heal)
 		
 		#missatge is drained
-		await GUI.battle.showMessage("!" + move.actualTarget.activePokemon.battleMessageName + " ha perdido energía!", false, 1.0)
+		await GUI.battle.showMessage("!" + move.actualTarget.activePokemon.battleMessageInitialName + " ha perdido energía!", false, 1.0)
 				
 #func doAnimation(to):
 	#print("jaja lol")

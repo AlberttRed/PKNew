@@ -64,7 +64,7 @@ func takeTurn():
 				GUI.battle.playAnimation("SELECT_ACTION",{}, p.battleSpot)
 				await active_pokemon.actionSelected
 				GUI.battle.stopAnimation("SELECT_ACTION")
-			print(p.Name + " selected " + CONST.BATTLE_ACTIONS.keys()[p.selected_action.type])
+			print(p.Name + " selected " + CONST.BATTLE_ACTIONS.keys()[p.selectedBattleChoice.type])
 			
 		stage = CONST.BATTLE_STAGES.DO_ACTION
 		
@@ -203,8 +203,8 @@ func startTrainerBattle():
 
 #Funció que ordena els actions de cada pokemon actiu segons prioritat, per saber en quin ordre s'executarà cada atac/acció
 func sortChoices(a : BattlePokemon, b : BattlePokemon):
-	var choice_a = a.selected_action
-	var choice_b = b.selected_action
+	var choice_a = a.selectedBattleChoice
+	var choice_b = b.selectedBattleChoice
 	
 	var unix_time: float = Time.get_unix_time_from_system()
 	var unix_time_int: int = unix_time

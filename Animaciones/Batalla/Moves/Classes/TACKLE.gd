@@ -17,7 +17,7 @@ func init(_move :BattleMove):
 
 func setAnimation(_root, animParams:Dictionary):
 #func doAnimation(target : BattleSpot):
-	var target:BattleSpot = move.selectedTargets[0]#animParams.get('Target')
+	var target:BattleSpot = move.target.actualTarget#animParams.get('Target')
 	#var animPlayer = origin.animPlayer
 	#var targetAnimPlayer = target.animPlayer
 	sprHit = Sprite2D.new()

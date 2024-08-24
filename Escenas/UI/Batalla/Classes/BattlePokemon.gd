@@ -21,6 +21,10 @@ var side : BattleSide: # Indica a quin side forma part el pokemon
 	get:
 		return participant.side
 
+var opponentSide:BattleSide:
+	get:
+		return side.opponentSide
+
 var sideType:CONST.BATTLE_SIDES:
 	get:
 		return participant.side.type
@@ -136,18 +140,21 @@ var HPbar : HPBar:
 var priority : int = 0 # indica quina prioritat té el pkmn dintre el battle en aquell turn. Per saber en quin ordre atacarà
 var moves : Array[BattleMove]
 
-var selected_action : BattleChoice
+var selectedBattleChoice : BattleChoice
 var selected_move : BattleMove = null
 
 var canAttack : bool = true
 
 var activeEffectsFlags : Array[BattleEffect] = [] #Array[CONST.MOVE_EFFECTS] = []
 
-var battleStatsMod : Array[int] = [0,0,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
+var statsStages : Array[int] = [0,0,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
+var criticalStage : int:
+	set(value):
+		return max(0, min(value, 4)) # EL modificador de critic com a minim pot ser 0 i maxim 3
 var listPokemonBattledAgainst : Array[BattlePokemon] = [] #Number of pokemon opponents that have participied in the battle to defeat the pokemon
 var battleSpot: BattleSpot
 
-var battleMessageName: String:
+var battleMessageInitialName: String:
 	get():
 		var msgName:String = ""
 		if controllable:
@@ -158,6 +165,32 @@ var battleMessageName: String:
 			else:
 				msgName = "El " + Name + " enemigo"
 		return msgName
+		
+var battleMessageMiddleDelName: String:
+	get():
+		var msgName:String = ""
+		if controllable:
+			msgName = "de " + Name
+		else:	
+			if isWild:
+				msgName = "del " + Name + " salvaje"
+			else:
+				msgName = "del " + Name + " enemigo"
+		return msgName
+
+var battleMessageMiddleAlName: String:
+	get():
+		var msgName:String = ""
+		if controllable:
+			msgName = "a " + Name
+		else:	
+			if isWild:
+				msgName = "al " + Name + " salvaje"
+			else:
+				msgName = "al " + Name + " enemigo"
+		return msgName
+
+
 #func _init(_pokemon : PokemonInstance, _IA: BattleIA):
 #func create(_pokemon : PokemonInstance, _IA: BattleIA):
 func _init(_pokemon: PokemonInstance, _IA: BattleIA = null):
@@ -295,18 +328,18 @@ func selectAction():
 		actionSelected.emit()
 		
 func doAction():
-	if selected_action.type == CONST.BATTLE_ACTIONS.LUCHAR: # is BattleMoveChoice: #LUCHAR
+	if selectedBattleChoice.type == CONST.BATTLE_ACTIONS.LUCHAR: # is BattleMoveChoice: #LUCHAR
 		side.restartEscapeAttempts()
-		await selected_action.doMove()
+		await selectedBattleChoice.doMove()
 		actionFinished.emit()
-	elif selected_action.type == CONST.BATTLE_ACTIONS.POKEMON: #is BattleSwitchChoice: #POKEMON
-		await selected_action.switchPokemon()
-		#await selected_action.pokemonSwitched
+	elif selectedBattleChoice.type == CONST.BATTLE_ACTIONS.POKEMON: #is BattleSwitchChoice: #POKEMON
+		await selectedBattleChoice.switchPokemon()
+		#await selectedBattleChoice.pokemonSwitched
 		actionFinished.emit()
-	elif selected_action.type == CONST.BATTLE_ACTIONS.MOCHILA: # is BattleItemChoice: #MOCHILA
+	elif selectedBattleChoice.type == CONST.BATTLE_ACTIONS.MOCHILA: # is BattleItemChoice: #MOCHILA
 		pass
 		#actionFinished.emit()
-	elif selected_action.type == CONST.BATTLE_ACTIONS.HUIR: #HUIR
+	elif selectedBattleChoice.type == CONST.BATTLE_ACTIONS.HUIR: #HUIR
 		if await tryEscapeFromBattle():
 			await GUI.battle.controller.endBattle()
 		else:
@@ -339,28 +372,28 @@ func doAction():
 	#await applyLaterEffects()
 
 func selectMove():
-	#selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
-	selected_action=BattleMoveChoice.new(self)
-	selected_action.selectMove()
-	await selected_action.moveSelected
+	#selectedBattleChoice=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
+	selectedBattleChoice=BattleMoveChoice.new(self)
+	selectedBattleChoice.selectMove()
+	await selectedBattleChoice.moveSelected
 	actionSelected.emit()
 	
 func changePokemon():
-	#selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
-	selected_action=BattleSwitchChoice.new(self)
-	await selected_action.showParty()
+	#selectedBattleChoice=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
+	selectedBattleChoice=BattleSwitchChoice.new(self)
+	await selectedBattleChoice.showParty()
 	#If a pokemon has been selected, go forward. Else the action still has to be selected
-	if selected_action.switchInPokemon != null:
+	if selectedBattleChoice.switchInPokemon != null:
 		actionSelected.emit()
 
 	
 func useBag():
-	selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.MOCHILA, 6)
+	selectedBattleChoice=BattleChoice.new(CONST.BATTLE_ACTIONS.MOCHILA, 6)
 	actionSelected.emit()
 
 	
 func exitBattle():
-	selected_action=BattleChoice.new(CONST.BATTLE_ACTIONS.HUIR, 6)
+	selectedBattleChoice=BattleChoice.new(CONST.BATTLE_ACTIONS.HUIR, 6)
 	actionSelected.emit()
 	
 # S'aplica la fórmula de les primeres 4 generacions	
@@ -419,8 +452,11 @@ func hasFullHealth():
 func hasWorkingAbility(a):
 	return ability == a
 
-func hasWorkingEffect(e):
-	return activeEffectsFlags.has(e)
+func hasWorkingEffect(_battleEffect:BattleEffect):
+	for battleEffect:BattleEffect in activeEffectsFlags:
+		if _battleEffect is BattleMoveAilmentEffect and _battleEffect.ailmentType == battleEffect.ailmentType :
+			return true
+	return false
 
 func hasAlly():
 	return listAllies.size() > 0
@@ -429,15 +465,15 @@ func hasAlly():
 # per aquell stat durant el combat. Utitzat per exemple en el calculateDamage.
 func getModStat(stat : CONST.STATS):
 	if stat == CONST.STATS.ATA:
-		return attack * CONST.BATTLE_STAGE_MULT_STATS[battleStatsMod[CONST.STATS.ATA]]
+		return attack * CONST.BATTLE_STAGE_MULT_STATS[statsStages[CONST.STATS.ATA]]
 	elif stat == CONST.STATS.DEF:
-		return defense * CONST.BATTLE_STAGE_MULT_STATS[battleStatsMod[CONST.STATS.DEF]]
+		return defense * CONST.BATTLE_STAGE_MULT_STATS[statsStages[CONST.STATS.DEF]]
 	elif stat == CONST.STATS.ATAESP:
-		return sp_attack * CONST.BATTLE_STAGE_MULT_STATS[battleStatsMod[CONST.STATS.ATAESP]]
+		return sp_attack * CONST.BATTLE_STAGE_MULT_STATS[statsStages[CONST.STATS.ATAESP]]
 	elif stat == CONST.STATS.DEFESP:
-		return sp_defense * CONST.BATTLE_STAGE_MULT_STATS[battleStatsMod[CONST.STATS.DEFESP]]
+		return sp_defense * CONST.BATTLE_STAGE_MULT_STATS[statsStages[CONST.STATS.DEFESP]]
 	elif stat == CONST.STATS.VEL:
-		return speed * CONST.BATTLE_STAGE_MULT_STATS[battleStatsMod[CONST.STATS.VEL]]
+		return speed * CONST.BATTLE_STAGE_MULT_STATS[statsStages[CONST.STATS.VEL]]
 
 
 func print_pokemon():
@@ -461,31 +497,31 @@ func updatePokemonState():
 		print(Name + " fainted!")
 		await setDefeated()
 		
-func changeStatus(_attacker : BattlePokemon, _status : CONST.AILMENTS):
-	if status == CONST.STATUS.OK:
-		if _status == CONST.AILMENTS.SLEEP:
-			status = CONST.STATUS.SLEEP
-		elif _status == CONST.AILMENTS.POISON:
-			status = CONST.STATUS.POISON
-		elif _status == CONST.AILMENTS.BURN:
-			status = CONST.STATUS.BURNT
-		elif _status == CONST.AILMENTS.PARALYSIS:
-			await playAnimation("PARALYSIS")
-			status = CONST.STATUS.PARALISIS
-		elif _status == CONST.AILMENTS.FREEZE:
-			status = CONST.STATUS.FROZEN
-		
-		if status != CONST.STATUS.OK:
-			addEffect(load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[_status]+".gd").new(self))
-			#addEffect(BattleMoveAilmentEffect.new(true, _status, _attacker, self))
-		
-	if _status == CONST.AILMENTS.NONE:
-		status = CONST.STATUS.OK
-		removeStatus(load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[_status]+".gd").new(self))
-		#removeStatus(BattleMoveAilmentEffect.new(true, _status, _attacker, self))
-
-		
+func changeStatus(statusAilment : BattleMoveAilmentEffect):
+	removeBattleEffect(statusAilment)
+	if statusAilment != null and statusAilment.isStatusAilment:
+		status = statusAilment.statusType
+		addBattleEffect(statusAilment)
 	HPbar.updateStatusUI()
+
+func hasStatusAilment():
+	return status != CONST.STATUS.OK
+
+func changeModStat(stat:CONST.STATS, value:int):
+	statsStages[stat] += value
+	if value > 0:
+		await playAnimation("STATUP",{'Stat': stat})
+		#await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target.battleSpot)
+	elif value < 0:
+		await playAnimation("STATDOWN",{'Stat': stat})
+		#await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target.battleSpot)
+	await GUI.battle.msgBox.showStatsMessage(self, stat, value)
+
+func getStatStage(stat:CONST.STATS):
+	return statsStages[stat]
+
+func changeCriticalStage(value: int):
+	criticalStage += value
 
 func applyPreviousEffects():
 	for effect in activeEffectsFlags:
@@ -520,16 +556,19 @@ func giveExpAtDefeat():
 			p.totalExp += expGained
 			await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 	
-func addEffect(effect : BattleEffect):
+func addBattleEffect(effect : BattleEffect):
 	activeEffectsFlags.push_back(effect)
 	
-func removeStatus(effect : BattleMoveAilmentEffect):
-	var delete
-	for e in activeEffectsFlags:
-		if e.isStatus:
-			delete = e
-			break
-	activeEffectsFlags.erase(delete)
+func removeBattleEffect(effect : BattleEffect):
+	activeEffectsFlags.erase(effect)
+	
+#func removeStatus(effect : BattleMoveAilmentEffect):
+	#var delete
+	#for e in activeEffectsFlags:
+		#if e.isStatus:
+			#delete = e
+			#break
+	#activeEffectsFlags.erase(delete)
 
 func levelUP():
 	instance.levelUP()

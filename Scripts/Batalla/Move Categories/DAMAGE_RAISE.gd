@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs que fan mal i pugen stats CATEGORY DAMAGE_RAISE
 
 func doEffect():

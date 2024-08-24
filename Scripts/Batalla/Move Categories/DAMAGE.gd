@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs simples, que només fan mal CATEGORY DAMAGE
 
 func doEffect():

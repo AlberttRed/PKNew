@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs que afecten tots els pokemons d'un dels dos sides de la batalla CATEGORY FIELD
 
 func doEffect():

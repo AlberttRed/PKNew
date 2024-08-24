@@ -19,3 +19,6 @@ func selectAction():
 func selectMove():
 	pass
 	
+func selectTargets():
+	pass
+	

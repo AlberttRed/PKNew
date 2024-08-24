@@ -2,11 +2,15 @@ class_name BattleMoveAilmentEffect extends BattleMoveEffect
 
 #Effect que es crida cada turn quan un pokemon està cremat, paraltizar, confós etc per restat vida, comprovar si esta dormit...
 
-var ailment : CONST.AILMENTS
-var target : BattlePokemon
+var ailmentType : CONST.AILMENTS
+var ailmentChance : int
+var isStatusAilment : bool = false
+var statusType : CONST.STATUS = CONST.STATUS.NONE
 
 func _init(move:BattleMove):
 	super._init(move)
+	ailmentType = move.ailmentType
+	ailmentChance = move.ailmentChance
 	#target = move.pokemon
 
 
@@ -42,12 +46,23 @@ func applyLaterEffects():
 		#await pokemon.heal(value)
 	#
 		#await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
-		
+
+func calculateAilmentChance():
+	randomize()
+	var valor : float = randf()
+	print("Trying " + move.pokemon.Name + " " + str(ailmentChance) + "% chance valor: " + str(valor))
+	if valor <= (ailmentChance/100.0):
+		return true
+	return false
+	
 func showAilmentSuceededMessage():
 	assert(false, "Please override showAilmentSuceededMessage()` in the derived script.")
 	
-func showAilmentFailedMessage():
-	assert(false, "Please override showAilmentFailedMessage()` in the derived script.")
-	
 func showAilmentRepeatedMessage():
 	assert(false, "Please override showAilmentRepeatedMessage()` in the derived script.")
+
+func showAilmentEffectMessage():
+	assert(false, "Please override showAilmentEffectMessage()` in the derived script.")
+
+func showAilmentEndMessage():
+	assert(false, "Please override showAilmentEndMessage()` in the derived script.")

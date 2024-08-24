@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs que fan KO en un sol atac CATEGORY OHKO
 
 func doEffect():

@@ -22,8 +22,11 @@ var critical : bool = false
 
 var min_hits : int
 var max_hits : int
-var num_hits : int
+var num_hits : int 
+var final_hits : int = 0
+
 var drainPercentage : int
+var moveHits : bool # Indica si el moviment falla/ha fallat o no
 var statChangeMod : Array[CONST.STATS]
 var statChangeValue : Array[int]
 var ailmentType : CONST.AILMENTS
@@ -34,19 +37,25 @@ var ailmentChance : int :
 		return ailmentChance
 			
 
-var target : CONST.TARGETS
+var target_type : BattleTarget.TYPE
 var move_effect : CONST.MOVE_EFFECTS
 var category : CONST.MOVE_CATEGORIES
 
-var selectedTargets: Array[BattleSpot]
-var actualTarget : BattleSpot
+var target: BattleTarget
+var actualTarget : BattleSpot:
+	get:
+		if target==null:
+			return null
+		return target.actualTarget
 
 var damage_class : CONST.DAMAGE_CLASS
 var contact_flag : bool = false
 
-var effect : BattleMoveEffect
+var moveCategoryeffect : BattleMoveCategoryEffect
 var ailment : BattleMoveAilmentEffect
+var ailmentResource : Resource
 var animation : Animation#BattleMoveAnimation
+var hasAnimationPlayed:bool = false
 
 func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	instance = _move
@@ -58,7 +67,8 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	priority = _move.priority
 	pp_total = _move.pp
 	pp_actual = _move.pp_actual
-	target = _move.base.target_id
+	target_type = _move.base.target_id
+	target = BattleTarget.new(self)
 	move_effect = _move.base.move_effect
 	category = _move.base.meta_category_id
 	damage_class = _move.damage_class as CONST.DAMAGE_CLASS
@@ -73,9 +83,10 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	
 	pokemon = _pokemon	
 	var name:String = str(CONST.MOVE_CATEGORIES.keys()[category])
-	effect = load("res://Scripts/Batalla/Move Categories/"+CONST.MOVE_CATEGORIES.keys()[category]+".gd").new(self)
-	if FileAccess.file_exists("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType]+".gd"):
-		ailment = load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType]+".gd").new(self)
+	moveCategoryeffect = load("res://Scripts/Batalla/Move Categories/"+CONST.MOVE_CATEGORIES.keys()[category]+".gd").new(self)
+	print("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType]+".gd")
+	if FileAccess.file_exists("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType+1]+".gd"):
+		ailmentResource = load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType+1]+".gd")
 	var n = instance.internalName.to_upper()
 #	if FileAccess.file_exists("res://Animaciones/Batalla/Moves/Classes/" + str(n) + ".gd") != null:
 	if FileAccess.file_exists("res://Animaciones/Batalla/Moves/Anim/" + str(n) + ".res"):
@@ -85,33 +96,33 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 
 func use():
 	
-	num_hits = getHits() # Aixo s'ha de canviar, es farà en lloc del for, una funció que vagi comrpovant els hits
-	
+	calculateHits() 
 	#await pokemon.applyPreviousEffects()
 	
 	await GUI.battle.msgBox.showMoveMessage(pokemon, self)
 
-	if animation != null:
-		await doAnimation()
-	
-	var final_hits = 0
-	for pkmnTarget:BattleSpot in selectedTargets:
-		actualTarget = pkmnTarget
-		#aqui es calcula la precisió
-		for i in range(num_hits):
-		#aqui es calcula si l atac es critic o no
-			if actualTarget.activePokemon.fainted:
-				break
-			await effect.doEffect()
-			final_hits = i
+	while target.nextTarget():
+		calculateAccuracy()
+		while _checkHit():
+			calculateCriticalHit()
+			await doAnimation()
+			final_hits+=1
+			await moveCategoryeffect.doEffect()
+			if critical:
+				await GUI.battle.showMessage("¡Un golpe crítico!", false, 2.0)
+				critical = false
 		
-		if isMultiHit():
-			await GUI.battle.showMessage("El movimiento golpeó " + str(final_hits) + " veces.", false, 2.0)
+		if !moveHits:
+			await GUI.battle.showMessage("¡El ataque " + pokemon.battleMessageMiddleDelName + " falló!", false, 2.0)
+		elif isMultiHit():
+			await GUI.battle.showMessage("N.º de golpes: " + str(final_hits) + ".", false, 2.0)
 		
 		await actualTarget.activePokemon.updatePokemonState()
 	
-	selectedTargets = []
+	target.clear()
 	actualTarget = null
+	final_hits = 0
+	hasAnimationPlayed=false
 	#await pokemon.applyLaterEffects()
 		
 #func doAnimation(target):
@@ -122,11 +133,14 @@ func use():
 	##await animation.doAnimation(target)
 
 func doAnimation():
-	SignalManager.BATTLE.playAnimation.emit(animation.init(self), {}, pokemon.battleSpot)
-	#playAnimation.emit(instance.internalName.to_upper(), animParams)
-	await SignalManager.ANIMATION.finished_animation
-	#await animation.doAnimation(target)
-	
+	if animation != null && !hasAnimationPlayed:
+		SignalManager.BATTLE.playAnimation.emit(animation.init(self), {}, pokemon.battleSpot)
+		#Nomes marquem l'animació com a played quan el move no es multihit, ja que si es multihit s'ha de reproduir x vegades
+		hasAnimationPlayed = !isMultiHit()
+		#playAnimation.emit(instance.internalName.to_upper(), animParams)
+		await SignalManager.ANIMATION.finished_animation
+		#await animation.doAnimation(target)
+		
 func is_physic_category():
 	return damage_class == CONST.DAMAGE_CLASS.FISICO
 
@@ -154,8 +168,8 @@ func calculateSTAB(target : BattlePokemon) -> float:
 func calculateDamage(to : BattlePokemon,r = null):
 	var Damage : int
 	#var Modifier
-	var Att : float = pokemon.getModStat(CONST.STATS.ATA) # pokemon.attack
-	var Def : float = to.getModStat(CONST.STATS.DEF) #to.defense
+	var Att : float
+	var Def : float
 	var STAB : float = 1.0
 	var Ef : float = calculateSTAB(to)
 	var random : float
@@ -165,10 +179,32 @@ func calculateDamage(to : BattlePokemon,r = null):
 	var Burn : float = 1.0
 	var Other : float = 1.0
 	
-	if is_special_category():
-		Att = to.getModStat(CONST.STATS.ATAESP) #pokemon.sp_attack
-		Def = to.getModStat(CONST.STATS.DEFESP) #to.sp_defense
-
+	if critical:
+		Critical = 2.0
+		
+	if is_physic_category():
+		#Falta aplicar que si l stage d atac es negatiu, l ignori. I si l stage de defensa rival es positiu, l ignori
+		if critical && pokemon.getStatStage(CONST.STATS.ATA)<0:
+			Att = pokemon.attack
+		else:
+			Att = pokemon.getModStat(CONST.STATS.ATA)
+		
+		if critical && pokemon.getStatStage(CONST.STATS.DEF)<0:
+			Def = to.defense
+		else:
+			Def = to.getModStat(CONST.STATS.DEF)
+	
+	elif is_special_category():
+		if critical && pokemon.getStatStage(CONST.STATS.ATAESP)<0:
+			Att = pokemon.sp_attack
+		else:
+			Att = pokemon.getModStat(CONST.STATS.ATAESP) 
+		
+		if critical && pokemon.getStatStage(CONST.STATS.DEFESP)<0:
+			Def = to.sp_defense
+		else:	
+			Def = to.getModStat(CONST.STATS.DEFESP) 
+	
 	if has_multiple_targets() and pokemon.listEnemies.size() > 1 :
 		Targets = 0.75
 
@@ -204,6 +240,7 @@ func calculateDamage(to : BattlePokemon,r = null):
 	Other = calculate_others(to,Ef,false)
 
 	Damage = int(int((int((2.0 * float(pokemon.level))/5.0 + 2.0) * float(power) * float(Att))/float(Def))/50.0 + 2.0) #(((2 * from.level/5 + 2) * power * Att/Def)/50 + 2)
+	print("Stats Stages: AT: " + str(pokemon.getStatStage(CONST.STATS.ATA)) + ", DEF: " + str(pokemon.getStatStage(CONST.STATS.DEF)) + ", ATESP: " + str(pokemon.getStatStage(CONST.STATS.ATAESP)) + ", DEFESP: " + str(pokemon.getStatStage(CONST.STATS.DEFESP)) + ", VEL: " + str(pokemon.getStatStage(CONST.STATS.VEL)) + ", ACC: " + str(pokemon.getStatStage(CONST.STATS.ACC)) + ", EVA: " + str(pokemon.getStatStage(CONST.STATS.EVA)))
 	print("Level: " + str(pokemon.level) + ", Power: " + str(power) + ", Attack: " + str(Att) + ", Def: " + str(Def) + ", Nature:" + str(CONST.NaturesName[pokemon.instance.nature_id]) + ", Rival nature:" + str(CONST.NaturesName[to.instance.nature_id]))
 	print("Damage: " + str(Damage))
 	print("Targets: " + str(Targets) + ", Weather: " + str(Weather) + ", Critical: " + str(Critical) + ", Random: " + str(random) + ", STAB: " + str(STAB) + ", Ef: " + str(Ef) + ", Burn: " + str(Burn) + ", Other: " + str(Other))
@@ -270,6 +307,31 @@ func calculate_others(to,Type,critical):
 	return value
 	### ITEMS
 	
+func calculateCriticalHit():
+	var probability:float = CONST.BATTLE_STAGE_MULT_CRITICAL[pokemon.criticalStage]
+	
+	randomize()
+	var n:float = randf_range(0.1, 100)#randf_range(min_hits, max_hits)
+	
+	critical = n <= probability && damage_class != CONST.DAMAGE_CLASS.ESTADO
+
+func calculateAccuracy():
+	if actualTarget is not BattleSpot:
+		return true
+	var targetPokemon:BattlePokemon = actualTarget.activePokemon
+	var calculatedProbability:float
+	var moveAccuracy:float = float(accuracy)
+	var finalStage:int = max(-6, min(pokemon.getStatStage(CONST.STATS.ACC) - targetPokemon.getStatStage(CONST.STATS.EVA), 6)) # EL modificador de precisió com a minim pot ser -6 i maxim 6
+	var stagedAccuracy:float = CONST.BATTLE_STAGE_MULT_EVACC[finalStage]
+	var other:float = 1.0 # TO DO
+	
+	calculatedProbability = moveAccuracy * stagedAccuracy * other
+	
+	randomize()
+	var n:float = randf_range(0.1, 100)
+	
+	moveHits = n <= calculatedProbability
+
 func calculateHealing(damage: int) -> int:
 	var healValue : int = 0
 	if drainPercentage != null and drainPercentage > 0:
@@ -292,7 +354,7 @@ func makeContact():
 	return contact_flag
 
 func has_target(t):
-	return target == t
+	return target_type == t
 
 func moveInflictsDamage():
 	return category == CONST.MOVE_CATEGORIES.DAMAGE or category == CONST.MOVE_CATEGORIES.DAMAGE_AILMENT or category == CONST.MOVE_CATEGORIES.DAMAGE_HEAL or category == CONST.MOVE_CATEGORIES.DAMAGE_LOWER or category == CONST.MOVE_CATEGORIES.DAMAGE_RAISE
@@ -302,31 +364,37 @@ func moveModifyStats():
 
 func moveCausesAilment():
 	return category == CONST.MOVE_CATEGORIES.AILMENT or category == CONST.MOVE_CATEGORIES.DAMAGE_AILMENT or category == CONST.MOVE_CATEGORIES.SWAGGER
-
-func calculateAilmentChance():
-	randomize()
-	var valor : float = randf()
-	print("Trying " + Name + " " + str(ailmentChance) + "% chance valor: " + str(valor))
-	if valor <= (ailmentChance/100.0):
-		return true
-	return false
 	
 
 func isMultiHit():
 	return max_hits > 1
 	
-func getHits():
-	#Es farà una funció que retorni true o false per cada multi hit. Ja que per cad ahit, hi ha un percentatge de que segueixi colpejant o no. 
-	# per tant enlloc del for i range(getHits) es farà un while multiHitSuceed segueix fent cops, i dintre la func es calcue¡len els %
-	randomize()
-	return randi_range(min_hits, max_hits)
+func calculateHits():
+	if min_hits == max_hits:
+		num_hits = max_hits
+	else:
+		randomize()
+		var n:float = randf_range(0.1, 100)#randf_range(min_hits, max_hits)
+		
+		match true:
+			_ when n >= 0.1 and n <= 37.5:
+				num_hits =  2
+			_ when n >= 37.6 and n <= 75.0:
+				num_hits =  3
+			_ when n >= 75.1 and n <= 82.5:
+				num_hits =  4
+			_ when n >= 82.6 and n <= 100.0:
+				num_hits =  5
+
+#Checks if there has finalized all hits/strikes for a multistike move
+func _checkHit() -> bool:
+	return moveHits and final_hits < num_hits and !actualTarget.activePokemon.fainted
 	
 
 func doDamage(target : BattlePokemon, damage : int):
 	var STAB = calculateSTAB(target)
-
-	print(Name + " damage: " + str(damage))
 	
+	print(Name + " damage: " + str(damage))
 	await target.playAnimation("HIT")
 	await target.take_damage(damage)
 	
@@ -340,7 +408,7 @@ func doDamage(target : BattlePokemon, damage : int):
 #	elif STAB == 0:
 #		GUI.battle.showMessage("No afecta a " + target.Name + ".", false, 2.0)
 #		await GUI.battle.msgBox.finished
-
+	
 func doHealing(target : BattlePokemon, heal : int):
 	var STAB = calculateSTAB(target)
 
@@ -348,29 +416,42 @@ func doHealing(target : BattlePokemon, heal : int):
 	
 	await target.heal(heal)#, CONST.HEAL_TYPE.MOVE)
 	
-	GUI.battle.showMessage("¡" + target.Name + " ha recuprado vida!", false, 2.0)
+	GUI.battle.showMessage("¡" + target.battleMessageInitialName + " ha recuprado vida!", false, 2.0)
 
 func modifyStats(target : BattlePokemon):
 	var i = 0
 	var text = ""
 	for stat:CONST.STATS in statChangeMod:
 		var value =  statChangeValue[i]
-		target.battleStatsMod[stat-1] += value
-		if value > 0:
-			await target.battleSpot.playAnimation("STATUP",{'Stat': stat})
-			#await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target.battleSpot)
-		elif value < 0:
-			await target.battleSpot.playAnimation("STATDOWN",{'Stat': stat})
-			#await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target.battleSpot)
-		await GUI.battle.msgBox.showStatsMessage(target, stat-1, value)
+		await target.changeModStat(stat-1, value)
+		i+=1
+		#target.battleStatsMod[stat-1] += value
+		#if value > 0:
+			#await target.battleSpot.playAnimation("STATUP",{'Stat': stat})
+			##await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target.battleSpot)
+		#elif value < 0:
+			#await target.battleSpot.playAnimation("STATDOWN",{'Stat': stat})
+			##await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target.battleSpot)
+		#await GUI.battle.msgBox.showStatsMessage(target, stat-1, value)
 
-func causeAilment(target : BattlePokemon):
-	if target.status == CONST.STATUS.OK and calculateAilmentChance():
-		#if ailmentType == CONST.AILMENTS.BURN or ailmentType == CONST.AILMENTS.FREEZE or ailmentType == CONST.AILMENTS.PARALYSIS or ailmentType == CONST.AILMENTS.POISON or ailmentType == CONST.AILMENTS.SLEEP:
-		print("Done!")
-		await target.changeStatus(pokemon, ailmentType)
-		await GUI.battle.msgBox.showAilmentMessage_Move(target, ailmentType)
+func causeAilment():
+	ailment = ailmentResource.new(self)
+	if actualTarget.activePokemon.hasWorkingEffect(ailment):
+		await ailment.showAilmentRepeatedMessage()
 		return
+	elif actualTarget.activePokemon.hasStatusAilment() and ailment.isStatusAilment:
+		await GUI.battle.showMessage("¡El ataque " + pokemon.battleMessageMiddleDelName + " falló!", false, 2.0)
+		return
+			
+	if ailment.calculateAilmentChance():
+		print("Done!")
+		await ailment.doAnimation()
+		await actualTarget.activePokemon.changeStatus(ailment)
+		await ailment.showAilmentSuceededMessage()
+		#await GUI.battle.msgBox.showAilmentMessage_Move(actualTarget.activePokemon, newAilment.ailmentType)
+		
+func selectTargets():
+	target.selectTargets()
 	
 func showAnimation(target : BattlePokemon):
 	pass

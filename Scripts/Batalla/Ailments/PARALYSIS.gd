@@ -1,6 +1,9 @@
-extends BattleAilmentEffect
+extends BattleMoveAilmentEffect
 
-
+func _init(move:BattleMove):
+	super(move)
+	isStatusAilment = true;
+	statusType = CONST.STATUS.PARALYSIS
 
 func doAnimation():
 	await target.battleSpot.playAnimation("PARALYSIS")
@@ -11,13 +14,17 @@ func applyPreviousEffects():
 		if valor <= (0.25):
 			target.canAttack = false
 			await doAnimation()
-			await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailment)
+			await showAilmentEffectMessage()
+			#await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailmentType)
 
 func showAilmentSuceededMessage():
-	GUI.battle.showMessage("¡" + target.Name + " está paralizado! ¡No se puede mover!", false, 2.0)
-	
-func showAilmentFailedMessage():
-	GUI.battle.showMessage("¡El ataque de " + pokemon.Name + " falló!", false, 2.0)
-	
+	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " está paralizado! ¡Quizá no pueda moverse!", false, 2.0)
+
 func showAilmentRepeatedMessage():
-	GUI.battle.showMessage("¡El " + target.Name + " salvaje ya está paralizado!", false, 2.0)
+	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " ya está paralizado!", false, 2.0)
+
+func showAilmentEffectMessage():
+	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " está paralizado! ¡No se puede mover!", false, 2.0)
+
+func showAilmentEndMessage():
+	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " ya no está paralizado!", false, 2.0)

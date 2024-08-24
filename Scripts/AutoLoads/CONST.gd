@@ -110,11 +110,12 @@ enum BATTLER_TYPES {
 }
 
 enum STATUS {
+	NONE = -1,
 	OK, 
 	SLEEP,
 	POISON,
 	BURNT,
-	PARALISIS,
+	PARALYSIS,
 	FROZEN,
 	FAINTED,
 	POKERUS
@@ -271,25 +272,25 @@ enum WEATHER {
 	TURBULENCIAS = 8,
 	LLUVIA_DIAMANTES = 9
 }
-	
-enum TARGETS {
-	NONE,
-	ESPECIFICO, # El Target es selecciona automáticament segons el moviment, son casos especials. Ex: Maldición, Contraataque En cas de combat doble, no fa seleccionar res
-	YO_PRIMERO, # Cas especial per l atac Yo Primero. Es selecciona el pokemon individualment, com un atac normal.
-	ALIADO, # L atac va dirigit per força l aliat del pokemon que executa l atac. Si no té aliat l'atac fallarà. Ex: Refuerzo En cas de combat doble, no fa seleccionar res
-	BASE_PLAYER, # Efecta a la BASE/FIELD. L'atac afecta a tots els pkmn q estàn a la mateixa base que el pkmn atacant. El target serà el mateix pokemon atacant i el seu aliat. Ex: Pantalla Luz En cas de combat doble, no fa seleccionar res
-	USER_OR_ALLY, # El jugador podrà seleccionar l'objectiu entre el propi pokemon atacant i l'aliat. Només un dels dos. En cas de combat doble, fa seleccionar entre el pokemon i l'aliat. En els enemics no deixa.
-	BASE_ENEMY, # Efecta a la BASE/FIELD. A la inversa que el BASE_PLAYER, l atac afectarà a TOTS els pokemons q estiguin la base rival. Ex: Púas En cas de combat doble, no fa seleccionar res
-	USER, #Efecte a l'usuari. Només es pot seleccionar el pokemon que fa l'atac. Ex: Danza espada En cas de combat doble, no fa seleccionar res
-	RANDOM_ENEMY, #Efecte a un dels dos pokemons enemics aleatoriament. No pots seleccionar quin. Ex: Combate En cas de combat doble, no fa seleccionar res
-	ALL_OTHER, #L'atac efecte a tots els pokemons sobre el camp de batalla menys l'atacant. Inclós els aliats. Ex: Surf. En cas de combat doble, no fa seleccionar res
-	SELECCIONAR, #El jugador selecciona individualment un pokemon, com qualsevol atac normal. Ex: Placaje #El jugador selecciona individualment un pokemon, com qualsevol atac normal. Ex: Placaje  En cas de combat doble, pot seleccionar els dos enemics i l'aliat. Si només queda un enemic (aliat i altre enemic morts), tambe et fa seleccioanr igualment, encara q nomes en qeu
-	ENEMIES, #L'atac afecta a tots els pokemons rivals. Ex: Malicioso  En cas de combat doble, no fa seleccionar res
-	ALL_FIELD, # Afecta al FIELD. Afecta al camp de batalla, per tant a tots els pokemons en combat, inclós l'atacant. Exemple: Tormenta Arena, Danza lluvia..  En cas de combat doble, no fa seleccionar res
-	PLAYERS, # Al revés que ENEMIES, afecta directament al pokemon atacant i aliats, pero no als enemics. Ex: Campana Cura  En cas de combat doble, no fa seleccionar res
-	ALL_POKEMON # Afecta directament a tots els pokemons en combat. Ex: Canto Mortal  En cas de combat doble, no fa seleccionar res
-
-}
+	#
+#enum TARGETS {
+	#NONE,
+	#ESPECIFICO, # El Target es selecciona automáticament segons el moviment, son casos especials. Ex: Maldición, Contraataque En cas de combat doble, no fa seleccionar res
+	#YO_PRIMERO, # Cas especial per l atac Yo Primero. Es selecciona el pokemon individualment, com un atac normal.
+	#ALIADO, # L atac va dirigit per força l aliat del pokemon que executa l atac. Si no té aliat l'atac fallarà. Ex: Refuerzo En cas de combat doble, no fa seleccionar res
+	#BASE_PLAYER, # Efecta a la BASE/FIELD. L'atac afecta a tots els pkmn q estàn a la mateixa base que el pkmn atacant. El target serà el mateix pokemon atacant i el seu aliat. Ex: Pantalla Luz En cas de combat doble, no fa seleccionar res
+	#USER_OR_ALLY, # El jugador podrà seleccionar l'objectiu entre el propi pokemon atacant i l'aliat. Només un dels dos. En cas de combat doble, fa seleccionar entre el pokemon i l'aliat. En els enemics no deixa.
+	#BASE_ENEMY, # Efecta a la BASE/FIELD. A la inversa que el BASE_PLAYER, l atac afectarà a TOTS els pokemons q estiguin la base rival. Ex: Púas En cas de combat doble, no fa seleccionar res
+	#USER, #Efecte a l'usuari. Només es pot seleccionar el pokemon que fa l'atac. Ex: Danza espada En cas de combat doble, no fa seleccionar res
+	#RANDOM_ENEMY, #Efecte a un dels dos pokemons enemics aleatoriament. No pots seleccionar quin. Ex: Combate En cas de combat doble, no fa seleccionar res
+	#ALL_OTHER, #L'atac efecte a tots els pokemons sobre el camp de batalla menys l'atacant. Inclós els aliats. Ex: Surf. En cas de combat doble, no fa seleccionar res
+	#SELECCIONAR, #El jugador selecciona individualment un pokemon, com qualsevol atac normal. Ex: Placaje #El jugador selecciona individualment un pokemon, com qualsevol atac normal. Ex: Placaje  En cas de combat doble, pot seleccionar els dos enemics i l'aliat. Si només queda un enemic (aliat i altre enemic morts), tambe et fa seleccioanr igualment, encara q nomes en qeu
+	#ENEMIES, #L'atac afecta a tots els pokemons rivals. Ex: Malicioso  En cas de combat doble, no fa seleccionar res
+	#ALL_FIELD, # Afecta al FIELD. Afecta al camp de batalla, per tant a tots els pokemons en combat, inclós l'atacant. Exemple: Tormenta Arena, Danza lluvia..  En cas de combat doble, no fa seleccionar res
+	#PLAYERS, # Al revés que ENEMIES, afecta directament al pokemon atacant i aliats, pero no als enemics. Ex: Campana Cura  En cas de combat doble, no fa seleccionar res
+	#ALL_POKEMON # Afecta directament a tots els pokemons en combat. Ex: Canto Mortal  En cas de combat doble, no fa seleccionar res
+#
+#}
 
 const BATTLE_STAGE_MULT_STATS = { 
 	6 : 4.0,
@@ -321,6 +322,14 @@ const BATTLE_STAGE_MULT_EVACC = {
 	-4 : 0.43,
 	-5 : 0.375,
 	-6 : 0.33,
+}
+#Taula que indica la probabilitat de fer un crític segons l'stage (battleCriticalMod) del pokemon
+const BATTLE_STAGE_MULT_CRITICAL = {
+	4 : 50.0,
+	3 : 33.3,
+	2 : 25.0,
+	1 : 12.5,
+	0 : 6.25,
 }
 
 #class MOVE_EFFECTS:

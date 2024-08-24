@@ -47,6 +47,8 @@ class animations:
 class BattleSignals:
 	signal playAnimation
 	signal playMoveAnimation
+	signal selectTarget
+	signal targetSelected
 	
 func _ready():
 	pass

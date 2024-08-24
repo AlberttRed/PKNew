@@ -59,6 +59,7 @@ func clearUI():
 func updateStatusUI():
 	if pokemon.status != CONST.STATUS.OK:
 		statusUI.visible = true
+		print(pokemon.status-1)
 		statusUI.region_rect = Rect2(0, 16*(pokemon.status-1), 44, 16)
 	else:
 		statusUI.visible = false

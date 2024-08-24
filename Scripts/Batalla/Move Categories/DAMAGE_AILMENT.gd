@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 # Effect d'atacs que fan mal i modifiquen provoquen ailment /canvi d estat CATEGORY DAMAGE_AILMENT
 
 func doEffect():
@@ -6,15 +6,11 @@ func doEffect():
 
 	if moveInflictsDamage():
 		print("Do damage!")
-		#Farà animació de colpejar, amb el so
 		var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
 		await move.doDamage(move.actualTarget.activePokemon, damage)
 
-
-	if moveCausesAilment(): 
+	#Si provoca ailment, i el target no te l ailment ni tampoc es un ailment d status ja tinguent el target un status
+	if moveCausesAilment() and !move.actualTarget.activePokemon.hasWorkingEffect(move.ailment) and !(move.actualTarget.activePokemon.hasStatusAilment() and move.ailment.isStatusAilment):
 		print("Cause ailment!")
-		#Farà animació de cremar, dormir, el que sigui
-		await move.causeAilment(move.actualTarget.activePokemon)
+		await move.causeAilment()
 #
-#func doAnimation(to):
-	#print("jaja lol")

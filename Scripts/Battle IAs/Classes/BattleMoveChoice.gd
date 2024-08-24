@@ -33,7 +33,7 @@ func selectMove():
 		GUI.battle.showMovesPanel()
 		await GUI.battle.moveSelected
 		print("uea")
-		await GUI.battle.showTargetSelection()
+		await move.selectTargets()
 		#await GUI.battle.targetSelected
 		print("eeee")
 		
@@ -41,6 +41,8 @@ func selectMove():
 	else:
 		print("IA doing move things")
 		pokemon.IA.selectMove()
+		await move.selectTargets()
+		#pokemon.IA.selectTargets()
 	moveSelected.emit()
 
 func doMove():
@@ -49,7 +51,7 @@ func doMove():
 	await pokemon.applyPreviousEffects()
 	
 	if pokemon.canAttack:
-		move.selectedTargets = target
+		#move.target.selectedTargets = target
 		await move.use()
 	
 	await pokemon.applyLaterEffects()

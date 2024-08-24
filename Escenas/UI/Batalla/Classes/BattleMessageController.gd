@@ -32,7 +32,7 @@ func showEffectivnessMessage(_target : BattlePokemon, _STAB : int):
 		GUI.battle.showMessage("No parece muy efectivo...", false, 2.0)
 		await GUI.battle.msgBox.finished
 	elif _STAB == 0:
-		GUI.battle.showMessage("No afecta a " + _target.Name + ".", false, 2.0)
+		GUI.battle.showMessage("No afecta " + _target.battleMessageMiddleAlName + ".", false, 2.0)
 		await GUI.battle.msgBox.finished
 
 
@@ -46,7 +46,7 @@ func showMoveMessage(_user : BattlePokemon, _move : BattleMove):
 			#type = " enemigo"
 		#else:
 			#type = " salvaje"
-	await GUI.battle.showMessage("¡" + _user.battleMessageName + " ha usado " + _move.Name + "!", false, 0.5)
+	await GUI.battle.showMessage("¡" + _user.battleMessageInitialName + " ha usado " + _move.Name + "!", false, 0.5)
 		
 #Missatge que es mostra quan es modifiquen stats
 func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):
@@ -85,23 +85,23 @@ func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int
 		
 		
 #Misatges que surten en el moment q es fa un atac i el pk rival queda paralitzat, dormit etc.
-func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS):
-	var name = ""
-	if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
-		name = _target.Name
-	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
-		name = _target.Name + " enemigo"
-	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
-		name = _target.Name + " salvaje"
-	
-	if _ailment == CONST.AILMENTS.PARALYSIS:
-		await GUI.battle.showMessage("¡" + name + " está paralizado! ¡Quizás no pueda moverse!", false, 2.0)
-	elif _ailment == CONST.AILMENTS.SLEEP:
-		await GUI.battle.showMessage("¡" + name + " se durmió!", false, 2.0)
-	elif _ailment == CONST.AILMENTS.FREEZE:
-		await GUI.battle.showMessage("¡" + name + " se ha congelado!", false, 2.0)
-	elif _ailment == CONST.AILMENTS.BURN:
-		await GUI.battle.showMessage("¡" + name + " ha sido quemado!", false, 2.0)
+#func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS):
+	#var name = ""
+	#if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
+		#name = _target.Name
+	#elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
+		#name = _target.Name + " enemigo"
+	#elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
+		#name = _target.Name + " salvaje"
+	#
+	#if _ailment == CONST.AILMENTS.PARALYSIS:
+		#await GUI.battle.showMessage("¡" + name + " está paralizado! ¡Quizás no pueda moverse!", false, 2.0)
+	#elif _ailment == CONST.AILMENTS.SLEEP:
+		#await GUI.battle.showMessage("¡" + name + " se durmió!", false, 2.0)
+	#elif _ailment == CONST.AILMENTS.FREEZE:
+		#await GUI.battle.showMessage("¡" + name + " se ha congelado!", false, 2.0)
+	#elif _ailment == CONST.AILMENTS.BURN:
+		#await GUI.battle.showMessage("¡" + name + " ha sido quemado!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.POISON:
 #		GUI.battle.showMessage("¡La velocidad de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.CONFUSION:
@@ -122,8 +122,8 @@ func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS)
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.NO_TYPE_IMMUNITY:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
-	elif _ailment == CONST.AILMENTS.LEECH_SEED:
-		await GUI.battle.showMessage("¡" + name + " fue infectado!", false, 2.0)
+	#elif _ailment == CONST.AILMENTS.LEECH_SEED:
+		#await GUI.battle.showMessage("¡" + name + " fue infectado!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.EMBARGO:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.PERISH_SONG:
@@ -132,23 +132,20 @@ func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS)
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #Misatges que surten quan un pkmn intenta fe run moviment i no pot per culpa de l'ailment
 #(el foc o el verí resten vida, o o el paralizar o dormir no deixen atacar etc)
-func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : CONST.AILMENTS):
-	var name = ""
-	if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
-		name = _target.Name
-	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
-		name = _target.Name + " enemigo"
-	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
-		name = _target.Name + " salvaje"
+#func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : BattleMoveAilmentEffect):
+	#var name = ""
+#
+	#
+	#await _ailment.showAilmentEffectMessage()
 	
-	if _ailment == CONST.AILMENTS.PARALYSIS:
-		await GUI.battle.showMessage("¡" + name + " está paralizado! ¡No se puede mover!", false, 2.0)
-	elif _ailment == CONST.AILMENTS.SLEEP:
-		await GUI.battle.showMessage("¡" + name + " se durmió!", false, 2.0)
-	elif _ailment == CONST.AILMENTS.FREEZE:
-		await GUI.battle.showMessage("¡" + name + " está congelado!", false, 2.0)
-	elif _ailment == CONST.AILMENTS.BURN:
-		await GUI.battle.showMessage("¡" + name + " se resiente de la quemadura!", false, 2.0)
+	#if _ailment.ailmentType == CONST.AILMENTS.PARALYSIS:
+		#await GUI.battle.showMessage("¡" + name + " está paralizado! ¡No se puede mover!", false, 2.0)
+	#elif _ailment.ailmentType == CONST.AILMENTS.SLEEP:
+		#await GUI.battle.showMessage("¡" + name + " está dormido como un trono.", false, 2.0)
+	#elif _ailment.ailmentType == CONST.AILMENTS.FREEZE:
+		#await GUI.battle.showMessage("¡" + name + " está congelado!", false, 2.0)
+	#elif _ailment.ailmentType == CONST.AILMENTS.BURN:
+		#await GUI.battle.showMessage("¡" + name + " se resiente de la quemadura!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.POISON:
 #		GUI.battle.showMessage("¡La velocidad de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.CONFUSION:
@@ -169,8 +166,8 @@ func showAilmentMessage_Effect(_target : BattlePokemon, _ailment : CONST.AILMENT
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.NO_TYPE_IMMUNITY:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
-	elif _ailment == CONST.AILMENTS.LEECH_SEED:
-		await GUI.battle.showMessage("¡Las drenadoras restaron salud a " + name + "!", false, 2.0)
+	#elif _ailment == CONST.AILMENTS.LEECH_SEED:
+		#await GUI.battle.showMessage("¡Las drenadoras restaron salud a " + name + "!", false, 2.0)
 #	elif _ailment == CONST.AILMENTS.EMBARGO:
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 #	elif _ailment == CONST.AILMENTS.PERISH_SONG:

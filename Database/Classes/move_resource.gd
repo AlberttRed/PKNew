@@ -88,5 +88,3 @@ func makeContact():
 
 func get_pp():
 	return pp
-
-

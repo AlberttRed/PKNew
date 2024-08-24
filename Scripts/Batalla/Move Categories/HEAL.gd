@@ -1,4 +1,4 @@
-extends BattleMoveEffect
+extends BattleMoveCategoryEffect
 #Moviments que únicament curen CATEGORY HEAL
 
 func doEffect():

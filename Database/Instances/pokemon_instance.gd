@@ -379,8 +379,12 @@ func load_moves():
 #		move.pp_actual = move.pp
 		movements.push_back(move)
 	#Onda Trueno
-	var move = move_instance_script.new().create(86)
-	movements.push_back(move)
+	movements.push_back(move_instance_script.new().create(86))
+	#Doble Bofeton
+	#movements.push_back(move_instance_script.new().create(3))
+	#Hypnosis
+	movements.push_back(move_instance_script.new().create(95))
+	
 #Calcula aleatoriament quin genero tindrà aquest pokemon, a partir del seu gender_rate
 #a l'hora de generar un pokemon nou
 func calculateGender():

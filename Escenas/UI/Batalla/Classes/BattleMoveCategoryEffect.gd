@@ -1,19 +1,18 @@
-class_name BattleMoveEffect extends BattleEffect
+class_name BattleMoveCategoryEffect
 
 var move : BattleMove
-var target : BattlePokemon
+var pokemon : BattlePokemon:
+	get:
+		return move.pokemon
+var target : BattlePokemon:
+	get:
+		return move.actualTarget.activePokemon
 #func doEffect(to: Array[BattlePokemon]):
 #	assert(false, "Please override doEffect()` in the derived script.")
 
 func _init(_move : BattleMove):
-	super._init(_move.pokemon)
-	target = _move.actualTarget.activePokemon
 	move = _move
 	#
-func doAnimation():
-	assert(false, "Please override doAnimation()` in the derived script.")
-
-
 func moveInflictsDamage():
 	return move.moveInflictsDamage()
 

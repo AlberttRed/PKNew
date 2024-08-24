@@ -323,10 +323,10 @@ func _on_move_focus_entered():
 func showTargetSelection():
 	#funció que farà seleccionar el target al Player. 
 	#controller.active_pokemon.selected_action.target = controller.active_pokemon.listEnemies
-	var listBattleSpots:Array[BattleSpot]
-	for e in controller.active_pokemon.listEnemies:
-		listBattleSpots.push_back(e.battleSpot)
-	targetSelected.emit(listBattleSpots)
+	#var listBattleSpots:Array[BattleSpot]
+	#for e in controller.active_pokemon.listEnemies:
+		#listBattleSpots.push_back(e.battleSpot)
+	SignalManager.BATTLE.selectTarget.emit(controller.active_pokemon.listEnemies[0])
 
 
 func _on_move_focus_exited():
