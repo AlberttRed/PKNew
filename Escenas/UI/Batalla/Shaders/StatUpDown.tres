@@ -5,6 +5,7 @@
 
 [resource]
 shader = ExtResource("1_lkdgm")
-shader_parameter/Direction = Vector2(0, 1)
+shader_parameter/Direction = Vector2(0, -1)
 shader_parameter/Speed = 0.5
+shader_parameter/opacity = 0.75
 shader_parameter/overlay = ExtResource("2_sosmq")

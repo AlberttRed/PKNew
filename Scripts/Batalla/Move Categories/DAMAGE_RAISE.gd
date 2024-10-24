@@ -7,14 +7,16 @@ func doEffect():
 	if moveInflictsDamage():
 		print("Do damage!")
 		#Farà animació de colpejar, amb el so
-		var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
-		await move.doDamage(move.actualTarget.activePokemon, damage)
+		#var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
+		#await move.doDamage(move.actualTarget.activePokemon, damage)
 
+		move.calculateDamage()
+		await move.doDamage()
 
-	if moveModifyStats():
+	if moveModifyStats() and !pokemon.fainted:
 		print("Modify stat!")
-		#Farà animació de baixar o pujar stats, amb el so
-		await move.modifyStats(move.actualTarget.activePokemon)
+		if move.calculateChangeStatChance():
+			await move.modifyStats(pokemon)
 
 #func doAnimation(to):
 	#print("jaja lol")

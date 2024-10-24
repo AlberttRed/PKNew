@@ -36,5 +36,5 @@ func getBestMoveChoices() -> BattleMoveChoice:
 func selectTargets():
 	randomize()
 	var target_index = randi_range(0, pokemon.listEnemies.size()-1)
-	SignalManager.BATTLE.selectTarget.emit([pokemon.listEnemies[target_index].battleSpot])
+	SignalManager.Battle.selectTarget.emit([pokemon.listEnemies[target_index].battleSpot])
 	#return BattleMoveChoice.new(pokemon.moves[move_index], [pokemon.listEnemies[target_index]])

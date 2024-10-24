@@ -7,14 +7,20 @@ func doEffect():
 	if moveInflictsDamage():
 		print("Do damage!")
 		#Farà animació de colpejar, amb el so
-		var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
-		await move.doDamage(move.actualTarget.activePokemon, damage)
+		#var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
+		#await move.doDamage(move.actualTarget.activePokemon, damage)
 
-		var heal: int = move.calculateHealing(damage)
-		await move.doHealing(move.pokemon, heal)
+		move.calculateDamage()
+		await move.doDamage()
+		
+		#var heal: int = move.calculateHealing(damage)
+		#await move.doHealing(move.pokemon, heal)
+		
+		move.calculateHealing()
+		await move.doHealing(move.pokemon)
 		
 		#missatge is drained
-		await GUI.battle.showMessage("!" + move.actualTarget.activePokemon.battleMessageInitialName + " ha perdido energía!", false, 1.0)
+		await GUI.battle.showMessage("¡" + move.actualTarget.activePokemon.battleMessageInitialName + " ha perdido energía!", false, 1.0)
 				
 #func doAnimation(to):
 	#print("jaja lol")

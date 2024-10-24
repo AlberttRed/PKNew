@@ -1,7 +1,7 @@
 [gd_scene load_steps=61 format=3 uid="uid://dmdm304dmklh8"]
 
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="1_35cnb"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleUI.gd" id="1_syfy0"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleUI.gd" id="1_syfy0"]
 [ext_resource type="StyleBox" uid="uid://cpxaac6mtjqnu" path="res://Escenas/UI/Batalla/Resources/BattleActions_Panel.tres" id="3_7u5r2"]
 [ext_resource type="StyleBox" uid="uid://bgsm216aqcccn" path="res://Escenas/UI/Batalla/Resources/BattleMoves_Panel.tres" id="4_1pp74"]
 [ext_resource type="Theme" uid="uid://bugfcogjtje8h" path="res://Escenas/UI/Fonts/fontMessageBox.tres" id="4_441j1"]
@@ -29,19 +29,19 @@
 [ext_resource type="AnimationLibrary" uid="uid://casxsbdqp031y" path="res://Objetos/Batalla/Animaciones/Moves/Battle_PokemonAnimations.res" id="19_2e54j"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="19_osmde"]
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="20_loxkp"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleSpot.gd" id="20_yu0i4"]
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated.gdshader" id="22_2sebl"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleSpot.gd" id="20_yu0i4"]
+[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated_OLD.gdshader" id="22_2sebl"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="25_tw0vt"]
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="26_tk2h0"]
 [ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="27_cqio0"]
 [ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="28_q32p6"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleSide.gd" id="30_y0xkt"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleParticipant.gd" id="35_5kxgh"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleSide.gd" id="30_y0xkt"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleParticipant.gd" id="35_5kxgh"]
 [ext_resource type="Texture2D" uid="uid://dx7t7y2tum7mu" path="res://Sprites/Pictures/trback000.png" id="36_bvlcl"]
 [ext_resource type="Texture2D" uid="uid://6cpfkdqyugvc" path="res://Sprites/Pictures/trback001.png" id="37_nlq6k"]
 [ext_resource type="Texture2D" uid="uid://cubck6nvldnr0" path="res://Sprites/Pictures/trainer005.png" id="42_mypoh"]
 [ext_resource type="Texture2D" uid="uid://bswf5x8a3euym" path="res://Sprites/Pictures/trainer006.png" id="43_whljm"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleAnimationController.gd" id="44_dvxit"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleAnimationController.gd" id="44_dvxit"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb151"]
 texture = ExtResource("4_l76bn")
@@ -436,6 +436,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="Move1" type="Panel" parent="PanelMoves/Moves"]
+visible = false
 offset_left = 4.0
 offset_top = 6.0
 offset_right = 196.0

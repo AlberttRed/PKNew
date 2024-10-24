@@ -50,4 +50,3 @@ func get_effectiveness_against(type) -> float:
 	print(Name + " is normal againgst " + type.Name)
 	return 1.0
 			
-

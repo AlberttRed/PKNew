@@ -59,6 +59,7 @@ func doMove():
 	
 func setMove(_move:BattleMove):
 	move = _move
+	pokemon.usedMove = _move
 	
 func setTarget(_target : Array[BattleSpot]):
 	target = _target

@@ -1,27 +1,17 @@
 shader_type canvas_item;
-uniform float cutoff : hint_range(0, 100);
-uniform float VIEWPORT_HEIGHT = 384.0;
-varying vec2 world_position;
+render_mode unshaded;
 
-void vertex() {
-	// Called for every vertex the material is visible on.
-	world_position = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
-}
+uniform float cutoff : hint_range(0.0, 1.0);
+uniform float smooth_size : hint_range(0.0, 1.0);
+uniform sampler2D mask : source_color;
 
-void fragment() {
-	// Called for every pixel the material is visible on.
+uniform vec4 color : source_color;
 
-	float y = VIEWPORT_HEIGHT / 100.0 * cutoff;
+void fragment()
+{
 
-	if (world_position.y < y) {
-		COLOR = texture(TEXTURE, UV);
-	}else{
-		COLOR = vec4(1,1,1, 0);
-	}
-}
-
-void light() {
-	// Called for every pixel for every light affecting the CanvasItem.
-	// Uncomment to replace the default light processing function with this one.
-
+	float value = texture(mask, UV).r;
+	float value2 = texture(TEXTURE, UV).a;
+	float alpha = smoothstep(cutoff, cutoff + smooth_size, value2 * value * (1.0 - smooth_size) + smooth_size);
+	COLOR = vec4(texture(TEXTURE, UV).rgb, alpha);
 }

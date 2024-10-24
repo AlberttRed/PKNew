@@ -1,6 +1,6 @@
-[gd_scene load_steps=72 format=3 uid="uid://c1wojnk4gqpx0"]
+[gd_scene load_steps=73 format=3 uid="uid://c1wojnk4gqpx0"]
 
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleUI.gd" id="1_y88u2"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleUI.gd" id="1_y88u2"]
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="2_4n17r"]
 [ext_resource type="Texture2D" uid="uid://ynuynks1px8n" path="res://Sprites/Pictures/TallGrassBattle.png" id="2_tckos"]
 [ext_resource type="StyleBox" uid="uid://cpxaac6mtjqnu" path="res://Escenas/UI/Batalla/Resources/BattleActions_Panel.tres" id="3_51j8k"]
@@ -13,9 +13,9 @@
 [ext_resource type="FontFile" uid="uid://rdvuqsu77j27" path="res://Escenas/UI/Fonts/pkmnemn.ttf" id="9_8dhsv"]
 [ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="10_yq8b8"]
 [ext_resource type="Texture2D" uid="uid://coiimjb2x6u06" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFightButtons.png" id="11_2m3sr"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleSide.gd" id="12_5khs7"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleSide.gd" id="12_5khs7"]
 [ext_resource type="Texture2D" uid="uid://4suianjdpdca" path="res://Sprites/Batalla/Battlebacks/playerbaseField.png" id="13_xdjkr"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleSpot.gd" id="14_ctpen"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleSpot.gd" id="14_ctpen"]
 [ext_resource type="Material" uid="uid://d11gerbjif732" path="res://Escenas/UI/Batalla/Shaders/StatUpDown.tres" id="15_7jxtj"]
 [ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="15_u4r5y"]
 [ext_resource type="Texture2D" uid="uid://dk116xfkakhg7" path="res://Sprites/Batalla/Moves Animations/OverlayStatDown.png" id="16_2xajv"]
@@ -29,9 +29,9 @@
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="22_k631i"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="23_0408d"]
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="24_b8gr0"]
-[ext_resource type="Texture2D" uid="uid://coxai6nue002s" path="res://Sprites/Batalla/Moves Animations/ParalysisFrames.png" id="24_jnsji"]
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated.gdshader" id="24_ugc0i"]
+[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated_OLD.gdshader" id="24_ugc0i"]
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="25_tsveh"]
+[ext_resource type="Texture2D" uid="uid://bbdfi7fvce4p6" path="res://Sprites/Batalla/Moves Animations/SleepFrames.png" id="26_2cntd"]
 [ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="26_3ufge"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="27_jbt43"]
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="28_14p7c"]
@@ -39,7 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="30_f6qhl"]
 [ext_resource type="Texture2D" uid="uid://jp48dg7huvv" path="res://Sprites/Batalla/Battlebacks/enemybaseField.png" id="31_j5f6p"]
 [ext_resource type="Texture2D" uid="uid://pbvisvp5jwv4" path="res://Sprites/Batalla/019.png" id="32_uw6fa"]
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattleParticipant.gd" id="33_5u4xe"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleParticipant.gd" id="33_5u4xe"]
 [ext_resource type="Texture2D" uid="uid://dx7t7y2tum7mu" path="res://Sprites/Pictures/trback000.png" id="33_cv2ry"]
 [ext_resource type="Texture2D" uid="uid://bmucqisxae21h" path="res://Sprites/Batalla/battle_shadow.png" id="33_f8vih"]
 [ext_resource type="Texture2D" uid="uid://6cpfkdqyugvc" path="res://Sprites/Pictures/trback001.png" id="34_inom0"]
@@ -47,7 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://dqkmrnqhdrcvb" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFoeBoxS.png" id="35_th2pa"]
 [ext_resource type="Texture2D" uid="uid://cubck6nvldnr0" path="res://Sprites/Pictures/trainer005.png" id="40_1uavv"]
 [ext_resource type="Texture2D" uid="uid://bswf5x8a3euym" path="res://Sprites/Pictures/trainer006.png" id="41_f6lv5"]
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNInOut.gdshader" id="41_gkbf1"]
+[ext_resource type="Texture2D" uid="uid://cwjm4mwajdsvi" path="res://Sprites/Batalla/Moves Animations/BurnFrames.png" id="44_haqvs"]
 [ext_resource type="AnimationLibrary" uid="uid://6y11gonugprj" path="res://Objetos/Batalla/Animaciones/Moves/GLOBAL.res" id="49_35s1f"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_egkj0"]
@@ -260,7 +260,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Sprite_Ray2:visible")
+tracks/11/path = NodePath("Zet2:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -272,7 +272,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Sprite_Ray1:visible")
+tracks/12/path = NodePath("Zet:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -284,7 +284,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Sprite_Ray1:position")
+tracks/13/path = NodePath("Zet:position")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -296,7 +296,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Sprite_Ray1:frame")
+tracks/14/path = NodePath("Zet:frame")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -308,7 +308,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Sprite_Ray1:flip_v")
+tracks/15/path = NodePath("Zet:flip_v")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -320,7 +320,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Sprite_Ray2:position")
+tracks/16/path = NodePath("Zet2:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -332,7 +332,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Sprite_Ray2:flip_h")
+tracks/17/path = NodePath("Zet2:flip_h")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -344,7 +344,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("Sprite_Ray1:flip_h")
+tracks/18/path = NodePath("Zet:flip_h")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -356,7 +356,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("Sprite_Ray2:frame")
+tracks/19/path = NodePath("Zet2:frame")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -376,6 +376,102 @@ tracks/20/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(770, -3)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Sprite:self_modulate")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Zet:scale")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Zet:rotation")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.17877]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Zet2:rotation")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.496672]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Zet2:scale")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Zet:modulate")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Zet2:modulate")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Zet:texture")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("26_2cntd")]
 }
 
 [sub_resource type="Animation" id="Animation_6moud"]
@@ -438,14 +534,73 @@ RichTextLabel/constants/shadow_outline_size = 1
 RichTextLabel/constants/table_h_separation = 3
 RichTextLabel/constants/table_v_separation = 3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6mvdf"]
-shader = ExtResource("41_gkbf1")
-shader_parameter/displacement = Vector2(0, 0)
-shader_parameter/velocity = Vector2(1, 1)
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/flash_modifier = 1.0
-shader_parameter/scale = 0.0
-shader_parameter/pos = 1.0
+[sub_resource type="Animation" id="Animation_mw2hc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.75]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Burn:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Burn:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-38, 30)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Burn:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x12qw"]
+_data = {
+"RESET": SubResource("Animation_mw2hc")
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8nwnv"]
 
@@ -1302,7 +1457,6 @@ metadata/_edit_lock_ = true
 visible = false
 material = ExtResource("15_7jxtj")
 texture = ExtResource("15_u4r5y")
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/PokemonA"]
 libraries = {
@@ -1323,19 +1477,20 @@ position = Vector2(-29, 95)
 scale = Vector2(1.125, 1.125)
 texture = ExtResource("33_f8vih")
 
-[node name="Sprite_Ray1" type="Sprite2D" parent="playerBase/PokemonA"]
+[node name="Zet" type="Sprite2D" parent="playerBase/PokemonA"]
 visible = false
 position = Vector2(25, 31)
-texture = ExtResource("24_jnsji")
+rotation = -0.17877
+texture = ExtResource("26_2cntd")
 flip_h = true
 hframes = 3
 frame = 2
 
-[node name="Sprite_Ray2" type="Sprite2D" parent="playerBase/PokemonA"]
+[node name="Zet2" type="Sprite2D" parent="playerBase/PokemonA"]
 position = Vector2(-26, -12)
-texture = ExtResource("24_jnsji")
-hframes = 3
-frame = 1
+rotation = -0.496672
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("26_2cntd")
 
 [node name="PokemonB" type="Node2D" parent="playerBase"]
 visible = false
@@ -1361,6 +1516,7 @@ scale = Vector2(1.125, 1.125)
 texture = ExtResource("33_f8vih")
 
 [node name="HPBarA" type="Sprite2D" parent="playerBase"]
+visible = false
 z_index = 1
 position = Vector2(770, -3)
 texture = ExtResource("22_k631i")
@@ -1543,6 +1699,7 @@ hframes = 5
 frame = 2
 
 [node name="TrainerB" type="Node2D" parent="playerBase"]
+visible = false
 position = Vector2(0, 9)
 script = ExtResource("33_5u4xe")
 
@@ -1577,23 +1734,44 @@ texture = ExtResource("17_kiipe")
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/PokemonA"]
 z_index = 1
-material = SubResource("ShaderMaterial_6mvdf")
+material = ExtResource("15_7jxtj")
 texture = ExtResource("32_uw6fa")
 region_rect = Rect2(0, 0, 160, 160)
 
 [node name="Shadow" type="Sprite2D" parent="enemyBase/PokemonA"]
+visible = false
 position = Vector2(2, 32)
 scale = Vector2(1.125, 1.125)
 texture = ExtResource("33_f8vih")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase/PokemonA"]
 libraries = {
+"": SubResource("AnimationLibrary_x12qw"),
 "Ailments": ExtResource("16_xv8xw"),
 "General": ExtResource("19_ch81s"),
 "Moves": ExtResource("18_tly4n"),
 "Pokemon": ExtResource("19_g4kk5"),
 "Weather": SubResource("AnimationLibrary_8nwnv")
 }
+
+[node name="Burn" type="Sprite2D" parent="enemyBase/PokemonA"]
+z_index = 1
+position = Vector2(-38, 30)
+texture = ExtResource("44_haqvs")
+vframes = 5
+
+[node name="Burn2" type="Sprite2D" parent="enemyBase/PokemonA"]
+z_index = 1
+position = Vector2(-23, 30)
+texture = ExtResource("44_haqvs")
+vframes = 5
+frame = 1
+
+[node name="Burn3" type="Sprite2D" parent="enemyBase/PokemonA"]
+z_index = 1
+position = Vector2(67, -54)
+texture = ExtResource("44_haqvs")
+vframes = 5
 
 [node name="PokemonB" type="Node2D" parent="enemyBase"]
 visible = false

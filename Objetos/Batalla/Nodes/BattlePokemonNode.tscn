@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://scg1ib4m4srk"]
 
-[ext_resource type="Script" path="res://Escenas/UI/Batalla/Classes/BattlePokemon.gd" id="1_jhpcm"]
+[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattlePokemon.gd" id="1_jhpcm"]
 [ext_resource type="Texture2D" uid="uid://bmucqisxae21h" path="res://Sprites/Batalla/battle_shadow.png" id="3_hdvp8"]
 [ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="3_y4gnn"]
 [ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Batalla/Animaciones/Moves/Battle_AilmentAnimations.res" id="4_e2kvf"]

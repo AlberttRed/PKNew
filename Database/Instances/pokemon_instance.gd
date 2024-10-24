@@ -128,6 +128,8 @@ var inBattle : bool
 	#get:
 		#return battleInstance != null && battleInstance.inBattle
 
+var activeBattleEffects:Array[BattleEffect]
+
 var inBattleParty : bool
 
 var capture_date: String = "18 de Nov. de 2018" 
@@ -295,6 +297,7 @@ func init_pokemon():
 		#set_info()
 	load_moves()
 	hp_actual = hp_total
+	#ability_id = CONST.ABILITIES.INTIMIDATE
 
 #
 #	hp_total = get_total_hp()
@@ -379,12 +382,17 @@ func load_moves():
 #		move.pp_actual = move.pp
 		movements.push_back(move)
 	#Onda Trueno
-	movements.push_back(move_instance_script.new().create(86))
+	if movements.size() < 4:
+		movements.push_back(move_instance_script.new().create(86))
 	#Doble Bofeton
 	#movements.push_back(move_instance_script.new().create(3))
-	#Hypnosis
-	movements.push_back(move_instance_script.new().create(95))
-	
+	#Polvo veneno
+	#movements.push_back(move_instance_script.new().create(77))
+	#Picotazo Ven.
+	#movements.push_back(move_instance_script.new().create(40))
+	#Ala de acero
+	if movements.size() < 4:
+		movements.push_back(move_instance_script.new().create(211))
 #Calcula aleatoriament quin genero tindrà aquest pokemon, a partir del seu gender_rate
 #a l'hora de generar un pokemon nou
 func calculateGender():

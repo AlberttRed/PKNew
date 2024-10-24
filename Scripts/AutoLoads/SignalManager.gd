@@ -5,8 +5,8 @@ extends Node
 @onready var CMD = commands.new()
 @onready var SCENE_MANAGER = scene_manager.new()
 @onready var PLAYER = player.new()
-@onready var ANIMATION = animations.new()
-@onready var BATTLE:BattleSignals = BattleSignals.new()
+@onready var Animations = animations.new()
+@onready var Battle:BattleSignals = BattleSignals.new()
 
 class event:
 	pass
@@ -45,10 +45,22 @@ class animations:
 	signal finished_animation
 	
 class BattleSignals:
-	signal playAnimation
-	signal playMoveAnimation
+	var Effects:BattleEffects = BattleEffects.new()
+	var Animations:BattleAnimations = BattleAnimations.new()
 	signal selectTarget
 	signal targetSelected
+	signal add
+	
+	class BattleEffects:
+		signal add
+		signal remove
+		signal applyAt
+		
+		signal finished
+		
+	class BattleAnimations:
+		signal playAnimation
+		signal playMoveAnimation
 	
 func _ready():
 	pass

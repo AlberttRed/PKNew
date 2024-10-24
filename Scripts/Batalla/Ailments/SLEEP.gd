@@ -1,21 +1,27 @@
-extends BattleMoveAilmentEffect
+extends BattleAilmentEffect
 
 func _init(move:BattleMove):
 	super(move)
 	isStatusAilment = true;
 	statusType = CONST.STATUS.SLEEP
+	persistentEffect = true
+	calculateTurns()
 
+func start():
+	turnsCounter = 0
+	
 func doAnimation():
-	pass
-	#await target.battleSpot.playAnimation("SLEEP")
+	await target.battleSpot.playAnimation("SLEEP")
 	
 func applyPreviousEffects():
-		randomize()
-		var valor : float = randf()
-		if valor <= (0.25):
-			target.canAttack = false
-			await doAnimation()
-			await showAilmentEffectMessage()#await GUI.battle.msgBox.showAilmentMessage_Effect(target, ailmentType)
+	if nextTurn():
+		target.canAttack = false
+		await doAnimation()
+		await showAilmentEffectMessage()
+	else:
+		target.canAttack = true
+		await showAilmentEndMessage()
+		target.changeStatus(null)
 
 func showAilmentSuceededMessage():
 	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " se durmió!", false, 2.0)
