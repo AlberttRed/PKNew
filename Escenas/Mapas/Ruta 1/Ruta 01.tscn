@@ -25,7 +25,7 @@ probability = 5.0
 [sub_resource type="Resource" id="Resource_1unxj"]
 script = ExtResource("21_wv7iv")
 pkmn_id = 19
-min_level = 2
+min_level = 4
 max_level = 4
 probability = 95.0
 

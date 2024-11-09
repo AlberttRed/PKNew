@@ -255,7 +255,6 @@ func create(_randomize_stats : bool = true, _pkmn_id : int = -1, _level : int = 
 		
 	randomize_stats = _randomize_stats	
 	#print(pkm_id.keys()[pkm_id])
-
 	init_pokemon()
 	
 	return self
@@ -390,9 +389,9 @@ func load_moves():
 	#movements.push_back(move_instance_script.new().create(77))
 	#Picotazo Ven.
 	#movements.push_back(move_instance_script.new().create(40))
-	#Ala de acero
+	#Reflejo
 	if movements.size() < 4:
-		movements.push_back(move_instance_script.new().create(211))
+		movements.push_back(move_instance_script.new().create(BattleEffect.Moves.CONFUSE_RAY))
 #Calcula aleatoriament quin genero tindrà aquest pokemon, a partir del seu gender_rate
 #a l'hora de generar un pokemon nou
 func calculateGender():

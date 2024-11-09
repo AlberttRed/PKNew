@@ -16,9 +16,10 @@ class_name BattleMoveDamage
 
 var pkmnLevel : int
 var movePower : int
-var criticalHit : bool
-var physicMove : bool
-var specialMove : bool
+var isCriticalHit : bool
+var isPhysicMove : bool
+var isSpecialMove : bool
+var isFixedDamage : bool = false
 var multipleTargets : bool
 var Effectiveness : float
 var maxDamage : float
@@ -32,6 +33,7 @@ var STABMod : float = 1.0
 var weatherMod : float = 1.0
 var burnMod : float = 1.0
 var otherMod : float = 1.0
+var confusedHit : bool = false
 
 var initialDamage : int
 var calculatedDamage : int
@@ -39,33 +41,34 @@ var calculatedDamage : int
 func _init(_move:BattleMove):
 	movePower = _move.power
 	pkmnLevel = _move.pokemon.level
-	physicMove = _move.damage_class == CONST.DAMAGE_CLASS.FISICO
-	specialMove = _move.damage_class == CONST.DAMAGE_CLASS.ESPECIAL
+	isPhysicMove = _move.damage_class == CONST.DAMAGE_CLASS.FISICO
+	isSpecialMove = _move.damage_class == CONST.DAMAGE_CLASS.ESPECIAL
 	maxDamage = _move.actualTarget.activePokemon.hp_actual
+	confusedHit = _move.confusedHit
 	
-	criticalHit = _move.critical
+	isCriticalHit = _move.critical
 	multipleTargets = _move.has_multiple_targets() and _move.pokemon.listEnemies.size() > 1
 	Effectiveness = _move.calculateEffectivness()
 	
-	if physicMove:
+	if isPhysicMove:
 		#Falta aplicar que si l stage d atac es negatiu, l ignori. I si l stage de defensa rival es positiu, l ignori
-		if criticalHit && _move.pokemon.getStatStage(CONST.STATS.ATA)<0:
+		if isCriticalHit && _move.pokemon.getStatStage(CONST.STATS.ATA)<0:
 			attackMod = _move.pokemon.attack
 		else:
 			attackMod = _move.pokemon.getModStat(CONST.STATS.ATA)
 		
-		if criticalHit && _move.actualTarget.activePokemon.getStatStage(CONST.STATS.DEF)>0:
+		if isCriticalHit && _move.actualTarget.activePokemon.getStatStage(CONST.STATS.DEF)>0:
 			deffenseMod = _move.actualTarget.activePokemon.defense
 		else:
 			deffenseMod = _move.actualTarget.activePokemon.getModStat(CONST.STATS.DEF)
 	
-	elif specialMove:
-		if criticalHit && _move.pokemon.getStatStage(CONST.STATS.ATAESP)<0:
+	elif isSpecialMove:
+		if isCriticalHit && _move.pokemon.getStatStage(CONST.STATS.ATAESP)<0:
 			attackMod = _move.pokemon.sp_attack
 		else:
 			attackMod = _move.pokemon.getModStat(CONST.STATS.ATAESP) 
 		
-		if criticalHit && _move.actualTarget.activePokemon.getStatStage(CONST.STATS.DEFESP)>0:
+		if isCriticalHit && _move.actualTarget.activePokemon.getStatStage(CONST.STATS.DEFESP)>0:
 			deffenseMod = _move.actualTarget.activePokemon.sp_defense
 		else:	
 			deffenseMod = _move.actualTarget.activePokemon.getModStat(CONST.STATS.DEFESP) 
@@ -74,11 +77,11 @@ func _init(_move:BattleMove):
 	
 	
 func calculate(r = null):#to : BattlePokemon,r = null):
-	if criticalHit == null or multipleTargets == null:
+	if isCriticalHit == null or multipleTargets == null:
 		pass
 		# show error
 	
-	if criticalHit:
+	if isCriticalHit:
 		criticalMod = 2.0
 		
 
@@ -116,8 +119,11 @@ func calculate(r = null):#to : BattlePokemon,r = null):
 #---- TO DO
 	#Other = calculate_others()
 #---- End TO DO
-	initialDamage = int(int((int((2.0 * float(pkmnLevel))/5.0 + 2.0) * float(movePower) * float(attackMod))/float(deffenseMod))/50.0 + 2.0) #(((2 * from.level/5 + 2) * power * Att/Def)/50 + 2)
-	calculatedDamage = int(int(int(int(int(int(int(int(initialDamage*targetsMod) * weatherMod) * criticalMod) * randomMod) * STABMod) * Effectiveness) * burnMod) * otherMod)
+	if !confusedHit:
+		initialDamage = int(int((int((2.0 * float(pkmnLevel))/5.0 + 2.0) * float(movePower) * float(attackMod))/float(deffenseMod))/50.0 + 2.0) #(((2 * from.level/5 + 2) * power * Att/Def)/50 + 2)
+		calculatedDamage = int(int(int(int(int(int(int(int(initialDamage*targetsMod) * weatherMod) * criticalMod) * randomMod) * STABMod) * Effectiveness) * burnMod) * otherMod)
+	else:
+		calculatedDamage = int(int((int((2.0 * float(pkmnLevel))/5.0 + 2.0) * float(40) * float(attackMod))/float(deffenseMod))/50.0 + 2.0) #(((2 * from.level/5 + 2) * power * Att/Def)/50 + 2)
 	
 	calculatedDamage = min(max(1, calculatedDamage), maxDamage)
 	

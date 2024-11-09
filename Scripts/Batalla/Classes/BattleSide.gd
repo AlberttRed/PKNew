@@ -23,11 +23,15 @@ var battleSpots:Array[BattleSpot]:
 var activePokemons : Array[BattlePokemon]: # Indica els pokemons que estan actius en el combat lluitant per aquell side
 	get:
 		return getActivePokemons()
-var activeBattleEffects : Array[BattleEffect] = [] #[CONST.MOVE_EFFECTS] = []
-
 var defeated : bool = false # Indica si tots els pokemons del Side han estat derrotats, per tant el Side ha perdut
 var escapeAttempts:int #Player attemps to exit the battle. If a Move is selected, the attemps counter will restart
-
+var field : BattleField
+var controllable:
+	get:
+		for p:BattleParticipant in participants:
+			if p.controllable:
+				return true
+		return false
 #func _init(_type : CONST.BATTLE_SIDES):
 	#type = _type
 	#
@@ -47,6 +51,7 @@ func addParticipant(_participant : Battler, _controllable : bool):
 func initSide(rules: BattleRules):
 	assert(!participants.is_empty(), "No s'ha carregat cap Participant per el side")
 	escapeAttempts = 0
+	field = BattleField.new(self)
 	loadParty()
 	if participants.size() == 1:
 		pokemonSpotA.setParticipant(participants[0])
@@ -74,14 +79,21 @@ func initSide(rules: BattleRules):
 func hasWorkingFieldEffect(e:BattleEffect.List):
 	var name:String = str(BattleEffect.List.keys()[e])
 	
-	for effect:BattleEffect in activeBattleEffects:
+	for effect:BattleEffect in field.activeBattleEffects:
 		var n = effect.name
 		if(n == name):
 			return true
 	return false
 
 func addBattleEffect(effect : BattleEffect):
-	SignalManager.Battle.Effects.add.emit(effect, self)
+	if effect == null:
+		return
+	SignalManager.Battle.Effects.add.emit(effect, field)
+
+func removeBattleEffect(effect : BattleEffect):
+	if effect == null:
+		return
+	SignalManager.Battle.Effects.remove.emit(effect, field)
 	
 # Funció que munta el party del Side, segons el número d'entrenadors del side. Si es un entrenador, agafarà els 6 pk
 # d'aquell entrenador. Si hi ha 2 entrenadors, agafarà 3 d'un i 3 de l'altre (com a màxim)
@@ -142,6 +154,8 @@ func clear():
 	participants.clear()
 	pokemonParty.clear()
 	activePokemons.clear()
+	field.activeBattleEffects.clear()
+	field = null
 
 	
 
@@ -153,3 +167,11 @@ func showActivePokemons():
 		#for p:BattleSpot in battleSpots:
 			#await p.showHPBar()
 	
+func getActiveBattleEffects(_pokemon:BattlePokemon):
+	var effectList : Array[BattleEffect]
+	if field == null:
+		return null
+	for e:BattleEffect in field.activeBattleEffects:
+		e.setTarget(_pokemon)
+		effectList.push_back(e)
+	return effectList

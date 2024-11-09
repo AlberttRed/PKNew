@@ -10,13 +10,13 @@ func doEffect():
 		#var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
 		#await move.doDamage(move.actualTarget.activePokemon, damage)
 
-		move.calculateDamage()
+		await move.calculateDamage()
 		await move.doDamage()
 		
 		#var heal: int = move.calculateHealing(damage)
 		#await move.doHealing(move.pokemon, heal)
 		
-		move.calculateHealing()
+		await move.calculateHealing()
 		await move.doHealing(move.pokemon)
 		
 		#missatge is drained

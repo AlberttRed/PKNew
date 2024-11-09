@@ -34,9 +34,6 @@ class_name Move
 @export var meta_flinch_chance : int = 0 # % de que un atac fagi retrocedir  al rival
 @export var meta_stat_chance : int = 0 # % de que un atac pugi o baixi els stats
 @export var contact_flag : bool = false
-@export var move_effect : int = 1 #id de la funció que s'ocupa de calcular el mal d'aquest moviment
-#var functions = MOVE_FUNCTIONS.hola()
-
 
 func _init():
 	add_user_signal("move_done")
@@ -80,9 +77,7 @@ func has_multiple_targets(from):
 func is_type(t):
 	return type == t
 	
-func hasWorkingMoveEffect(e):
-	return move_effect == e
-	
+
 func makeContact():
 	return contact_flag
 

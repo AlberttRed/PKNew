@@ -48,13 +48,19 @@ func selectMove():
 func doMove():
 	print(pokemon.Name + " doing move " + move.Name)
 	
-	await pokemon.applyPreviousEffects()
+	await GUI.battle.controller.effects.applyBattleEffect("BeforeMove")
+	#SignalManager.Battle.Effects.applyAt.emit("BeforeMove")
+	#await SignalManager.Battle.Effects.finished
 	
-	if pokemon.canAttack:
-		#move.target.selectedTargets = target
-		await move.use()
+	#if pokemon.canAttack:
+		##move.target.selectedTargets = target
+		#await move.use()
+	await pokemon.doMove()
 	
-	await pokemon.applyLaterEffects()
+	await GUI.battle.controller.effects.applyBattleEffect("AfterMove")
+	#SignalManager.Battle.Effects.applyAt.emit("AfterMove")
+	#await SignalManager.Battle.Effects.finished
+
 	#pokemon.actionFinished
 	
 func setMove(_move:BattleMove):

@@ -71,6 +71,8 @@ func selectTargets():
 	
 func addTarget(target):
 	selectedTargets.push_back(target)
+	if move.effect != null:
+		move.effect.setTarget(target)
 	SignalManager.Battle.targetSelected.emit()
 	
 func nextTarget() ->bool:
@@ -82,7 +84,7 @@ func doTargetAliado():
 		addTarget(ally.battleSpot)
 
 func doTargetBasePlayer():
-	addTarget(move.pokemon.side)
+	addTarget(move.pokemon.side.field)
 	
 func doTargetUserOrALly():
 	if GUI.battle.controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
@@ -93,7 +95,7 @@ func doTargetUserOrALly():
 	await SignalManager.BATTLE.targetSelected
 	
 func doTargetBaseEnemy():
-	addTarget(move.pokemon.opponentSide)
+	addTarget(move.pokemon.opponentSide.field)
 	
 func doTargetUser():
 	addTarget(move.pokemon.battleSpot)

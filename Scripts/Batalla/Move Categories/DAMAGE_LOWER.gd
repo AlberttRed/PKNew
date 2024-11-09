@@ -11,7 +11,7 @@ func doEffect():
 		#var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
 		#await move.doDamage(move.actualTarget.activePokemon, damage)
 
-		move.calculateDamage()
+		await move.calculateDamage()
 		await move.doDamage()
 
 	if moveModifyStats() and !target.fainted:

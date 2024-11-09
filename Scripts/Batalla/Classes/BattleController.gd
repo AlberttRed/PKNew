@@ -18,15 +18,18 @@ var activePokemons : Array[BattlePokemon]: # Indica els pokemons que estan actiu
 	get:
 		return playerSide.activePokemons + enemySide.activePokemons
 	
-var activeBattleSpot : BattleSpot
+var activeBattleSpot : BattleSpot:
+	set(bs):
+		activeBattleSpot = bs
+		effects.activePokmeon = bs.activePokemon
 var active_pokemon : BattlePokemon: # Indica el pokémon actiu que està fent el turn
 	get:
 		return activeBattleSpot.activePokemon
 var turnPokemonOrder : Array[BattleSpot]
-var activeBattleEffects : Array[BattleEffect]
-var battleEffectsController : BattleEffectController
+var effects : BattleEffectController
 #var activeWeathereffect : BattleWeatherEffect = null # CONST.WEATHER = CONST.WEATHER.NONE #Només pot haver-hi un tipus de Weather actiu a la vegada
 var activeWeather
+var field:BattleField
 
 var UI : BattleUI:
 	get:
@@ -34,12 +37,13 @@ var UI : BattleUI:
 	
 func _init(_battleRules : BattleRules):
 	rules = _battleRules
-	battleEffectsController = BattleEffectController.new(self)
+	effects = BattleEffectController.new(self)
+	field = BattleField.new()
 
 func initBattle():
 
-	assert(playerSide != null or enemySide != null, "No se han configurado los BattleSide para el combate.")
 	setSides()
+	#assert(playerSide == null or enemySide == null, "No se han configurado los BattleSide para el combate.")
 
 	await GUI.initBattleTransition()
 	UI = GUI.battle.initUI(self)
@@ -66,8 +70,10 @@ func initBattle():
 	await takeTurn()
 
 func takeTurn():
-	SignalManager.Battle.Effects.applyAt.emit("InitBattleTurn")
-	await SignalManager.Battle.Effects.finished#battleEffectsController.applyBattleEffectAtInitBattleTurn()
+	print("lalala")
+	await effects.applyBattleEffect("InitBattleTurn")
+	#SignalManager.Battle.Effects.applyAt.emit("InitBattleTurn")
+	#await SignalManager.Battle.Effects.finished
 	if stage == CONST.BATTLE_STAGES.SELECT_ACTION:
 		print("active pokemons :" + str(activePokemons))
 		for bs:BattleSpot in activeBattleSpots:# p:BattlePokemon in activePokemons:
@@ -89,8 +95,12 @@ func takeTurn():
 		for bs:BattleSpot in turnPokemonOrder:
 			activeBattleSpot = bs
 			if active_pokemon!=null and !active_pokemon.fainted and !active_pokemon.opponentSide.isDefeated():
-				SignalManager.Battle.Effects.applyAt.emit("InitPKMNTurn")
-				await SignalManager.Battle.Effects.finished#battleEffectsController.applyBattleEffectAtInitPKMNTurn()
+				print(active_pokemon.Name + " Effects("+ str(active_pokemon.activeAccumulatedEffects.size()) + "): ")
+				for effect in active_pokemon.activeAccumulatedEffects:
+					print(effect.name)
+				#SignalManager.Battle.Effects.applyAt.emit("InitPKMNTurn")
+				#await SignalManager.Battle.Effects.finished
+				await effects.applyBattleEffect("InitPKMNTurn")
 				active_pokemon.doAction()
 				await active_pokemon.actionFinished
 			#Only give exp if pokemon is from player
@@ -100,14 +110,15 @@ func takeTurn():
 					if e.fainted and e.side.type == CONST.BATTLE_SIDES.ENEMY:
 						await e.giveExpAtDefeat()
 						e.battleSpot.removeActivePokemon()
-				SignalManager.Battle.Effects.applyAt.emit("EndPKMNTurn")
-				await SignalManager.Battle.Effects.finished#await battleEffectsController.applyBattleEffectAtEndPKMNTurn()
+				await effects.applyBattleEffect("EndPKMNTurn")
+				#SignalManager.Battle.Effects.applyAt.emit("EndPKMNTurn")
+				#await SignalManager.Battle.Effects.finished
 			
 	#endTurn()
 	#takeTurn()
 	if !battleFinished():
 		stage = CONST.BATTLE_STAGES.SELECT_ACTION
-		endTurn()
+		await endTurn()
 		takeTurn()
 	else:
 		print("c'est fini")
@@ -184,6 +195,8 @@ func setSides():
 	self.sides = [playerSide, enemySide]
 	self.playerSide.opponentSide = enemySide
 	self.enemySide.opponentSide = playerSide
+	enemySide.field.parentField = field
+	playerSide.field.parentField = field
 #		print("player side: ")
 #		for a in allies:
 #			print(a.Name)
@@ -249,7 +262,8 @@ func sortChoices(a : BattleSpot, b : BattleSpot):
 	var unix_time_int: int = unix_time
 	var dt: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
 	
-	
+	print(choice_a.priority)
+	print(choice_b.priority)
 	if choice_a.priority > choice_b.priority:
 		return true
 	elif choice_a.priority < choice_b.priority:
@@ -283,8 +297,9 @@ func battleFinished():
 	return false
 	
 func endTurn():
-	SignalManager.Battle.Effects.applyAt.emit("EndBattleTurn")
-	await SignalManager.Battle.Effects.finished#battleEffectsController.applyBattleEffectAtEndBattleTurn()
+	await effects.applyBattleEffect("EndBattleTurn")
+	#SignalManager.Battle.Effects.applyAt.emit("EndBattleTurn")
+	#await SignalManager.Battle.Effects.finished#battleEffectsController.applyBattleEffectAtEndBattleTurn()
 	for p in activePokemons:
 		p.endTurn()
 	#turnPokemonOrder.clear()
@@ -292,6 +307,7 @@ func endTurn():
 func endBattle():
 	await GUI.fadeIn(1.3)
 	UI.clear()
+	effects.clear()
 	await GUI.get_tree().create_timer(1).timeout
 	await GUI.fadeOut(3)
 	
@@ -306,6 +322,8 @@ func queue_free():
 	active_pokemon = null
 
 	turnPokemonOrder.clear()
+	field.activeBattleEffects.clear()
+	field = null
 
 	
 #func doCommonAnimation(root:Object, animName:String):

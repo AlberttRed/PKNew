@@ -8,7 +8,7 @@ func doEffect():
 		print("Do damage!")
 		#var damage : int =  move.calculateDamage(move.actualTarget.activePokemon)
 		#await move.doDamage(move.actualTarget.activePokemon, damage)
-		move.calculateDamage()
+		await move.calculateDamage()
 		await move.doDamage()
 
 	#Si provoca ailment, i el target no te l ailment ni tampoc es un ailment d status ja tinguent el target un status

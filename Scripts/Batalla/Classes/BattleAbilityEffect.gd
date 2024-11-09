@@ -10,4 +10,3 @@ class_name BattleAbilityEffect extends BattleEffect
 
 func doAnimation():
 	assert(false, "Please override doAnimation()` in the derived script.")
-

@@ -100,6 +100,10 @@ func removeActivePokemon():
 	self.visible = false
 	activePokemon.inBattle = false
 	#activePokemon.instance = null
+	#activePokemon.activeAccumulatedEffects.clear()
+	#activePokemon.activeBattleEffects.clear()
+	SignalManager.Battle.Effects.clear.emit(activePokemon)
+	await SignalManager.Battle.Effects.finished
 	activePokemon.clear()
 	activePokemon.disconnectActions()
 	HPbar.clearUI()
@@ -147,7 +151,7 @@ func quitPokemon(update:bool=false):
 	await playAnimation("OUT_BATTLE")
 	#await hideHPBar()
 	#await animPlayer.playAnimation("OUT_BATTLE")
-	removeActivePokemon()
+	await removeActivePokemon()
 	##AQUI FAREM ANIMACIÓ SORTIDA
 	
 func showHPBar():
@@ -155,6 +159,11 @@ func showHPBar():
 
 func hideHPBar():
 	await GUI.battle.hideHPBarUI(HPbar)
+
+func addBattleEffect(effect : BattleEffect):
+	if effect == null:
+		return
+	SignalManager.Battle.Effects.add.emit(effect, activePokemon)
 
 func playAnimation(animation:String, animParams:Dictionary = {}):
 	SignalManager.Battle.Animations.playAnimation.emit(animation, animParams, self)

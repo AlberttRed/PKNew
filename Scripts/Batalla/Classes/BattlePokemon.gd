@@ -145,11 +145,15 @@ var selected_move : BattleMove = null
 var usedMove : BattleMove
 
 var canAttack : bool = true
+var canEscape
 
 var activeBattleEffects : Array[BattleEffect]:# = [] #Array[CONST.MOVE_EFFECTS] = []
 	get:
 		return instance.activeBattleEffects
-var activeAccumulatedEffects : Array[BattleEffect]
+var activeAccumulatedEffects : Array[BattleEffect]:
+	get:
+		return GUI.battle.controller.field.activeBattleEffects + side.getActiveBattleEffects(self) + activeBattleEffects
+
 
 var statsStages : Array[int] = [0,0,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai
 var criticalStage : int:
@@ -158,6 +162,7 @@ var criticalStage : int:
 var listPokemonBattledAgainst : Array[BattlePokemon] = [] #Number of pokemon opponents that have participied in the battle to defeat the pokemon
 var battleSpot: BattleSpot
 var abilityEffect : BattleEffect
+var receivedDamage:BattleMoveDamage
 
 var battleMessageInitialName: String:
 	get():
@@ -236,7 +241,7 @@ func _init(_pokemon: PokemonInstance, _IA: BattleIA = null):
 		abilityEffect = BattleEffect.getAbility(ability).new(self, self)
 	
 	loadMoves()
-	#loadBattleEffects()
+	loadBattleEffects()
 
 func setIA(_IA:BattleIA):
 	if _IA != null:
@@ -253,11 +258,11 @@ func loadMoves():
 		var battleMove = BattleMove.new(m, self)
 		moves.push_back(battleMove)
 		
-#func loadBattleEffects():
-	#for effect:BattleEffect in activeBattleEffects:
+func loadBattleEffects():
+	for effect:BattleEffect in activeBattleEffects:
 		#effect.start()
-		#effect.target = self
-		#
+		effect.target = self
+
 func clearBattleEffects():
 	for effect:BattleEffect in activeBattleEffects:
 		effect.clear()
@@ -265,7 +270,7 @@ func clearBattleEffects():
 func clear():
 	listAllies.clear()
 	listEnemies.clear()
-	clearBattleEffects()
+	#clearBattleEffects()
 	
 	#
 #func loadPokemon(pokemon:PokemonInstance):
@@ -402,6 +407,10 @@ func selectMove():
 	await selectedBattleChoice.moveSelected
 	actionSelected.emit()
 	
+func doMove():
+	if canAttack:
+		await usedMove.use()
+	
 func changePokemon():
 	#selectedBattleChoice=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
 	selectedBattleChoice=BattleSwitchChoice.new(self)
@@ -448,8 +457,12 @@ func getExpGained(opponent : BattlePokemon):
 	
 	return floor(floor(floor(floor((b * lf / 7) * (1.0 / s)) * e) * a) * t)
 	
-func take_damage(amount):
-	hp_actual -= amount
+func takeDamage(damage:BattleMoveDamage):
+	receivedDamage=damage
+	await GUI.battle.controller.effects.applyBattleEffect("TakeDamage", self)
+	#SignalManager.Battle.Effects.applyAt.emit("TakeDamage", self)
+	#await SignalManager.Battle.Effects.finished
+	hp_actual -= receivedDamage.calculatedDamage
 	hp_actual = max(0, hp_actual)
 	HPbar.updateHP(hp_actual)
 	await HPbar.updated
@@ -516,7 +529,8 @@ func checkFainted():
 func changeStatus(statusAilment : BattleEffect):
 	if statusAilment != null:
 		print(statusAilment.get_script().get_name())
-		status = CONST.STATUS.get(statusAilment.name)#statusAilment.statusType
+		if statusAilment.type == BattleEffect.Type.STATUS:
+			status = CONST.STATUS.get(statusAilment.name)#statusAilment.statusType
 		addBattleEffect(statusAilment)
 	else:
 		removeBattleEffect(statusAilment)
@@ -543,14 +557,6 @@ func getStatStage(stat:CONST.STATS):
 func changeCriticalStage(value: int):
 	criticalStage += value
 
-func applyPreviousEffects():
-	for effect in activeAccumulatedEffects:
-		await effect.applyPreviousEffects()
-	
-func applyLaterEffects():
-	for effect in activeAccumulatedEffects:
-		await effect.applyLaterEffects()
-
 func setDefeated():
 	print(Name + " fainted!")
 	await playAnimation("DEFEATED",{'Side':sideType})
@@ -576,10 +582,14 @@ func giveExpAtDefeat():
 			await GUI.battle.msgBox.showGainedEXPMessage(p, expGained)
 	
 func addBattleEffect(effect : BattleEffect):
+	if effect == null:
+		return
 	SignalManager.Battle.Effects.add.emit(effect, self)
 	#activeBattleEffects.push_back(effect)
 	
 func removeBattleEffect(effect : BattleEffect):
+	if effect == null:
+		return
 	SignalManager.Battle.Effects.remove.emit(effect, self)
 	
 func hasWorkingEffect(effect:BattleEffect):
@@ -607,22 +617,27 @@ func hasItemEquipped(item_id:int):
 	
 #Calculate the chances to escapte from the battle and its success
 func tryEscapeFromBattle():
-	var playerSpeed = speed
 	side.escapeAttempts += 1
-	var success:bool = true
+	# TO DO comprovar abans dels effects si estàs en combat d'entrenador, no poder escapar 
+	SignalManager.Battle.Effects.applyAt.emit("EscapeBattle")
+	await SignalManager.Battle.Effects.finished
+	if canEscape:
+		return canEscape
+
+	var playerSpeed = speed
 	for e in listEnemies:
 		var enemySpeed:float = e.speed
 		if playerSpeed > enemySpeed:
-			success = true
+			canEscape = true
 		else:
 			var speedChances:float = floor(((playerSpeed * 128.0 / enemySpeed) + 30.0) * side.escapeAttempts)
 			randomize()
 			var rand:int = randi() % 256
-			success = rand < fmod(speedChances, 256)
-		if !success:
+			canEscape = rand < fmod(speedChances, 256)
+		if !canEscape:
 			break
-	await GUI.battle.msgBox.showExitMessage(success)
-	return success
+	await GUI.battle.msgBox.showExitMessage(canEscape)
+	return canEscape
 
 func enterBattle(update:bool=false):
 	battleSpot.enterPokemon(self, update)

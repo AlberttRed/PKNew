@@ -45,14 +45,14 @@ var calculatedEffectivness : float
 var calculatedHealing : int
 
 var target_type : BattleTarget.TYPE
-var move_effect : CONST.MOVE_EFFECTS
+#var move_effect : CONST.MOVE_EFFECTS
 var category : CONST.MOVE_CATEGORIES
 
 var target: BattleTarget:
 	set(t):
 		#ailment.target = t
 		target = t
-var actualTarget : BattleSpot:
+var actualTarget:
 	get:
 		if target==null:
 			return null
@@ -61,11 +61,13 @@ var actualTarget : BattleSpot:
 var damage_class : CONST.DAMAGE_CLASS
 var contact_flag : bool = false
 
+var effect : BattleEffect #Move Effect
 var moveCategoryeffect : BattleMoveCategoryEffect
 var ailment : BattleEffect
 var animation : Animation#BattleMoveAnimation
 var hasAnimationPlayed:bool = false
 var damage : BattleMoveDamage
+var confusedHit : bool = false
 
 func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	instance = _move
@@ -79,7 +81,6 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	pp_actual = _move.pp_actual
 	target_type = _move.base.target_id
 	target = BattleTarget.new(self)
-	move_effect = _move.base.move_effect
 	category = _move.base.meta_category_id
 	damage_class = _move.damage_class as CONST.DAMAGE_CLASS
 	contact_flag = _move.base.contact_flag
@@ -110,7 +111,11 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	if BattleEffect.getAilment(ailmentType) != null:
 		ailment = BattleEffect.getAilment(ailmentType).new(pokemon)
 		ailment.effectChance = ailmentChance
-
+		ailment.minTurns = min_turns
+		ailment.maxTurns = max_turns
+	if FileAccess.file_exists("res://Scripts/Batalla/Effects/Moves/" + str(n) + ".gd"):
+		effect = load("res://Scripts/Batalla/Effects/Moves/" + str(n) + ".gd").new(pokemon)
+		
 func use():
 	calculateHits() 
 	#await pokemon.applyPreviousEffects()
@@ -120,9 +125,12 @@ func use():
 	while target.nextTarget():
 		calculateAccuracy()
 		while _checkHit():
+			target.actualTarget.addBattleEffect(effect)
 			calculateCriticalHit()
 			await doAnimation()
 			final_hits+=1
+			if effect!=null:
+				await effect.doEffect()
 			await moveCategoryeffect.doEffect()
 			if critical:
 				await GUI.battle.showMessage("¡Un golpe crítico!", false, 2.0)
@@ -133,7 +141,8 @@ func use():
 		elif isMultiHit():
 			await GUI.battle.showMessage("N.º de golpes: " + str(final_hits) + ".", false, 2.0)
 		
-		await target.actualTarget.activePokemon.checkFainted()
+		if target.actualTarget is BattleSpot:
+			await target.actualTarget.activePokemon.checkFainted()
 		#await actualTarget.activePokemon.updatePokemonState()
 	
 	target.clear()
@@ -185,8 +194,9 @@ func calculateEffectivness():
 	
 func calculateDamage(r = null):
 	damage = BattleMoveDamage.new(self)
-	SignalManager.Battle.Effects.applyAt.emit("CalculateDamage")
-	await SignalManager.Battle.Effects.finished
+	#SignalManager.Battle.Effects.applyAt.emit("CalculateDamage")
+	#await SignalManager.Battle.Effects.finished
+	await GUI.battle.controller.effects.applyBattleEffect("CalculateDamage")
 	damage.calculate()
 	print("Stats Stages: AT: " + str(pokemon.getStatStage(CONST.STATS.ATA)) + ", DEF: " + str(pokemon.getStatStage(CONST.STATS.DEF)) + ", ATESP: " + str(pokemon.getStatStage(CONST.STATS.ATAESP)) + ", DEFESP: " + str(pokemon.getStatStage(CONST.STATS.DEFESP)) + ", VEL: " + str(pokemon.getStatStage(CONST.STATS.VEL)) + ", ACC: " + str(pokemon.getStatStage(CONST.STATS.ACC)) + ", EVA: " + str(pokemon.getStatStage(CONST.STATS.EVA)))
 	print("Level: " + str(pokemon.level) + ", Power: " + str(power) + ", Attack: " + str(damage.attackMod) + ", Def: " + str(damage.deffenseMod) + ", Nature:" + str(CONST.NaturesName[pokemon.instance.nature_id]) + ", Rival nature:" + str(CONST.NaturesName[actualTarget.activePokemon.instance.nature_id]))
@@ -288,14 +298,14 @@ func calculate_others():#to,Type,critical):
 	if actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
 		value *= 0.5
 		
-	if (move_effect == CONST.MOVE_EFFECTS.GOLPE_CUERPO or move_effect == CONST.MOVE_EFFECTS.CARGA_DRAGON or self.move_effect == CONST.MOVE_EFFECTS.CUERPO_PESADO or self.move_effect == CONST.MOVE_EFFECTS.PLANCHA_VOLADORA or self.move_effect == CONST.MOVE_EFFECTS.GOLPE_CALOR or self.move_effect == CONST.MOVE_EFFECTS.PISOTON) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.REDUCCION):
-		value *= 2.0
-		
-	if (move_effect == CONST.MOVE_EFFECTS.TERREMOTO or move_effect == CONST.MOVE_EFFECTS.MAGNITUD) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.EXCAVAR):
-		value *= 2.0
-
-	if (move_effect == CONST.MOVE_EFFECTS.SURF or move_effect == CONST.MOVE_EFFECTS.TORBELLINO) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.BUCEO):
-		value *= 2.0
+	#if (move_effect == CONST.MOVE_EFFECTS.GOLPE_CUERPO or move_effect == CONST.MOVE_EFFECTS.CARGA_DRAGON or self.move_effect == CONST.MOVE_EFFECTS.CUERPO_PESADO or self.move_effect == CONST.MOVE_EFFECTS.PLANCHA_VOLADORA or self.move_effect == CONST.MOVE_EFFECTS.GOLPE_CALOR or self.move_effect == CONST.MOVE_EFFECTS.PISOTON) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.REDUCCION):
+		#value *= 2.0
+		#
+	#if (move_effect == CONST.MOVE_EFFECTS.TERREMOTO or move_effect == CONST.MOVE_EFFECTS.MAGNITUD) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.EXCAVAR):
+		#value *= 2.0
+#
+	#if (move_effect == CONST.MOVE_EFFECTS.SURF or move_effect == CONST.MOVE_EFFECTS.TORBELLINO) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.BUCEO):
+		#value *= 2.0
 	
 	if !actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.PANTALLA_LUZ) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
 		value *= 0.5
@@ -421,7 +431,12 @@ func calculateHits():
 
 #Checks if there has finalized all hits/strikes for a multistike move
 func _checkHit() -> bool:
-	return moveHits and final_hits < num_hits and !actualTarget.activePokemon.fainted
+	var fainted:bool = (actualTarget is BattleSpot and actualTarget.activePokemon.fainted)
+	#SignalManager.Battle.Effects.applyAt.emit("CheckHit")
+	#await SignalManager.Battle.Effects.finished
+	var effectHits = effect == null || effect.effectHits
+	moveHits = moveHits && effectHits
+	return moveHits and final_hits < num_hits and !fainted
 	
 
 func doDamage():#target : BattlePokemon, damage : int):
@@ -429,19 +444,11 @@ func doDamage():#target : BattlePokemon, damage : int):
 	
 	print(Name + " damage: " + str(damage.calculatedDamage))
 	await target.actualTarget.playAnimation("HIT")
-	await target.actualTarget.activePokemon.take_damage(damage.calculatedDamage)
+	await target.actualTarget.activePokemon.takeDamage(damage)
 	
-	await GUI.battle.msgBox.showEffectivnessMessage(target.actualTarget.activePokemon, calculatedEffectivness)
-#	if STAB >= 2:
-#		GUI.battle.showMessage("¡Es muy efectivo!", false, 2.0)
-#		await GUI.battle.msgBox.finished
-#	elif STAB < 1:
-#		GUI.battle.showMessage("No parece muy efectivo...", false, 2.0)
-#		await GUI.battle.msgBox.finished
-#	elif STAB == 0:
-#		GUI.battle.showMessage("No afecta a " + target.Name + ".", false, 2.0)
-#		await GUI.battle.msgBox.finished
-	
+	if !confusedHit:
+		await GUI.battle.msgBox.showEffectivnessMessage(target.actualTarget.activePokemon, calculatedEffectivness)
+
 func doHealing(targetToHeal : BattlePokemon):#, heal : int):
 	
 	print(Name + " heal: " + str(calculatedHealing))
@@ -470,7 +477,8 @@ func causeAilment():
 	if ailment == null:
 		assert(false, "Move " + Name + " has no ailment configured.")
 		return
-	ailment.target = target.actualTarget
+	ailment.calculateTurns()
+	ailment.setTarget(target.actualTarget)
 	#ailment = BattleEffect.getAilment(ailmentType).new(pokemon,target)#(self)
 	if actualTarget.activePokemon.hasWorkingEffect(ailment):
 		await ailment.showEffectRepeatedMessage()
@@ -495,6 +503,7 @@ func calculateChangeStatChance() -> bool:
 	return false
 
 func selectTargets():
+	target.clear()
 	target.selectTargets()
 	
 func showAnimation(target : BattlePokemon):

@@ -1,14 +1,22 @@
 class_name BattleEffect
 
+signal finished
+
 static func getAilment(ailmentCode : CONST.AILMENTS) -> Resource:
-	if FileAccess.file_exists("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentCode+1]+".gd"):
-		return load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentCode+1]+".gd")
+	if FileAccess.file_exists("res://Scripts/Batalla/Effects/Ailments/"+CONST.AILMENTS.keys()[ailmentCode+1]+".gd"):
+		return load("res://Scripts/Batalla/Effects/Ailments/"+CONST.AILMENTS.keys()[ailmentCode+1]+".gd")
 	return null
 	
 static func getAbility(abilityCode : CONST.ABILITIES) -> Resource:
-	var name = CONST.ABILITIES.keys()[abilityCode]
-	if FileAccess.file_exists("res://Scripts/Batalla/Abilities/"+CONST.ABILITIES.keys()[abilityCode]+".gd"):
-		return load("res://Scripts/Batalla/Abilities/"+CONST.ABILITIES.keys()[abilityCode]+".gd")
+	if FileAccess.file_exists("res://Scripts/Batalla/Effects/Abilities/"+CONST.ABILITIES.keys()[abilityCode]+".gd"):
+		return load("res://Scripts/Batalla/Effects/Abilities/"+CONST.ABILITIES.keys()[abilityCode]+".gd")
+	return null
+
+static func getMove(moveCode : Moves) -> Resource:
+	if Moves.keys().size() < moveCode:
+		return null
+	if FileAccess.file_exists("res://Scripts/Batalla/Effects/Moves/"+Moves.keys()[moveCode]+".gd"):
+		return load("res://Scripts/Batalla/Effects/Moves/"+Moves.keys()[moveCode]+".gd")
 	return null
 
 enum List {
@@ -23,6 +31,11 @@ enum List {
 	ALLANAMIENTO
 }
 
+enum Moves {
+	REFLECT = 115,
+	CONFUSE_RAY = 109
+}
+
 enum Type {
 	MOVE,
 	STATUS,
@@ -31,56 +44,102 @@ enum Type {
 	WEATHER	
 }
 
+enum Priority {
+	LOWEST,
+	LOW,
+	MIDDLE,
+	HIGH,
+	HIGHEST
+}
+
 var originPokemon : BattlePokemon
-#var originMove : BattleMove
-var target = null: # BattlePokemon | BattleSpot | BattleSide
-	#get:
-		#if target is BattleTarget:
-			#return target.actualTarget.activePokemon
-		#return target
-	set(e):
-		if e is BattleSpot:
-			target = e.activePokemon
-		else:
-			target = e
+var targetPokemon : BattlePokemon
+var priority : Priority:
+	get:
+		return getPriority()
+var targetField : BattleField
 var effectChance : int
-var type = null
+var effectHits : bool #Indicate if the effect/move misses or not
 #var _origin = null # BattleMove | Abilty, Ailment
 
 
 var pokemon : BattlePokemon
 var persistent:bool:
 	get:
-		return maxTurns == 0 and minTurns == 0
+		return getPersistent()
+	#get:
+		#return maxTurns == 0 and minTurns == 0
 
 var minTurns:int = 0:
 	set(min):
+		if min == null:
+			min = 0
 		turnsCounter = 0
 		minTurns = min
 var maxTurns :int = 0:
 	set(max):
+		if max == null:
+			max = 0
 		turnsCounter = 0
 		maxTurns = max
 
 var turnsCounter:int
 var activeTurns:int
 
-func _init(_originPokemon : BattlePokemon = null, _target = null):
-	self.originPokemon = _originPokemon
-	if _target is BattleTarget:
-		self.target = target.actualTarget.activePokemon
-	else:
-		self.target = _target
-	
+func _init(_origin = null, _target = null):
+	setOrigin(_origin)
+	setTarget(_target)
 
+func setOrigin(_origin):
+	if _origin == null:
+		return
+	if _origin is BattleMove:
+		self.originPokemon = _origin.pokemon
+	elif _origin is BattlePokemon:
+		self.originPokemon = _origin
+	else:
+		assert(false, "Not a valid origin type for BattleEffect " + str(self.name))
+
+func setOriginPokemon(_pokemon:BattlePokemon):
+	self.originPokemon = _pokemon
+	
+func setTarget(_target):
+	if _target == null:
+		return
+	if _target is BattleField:
+		self.targetField = _target
+	elif _target is BattlePokemon:
+		self.targetPokemon = _target
+	elif _target is BattleSpot:
+		self.targetPokemon = _target.activePokemon
+	else:
+		assert(false, "Not a valid target type for BattleEffect " + str(self.name))
+		return
+	effectHits = checkHitEffect()
+
+func getPriority() -> int:
+	if self.type == Type.STATUS:
+		return Priority.HIGH
+	else:
+		return Priority.LOWEST
+
+func getPersistent() -> bool:
+	return false
+	
+	
 func doEffect():
 	assert(false, "Please override doEffect()` in the derived script.")
+
+func checkHitEffect() -> bool:
+	return true
+
 
 func clear():
 	assert(false, "Please override clear()` in the derived script.")
 
 func calculateTurns():
 	randomize()
+	turnsCounter=0
 	activeTurns = randi_range(minTurns,maxTurns)
 
 func nextTurn():
@@ -95,12 +154,7 @@ func calculateEffectChance():
 		return true
 	return false
 	
-func applyPreviousEffects():
-	pass
-	
-
-func applyLaterEffects():
-	pass
+#region New Code Region
 	
 func applyBattleEffectAtInitBattleTurn():
 	pass
@@ -116,6 +170,19 @@ func applyBattleEffectAtEndPKMNTurn():
 
 func applyBattleEffectAtCalculateDamage():
 	pass
+	
+func applyBattleEffectAtTakeDamage():
+	pass
+
+func applyBattleEffectAtEscapeBattle():
+	pass
+	
+func applyBattleEffectAtBeforeMove():
+	pass
+	
+func applyBattleEffectAtAfterMove():
+	pass
+#endregion
 
 func showEffectSuceededMessage():
 	assert(false, "Please override showEffectSuceededMessage()` in the derived script.")
@@ -133,9 +200,25 @@ func showEffectEndMessage():
 #Get the name of the script(without .gd) as the name
 func _get(property: StringName) -> Variant:
 	if property == "name":
-		print(get_script().get_path().get_file().trim_suffix('.gd'))
 		return 	get_script().get_path().get_file().trim_suffix('.gd')
+	if property == "type":
+		var array = get_script().get_path().split("/")
+		array.reverse()
+		var typeName = array[1]
+		match typeName:
+			"Abilities":
+				return Type.ABILITY
+			"Ailments":
+				var effectName = self.name
+				if effectName == "PARALYSIS" || effectName == "BURN" || effectName == "SLEEP" || effectName == "FREEZE" || effectName == "POISON":
+					return Type.STATUS
+				return Type.AILMENT
+			"Moves":
+				return Type.MOVE
+			_:
+				return null
 	return property
+	
 #
 #func setOrigin(origin):
 	#if origin is BattleMove:

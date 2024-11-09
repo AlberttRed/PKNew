@@ -227,6 +227,7 @@ func msg_TextDisplayed():
 	textDisplayed.emit()
 	
 func msg_Finished():
+	print("lelelele")
 	print("finished")
 	finished.emit()
 

@@ -9,7 +9,7 @@ func doEffect():
 		print("Do damage!")
 		#Farà animació de colpejar, amb el so
 		#var damage : int =  move.calculateDamage()#move.actualTarget.activePokemon)
-		move.calculateDamage()
+		await move.calculateDamage()
 		await move.doDamage()#move.actualTarget.activePokemon, damage)
 
 #func doAnimation(to):
