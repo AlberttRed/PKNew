@@ -91,9 +91,7 @@ func clear():
 	elif controller.rules.mode == CONST.BATTLE_MODES.DOUBLE:
 		clearDoubleBattleUI()
 	controller.queue_free()
-	playerSide.clear()
-	enemySide.clear()
-	
+
 #func initSingleBattleUI():
 	#$playerBase/PokemonPlayerA.visible = false
 	#$enemyBase/PokemonEnemyA.visible = false

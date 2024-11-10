@@ -27,7 +27,7 @@ func _init(_battleController : BattleController) -> void:
 	self.battleController = _battleController
 	SignalManager.Battle.Effects.add.connect(addBattleEffect)
 	SignalManager.Battle.Effects.remove.connect(removeBattleEffect)
-	SignalManager.Battle.Effects.clear.connect(clearPokemonEffects)
+	#SignalManager.Battle.Effects.clear.connect(clearPokemonEffects)
 
 func addBattleEffect(_battleEffect : BattleEffect, target):
 	if _battleEffect == null:
@@ -45,7 +45,7 @@ func addBattleEffect(_battleEffect : BattleEffect, target):
 			addStatusEffect(_battleEffect, target)
 			
 	print(target.activeBattleEffects)
-	if !target.hasWorkingEffect(_battleEffect):
+	if !target.hasWorkingEffect(_battleEffect.name):
 		target.activeBattleEffects.push_back(_battleEffect)
 	print(target.activeBattleEffects)
 	#update()
@@ -93,8 +93,11 @@ func removeAilmentEffect(_battleEffectToRemove : BattleEffect, target):
 func removeAbilityEffect(_battleEffect : BattleEffect, target):
 	pass
 
-func removeStatusEffect(_battleEffect : BattleEffect, target):
-	pass
+func removeStatusEffect(_battleEffectToRemove : BattleEffect, target):
+	for battleEffect:BattleEffect in target.activeBattleEffects:
+		if _battleEffectToRemove.name == battleEffect.name :
+			target.activeBattleEffects.erase(battleEffect)
+			return
 	
 func removeMoveEffect(_battleEffectToRemove : BattleEffect, target):
 	for battleEffect:BattleEffect in target.activeBattleEffects:
@@ -111,7 +114,7 @@ func removeMoveEffect(_battleEffectToRemove : BattleEffect, target):
 #region APPLY EFFECTS
 
 func applyBattleEffect(functionName:String, pokemon:BattlePokemon=null):
-	await Engine.get_main_loop().process_frame
+	#await Engine.get_main_loop().process_frame
 	var originalPokemon = activePokmeon
 	activeBattleAccumulatedEffects.sort_custom(sortByPriority)
 	if pokemon != null:
@@ -122,7 +125,7 @@ func applyBattleEffect(functionName:String, pokemon:BattlePokemon=null):
 		await applyEffect.call()
 	if pokemon != null:
 		activePokmeon = originalPokemon
-	SignalManager.Battle.Effects.finished.emit()	
+	#SignalManager.Battle.Effects.finished.emit()	
 		
 
 func applyBattleEffectAtInitBattleTurn():
@@ -181,7 +184,6 @@ func applyBattleEffectAtAfterMove():
 #endregion
 
 func clearPokemonEffects(pokemon:BattlePokemon):
-	await Engine.get_main_loop().process_frame
 	print(pokemon.Name + " Effects("+ str(pokemon.activeBattleEffects.size()) + "): ")
 	pokemon.activeAccumulatedEffects.clear()
 	var effectsToDelete:Array[BattleEffect] = []
@@ -195,12 +197,12 @@ func clearPokemonEffects(pokemon:BattlePokemon):
 	print(pokemon.Name + " Effects("+ str(pokemon.activeBattleEffects.size()) + "): ")
 	for effect in pokemon.activeBattleEffects:
 		print(effect.name)
-	SignalManager.Battle.Effects.finished.emit()	
+	#SignalManager.Battle.Effects.finished.emit()	
 
 func clear():
 	SignalManager.Battle.Effects.add.disconnect(addBattleEffect)
 	SignalManager.Battle.Effects.remove.disconnect(removeBattleEffect)
-	SignalManager.Battle.Effects.clear.disconnect(clearPokemonEffects)
+	#SignalManager.Battle.Effects.clear.disconnect(clearPokemonEffects)
 	activeBattleAccumulatedEffects.clear()
 	battleController = null
 	activePokmeon = null

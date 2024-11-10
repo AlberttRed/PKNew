@@ -1,46 +1,45 @@
-extends BattleAilmentEffect
+extends BattleEffect
 
 var badPoison:bool = false
 var badPoisonCounter:int = 0
-
-func _init(move:BattleMove):
-	super(move)
-	isStatusAilment = true
-	statusType = CONST.STATUS.POISON
-	persistentEffect = true
 
 func start():
 	pass
 	
 func doAnimation():
-	await target.battleSpot.playAnimation("POISON")
-	
-func applyLaterEffects():
-	await showAilmentEffectMessage()
-	await doAnimation()
-	await target.take_damage(calculatePoisonDamage())
+	await targetPokemon.battleSpot.playAnimation("POISON")
 
-func calculatePoisonDamage() -> int:
-	var damage: int
+func getPersistent() -> bool:
+	return !targetPokemon.fainted
+	
+func applyBattleEffectAtAfterMove():
+	await showEffectMessage()
+	await doAnimation()
+	
+	await targetPokemon.takeDamage(calculatePoisonDamage())
+
+func calculatePoisonDamage() -> BattleMoveDamage:
+	var calculatedDamage: int
+	var damage : BattleMoveDamage = BattleMoveDamage.new()
 	if badPoison:
 		badPoisonCounter += 1
-		damage = target.hp_total * (float(badPoisonCounter)/16.0) # 1|16
+		calculatedDamage = targetPokemon.hp_total * (float(badPoisonCounter)/16.0) # 1|16
 	else:
-		damage = target.hp_total * (1.0/8.0) # 1|8
-		
-	return max(1, floor(damage))
+		calculatedDamage = targetPokemon.hp_total * (1.0/8.0) # 1|8
+	damage.calculatedDamage = max(1, floor(calculatedDamage))
+	return damage
 
-func showAilmentSuceededMessage():
+func showEffectSuceededMessage():
 	if badPoison:
-		await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " fue gravemente envenenado!", false, 2.0)
+		await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " fue gravemente envenenado!", false, 2.0)
 	else:
-		await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " fue envenenado!", false, 2.0)
+		await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " fue envenenado!", false, 2.0)
 
-func showAilmentRepeatedMessage():
-	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " ya está evenenado!", false, 2.0)
+func showEffectRepeatedMessage():
+	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya está evenenado!", false, 2.0)
 
-func showAilmentEffectMessage():
-	await GUI.battle.showMessage("¡El veneno resta PS " + target.battleMessageMiddleAlName + "!", false, 1.0)
+func showEffectMessage():
+	await GUI.battle.showMessage("¡El veneno resta PS " + targetPokemon.battleMessageMiddleAlName + "!", false, 1.0)
 
-func showAilmentEndMessage():
-	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " ya no está envenenado!", false, 2.0)
+func showEffectEndMessage():
+	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya no está envenenado!", false, 2.0)

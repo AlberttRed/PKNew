@@ -28,8 +28,14 @@ func removeBattleEffect(effect : BattleEffect):
 			#return true
 	#return false
 
-func hasWorkingEffect(effect:BattleEffect):
+func hasWorkingEffect(effectName:String) -> bool:
 	for battleEffect:BattleEffect in activeBattleEffects:
-		if effect.name == battleEffect.name:
+		if effectName == battleEffect.name:
 			return true
 	return false
+	
+func hasAilmentEffect(ailmentCode:BattleEffect.Ailments) -> bool:
+	return hasWorkingEffect(BattleEffect.Ailments.keys()[ailmentCode])
+	
+func hasMoveEffect(moveCode:BattleEffect.Moves) -> bool:
+	return hasWorkingEffect(BattleEffect.Moves.keys()[moveCode])

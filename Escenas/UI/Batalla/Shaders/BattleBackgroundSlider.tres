@@ -5,4 +5,4 @@
 [resource]
 shader = ExtResource("1_rdpcc")
 shader_parameter/Direction = Vector2(0.0120482, 0)
-shader_parameter/Speed = 0.0
+shader_parameter/Speed = 0.75

@@ -261,7 +261,7 @@ func loadMoves():
 func loadBattleEffects():
 	for effect:BattleEffect in activeBattleEffects:
 		#effect.start()
-		effect.target = self
+		effect.targetPokemon = self
 
 func clearBattleEffects():
 	for effect:BattleEffect in activeBattleEffects:
@@ -369,10 +369,10 @@ func doAction():
 		else:
 			actionFinished.emit()
 
-func _setStatus(loadedStatus:CONST.STATUS):
-	match loadedStatus:
-		CONST.STATUS.PARALYSIS:
-			addBattleEffect(load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[CONST.AILMENTS.PARALYSIS]+".gd").new(null))
+#func _setStatus(loadedStatus:CONST.STATUS):
+	#match loadedStatus:
+		#CONST.STATUS.PARALYSIS:
+			#addBattleEffect(load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[CONST.AILMENTS.PARALYSIS]+".gd").new(null))
 
 #func selectMove():
 	#if controllable:
@@ -592,11 +592,20 @@ func removeBattleEffect(effect : BattleEffect):
 		return
 	SignalManager.Battle.Effects.remove.emit(effect, self)
 	
-func hasWorkingEffect(effect:BattleEffect):
+func hasWorkingEffect(effectName:String) -> bool:
 	for battleEffect:BattleEffect in activeAccumulatedEffects:
-		if effect.name == battleEffect.name:
+		if effectName == battleEffect.name:
 			return true
 	return false
+	
+func hasAilmentEffect(ailmentCode:BattleEffect.Ailments) -> bool:
+	return hasWorkingEffect(BattleEffect.Ailments.keys()[ailmentCode])
+	
+func hasAbilityEffect(abilityCode:BattleEffect.Abilities) -> bool:
+	return hasWorkingEffect(BattleEffect.Abilities.keys()[abilityCode])
+	
+func hasMoveEffect(moveCode:BattleEffect.Moves) -> bool:
+	return hasWorkingEffect(BattleEffect.Moves.keys()[moveCode])
 #func removeStatus(effect : BattleMoveAilmentEffect):
 	#var delete
 	#for e in activeEffectsFlags:
@@ -619,8 +628,9 @@ func hasItemEquipped(item_id:int):
 func tryEscapeFromBattle():
 	side.escapeAttempts += 1
 	# TO DO comprovar abans dels effects si estàs en combat d'entrenador, no poder escapar 
-	SignalManager.Battle.Effects.applyAt.emit("EscapeBattle")
-	await SignalManager.Battle.Effects.finished
+	await GUI.battle.controller.effects.applyBattleEffect("EscapeBattle")
+	#SignalManager.Battle.Effects.applyAt.emit("EscapeBattle")
+	#await SignalManager.Battle.Effects.finished
 	if canEscape:
 		return canEscape
 
@@ -657,7 +667,7 @@ func playAnimation(animName:String, animParams:Dictionary={}):
 	await SignalManager.Animations.finished_animation
 
 func initAbility():
-	if !hasWorkingEffect(abilityEffect):
+	if abilityEffect!=null and !hasWorkingEffect(abilityEffect.name):
 		addBattleEffect(abilityEffect)
 
 func get_path_to(node:Node2D):

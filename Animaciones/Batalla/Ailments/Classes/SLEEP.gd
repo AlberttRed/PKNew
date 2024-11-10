@@ -1,8 +1,8 @@
 extends BattleMoveAnimation
 #----------------------------------------------------
-#	Status Paralysis
+#	Status Sleep
 #----------------------------------------------------
-const animName = "Ailments/PARALYSIS"
+const animName = "Ailments/SLEEP"
 
 var zet1:Sprite2D
 var zet2:Sprite2D

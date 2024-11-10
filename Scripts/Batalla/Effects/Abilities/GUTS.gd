@@ -6,6 +6,7 @@ func applyBattleEffectAtCalculateDamage():
 	if originPokemon.hasStatusAilment() and originPokemon.status != CONST.STATUS.FROZEN:
 		newAttack = floori(originPokemon.usedMove.damage.attackMod * 1.5)
 		originPokemon.usedMove.damage.attackMod = newAttack
+		originPokemon.usedMove.damage.calculate()
 	
 func clear():
 	pass

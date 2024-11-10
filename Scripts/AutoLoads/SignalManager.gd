@@ -54,7 +54,7 @@ class BattleSignals:
 	class BattleEffects:
 		signal add
 		signal remove
-		signal clear
+		#signal clear
 		
 		signal finished
 		

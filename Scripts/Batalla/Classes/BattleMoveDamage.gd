@@ -38,7 +38,9 @@ var confusedHit : bool = false
 var initialDamage : int
 var calculatedDamage : int
 
-func _init(_move:BattleMove):
+func _init(_move:BattleMove=null):
+	if _move == null:
+		return
 	movePower = _move.power
 	pkmnLevel = _move.pokemon.level
 	isPhysicMove = _move.damage_class == CONST.DAMAGE_CLASS.FISICO
@@ -121,7 +123,8 @@ func calculate(r = null):#to : BattlePokemon,r = null):
 #---- End TO DO
 	if !confusedHit:
 		initialDamage = int(int((int((2.0 * float(pkmnLevel))/5.0 + 2.0) * float(movePower) * float(attackMod))/float(deffenseMod))/50.0 + 2.0) #(((2 * from.level/5 + 2) * power * Att/Def)/50 + 2)
-		calculatedDamage = int(int(int(int(int(int(int(int(initialDamage*targetsMod) * weatherMod) * criticalMod) * randomMod) * STABMod) * Effectiveness) * burnMod) * otherMod)
+		#calculatedDamage = int(int(int(int(int(int(int(int(initialDamage*targetsMod) * weatherMod) * criticalMod) * randomMod) * STABMod) * Effectiveness) * burnMod) * otherMod)
+		calculatedDamage = int(int(int(int(int(int(int(initialDamage*targetsMod) * weatherMod) * criticalMod) * randomMod) * STABMod) * Effectiveness) * otherMod)
 	else:
 		calculatedDamage = int(int((int((2.0 * float(pkmnLevel))/5.0 + 2.0) * float(40) * float(attackMod))/float(deffenseMod))/50.0 + 2.0) #(((2 * from.level/5 + 2) * power * Att/Def)/50 + 2)
 	

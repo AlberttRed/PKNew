@@ -20,14 +20,14 @@ script = ExtResource("21_wv7iv")
 pkmn_id = 16
 min_level = 2
 max_level = 5
-probability = 5.0
+probability = 90.0
 
 [sub_resource type="Resource" id="Resource_1unxj"]
 script = ExtResource("21_wv7iv")
 pkmn_id = 19
 min_level = 4
 max_level = 4
-probability = 95.0
+probability = 10.0
 
 [node name="Ruta 01" type="Node2D"]
 y_sort_enabled = true

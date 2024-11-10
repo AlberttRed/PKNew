@@ -8,8 +8,8 @@ func start():
 	pass
 
 func doAnimation():
-	await GUI.get_tree().create_timer(3).timeout
-	#await targetPokemon.battleSpot.playAnimation("PARALYSIS")
+	#await GUI.get_tree().create_timer(3).timeout
+	await targetPokemon.battleSpot.playAnimation("CONFUSION")
 	
 func applyBattleEffectAtBeforeMove():
 	if !targetPokemon.canAttack:
@@ -40,10 +40,10 @@ func showEffectRepeatedMessage():
 	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya está confuso!", false, 2.0)
 
 func showPreviousEffectMessage():
-	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " está confuso!", false, 2.0)
+	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " está confuso!", false, 1.5)
 
 func showEffectMessage():
-	await GUI.battle.showMessage("¡Está tan confuso que se hirió a si mismo!", false, 2.0)
+	await GUI.battle.showMessage("¡Está tan confuso que se hirió a si mismo!", false, 0.5)
 
 func showEffectEndMessage():
 	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya no está confuso!", false, 2.0)

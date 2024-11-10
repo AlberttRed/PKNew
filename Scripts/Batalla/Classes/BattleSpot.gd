@@ -102,8 +102,9 @@ func removeActivePokemon():
 	#activePokemon.instance = null
 	#activePokemon.activeAccumulatedEffects.clear()
 	#activePokemon.activeBattleEffects.clear()
-	SignalManager.Battle.Effects.clear.emit(activePokemon)
-	await SignalManager.Battle.Effects.finished
+	await GUI.battle.controller.effects.clearPokemonEffects(activePokemon)
+	#SignalManager.Battle.Effects.clear.emit(activePokemon)
+	#await SignalManager.Battle.Effects.finished
 	activePokemon.clear()
 	activePokemon.disconnectActions()
 	HPbar.clearUI()

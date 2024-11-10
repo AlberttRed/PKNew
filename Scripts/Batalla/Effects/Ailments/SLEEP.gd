@@ -1,36 +1,34 @@
-extends BattleAilmentEffect
+extends BattleEffect
 
-func _init(move:BattleMove):
-	super(move)
-	isStatusAilment = true;
-	statusType = CONST.STATUS.SLEEP
-	persistentEffect = true
-	calculateTurns()
 
 func start():
-	turnsCounter = 0
+	pass
 	
 func doAnimation():
-	await target.battleSpot.playAnimation("SLEEP")
+	await targetPokemon.battleSpot.playAnimation("SLEEP")
+
+func getPersistent() -> bool:
+	return !targetPokemon.fainted
 	
-func applyPreviousEffects():
+func applyBattleEffectAtBeforeMove():
 	if nextTurn():
-		target.canAttack = false
+		targetPokemon.canAttack = false
 		await doAnimation()
-		await showAilmentEffectMessage()
+		await showEffectMessage()
 	else:
-		target.canAttack = true
-		await showAilmentEndMessage()
-		target.changeStatus(null)
+		targetPokemon.canAttack = true
+		await showEffectEndMessage()
+		targetPokemon.removeBattleEffect(self)
+		targetPokemon.changeStatus(null)
 
-func showAilmentSuceededMessage():
-	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " se durmió!", false, 2.0)
+func showEffectSuceededMessage():
+	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " se durmió!", false, 2.0)
 
-func showAilmentRepeatedMessage():
-	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " ya está dormido!", false, 2.0)
+func showEffectRepeatedMessage():
+	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya está dormido!", false, 2.0)
 
-func showAilmentEffectMessage():
-	await GUI.battle.showMessage(target.battleMessageInitialName + " está dormido como un tronco.", false, 2.0)
+func showEffectMessage():
+	await GUI.battle.showMessage(targetPokemon.battleMessageInitialName + " está dormido como un tronco.", false, 2.0)
 
-func showAilmentEndMessage():
-	await GUI.battle.showMessage("¡" + target.battleMessageInitialName + " se despertó!", false, 2.0)
+func showEffectEndMessage():
+	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " se despertó!", false, 2.0)

@@ -33,10 +33,10 @@ var healAmount : int
 var moveHits : bool # Indica si el moviment falla/ha fallat o no
 var statChangeMod : Array[CONST.STATS]
 var statChangeValue : Array[int]
-var ailmentType : CONST.AILMENTS
+var ailmentType : BattleEffect.Ailments
 var ailmentChance : int :
 	get:
-		if ailmentType != CONST.AILMENTS.NONE and ailmentChance == 0:
+		if ailmentType != BattleEffect.Ailments.NONE and ailmentChance == 0:
 			return 100
 		return ailmentChance
 var statChangeChance : int
@@ -100,7 +100,7 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 	pokemon = _pokemon	
 	var name:String = str(CONST.MOVE_CATEGORIES.keys()[category])
 	moveCategoryeffect = load("res://Scripts/Batalla/Move Categories/"+CONST.MOVE_CATEGORIES.keys()[category]+".gd").new(self)
-	print("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType]+".gd")
+	print("res://Scripts/Batalla/Ailments/"+BattleEffect.Ailments.keys()[ailmentType]+".gd")
 	#if FileAccess.file_exists("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType+1]+".gd"):
 		#ailmentResource = load("res://Scripts/Batalla/Ailments/"+CONST.AILMENTS.keys()[ailmentType+1]+".gd")
 	var n = instance.internalName.to_upper()
@@ -196,8 +196,8 @@ func calculateDamage(r = null):
 	damage = BattleMoveDamage.new(self)
 	#SignalManager.Battle.Effects.applyAt.emit("CalculateDamage")
 	#await SignalManager.Battle.Effects.finished
-	await GUI.battle.controller.effects.applyBattleEffect("CalculateDamage")
 	damage.calculate()
+	await GUI.battle.controller.effects.applyBattleEffect("CalculateDamage")
 	print("Stats Stages: AT: " + str(pokemon.getStatStage(CONST.STATS.ATA)) + ", DEF: " + str(pokemon.getStatStage(CONST.STATS.DEF)) + ", ATESP: " + str(pokemon.getStatStage(CONST.STATS.ATAESP)) + ", DEFESP: " + str(pokemon.getStatStage(CONST.STATS.DEFESP)) + ", VEL: " + str(pokemon.getStatStage(CONST.STATS.VEL)) + ", ACC: " + str(pokemon.getStatStage(CONST.STATS.ACC)) + ", EVA: " + str(pokemon.getStatStage(CONST.STATS.EVA)))
 	print("Level: " + str(pokemon.level) + ", Power: " + str(power) + ", Attack: " + str(damage.attackMod) + ", Def: " + str(damage.deffenseMod) + ", Nature:" + str(CONST.NaturesName[pokemon.instance.nature_id]) + ", Rival nature:" + str(CONST.NaturesName[actualTarget.activePokemon.instance.nature_id]))
 	print("Damage: " + str(damage.calculatedDamage))
@@ -291,62 +291,62 @@ func calculateDamage(r = null):
 	##Fem el minim amb l hp actual perque si fem mes mal, que vida té el pokemon, com a maxim ens retorni la vida que li queda
 	#return min(calculatedDamage, actualTarget.activePokemon.hp_actual)
 	
-func calculate_others():#to,Type,critical):
-	var value = 1.0
-
-	### MOVES
-	if actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
-		value *= 0.5
-		
-	#if (move_effect == CONST.MOVE_EFFECTS.GOLPE_CUERPO or move_effect == CONST.MOVE_EFFECTS.CARGA_DRAGON or self.move_effect == CONST.MOVE_EFFECTS.CUERPO_PESADO or self.move_effect == CONST.MOVE_EFFECTS.PLANCHA_VOLADORA or self.move_effect == CONST.MOVE_EFFECTS.GOLPE_CALOR or self.move_effect == CONST.MOVE_EFFECTS.PISOTON) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.REDUCCION):
+#func calculate_others():#to,Type,critical):
+	#var value = 1.0
+#
+	#### MOVES
+	#if actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
+		#value *= 0.5
+		#
+	##if (move_effect == CONST.MOVE_EFFECTS.GOLPE_CUERPO or move_effect == CONST.MOVE_EFFECTS.CARGA_DRAGON or self.move_effect == CONST.MOVE_EFFECTS.CUERPO_PESADO or self.move_effect == CONST.MOVE_EFFECTS.PLANCHA_VOLADORA or self.move_effect == CONST.MOVE_EFFECTS.GOLPE_CALOR or self.move_effect == CONST.MOVE_EFFECTS.PISOTON) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.REDUCCION):
+		##value *= 2.0
+		##
+	##if (move_effect == CONST.MOVE_EFFECTS.TERREMOTO or move_effect == CONST.MOVE_EFFECTS.MAGNITUD) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.EXCAVAR):
+		##value *= 2.0
+##
+	##if (move_effect == CONST.MOVE_EFFECTS.SURF or move_effect == CONST.MOVE_EFFECTS.TORBELLINO) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.BUCEO):
+		##value *= 2.0
+	#
+	#if !actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.PANTALLA_LUZ) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
+		#value *= 0.5
+#
+	#if !actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.REFLEJO) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
+		#value *= 0.5
+	#
+	#### ABILITIES
+	#
+	#if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.PELUCHE) and self.makeContact() and !self.is_type(CONST.calculatedEffectivnessS.FUEGO):
+		#value *= 0.5
+	#elif actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.PELUCHE) and !self.makeContact() and self.is_type(CONST.calculatedEffectivnessS.FUEGO):
 		#value *= 2.0
 		#
-	#if (move_effect == CONST.MOVE_EFFECTS.TERREMOTO or move_effect == CONST.MOVE_EFFECTS.MAGNITUD) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.EXCAVAR):
+	#if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.FILTRO) and calculatedEffectivness > 1:
+		#value *= 0.75
+	#
+	#if pokemon.hasAlly() and pokemon.ally.hasWorkingAbility(CONST.ABILITIES.COMPIESCOLTA):
+		#value *= 0.75
+		#
+	#if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.COMPENSACION) and actualTarget.activePokemon.hasFullHealth():
+		#value *= 0.50
+		#
+	#if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.ARMADURA_PRISMA) and calculatedEffectivness > 1:
+		#value *= 0.75
+		#
+	#if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.GUARDIA_ESPECTRO) and actualTarget.activePokemon.hasFullHealth():
+		#value *= 0.50
+		#
+	#if pokemon.hasWorkingAbility(CONST.ABILITIES.FRANCOTIRADOR) and critical:
+		#value *= 1.50
+	#
+	#if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.ROCA_SOLIDA) and calculatedEffectivness > 1:
+		#value *= 0.75
+		#
+	#if pokemon.hasWorkingAbility(CONST.ABILITIES.CROMOLENTE) and calculatedEffectivness < 1:
 		#value *= 2.0
-#
-	#if (move_effect == CONST.MOVE_EFFECTS.SURF or move_effect == CONST.MOVE_EFFECTS.TORBELLINO) and actualTarget.activePokemon.hasWorkingMoveEffect(CONST.MOVE_EFFECTS.BUCEO):
-		#value *= 2.0
-	
-	if !actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.PANTALLA_LUZ) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
-		value *= 0.5
-
-	if !actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.VELO_AURORA) and actualTarget.activePokemon.side.hasWorkingFieldEffect(BattleEffect.List.REFLEJO) and !critical and !pokemon.hasWorkingAbility(CONST.MOVE_EFFECTS.ALLANAMIENTO):
-		value *= 0.5
-	
-	### ABILITIES
-	
-	if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.PELUCHE) and self.makeContact() and !self.is_type(CONST.calculatedEffectivnessS.FUEGO):
-		value *= 0.5
-	elif actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.PELUCHE) and !self.makeContact() and self.is_type(CONST.calculatedEffectivnessS.FUEGO):
-		value *= 2.0
-		
-	if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.FILTRO) and calculatedEffectivness > 1:
-		value *= 0.75
-	
-	if pokemon.hasAlly() and pokemon.ally.hasWorkingAbility(CONST.ABILITIES.COMPIESCOLTA):
-		value *= 0.75
-		
-	if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.COMPENSACION) and actualTarget.activePokemon.hasFullHealth():
-		value *= 0.50
-		
-	if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.ARMADURA_PRISMA) and calculatedEffectivness > 1:
-		value *= 0.75
-		
-	if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.GUARDIA_ESPECTRO) and actualTarget.activePokemon.hasFullHealth():
-		value *= 0.50
-		
-	if pokemon.hasWorkingAbility(CONST.ABILITIES.FRANCOTIRADOR) and critical:
-		value *= 1.50
-	
-	if actualTarget.activePokemon.hasWorkingAbility(CONST.ABILITIES.ROCA_SOLIDA) and calculatedEffectivness > 1:
-		value *= 0.75
-		
-	if pokemon.hasWorkingAbility(CONST.ABILITIES.CROMOLENTE) and calculatedEffectivness < 1:
-		value *= 2.0
-	
-	return value
-	### ITEMS
-	
+	#
+	#return value
+	#### ITEMS
+	#
 func calculateCriticalHit():
 	var probability:float = CONST.BATTLE_STAGE_MULT_CRITICAL[pokemon.criticalStage]
 	
@@ -480,7 +480,7 @@ func causeAilment():
 	ailment.calculateTurns()
 	ailment.setTarget(target.actualTarget)
 	#ailment = BattleEffect.getAilment(ailmentType).new(pokemon,target)#(self)
-	if actualTarget.activePokemon.hasWorkingEffect(ailment):
+	if actualTarget.activePokemon.hasWorkingEffect(ailment.name):
 		await ailment.showEffectRepeatedMessage()
 		return
 	elif actualTarget.activePokemon.hasStatusAilment() and ailment.type == BattleEffect.Type.STATUS:
@@ -515,3 +515,6 @@ func print_move():
 
 func is_type(t):
 	return type.id == t
+
+func equals(moveId : BattleEffect.Moves):
+	return self.id == moveId

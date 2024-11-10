@@ -8,6 +8,7 @@ func applyBattleEffectAtCalculateDamage():
 	if originPokemon.hp_actual <= hpPercentage:
 		power = floori(originPokemon.usedMove.damage.movePower * 1.5)
 		originPokemon.usedMove.damage.movePower = power
+		originPokemon.usedMove.damage.calculate()
 	
 func clear():
 	pass

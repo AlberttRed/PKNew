@@ -12,13 +12,13 @@ func doEffect():
 			await GUI.battle.showMessage("¡Reflejo subió la Defensa del equipo rival!", false, 2.0)
 
 func checkHitEffect() -> bool:
-	return !targetField.hasWorkingEffect(self)
+	return !targetField.hasWorkingEffect(self.name)
 	#else:
 		#power = originPokemon.selected_move.damage.movePower
 func applyBattleEffectAtTakeDamage():
 	if targetPokemon.receivedDamage.isPhysicMove && !targetPokemon.receivedDamage.isCriticalHit && !targetPokemon.receivedDamage.isFixedDamage:
 		var newDamage :int = floori(targetPokemon.receivedDamage.calculatedDamage / 2.0)
-		targetPokemon.receivedDamage.calculatedDamage = newDamage
+		targetPokemon.receivedDamage.calculatedDamage = max(1, newDamage)
 
 func applyBattleEffectAtInitBattleTurn():
 	if !nextTurn():

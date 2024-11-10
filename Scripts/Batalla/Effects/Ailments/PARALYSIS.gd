@@ -8,7 +8,7 @@ func doAnimation():
 	await targetPokemon.battleSpot.playAnimation("PARALYSIS")
 	
 func getPersistent() -> bool:
-	return !originPokemon.fainted
+	return !targetPokemon.fainted
 	
 func applyBattleEffectAtBeforeMove():
 		randomize()
@@ -30,7 +30,6 @@ func showEffectMessage():
 
 func showEffectEndMessage():
 	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya no está paralizado!", false, 2.0)
-
 
 		
 #func _get(property: StringName) -> Variant:

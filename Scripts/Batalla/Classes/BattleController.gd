@@ -306,8 +306,8 @@ func endTurn():
 	
 func endBattle():
 	await GUI.fadeIn(1.3)
-	UI.clear()
 	effects.clear()
+	UI.clear()
 	await GUI.get_tree().create_timer(1).timeout
 	await GUI.fadeOut(3)
 	
