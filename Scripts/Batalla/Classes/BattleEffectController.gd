@@ -81,8 +81,11 @@ func addStatusEffect(_battleEffect : BattleEffect, target):
 func addMoveEffect(_battleEffect : BattleEffect, target):
 	pass
 	
-func removeWeatcherEffect(_battleEffect : BattleEffect, target):
-	pass
+func removeWeatcherEffect(_battleEffectToRemove : BattleEffect, target):
+	for battleEffect:BattleEffect in target.activeBattleEffects:
+		if _battleEffectToRemove.name == battleEffect.name :
+			target.activeBattleEffects.erase(battleEffect)
+			return
 	
 func removeAilmentEffect(_battleEffectToRemove : BattleEffect, target):
 	for battleEffect:BattleEffect in target.activeBattleEffects:

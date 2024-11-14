@@ -197,7 +197,8 @@ func calculateDamage(r = null):
 	#SignalManager.Battle.Effects.applyAt.emit("CalculateDamage")
 	#await SignalManager.Battle.Effects.finished
 	damage.calculate()
-	await GUI.battle.controller.effects.applyBattleEffect("CalculateDamage")
+	if !confusedHit:
+		await GUI.battle.controller.effects.applyBattleEffect("CalculateDamage")
 	print("Stats Stages: AT: " + str(pokemon.getStatStage(CONST.STATS.ATA)) + ", DEF: " + str(pokemon.getStatStage(CONST.STATS.DEF)) + ", ATESP: " + str(pokemon.getStatStage(CONST.STATS.ATAESP)) + ", DEFESP: " + str(pokemon.getStatStage(CONST.STATS.DEFESP)) + ", VEL: " + str(pokemon.getStatStage(CONST.STATS.VEL)) + ", ACC: " + str(pokemon.getStatStage(CONST.STATS.ACC)) + ", EVA: " + str(pokemon.getStatStage(CONST.STATS.EVA)))
 	print("Level: " + str(pokemon.level) + ", Power: " + str(power) + ", Attack: " + str(damage.attackMod) + ", Def: " + str(damage.deffenseMod) + ", Nature:" + str(CONST.NaturesName[pokemon.instance.nature_id]) + ", Rival nature:" + str(CONST.NaturesName[actualTarget.activePokemon.instance.nature_id]))
 	print("Damage: " + str(damage.calculatedDamage))
@@ -487,7 +488,7 @@ func causeAilment():
 		await GUI.battle.showMessage("¡El ataque " + pokemon.battleMessageMiddleDelName + " falló!", false, 2.0)
 		return
 			
-	if ailment.calculateEffectChance():
+	if true:#ailment.calculateEffectChance():
 		print("Done!")
 		await ailment.doAnimation()
 		await ailment.showEffectSuceededMessage()
@@ -513,7 +514,7 @@ func print_move():
 	print(" ------ " + str(Name) + " " + str(pp_actual) + "/" + str(pp_total) + " PP ------ ")
 
 
-func is_type(t):
+func isType(t):
 	return type.id == t
 
 func equals(moveId : BattleEffect.Moves):

@@ -152,7 +152,7 @@ var activeBattleEffects : Array[BattleEffect]:# = [] #Array[CONST.MOVE_EFFECTS] 
 		return instance.activeBattleEffects
 var activeAccumulatedEffects : Array[BattleEffect]:
 	get:
-		return GUI.battle.controller.field.activeBattleEffects + side.getActiveBattleEffects(self) + activeBattleEffects
+		return GUI.battle.controller.field.getActiveBattleEffects(self) + side.field.getActiveBattleEffects(self) + activeBattleEffects
 
 
 var statsStages : Array[int] = [0,0,0,0,0,0,0,0]  #Modificadors d'stats. El primer es HP, no es farà servir mai

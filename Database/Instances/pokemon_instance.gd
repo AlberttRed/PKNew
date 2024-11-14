@@ -386,13 +386,13 @@ func load_moves():
 	#Doble Bofeton
 	#movements.push_back(move_instance_script.new().create(3))
 	#Polvo veneno
-	if movements.size() < 4:
-		movements.push_back(move_instance_script.new().create(261))
+	#if movements.size() < 4:
+		#movements.push_back(move_instance_script.new().create(261))
 	#Picotazo Ven.
 	#movements.push_back(move_instance_script.new().create(40))
 	#Hipnosis
 	if movements.size() < 4:
-		movements.push_back(move_instance_script.new().create(95))
+		movements.push_back(move_instance_script.new().create(240))
 #Calcula aleatoriament quin genero tindrà aquest pokemon, a partir del seu gender_rate
 #a l'hora de generar un pokemon nou
 func calculateGender():

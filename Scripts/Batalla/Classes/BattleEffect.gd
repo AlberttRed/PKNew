@@ -19,6 +19,10 @@ static func getMove(moveCode : Moves) -> Resource:
 		return load("res://Scripts/Batalla/Effects/Moves/"+Moves.keys()[moveCode]+".gd")
 	return null
 
+static func getWeather(weatherCode : Weather) -> Resource:
+	if FileAccess.file_exists("res://Scripts/Batalla/Effects/Weather/"+Weather.keys()[weatherCode]+".gd"):
+		return load("res://Scripts/Batalla/Effects/Weather/"+Weather.keys()[weatherCode]+".gd")
+	return null
 #enum List {
 	#PARALYSIS,
 	#BURN,
@@ -32,6 +36,7 @@ static func getMove(moveCode : Moves) -> Resource:
 #}
 
 enum Moves {
+	SOLAR_BEAM = 76,
 	REFLECT = 115,
 	CONFUSE_RAY = 109,
 	FACADE = 263
@@ -42,7 +47,7 @@ enum Ailments {
 	NONE = 0, 
 	PARALYSIS = 1,
 	SLEEP = 2,
-	FREEZE = 3,
+	FROZEN = 3,
 	BURN = 4,
 	POISON = 5,
 	CONFUSION = 6,
@@ -296,6 +301,13 @@ enum Abilities {
 	ARMADURA_PRISMA
 }
 
+enum Weather {
+	HARSH_SUNLIGHT,
+	RAIN,
+	SANDSTORM,
+	HAIL
+}
+
 enum Type {
 	MOVE,
 	STATUS,
@@ -470,11 +482,13 @@ func _get(property: StringName) -> Variant:
 				return Type.ABILITY
 			"Ailments":
 				var effectName = self.name
-				if effectName == "PARALYSIS" || effectName == "BURN" || effectName == "SLEEP" || effectName == "FREEZE" || effectName == "POISON":
+				if effectName == "PARALYSIS" || effectName == "BURN" || effectName == "SLEEP" || effectName == "FROZEN" || effectName == "POISON":
 					return Type.STATUS
 				return Type.AILMENT
 			"Moves":
 				return Type.MOVE
+			"Weather":
+				return Type.WEATHER
 			_:
 				return null
 	return property

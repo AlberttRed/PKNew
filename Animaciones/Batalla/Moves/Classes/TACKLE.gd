@@ -4,11 +4,8 @@ extends BattleMoveAnimation
 #----------------------------------------------------
 const animPath = "res://Animaciones/Batalla/Moves/Anim/TACKLE.res"
 
-const FRAME_TEXTURE:Texture2D = preload("res://Sprites/Batalla/Moves Animations/TackleFrames.png") 
-const FRAME_PLAYER_POS:Vector2 = Vector2(-258,112)
-const FRAME_ENEMY_POS:Vector2 = Vector2(260,-72)
-
-var sprHit:Sprite2D
+#var animationFrames:Node2D
+#var sprHit:Sprite2D
 
 func init(_move :BattleMove):
 	self.move = _move
@@ -20,23 +17,27 @@ func setAnimation(_root, animParams:Dictionary):
 	var target:BattleSpot = move.target.actualTarget#animParams.get('Target')
 	#var animPlayer = origin.animPlayer
 	#var targetAnimPlayer = target.animPlayer
-	sprHit = Sprite2D.new()
+	#animationFrames = Node2D.new()
+	#sprHit = Sprite2D.new()
 	var targetPath = _root.get_path_to(target)
 	
-	var framePosition:Vector2
+	var framePosition:Vector2 = Vector2(0,0)
 	var pushPosition:Vector2
 	if target.side.type == CONST.BATTLE_SIDES.ENEMY:
 		pushPosition = Vector2(50,0)
-		framePosition = FRAME_ENEMY_POS
+		#framePosition = FRAME_ENEMY_POS
 	else:
 		pushPosition = Vector2(-50,0)
-		framePosition = FRAME_PLAYER_POS
+		#framePosition = FRAME_PLAYER_POS
 	
-	sprHit.name = "Sprite_Hit"
-	sprHit.texture = FRAME_TEXTURE
-	sprHit.z_index = 10
-	sprHit.visible = false
-	_root.add_child(sprHit)
+	#animationFrames.name = "AnimationFrames"
+	#animationFrames.z_index = 10
+	#sprHit.name = "Hit"
+	#sprHit.z_index = 10
+	#sprHit.visible = false
+	#animationFrames.add_child(sprHit)
+	#_root.add_child(animationFrames)
+	_root.get_node("AnimationFrames").global_position =  target.global_position
 	#var animation: Animation =  self#animPlayer.get_animation(animName)
 
 #### Sprite:position
@@ -53,7 +54,7 @@ func setAnimation(_root, animParams:Dictionary):
 	#track_index = animation.add_track(Animation.TYPE_VALUE)
 	#animation.track_set_path(track_index, "Sprite2D:position")
 
-	track_index = animation.find_track("Sprite_Hit:position", Animation.TYPE_VALUE)
+	track_index = animation.find_track("AnimationFrames/Hit:position", Animation.TYPE_VALUE)
 	key_id = animation.track_find_key(track_index, 0.2)
 	animation.track_set_key_value(track_index, key_id, framePosition)
 	key_id = animation.track_find_key(track_index, 0.25)
@@ -68,9 +69,10 @@ func setAnimation(_root, animParams:Dictionary):
 	#animPlayer.play(animName)
 	#await animPlayer.animation_finished
 	#spr1.queue_free()
-
-func freeAnimation():
-	sprHit.queue_free()
+#
+#func freeAnimation():
+	#sprHit.queue_free()
+	#animationFrames.queue_free()
 
 
 #func setOriginTarget(target:BattlePokemon, anim:Animation):

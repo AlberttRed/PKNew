@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://bboi1elun0mpv"]
+
+[ext_resource type="Texture2D" uid="uid://cg37xmpak4tvn" path="res://Sprites/Batalla/Moves Animations/KarateChopFrames.png" id="1_5u318"]
+[ext_resource type="Texture2D" uid="uid://coxai6nue002s" path="res://Sprites/Batalla/Moves Animations/ParalysisFrames.png" id="1_n6s16"]
+[ext_resource type="Texture2D" uid="uid://x51xp6oodf4j" path="res://Sprites/Batalla/Moves Animations/TackleFrames.png" id="2_w00wx"]
+[ext_resource type="Texture2D" uid="uid://bbdfi7fvce4p6" path="res://Sprites/Batalla/Moves Animations/SleepFrames.png" id="3_81d2a"]
+[ext_resource type="Texture2D" uid="uid://cuc23sc7y54f8" path="res://Sprites/Batalla/Moves Animations/FrorzenFrames.png" id="4_ojaa2"]
+[ext_resource type="Texture2D" uid="uid://cwjm4mwajdsvi" path="res://Sprites/Batalla/Moves Animations/BurnFrames.png" id="5_cox6l"]
+[ext_resource type="Texture2D" uid="uid://2qrc1kywh8p5" path="res://Sprites/Batalla/Moves Animations/ConfusionFrames.png" id="5_m76gn"]
+
+[node name="AnimationFrames" type="Node2D"]
+z_index = 10
+
+[node name="PARALYSIS" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Ray1" type="Sprite2D" parent="PARALYSIS"]
+texture = ExtResource("1_n6s16")
+
+[node name="Ray2" type="Sprite2D" parent="PARALYSIS"]
+texture = ExtResource("1_n6s16")
+
+[node name="BURN" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Burn" type="Sprite2D" parent="BURN"]
+z_index = 2
+position = Vector2(-43, 30)
+texture = ExtResource("5_cox6l")
+vframes = 5
+
+[node name="Burn2" type="Sprite2D" parent="BURN"]
+z_index = 2
+position = Vector2(-43, 30)
+texture = ExtResource("5_cox6l")
+vframes = 5
+
+[node name="Burn3" type="Sprite2D" parent="BURN"]
+z_index = 2
+position = Vector2(-43, 30)
+texture = ExtResource("5_cox6l")
+vframes = 5
+
+[node name="SLEEP" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Zet" type="Sprite2D" parent="SLEEP"]
+position = Vector2(25, 31)
+rotation = -0.17877
+texture = ExtResource("3_81d2a")
+flip_h = true
+
+[node name="Zet2" type="Sprite2D" parent="SLEEP"]
+position = Vector2(-26, -12)
+rotation = -0.496672
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_81d2a")
+
+[node name="FROZEN" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Freeze" type="Sprite2D" parent="FROZEN"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-5, -10)
+texture = ExtResource("4_ojaa2")
+
+[node name="CONFUSION" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(-16, -20)
+
+[node name="Bird1" type="Sprite2D" parent="CONFUSION"]
+texture = ExtResource("5_m76gn")
+vframes = 3
+
+[node name="Bird2" type="Sprite2D" parent="CONFUSION"]
+texture = ExtResource("5_m76gn")
+vframes = 3
+
+[node name="Bird3" type="Sprite2D" parent="CONFUSION"]
+texture = ExtResource("5_m76gn")
+vframes = 3
+
+[node name="Bird4" type="Sprite2D" parent="CONFUSION"]
+texture = ExtResource("5_m76gn")
+vframes = 3
+
+[node name="Bird5" type="Sprite2D" parent="CONFUSION"]
+texture = ExtResource("5_m76gn")
+vframes = 3
+
+[node name="POUND" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Hit" type="Sprite2D" parent="POUND"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_w00wx")
+
+[node name="KARATE-CHOP" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Chop" type="Sprite2D" parent="KARATE-CHOP"]
+position = Vector2(-60, 0)
+texture = ExtResource("1_5u318")
+flip_h = true
+
+[node name="Hit" type="Sprite2D" parent="KARATE-CHOP"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_w00wx")
+
+[node name="TACKLE" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Hit" type="Sprite2D" parent="TACKLE"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_w00wx")

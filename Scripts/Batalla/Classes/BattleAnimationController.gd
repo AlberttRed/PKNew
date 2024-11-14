@@ -8,6 +8,11 @@ var currentAnimationName :String
 var currentAnimation :Animation
 var animParams :Dictionary
 var root
+@onready var frames : Dictionary
+
+func _ready() -> void:
+	for frameGroup:Node2D in $AnimationFrames.get_children():
+		frames[frameGroup.name] = frameGroup
 
 var temporary: bool = false
 
@@ -35,9 +40,15 @@ func _playAnimationByName(name: StringName = "", _animParams:Dictionary = {}, cu
 		assert(false, "Animation " + name + " does not exist.")
 		return
 		#
+	#if animPlayer.animation.has_method("setAnimation"):#get_script() != null:
+	if frames.has(name):
+		var framesCopy:Node2D = frames.get(name).duplicate()
+		framesCopy.name = "AnimationFrames"
+		root.add_child(framesCopy)
+		animPlayer.frames = framesCopy
 	if animPlayer.animation.has_method("setAnimation"):#get_script() != null:
 		animPlayer.animation.setAnimation(root, animParams)
-	
+
 	animPlayer.play(currentAnimationName, custom_blend, custom_speed, from_end)
 	await animPlayer.animation_finished
 
@@ -55,7 +66,12 @@ func _playAnimationByAnimation(animation: Animation, custom_blend: float = -1, c
 	if animPlayer.animation == null:
 		assert(false, "Animation " + name + " does not exist.")
 		return
-		#
+	print(animation.resource_name)
+	if frames.has(animation.resource_name):
+		var framesCopy:Node2D = frames.get(animation.resource_name).duplicate()
+		framesCopy.name = "AnimationFrames"
+		root.add_child(framesCopy)
+		animPlayer.frames = framesCopy
 	if animPlayer.animation.has_method("setAnimation"):#get_script() != null:
 		animPlayer.animation.setAnimation(root, animParams)
 	

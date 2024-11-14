@@ -10,7 +10,7 @@ var animation :Animation:
 		animation = _currentAnimation
 var animParams :Dictionary
 var root
-
+var frames : Node2D
 var temporary: bool = false
 
 func _enter_tree():
@@ -53,8 +53,10 @@ func _on_animation_finished(anim_name):
 
 func finish():
 	currentAnimationName=""
-	if animation!=null and animation.get_script() != null:
-		animation.freeAnimation()
+	#if animation!=null and animation.get_script() != null:
+		#animation.freeAnimation()
+	if frames != null:
+		frames.queue_free()
 	animation = null
 	finished.emit(self)
 

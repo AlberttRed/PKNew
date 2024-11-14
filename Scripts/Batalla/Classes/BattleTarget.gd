@@ -124,8 +124,7 @@ func doTargetEnemies():
 		addTarget(enemy)
 
 func doTargetAllField():
-	doTargetBasePlayer()
-	doTargetBaseEnemy()
+	addTarget(move.pokemon.side.field.parentField)
 	
 func doTargetPlayers():
 	for player:BattleSpot in move.pokemon.side.battleSpots:

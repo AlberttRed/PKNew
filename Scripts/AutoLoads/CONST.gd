@@ -314,23 +314,23 @@ const BATTLE_STAGE_MULT_CRITICAL = {
 class TYPES:
 	const NONE = 0
 	const NORMAL = 1
-	const LUCHA = 2
-	const VOLADOR = 3
-	const VENENO = 4
-	const TIERRA = 5
-	const ROCA = 6
-	const BICHO = 7
-	const FANTASMA = 8
-	const ACERO = 9
-	const FUEGO = 10
-	const AGUA = 11
-	const PLANTA = 12
-	const ELECTRICO = 13
-	const PSIQUICO = 14
-	const HIELO = 15
+	const FIGHTING = 2
+	const FLYING = 3
+	const POISONO = 4
+	const GROUND = 5
+	const ROCK = 6
+	const BUG = 7
+	const GHOST = 8
+	const STEEL = 9
+	const FIRE = 10
+	const WATER = 11
+	const GRASS = 12
+	const ELECTRIC = 13
+	const PSYCHIC = 14
+	const ICE = 15
 	const DRAGON = 16
-	const SINIESTRO = 17
-	const HADA = 18
+	const DARK = 17
+	const FAIRY = 18
 
 enum HEAL_TYPE {
 	MOVE,

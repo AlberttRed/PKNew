@@ -6,6 +6,7 @@ func doEffect():
 	if turnsCounter == 0:
 		turnsCounter = 1
 		activeTurns = 5
+		# FALTA ANIMACIÓ
 		if targetField.side.controllable:
 			await GUI.battle.showMessage("¡Reflejo subió la Defensa de tu equipo!", false, 2.0)
 		else:

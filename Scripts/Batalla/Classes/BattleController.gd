@@ -216,8 +216,8 @@ func setSides():
 #func addPersistentWeather(weather:CONST.WEATHER):
 	#activeWeathereffect = BattleWeatherEffect.getWeather(weather).new()
 	#
-func addTemporaryWeather(weather:CONST.WEATHER, minTurns: int, maxTurns: int):
-	var newWeather:BattleWeatherEffect = BattleWeatherEffect.getWeather(weather).new()
+func addTemporaryWeather(weather:BattleEffect.Weather, minTurns: int, maxTurns: int):
+	var newWeather:BattleEffect = BattleEffect.getWeather(weather).new()
 	newWeather.minTurns = minTurns
 	newWeather.maxTurns = maxTurns
 

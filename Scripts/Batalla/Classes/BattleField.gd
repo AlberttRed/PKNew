@@ -39,3 +39,13 @@ func hasAilmentEffect(ailmentCode:BattleEffect.Ailments) -> bool:
 	
 func hasMoveEffect(moveCode:BattleEffect.Moves) -> bool:
 	return hasWorkingEffect(BattleEffect.Moves.keys()[moveCode])
+
+func hasWeatherEffect(weatherCode:BattleEffect.Weather) -> bool:
+	return hasWorkingEffect(BattleEffect.Weather.keys()[weatherCode])
+
+func getActiveBattleEffects(_pokemon:BattlePokemon):
+	var effectList : Array[BattleEffect]
+	for e:BattleEffect in activeBattleEffects:
+		e.setTarget(_pokemon)
+		effectList.push_back(e)
+	return effectList
