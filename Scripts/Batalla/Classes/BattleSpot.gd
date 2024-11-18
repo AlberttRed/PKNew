@@ -13,7 +13,7 @@ var side:BattleSide:
 var opponentSide : BattleSide:
 	get:
 		return side.opponentSide
-var HPbar:HPBar
+@export var HPbar:HPBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bboi1elun0mpv"]
+[gd_scene load_steps=10 format=3 uid="uid://bboi1elun0mpv"]
 
 [ext_resource type="Texture2D" uid="uid://cg37xmpak4tvn" path="res://Sprites/Batalla/Moves Animations/KarateChopFrames.png" id="1_5u318"]
 [ext_resource type="Texture2D" uid="uid://coxai6nue002s" path="res://Sprites/Batalla/Moves Animations/ParalysisFrames.png" id="1_n6s16"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cuc23sc7y54f8" path="res://Sprites/Batalla/Moves Animations/FrorzenFrames.png" id="4_ojaa2"]
 [ext_resource type="Texture2D" uid="uid://cwjm4mwajdsvi" path="res://Sprites/Batalla/Moves Animations/BurnFrames.png" id="5_cox6l"]
 [ext_resource type="Texture2D" uid="uid://2qrc1kywh8p5" path="res://Sprites/Batalla/Moves Animations/ConfusionFrames.png" id="5_m76gn"]
+[ext_resource type="Texture2D" uid="uid://dqrw0rkefbit3" path="res://Sprites/Batalla/Moves Animations/RainFrames.png" id="8_e2wri"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qj7ns"]
 
 [node name="AnimationFrames" type="Node2D"]
 z_index = 10
@@ -112,5 +115,71 @@ texture = ExtResource("2_w00wx")
 z_index = 3
 
 [node name="Hit" type="Sprite2D" parent="TACKLE"]
+visible = false
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_w00wx")
+
+[node name="RAIN" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Fade" type="Sprite2D" parent="RAIN"]
+modulate = Color(0, 0, 0, 0)
+z_index = 5
+z_as_relative = false
+scale = Vector2(512, 288)
+texture = SubResource("CanvasTexture_qj7ns")
+centered = false
+
+[node name="Rain1" type="Sprite2D" parent="RAIN"]
+visible = false
+z_index = 5
+z_as_relative = false
+position = Vector2(254, 251)
+texture = ExtResource("8_e2wri")
+vframes = 7
+frame = 6
+
+[node name="Rain2" type="Sprite2D" parent="RAIN"]
+visible = false
+z_index = 5
+z_as_relative = false
+position = Vector2(301, 238)
+texture = ExtResource("8_e2wri")
+vframes = 7
+frame = 6
+
+[node name="Rain3" type="Sprite2D" parent="RAIN"]
+visible = false
+z_index = 5
+z_as_relative = false
+position = Vector2(469, 244)
+texture = ExtResource("8_e2wri")
+vframes = 7
+frame = 6
+
+[node name="Rain4" type="Sprite2D" parent="RAIN"]
+visible = false
+z_index = 5
+z_as_relative = false
+position = Vector2(85, 241)
+texture = ExtResource("8_e2wri")
+vframes = 7
+frame = 6
+
+[node name="Rain5" type="Sprite2D" parent="RAIN"]
+visible = false
+z_index = 5
+z_as_relative = false
+position = Vector2(471, 161)
+texture = ExtResource("8_e2wri")
+vframes = 7
+frame = 6
+
+[node name="Rain6" type="Sprite2D" parent="RAIN"]
+visible = false
+z_index = 5
+z_as_relative = false
+position = Vector2(182, 237)
+texture = ExtResource("8_e2wri")
+vframes = 7
+frame = 6

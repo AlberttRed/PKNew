@@ -400,10 +400,11 @@ func doAction():
 	#
 	#await applyLaterEffects()
 
-func selectMove():
+func selectMove(rememberFocus:bool = false):
 	#selectedBattleChoice=BattleChoice.new(CONST.BATTLE_ACTIONS.POKEMON, 6)
 	selectedBattleChoice=BattleMoveChoice.new(self)
-	selectedBattleChoice.selectMove()
+	
+	selectedBattleChoice.selectMove(rememberFocus)
 	await selectedBattleChoice.moveSelected
 	actionSelected.emit()
 	
@@ -541,13 +542,19 @@ func hasStatusAilment():
 	return status != CONST.STATUS.OK
 
 func changeModStat(stat:CONST.STATS, value:int, showMessage = true):
-	statsStages[stat] += value
 	if value > 0:
+		if statsStages[stat] == 6:
+			await GUI.battle.msgBox.showStatsFailedMessage(self, stat, value)
+			return
 		await playAnimation("STATUP",{'Stat': stat})
 		#await BattleAnimationList.new().getCommonAnimation("StatUp").doAnimation(target.battleSpot)
 	elif value < 0:
+		if statsStages[stat] == -6:
+			await GUI.battle.msgBox.showStatsFailedMessage(self, stat, value)
+			return
 		await playAnimation("STATDOWN",{'Stat': stat})
 		#await BattleAnimationList.new().getCommonAnimation("StatDown").doAnimation(target.battleSpot)
+	statsStages[stat] += value
 	if showMessage:
 		await GUI.battle.msgBox.showStatsMessage(self, stat, value)
 

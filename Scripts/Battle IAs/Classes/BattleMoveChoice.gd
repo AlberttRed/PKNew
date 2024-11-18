@@ -27,15 +27,14 @@ func _init(pokemon:BattlePokemon):
 		GUI.battle.moveSelected.connect(Callable(self, "setMove"))
 		GUI.battle.targetSelected.connect(Callable(self, "setTarget"))
 	
-func selectMove():
+func selectMove(rememberFocus:bool = false):
 	if pokemon.controllable:
-		print("nse")
-		GUI.battle.showMovesPanel()
+
+		GUI.battle.showMovesPanel(rememberFocus)
 		await GUI.battle.moveSelected
-		print("uea")
 		await move.selectTargets()
 		#await GUI.battle.targetSelected
-		print("eeee")
+
 		
 		#pokemon.actionSelected.emit()
 	else:

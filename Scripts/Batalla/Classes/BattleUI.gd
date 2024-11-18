@@ -16,8 +16,9 @@ signal targetSelected
 #@onready var sideNode : BattleSide = $enemyBase
 
 var controller : BattleController = null
-@onready var playerSide: BattleSide = $playerBase
-@onready var enemySide: BattleSide = $enemyBase
+@onready var field: BattleField = $Background
+@onready var playerField: BattleField = $playerBase
+@onready var enemyField: BattleField = $enemyBase
 
 var msgBox : BattleMessageController
 #var animController : BattleAnimationList
@@ -40,6 +41,8 @@ var actionSignalSelected : Signal
 
 @onready var animController : AnimationPlayer = $AnimationController
 
+var latestMovePanel: Panel = null
+
 #@onready var playerParty : Node2D = $playerBase/PlayerParty
 #@onready var enemyParty : Node2D = $enemyBase/EnemyParty
 
@@ -60,8 +63,8 @@ func initUI(_controller):
 	#updateUINodes()
 	
 	#initPartiesUI()
-	playerSide.position = CONST.BATTLE.PLAYER_BASE_INITIALPOSITION
-	enemySide.position = CONST.BATTLE.ENEMY_BASE_INITIALPOSITION
+	playerField.position = CONST.BATTLE.PLAYER_BASE_INITIALPOSITION
+	enemyField.position = CONST.BATTLE.ENEMY_BASE_INITIALPOSITION
 	
 	if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 		initSingleBattleUI()
@@ -143,14 +146,7 @@ func clearSingleBattleUI():
 			for p:BattleSpot in s.battleSpots:
 				p.removeActivePokemon()
 		s.clear()
-	#for p in controller.activePokemons:
-		#p.HPbar.clearUI()
-		#p.clear()
-		#p.instance = null
-		#
-	#for s:BattleSide in controller.sides:
-		#s.clear()
-		#
+
 		
 func clearDoubleBattleUI():
 	pass
@@ -180,13 +176,18 @@ func _input(event):
 		Input.action_release("ui_accept")
 		#controller.active_pokemon.doAnimation()
 		INPUT.ui_accept.free_state()
-		if onActionsPanel():
+		if onConfirmationPanel():
+			print("Confirmation selected")
+		elif onActionsPanel():
 				print("Action selected")
 				actionSignalSelected.emit()
 		elif onMovesPanel():
 				print("Move selected")
-				#controller.active_pokemon.selected_action = BattleMoveChoice.new(controller.active_pokemon.selected_move, [])
-				moveSelected.emit(controller.active_pokemon.selected_move)
+				if controller.active_pokemon.selected_move.pp_actual == 0:
+					await GUI.battle.showMessage("¡No quedan PP para este movimiento!", false, 2.0)
+					selectMove.emit(true)
+				else:
+					moveSelected.emit(controller.active_pokemon.selected_move)
 	elif event.is_action_pressed("ui_cancel"):
 		if onMovesPanel():
 			hideMovesPanel()
@@ -210,10 +211,18 @@ func showActionsPanel():
 	cmdLuchar.grab_focus()
 	showPanel($PanelActions)
 	
-func showMovesPanel():
+func showMovesPanel(rememberFocus = false):
 	showPanel($PanelMoves)
 	initMovesPanel()
-	pnlMove1.grab_focus()
+	if rememberFocus:
+		latestMovePanel.grab_focus()
+	else:
+		pnlMove1.grab_focus()
+		
+func showConfirmationPanel():
+	var array:Array[String] = ["SI","NO"]
+	$ChoicesContainer.activeChoices(array)
+	$ChoicesContainer.showContainer()
 	
 func showParty():
 	GUI.show_party(CONST.MENU_MODES.BATTLE)
@@ -290,34 +299,58 @@ func _on_action_focus_exited():
 func _on_move_focus_entered():
 	var move : BattleMove = null
 	if pnlMove1.has_focus():
+		latestMovePanel = pnlMove1
 		move = controller.active_pokemon.moves[0]
 		print(move.Name)
 		pnlMove1.get("theme_override_styles/panel").region_rect.position.x = 192
 		controller.active_pokemon.selected_move = move
 
 	elif pnlMove2.has_focus():
+		latestMovePanel = pnlMove2
 		move = controller.active_pokemon.moves[1]
 		print(move.Name)
 		pnlMove2.get("theme_override_styles/panel").region_rect.position.x = 192
 		controller.active_pokemon.selected_move = move
 
 	elif pnlMove3.has_focus():
+		latestMovePanel = pnlMove3
 		move = controller.active_pokemon.moves[2]
 		print(move.Name)
 		pnlMove3.get("theme_override_styles/panel").region_rect.position.x = 192
 		controller.active_pokemon.selected_move = move
 		
 	elif pnlMove4.has_focus():
+		latestMovePanel = pnlMove4
 		move = controller.active_pokemon.moves[3]
 		print(move.Name)
 		pnlMove4.get("theme_override_styles/panel").region_rect.position.x = 192
 		controller.active_pokemon.selected_move = move
 
+	updateMoveInfoPanel(move)
+	
+		
+
+func updateMoveInfoPanel(move:BattleMove):
 	if move != null:
 		$PanelMoves/MoveType.vframes = 1
 		$PanelMoves/MoveType.texture = move.type.image
 		$PanelMoves/lblPPs.text = "PP: " + str(move.pp_actual) + "/" + str(move.pp_total)
+		
+		if move.pp_actual == 0:
+			$PanelMoves/lblPPs.add_theme_color_override("font_color", Color("FF4A4A"))
+			$PanelMoves/lblPPs.add_theme_color_override("font_shadow_color", Color("8C3131"))
+		elif move.pp_actual > 0 && float(move.pp_actual) <= move.pp_total/4.0:
+			$PanelMoves/lblPPs.add_theme_color_override("font_color", Color("FF8C21"))
+			$PanelMoves/lblPPs.add_theme_color_override("font_shadow_color", Color("944A18"))
+		elif float(move.pp_actual) > move.pp_total/4.0 && float(move.pp_actual) <= move.pp_total/2.0:
+			$PanelMoves/lblPPs.add_theme_color_override("font_color", Color("FFC600"))
+			$PanelMoves/lblPPs.add_theme_color_override("font_shadow_color", Color("946B00"))
+		else:
+			$PanelMoves/lblPPs.remove_theme_color_override("font_color")
+			$PanelMoves/lblPPs.remove_theme_color_override("font_shadow_color")
 
+	
+	
 func showTargetSelection():
 	#funció que farà seleccionar el target al Player. 
 	#controller.active_pokemon.selected_action.target = controller.active_pokemon.listEnemies
@@ -346,6 +379,9 @@ func onMovesPanel():
 	
 func onActionsPanel():
 	return $PanelActions.visible and !$PanelMessageBox.visible and !$PanelMoves.visible and !GUI.party.visible #and controller.active_pokemon.selected_action != -1
+
+func onConfirmationPanel():
+	return $ChoicesContainer.visible
 
 func showPanel(_panel : Panel):
 	$PanelMessageBox.hide()

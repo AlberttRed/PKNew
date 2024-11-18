@@ -52,6 +52,7 @@ func showMoveMessage(_user : BattlePokemon, _move : BattleMove):
 func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):
 	var text = ""
 	var name = ""
+	var statText = ""
 	if _value == -2:
 		text = "bajó mucho"
 	elif _value == -1:
@@ -61,28 +62,66 @@ func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int
 	elif _value == 2:
 		text = "subió mucho"
 	
-	if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
-		name = "de " + _target.Name
-	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
-		name = "del " + _target.Name + " enemigo"
-	elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
-		name = "del " + _target.Name + " salvaje"
+	#if _target.side.type == CONST.BATTLE_SIDES.PLAYER:
+		#name = "de " + _target.Name
+	#elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
+		#name = "del " + _target.Name + " enemigo"
+	#elif GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.WILD_POKEMON:
+		#name = "del " + _target.Name + " salvaje"
+	#
+	if _stat == CONST.STATS.ATA:
+		statText = "El ataque "
+		#await GUI.battle.showMessage("¡El ataque " + name + " " + text + "!", false, 2.0)
+	elif _stat == CONST.STATS.DEF:
+		statText = "La defensa "
+		#await GUI.battle.showMessage("¡La defensa " + name + " " + text + "!", false, 2.0)
+	elif _stat == CONST.STATS.ATAESP:
+		statText = "El ataque especial "
+		#await GUI.battle.showMessage("¡El ataque especial " + name + " " + text + "!", false, 2.0)	
+	elif _stat == CONST.STATS.DEFESP:
+		statText = "La defensa especial "
+		#await GUI.battle.showMessage("¡La defensa especial " + name + " " + text + "!", false, 2.0)	
+	elif _stat == CONST.STATS.VEL:
+		statText = "La velocidad "
+		#await GUI.battle.showMessage("¡La velocidad " + name + " " + text + "!", false, 2.0)	
+	elif _stat == CONST.STATS.ACC:
+		statText = "La precisión "
+		#await GUI.battle.showMessage("¡La precisión " + name + " " + text + "!", false, 2.0)	
+	elif _stat == CONST.STATS.EVA:
+		statText = "La evasión "
+		#await GUI.battle.showMessage("¡La evasión " + name + " " + text + "!", false, 2.0)		
+		
+	await GUI.battle.showMessage("¡" + statText + _target.battleMessageMiddleDelName + " " + text + "!", false, 2.0)		
+
+#Missatge que es mostra quan es modifiquen stats
+func showStatsFailedMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):
+	var text = ""
+	var name = ""
+	var statText = ""
+
+	if _value > 0:
+		text = " no puede subir más"
+	else:
+		text = " no puede bajar más"
+	
 	
 	if _stat == CONST.STATS.ATA:
-		await GUI.battle.showMessage("¡El ataque " + name + " " + text + "!", false, 2.0)
+		statText = "El ataque "
 	elif _stat == CONST.STATS.DEF:
-		await GUI.battle.showMessage("¡La defensa " + name + " " + text + "!", false, 2.0)
+		statText = "La defensa "
 	elif _stat == CONST.STATS.ATAESP:
-		await GUI.battle.showMessage("¡El ataque especial " + name + " " + text + "!", false, 2.0)	
+		statText = "El ataque especial "
 	elif _stat == CONST.STATS.DEFESP:
-		await GUI.battle.showMessage("¡La defensa especial " + name + " " + text + "!", false, 2.0)	
+		statText = "La defensa especial "
 	elif _stat == CONST.STATS.VEL:
-		await GUI.battle.showMessage("¡La velocidad " + name + " " + text + "!", false, 2.0)	
+		statText = "La velocidad "
 	elif _stat == CONST.STATS.ACC:
-		await GUI.battle.showMessage("¡La precisión " + name + " " + text + "!", false, 2.0)	
+		statText = "La precisión "
 	elif _stat == CONST.STATS.EVA:
-		await GUI.battle.showMessage("¡La evasión " + name + " " + text + "!", false, 2.0)		
-		
+		statText = "La evasión "
+
+	await GUI.battle.showMessage("¡" + statText + _target.battleMessageMiddleDelName + " " + text + "!", false, 2.0)		
+
 		
 #Misatges que surten en el moment q es fa un atac i el pk rival queda paralitzat, dormit etc.
 #func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS):
@@ -221,7 +260,9 @@ func showExitMessage(success:bool):
 	#GUI.accept.emit()
 	##GUI.levelUp.accept.emit()
 
-
+func hide():
+	msgBox.clear_msg()
+	
 func msg_TextDisplayed():
 	print("displayed")
 	textDisplayed.emit()

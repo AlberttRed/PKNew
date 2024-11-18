@@ -271,7 +271,7 @@ func _ready():
 #	set_info()
 #		
 	load_moves()
-	hp_actual = hp_total
+	hp_actual = 1
 	print_pokemon_base()
 #	hp_total = get_total_hp()
 #	hp_actual = int(float(hp_total) / randf_range(1, 6))
@@ -391,8 +391,9 @@ func load_moves():
 	#Picotazo Ven.
 	#movements.push_back(move_instance_script.new().create(40))
 	#Hipnosis
-	if movements.size() < 4:
-		movements.push_back(move_instance_script.new().create(240))
+	#if movements.size() < 4:
+		#movements.push_back(move_instance_script.new().create(240))
+	#
 #Calcula aleatoriament quin genero tindrà aquest pokemon, a partir del seu gender_rate
 #a l'hora de generar un pokemon nou
 func calculateGender():

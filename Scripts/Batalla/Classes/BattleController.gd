@@ -3,10 +3,10 @@ class_name BattleController
 var rules : BattleRules = null
 var playerSide: BattleSide:
 	get:
-		return UI.playerSide
+		return UI.playerField.side
 var enemySide: BattleSide:
 	get:
-		return UI.enemySide
+		return UI.enemyField.side
 var sides : Array[BattleSide] = []
 var stage : CONST.BATTLE_STAGES
 
@@ -29,7 +29,9 @@ var turnPokemonOrder : Array[BattleSpot]
 var effects : BattleEffectController
 #var activeWeathereffect : BattleWeatherEffect = null # CONST.WEATHER = CONST.WEATHER.NONE #Només pot haver-hi un tipus de Weather actiu a la vegada
 var activeWeather
-var field:BattleField
+var field:BattleField:
+	get:
+		return UI.field
 
 var UI : BattleUI:
 	get:
@@ -38,7 +40,10 @@ var UI : BattleUI:
 func _init(_battleRules : BattleRules):
 	rules = _battleRules
 	effects = BattleEffectController.new(self)
-	field = BattleField.new()
+	UI.playerField._init()
+	UI.enemyField._init()
+	#playerSide = BattleSide.new(UI.playerField)
+	#enemySide = BattleSide.new(UI.enemyField)
 
 func initBattle():
 
@@ -46,7 +51,7 @@ func initBattle():
 	#assert(playerSide == null or enemySide == null, "No se han configurado los BattleSide para el combate.")
 
 	await GUI.initBattleTransition()
-	UI = GUI.battle.initUI(self)
+	UI.initUI(self)
 	if rules.weather != CONST.WEATHER.NONE:
 		pass
 		#addPersistentWeather(rules.weather)
@@ -105,11 +110,7 @@ func takeTurn():
 				await active_pokemon.actionFinished
 			#Only give exp if pokemon is from player
 
-				for e in activePokemons:
-					await e.checkFainted()
-					if e.fainted and e.side.type == CONST.BATTLE_SIDES.ENEMY:
-						await e.giveExpAtDefeat()
-						e.battleSpot.removeActivePokemon()
+				await checkDefeatedPokemon()
 				await effects.applyBattleEffect("EndPKMNTurn")
 				#SignalManager.Battle.Effects.applyAt.emit("EndPKMNTurn")
 				#await SignalManager.Battle.Effects.finished
@@ -191,12 +192,22 @@ func updateActivePokemons():
 			#if !p.listPokemonBattledAgainst.has(e):
 				#p.listPokemonBattledAgainst.push_back(e)
 
+func checkDefeatedPokemon():
+	for e in activePokemons:
+		await e.checkFainted()
+		if e.fainted:
+			if e.side.type == CONST.BATTLE_SIDES.ENEMY:
+				await e.giveExpAtDefeat()
+			else:
+				GUI.battle.showConfirmationPanel()
+			e.battleSpot.removeActivePokemon()
+
 func setSides():
 	self.sides = [playerSide, enemySide]
-	self.playerSide.opponentSide = enemySide
-	self.enemySide.opponentSide = playerSide
-	enemySide.field.parentField = field
-	playerSide.field.parentField = field
+	#self.playerSide.opponentSide = enemySide
+	#self.enemySide.opponentSide = playerSide
+	#enemySide.field.parentField = field
+	#playerSide.field.parentField = field
 #		print("player side: ")
 #		for a in allies:
 #			print(a.Name)
@@ -308,6 +319,7 @@ func endBattle():
 	await GUI.fadeIn(1.3)
 	effects.clear()
 	UI.clear()
+	field.activeBattleEffects.clear()
 	await GUI.get_tree().create_timer(1).timeout
 	await GUI.fadeOut(3)
 	

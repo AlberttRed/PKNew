@@ -1,15 +1,19 @@
-extends Node2D
+#extends Node2D
 class_name BattleSide
 	
-@export var type : CONST.BATTLE_SIDES = CONST.BATTLE_SIDES.NONE
-@export var opponentSide : BattleSide
-@export var isWild : bool = false
-
-@onready var pokemonSpotA:BattleSpot = $PokemonA
-@onready var pokemonSpotB:BattleSpot = $PokemonB
-
-@onready var trainerA:BattleParticipant = $TrainerA
-@onready var trainerB:BattleParticipant = $TrainerB
+var type:
+	get:
+		return field.type
+var opponentSide : BattleSide:
+	get:
+		return field.opponentField.side
+var isWild : bool = false
+#
+#@onready var pokemonSpotA:BattleSpot = $PokemonA
+#@onready var pokemonSpotB:BattleSpot = $PokemonB
+#
+#@onready var trainerA:BattleParticipant = $TrainerA
+#@onready var trainerB:BattleParticipant = $TrainerB
 
 var participants : Array[BattleParticipant] # Numero d' "Entrenadors" del Side
 var pokemonParty : Array[BattlePokemon] # La party que tindrà el side en el combat, formada per pokemons del/s BattleParticipant/s
@@ -32,16 +36,17 @@ var controllable:
 			if p.controllable:
 				return true
 		return false
-#func _init(_type : CONST.BATTLE_SIDES):
-	#type = _type
-	#
+
+func _init(_field : BattleField):
+	field = _field
+
 func addParticipant(_participant : Battler, _controllable : bool):
 	print("ia " + str(_participant.battleIA))
 	var participant:BattleParticipant
 	if participants.is_empty():
-		participant = trainerA
+		participant = field.trainerSpotA
 	else:
-		participant = trainerB
+		participant = field.trainerSpotB
 	participant.setParticipant(_participant, _controllable)
 	##var p : BattleParticipant = BattleParticipant.new(_participant, _controllable)
 	participant.side = self
@@ -51,29 +56,28 @@ func addParticipant(_participant : Battler, _controllable : bool):
 func initSide(rules: BattleRules):
 	assert(!participants.is_empty(), "No s'ha carregat cap Participant per el side")
 	escapeAttempts = 0
-	field = BattleField.new(self)
 	loadParty()
 	if participants.size() == 1:
-		pokemonSpotA.setParticipant(participants[0])
-		pokemonSpotA.setSide(self)
-		pokemonSpotA.HPbar = $HPBarA
-		pokemonSpotA.show()
+		field.pokemonSpotA.setParticipant(participants[0])
+		#field.pokemonSpotA.setSide(self)
+		field.pokemonSpotA.HPbar = field.hpBarA
+		field.pokemonSpotA.show()
 		if rules.mode == CONST.BATTLE_MODES.DOUBLE:
-			pokemonSpotB.setParticipant(participants[0])
-			pokemonSpotB.setSide(self)
-			pokemonSpotB.HPbar = $HPBarB
-			pokemonSpotB.show()
+			field.pokemonSpotB.setParticipant(participants[0])
+			#field.pokemonSpotB.setSide(self)
+			#pokemonSpotB.HPbar = field.hpBarB
+			field.pokemonSpotB.show()
 		else:
-			pokemonSpotB.hide()
+			field.pokemonSpotB.hide()
 	elif participants.size() == 2:
-		pokemonSpotA.setParticipant(participants[0])
-		pokemonSpotA.setSide(self)
-		pokemonSpotA.HPbar = $HPBarA
-		pokemonSpotA.show()
-		pokemonSpotB.setParticipant(participants[1])
-		pokemonSpotB.setSide(self)
-		pokemonSpotB.HPbar = $HPBarB
-		pokemonSpotB.show()
+		field.pokemonSpotA.setParticipant(participants[0])
+		#field.pokemonSpotA.setSide(self)
+		#pokemonSpotA.HPbar = $HPBarA
+		field.pokemonSpotA.show()
+		field.pokemonSpotB.setParticipant(participants[1])
+		#field.pokemonSpotB.setSide(self)
+		#pokemonSpotB.HPbar = $HPBarB
+		field.pokemonSpotB.show()
 	#activePokemons = getActivePokemons()
 		
 #func hasWorkingFieldEffect(e:BattleEffect.List):
@@ -149,10 +153,7 @@ func getBattleSpots():
 	return list
 
 func isDefeated():
-	print("party ")
-
 	for p in pokemonParty:
-		print(p.Name + " " + str(p.hp_actual))
 		if !p.fainted:
 			return false
 	return true
@@ -187,3 +188,4 @@ func getActiveBattleEffects(_pokemon:BattlePokemon):
 		e.setTarget(_pokemon)
 		effectList.push_back(e)
 	return effectList
+	

@@ -114,6 +114,8 @@ func close():
 	exit.emit()
 	
 func selectOption():
+	if swapping:
+		return
 	if !msgBox.is_visible():
 		if !actions.visible and !$SUMMARY.visible:
 			if get_focus_owner(self).get_name() == "Salir":
@@ -158,6 +160,8 @@ func showMsg(text:String):
 	actions.show()
 	
 func cancelOption():
+	if swapping:
+		return
 	if !msgBox.is_visible():
 		if !actions.visible and !$SUMMARY.visible:
 			if movingPokemon:

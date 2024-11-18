@@ -53,8 +53,8 @@ func _on_animation_finished(anim_name):
 
 func finish():
 	currentAnimationName=""
-	#if animation!=null and animation.get_script() != null:
-		#animation.freeAnimation()
+	if animation!=null and animation.get_script() != null && animation.has_method("freeAnimation"):
+		animation.freeAnimation()
 	if frames != null:
 		frames.queue_free()
 	animation = null

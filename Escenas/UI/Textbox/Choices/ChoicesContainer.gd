@@ -61,7 +61,7 @@ func activeChoice(choiceName:String):
 	if !listActiveChoices.has(choice):
 		listActiveChoices.push_back(choice)
 		$VBoxContainer.move_child(choice, listActiveChoices.size()-1)
-		position = position - Vector2(0, 36)
+		position = position - Vector2(0, choice.size.y)
 	choice.show()
 	
 func disableChoice(choiceName:String):

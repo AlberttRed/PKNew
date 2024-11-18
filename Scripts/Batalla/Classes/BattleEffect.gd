@@ -332,7 +332,6 @@ var priority : Priority:
 var targetField : BattleField
 var effectChance : int
 var effectHits : bool #Indicate if the effect/move misses or not
-#var _origin = null # BattleMove | Abilty, Ailment
 
 
 var pokemon : BattlePokemon
@@ -387,7 +386,6 @@ func setTarget(_target):
 	else:
 		assert(false, "Not a valid target type for BattleEffect " + str(self.name))
 		return
-	effectHits = checkHitEffect()
 
 func getPriority() -> int:
 	if self.type == Type.STATUS:
@@ -405,9 +403,11 @@ func doEffect():
 func checkHitEffect() -> bool:
 	return true
 
-
 func clear():
 	pass
+
+func setEffectHits():
+	effectHits = checkHitEffect()
 
 func calculateTurns():
 	randomize()

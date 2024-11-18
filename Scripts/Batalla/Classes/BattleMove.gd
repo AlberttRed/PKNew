@@ -118,8 +118,7 @@ func _init(_move : MoveInstance, _pokemon : BattlePokemon):
 		
 func use():
 	calculateHits() 
-	#await pokemon.applyPreviousEffects()
-	
+	pp_actual-=1
 	await GUI.battle.msgBox.showMoveMessage(pokemon, self)
 
 	while target.nextTarget():
@@ -357,8 +356,12 @@ func calculateCriticalHit():
 	critical = n <= probability && damage_class != CONST.DAMAGE_CLASS.ESTADO
 
 func calculateAccuracy():
+	if effect != null:
+		effect.setEffectHits()
+	var effectHits = effect == null || effect.effectHits
 	if actualTarget is not BattleSpot or target.type == BattleTarget.TYPE.USER:
-		moveHits = true
+		#If target is field type or user type, move always hit. In this case, only need to check effect hit
+		moveHits = effectHits
 		return
 	var targetPokemon:BattlePokemon = actualTarget.activePokemon
 	var calculatedProbability:float
@@ -372,8 +375,8 @@ func calculateAccuracy():
 	randomize()
 	var n:float = randf_range(0.1, 100)
 	
-	moveHits = n <= calculatedProbability
-
+	moveHits = (n <= calculatedProbability) && effectHits
+	
 func calculateHealing():#damage: int):
 	var healValue : int = 0
 	if drainPercentage != null and drainPercentage > 0:
@@ -435,8 +438,6 @@ func _checkHit() -> bool:
 	var fainted:bool = (actualTarget is BattleSpot and actualTarget.activePokemon.fainted)
 	#SignalManager.Battle.Effects.applyAt.emit("CheckHit")
 	#await SignalManager.Battle.Effects.finished
-	var effectHits = effect == null || effect.effectHits
-	moveHits = moveHits && effectHits
 	return moveHits and final_hits < num_hits and !fainted
 	
 
