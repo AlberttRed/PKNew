@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://bugfcogjtje8h" path="res://Escenas/UI/Fonts/fontMessageBox.tres" id="4_sh5bn"]
 [ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="5_syydx"]
 [ext_resource type="Texture2D" uid="uid://vxedaqbf3pad" path="res://Escenas/UI/Batalla/Resources/Sprites/battleCommandButtons.png" id="6_f5daf"]
-[ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG.tscn" id="7_r06ls"]
+[ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG_OLD.tscn" id="7_r06ls"]
 [ext_resource type="StyleBox" uid="uid://bgsm216aqcccn" path="res://Escenas/UI/Batalla/Resources/BattleMoves_Panel.tres" id="8_bluvr"]
 [ext_resource type="FontFile" uid="uid://rdvuqsu77j27" path="res://Escenas/UI/Fonts/pkmnemn.ttf" id="9_8dhsv"]
 [ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="10_yq8b8"]
@@ -2393,7 +2393,6 @@ scale = Vector2(1.125, 1.125)
 texture = ExtResource("33_f8vih")
 
 [node name="HPBarA" type="Sprite2D" parent="playerBase"]
-visible = false
 z_index = 6
 z_as_relative = false
 position = Vector2(770, -3)

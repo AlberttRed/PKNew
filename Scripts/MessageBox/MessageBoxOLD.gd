@@ -1,6 +1,6 @@
 extends Node
 
-class_name MessageBox
+class_name MessageBoxOLD
 
 
 signal textDisplayed
@@ -38,6 +38,8 @@ var position:Vector2:
 		msgBox.position = p
 #@onready var timer: Timer = null
 #@onready var animationPlayer: AnimationPlayer = null
+
+enum {YES, NO}
 
 
 func _init(_msgBox : Panel):
@@ -182,7 +184,7 @@ func autoclip(text=""):
 func is_visible():
 	return msgBox.is_visible()
 
-func show_msgBattle(text : String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
+func show_msgBattle(text : String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false, waitChoice = false):
 	if _waitTime > 0.0:
 		stop = _waitTime
 	else:
@@ -230,5 +232,10 @@ func show_msgBattle(text : String, showIcon : bool = true, _waitTime : float = 0
 
 		animationPlayer.stop()		
 		next.hide()
+		
+	if !waitChoice:
+		finished.emit()
 
-	finished.emit()
+
+func showMessage():
+	pass

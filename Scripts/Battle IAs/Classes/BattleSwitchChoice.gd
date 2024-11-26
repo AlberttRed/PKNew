@@ -12,14 +12,18 @@ func _init(_selectedPokemon : BattlePokemon):
 	#target = _target
 	self.priority = 6 # Els canvis de pokemon sempre tenen prioritat 6
 	self.type = CONST.BATTLE_ACTIONS.POKEMON
-	GUI.party.pokemonSelected.connect(Callable(self, "setSwitchInPokemon"))
+	#GUI.party.pokemonSelected.connect(Callable(self, "setSwitchInPokemon"))
 	
+#func showParty():
+	#await GUI.battle.showParty()
+
 func showParty():
-	await GUI.battle.showParty()
+	switchInPokemon = await GUI.battle.showParty()
+	GUI.battle.cmdPokemon.grab_focus()
 	
 func switchPokemon():
 	await battleSpot.swapPokemon(switchInPokemon)
 	await GUI.get_tree().create_timer(1).timeout
 	
-func setSwitchInPokemon(pokemonPartyIndex:int):#pokemon:BattlePokemon):
-	switchInPokemon = switchOutPokemon.participant.pokemonTeam[pokemonPartyIndex] #pokemon
+#func setSwitchInPokemon(pokemonPartyIndex:int):#pokemon:BattlePokemon):
+	#switchInPokemon = switchOutPokemon.participant.pokemonTeam[pokemonPartyIndex] #pokemon

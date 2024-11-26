@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dmdm304dmklh8"]
+[gd_scene load_steps=80 format=3 uid="uid://dmdm304dmklh8"]
 
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="1_35cnb"]
 [ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleUI.gd" id="1_syfy0"]
@@ -6,11 +6,12 @@
 [ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleField.gd" id="3_44m5u"]
 [ext_resource type="StyleBox" uid="uid://bgsm216aqcccn" path="res://Escenas/UI/Batalla/Resources/BattleMoves_Panel.tres" id="4_1pp74"]
 [ext_resource type="Theme" uid="uid://bugfcogjtje8h" path="res://Escenas/UI/Fonts/fontMessageBox.tres" id="4_441j1"]
-[ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG.tscn" id="4_j0igc"]
 [ext_resource type="Texture2D" uid="uid://vxedaqbf3pad" path="res://Escenas/UI/Batalla/Resources/Sprites/battleCommandButtons.png" id="4_l76bn"]
 [ext_resource type="Texture2D" uid="uid://jp48dg7huvv" path="res://Sprites/Batalla/Battlebacks/enemybaseField.png" id="6_yaj7x"]
 [ext_resource type="Texture2D" uid="uid://bpjm37rtjwm8e" path="res://Sprites/Batalla/567.png" id="9_2td6s"]
+[ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="9_yhn83"]
 [ext_resource type="Texture2D" uid="uid://pbvisvp5jwv4" path="res://Sprites/Batalla/019.png" id="10_db7kv"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/MessageBox.gd" id="10_dtmuf"]
 [ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="10_gjl27"]
 [ext_resource type="FontFile" uid="uid://rdvuqsu77j27" path="res://Escenas/UI/Fonts/pkmnemn.ttf" id="10_o3o5j"]
 [ext_resource type="Texture2D" uid="uid://coiimjb2x6u06" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFightButtons.png" id="10_wa1kd"]
@@ -18,12 +19,16 @@
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="11_a22gy"]
 [ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="11_mjwwj"]
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="11_ne00b"]
+[ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="11_sxhgc"]
+[ext_resource type="Script" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="12_ki6wv"]
 [ext_resource type="Texture2D" uid="uid://4suianjdpdca" path="res://Sprites/Batalla/Battlebacks/playerbaseField.png" id="12_kij8v"]
 [ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="12_mjuc7"]
 [ext_resource type="PackedScene" uid="uid://du3d20hvxfop2" path="res://Escenas/UI/Textbox/Choices/ChoicesContainer.tscn" id="13_5ly3f"]
+[ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="13_ejjn3"]
 [ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="13_il7rh"]
 [ext_resource type="PackedScene" uid="uid://bpegpem5d7eqb" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.tscn" id="14_b2hym"]
 [ext_resource type="Texture2D" uid="uid://cp3p5plvvv4sj" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="14_e8ogj"]
+[ext_resource type="Animation" uid="uid://beugpt1ql5na2" path="res://Escenas/UI/Textbox/Resources/next_animation.tres" id="14_edc4l"]
 [ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Batalla/Animaciones/Moves/Battle_AilmentAnimations.res" id="15_l48co"]
 [ext_resource type="AnimationLibrary" uid="uid://6y11gonugprj" path="res://Objetos/Batalla/Animaciones/Moves/GLOBAL.res" id="16_d25ld"]
 [ext_resource type="Texture2D" uid="uid://dnu7djupfw2o" path="res://Escenas/UI/Menus/Resources/arrowSpriteOK2.png" id="17_53sog"]
@@ -72,6 +77,55 @@ texture = ExtResource("4_l76bn")
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 region_rect = Rect2(0, 138, 260, 414)
+
+[sub_resource type="Theme" id="Theme_x4phv"]
+default_font = ExtResource("11_sxhgc")
+default_font_size = 26
+
+[sub_resource type="Animation" id="Animation_bs852"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_8ajbi"]
+resource_name = "Scroll"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ScrollContainer:scroll_vertical")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 32]
+}
+
+[sub_resource type="Animation" id="Animation_mbf3k"]
+resource_name = "Typing"
+length = 4.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ScrollContainer/Container/LabelHGSS:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5i0nh"]
+_data = {
+"Idle": ExtResource("14_edc4l"),
+"RESET": SubResource("Animation_bs852"),
+"Scroll": SubResource("Animation_8ajbi"),
+"Typing": SubResource("Animation_mbf3k")
+}
 
 [sub_resource type="Theme" id="Theme_uti51"]
 default_font = ExtResource("10_o3o5j")
@@ -377,49 +431,116 @@ focus_neighbor_top = NodePath("../Pokemon")
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ey4ts")
 
-[node name="PanelMessageBox" parent="." instance=ExtResource("4_j0igc")]
+[node name="PanelMessageBox" type="Panel" parent="."]
 z_index = 6
 z_as_relative = false
+layout_mode = 0
+offset_top = 288.0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = ExtResource("9_yhn83")
+script = ExtResource("10_dtmuf")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelMessageBox"]
+layout_direction = 1
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -96.0
-offset_right = 256.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
+anchors_preset = -1
+offset_left = 32.0
+offset_top = 20.0
+offset_right = 465.0
+offset_bottom = 78.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Container" type="Control" parent="PanelMessageBox/ScrollContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LabelHGSS" type="RichTextLabel" parent="PanelMessageBox/ScrollContainer/Container"]
+layout_mode = 2
+offset_right = 433.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_x4phv")
+theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
+theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 12
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+tab_size = 2
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+script = ExtResource("12_ki6wv")
+font_size = 26
+font_color = Color(0.345098, 0.345098, 0.313726, 1)
+outline_color = Color(0.658824, 0.721569, 0.721569, 1)
+text_font = ExtResource("11_sxhgc")
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="PanelMessageBox" index="0"]
-auto_translate_mode = 2
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -231.0
-offset_top = -25.0
-offset_right = 221.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/line_separation = 7
-text = ""
-
-[node name="Label2" parent="PanelMessageBox/Label" index="1"]
-auto_translate_mode = 2
-layout_mode = 3
-offset_right = 452.0
-offset_bottom = 56.0
-theme_override_constants/line_separation = 7
-
-[node name="next" parent="PanelMessageBox" index="1"]
+[node name="Outline" type="RichTextLabel" parent="PanelMessageBox/ScrollContainer/Container/LabelHGSS"]
+layout_mode = 0
+offset_right = 433.0
+offset_bottom = 58.0
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_x4phv")
+theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
+theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 12
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+tab_size = 2
+visible_characters_behavior = 1
 metadata/_edit_lock_ = true
+
+[node name="Outline2" type="RichTextLabel" parent="PanelMessageBox/ScrollContainer/Container/LabelHGSS"]
+layout_mode = 0
+offset_right = 433.0
+offset_bottom = 58.0
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_x4phv")
+theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
+theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 12
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+tab_size = 2
+visible_characters_behavior = 1
+metadata/_edit_lock_ = true
+
+[node name="next" type="Sprite2D" parent="PanelMessageBox"]
+visible = false
+position = Vector2(491, 69)
+texture = ExtResource("13_ejjn3")
+hframes = 4
+
+[node name="Timer" type="Timer" parent="PanelMessageBox"]
+process_callback = 0
+wait_time = 0.05
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="PanelMessageBox"]
+root_node = NodePath("../next")
+libraries = {
+"": SubResource("AnimationLibrary_5i0nh")
+}
 
 [node name="PanelMoves" type="Panel" parent="."]
 z_index = 6
@@ -1036,7 +1157,6 @@ visible = false
 [connection signal="value_changed" from="playerBase/HPBarA/exp_bar/TextureProgressBar" to="playerBase/HPBarA/exp_bar" method="_on_value_changed"]
 [connection signal="value_changed" from="playerBase/HPBarB/exp_bar/TextureProgressBar" to="playerBase/HPBarB/exp_bar" method="_on_value_changed"]
 
-[editable path="PanelMessageBox"]
 [editable path="ChoicesContainer"]
 [editable path="playerBase/HPBarA/health_bar"]
 [editable path="playerBase/HPBarB/health_bar"]

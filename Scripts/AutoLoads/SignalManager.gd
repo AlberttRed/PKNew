@@ -47,6 +47,7 @@ class animations:
 class BattleSignals:
 	var Effects:BattleEffects = BattleEffects.new()
 	var Animations:BattleAnimations = BattleAnimations.new()
+	var ExperienceHandler:BattleExperience = BattleExperience.new()
 	signal selectTarget
 	signal targetSelected
 	signal add
@@ -61,7 +62,17 @@ class BattleSignals:
 	class BattleAnimations:
 		signal playAnimation
 		signal playMoveAnimation
-	
+		
+	class BattleExperience:
+		signal addPokemon
+		signal finished
+		signal giveExp
+		signal free
+		
+func disconnectAll(sig:Signal):
+	for dict in sig.get_connections():
+		sig.disconnect(dict.callable)
+		
 func _ready():
 	pass
 #	EVENT = event.new()

@@ -17,22 +17,22 @@ var msg:
 
 
 
-func _init(_panel : Panel):
-	msgBox = MessageBox.new(_panel)
+#func _init(_panel : Panel):
+	#msgBox = MessageBox.new(_panel)
 	#accept.connect(Callable(self, "accept_msg"))
-	msgBox.textDisplayed.connect(Callable(self, "msg_TextDisplayed"))
-	msgBox.finished.connect(Callable(self, "msg_Finished"))
+	#msgBox.textDisplayed.connect(Callable(self, "msg_TextDisplayed"))
+	#msgBox.finished.connect(Callable(self, "msg_Finished"))
 
 #Missatge que es mostra quan un atac es efectiu, ho es poc, o no afecta
 func showEffectivnessMessage(_target : BattlePokemon, _STAB : int):
 	if _STAB >= 2:
-		GUI.battle.showMessage("¡Es muy efectivo!", false, 2.0)
+		GUI.battle.showMessageWait("¡Es muy efectivo!", 2.0)
 		await GUI.battle.msgBox.finished
 	elif _STAB < 1:
-		GUI.battle.showMessage("No parece muy efectivo...", false, 2.0)
+		GUI.battle.showMessageWait("No parece muy efectivo...", 2.0)
 		await GUI.battle.msgBox.finished
 	elif _STAB == 0:
-		GUI.battle.showMessage("No afecta " + _target.battleMessageMiddleAlName + ".", false, 2.0)
+		GUI.battle.showMessageWait("No afecta " + _target.battleMessageMiddleAlName + ".", 2.0)
 		await GUI.battle.msgBox.finished
 
 
@@ -46,8 +46,8 @@ func showMoveMessage(_user : BattlePokemon, _move : BattleMove):
 			#type = " enemigo"
 		#else:
 			#type = " salvaje"
-	await GUI.battle.showMessage("¡" + _user.battleMessageInitialName + " ha usado " + _move.Name + "!", false, 0.5)
-		
+	await GUI.battle.showMessageNoClose("¡" + _user.battleMessageInitialName + " ha usado " + _move.Name + "!")
+	await GUI.get_tree().create_timer(0.5).timeout
 #Missatge que es mostra quan es modifiquen stats
 func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):
 	var text = ""
@@ -91,7 +91,7 @@ func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int
 		statText = "La evasión "
 		#await GUI.battle.showMessage("¡La evasión " + name + " " + text + "!", false, 2.0)		
 		
-	await GUI.battle.showMessage("¡" + statText + _target.battleMessageMiddleDelName + " " + text + "!", false, 2.0)		
+	await GUI.battle.showMessageWait("¡" + statText + _target.battleMessageMiddleDelName + " " + text + "!", 2.0)		
 
 #Missatge que es mostra quan es modifiquen stats
 func showStatsFailedMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):
@@ -215,29 +215,29 @@ func showStatsFailedMessage(_target : BattlePokemon, _stat : CONST.STATS, _value
 #		GUI.battle.showMessage("¡La evasión de " + _target.Name + " " + text + "!", false, 2.0)	
 
 
-func show_msgBattle(text:String, showIcon : bool = true, _waitTime : float = 0.0, waitInput = false):
-	msgBox.show_msgBattle(text, showIcon, _waitTime, waitInput)
+func show_msgBattle(text:String, showIcon : bool = true, _waitTime : float = 0.0, waitInput = false, waitChoice = false):
+	msgBox.show_msgBattle(text, showIcon, _waitTime, waitInput, waitChoice)
 	await finished
 #Missatge que es mostra quan es debilita un pokemon
 func showDefeatedPKMNMessage(_defeatedPKMN : BattlePokemon):
 	var type = ""
 	if _defeatedPKMN.controllable:
-		await GUI.battle.showMessageInput("¡" + _defeatedPKMN.Name + " se debilitó!", false)
+		await GUI.battle.showMessageInput("¡" + _defeatedPKMN.Name + " se debilitó!")
 	else:
 		if GUI.battle.controller.rules.type == CONST.BATTLER_TYPES.TRAINER:
 			type = " enemigo"
 		else:
 			type = " salvaje"
-		await GUI.battle.showMessageInput("¡El " + _defeatedPKMN.Name + type + " se debilitó!", false)
+		await GUI.battle.showMessageInput("¡El " + _defeatedPKMN.Name + type + " se debilitó!")
 	
 #Missatge que es mostra quan es guanya experiencia al derrotar un pokemon
 func showGainedEXPMessage(_pokemonTarget : BattlePokemon, expGained : int):
 	print("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!")
-	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!", false)
+	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " ha ganado " + str(expGained) + " Puntos de Experiencia!")
 
 func showLevelUpMessage(_pokemonTarget : BattlePokemon, level : int):
 	print("¡" + _pokemonTarget.Name + " subió al nivel " + str(level) + "!")
-	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " subió al nivel " + str(level) + "!", false)
+	await GUI.battle.showMessageInput("¡" + _pokemonTarget.Name + " subió al nivel " + str(level) + "!")
 
 func showLevelUpStats(pokemon:BattlePokemon):
 	var levelUpPanel:Panel = GUI.levelUp
@@ -262,15 +262,15 @@ func showExitMessage(success:bool):
 
 func hide():
 	msgBox.clear_msg()
-	
-func msg_TextDisplayed():
-	print("displayed")
-	textDisplayed.emit()
-	
-func msg_Finished():
-	print("lelelele")
-	print("finished")
-	finished.emit()
+	#
+#func msg_TextDisplayed():
+	#print("displayed")
+	#textDisplayed.emit()
+	#
+#func msg_Finished():
+	#print("lelelele")
+	#print("finished")
+	#finished.emit()
 
 func clear():
 	msgBox.label.text = ""

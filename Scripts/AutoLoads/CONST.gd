@@ -471,10 +471,10 @@ class BAG_POCKETS:
 	const BATTLE_ITEMS = 7
 	const KEY_ITEMS = 8
 	
-enum MENU_MODES {
+enum PARTY_MODES {
 	MENU = 1,
 	BATTLE = 2,
-	ITEM = 3
+	BAG = 3
 }
 	
 enum ENCOUNTER_METHODS {

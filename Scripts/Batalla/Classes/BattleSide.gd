@@ -8,6 +8,10 @@ var opponentSide : BattleSide:
 	get:
 		return field.opponentField.side
 var isWild : bool = false
+
+var pendingPokemonChanges:bool:
+	get:
+		return !getPendingPokemonChanges().is_empty()
 #
 #@onready var pokemonSpotA:BattleSpot = $PokemonA
 #@onready var pokemonSpotB:BattleSpot = $PokemonB
@@ -127,6 +131,8 @@ func loadParty():
 				pokemonParty.push_back(pk)
 				i += 1
 		i = 0
+	if controllable:
+		GUI.party.loadParty(pokemonParty)
 
 func getNextPartyPokemon():
 	for p:BattlePokemon in pokemonParty:
@@ -170,7 +176,10 @@ func clear():
 	field.activeBattleEffects.clear()
 	field = null
 
-	
+
+
+func getNextPokemons():
+	return battleSpots.map(func(bs:BattleSpot): return bs.nextPokemon).filter(func(pk:BattlePokemon): return pk!=null)
 
 func showActivePokemons():
 	if !isWild:
@@ -179,6 +188,13 @@ func showActivePokemons():
 		await SignalManager.Animations.finished_animation
 		#for p:BattleSpot in battleSpots:
 			#await p.showHPBar()
+func showPokemons():
+	for bs:BattleSpot in battleSpots:
+		await bs.showNextPokemon()
+	
+func getPendingPokemonChanges():
+	return  battleSpots.filter(func(bs): return bs.pendingPokemonChanges)
+
 	
 func getActiveBattleEffects(_pokemon:BattlePokemon):
 	var effectList : Array[BattleEffect]

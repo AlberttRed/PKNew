@@ -7,6 +7,7 @@ class_name BattleSpot
 
 var participant : BattleParticipant# Indica a quin participant pertany (entrenador)
 var activePokemon:BattlePokemon #Indica quin Pokémon està en aquest spot en aquest moment
+var nextPokemon: BattlePokemon #Indica quin Pokemon serà el següent en entrar
 var side:BattleSide:
 	get:
 		return participant.side
@@ -14,6 +15,14 @@ var opponentSide : BattleSide:
 	get:
 		return side.opponentSide
 @export var HPbar:HPBar
+
+var controllable:bool:
+	get:
+		return participant.controllable
+
+var pendingPokemonChanges:bool:
+	get:
+		return nextPokemon != null or (nextPokemon == null and activePokemon == null and participant.hasAvailablePokemon)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -79,6 +88,7 @@ func loadActivePokemon(pokemon:BattlePokemon):
 	activePokemon.setBattleSpot(self)
 	activePokemon.inBattle = true
 	activePokemon.initAbility()
+	GUI.battle.controller.newTurn.connect(func(): activePokemon.turnsInBattle +=1)
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
 		if GUI.battle.controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 			self.position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
@@ -153,7 +163,11 @@ func quitPokemon(update:bool=false):
 	#await hideHPBar()
 	#await animPlayer.playAnimation("OUT_BATTLE")
 	await removeActivePokemon()
-	##AQUI FAREM ANIMACIÓ SORTIDA
+
+func checkFainted():
+	if activePokemon != null and activePokemon.fainted and activePokemon.inBattle:
+		await activePokemon.setDefeated()
+		removeActivePokemon()
 	
 func showHPBar():
 	await GUI.battle.showHPBarUI(HPbar)
@@ -165,6 +179,28 @@ func addBattleEffect(effect : BattleEffect):
 	if effect == null:
 		return
 	SignalManager.Battle.Effects.add.emit(effect, activePokemon)
+	
+func endTurn():
+	if activePokemon!=null:
+		activePokemon.endTurn()
+		
+func selectNextPokemon():
+	#var selectedPokemon = null
+	if !participant.hasAvailablePokemon:
+		nextPokemon = null
+		return
+	if participant.controllable:
+		nextPokemon = await GUI.battle.showParty()
+	#else:
+		#IA.selectNextPokemon()
+
+func showNextPokemon():
+	if activePokemon == null:
+		loadActivePokemon(nextPokemon)
+		await enterPokemon(nextPokemon)
+	else:
+		await swapPokemon(nextPokemon)
+	nextPokemon = null
 
 func playAnimation(animation:String, animParams:Dictionary = {}):
 	SignalManager.Battle.Animations.playAnimation.emit(animation, animParams, self)

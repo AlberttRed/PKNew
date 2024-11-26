@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://dkjekvml5fqpp"]
+[gd_scene load_steps=103 format=3 uid="uid://dkjekvml5fqpp"]
 
 [ext_resource type="Texture2D" uid="uid://d2i5gus8tvoi" path="res://Escenas/UI/Menus/Resources/partybg.PNG" id="1_ew7hq"]
 [ext_resource type="Script" path="res://Escenas/UI/Menus/2 - Party/PARTY.gd" id="2"]
@@ -47,15 +47,20 @@
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="40_f8fc6"]
 [ext_resource type="Texture2D" uid="uid://bqy27j631k2qe" path="res://Escenas/UI/Menus/Resources/summary4.png" id="41_xg58t"]
 [ext_resource type="Texture2D" uid="uid://cj41hphayr3y0" path="res://Escenas/UI/Menus/Resources/summary5.png" id="42_vf0ii"]
-[ext_resource type="Texture2D" uid="uid://nmbu8413mkjl" path="res://Sprites/Pictures/EXPsummary_background.png" id="44_0vaoq"]
+[ext_resource type="Texture2D" uid="uid://c486w3if8mwhf" path="res://Sprites/Pictures/EXPsummary_background.png" id="44_0vaoq"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="44_1etyu"]
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="45_0ap10"]
-[ext_resource type="Texture2D" uid="uid://d181nfjfvlqo7" path="res://Sprites/Pictures/EXPsummary_overlay.png" id="45_yx00i"]
-[ext_resource type="Texture2D" uid="uid://dyssdsut0bkqw" path="res://Sprites/Pictures/EXPsummary_progress.png" id="46_kss2v"]
+[ext_resource type="Texture2D" uid="uid://bcp5o8xtx3plb" path="res://Sprites/Pictures/EXPsummary_overlay.png" id="45_yx00i"]
+[ext_resource type="Texture2D" uid="uid://j0kmrmsug5tw" path="res://Sprites/Pictures/EXPsummary_progress.png" id="46_kss2v"]
 [ext_resource type="Texture2D" uid="uid://ctnjnkfpilrj8" path="res://Sprites/Pictures/HPsummary_background.png" id="46_licca"]
 [ext_resource type="Texture2D" uid="uid://cdb6j2ubvprkw" path="res://Sprites/Pictures/HPsummary_overlay.png" id="47_tfkpk"]
 [ext_resource type="Texture2D" uid="uid://jwxxv6ieuia1" path="res://Sprites/Pictures/HPsummary_progress.png" id="48_fc5h1"]
-[ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG.tscn" id="55_na0po"]
+[ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG_OLD.tscn" id="55_na0po"]
+[ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="57_0h8r4"]
+[ext_resource type="Script" path="res://Escenas/UI/Textbox/MessageBox.gd" id="58_foh34"]
+[ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="59_1wbce"]
+[ext_resource type="Script" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="60_mee08"]
+[ext_resource type="Animation" uid="uid://beugpt1ql5na2" path="res://Escenas/UI/Textbox/Resources/next_animation.tres" id="61_2e7d1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oj2bc"]
 texture = ExtResource("1_ew7hq")
@@ -203,6 +208,55 @@ region_rect = Rect2(0, 0, 512, 384)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u2ecf"]
 texture = ExtResource("42_vf0ii")
 region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="Theme" id="Theme_x4phv"]
+default_font = ExtResource("59_1wbce")
+default_font_size = 26
+
+[sub_resource type="Animation" id="Animation_bs852"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_8ajbi"]
+resource_name = "Scroll"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ScrollContainer:scroll_vertical")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 32]
+}
+
+[sub_resource type="Animation" id="Animation_mbf3k"]
+resource_name = "Typing"
+length = 4.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ScrollContainer/Container/LabelHGSS:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5i0nh"]
+_data = {
+"Idle": ExtResource("61_2e7d1"),
+"RESET": SubResource("Animation_bs852"),
+"Scroll": SubResource("Animation_8ajbi"),
+"Typing": SubResource("Animation_mbf3k")
+}
 
 [node name="PARTY" type="Panel"]
 offset_right = 512.0
@@ -1087,6 +1141,7 @@ offset_bottom = 97.848
 text = "Elige a un Pokémon."
 
 [node name="ACTIONS" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 368.0
 offset_top = 351.0
@@ -1790,24 +1845,25 @@ text = "12097"
 horizontal_alignment = 1
 
 [node name="exp_bar" type="Node2D" parent="SUMMARY/SUMMARY_1"]
-position = Vector2(357, 376)
+position = Vector2(357, 377)
 script = ExtResource("44_1etyu")
 metadata/_edit_vertical_guides_ = [-205.084]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="SUMMARY/SUMMARY_1/exp_bar"]
-offset_left = -39.0
-offset_top = -7.0
-offset_right = 161.0
-offset_bottom = 10.0
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 179.0
+offset_bottom = 8.0
 scale = Vector2(1, 0.960005)
-max_value = 0.0
+min_value = 314.0
+max_value = 419.0
 step = 0.1
+value = 314.0
 stretch_margin_left = 1
 texture_under = ExtResource("44_0vaoq")
 texture_over = ExtResource("45_yx00i")
 texture_progress = ExtResource("46_kss2v")
 tint_progress = Color(0.27451, 0.552941, 0.960784, 1)
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SUMMARY/SUMMARY_1/exp_bar"]
 
@@ -2892,20 +2948,140 @@ theme_override_fonts/font = ExtResource("19")
 theme_override_font_sizes/font_size = 26
 text = "0"
 
-[node name="MSG" parent="." instance=ExtResource("55_na0po")]
+[node name="MSG_OLD" parent="." instance=ExtResource("55_na0po")]
 visible = false
 layout_mode = 0
 offset_top = 0.0
 offset_bottom = 96.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_3m2bu")
 
-[node name="Label" parent="MSG" index="0"]
-auto_translate_mode = 2
+[node name="Label" parent="MSG_OLD" index="0"]
 offset_left = 13.899
 offset_right = 490.899
 
-[node name="Label2" parent="MSG/Label" index="1"]
-auto_translate_mode = 2
+[node name="MSG" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("57_0h8r4")
+script = ExtResource("58_foh34")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MSG"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 32.0
+offset_top = 20.0
+offset_right = 465.0
+offset_bottom = 78.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Container" type="Control" parent="MSG/ScrollContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LabelHGSS" type="RichTextLabel" parent="MSG/ScrollContainer/Container"]
+layout_mode = 2
+offset_right = 433.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_x4phv")
+theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
+theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 12
+bbcode_enabled = true
+text = "Esta es la primera línea
+Esta es la segunda línea
+Esta es la tercera línea
+Esta es la cuarta línea"
+fit_content = true
+scroll_active = false
+tab_size = 2
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+script = ExtResource("60_mee08")
+font_size = 26
+font_color = Color(0.345098, 0.345098, 0.313726, 1)
+outline_color = Color(0.658824, 0.721569, 0.721569, 1)
+text_font = ExtResource("59_1wbce")
+metadata/_edit_lock_ = true
+
+[node name="Outline" type="RichTextLabel" parent="MSG/ScrollContainer/Container/LabelHGSS"]
+layout_mode = 0
+offset_right = 433.0
+offset_bottom = 58.0
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_x4phv")
+theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
+theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 12
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "Esta es la primera línea
+Esta es la segunda línea
+Esta es la tercera línea
+Esta es la cuarta línea
+
+"
+fit_content = true
+scroll_active = false
+tab_size = 2
+visible_characters_behavior = 1
+metadata/_edit_lock_ = true
+
+[node name="Outline2" type="RichTextLabel" parent="MSG/ScrollContainer/Container/LabelHGSS"]
+layout_mode = 0
+offset_right = 433.0
+offset_bottom = 58.0
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_x4phv")
+theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
+theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_separation = 12
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "Esta es la primera línea
+Esta es la segunda línea
+Esta es la tercera línea
+Esta es la cuarta línea
+
+"
+fit_content = true
+scroll_active = false
+tab_size = 2
+visible_characters_behavior = 1
+metadata/_edit_lock_ = true
+
+[node name="next" type="Sprite2D" parent="MSG"]
+position = Vector2(491, 69)
+texture = ExtResource("29")
+hframes = 4
+
+[node name="Timer" type="Timer" parent="MSG"]
+process_callback = 0
+wait_time = 0.05
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="MSG"]
+root_node = NodePath("../next")
+libraries = {
+"": SubResource("AnimationLibrary_5i0nh")
+}
 
 [connection signal="focus_entered" from="PKMN_0/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_1/Panel" to="." method="_on_PKMN_focus_entered"]
@@ -2967,4 +3143,4 @@ auto_translate_mode = 2
 [editable path="SUMMARY/SUMMARY_4/Move4/dPP"]
 [editable path="SUMMARY/SUMMARY_5/lCintas"]
 [editable path="SUMMARY/SUMMARY_5/dCintas"]
-[editable path="MSG"]
+[editable path="MSG_OLD"]

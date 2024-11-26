@@ -22,3 +22,5 @@ func selectMove():
 func selectTargets():
 	pass
 	
+func selectNextPokemon():
+	pass

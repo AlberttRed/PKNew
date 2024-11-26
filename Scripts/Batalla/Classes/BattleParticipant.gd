@@ -6,6 +6,16 @@ var controllable : bool # Indica si el participant el controlarà el Jugador o l
 var battleSpots : Array[BattleSpot] # Indica quins "spots" controla el participant (PokemonA/pokemonB)
 @onready var sprite : Sprite2D = $Sprite
 var side : BattleSide
+var activePokemons : Array[BattlePokemon]: # Indica els pokemons que estan actius en el combat lluitant per aquell side
+	get:
+		return getActivePokemons()
+var pendingPokemonChanges:bool:
+	get:
+		return !getPendingPokemonChanges().is_empty()
+		
+var hasAvailablePokemon:bool:
+	get:
+		return !getAvailablePokemon().is_empty()
 #var IA: BattleIA
 
 # Given a Battler, load the Participant Party from battler's party. Also assigns an IA to the particpant
@@ -73,11 +83,31 @@ func playAnimation(animation:String, animParams:Dictionary = {}):
 	await SignalManager.Animations.finished_animation
 	#await GUI.battle.playAnimation(animation, animParams, self)
 
-#func bringInPokemon(pokemon:PokemonInstance, battleSpot:BattlePokemon):
-	#battleSpot.enterPokemon()
-	#
-#func bringOutOutPokemon(pokemon:PokemonInstance, battleSpot:BattlePokemon):
-	#battleSpot.quitPokemon()
+func getNextPokemons() -> Array[BattlePokemon]:
+	return battleSpots.map(func(bs:BattleSpot): return bs.nextPokemon).filter(func(pk:BattlePokemon): return pk!=null)
+
+func getPendingPokemonChanges():
+	return  battleSpots.filter(func(bs): return bs.pendingPokemonChanges)
+
+
+func getAvailablePokemon():
+	return pokemonTeam.filter(func(pk:BattlePokemon): return !pk.inBattle and !pk.fainted)
+
+
+func getActivePokemons():
+	var list:Array[BattlePokemon] = []
+	for s:BattleSpot in battleSpots:
+		if s.activePokemon != null:
+			list.push_back(s.activePokemon)
+	#for n in get_children():
+		#if n is BattleSpot and n.visible and n.activePokemon != null:
+			#print(name + ": " +n.name)
+			#list.push_back(n.activePokemon)
+	return list
+	
+func selectNextPokemons():
+	for bs:BattleSpot in battleSpots:
+		await bs.selectNextPokemon()
 
 func clear():
 	if pokemonTeam != null:

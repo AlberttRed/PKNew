@@ -120,7 +120,7 @@ func use():
 	calculateHits() 
 	pp_actual-=1
 	await GUI.battle.msgBox.showMoveMessage(pokemon, self)
-
+	
 	while target.nextTarget():
 		calculateAccuracy()
 		while _checkHit():
@@ -141,7 +141,7 @@ func use():
 			await GUI.battle.showMessage("N.º de golpes: " + str(final_hits) + ".", false, 2.0)
 		
 		if target.actualTarget is BattleSpot:
-			await target.actualTarget.activePokemon.checkFainted()
+			await target.actualTarget.checkFainted()
 		#await actualTarget.activePokemon.updatePokemonState()
 	
 	target.clear()

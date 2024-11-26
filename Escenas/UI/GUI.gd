@@ -11,6 +11,7 @@ signal left
 signal right
 signal up
 signal down
+signal select
 
 signal fadedOut
 signal fadedIn
@@ -18,11 +19,13 @@ signal fadedIn
 var fading:bool = false
 var next = false
 
-@onready var msg = MessageBox.new($MSG)
+#@onready var msg = MessageBox.new($MSG)
+@onready var msg = $MSG
 #onready var options = get_node("OPTIONS")
 @onready var menu = $MAIN_MENU
 @onready var battle:BattleUI = $BATTLE
 @onready var chs = $CHOICES
+@onready var choices:ChoicesContainer = $ChoicesContainer
 @onready var party = $PARTY
 #onready var bag = get_node("BAG")
 @onready var transition = $TRANSITION
@@ -35,15 +38,47 @@ func _ready():
 #	$INTRO.connect("new_game", GAME_DATA, "new_game")
 #	add_user_signal("finished")
 #	add_user_signal("input")
-	menu.pokemon.connect(Callable(self, "show_party"))
+	menu.pokemon.connect(showParty)
+	#if name == "GUI":
+		#showMessageYesNo("Esta es la primera línea
+#Esta es la segunda línea
+#Esta es la tercera línea
+#Esta es la cuarta línea")#, 2.0)
+
 #	menu.connect("save", self, "save")
 #	menu.connect("bag", self, "show_bag")
-	pass
 #	options.connect("text_speed_changed", self, "_on_text_speed_changed")
 	#msg.connect("input", self, "send_input")
 #
 #func _init():
 #	get_node("MSG").Panel = CONST.Window_StyleBoxç
+func setMessageBox(msgBox:MessageBox):
+	if self.msg != null:
+		self.msg.clear()
+	self.msg = msgBox
+
+func showMessageInput(text):
+	msg.waitInput = true
+	await msg.showMessage(text)
+
+func showMessageWait(text, waitTime:float):
+	msg.waitTime = waitTime
+	await msg.showMessage(text)
+
+func showMessageNoClose(text):
+	msg.closeAtEnd = false
+	await msg.showMessage(text)
+
+
+func showMessageYesNo(message:String) -> int:
+	msg.closeAtEnd = false
+	select.connect(Callable(msg, "close"))
+	await msg.showMessage(message)
+	var selectedOption:int = await showChoices(["SI","NO"])
+	select.disconnect(Callable(msg, "close"))
+	
+	return selectedOption
+
 
 func showMsg(text : String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
 	msg.show_msgBattle(text, showIcon, _waitTime, waitInput)
@@ -145,30 +180,29 @@ func isFading():
 	return fading
 
 
-func show_party(mode:CONST.MENU_MODES):
-	print("miau")
+func showParty():
 	await GUI.fadeIn(3)
-	if mode == CONST.MENU_MODES.MENU:
-		menu.close()
-	elif mode == CONST.MENU_MODES.BATTLE:
-		GUI.battle.hide()
-		
-	#if menu.visible:
-		#mode = CONST.PARTY_MODES.MENU
-	party.open(mode)
-	#await GUI.fadeOut(3)
-	#party.set_process(true)
+	menu.close()
+	party.loadParty(GAME_DATA.party)
+	party.open(CONST.PARTY_MODES.MENU)
 	await party.exit
-	
-	#yield(party,"salir")
-	#party.hide_party()
-	#party.set_process(false)
-	if mode == CONST.MENU_MODES.MENU:
-		menu.open()
-	elif mode == CONST.MENU_MODES.BATTLE:
-		GUI.battle.show()
+	menu.open()
 	await GUI.fadeOut(3)
-
+	
+func showChoices(choiceOptions:Array[String]):
+	choices.addChoices(choiceOptions)
+	choices.activeChoices(choiceOptions)
+	var selectedChoice:int = await choices.showContainer()
+	choices.hideContainer()
+	return selectedChoice
+	
+#func showPartyBattle():
+	#await GUI.fadeIn(3)
+	#GUI.battle.hide()
+	#var party.openPokemonSelection()
+	#await party.exit
+	#GUI.battle.show()
+	#await GUI.fadeOut(3)
 	
 func _input(event):
 	#if ($MSG.visible and !chs.visible and msg.text_completed):
@@ -177,7 +211,10 @@ func _input(event):
 			Input.action_release("ui_accept")
 			INPUT.ui_accept.free_state()
 			print("GUI accept")
-			accept.emit()
+			if choices.visible:
+				select.emit()
+			else:
+				accept.emit()
 		if event.is_action_pressed("ui_cancel"):
 			Input.action_release("ui_cancel")
 			INPUT.ui_cancel.free_state()

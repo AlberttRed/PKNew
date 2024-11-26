@@ -1,6 +1,11 @@
 class_name BattleController
+
+signal newTurn
 	
 var rules : BattleRules = null
+var playerParticipant: BattleParticipant:
+	get:
+		return playerSide.participants.filter(func(bp:BattleParticipant): return bp.controllable).front()
 var playerSide: BattleSide:
 	get:
 		return UI.playerField.side
@@ -36,6 +41,8 @@ var field:BattleField:
 var UI : BattleUI:
 	get:
 		return GUI.battle
+		
+var expHandler:BattleExperienceHandler = BattleExperienceHandler.new()
 	
 func _init(_battleRules : BattleRules):
 	rules = _battleRules
@@ -75,6 +82,7 @@ func initBattle():
 	await takeTurn()
 
 func takeTurn():
+	newTurn.emit()
 	print("lalala")
 	await effects.applyBattleEffect("InitBattleTurn")
 	#SignalManager.Battle.Effects.applyAt.emit("InitBattleTurn")
@@ -103,20 +111,19 @@ func takeTurn():
 				print(active_pokemon.Name + " Effects("+ str(active_pokemon.activeAccumulatedEffects.size()) + "): ")
 				for effect in active_pokemon.activeAccumulatedEffects:
 					print(effect.name)
-				#SignalManager.Battle.Effects.applyAt.emit("InitPKMNTurn")
-				#await SignalManager.Battle.Effects.finished
 				await effects.applyBattleEffect("InitPKMNTurn")
 				active_pokemon.doAction()
 				await active_pokemon.actionFinished
-			#Only give exp if pokemon is from player
 
-				await checkDefeatedPokemon()
+				for spot:BattleSpot in activeBattleSpots:
+					spot.checkFainted()
+				
+				#Give exp to all implied pokemon
+				SignalManager.Battle.ExperienceHandler.giveExp.emit()
+				await SignalManager.Battle.ExperienceHandler.finished
+				
 				await effects.applyBattleEffect("EndPKMNTurn")
-				#SignalManager.Battle.Effects.applyAt.emit("EndPKMNTurn")
-				#await SignalManager.Battle.Effects.finished
-			
-	#endTurn()
-	#takeTurn()
+
 	if !battleFinished():
 		stage = CONST.BATTLE_STAGES.SELECT_ACTION
 		await endTurn()
@@ -192,15 +199,6 @@ func updateActivePokemons():
 			#if !p.listPokemonBattledAgainst.has(e):
 				#p.listPokemonBattledAgainst.push_back(e)
 
-func checkDefeatedPokemon():
-	for e in activePokemons:
-		await e.checkFainted()
-		if e.fainted:
-			if e.side.type == CONST.BATTLE_SIDES.ENEMY:
-				await e.giveExpAtDefeat()
-			else:
-				GUI.battle.showConfirmationPanel()
-			e.battleSpot.removeActivePokemon()
 
 func setSides():
 	self.sides = [playerSide, enemySide]
@@ -251,9 +249,8 @@ func startWildBattle():
 	for p:BattleSpot in enemySide.battleSpots:
 		await p.showHPBar()
 	if enemySide.activePokemons.size() == 1:
-		await GUI.battle.showMessage("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!", false, 1.5)
-		#await UI.showMessageInput("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!")
-	
+		await GUI.battle.showMessageNoClose("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!")#, 1.5)
+		await GUI.get_tree().create_timer(1.5).timeout
 	await playerSide.showActivePokemons()
 	
 func startTrainerBattle():
@@ -309,17 +306,71 @@ func battleFinished():
 	
 func endTurn():
 	await effects.applyBattleEffect("EndBattleTurn")
-	#SignalManager.Battle.Effects.applyAt.emit("EndBattleTurn")
-	#await SignalManager.Battle.Effects.finished#battleEffectsController.applyBattleEffectAtEndBattleTurn()
-	for p in activePokemons:
-		p.endTurn()
-	#turnPokemonOrder.clear()
+	# es podria fer una senyal per l endTurn igual que vaig fer una pel newTurn?
+	for bs:BattleSpot in activeBattleSpots:
+		bs.endTurn()
 	
+	await handlePokemonChanges()
+	#for spot:BattleSpot in activeBattleSpots:
+		#if spot.activePokemon == null:
+			#await spot.selectNextPokemon()
+		#else:
+			#spot.endTurn()
+			#
+	#if enemySide.pendingPokemonChange:
+#
+		##await GUI.battle.showNextPokemonMessage(enemySide.getChangedPokemon(), false, 1.5)
+		#if !playerParticipant.pendingPokemonChange and rules.mode == CONST.BATTLE_MODES.SINGLE:
+			#await GUI.battle.showNextPokemonMessage("¿Quieres cambiar de Pokémon?", false, 1.5)
+			#for bs:BattleSpot in playerParticipant.battleSpots:
+				#bs.selectNextPokemon()
+		##enemySide.showPokemon()
+		#
+	#if playerSide.pendingPokemonChange:
+		#await playerSide.showPokemons()
+		#playerSide.showPokemon()
+	#for p in activePokemons:
+		#p.endTurn()
+
+func handlePokemonChanges():
+	for bs:BattleSpot in activeBattleSpots:
+		if bs.activePokemon == null && !bs.controllable:
+				bs.selectNextPokemon()
+		
+	var changePokemon:bool = playerParticipant.pendingPokemonChanges#(enemySide.pendingPokemonChanges && UI.showMessageYesNo("Quieres cambiar?") == MessageBox.YES) || playerParticipant.pendingPokemonChanges
+	
+	if changePokemon:
+		var msgOption:int = await UI.showMessageYesNo("¿Quieres cambiar de Pokémon?")
+		if msgOption == MessageBox.YES:
+			await playerParticipant.selectNextPokemons()
+		else:
+			pass#ESCAPE
+	
+	var showPokemonOrder:Array[BattleSpot] = activeBattleSpots.duplicate()
+	showPokemonOrder.sort_custom(orderByShowPokemonOrder)
+	for bs:BattleSpot in showPokemonOrder:
+		if bs.pendingPokemonChanges:
+			await bs.showNextPokemon()
+
+# En primera posició els spots que controlem, i després els de la IA.
+# Dintre de la IA, primer els enemics, i llavors el company.
+func orderByShowPokemonOrder(a:BattleSpot, b:BattleSpot):
+	if (!a.controllable and b.controllable) || (a.controllable and b.controllable):
+		return true
+	elif a.controllable and !b.controllable:
+		return false
+	elif !a.controllable and !b.controllable:
+		if a.side.type == CONST.BATTLE_SIDES.ENEMY:
+			return false
+		else:
+			return true
+	return true
+
 func endBattle():
 	await GUI.fadeIn(1.3)
 	effects.clear()
 	UI.clear()
-	field.activeBattleEffects.clear()
+	queue_free()
 	await GUI.get_tree().create_timer(1).timeout
 	await GUI.fadeOut(3)
 	
@@ -329,10 +380,11 @@ func queue_free():
 	enemySide = null
 
 	sides.clear()
-		
+	SignalManager.disconnectAll(newTurn)
 	activePokemons.clear()
 	active_pokemon = null
-
+	SignalManager.Battle.ExperienceHandler.free.emit()
+	expHandler = null
 	turnPokemonOrder.clear()
 	field.activeBattleEffects.clear()
 	field = null

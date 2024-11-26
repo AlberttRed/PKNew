@@ -38,6 +38,10 @@ var listAllies  : Array[BattlePokemon]:
 
 var IA: BattleIA
 
+var newInBattle:bool:
+	get:
+		return turnsInBattle == 0
+
 var Name : String:
 	get:
 		return instance.Name
@@ -146,6 +150,7 @@ var usedMove : BattleMove
 
 var canAttack : bool = true
 var canEscape
+var turnsInBattle:int = 0
 
 var activeBattleEffects : Array[BattleEffect]:# = [] #Array[CONST.MOVE_EFFECTS] = []
 	get:
@@ -430,6 +435,21 @@ func exitBattle():
 	selectedBattleChoice=BattleChoice.new(CONST.BATTLE_ACTIONS.HUIR, 6)
 	actionSelected.emit()
 	
+func giveExp(expGained:int):
+	if inBattle:
+		HPbar.updateEXP(totalExp+expGained)
+		await HPbar.updated
+	else:
+		var remainingExp:int = expGained
+		while remainingExp > 0:
+			if totalExp+remainingExp < nextLevelExpBase:
+				totalExp += remainingExp
+				remainingExp = 0
+			else:
+				remainingExp = (totalExp+remainingExp) - nextLevelExpBase
+				totalExp = nextLevelExpBase
+				await levelUP()
+	
 # S'aplica la fórmula de les primeres 4 generacions	
 func getExpGained(opponent : BattlePokemon):
 	var a = 1 # if fainted pokemon is wild or from a trainer
@@ -523,10 +543,7 @@ func print_moves():
 	for m in moves:
 		m.print_move()
 
-func checkFainted():
-	if fainted && inBattle:
-		await setDefeated()
-		
+
 func changeStatus(statusAilment : BattleEffect):
 	if statusAilment != null:
 		print(statusAilment.get_script().get_name())
@@ -568,6 +585,8 @@ func setDefeated():
 	print(Name + " fainted!")
 	await playAnimation("DEFEATED",{'Side':sideType})
 	inBattle = false
+	if !controllable:
+		SignalManager.Battle.ExperienceHandler.addPokemon.emit(self)
 	await GUI.battle.msgBox.showDefeatedPKMNMessage(self)
 	
 func giveExpAtDefeat():
@@ -623,7 +642,8 @@ func hasMoveEffect(moveCode:BattleEffect.Moves) -> bool:
 
 func levelUP():
 	instance.levelUP()
-	HPbar.updateUI()
+	if inBattle:
+		HPbar.updateUI()
 	await GUI.battle.msgBox.showLevelUpMessage(self, level)
 	await GUI.battle.msgBox.showLevelUpStats(self)
 	levelChanged.emit()

@@ -71,7 +71,8 @@ func initUI(_controller):
 	elif controller.rules.mode == CONST.BATTLE_MODES.DOUBLE:
 		initDoubleBattleUI()
 	
-	msgBox = BattleMessageController.new($PanelMessageBox)
+	msgBox = BattleMessageController.new()#$PanelMessageBox)
+	GUI.setMessageBox($PanelMessageBox)
 	#animController = BattleAnimationList.new()
 	
 	$PanelMessageBox.show()
@@ -86,14 +87,13 @@ func initUI(_controller):
 func clear():
 	hide()
 	set_process_input(false)
-	msgBox.clear()
+	#msgBox.clear()
 	playAnimation("RESET")
 	SignalManager.Battle.Animations.playAnimation.disconnect(playAnimation)
 	if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 		clearSingleBattleUI()
 	elif controller.rules.mode == CONST.BATTLE_MODES.DOUBLE:
 		clearDoubleBattleUI()
-	controller.queue_free()
 
 #func initSingleBattleUI():
 	#$playerBase/PokemonPlayerA.visible = false
@@ -197,14 +197,21 @@ func setPanelActionsText(text:String):
 	$PanelActions/Label.text = text
 	$PanelActions/Label/Label2.text = text
 			
-func showMessage(text:String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
+func showMessageWait(text:String, waitTime:float):#, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
 	showPanel($PanelMessageBox)
-	await msgBox.show_msgBattle(text, showIcon, _waitTime, waitInput)
+	await GUI.showMessageWait(text, waitTime)
 
-func showMessageInput(text:String, showIcon : bool = true):
+func showMessageNoClose(text:String):#, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
 	showPanel($PanelMessageBox)
-	await msgBox.show_msgBattle(text, showIcon, 0.0, true)
+	await GUI.showMessageNoClose(text)
 
+func showMessageInput(text:String):
+	showPanel($PanelMessageBox)
+	await GUI.showMessageInput(text)
+
+func showMessageYesNo(text:String):
+	showPanel($PanelMessageBox)
+	return await GUI.showMessageYesNo(text)
 	
 func showActionsPanel():
 	setPanelActionsText("¿Qué debería hacer \n" + controller.active_pokemon.Name + "?")
@@ -218,16 +225,24 @@ func showMovesPanel(rememberFocus = false):
 		latestMovePanel.grab_focus()
 	else:
 		pnlMove1.grab_focus()
-		
-func showConfirmationPanel():
-	var array:Array[String] = ["SI","NO"]
-	$ChoicesContainer.activeChoices(array)
-	$ChoicesContainer.showContainer()
+		#
+#func showConfirmationPanel():
+	#var array:Array[String] = ["SI","NO"]
+	#$ChoicesContainer.activeChoices(array)
+	#$ChoicesContainer.showContainer()
+	#
+#func showParty():
+	#GUI.show_party(CONST.PARTY_MODES.BATTLE)
+	#await GUI.party.exit
+	#cmdPokemon.grab_focus()
 	
-func showParty():
-	GUI.show_party(CONST.MENU_MODES.BATTLE)
+func showParty() -> BattlePokemon: #Modificarem el showParty dle BattleUI, enlloc de ferho en el GUI
+	var selectedPokemon:BattlePokemon
+	await GUI.fadeIn(3)
+	GUI.party.open(CONST.PARTY_MODES.BATTLE)
 	await GUI.party.exit
-	cmdPokemon.grab_focus()
+	await GUI.fadeOut(3)
+	return GUI.party.selectedBattlePokemon
 
 func hideMovesPanel():
 	showPanel($PanelActions)
@@ -391,11 +406,11 @@ func showPanel(_panel : Panel):
 	_panel.show()
 	
 func showHPBarUI(hpBar:HPBar):
-	var side:CONST.BATTLE_SIDES = hpBar.pokemon.battleSpot.side.type
+	var side:CONST.BATTLE_SIDES = hpBar.get_parent().side.type#pokemon.battleSpot.side.type
 	await playAnimation("SHOW_HPBAR",{'Side':side},hpBar)
 
 func hideHPBarUI(hpBar:HPBar):
-	var side:CONST.BATTLE_SIDES = hpBar.pokemon.battleSpot.side.type
+	var side:CONST.BATTLE_SIDES = hpBar.get_parent().side.type#hpBar.pokemon.battleSpot.side.type
 	await playAnimation("HIDE_HPBAR",{'Side':side},hpBar)
 
 func playAnimation(animation, animParams:Dictionary = {}, _root:Node = self):

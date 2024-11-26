@@ -1,6 +1,11 @@
 
 extends Panel
 
+signal exit
+signal swappedOut
+signal swappedIn
+signal pokemonSelected
+
 const msgBox_normalSize = Vector2(398, 66)
 const msgBox_actionsSize = Vector2(370, 66)
 
@@ -37,9 +42,9 @@ enum ACTION_PANEL {NONE, DATOS, CAMBIO, MOVER, OBJETO, SALIR}
 @onready var salir = $Salir
 @onready var actions:ChoicesContainer = $ACTIONS
 @onready var fixedMsg = $FIXED_MSG
-@onready var msgBox:MessageBox = MessageBox.new($MSG)
+@onready var msgBox:MessageBox = $MSG #MessageBox.new($MSG)
 
-var partyMode:CONST.MENU_MODES
+var partyMode:CONST.PARTY_MODES
 
 #var signals = ["pokedex","pokemon","item","player","save","option","exit"]
 var start
@@ -55,11 +60,18 @@ var actions_index:int = ACTION_PANEL.NONE #Index used to move between panel acti
 var summary_index = 0 #Index used to move between summaries pages
 var movingIndex: int = 0 #Index used to move between pokemon summaries
 
+var activePokemon:
+	get:
+		if index == -1:
+			return null
+		if loadedParty[index] is BattlePokemon:
+			return loadedParty[index].instance
+		else:
+			return loadedParty[index]
 
-signal exit
-signal swappedOut
-signal swappedIn
-signal pokemonSelected
+
+var loadedParty:Array
+var selectedBattlePokemon # Pokemon selected to enter battle
 
 func _init():
 	pass
@@ -77,10 +89,14 @@ func _ready():
 	summary[3].get_node("Move4").visible = false
 	#connect("exit", self, "hide")
 
-func open(mode:CONST.MENU_MODES):
+func loadParty(_party:Array):
+	loadedParty = _party
+		
+func open(mode:CONST.PARTY_MODES):
 	index = 0
 	partyMode = mode
 	hide_actions()
+	print("exit connections: " + str(GUI.accept.get_connections().size()))
 	print("open party")
 	GUI.accept.connect(Callable(self, "selectOption"))
 	GUI.cancel.connect(Callable(self, "cancelOption"))
@@ -92,6 +108,14 @@ func open(mode:CONST.MENU_MODES):
 		p.get_node("AnimationPlayer").play("party_animations/RESET")
 	load_pokemon()
 
+	match partyMode:
+		CONST.PARTY_MODES.MENU:
+			setMenuMode()
+		CONST.PARTY_MODES.BATTLE:
+			setBattleMode()
+		CONST.PARTY_MODES.BAG:
+			setBagMode()
+
 	pkmns[index].grab_focus()
 	setFixedMsgText("Elige a un Pokémon.")
 	update_styles()
@@ -100,6 +124,12 @@ func open(mode:CONST.MENU_MODES):
 		await GUI.fadeOut(3)
 		#await GUI.fadedOut
 	load_focus()
+	
+#func openPokemonSelection():
+	#open(CONST.PARTY_MODES.BATTLE)
+	#await pokemonSelected
+	#return index
+	#
 	
 func close():
 	print("close party")
@@ -114,7 +144,7 @@ func close():
 	exit.emit()
 	
 func selectOption():
-	if swapping:
+	if !visible or swapping:
 		return
 	if !msgBox.is_visible():
 		if !actions.visible and !$SUMMARY.visible:
@@ -123,24 +153,27 @@ func selectOption():
 					cancelMovePokemon()
 				close()
 			else:
-				if partyMode == CONST.MENU_MODES.MENU:
+				if partyMode == CONST.PARTY_MODES.MENU:
 					if !movingPokemon:
 						show_PartyActions()
 					else:
 						movePokemonTargetIndex = index
 						await swapPokemon()
-				elif partyMode == CONST.MENU_MODES.BATTLE:
+				elif partyMode == CONST.PARTY_MODES.BATTLE:
 					show_BattleActions()
 					
 		elif actions.visible and !$SUMMARY.visible:
 			if actions.isSelected("DATOS"):
 				show_summaries()
 			elif actions.isSelected("CAMBIO"):
-				if !GAME_DATA.party[index].inBattle:
-					pokemonSelected.emit(index)#GAME_DATA.party[index])
-					close()
+				if activePokemon.inBattle:
+					await showMsg(activePokemon.Name + " ya está en el campo de batalla!")
+				elif activePokemon.fainted:
+					await showMsg(activePokemon.Name + " está fuera de combate!")
 				else:
-					await showMsg(GAME_DATA.party[index].Name + " ya está en el campo de batalla!")
+					selectedBattlePokemon = loadedParty[index]
+					pokemonSelected.emit()#loadedParty[index])#index
+					close()
 			elif actions.isSelected("MOVER"):
 				selectMovePokemon()
 			elif actions.isSelected("OBJETO"):
@@ -346,7 +379,7 @@ func load_pokemon():
 		
 		if GAME_DATA.party[p].fainted:
 			pkmns[p].get_node("Status").visible = true
-			pkmns[p].get_node("Status").region_enabled = false
+			pkmns[p].get_node("Status").region_enabled = true
 			pkmns[p].get_node("Status").region_rect = Rect2(0, 16*(CONST.STATUS.FAINTED-1), 44, 16)
 		else:
 			if GAME_DATA.party[p].status != CONST.STATUS.OK:
@@ -373,7 +406,7 @@ func load_pokemon():
 			
 		
 func showActions():
-	setFixedMsgText("¿Qué hacer con " + GAME_DATA.party[index].Name + "?", msgBox_actionsSize)
+	setFixedMsgText("¿Qué hacer con " + activePokemon.Name + "?", msgBox_actionsSize)
 	pkmns[index].release_focus()
 	update_styles()
 	clear_focus()
@@ -498,125 +531,125 @@ func hide_summaries():
 func load_summary(index:int):
 	$SUMMARY/GENERAL.visible = true
 # ---- GENERAL --------
-	$SUMMARY/GENERAL.get_node("Nombre").text = GAME_DATA.party[index].Name
-	$SUMMARY/GENERAL.get_node("Nombre/Outline").text = GAME_DATA.party[index].Name
+	$SUMMARY/GENERAL.get_node("Nombre").text = activePokemon.Name
+	$SUMMARY/GENERAL.get_node("Nombre/Outline").text = activePokemon.Name
 	
-	if GAME_DATA.party[index].gender == CONST.GENEROS.MACHO:
+	if activePokemon.gender == CONST.GENEROS.MACHO:
 		$SUMMARY/GENERAL.get_node("Genero").texture = load("res://Escenas/UI/Menus/Resources/male_icon.png")
-	elif GAME_DATA.party[index].gender == CONST.GENEROS.HEMBRA:
+	elif activePokemon.gender == CONST.GENEROS.HEMBRA:
 		$SUMMARY/GENERAL.get_node("Genero").texture = load("res://Escenas/UI/Menus/Resources/female_icon.png")
 	else:
 		$SUMMARY/GENERAL.get_node("Genero").texture = null
 
-	if GAME_DATA.party[index].fainted:
+	if activePokemon.fainted:
 		$SUMMARY/GENERAL.get_node("Status").visible = true
 		$SUMMARY/GENERAL.get_node("Status").region_enabled = false
 		$SUMMARY/GENERAL.get_node("Status").region_rect = Rect2(0, 16*(CONST.STATUS.FAINTED-1), 44, 16)
 	else:
-		if GAME_DATA.party[index].status != CONST.STATUS.OK:
+		if activePokemon.status != CONST.STATUS.OK:
 			$SUMMARY/GENERAL.get_node("Status").region_enabled = true
 			$SUMMARY/GENERAL.get_node("Status").visible = true
-			$SUMMARY/GENERAL.get_node("Status").region_rect = Rect2(0, 16*(GAME_DATA.party[index].status-1), 44, 16)
+			$SUMMARY/GENERAL.get_node("Status").region_rect = Rect2(0, 16*(activePokemon.status-1), 44, 16)
 		else:
 			$SUMMARY/GENERAL.get_node("Status").visible = false
 	#--- falta pokeball
 	#--- falta objecte
 	#--- falta barra exp
-	$SUMMARY/GENERAL.get_node("Nivel").text = str(GAME_DATA.party[index].level)
-	$SUMMARY/GENERAL.get_node("Nivel/Outline").text = str(GAME_DATA.party[index].level)
-	$SUMMARY/GENERAL.get_node("Sprite").texture = GAME_DATA.party[index].battle_front_sprite#load("res://Sprites/Batalla/Battlers/" + str(GAME_DATA.party[index].pkm_id).pad_zeros(3) + ".png")
+	$SUMMARY/GENERAL.get_node("Nivel").text = str(activePokemon.level)
+	$SUMMARY/GENERAL.get_node("Nivel/Outline").text = str(activePokemon.level)
+	$SUMMARY/GENERAL.get_node("Sprite").texture = activePokemon.battle_front_sprite#load("res://Sprites/Batalla/Battlers/" + str(activePokemon.pkm_id).pad_zeros(3) + ".png")
 	
 	# ---- SUMMARY 1 --------
 		
-	summary[0].get_node("dNumDex").text = str(GAME_DATA.party[index].pkm_id).pad_zeros(3)
-	summary[0].get_node("dNumDex/Outline").text = str(GAME_DATA.party[index].pkm_id).pad_zeros(3)
+	summary[0].get_node("dNumDex").text = str(activePokemon.pkm_id).pad_zeros(3)
+	summary[0].get_node("dNumDex/Outline").text = str(activePokemon.pkm_id).pad_zeros(3)
 	
-	summary[0].get_node("dEspecie").text = GAME_DATA.party[index].Name
-	summary[0].get_node("dEspecie/Outline").text = GAME_DATA.party[index].Name
+	summary[0].get_node("dEspecie").text = activePokemon.Name
+	summary[0].get_node("dEspecie/Outline").text = activePokemon.Name
 	summary[0].get_node("Tipos/pTipo1/dTipo1").vframes = 1
-	summary[0].get_node("Tipos/pTipo1/dTipo1").texture = GAME_DATA.party[index].type_a.image#frame = GAME_DATA.party[index].type_a
+	summary[0].get_node("Tipos/pTipo1/dTipo1").texture = activePokemon.type_a.image#frame = activePokemon.type_a
 
-	if  GAME_DATA.party[index].type_b != null:
+	if  activePokemon.type_b != null:
 		summary[0].get_node("Tipos/pTipo2").visible = true
 		summary[0].get_node("Tipos/pTipo2/dTipo2").vframes = 1
-		summary[0].get_node("Tipos/pTipo2/dTipo2").texture = GAME_DATA.party[index].type_b.image#.frame = GAME_DATA.party[index].type_b
+		summary[0].get_node("Tipos/pTipo2/dTipo2").texture = activePokemon.type_b.image#.frame = activePokemon.type_b
 	else:
 		summary[0].get_node("Tipos/pTipo2").visible = false
 	
-	summary[0].get_node("dEO").text = GAME_DATA.party[index].original_trainer
-	summary[0].get_node("dEO/Outline").text = GAME_DATA.party[index].original_trainer
+	summary[0].get_node("dEO").text = activePokemon.original_trainer
+	summary[0].get_node("dEO/Outline").text = activePokemon.original_trainer
 	
-	summary[0].get_node("dID").text = str(GAME_DATA.party[index].trainer_id)
-	summary[0].get_node("dID/Outline").text = str(GAME_DATA.party[index].trainer_id)
+	summary[0].get_node("dID").text = str(activePokemon.trainer_id)
+	summary[0].get_node("dID/Outline").text = str(activePokemon.trainer_id)
 	
-	summary[0].get_node("dExperiencia").text = str(GAME_DATA.party[index].totalExp)
-	summary[0].get_node("dExperiencia/Outline").text = str(GAME_DATA.party[index].totalExp)
+	summary[0].get_node("dExperiencia").text = str(activePokemon.totalExp)
+	summary[0].get_node("dExperiencia/Outline").text = str(activePokemon.totalExp)
 	
-	summary[0].get_node("dSigNivel").text = str(GAME_DATA.party[index].nextLevelExpBase - GAME_DATA.party[index].totalExp)
-	summary[0].get_node("dSigNivel/Outline").text = str(GAME_DATA.party[index].nextLevelExpBase - GAME_DATA.party[index].totalExp)
+	summary[0].get_node("dSigNivel").text = str(activePokemon.nextLevelExpBase - activePokemon.totalExp)
+	summary[0].get_node("dSigNivel/Outline").text = str(activePokemon.nextLevelExpBase - activePokemon.totalExp)
 
-	summary[0].get_node("exp_bar").init(GAME_DATA.party[index])
-	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").max_value = GAME_DATA.party[index].nextLevelExpBase
-	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").min_value = GAME_DATA.party[index].actualLevelExpBase
-	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").value = GAME_DATA.party[index].totalExp
+	summary[0].get_node("exp_bar").init(activePokemon)
+	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").max_value = activePokemon.nextLevelExpBase
+	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").min_value = activePokemon.actualLevelExpBase
+	#summary[0].get_node("exp_bar").get_node("TextureProgressBar").value = activePokemon.totalExp
 	#
 	# ---- SUMMARY 2 --------
 
-	summary[1].get_node("Naturaleza").text = CONST.NaturesName[GAME_DATA.party[index].nature_id] + "."
-	summary[1].get_node("Naturaleza/Outline").text = CONST.NaturesName[GAME_DATA.party[index].nature_id] + "."
+	summary[1].get_node("Naturaleza").text = CONST.NaturesName[activePokemon.nature_id] + "."
+	summary[1].get_node("Naturaleza/Outline").text = CONST.NaturesName[activePokemon.nature_id] + "."
 	
-	summary[1].get_node("Labels/FechaCaptura").text = GAME_DATA.party[index].capture_date
-	summary[1].get_node("Labels/FechaCaptura/Outline").text = GAME_DATA.party[index].capture_date
+	summary[1].get_node("Labels/FechaCaptura").text = activePokemon.capture_date
+	summary[1].get_node("Labels/FechaCaptura/Outline").text = activePokemon.capture_date
 	
-	summary[1].get_node("Labels/RutaCaptura").text = GAME_DATA.party[index].capture_route
-	summary[1].get_node("Labels/RutaCaptura/Outline").text = GAME_DATA.party[index].capture_route
+	summary[1].get_node("Labels/RutaCaptura").text = activePokemon.capture_route
+	summary[1].get_node("Labels/RutaCaptura/Outline").text = activePokemon.capture_route
 	
-	summary[1].get_node("Labels/NivelCaptura").text = "Encontrado con Nv. " + str(GAME_DATA.party[index].capture_level) + "."
-	summary[1].get_node("Labels/NivelCaptura/Outline").text = "Encontrado con Nv. " + str(GAME_DATA.party[index].capture_level) + "."
+	summary[1].get_node("Labels/NivelCaptura").text = "Encontrado con Nv. " + str(activePokemon.capture_level) + "."
+	summary[1].get_node("Labels/NivelCaptura/Outline").text = "Encontrado con Nv. " + str(activePokemon.capture_level) + "."
 	
-	summary[1].get_node("DescNaturaleza").text = GAME_DATA.party[index].personality
-	summary[1].get_node("DescNaturaleza/Outline").text = GAME_DATA.party[index].personality
+	summary[1].get_node("DescNaturaleza").text = activePokemon.personality
+	summary[1].get_node("DescNaturaleza/Outline").text = activePokemon.personality
 	
 	# ---- SUMMARY 3 --------
 
-	summary[2].get_node("dPS").text = str(GAME_DATA.party[index].hp_actual) + "/" + str(GAME_DATA.party[index].hp_total)
-	summary[2].get_node("dPS/Outline").text = str(GAME_DATA.party[index].hp_actual) + "/" + str(GAME_DATA.party[index].hp_total)
+	summary[2].get_node("dPS").text = str(activePokemon.hp_actual) + "/" + str(activePokemon.hp_total)
+	summary[2].get_node("dPS/Outline").text = str(activePokemon.hp_actual) + "/" + str(activePokemon.hp_total)
 	
-	summary[2].get_node("health_bar").init(GAME_DATA.party[index])
+	summary[2].get_node("health_bar").init(activePokemon)
 	
-	summary[2].get_node("ValueStats").get_node("dAtaque").text = str(GAME_DATA.party[index].attack) 
-	summary[2].get_node("ValueStats").get_node("dAtaque/Outline").text = str(GAME_DATA.party[index].attack) 
+	summary[2].get_node("ValueStats").get_node("dAtaque").text = str(activePokemon.attack) 
+	summary[2].get_node("ValueStats").get_node("dAtaque/Outline").text = str(activePokemon.attack) 
 	
-	summary[2].get_node("ValueStats").get_node("dDefensa").text = str(GAME_DATA.party[index].defense) 
-	summary[2].get_node("ValueStats").get_node("dDefensa/Outline").text = str(GAME_DATA.party[index].defense) 
+	summary[2].get_node("ValueStats").get_node("dDefensa").text = str(activePokemon.defense) 
+	summary[2].get_node("ValueStats").get_node("dDefensa/Outline").text = str(activePokemon.defense) 
 	
-	summary[2].get_node("ValueStats").get_node("dAtEsp").text = str(GAME_DATA.party[index].special_attack) 
-	summary[2].get_node("ValueStats").get_node("dAtEsp/Outline").text = str(GAME_DATA.party[index].special_attack) 
+	summary[2].get_node("ValueStats").get_node("dAtEsp").text = str(activePokemon.special_attack) 
+	summary[2].get_node("ValueStats").get_node("dAtEsp/Outline").text = str(activePokemon.special_attack) 
 	
-	summary[2].get_node("ValueStats").get_node("dDefEsp").text = str(GAME_DATA.party[index].special_defense)
-	summary[2].get_node("ValueStats").get_node("dDefEsp/Outline").text = str(GAME_DATA.party[index].special_defense) 
+	summary[2].get_node("ValueStats").get_node("dDefEsp").text = str(activePokemon.special_defense)
+	summary[2].get_node("ValueStats").get_node("dDefEsp/Outline").text = str(activePokemon.special_defense) 
 	
-	summary[2].get_node("ValueStats").get_node("dVelocidad").text = str(GAME_DATA.party[index].speed) 
-	summary[2].get_node("ValueStats").get_node("dVelocidad/Outline").text = str(GAME_DATA.party[index].speed) 
+	summary[2].get_node("ValueStats").get_node("dVelocidad").text = str(activePokemon.speed) 
+	summary[2].get_node("ValueStats").get_node("dVelocidad/Outline").text = str(activePokemon.speed) 
 	
-	print(GAME_DATA.party[index].ability_id)
-	summary[2].get_node("dHabilidad").text = CONST.AbilitiesName[GAME_DATA.party[index].ability_id]
-	summary[2].get_node("dHabilidad/Outline").text = CONST.AbilitiesName[GAME_DATA.party[index].ability_id]
+	print(activePokemon.ability_id)
+	summary[2].get_node("dHabilidad").text = CONST.AbilitiesName[activePokemon.ability_id]
+	summary[2].get_node("dHabilidad/Outline").text = CONST.AbilitiesName[activePokemon.ability_id]
 	
-	summary[2].get_node("DescHabilidad").text = CONST.AbilitiesDesc[GAME_DATA.party[index].ability_id]
-	summary[2].get_node("DescHabilidad/Outline").text = CONST.AbilitiesDesc[GAME_DATA.party[index].ability_id]
+	summary[2].get_node("DescHabilidad").text = CONST.AbilitiesDesc[activePokemon.ability_id]
+	summary[2].get_node("DescHabilidad/Outline").text = CONST.AbilitiesDesc[activePokemon.ability_id]
 	
 	clearMoves()
 	# ---- SUMMARY 3 --------
-	print(str(GAME_DATA.party[index].movements.size()))
-	for i in range(GAME_DATA.party[index].movements.size()):
-		print(GAME_DATA.party[index].movements[i].type.Name)
+	print(str(activePokemon.movements.size()))
+	for i in range(activePokemon.movements.size()):
+		print(activePokemon.movements[i].type.Name)
 		summary[3].get_node("Move" + str(i+1)).visible = true
-		summary[3].get_node("Move" + str(i+1) + "/Ataque").text = GAME_DATA.party[index].movements[i].Name
-		summary[3].get_node("Move" + str(i+1) + "/Ataque/Outline").text = GAME_DATA.party[index].movements[i].Name
-		summary[3].get_node("Move" + str(i+1) + "/Tipo").frame = GAME_DATA.party[index].movements[i].type.id
-		summary[3].get_node("Move" + str(i+1) + "/dPP").text = str(GAME_DATA.party[index].movements[i].pp_actual) + "/" + str(GAME_DATA.party[index].movements[i].pp)
-		summary[3].get_node("Move" + str(i+1) + "/dPP/Outline").text = str(GAME_DATA.party[index].movements[i].pp_actual) + "/" + str(GAME_DATA.party[index].movements[i].pp)
+		summary[3].get_node("Move" + str(i+1) + "/Ataque").text = activePokemon.movements[i].Name
+		summary[3].get_node("Move" + str(i+1) + "/Ataque/Outline").text = activePokemon.movements[i].Name
+		summary[3].get_node("Move" + str(i+1) + "/Tipo").frame = activePokemon.movements[i].type.id
+		summary[3].get_node("Move" + str(i+1) + "/dPP").text = str(activePokemon.movements[i].pp_actual) + "/" + str(activePokemon.movements[i].pp)
+		summary[3].get_node("Move" + str(i+1) + "/dPP/Outline").text = str(activePokemon.movements[i].pp_actual) + "/" + str(activePokemon.movements[i].pp)
 
 func get_focus_owner(parent):
 	for c in parent.get_children():
@@ -627,7 +660,18 @@ func get_focus_owner(parent):
 			p = c.get_node("Panel")
 		if p.has_focus():
 			return p
+			
+func setBattleMode():
+	exit.connect(func(): pokemonSelected.emit())
+	print("exit connections: " + str(exit.get_connections().size()))
 
+func setMenuMode():
+	pass
+
+func setBagMode():
+	pass
+	
+	
 func clearMoves():
 	summary[3].get_node("Move1").visible = false
 	summary[3].get_node("Move2").visible = false

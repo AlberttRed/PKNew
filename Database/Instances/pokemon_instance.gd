@@ -271,7 +271,7 @@ func _ready():
 #	set_info()
 #		
 	load_moves()
-	hp_actual = 1
+	hp_actual = 1#hp_total
 	print_pokemon_base()
 #	hp_total = get_total_hp()
 #	hp_actual = int(float(hp_total) / randf_range(1, 6))
@@ -295,7 +295,7 @@ func init_pokemon():
 		push_error("No s'ha seleccionat un genere pel pokémon " + Name)
 		#set_info()
 	load_moves()
-	hp_actual = hp_total
+	hp_actual = 1#hp_total
 	#ability_id = CONST.ABILITIES.INTIMIDATE
 
 #

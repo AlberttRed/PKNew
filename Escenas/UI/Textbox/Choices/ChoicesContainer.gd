@@ -2,7 +2,7 @@ extends PanelContainer
 
 class_name ChoicesContainer
 
-var newChoiceNode = load("res://Escenas/UI/Textbox/Choices/ChoicePanel.tscn")
+var newChoiceNode = preload("res://Escenas/UI/Textbox/Choices/ChoicePanel.tscn")
 
 const CONTAINER_CHOICES_POS: Vector2 = Vector2(368, 351)
 const CONTAINER_CHOICES_EMPTY_SIZE: Vector2 = Vector2(144, 28)
@@ -28,12 +28,16 @@ func initChoices():
 		initChoice(choice)
 
 func addChoice(choiceName:String):
-	var newChoice:ChoicePanel = newChoiceNode.new()
-	newChoice.Name = choiceName
+	var newChoice:ChoicePanel = newChoiceNode.instantiate()
+	newChoice.name = choiceName
 	newChoice.text = choiceName
 	$VBoxContainer.add_child(newChoice)
 	initChoice(newChoice)
 	
+func addChoices(choices:Array[String]):
+	for choice:String in choices:
+		addChoice(choice)
+
 func initChoice(choice:ChoicePanel):
 	choice.index = listChoices.size()
 	if !listChoices.has(choice):
@@ -107,6 +111,8 @@ func showContainer():
 	selectedIndex=0
 	selectChoice(listActiveChoices[selectedIndex].name)
 	show()
+	await GUI.select
+	return selectedIndex
 
 func hideContainer():
 	if GUI.up.is_connected(Callable(self, "movePrevious")):

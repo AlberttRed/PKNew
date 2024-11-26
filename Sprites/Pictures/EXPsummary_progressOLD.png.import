@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcp5o8xtx3plb"
-path="res://.godot/imported/EXPsummary_overlay.png-1dd5ba3d0798176512ba41b24f2d2357.ctex"
+uid="uid://dyssdsut0bkqw"
+path="res://.godot/imported/EXPsummary_progressOLD.png-1b9e35777146e7df7d09a56edb4692a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Pictures/EXPsummary_overlay.png"
-dest_files=["res://.godot/imported/EXPsummary_overlay.png-1dd5ba3d0798176512ba41b24f2d2357.ctex"]
+source_file="res://Sprites/Pictures/EXPsummary_progressOLD.png"
+dest_files=["res://.godot/imported/EXPsummary_progressOLD.png-1b9e35777146e7df7d09a56edb4692a6.ctex"]
 
 [params]
 

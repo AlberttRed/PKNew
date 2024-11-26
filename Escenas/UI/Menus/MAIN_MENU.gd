@@ -11,7 +11,7 @@ var start
 var menu_mode
 
 signal pokedex
-signal pokemon(mode:CONST.MENU_MODES)
+signal pokemon(mode:CONST.PARTY_MODES)
 signal bag
 signal player
 signal save
@@ -33,7 +33,7 @@ func _ready():
 	hide()
 
 func selectOption():
-	emit_signal(signals[index], CONST.MENU_MODES.MENU)
+	emit_signal(signals[index])#, CONST.PARTY_MODES.MENU)
 
 func open():
 	print("open start menu")
