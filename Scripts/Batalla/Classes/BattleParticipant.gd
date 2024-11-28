@@ -1,6 +1,8 @@
 extends Node2D
 class_name BattleParticipant
 
+signal nextPokemonSelected
+
 var pokemonTeam : Array[BattlePokemon] # El número de pokémons que tindrà el battler, i que per tant controlarà
 var controllable : bool # Indica si el participant el controlarà el Jugador o la IA
 var battleSpots : Array[BattleSpot] # Indica quins "spots" controla el participant (PokemonA/pokemonB)
@@ -108,6 +110,14 @@ func getActivePokemons():
 func selectNextPokemons():
 	for bs:BattleSpot in battleSpots:
 		await bs.selectNextPokemon()
+	nextPokemonSelected.emit()
+	
+func tryEscapeFromBattle() -> bool:
+	if battleSpots[0].activePokemon != null:
+		return await battleSpots[0].activePokemon.tryEscapeFromBattle()
+	else:
+		return await battleSpots[0].previousPokemon.tryEscapeFromBattle()
+	
 
 func clear():
 	if pokemonTeam != null:

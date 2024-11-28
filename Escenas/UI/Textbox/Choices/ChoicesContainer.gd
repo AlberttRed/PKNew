@@ -4,8 +4,8 @@ class_name ChoicesContainer
 
 var newChoiceNode = preload("res://Escenas/UI/Textbox/Choices/ChoicePanel.tscn")
 
-const CONTAINER_CHOICES_POS: Vector2 = Vector2(368, 351)
-const CONTAINER_CHOICES_EMPTY_SIZE: Vector2 = Vector2(144, 28)
+var CONTAINER_CHOICES_POS: Vector2 #= Vector2(368, 351)
+var CONTAINER_CHOICES_EMPTY_SIZE: Vector2 #= Vector2(144, 28)
 
 var selectedIndex:int = 0
 var selectedChoice:ChoicePanel
@@ -19,6 +19,8 @@ var selectedChoice:ChoicePanel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	CONTAINER_CHOICES_POS = position
+	CONTAINER_CHOICES_EMPTY_SIZE = size
 	if stylePanel != null:
 		add_theme_stylebox_override("panel", stylePanel)
 	initChoices()
@@ -32,11 +34,29 @@ func addChoice(choiceName:String):
 	newChoice.name = choiceName
 	newChoice.text = choiceName
 	$VBoxContainer.add_child(newChoice)
+	newChoice.added = true
 	initChoice(newChoice)
 	
 func addChoices(choices:Array[String]):
 	for choice:String in choices:
 		addChoice(choice)
+
+func removeChoice(choice:ChoicePanel):
+	if choice!=null and listChoices.has(choice) and choice.added:
+		$VBoxContainer.remove_child(choice)
+
+func removeChoices(choices:Array[ChoicePanel]):
+	for choice:ChoicePanel in choices:
+		removeChoice(choice)
+
+
+func removeChoiceByName(choiceName:String):
+	var choice:ChoicePanel = getChoice(choiceName)
+	removeChoice(choice)
+		
+func removeeAllChoices():
+	for c in listChoices:
+		removeChoice(c)
 
 func initChoice(choice:ChoicePanel):
 	choice.index = listChoices.size()
@@ -62,17 +82,18 @@ func getChoice(choiceName:String) -> ChoicePanel:
 
 func activeChoice(choiceName:String):
 	var choice:ChoicePanel = getChoice(choiceName)
-	if !listActiveChoices.has(choice):
+	if choice != null and !listActiveChoices.has(choice):
 		listActiveChoices.push_back(choice)
 		$VBoxContainer.move_child(choice, listActiveChoices.size()-1)
-		position = position - Vector2(0, choice.size.y)
+		print(choice.size.y)
+		position -= Vector2(0, choice.size.y+2)
 	choice.show()
 	
 func disableChoice(choiceName:String):
 	var choice:ChoicePanel = getChoice(choiceName)
 	if listActiveChoices.has(choice):
 		listActiveChoices.erase(choice)
-		position = position + Vector2(0, 36)
+		position += Vector2(0, 36)
 	choice.hide()
 
 func activeChoices(choiceNames:Array[String]):
@@ -84,7 +105,6 @@ func disableChoices(choiceNames:Array[String]):
 		disableChoice(cName)
 
 func disableAllChoices():
-	print("disable list. " + str(listActiveChoices))
 	for c in listChoices:
 		print("disable " + c.name)
 		disableChoice(c.name)
@@ -120,6 +140,7 @@ func hideContainer():
 	if GUI.down.is_connected(Callable(self, "moveNext")):
 		GUI.down.disconnect(Callable(self, "moveNext"))
 	disableAllChoices()
+	removeeAllChoices()
 	size = CONTAINER_CHOICES_EMPTY_SIZE
 	hide()
 

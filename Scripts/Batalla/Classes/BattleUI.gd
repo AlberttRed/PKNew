@@ -89,6 +89,7 @@ func clear():
 	set_process_input(false)
 	#msgBox.clear()
 	playAnimation("RESET")
+	GUI.resetMessageBox()
 	SignalManager.Battle.Animations.playAnimation.disconnect(playAnimation)
 	if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
 		clearSingleBattleUI()
@@ -199,6 +200,7 @@ func setPanelActionsText(text:String):
 			
 func showMessageWait(text:String, waitTime:float):#, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
 	showPanel($PanelMessageBox)
+	GUI.msg.closeAtEnd = false
 	await GUI.showMessageWait(text, waitTime)
 
 func showMessageNoClose(text:String):#, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
@@ -207,11 +209,12 @@ func showMessageNoClose(text:String):#, showIcon : bool = true, _waitTime : floa
 
 func showMessageInput(text:String):
 	showPanel($PanelMessageBox)
+	GUI.msg.closeAtEnd = false
 	await GUI.showMessageInput(text)
 
 func showMessageYesNo(text:String):
 	showPanel($PanelMessageBox)
-	return await GUI.showMessageYesNo(text)
+	return await GUI.showMessageYesNo(text, false)
 	
 func showActionsPanel():
 	setPanelActionsText("¿Qué debería hacer \n" + controller.active_pokemon.Name + "?")
@@ -236,9 +239,10 @@ func showMovesPanel(rememberFocus = false):
 	#await GUI.party.exit
 	#cmdPokemon.grab_focus()
 	
-func showParty() -> BattlePokemon: #Modificarem el showParty dle BattleUI, enlloc de ferho en el GUI
+func showParty(canQuit:bool=true) -> BattlePokemon: #Modificarem el showParty dle BattleUI, enlloc de ferho en el GUI
 	var selectedPokemon:BattlePokemon
 	await GUI.fadeIn(3)
+	GUI.party.canQuit = canQuit
 	GUI.party.open(CONST.PARTY_MODES.BATTLE)
 	await GUI.party.exit
 	await GUI.fadeOut(3)

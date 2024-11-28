@@ -527,7 +527,6 @@ visible_characters_behavior = 1
 metadata/_edit_lock_ = true
 
 [node name="next" type="Sprite2D" parent="PanelMessageBox"]
-visible = false
 position = Vector2(491, 69)
 texture = ExtResource("13_ejjn3")
 hframes = 4
@@ -685,13 +684,11 @@ styleEmpty = SubResource("StyleBoxEmpty_d82kq")
 
 [node name="SI" parent="ChoicesContainer/VBoxContainer" index="0" instance=ExtResource("14_b2hym")]
 visible = false
-custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "SÍ"
 
 [node name="NO" parent="ChoicesContainer/VBoxContainer" index="1" instance=ExtResource("14_b2hym")]
 visible = false
-custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "NO"
 

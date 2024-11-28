@@ -33,6 +33,10 @@ var activePokemons : Array[BattlePokemon]: # Indica els pokemons que estan actiu
 		return getActivePokemons()
 var defeated : bool = false # Indica si tots els pokemons del Side han estat derrotats, per tant el Side ha perdut
 var escapeAttempts:int #Player attemps to exit the battle. If a Move is selected, the attemps counter will restart
+var escapedBattle:bool
+	#get:
+		#return !activePokemons.filter(func(pk:BattlePokemon): return pk.canEscape).is_empty()
+
 var field : BattleField
 var controllable:
 	get:
@@ -125,13 +129,18 @@ func loadParty():
 	
 	for part:BattleParticipant in participants:
 		for pk:BattlePokemon in part.pokemonTeam:
-			if i != num_pk && !pk.fainted:
+			if i != num_pk:# && !pk.fainted:
 				pk.inBattleParty = true
 				#$Party.add_child(pk)
 				pokemonParty.push_back(pk)
 				i += 1
 		i = 0
 	if controllable:
+		if pokemonParty[0].fainted:
+			var pk:BattlePokemon = pokemonParty[0]
+			pokemonParty[0] = pokemonParty[1]
+			pokemonParty[1] = pk
+		
 		GUI.party.loadParty(pokemonParty)
 
 func getNextPartyPokemon():

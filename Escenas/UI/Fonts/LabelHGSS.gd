@@ -46,8 +46,8 @@ func _ready():
 		$Outline2.size = size
 		
 func setText(_text):
-	text = _text
-
+	self.text = _text
+			
 func updateNextLine():
 	nextLineStop += 1
 	

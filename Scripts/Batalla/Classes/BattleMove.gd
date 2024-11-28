@@ -132,13 +132,13 @@ func use():
 				await effect.doEffect()
 			await moveCategoryeffect.doEffect()
 			if critical:
-				await GUI.battle.showMessage("¡Un golpe crítico!", false, 2.0)
+				await GUI.battle.showMessageWait("¡Un golpe crítico!", 2.0)
 				critical = false
 		
 		if !moveHits:
-			await GUI.battle.showMessage("¡El ataque " + pokemon.battleMessageMiddleDelName + " falló!", false, 2.0)
+			await GUI.battle.showMessageWait("¡El ataque " + pokemon.battleMessageMiddleDelName + " falló!", 2.0)
 		elif isMultiHit():
-			await GUI.battle.showMessage("N.º de golpes: " + str(final_hits) + ".", false, 2.0)
+			await GUI.battle.showMessageWait("N.º de golpes: " + str(final_hits) + ".", 2.0)
 		
 		if target.actualTarget is BattleSpot:
 			await target.actualTarget.checkFainted()

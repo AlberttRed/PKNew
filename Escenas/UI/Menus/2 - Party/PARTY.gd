@@ -43,6 +43,7 @@ enum ACTION_PANEL {NONE, DATOS, CAMBIO, MOVER, OBJETO, SALIR}
 @onready var actions:ChoicesContainer = $ACTIONS
 @onready var fixedMsg = $FIXED_MSG
 @onready var msgBox:MessageBox = $MSG #MessageBox.new($MSG)
+var canQuit: bool = true
 
 var partyMode:CONST.PARTY_MODES
 
@@ -64,13 +65,13 @@ var activePokemon:
 	get:
 		if index == -1:
 			return null
-		if loadedParty[index] is BattlePokemon:
-			return loadedParty[index].instance
-		else:
-			return loadedParty[index]
+		#if loadedParty[index] is BattlePokemon:
+			#return loadedParty[index].instance
+		#else:
+		return loadedParty[index]
 
 
-var loadedParty:Array
+var loadedParty:Array[PokemonInstance]
 var selectedBattlePokemon # Pokemon selected to enter battle
 
 func _init():
@@ -90,10 +91,15 @@ func _ready():
 	#connect("exit", self, "hide")
 
 func loadParty(_party:Array):
-	loadedParty = _party
+	if !_party.is_same_typed(loadedParty):
+		loadedParty.assign(_party.map(func(bp:BattlePokemon): return bp.instance))
+	else:
+		loadedParty = _party
 		
+	
 func open(mode:CONST.PARTY_MODES):
 	index = 0
+	selectedBattlePokemon = null
 	partyMode = mode
 	hide_actions()
 	print("exit connections: " + str(GUI.accept.get_connections().size()))
@@ -119,6 +125,7 @@ func open(mode:CONST.PARTY_MODES):
 	pkmns[index].grab_focus()
 	setFixedMsgText("Elige a un Pokémon.")
 	update_styles()
+	GUI.setMessageBox(msgBox)
 	show()
 	if GUI.isFading():
 		await GUI.fadeOut(3)
@@ -139,6 +146,7 @@ func close():
 	GUI.right.disconnect(Callable(self, "moveRight"))
 	GUI.up.disconnect(Callable(self, "moveUp"))
 	GUI.down.disconnect(Callable(self, "moveDown"))
+	GUI.resetMessageBox()
 	await GUI.fadeIn(3)
 	hide()
 	exit.emit()
@@ -151,7 +159,8 @@ func selectOption():
 			if get_focus_owner(self).get_name() == "Salir":
 				if movingPokemon:
 					cancelMovePokemon()
-				close()
+				if canQuit:
+					close()
 			else:
 				if partyMode == CONST.PARTY_MODES.MENU:
 					if !movingPokemon:
@@ -169,7 +178,7 @@ func selectOption():
 				if activePokemon.inBattle:
 					await showMsg(activePokemon.Name + " ya está en el campo de batalla!")
 				elif activePokemon.fainted:
-					await showMsg(activePokemon.Name + " está fuera de combate!")
+					await showMsg("¡A " + activePokemon.Name + " no le quedan fuerzas para luchar!")
 				else:
 					selectedBattlePokemon = loadedParty[index]
 					pokemonSelected.emit()#loadedParty[index])#index
@@ -187,9 +196,8 @@ func showMsg(text:String):
 	if actions.visible:
 		actions.hide()
 	msgBox.position = Vector2(0, 288)
-	msgBox.show_msgBattle(text, false, 0.0, true)
-	await msgBox.finished
-	msgBox.clear_msg()
+	await GUI.showMessageInput(text)
+	msgBox.position = Vector2(0, 0)
 	actions.show()
 	
 func cancelOption():
@@ -200,10 +208,12 @@ func cancelOption():
 			if movingPokemon:
 				cancelMovePokemon()
 				if get_focus_owner(self).get_name() == "Salir":
-					close()
+					if canQuit:
+						close()
 			else:
 				if get_focus_owner(self).get_name() == "Salir":
-					close()
+					if canQuit:
+						close()
 				index = -1
 				salir.grab_focus()
 				update_styles()
@@ -262,11 +272,11 @@ func swapPokemon():
 		
 	await swappedOut
 	
-	var pOrigin = GAME_DATA.party[movePokemonOriginIndex]
-	var pTarget = GAME_DATA.party[movePokemonTargetIndex]
+	var pOrigin = loadedParty[movePokemonOriginIndex]
+	var pTarget = loadedParty[movePokemonTargetIndex]
 	
-	GAME_DATA.party[movePokemonOriginIndex] = pTarget
-	GAME_DATA.party[movePokemonTargetIndex] = pOrigin
+	loadedParty[movePokemonOriginIndex] = pTarget
+	loadedParty[movePokemonTargetIndex] = pOrigin
 	
 	load_pokemon()
 
@@ -304,7 +314,7 @@ func show_party():
 	
 	
 func hide_party():
-	for p in range(GAME_DATA.party.size()):
+	for p in range(loadedParty.size()):
 		pkmns[p].visible = false
 	opened = false
 	hide()
@@ -328,13 +338,14 @@ func update_styles():
 	salir.add_theme_stylebox_override("panel", style_salir)
 
 	for p in range(pkmns.size()):
+		
 		if p == 0:
 			form = "rounded"
 		else:
 			form = "square"
 
 		if p==index:
-			if GAME_DATA.party[p].fainted:
+			if loadedParty[p].fainted:
 				type = "fainted_sel"
 			elif !movingPokemon:
 				type = "normal_sel"
@@ -348,7 +359,7 @@ func update_styles():
 			pkmns[p].get_node("ball").texture = load("res://Escenas/UI/Menus/Resources/partyBallSel.PNG")
 			pkmns[p].get_node("AnimationPlayer").play("party_animations/PARTY_pkmn_icon_updown")
 		else:
-			if GAME_DATA.party[p].fainted:
+			if loadedParty[p].fainted:
 				type = "fainted"
 			elif !movingPokemon or (movingPokemon && movePokemonOriginIndex != p):
 				type = "normal"
@@ -368,38 +379,38 @@ func setFixedMsgText(text:String, boxSize:Vector2 = msgBox_normalSize):
 	fixedMsg.size = boxSize
 
 func load_pokemon():
-	for p in range(GAME_DATA.party.size()):
+	for p in range(loadedParty.size()):
 		pkmns[p].visible = true
-		pkmns[p].get_node("Nombre").text = GAME_DATA.party[p].Name
-		pkmns[p].get_node("Nombre/Outline").text = GAME_DATA.party[p].Name
+		pkmns[p].get_node("Nombre").text = loadedParty[p].Name
+		pkmns[p].get_node("Nombre/Outline").text = loadedParty[p].Name
 		
-		pkmns[p].get_node("Nivel").text = "Nv." + str(GAME_DATA.party[p].level)
-		pkmns[p].get_node("Nivel/Outline").text = "Nv." + str(GAME_DATA.party[p].level)
+		pkmns[p].get_node("Nivel").text = "Nv." + str(loadedParty[p].level)
+		pkmns[p].get_node("Nivel/Outline").text = "Nv." + str(loadedParty[p].level)
 		
 		
-		if GAME_DATA.party[p].fainted:
+		if loadedParty[p].fainted:
 			pkmns[p].get_node("Status").visible = true
 			pkmns[p].get_node("Status").region_enabled = true
 			pkmns[p].get_node("Status").region_rect = Rect2(0, 16*(CONST.STATUS.FAINTED-1), 44, 16)
 		else:
-			if GAME_DATA.party[p].status != CONST.STATUS.OK:
+			if loadedParty[p].status != CONST.STATUS.OK:
 				pkmns[p].get_node("Status").region_enabled = true
 				pkmns[p].get_node("Status").visible = true
-				pkmns[p].get_node("Status").region_rect = Rect2(0, 16*(GAME_DATA.party[p].status-1), 44, 16)
+				pkmns[p].get_node("Status").region_rect = Rect2(0, 16*(loadedParty[p].status-1), 44, 16)
 			else:
 				pkmns[p].get_node("Status").visible = false
 
-		pkmns[p].get_node("health_bar").init(GAME_DATA.party[p])
+		pkmns[p].get_node("health_bar").init(loadedParty[p])
 		
-		pkmns[p].get_node("pkmn").texture = load("res://Resources/Pokemon/" + str(GAME_DATA.party[p].pkm_id).pad_zeros(3) + ".tres").icon_sprite
+		pkmns[p].get_node("pkmn").texture = load("res://Resources/Pokemon/" + str(loadedParty[p].pkm_id).pad_zeros(3) + ".tres").icon_sprite
 		
-		var percentage:float = float(GAME_DATA.party[p].hp_actual) / float(GAME_DATA.party[p].hp_total)
+		var percentage:float = float(loadedParty[p].hp_actual) / float(loadedParty[p].hp_total)
 		print(percentage)
 		#pkmns[p].get_node("health_bar/health").scale = Vector2(percentage, 1)
 		
-		if GAME_DATA.party[p].gender == CONST.GENEROS.MACHO:
+		if loadedParty[p].gender == CONST.GENEROS.MACHO:
 			pkmns[p].get_node("gender").texture = load("res://Escenas/UI/Menus/Resources/male_icon.png")
-		elif GAME_DATA.party[p].gender == CONST.GENEROS.HEMBRA:
+		elif loadedParty[p].gender == CONST.GENEROS.HEMBRA:
 			pkmns[p].get_node("gender").texture = load("res://Escenas/UI/Menus/Resources/female_icon.png")
 		else:
 			pkmns[p].get_node("gender").texture = null
@@ -462,25 +473,25 @@ func _on_Salir_focus_entered():
 func load_focus():
 	for p in pkmns:
 		p.set_focus_mode(Control.FOCUS_ALL)
-	if GAME_DATA.party.size() == 1:
+	if loadedParty.size() == 1:
 		print("LOL")
 		pkmns[0].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[0].set_focus_neighbor(SIDE_RIGHT, "../../PKMN_0/Panel")
-	if GAME_DATA.party.size() == 2:
+	if loadedParty.size() == 2:
 		pkmns[0].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[1].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
-	if GAME_DATA.party.size() == 3:
+	if loadedParty.size() == 3:
 		pkmns[1].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[2].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[2].set_focus_neighbor(SIDE_RIGHT, "../../PKMN_2/Panel")
-	if GAME_DATA.party.size() == 4:
+	if loadedParty.size() == 4:
 		pkmns[2].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[3].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
-	if GAME_DATA.party.size() == 5:
+	if loadedParty.size() == 5:
 		pkmns[3].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[4].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[4].set_focus_neighbor(SIDE_RIGHT, "../../PKMN_4/Panel")
-	if GAME_DATA.party.size() == 6:
+	if loadedParty.size() == 6:
 		pkmns[4].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 		pkmns[5].set_focus_neighbor(SIDE_BOTTOM, "../../Salir")
 	pkmns[index].grab_focus()

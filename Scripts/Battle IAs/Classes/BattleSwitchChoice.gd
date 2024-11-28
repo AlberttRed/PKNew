@@ -22,8 +22,10 @@ func showParty():
 	GUI.battle.cmdPokemon.grab_focus()
 	
 func switchPokemon():
-	await battleSpot.swapPokemon(switchInPokemon)
-	await GUI.get_tree().create_timer(1).timeout
+	if switchInPokemon != null:
+		await battleSpot.swapPokemon(switchInPokemon)
+		await GUI.get_tree().create_timer(1).timeout
+		switchInPokemon = null
 	
 #func setSwitchInPokemon(pokemonPartyIndex:int):#pokemon:BattlePokemon):
 	#switchInPokemon = switchOutPokemon.participant.pokemonTeam[pokemonPartyIndex] #pokemon

@@ -34,19 +34,19 @@ func applyBattleEffectAtBeforeMove():
 		targetPokemon.removeBattleEffect(self)
 		
 func showEffectSuceededMessage():
-	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " se ecuentra confuso!", false, 2.0)
+	await GUI.battle.showMessageWait("¡" + targetPokemon.battleMessageInitialName + " se ecuentra confuso!", 2.0)
 
 func showEffectRepeatedMessage():
-	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya está confuso!", false, 2.0)
+	await GUI.battle.showMessageWait("¡" + targetPokemon.battleMessageInitialName + " ya está confuso!", 2.0)
 
 func showPreviousEffectMessage():
-	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " está confuso!", false, 1.5)
+	await GUI.battle.showMessageWait("¡" + targetPokemon.battleMessageInitialName + " está confuso!", 1.5)
 
 func showEffectMessage():
-	await GUI.battle.showMessage("¡Está tan confuso que se hirió a si mismo!", false, 0.5)
+	await GUI.battle.showMessageWait("¡Está tan confuso que se hirió a si mismo!", 0.5)
 
 func showEffectEndMessage():
-	await GUI.battle.showMessage("¡" + targetPokemon.battleMessageInitialName + " ya no está confuso!", false, 2.0)
+	await GUI.battle.showMessageWait("¡" + targetPokemon.battleMessageInitialName + " ya no está confuso!", 2.0)
 
 func clear():
 	pass

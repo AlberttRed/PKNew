@@ -26,14 +26,14 @@ var msg:
 #Missatge que es mostra quan un atac es efectiu, ho es poc, o no afecta
 func showEffectivnessMessage(_target : BattlePokemon, _STAB : int):
 	if _STAB >= 2:
-		GUI.battle.showMessageWait("¡Es muy efectivo!", 2.0)
-		await GUI.battle.msgBox.finished
+		await GUI.battle.showMessageWait("¡Es muy efectivo!", 2.0)
+		#await GUI.battle.msgBox.finished
 	elif _STAB < 1:
-		GUI.battle.showMessageWait("No parece muy efectivo...", 2.0)
-		await GUI.battle.msgBox.finished
+		await GUI.battle.showMessageWait("No parece muy efectivo...", 2.0)
+		#await GUI.battle.msgBox.finished
 	elif _STAB == 0:
-		GUI.battle.showMessageWait("No afecta " + _target.battleMessageMiddleAlName + ".", 2.0)
-		await GUI.battle.msgBox.finished
+		await GUI.battle.showMessageWait("No afecta " + _target.battleMessageMiddleAlName + ".", 2.0)
+		#await GUI.battle.msgBox.finished
 
 
 #Missatge que es mostra quan es realitza un atac
@@ -46,8 +46,8 @@ func showMoveMessage(_user : BattlePokemon, _move : BattleMove):
 			#type = " enemigo"
 		#else:
 			#type = " salvaje"
-	await GUI.battle.showMessageNoClose("¡" + _user.battleMessageInitialName + " ha usado " + _move.Name + "!")
-	await GUI.get_tree().create_timer(0.5).timeout
+	await GUI.battle.showMessageWait("¡" + _user.battleMessageInitialName + " ha usado " + _move.Name + "!", 0.5)
+	#await GUI.get_tree().create_timer(0.5).timeout
 #Missatge que es mostra quan es modifiquen stats
 func showStatsMessage(_target : BattlePokemon, _stat : CONST.STATS, _value : int):
 	var text = ""
@@ -251,7 +251,7 @@ func showExitMessage(success:bool):
 	else:
 		msg = "¡No puedes huir!"
 	print(msg)
-	await GUI.battle.showMessage(msg, false, 1.5)
+	await GUI.battle.showMessageWait(msg,  1.5)
 	#await GUI.battle.showMessageInput(msg, false)
 	#
 #func accept_msg():

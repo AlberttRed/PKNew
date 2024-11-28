@@ -283,6 +283,7 @@ style_actions_selected = SubResource("StyleBoxTexture_0gflp")
 metadata/_edit_lock_ = true
 
 [node name="PKMN_0" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -3083,7 +3084,6 @@ libraries = {
 "": SubResource("AnimationLibrary_5i0nh")
 }
 
-[connection signal="focus_entered" from="PKMN_0/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_1/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_2/Panel" to="." method="_on_PKMN_focus_entered"]
 [connection signal="focus_entered" from="PKMN_3/Panel" to="." method="_on_PKMN_focus_entered"]

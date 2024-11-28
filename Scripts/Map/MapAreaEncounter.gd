@@ -50,14 +50,14 @@ func getPokemonEncounter():
 	var bc : BattleController = BattleController.new(br)
 	#var bs_player : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.PLAYER)
 	#var bs_enemy : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.ENEMY)
-	
+	GLOBAL.PLAYER.trainer.party[0].hp_actual = 0
+	GLOBAL.PLAYER.trainer.party[1].hp_actual = GLOBAL.PLAYER.trainer.party[1].hp_total
 	bc.playerSide.addParticipant(GLOBAL.PLAYER.trainer, true)
 	bc.enemySide.addParticipant(enemyBattler, false)
 	bc.enemySide.isWild = true
 	
 	bc.playerSide.initSide(br)
 	bc.enemySide.initSide(br)
-	
 	await bc.initBattle()
 	
 

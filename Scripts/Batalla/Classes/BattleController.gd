@@ -116,7 +116,7 @@ func takeTurn():
 				await active_pokemon.actionFinished
 
 				for spot:BattleSpot in activeBattleSpots:
-					spot.checkFainted()
+					await spot.checkFainted()
 				
 				#Give exp to all implied pokemon
 				SignalManager.Battle.ExperienceHandler.giveExp.emit()
@@ -124,12 +124,10 @@ func takeTurn():
 				
 				await effects.applyBattleEffect("EndPKMNTurn")
 
+	await endTurn()
 	if !battleFinished():
-		stage = CONST.BATTLE_STAGES.SELECT_ACTION
-		await endTurn()
 		takeTurn()
 	else:
-		print("c'est fini")
 		await endBattle()
 	
 func initActivePokemons():
@@ -249,8 +247,8 @@ func startWildBattle():
 	for p:BattleSpot in enemySide.battleSpots:
 		await p.showHPBar()
 	if enemySide.activePokemons.size() == 1:
-		await GUI.battle.showMessageNoClose("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!")#, 1.5)
-		await GUI.get_tree().create_timer(1.5).timeout
+		await GUI.battle.showMessageWait("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!", 1.5)
+		#await GUI.get_tree().create_timer(1.5).timeout
 	await playerSide.showActivePokemons()
 	
 func startTrainerBattle():
@@ -298,6 +296,8 @@ func sortChoices(a : BattleSpot, b : BattleSpot):
 				return false
 			
 func battleFinished():
+	if playerSide.escapedBattle or enemySide.escapedBattle:
+		return true
 	print("sides size " + str(sides.size()))
 	for s in sides:
 		if s.isDefeated():
@@ -305,6 +305,7 @@ func battleFinished():
 	return false
 	
 func endTurn():
+	stage = CONST.BATTLE_STAGES.SELECT_ACTION
 	await effects.applyBattleEffect("EndBattleTurn")
 	# es podria fer una senyal per l endTurn igual que vaig fer una pel newTurn?
 	for bs:BattleSpot in activeBattleSpots:
@@ -340,18 +341,21 @@ func handlePokemonChanges():
 	var changePokemon:bool = playerParticipant.pendingPokemonChanges#(enemySide.pendingPokemonChanges && UI.showMessageYesNo("Quieres cambiar?") == MessageBox.YES) || playerParticipant.pendingPokemonChanges
 	
 	if changePokemon:
-		var msgOption:int = await UI.showMessageYesNo("¿Quieres cambiar de Pokémon?")
+		var msgOption:int = await UI.showMessageYesNo("¿Usas el siguiente Pokémon?")
 		if msgOption == MessageBox.YES:
 			await playerParticipant.selectNextPokemons()
 		else:
-			pass#ESCAPE
-	
+			if await playerParticipant.tryEscapeFromBattle():
+				return
+			else:
+				await playerParticipant.selectNextPokemons()
+				
 	var showPokemonOrder:Array[BattleSpot] = activeBattleSpots.duplicate()
 	showPokemonOrder.sort_custom(orderByShowPokemonOrder)
 	for bs:BattleSpot in showPokemonOrder:
 		if bs.pendingPokemonChanges:
 			await bs.showNextPokemon()
-
+			
 # En primera posició els spots que controlem, i després els de la IA.
 # Dintre de la IA, primer els enemics, i llavors el company.
 func orderByShowPokemonOrder(a:BattleSpot, b:BattleSpot):

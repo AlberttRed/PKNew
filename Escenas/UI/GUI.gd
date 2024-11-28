@@ -20,7 +20,7 @@ var fading:bool = false
 var next = false
 
 #@onready var msg = MessageBox.new($MSG)
-@onready var msg = $MSG
+@onready var msg:MessageBox = $MSG
 #onready var options = get_node("OPTIONS")
 @onready var menu = $MAIN_MENU
 @onready var battle:BattleUI = $BATTLE
@@ -55,11 +55,17 @@ func _ready():
 func setMessageBox(msgBox:MessageBox):
 	if self.msg != null:
 		self.msg.clear()
+	msgBox.setText("")
 	self.msg = msgBox
 
+func resetMessageBox():
+	if self.msg != null:
+		self.msg.clear()
+	self.msg = $MSG
+
 func showMessageInput(text):
-	msg.waitInput = true
-	await msg.showMessage(text)
+	self.msg.waitInput = true
+	await self.msg.showMessage(text)
 
 func showMessageWait(text, waitTime:float):
 	msg.waitTime = waitTime
@@ -70,12 +76,17 @@ func showMessageNoClose(text):
 	await msg.showMessage(text)
 
 
-func showMessageYesNo(message:String) -> int:
+func showMessageYesNo(message:String, closeAtEnd:bool = true) -> int:
 	msg.closeAtEnd = false
-	select.connect(Callable(msg, "close"))
+	msg.waitInput = false
+	if closeAtEnd:
+		select.connect(Callable(msg, "close"))
 	await msg.showMessage(message)
 	var selectedOption:int = await showChoices(["SI","NO"])
-	select.disconnect(Callable(msg, "close"))
+	if closeAtEnd:
+		select.disconnect(Callable(msg, "close"))
+	else:
+		msg.setText("")
 	
 	return selectedOption
 
@@ -189,11 +200,12 @@ func showParty():
 	menu.open()
 	await GUI.fadeOut(3)
 	
-func showChoices(choiceOptions:Array[String]):
+func showChoices(choiceOptions:Array[String], closeAtEnd = true):
 	choices.addChoices(choiceOptions)
 	choices.activeChoices(choiceOptions)
 	var selectedChoice:int = await choices.showContainer()
-	choices.hideContainer()
+	if closeAtEnd:
+		choices.hideContainer()
 	return selectedChoice
 	
 #func showPartyBattle():

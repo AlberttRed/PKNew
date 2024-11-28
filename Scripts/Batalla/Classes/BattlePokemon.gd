@@ -149,7 +149,10 @@ var selected_move : BattleMove = null
 var usedMove : BattleMove
 
 var canAttack : bool = true
-var canEscape
+var canEscape:
+	set(e):
+		side.escapedBattle = e
+		canEscape = e
 var turnsInBattle:int = 0
 
 var activeBattleEffects : Array[BattleEffect]:# = [] #Array[CONST.MOVE_EFFECTS] = []
@@ -655,7 +658,7 @@ func hasItemEquipped(item_id:int):
 func tryEscapeFromBattle():
 	side.escapeAttempts += 1
 	# TO DO comprovar abans dels effects si estàs en combat d'entrenador, no poder escapar 
-	await GUI.battle.controller.effects.applyBattleEffect("EscapeBattle")
+	await GUI.battle.controller.effects.applyBattleEffect("EscapeBattle", self)
 	#SignalManager.Battle.Effects.applyAt.emit("EscapeBattle")
 	#await SignalManager.Battle.Effects.finished
 	if canEscape:

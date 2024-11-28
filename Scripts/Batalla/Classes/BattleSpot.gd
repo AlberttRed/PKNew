@@ -8,6 +8,7 @@ class_name BattleSpot
 var participant : BattleParticipant# Indica a quin participant pertany (entrenador)
 var activePokemon:BattlePokemon #Indica quin Pokémon està en aquest spot en aquest moment
 var nextPokemon: BattlePokemon #Indica quin Pokemon serà el següent en entrar
+var previousPokemon: BattlePokemon
 var side:BattleSide:
 	get:
 		return participant.side
@@ -107,6 +108,9 @@ func loadActivePokemon(pokemon:BattlePokemon):
 		#m.playAnimation.connect(Callable(self, "playAnimation"))
 
 func removeActivePokemon():
+	if activePokemon == null:
+		return
+	previousPokemon = activePokemon
 	self.visible = false
 	activePokemon.inBattle = false
 	#activePokemon.instance = null
@@ -158,7 +162,7 @@ func enterPokemon(pokemon:BattlePokemon, update:bool=false):
 		#await activePokemon.doAnimation("INOUT_BATTLE")
 	
 func quitPokemon(update:bool=false):
-	await GUI.battle.showMessage("¡" + activePokemon.Name + ", cambio! ¡Vuelve aquí!", false, 0.5)
+	await GUI.battle.showMessageWait("¡" + activePokemon.Name + ", cambio! ¡Vuelve aquí!", 0.5)
 	await playAnimation("OUT_BATTLE")
 	#await hideHPBar()
 	#await animPlayer.playAnimation("OUT_BATTLE")
@@ -190,7 +194,7 @@ func selectNextPokemon():
 		nextPokemon = null
 		return
 	if participant.controllable:
-		nextPokemon = await GUI.battle.showParty()
+		nextPokemon = await GUI.battle.showParty(activePokemon != null)
 	#else:
 		#IA.selectNextPokemon()
 

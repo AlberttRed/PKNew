@@ -8,6 +8,8 @@ var styleUnselected: StyleBox
 @onready var arrow:Panel = $Arrow
 @onready var selected:bool = false
 
+@onready var added:bool = false
+
 var index:int
 @export_multiline var text:String:
 	get:

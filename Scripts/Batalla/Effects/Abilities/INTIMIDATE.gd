@@ -6,7 +6,7 @@ func doIntimidation():
 	if !activated:
 		for enemy:BattlePokemon in originPokemon.listEnemies:
 			await enemy.changeModStat(CONST.STATS.ATA, -1, false)
-			await GUI.battle.showMessage("¡Intimidación " + originPokemon.battleMessageMiddleDelName + " baja el ataque " + enemy.battleMessageMiddleDelName + "!", false, 2.0)
+			await GUI.battle.showMessageWait("¡Intimidación " + originPokemon.battleMessageMiddleDelName + " baja el ataque " + enemy.battleMessageMiddleDelName + "!", 2.0)
 		activated = true
 
 func applyBattleEffectAtInitBattleTurn():

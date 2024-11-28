@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6s1oa8tssbi1"]
+[gd_scene load_steps=17 format=3 uid="uid://c6s1oa8tssbi1"]
 
 [ext_resource type="Script" path="res://Escenas/UI/GUI.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG_OLD.tscn" id="3"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://du3d20hvxfop2" path="res://Escenas/UI/Textbox/Choices/ChoicesContainer.tscn" id="9_8efuo"]
 [ext_resource type="Texture2D" uid="uid://cp3p5plvvv4sj" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="10_gmw6c"]
 [ext_resource type="Texture2D" uid="uid://dnu7djupfw2o" path="res://Escenas/UI/Menus/Resources/arrowSpriteOK2.png" id="11_klrg4"]
+[ext_resource type="PackedScene" uid="uid://bpegpem5d7eqb" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.tscn" id="13_navh0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b8aew"]
 texture = ExtResource("10_gmw6c")
@@ -69,6 +70,10 @@ offset_bottom = 287.0
 stylePanel = SubResource("StyleBoxTexture_b8aew")
 styleArrow = SubResource("StyleBoxTexture_amfxk")
 styleEmpty = SubResource("StyleBoxEmpty_lof4g")
+
+[node name="ChoicePanel" parent="ChoicesContainer/VBoxContainer" index="0" instance=ExtResource("13_navh0")]
+visible = false
+layout_mode = 2
 
 [editable path="TRANSITION"]
 [editable path="LEVELUP"]

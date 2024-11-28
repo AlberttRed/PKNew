@@ -1,0 +1,149 @@
+[gd_scene load_steps=14 format=3 uid="uid://b6bvq2kmkv5sh"]
+
+[ext_resource type="Texture2D" uid="uid://dhhhrgpxjqs0m" path="res://Escenas/UI/Menus/Resources/partyPanelRound.png" id="1_ltqyh"]
+[ext_resource type="FontFile" path="res://Escenas/UI/Fonts/df_party_lletraGran.tres" id="2_7ul51"]
+[ext_resource type="FontFile" path="res://Escenas/UI/Fonts/df_party_lletraPetita.tres" id="3_r5soy"]
+[ext_resource type="Texture2D" uid="uid://cfr1vpq8pfv7x" path="res://Sprites/Pictures/statuses.PNG" id="4_m8t2i"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="5_40ocy"]
+[ext_resource type="Texture2D" uid="uid://lmdx6hpah1a2" path="res://Sprites/Pictures/HPparty_background.png" id="6_fdxfp"]
+[ext_resource type="Texture2D" uid="uid://w4le6cwl56bx" path="res://Sprites/Pictures/HPparty_overlay.png" id="7_r12j0"]
+[ext_resource type="Texture2D" uid="uid://hjo0fxuci6wj" path="res://Sprites/Pictures/HPparty_progress.png" id="8_oskxo"]
+[ext_resource type="Texture2D" uid="uid://xw4mbww10chu" path="res://Escenas/UI/Menus/Resources/partyBall.PNG" id="9_7q7ow"]
+[ext_resource type="Texture2D" uid="uid://cbto5m75tk38f" path="res://Sprites/Iconos/icon025.png" id="10_ow7jw"]
+[ext_resource type="Texture2D" uid="uid://v58562kai84n" path="res://Escenas/UI/Menus/Resources/female_icon.png" id="11_1yp18"]
+[ext_resource type="AnimationLibrary" uid="uid://bw3dmb8wuj58f" path="res://Escenas/UI/Others/Resources/party_animations.res" id="12_2dkci"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xxuhc"]
+texture = ExtResource("1_ltqyh")
+region_rect = Rect2(0, 0, 256, 98)
+
+[node name="PKMN_0" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 98.0
+focus_neighbor_right = NodePath("../../PKMN_1/Panel")
+focus_neighbor_bottom = NodePath("../../PKMN_2/Panel")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xxuhc")
+metadata/_edit_lock_ = true
+
+[node name="Nombre" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.408
+offset_right = 180.0
+offset_bottom = 66.408
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_7ul51")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Outline" type="Label" parent="Panel/Nombre"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 46.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_7ul51")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+
+[node name="Nivel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 105.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("3_r5soy")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Outline" type="Label" parent="Panel/Nivel"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("3_r5soy")
+theme_override_font_sizes/font_size = 22
+text = "Nv.25"
+
+[node name="Status" type="Sprite2D" parent="Panel"]
+position = Vector2(107, 76)
+texture = ExtResource("4_m8t2i")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="health_bar" type="Node2D" parent="Panel"]
+position = Vector2(64, 8)
+script = ExtResource("5_40ocy")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="Panel/health_bar"]
+offset_left = 97.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_7ul51")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="Outline" type="Label" parent="Panel/health_bar/lblHP"]
+layout_mode = 0
+theme_override_colors/font_shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_7ul51")
+theme_override_font_sizes/font_size = 26
+text = "58/58"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Panel/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("6_fdxfp")
+texture_over = ExtResource("7_r12j0")
+texture_progress = ExtResource("8_oskxo")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/health_bar"]
+
+[node name="ball" type="Sprite2D" parent="Panel"]
+position = Vector2(31.6, 28)
+texture = ExtResource("9_7q7ow")
+
+[node name="pkmn" type="Sprite2D" parent="Panel"]
+position = Vector2(57.6, 34)
+texture = ExtResource("10_ow7jw")
+hframes = 2
+
+[node name="gender" type="Sprite2D" parent="Panel"]
+position = Vector2(229, 32)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("11_1yp18")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel"]
+reset_on_save = false
+libraries = {
+"party_animations": ExtResource("12_2dkci")
+}

@@ -54,7 +54,9 @@ func _ready():
 	#else:
 		#set_physics_process(false)
 		#finsihedTyping.emit()
-
+func setText(_text):
+	label.text = _text
+	
 func writeText():
 	set_physics_process(true)
 	while label.visible_characters < label.get_total_character_count():
@@ -74,17 +76,17 @@ func startText():
 	finished.connect(onFinish)
 	label.visible_characters = 0
 	#$AnimationPlayer.animation_finished.connect(_finishedMessage)
-	if waitTime > 0.0 and closeAtEnd:
+	if !waitInput:#waitTime > 0.0:
 		finishedAllText.connect(close)
-	if !closeAtEnd:
-		finishedAllText.connect(func(): finished.emit())
+	#if !closeAtEnd:
+		#finishedAllText.connect(func(): finished.emit())
 	
 	#$AnimationPlayer.play("Typing")
 	writeText()
 	
 func selectOption(): #(ui_accept)
 	if messageHasFinished:
-		if waitInput and closeAtEnd:
+		if waitInput:
 			close()
 	else:
 		if typing:
@@ -95,7 +97,7 @@ func selectOption(): #(ui_accept)
 
 func cancelOption(): #(ui_cancel)
 		if messageHasFinished:
-			if waitInput and closeAtEnd:
+			if waitInput:
 				close()
 		else:
 			if typing:
@@ -155,6 +157,8 @@ func getNextMessage():
 func _finishedMessage():
 	finishedMessage.emit()
 	if messageHasFinished and isLastMessage:
+		if waitTime > 0.0:
+			await get_tree().create_timer(waitTime).timeout
 		finishedAllText.emit()
 		
 func showMessage(message = null):
@@ -162,14 +166,13 @@ func showMessage(message = null):
 		addMessage(message)
 	label.text = getNextMessage()
 	$next.hide()
-	show()
+	self.show()
 	startText()
 	await finished
 		
 func close():
-	if waitTime > 0.0:
-		await get_tree().create_timer(waitTime).timeout
-	hide()
+	if closeAtEnd:
+		hide()
 	finished.emit()
 	
 func clear():
@@ -190,7 +193,6 @@ func clear():
 	waitInput = true
 	_stop = false
 	actualMessageIndex = 0
-	label.clear()
 	
 func updateScroll(startingPosition:int, finalPosition:int):
 #### Sprite:position

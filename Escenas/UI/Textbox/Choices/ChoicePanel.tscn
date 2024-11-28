@@ -12,7 +12,7 @@ axis_stretch_horizontal = 1
 region_rect = Rect2(0, 0, 14, 32)
 
 [node name="ChoicePanel" type="Panel"]
-custom_minimum_size = Vector2(116, 34)
+custom_minimum_size = Vector2(0, 34)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 2
