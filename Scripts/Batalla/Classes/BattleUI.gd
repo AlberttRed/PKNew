@@ -239,12 +239,13 @@ func showMovesPanel(rememberFocus = false):
 	#await GUI.party.exit
 	#cmdPokemon.grab_focus()
 	
-func showParty(canQuit:bool=true) -> BattlePokemon: #Modificarem el showParty dle BattleUI, enlloc de ferho en el GUI
+func showParty(canQuit:bool=true) -> int: #Modificarem el showParty dle BattleUI, enlloc de ferho en el GUI
 	var selectedPokemon:BattlePokemon
 	await GUI.fadeIn(3)
 	GUI.party.canQuit = canQuit
-	GUI.party.open(CONST.PARTY_MODES.BATTLE)
+	GUI.party.open(Party.Modes.BATTLE)
 	await GUI.party.exit
+	GUI.setMessageBox($PanelMessageBox)
 	await GUI.fadeOut(3)
 	return GUI.party.selectedBattlePokemon
 

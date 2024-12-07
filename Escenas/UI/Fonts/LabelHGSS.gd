@@ -1,5 +1,7 @@
 extends RichTextLabel
 
+class_name LabelHGSS
+
 signal line_displayed
 signal lines_displayed
 signal text_completed
@@ -19,34 +21,55 @@ var messageHasFinished:bool:
 	get:
 		return visible_characters == -1 or visible_characters == get_total_character_count()
  
-@export var font_size : int
-@export var font_color : Color
-@export var outline_color : Color
-@export var text_font :Font #DynamicFont
-@export var block_outline : bool = true
+@export_enum("Left", "Center", "Right") var align: int
+#@export var font_color : Color
+#@export var outline_color : Color
+#@export var text_font :Font #DynamicFont
+#@export var block_outline : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set("theme_override_fonts/normal_font", text_font)
-	$Outline.set("theme_override_fonts/normal_font", text_font)
-	$Outline2.set("theme_override_fonts/normal_font", text_font)
-	set("theme_override_font_sizes/normal_font_size", font_size)
-	$Outline.set("theme_override_font_sizes/normal_font_size", font_size)
-	$Outline2.set("theme_override_font_sizes/normal_font_size", font_size)
-	set("theme_override_colors/default_color", font_color)
-	$Outline.set("theme_override_colors/default_color", font_color)
-	$Outline2.set("theme_override_colors/default_color", font_color)
-	set("theme_override_colors/font_shadow_color", outline_color)
-	$Outline.set("theme_override_colors/font_shadow_color", outline_color)
-	$Outline2.set("theme_override_colors/font_shadow_color", outline_color)
-	if block_outline:
-		$Outline.position = Vector2(0, 0)
-		$Outline.size = size
-		$Outline2.position = Vector2(0, 0)
-		$Outline2.size = size
+	setText(text)
+	var textFont = get("default_font")# get("theme_override_fonts/normal_font")
+	var fontSize = get("default_font_size")# get("theme_override_font_sizes/normal_font_size")
+	var fontColor = get("theme_override_colors/default_color")
+	var outlineColor = get("theme_override_colors/font_shadow_color")
+	var lineSeparation: int = get("theme_override_constants/line_separation")
+	var topSpacing = get("spacing_top")
+
+	$Outline.set("default_font", textFont)#.set("theme_override_fonts/normal_font", textFont)
+	$Outline2.set("default_font", textFont)#.set("theme_override_fonts/normal_font", textFont)
+
+	$Outline.set("default_font_size", fontSize)#.set("theme_override_font_sizes/normal_font_size", fontSize)
+	$Outline2.set("default_font_size", fontSize)#.set("theme_override_font_sizes/normal_font_size", fontSize)
+
+	$Outline.set("theme_override_colors/default_color", fontColor)
+	$Outline2.set("theme_override_colors/default_color", fontColor)
+
+	$Outline.set("theme_override_colors/font_shadow_color", outlineColor)
+	$Outline2.set("theme_override_colors/font_shadow_color", outlineColor)
+	
+	$Outline.set("theme_override_constants/line_separation", lineSeparation)
+	$Outline2.set("theme_override_constants/line_separation", lineSeparation)
+	
+	$Outline.set("spacing_top", topSpacing)
+	$Outline2.set("spacing_top", topSpacing)
+
+	$Outline.position = Vector2(0, 0)
+	$Outline.size = size
+	$Outline2.position = Vector2(0, 0)
+	$Outline2.size = size
 		
 func setText(_text):
-	self.text = _text
+	var algn = ""
+	match align:
+		0:
+			algn = "[left]"
+		1:
+			algn = "[center]"
+		2:
+			algn = "[right]"
+	self.text = algn+str(_text)
 			
 func updateNextLine():
 	nextLineStop += 1
@@ -59,9 +82,17 @@ func reset():
 func _set(name, value):
 	match name:
 		"text":
-			text = value
-			$Outline.text = value
-			$Outline2.text = value
+			#var algn = ""
+			#match align:
+				#0:
+					#algn = "[left]"
+				#1:
+					#algn = "[center]"
+				#2:
+					#algn = "[right]"
+			text = str(value)
+			$Outline.text = str(value)
+			$Outline2.text = str(value)
 		"visible_characters":
 			var nextLine = 0
 			visible_characters = value

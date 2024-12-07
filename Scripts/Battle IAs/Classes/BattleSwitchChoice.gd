@@ -18,7 +18,9 @@ func _init(_selectedPokemon : BattlePokemon):
 	#await GUI.battle.showParty()
 
 func showParty():
-	switchInPokemon = await GUI.battle.showParty()
+	var selectedIndex = await GUI.battle.showParty()
+	if selectedIndex != null:
+		switchInPokemon = battleSpot.side.pokemonParty[selectedIndex]
 	GUI.battle.cmdPokemon.grab_focus()
 	
 func switchPokemon():

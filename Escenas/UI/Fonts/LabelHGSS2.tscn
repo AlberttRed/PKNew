@@ -1,22 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4ex854x6yq5d"]
+[gd_scene load_steps=6 format=3 uid="uid://bp35k0hu6xkjk"]
 
-[ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="1_186ph"]
-[ext_resource type="Script" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="2_kjeps"]
+[ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="1_42yfr"]
+[ext_resource type="Script" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="2_7m72k"]
 
-[sub_resource type="FontVariation" id="FontVariation_t75x6"]
-base_font = ExtResource("1_186ph")
-spacing_top = 4
+[sub_resource type="FontVariation" id="FontVariation_5i1r1"]
+base_font = ExtResource("1_42yfr")
+
+[sub_resource type="Theme" id="Theme_wkhqm"]
+default_font = SubResource("FontVariation_5i1r1")
+default_font_size = 26
 
 [sub_resource type="Theme" id="Theme_x4phv"]
-default_font = SubResource("FontVariation_t75x6")
+default_font = ExtResource("1_42yfr")
 default_font_size = 26
 
 [node name="LabelHGSS" type="RichTextLabel"]
-offset_right = 508.0
-offset_bottom = 77.0
-size_flags_horizontal = 3
+anchors_preset = -1
+anchor_right = 539.71
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = 1.0
+size_flags_horizontal = 0
 size_flags_vertical = 3
-theme = SubResource("Theme_x4phv")
+theme = SubResource("Theme_wkhqm")
 theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
 theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
 theme_override_constants/shadow_offset_y = 0
@@ -24,10 +30,10 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_outline_size = 0
 theme_override_constants/line_separation = 18
 bbcode_enabled = true
-text = "PRECISIÓN"
+text = "Text"
 scroll_active = false
 tab_size = 2
-script = ExtResource("2_kjeps")
+script = ExtResource("2_7m72k")
 
 [node name="Outline" type="RichTextLabel" parent="."]
 layout_mode = 0

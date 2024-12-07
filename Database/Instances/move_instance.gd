@@ -22,6 +22,12 @@ var Name : String :
 	set(value):
 		Name = value 
 
+var description : String :
+	get:
+		return base.description
+	set(value):
+		description = value 
+
 var power : int :
 	get:
 		return base.power
@@ -72,15 +78,12 @@ var mod_pp = 0
 #func get_priority():
 #	return DB.Moves[id].priority
 	
-func create(_move_id : int = -1):
+func _init(_move_id : int = -1) -> void:
 	if _move_id != -1:
 		var t_num : String = "%03d" % _move_id
 		self.base = load("res://Resources/Moves/" + t_num + ".tres")
 		pp = base.pp
 		pp_actual = pp
-		
-		return self
-		
 
 #func doMove(from,to):
 #	DB.moves[id].ShowAnimation(from,to)

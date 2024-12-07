@@ -3,6 +3,8 @@ extends Node
 
 class_name PokemonInstance
 
+signal newMoveLearned
+
 @export var randomize_pokemon: bool = false
 @export var randomize_stats: bool = false
 
@@ -173,6 +175,11 @@ var battle_back_sprite:
 			return base.battle_back_shiny_sprite
 		else:
 			return base.battle_back_sprite
+
+var icon_sprite:
+	get:
+		return base.icon_sprite
+	
 	set(value):
 		battle_back_sprite = value
 		
@@ -184,6 +191,7 @@ var EVs = []
 var IVs = []
 var personality = "" #setget set_personality,get_personality
 var trainer:Battler #Indica l'entrenador del pokemon(si en té)
+var learningMoves:Array[PokemonLearningMove] #Indicates the list of moves this pokemon is capable to learn
 
 var ally
 var enemies = []
@@ -214,6 +222,7 @@ var battle_position
 #		DB.moves[id].doMove()
 
 var movements : Array[MoveInstance] = []
+var newLearningMove : MoveInstance
 
 var mod_attack = 0
 var mod_defense = 0
@@ -269,7 +278,7 @@ func _ready():
 		randomize_pkmn()
 #	print("patata")
 #	set_info()
-#		
+	loadLearningMoves()
 	load_moves()
 	hp_actual = 1#hp_total
 	print_pokemon_base()
@@ -290,6 +299,8 @@ func init_pokemon():
 	if randomize_pokemon || randomize_stats:
 		randomize_pkmn()
 	print("init " + Name)
+	
+	loadLearningMoves()
 	
 	if gender == CONST.GENEROS.NON_SELECTED:
 		push_error("No s'ha seleccionat un genere pel pokémon " + Name)
@@ -340,46 +351,61 @@ func randomize_pkmn():
 
 func load_moves():
 	var learnable_indexes = []
-	var move_instance_script = load("res://Database/Instances/move_instance.gd")
+	#var move_instance_script = load("res://Database/Instances/move_instance.gd")
 	#print(learn_move_id)
 	#print(Name)
-	for i in range(base.learn_move_id.size()):
-		if (base.learn_type[i] == str(CONST.LEARN_LVL_UP)):
-			#print("lvl " + str(base.learn_lvl[i]) + " " + str(base.learn_move_id[i]))
-			if (base.learn_lvl[i] <= level):
-				
-				learnable_indexes.push_back(i)
-#	print(learnable_indexes)
-#	for i in learnable_indexes:
-#		print(str(learn_move_id[i]) + " " + str(DB.Moves[learn_move_id[i].to_int()-1].get_name()))
+	
+	var moves:Array[PokemonLearningMove] = learningMoves.filter(func(move:PokemonLearningMove): return move.learningType==PokemonLearningMove.Type.LVL_UP and move.learningLevel<=level).slice(0, 4)
+	
+	movements.assign(moves.map(func(m:PokemonLearningMove): return m.getMove()))
+	if movements.size() < 4:
+		movements.push_back(MoveInstance.new(86))
+	if movements.size() < 4:
+		movements.push_back(MoveInstance.new(3))
+	
+func addMove(_move:MoveInstance):
+	if movements.size() == 4:
+		assert(false, "Pokemon already has 4 moves")
+	movements.push_back(_move)
 
-	#learnable_indexes.sort_custom(Callable(self, "move_is_greater"))
-	#print(Name)
-	#for m in learnable_indexes:
-		#print(DB.Moves[m+1].name)
-	if (learnable_indexes.size() > 4):
-		var moves = []
-		var idx = learnable_indexes.size()-4;
-#		moves.push_back(69)# FUERZA    learnable_indexes[idx])
-#		moves.push_back(14)# CORTE     learnable_indexes[idx+1])
-#		moves.push_back(56)# SURF      learnable_indexes[idx+2])
-		moves.push_back(learnable_indexes[idx])
-		moves.push_back(learnable_indexes[idx+1])
-		moves.push_back(learnable_indexes[idx+2])
-		moves.push_back(learnable_indexes[idx+3])
 		
-		learnable_indexes = moves
-	#print(learnable_indexes)
-	if learnable_indexes.size() == 4:
-		learnable_indexes.remove_at(3)
-	#if p.movements.size() == 0 or p.movements == []:
-	for idx in learnable_indexes:
-		print("yep")
-		var move = move_instance_script.new().create(base.learn_move_id[idx].to_int())
-#		move.id = learn_move_id[idx].to_int()-1
-#		move.pp = DB.Moves[move.id].pp
-#		move.pp_actual = move.pp
-		movements.push_back(move)
+	#for i in range(base.learn_move_id.size()):
+		#if (base.learn_type[i] == str(CONST.LEARN_LVL_UP)):
+			##print("lvl " + str(base.learn_lvl[i]) + " " + str(base.learn_move_id[i]))
+			#if (base.learn_lvl[i] <= level):
+				#
+				#learnable_indexes.push_back(i)
+##	print(learnable_indexes)
+##	for i in learnable_indexes:
+##		print(str(learn_move_id[i]) + " " + str(DB.Moves[learn_move_id[i].to_int()-1].get_name()))
+#
+	##learnable_indexes.sort_custom(Callable(self, "move_is_greater"))
+	##print(Name)
+	##for m in learnable_indexes:
+		##print(DB.Moves[m+1].name)
+	#if (learnable_indexes.size() > 4):
+		#var moves = []
+		#var idx = learnable_indexes.size()-4;
+##		moves.push_back(69)# FUERZA    learnable_indexes[idx])
+##		moves.push_back(14)# CORTE     learnable_indexes[idx+1])
+##		moves.push_back(56)# SURF      learnable_indexes[idx+2])
+		#moves.push_back(learnable_indexes[idx])
+		#moves.push_back(learnable_indexes[idx+1])
+		#moves.push_back(learnable_indexes[idx+2])
+		#moves.push_back(learnable_indexes[idx+3])
+		#
+		#learnable_indexes = moves
+	##print(learnable_indexes)
+	#if learnable_indexes.size() == 4:
+		#learnable_indexes.remove_at(3)
+	##if p.movements.size() == 0 or p.movements == []:
+	#for idx in learnable_indexes:
+		#var move = MoveInstance.new(base.learn_move_id[idx].to_int())
+		##var move = move_instance_script.new().create(base.learn_move_id[idx].to_int())
+##		move.id = learn_move_id[idx].to_int()-1
+##		move.pp = DB.Moves[move.id].pp
+##		move.pp_actual = move.pp
+		#movements.push_back(move)
 	#Onda Trueno
 	#if movements.size() < 4:
 		#movements.push_back(move_instance_script.new().create(86))
@@ -394,6 +420,15 @@ func load_moves():
 	#if movements.size() < 4:
 		#movements.push_back(move_instance_script.new().create(240))
 	#
+	
+func loadLearningMoves():
+	for i in range(base.learn_move_id.size()):
+		print(base.learn_move_id[i])
+		print(base.learn_type[i])
+		print(base.learn_lvl[i])
+		learningMoves.push_back(PokemonLearningMove.new(base.learn_move_id[i] as int, base.learn_type[i] as int,base.learn_lvl[i] as int))
+		
+		
 #Calcula aleatoriament quin genero tindrà aquest pokemon, a partir del seu gender_rate
 #a l'hora de generar un pokemon nou
 func calculateGender():
@@ -507,7 +542,13 @@ func hasFullHealth():
 	
 func updateStats():
 	pass
-
+	
+func checkNewLevelMoveLearned():
+	newLearningMove = null
+	var newMove:PokemonLearningMove = learningMoves.filter(func(move:PokemonLearningMove): return move.learningType == PokemonLearningMove.Type.LVL_UP and move.learningLevel == level).pop_front()
+	if newMove!=null:
+		newLearningMove = newMove.getMove()
+	
 func levelUP():
 	var previousHP:float = hp_total
 	level += 1
@@ -516,7 +557,6 @@ func levelUP():
 	var incrHP:float = (newHP - previousHP) / previousHP * 100.0
 	var hpAdd = ceil(hp_actual * (incrHP/100.0))
 	hp_actual =  hp_actual + hpAdd
-	print("a")
 
 func getHPStat(_level:int):
 	return int( (float(_level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + _level + 10

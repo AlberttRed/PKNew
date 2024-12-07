@@ -194,7 +194,9 @@ func selectNextPokemon():
 		nextPokemon = null
 		return
 	if participant.controllable:
-		nextPokemon = await GUI.battle.showParty(activePokemon != null)
+		var selectedIndex = await GUI.battle.showParty(activePokemon != null)
+		if selectedIndex != null:
+			nextPokemon = side.pokemonParty[selectedIndex]
 	#else:
 		#IA.selectNextPokemon()
 

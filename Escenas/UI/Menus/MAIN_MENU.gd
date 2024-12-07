@@ -11,7 +11,7 @@ var start
 var menu_mode
 
 signal pokedex
-signal pokemon(mode:CONST.PARTY_MODES)
+signal pokemon(mode:Party.Modes)
 signal bag
 signal player
 signal save

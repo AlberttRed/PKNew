@@ -15,12 +15,11 @@ region_rect = Rect2(4, 4, 40, 40)
 [node name="LEVELUP" type="Panel"]
 z_index = 2
 offset_left = 296.0
-offset_top = 128.0
+offset_top = 86.0
 offset_right = 508.0
-offset_bottom = 313.0
+offset_bottom = 300.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_3nmwb")
 script = ExtResource("2_g4n0e")
-metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_direction = 1

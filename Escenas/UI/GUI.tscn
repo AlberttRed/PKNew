@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://c6s1oa8tssbi1"]
+[gd_scene load_steps=16 format=3 uid="uid://c6s1oa8tssbi1"]
 
 [ext_resource type="Script" path="res://Escenas/UI/GUI.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG_OLD.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://c3hp5o2kge4fg" path="res://Escenas/UI/Textbox/Choices/CHOICES_OLD.tscn" id="3_hwenn"]
 [ext_resource type="PackedScene" uid="uid://dkjekvml5fqpp" path="res://Escenas/UI/Menus/2 - Party/PARTY.tscn" id="4_ltquc"]
 [ext_resource type="PackedScene" uid="uid://cg0kncuwkhf3k" path="res://Escenas/UI/Menus/MAIN_MENU.tscn" id="4_xq6r8"]
 [ext_resource type="PackedScene" uid="uid://brvsn2vfev6ng" path="res://Escenas/UI/Textbox/MessageBox.tscn" id="5_rtl2r"]
@@ -44,9 +43,6 @@ visible = false
 z_index = 7
 
 [node name="MSG" parent="." instance=ExtResource("5_rtl2r")]
-visible = false
-
-[node name="CHOICES" parent="." instance=ExtResource("3_hwenn")]
 visible = false
 
 [node name="BATTLE" parent="." instance=ExtResource("6_8knxp")]

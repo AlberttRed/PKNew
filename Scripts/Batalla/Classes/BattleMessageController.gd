@@ -120,9 +120,31 @@ func showStatsFailedMessage(_target : BattlePokemon, _stat : CONST.STATS, _value
 	elif _stat == CONST.STATS.EVA:
 		statText = "La evasión "
 
-	await GUI.battle.showMessage("¡" + statText + _target.battleMessageMiddleDelName + " " + text + "!", false, 2.0)		
+	await GUI.battle.showMessageWait("¡" + statText + _target.battleMessageMiddleDelName + " " + text + "!", 2.0)		
 
-		
+func showLearnMoveMessage(_target : BattlePokemon, _move: MoveInstance) -> bool:
+	await GUI.battle.showMessageInput(_target.Name + " intenta aprender " + _move.Name+".")
+	await GUI.battle.showMessageInput("Pero " + _target.Name + " no puede aprender más de cuatro movimientos.")
+	var msgOption:int = await GUI.battle.showMessageYesNo("¿Quieres sustituir uno de esos movimientos por " + _move.Name + "?")
+	while msgOption != null:
+		if msgOption == MessageBox.NO:
+			var msgOption2:int = await GUI.battle.showMessageYesNo("¿Deja de aprender " + _move.Name + "?")
+			if msgOption2 == MessageBox.YES:
+				await GUI.battle.showMessageInput("¡"+_target.Name + " no aprendió " + _move.Name + "!")
+				return false
+			else:
+				await GUI.battle.showMessageInput(_target.Name + " intenta aprender " + _move.Name)
+				await GUI.battle.showMessageInput("Pero " + _target.Name + " no puede aprender más de cuatro movimientos.")
+				msgOption = await GUI.battle.showMessageYesNo("¿Quieres sustituir uno de esos movimientos por " + _move.Name + "?")
+		elif msgOption == MessageBox.YES:
+			return true
+	return false
+
+func showReplacedMoveMessage(_target : BattlePokemon, oldMove: MoveInstance, newMove: MoveInstance):
+	await GUI.battle.showMessageInput("1, 2, 3 y ... ... ... ¡puf!")
+	await GUI.battle.showMessageInput(_target.Name + " olvidó " + oldMove.Name+".")
+	await GUI.battle.showMessageInput("Y...")
+	await GUI.battle.showMessageInput("¡" + _target.Name + " aprendió " + newMove.Name+"!")
 #Misatges que surten en el moment q es fa un atac i el pk rival queda paralitzat, dormit etc.
 #func showAilmentMessage_Move(_target : BattlePokemon, _ailment : CONST.AILMENTS):
 	#var name = ""

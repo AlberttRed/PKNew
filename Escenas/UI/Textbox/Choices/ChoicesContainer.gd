@@ -57,6 +57,7 @@ func removeChoiceByName(choiceName:String):
 func removeeAllChoices():
 	for c in listChoices:
 		removeChoice(c)
+	listChoices.clear()
 
 func initChoice(choice:ChoicePanel):
 	choice.index = listChoices.size()

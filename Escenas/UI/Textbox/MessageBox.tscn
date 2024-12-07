@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://brvsn2vfev6ng"]
+[gd_scene load_steps=13 format=3 uid="uid://brvsn2vfev6ng"]
 
 [ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="1_1g85p"]
 [ext_resource type="Script" path="res://Escenas/UI/Textbox/MessageBox.gd" id="2_re8jy"]
@@ -7,8 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="5_ugtco"]
 [ext_resource type="Animation" uid="uid://beugpt1ql5na2" path="res://Escenas/UI/Textbox/Resources/next_animation.tres" id="6_thy6l"]
 
+[sub_resource type="FontVariation" id="FontVariation_djhwc"]
+base_font = ExtResource("3_15orl")
+spacing_top = 4
+
 [sub_resource type="Theme" id="Theme_x4phv"]
-default_font = ExtResource("3_15orl")
+default_font = SubResource("FontVariation_djhwc")
 default_font_size = 26
 
 [sub_resource type="Animation" id="Animation_bs852"]
@@ -68,9 +72,9 @@ layout_direction = 1
 layout_mode = 1
 anchors_preset = -1
 offset_left = 32.0
-offset_top = 20.0
+offset_top = 16.0
 offset_right = 465.0
-offset_bottom = 78.0
+offset_bottom = 79.0
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
@@ -93,7 +97,7 @@ theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_outline_size = 0
-theme_override_constants/line_separation = 12
+theme_override_constants/line_separation = 8
 bbcode_enabled = true
 text = "Esta es la primera línea
 Esta es la segunda línea
@@ -106,16 +110,12 @@ visible_characters = 0
 visible_characters_behavior = 1
 visible_ratio = 0.0
 script = ExtResource("4_icamg")
-font_size = 26
-font_color = Color(0.345098, 0.345098, 0.313726, 1)
-outline_color = Color(0.658824, 0.721569, 0.721569, 1)
-text_font = ExtResource("3_15orl")
 metadata/_edit_lock_ = true
 
 [node name="Outline" type="RichTextLabel" parent="ScrollContainer/Container/LabelHGSS"]
 layout_mode = 0
 offset_right = 433.0
-offset_bottom = 58.0
+offset_bottom = 164.0
 size_flags_stretch_ratio = 0.0
 theme = SubResource("Theme_x4phv")
 theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
@@ -123,7 +123,7 @@ theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_outline_size = 0
-theme_override_constants/line_separation = 12
+theme_override_constants/line_separation = 8
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "Esta es la primera línea
@@ -141,7 +141,7 @@ metadata/_edit_lock_ = true
 [node name="Outline2" type="RichTextLabel" parent="ScrollContainer/Container/LabelHGSS"]
 layout_mode = 0
 offset_right = 433.0
-offset_bottom = 58.0
+offset_bottom = 164.0
 size_flags_stretch_ratio = 0.0
 theme = SubResource("Theme_x4phv")
 theme_override_colors/default_color = Color(0.317647, 0.317647, 0.34902, 1)
@@ -149,7 +149,7 @@ theme_override_colors/font_shadow_color = Color(0.65098, 0.65098, 0.682353, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_outline_size = 0
-theme_override_constants/line_separation = 12
+theme_override_constants/line_separation = 8
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "Esta es la primera línea

@@ -1,41 +1,8 @@
-[gd_scene load_steps=4 format=3]
-
-[ext_resource type="DynamicFontData" uid="uid://odn2mkfd4lap" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="1"]
-
-
-[sub_resource type="DynamicFont" id=1]
-size = 26
-use_mipmaps = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 26
-outline_color = Color( 0.00784314, 0, 0, 1 )
-use_mipmaps = true
-font_data = ExtResource( 1 )
+[gd_scene format=3 uid="uid://b6ocpidj2td0g"]
 
 [node name="Label" type="Label"]
-margin_left = 46.1851
-margin_top = 96.1744
-margin_right = 237.185
-margin_bottom = 124.174
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.25098, 0.25098, 0.25098, 1 )
-custom_colors/font_color_shadow = Color( 0.690196, 0.690196, 0.690196, 1 )
-custom_constants/shadow_offset_x = 0
-custom_constants/shadow_offset_y = 2
 text = "63"
 
 [node name="Outline" type="Label" parent="."]
-margin_right = 181.0
-margin_bottom = 27.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.25098, 0.25098, 0.25098, 1 )
-custom_colors/font_color_shadow = Color( 0.690196, 0.690196, 0.690196, 1 )
-custom_constants/shadow_offset_x = 2
-custom_constants/shadow_offset_y = 0
+layout_mode = 0
 text = "63"
-__meta__ = {
-"_edit_lock_": true
-}
-

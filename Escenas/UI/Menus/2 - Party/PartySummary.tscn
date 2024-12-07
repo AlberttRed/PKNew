@@ -1,0 +1,1718 @@
+[gd_scene load_steps=47 format=3 uid="uid://gdxd2a726tc0"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/PartySummary.gd" id="1_re5et"]
+[ext_resource type="PackedScene" path="res://Escenas/UI/Fonts/font_summary_LetraBlanca.tscn" id="1_rwu2n"]
+[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="2_eg5aj"]
+[ext_resource type="Texture2D" uid="uid://c8kpj8jre1qao" path="res://Escenas/UI/Menus/Resources/male_icon.png" id="3_h6xl0"]
+[ext_resource type="Texture2D" uid="uid://b6hiwscxkv33j" path="res://Escenas/UI/Menus/Resources/summaryball00.png" id="4_tua3y"]
+[ext_resource type="PackedScene" uid="uid://b6ocpidj2td0g" path="res://Escenas/UI/Fonts/font_summary_LetraNegra.tscn" id="5_lb2gy"]
+[ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="6_q0ixx"]
+[ext_resource type="Texture2D" uid="uid://cbto5m75tk38f" path="res://Sprites/Iconos/icon025.png" id="7_li5g0"]
+[ext_resource type="Texture2D" uid="uid://danwumq4xmbxq" path="res://Escenas/UI/Menus/Resources/summary1.png" id="8_omywj"]
+[ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="9_wfs1f"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/SummaryPages/PartySummaryData.gd" id="10_ix7fs"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="10_uruff"]
+[ext_resource type="Texture2D" uid="uid://c486w3if8mwhf" path="res://Sprites/Pictures/EXPsummary_background.png" id="11_3cqe8"]
+[ext_resource type="Texture2D" uid="uid://bcp5o8xtx3plb" path="res://Sprites/Pictures/EXPsummary_overlay.png" id="12_dqai2"]
+[ext_resource type="Texture2D" uid="uid://j0kmrmsug5tw" path="res://Sprites/Pictures/EXPsummary_progress.png" id="13_pxepm"]
+[ext_resource type="Texture2D" uid="uid://ccbva4mg5505l" path="res://Escenas/UI/Menus/Resources/summary2.PNG" id="14_k8371"]
+[ext_resource type="Texture2D" uid="uid://vp3788sffcg4" path="res://Escenas/UI/Menus/Resources/summary3.PNG" id="15_nad7y"]
+[ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="16_p6hxq"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/SummaryPages/PartySummaryTrainer.gd" id="17_c1vnc"]
+[ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="17_re6e6"]
+[ext_resource type="Texture2D" uid="uid://ctnjnkfpilrj8" path="res://Sprites/Pictures/HPsummary_background.png" id="18_0pyjn"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/SummaryPages/PartySummaryStats.gd" id="19_pigrk"]
+[ext_resource type="Texture2D" uid="uid://cdb6j2ubvprkw" path="res://Sprites/Pictures/HPsummary_overlay.png" id="19_qbgrh"]
+[ext_resource type="Texture2D" uid="uid://jwxxv6ieuia1" path="res://Sprites/Pictures/HPsummary_progress.png" id="20_tvqbh"]
+[ext_resource type="Texture2D" uid="uid://bqy27j631k2qe" path="res://Escenas/UI/Menus/Resources/summary4.png" id="21_8os2p"]
+[ext_resource type="Texture2D" uid="uid://cj41hphayr3y0" path="res://Escenas/UI/Menus/Resources/summary5.png" id="22_aoprn"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/SummaryPages/PartySummaryMoves.gd" id="26_sqdml"]
+[ext_resource type="Texture2D" uid="uid://bfnh1nj2ki6ko" path="res://Escenas/UI/Menus/Resources/summary4details.PNG" id="27_xptfv"]
+[ext_resource type="Texture2D" uid="uid://d33k03vpir2lu" path="res://Escenas/UI/Menus/Resources/summary4learning.PNG" id="28_a5s0k"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/SummaryPages/PartySummaryRibbons.gd" id="28_iwvnf"]
+[ext_resource type="Texture2D" uid="uid://bpu214w54ts7t" path="res://Escenas/UI/Menus/Resources/summarymovesel.PNG" id="29_u3yho"]
+[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="30_vhko7"]
+[ext_resource type="Texture2D" uid="uid://tynlh4mi2kj1" path="res://Escenas/UI/Menus/Resources/category.png" id="31_fp2wg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ev6ym"]
+texture = ExtResource("8_omywj")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fk2ns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slrel"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_amjfa"]
+texture = ExtResource("14_k8371")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8itae"]
+texture = ExtResource("15_nad7y")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e6ab3"]
+line_spacing = 10.0
+font = ExtResource("2_eg5aj")
+font_size = 26
+font_color = Color(0.25098, 0.25098, 0.25098, 1)
+shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p3amy"]
+texture = ExtResource("28_a5s0k")
+region_rect = Rect2(0, 0, 512, 384)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r3vod"]
+region_rect = Rect2(0, 74, 252, 74)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vsqvo"]
+region_rect = Rect2(0, 74, 252, 74)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f56w3"]
+region_rect = Rect2(0, 74, 252, 74)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8t666"]
+region_rect = Rect2(0, 74, 252, 74)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tv22y"]
+region_rect = Rect2(0, 74, 252, 74)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u2ecf"]
+texture = ExtResource("22_aoprn")
+region_rect = Rect2(0, 0, 512, 384)
+
+[node name="SUMMARY" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_re5et")
+
+[node name="GENERAL" type="Control" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Nombre" parent="GENERAL" instance=ExtResource("1_rwu2n")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 194.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="GENERAL/Nombre" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+
+[node name="Genero" type="Sprite2D" parent="GENERAL"]
+position = Vector2(183, 77)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_h6xl0")
+
+[node name="Pokeball" type="Sprite2D" parent="GENERAL"]
+position = Vector2(29, 76)
+texture = ExtResource("4_tua3y")
+
+[node name="Nivel" parent="GENERAL" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 46.185
+offset_top = 96.174
+offset_right = 237.185
+offset_bottom = 124.174
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+
+[node name="Outline" parent="GENERAL/Nivel" index="0"]
+offset_right = 1.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+
+[node name="Status" type="Sprite2D" parent="GENERAL"]
+position = Vector2(145, 107)
+texture = ExtResource("6_q0ixx")
+region_enabled = true
+region_rect = Rect2(0, 16, 44, 16)
+
+[node name="Sprite" type="Sprite2D" parent="GENERAL"]
+position = Vector2(99.7798, 204.815)
+texture = ExtResource("7_li5g0")
+
+[node name="lObjeto" parent="GENERAL" instance=ExtResource("1_rwu2n")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 324.0
+offset_right = 168.0
+offset_bottom = 355.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="Outline" parent="GENERAL/lObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Objeto"
+
+[node name="dObjeto" parent="GENERAL" instance=ExtResource("1_rwu2n")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 357.21
+offset_right = 168.0
+offset_bottom = 388.21
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="Outline" parent="GENERAL/dObjeto" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Ninguno"
+
+[node name="PAGES" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DATA" type="Panel" parent="PAGES"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ev6ym")
+script = ExtResource("10_ix7fs")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="PAGES/DATA"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 216.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "DATOS"
+
+[node name="Titulo" type="Label" parent="PAGES/DATA/Titulo"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "DATOS"
+
+[node name="Labels" type="VBoxContainer" parent="PAGES/DATA"]
+layout_mode = 0
+offset_left = 237.548
+offset_top = 83.1698
+offset_right = 477.548
+offset_bottom = 269.17
+
+[node name="lNumDex" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Nº Dex"
+
+[node name="Outline" parent="PAGES/DATA/Labels/lNumDex" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Nº Dex"
+
+[node name="lEspecie" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Especie"
+
+[node name="Outline" parent="PAGES/DATA/Labels/lEspecie" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Especie"
+
+[node name="lTipo" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Tipo"
+
+[node name="Outline" parent="PAGES/DATA/Labels/lTipo" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Tipo"
+
+[node name="lEO" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "EO"
+
+[node name="Outline" parent="PAGES/DATA/Labels/lEO" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "EO"
+
+[node name="lID" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Nº ID"
+
+[node name="Outline" parent="PAGES/DATA/Labels/lID" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Nº ID"
+
+[node name="lExperiencia" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Puntos de Experiencia"
+
+[node name="Outline" parent="PAGES/DATA/Labels/lExperiencia" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Puntos de Experiencia"
+
+[node name="dNumDex" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 370.413
+offset_top = 83.9602
+offset_right = 503.413
+offset_bottom = 109.96
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "025"
+horizontal_alignment = 1
+
+[node name="Outline" parent="PAGES/DATA/dNumDex" index="0"]
+layout_direction = 2
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "025"
+horizontal_alignment = 1
+
+[node name="dEspecie" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 116.0
+offset_right = 501.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+horizontal_alignment = 1
+
+[node name="Outline" parent="PAGES/DATA/dEspecie" index="0"]
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Pikachu"
+horizontal_alignment = 1
+
+[node name="Tipos" type="HBoxContainer" parent="PAGES/DATA"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.842
+offset_top = 145.158
+offset_right = -11.158
+offset_bottom = -209.843
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="pTipo1" type="Panel" parent="PAGES/DATA/Tipos"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fk2ns")
+
+[node name="dTipo1" type="Sprite2D" parent="PAGES/DATA/Tipos/pTipo1"]
+position = Vector2(32, 14)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+
+[node name="pTipo2" type="Panel" parent="PAGES/DATA/Tipos"]
+visible = false
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slrel")
+
+[node name="dTipo2" type="Sprite2D" parent="PAGES/DATA/Tipos/pTipo2"]
+position = Vector2(32, 14)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+
+[node name="dEO" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 180.0
+offset_right = 501.0
+offset_bottom = 206.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Rojo"
+horizontal_alignment = 1
+
+[node name="Outline" parent="PAGES/DATA/dEO" index="0"]
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Rojo"
+horizontal_alignment = 1
+
+[node name="dID" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 213.0
+offset_right = 501.0
+offset_bottom = 239.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "55720"
+horizontal_alignment = 1
+
+[node name="Outline" parent="PAGES/DATA/dID" index="0"]
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "55720"
+horizontal_alignment = 1
+
+[node name="dExperiencia" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 369.706
+offset_top = 274.869
+offset_right = 502.706
+offset_bottom = 300.869
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "250047"
+horizontal_alignment = 1
+
+[node name="Outline" parent="PAGES/DATA/dExperiencia" index="0"]
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "250047"
+horizontal_alignment = 1
+
+[node name="lSigNivel" parent="PAGES/DATA" instance=ExtResource("1_rwu2n")]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 309.0
+offset_right = 478.0
+offset_bottom = 336.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Para subir de nivel"
+
+[node name="Outline" parent="PAGES/DATA/lSigNivel" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Para subir de nivel"
+
+[node name="dSigNivel" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 368.078
+offset_top = 342.281
+offset_right = 501.078
+offset_bottom = 368.281
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "12097"
+horizontal_alignment = 1
+
+[node name="Outline" parent="PAGES/DATA/dSigNivel" index="0"]
+offset_right = 133.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "12097"
+horizontal_alignment = 1
+
+[node name="exp_bar" type="Node2D" parent="PAGES/DATA"]
+position = Vector2(357, 377)
+script = ExtResource("10_uruff")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PAGES/DATA/exp_bar"]
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 179.0
+offset_bottom = 8.0
+scale = Vector2(1, 0.960005)
+min_value = 314.0
+max_value = 419.0
+step = 0.1
+value = 314.0
+stretch_margin_left = 1
+texture_under = ExtResource("11_3cqe8")
+texture_over = ExtResource("12_dqai2")
+texture_progress = ExtResource("13_pxepm")
+tint_progress = Color(0.27451, 0.552941, 0.960784, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PAGES/DATA/exp_bar"]
+
+[node name="TRAINER" type="Panel" parent="PAGES"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_amjfa")
+script = ExtResource("17_c1vnc")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="PAGES/TRAINER"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 216.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "NOTAS ENTRENADOR"
+
+[node name="Titulo" type="Label" parent="PAGES/TRAINER/Titulo"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "NOTAS ENTRENADOR"
+
+[node name="Labels" type="VBoxContainer" parent="PAGES/TRAINER"]
+layout_mode = 0
+offset_left = 242.048
+offset_top = 83.365
+offset_right = 482.048
+offset_bottom = 203.365
+
+[node name="LabelNaturaleza" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Naturaleza"
+
+[node name="Outline" parent="PAGES/TRAINER/Labels/LabelNaturaleza" index="0"]
+offset_right = 1.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Naturaleza"
+
+[node name="FechaCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "18 de Nov. de 2018"
+
+[node name="Outline" parent="PAGES/TRAINER/Labels/FechaCaptura" index="0"]
+offset_right = 1.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "18 de Nov. de 2018"
+
+[node name="RutaCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Intro"
+
+[node name="Outline" parent="PAGES/TRAINER/Labels/RutaCaptura" index="0"]
+offset_right = 1.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Intro"
+
+[node name="NivelCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Encontrado con Nv. 63."
+
+[node name="Outline" parent="PAGES/TRAINER/Labels/NivelCaptura" index="0"]
+offset_right = 1.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Encontrado con Nv. 63."
+
+[node name="DescNaturaleza" parent="PAGES/TRAINER" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 245.0
+offset_right = 505.0
+offset_bottom = 291.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Muy persistente."
+
+[node name="Outline" parent="PAGES/TRAINER/DescNaturaleza" index="0"]
+offset_right = 1.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Muy persistente."
+
+[node name="Naturaleza" parent="PAGES/TRAINER" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 360.452
+offset_top = 84.99
+offset_right = 600.452
+offset_bottom = 110.99
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Seria."
+
+[node name="Outline" parent="PAGES/TRAINER/Naturaleza" index="0"]
+offset_right = 1.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Seria."
+
+[node name="STATS" type="Panel" parent="PAGES"]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8itae")
+script = ExtResource("19_pigrk")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="PAGES/STATS"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 215.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "CARACTERÍSTICAS"
+
+[node name="Titulo" type="Label" parent="PAGES/STATS/Titulo"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "CARACTERÍSTICAS"
+
+[node name="lPS" parent="PAGES/STATS" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+offset_left = 246.0
+offset_top = 80.0
+offset_right = 342.0
+offset_bottom = 103.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "PS"
+metadata/_edit_lock_ = true
+
+[node name="Outline" parent="PAGES/STATS/lPS" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "PS
+"
+
+[node name="dPS" parent="PAGES/STATS" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 394.0
+offset_top = 80.0
+offset_right = 478.0
+offset_bottom = 100.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "150/150"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="Outline" parent="PAGES/STATS/dPS" index="0"]
+layout_direction = 3
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "150/150"
+horizontal_alignment = 2
+
+[node name="health_bar" type="Node2D" parent="PAGES/STATS"]
+position = Vector2(289, 63)
+script = ExtResource("16_p6hxq")
+metadata/_edit_vertical_guides_ = [-205.084]
+
+[node name="lblHP" type="Label" parent="PAGES/STATS/health_bar"]
+visible = false
+offset_left = 11.1186
+offset_top = 10.3219
+offset_right = 61.1186
+offset_bottom = 33.3219
+theme = ExtResource("17_re6e6")
+text = "45/45"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PAGES/STATS/health_bar"]
+offset_left = 39.2088
+offset_top = 43.4241
+offset_right = 171.209
+offset_bottom = 83.4241
+step = 0.1
+value = 100.0
+stretch_margin_left = 1
+texture_under = ExtResource("18_0pyjn")
+texture_over = ExtResource("19_qbgrh")
+texture_progress = ExtResource("20_tvqbh")
+tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PAGES/STATS/health_bar"]
+
+[node name="LabelStats" type="VBoxContainer" parent="PAGES/STATS"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 125.0
+offset_right = 342.0
+offset_bottom = 281.0
+metadata/_edit_lock_ = true
+
+[node name="lAtaque" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Ataque"
+
+[node name="Outline" parent="PAGES/STATS/LabelStats/lAtaque" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Ataque"
+
+[node name="lDefensa" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Defensa"
+
+[node name="Outline" parent="PAGES/STATS/LabelStats/lDefensa" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Defensa"
+
+[node name="lAtEsp" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "At. Esp."
+
+[node name="Outline" parent="PAGES/STATS/LabelStats/lAtEsp" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "At. Esp."
+
+[node name="lDefEsp" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Def. Esp."
+
+[node name="Outline" parent="PAGES/STATS/LabelStats/lDefEsp" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Def. Esp."
+
+[node name="Velocidad" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Velocidad"
+
+[node name="Outline" parent="PAGES/STATS/LabelStats/Velocidad" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Velocidad"
+
+[node name="ValueStats" type="VBoxContainer" parent="PAGES/STATS"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 125.0
+offset_right = 456.0
+offset_bottom = 281.0
+
+[node name="dAtaque" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="Outline" parent="PAGES/STATS/ValueStats/dAtaque" index="0"]
+layout_direction = 3
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="dDefensa" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="Outline" parent="PAGES/STATS/ValueStats/dDefensa" index="0"]
+layout_direction = 3
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="dAtEsp" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="Outline" parent="PAGES/STATS/ValueStats/dAtEsp" index="0"]
+layout_direction = 3
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="dDefEsp" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="Outline" parent="PAGES/STATS/ValueStats/dDefEsp" index="0"]
+layout_direction = 3
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="dVelocidad" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="Outline" parent="PAGES/STATS/ValueStats/dVelocidad" index="0"]
+layout_direction = 3
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="lHabilidad" parent="PAGES/STATS" instance=ExtResource("1_rwu2n")]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 288.0
+offset_right = 371.0
+offset_bottom = 319.0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Habilidad"
+metadata/_edit_lock_ = true
+
+[node name="Outline" parent="PAGES/STATS/lHabilidad" index="0"]
+layout_mode = 0
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Habilidad"
+
+[node name="dHabilidad" parent="PAGES/STATS" instance=ExtResource("5_lb2gy")]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 288.0
+offset_right = 504.0
+offset_bottom = 308.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Elec. Estática"
+metadata/_edit_lock_ = true
+
+[node name="Outline" parent="PAGES/STATS/dHabilidad" index="0"]
+layout_direction = 2
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Elec. Estática"
+
+[node name="DescHabilidad" type="Label" parent="PAGES/STATS"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 322.0
+offset_right = 501.0
+offset_bottom = 379.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Paraliza con el contacto."
+label_settings = SubResource("LabelSettings_e6ab3")
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 1
+max_lines_visible = 2
+metadata/_edit_lock_ = true
+
+[node name="Outline" type="Label" parent="PAGES/STATS/DescHabilidad"]
+layout_direction = 2
+layout_mode = 0
+offset_right = 279.0
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+theme_override_constants/line_spacing = 10
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_eg5aj")
+theme_override_font_sizes/font_size = 26
+text = "Paraliza con el contacto."
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 2
+max_lines_visible = 2
+
+[node name="MOVES" type="Panel" parent="PAGES"]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_p3amy")
+script = ExtResource("26_sqdml")
+normalBackground = ExtResource("21_8os2p")
+detailedBackground = ExtResource("27_xptfv")
+learningBackground = ExtResource("28_a5s0k")
+moveSelMark = ExtResource("29_u3yho")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" parent="PAGES/MOVES" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 16.0
+offset_right = 204.0
+offset_bottom = 46.0
+theme_override_colors/default_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+text = "MOVIMIENTOS"
+
+[node name="MoveInfo" type="Control" parent="PAGES/MOVES"]
+anchors_preset = 0
+offset_top = 60.0
+offset_right = 240.0
+offset_bottom = 380.0
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="PAGES/MOVES/MoveInfo"]
+position = Vector2(52, 30)
+texture = ExtResource("7_li5g0")
+flip_h = true
+hframes = 2
+metadata/_edit_lock_ = true
+
+[node name="Type1" type="Sprite2D" parent="PAGES/MOVES/MoveInfo"]
+position = Vector2(132, 46)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+frame = 14
+metadata/_edit_lock_ = true
+
+[node name="Type2" type="Sprite2D" parent="PAGES/MOVES/MoveInfo"]
+position = Vector2(200, 46)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+frame = 14
+metadata/_edit_lock_ = true
+
+[node name="lCategory" parent="PAGES/MOVES/MoveInfo" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 62.0
+offset_right = 159.0
+offset_bottom = 94.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "CATEG."
+metadata/_edit_lock_ = true
+
+[node name="lPower" parent="PAGES/MOVES/MoveInfo" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 94.0
+offset_right = 158.0
+offset_bottom = 123.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "POTENCIA"
+metadata/_edit_lock_ = true
+
+[node name="lAccuracy" parent="PAGES/MOVES/MoveInfo" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 126.0
+offset_right = 156.0
+offset_bottom = 157.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+metadata/_edit_lock_ = true
+
+[node name="dCategory" type="Sprite2D" parent="PAGES/MOVES/MoveInfo"]
+position = Vector2(198, 78)
+texture = ExtResource("31_fp2wg")
+vframes = 3
+metadata/_edit_lock_ = true
+
+[node name="dPower" parent="PAGES/MOVES/MoveInfo" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 94.0
+offset_right = 214.0
+offset_bottom = 125.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "[right]20"
+align = 2
+metadata/_edit_lock_ = true
+
+[node name="dAccuracy" parent="PAGES/MOVES/MoveInfo" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 126.0
+offset_right = 214.0
+offset_bottom = 157.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "[right]20"
+align = 2
+metadata/_edit_lock_ = true
+
+[node name="lDescription" parent="PAGES/MOVES/MoveInfo" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 160.0
+offset_right = 230.0
+offset_bottom = 317.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+theme_override_constants/line_separation = 8
+text = "Un voraz bocado que puede hacer retroceder al rival."
+metadata/_edit_lock_ = true
+
+[node name="MovePanels" type="VBoxContainer" parent="PAGES/MOVES"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 240.0
+offset_top = 16.0
+offset_right = 492.0
+offset_bottom = 282.0
+theme_override_constants/separation = -10
+metadata/_edit_lock_ = true
+
+[node name="Move1" type="Panel" parent="PAGES/MOVES/MovePanels"]
+custom_minimum_size = Vector2(252, 74)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Move2")
+theme_override_styles/panel = SubResource("StyleBoxTexture_r3vod")
+metadata/_edit_lock_ = true
+
+[node name="Tipo" type="Sprite2D" parent="PAGES/MOVES/MovePanels/Move1"]
+position = Vector2(38, 22)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+frame = 14
+metadata/_edit_lock_ = true
+
+[node name="Ataque" parent="PAGES/MOVES/MovePanels/Move1" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 10.0
+offset_right = 243.0
+offset_bottom = 43.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "Garra Dragón"
+metadata/_edit_lock_ = true
+
+[node name="lPP" parent="PAGES/MOVES/MovePanels/Move1" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 40.0
+offset_right = 133.0
+offset_bottom = 70.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "PP"
+metadata/_edit_lock_ = true
+
+[node name="dPP" parent="PAGES/MOVES/MovePanels/Move1" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 40.0
+offset_right = 220.0
+offset_bottom = 71.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "[right]24/24"
+align = 2
+metadata/_edit_lock_ = true
+
+[node name="Move2" type="Panel" parent="PAGES/MOVES/MovePanels"]
+custom_minimum_size = Vector2(252, 74)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Move1")
+focus_neighbor_bottom = NodePath("../Move3")
+theme_override_styles/panel = SubResource("StyleBoxTexture_vsqvo")
+metadata/_edit_lock_ = true
+
+[node name="Tipo" type="Sprite2D" parent="PAGES/MOVES/MovePanels/Move2"]
+position = Vector2(38, 22)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+frame = 14
+metadata/_edit_lock_ = true
+
+[node name="Ataque" parent="PAGES/MOVES/MovePanels/Move2" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 10.0
+offset_right = 243.0
+offset_bottom = 41.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "Garra Dragón"
+metadata/_edit_lock_ = true
+
+[node name="lPP" parent="PAGES/MOVES/MovePanels/Move2" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 40.0
+offset_right = 134.0
+offset_bottom = 69.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "PP"
+metadata/_edit_lock_ = true
+
+[node name="dPP" parent="PAGES/MOVES/MovePanels/Move2" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 40.0
+offset_right = 220.0
+offset_bottom = 72.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "[right]24/24"
+align = 2
+metadata/_edit_lock_ = true
+
+[node name="Move3" type="Panel" parent="PAGES/MOVES/MovePanels"]
+custom_minimum_size = Vector2(252, 74)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Move2")
+focus_neighbor_bottom = NodePath("../Move4")
+theme_override_styles/panel = SubResource("StyleBoxTexture_f56w3")
+metadata/_edit_lock_ = true
+
+[node name="Tipo" type="Sprite2D" parent="PAGES/MOVES/MovePanels/Move3"]
+position = Vector2(38, 22)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+frame = 14
+metadata/_edit_lock_ = true
+
+[node name="Ataque" parent="PAGES/MOVES/MovePanels/Move3" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 10.0
+offset_right = 245.0
+offset_bottom = 43.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "Garra Dragón"
+metadata/_edit_lock_ = true
+
+[node name="lPP" parent="PAGES/MOVES/MovePanels/Move3" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 40.0
+offset_right = 135.0
+offset_bottom = 68.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "PP"
+metadata/_edit_lock_ = true
+
+[node name="dPP" parent="PAGES/MOVES/MovePanels/Move3" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 40.0
+offset_right = 220.0
+offset_bottom = 72.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "[right]24/24"
+align = 2
+metadata/_edit_lock_ = true
+
+[node name="Move4" type="Panel" parent="PAGES/MOVES/MovePanels"]
+custom_minimum_size = Vector2(252, 74)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Move3")
+theme_override_styles/panel = SubResource("StyleBoxTexture_8t666")
+metadata/_edit_lock_ = true
+
+[node name="Tipo" type="Sprite2D" parent="PAGES/MOVES/MovePanels/Move4"]
+position = Vector2(38, 22)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+frame = 14
+metadata/_edit_lock_ = true
+
+[node name="Ataque" parent="PAGES/MOVES/MovePanels/Move4" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 10.0
+offset_right = 247.0
+offset_bottom = 41.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "Garra Dragón"
+metadata/_edit_lock_ = true
+
+[node name="lPP" parent="PAGES/MOVES/MovePanels/Move4" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 40.0
+offset_right = 131.0
+offset_bottom = 71.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "PP"
+metadata/_edit_lock_ = true
+
+[node name="dPP" parent="PAGES/MOVES/MovePanels/Move4" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 40.0
+offset_right = 220.0
+offset_bottom = 71.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "[right]24/24"
+align = 2
+metadata/_edit_lock_ = true
+
+[node name="Move0" type="Panel" parent="PAGES/MOVES"]
+custom_minimum_size = Vector2(252, 74)
+layout_mode = 0
+offset_left = 240.0
+offset_top = 292.0
+offset_right = 492.0
+offset_bottom = 366.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_tv22y")
+metadata/_edit_lock_ = true
+
+[node name="Tipo" type="Sprite2D" parent="PAGES/MOVES/Move0"]
+position = Vector2(38, 22)
+texture = ExtResource("9_wfs1f")
+vframes = 24
+frame = 14
+metadata/_edit_lock_ = true
+
+[node name="Ataque" parent="PAGES/MOVES/Move0" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 10.0
+offset_right = 246.0
+offset_bottom = 43.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "Garra Dragón"
+metadata/_edit_lock_ = true
+
+[node name="lPP" parent="PAGES/MOVES/Move0" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 40.0
+offset_right = 135.0
+offset_bottom = 70.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "PP"
+metadata/_edit_lock_ = true
+
+[node name="dPP" parent="PAGES/MOVES/Move0" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 40.0
+offset_right = 220.0
+offset_bottom = 71.0
+theme_override_colors/default_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_colors/font_shadow_color = Color(0.709804, 0.709804, 0.709804, 1)
+text = "[right]24/24"
+align = 2
+metadata/_edit_lock_ = true
+
+[node name="RIBBONS" type="Panel" parent="PAGES"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_u2ecf")
+script = ExtResource("28_iwvnf")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" parent="PAGES/RIBBONS" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 16.0
+offset_right = 204.0
+offset_bottom = 46.0
+theme_override_colors/default_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
+text = "CINTAS"
+metadata/_edit_lock_ = true
+
+[node name="lCintas" parent="PAGES/RIBBONS" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 341.0
+offset_right = 414.0
+offset_bottom = 371.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+text = "N.º de Cintas:"
+metadata/_edit_lock_ = true
+
+[node name="dCintas" parent="PAGES/RIBBONS" instance=ExtResource("30_vhko7")]
+layout_mode = 0
+offset_left = 437.0
+offset_top = 341.0
+offset_right = 480.0
+offset_bottom = 371.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
+text = "0"
+metadata/_edit_lock_ = true
+
+[connection signal="value_changed" from="PAGES/DATA/exp_bar/TextureProgressBar" to="PAGES/DATA/exp_bar" method="_on_value_changed"]
+[connection signal="hidden" from="PAGES/MOVES" to="PAGES/MOVES" method="_on_hidden"]
+[connection signal="focus_entered" from="PAGES/MOVES/MovePanels/Move1" to="PAGES/MOVES" method="_on_move_focus_entered"]
+[connection signal="focus_exited" from="PAGES/MOVES/MovePanels/Move1" to="PAGES/MOVES" method="_on_move_focus_exited"]
+[connection signal="focus_entered" from="PAGES/MOVES/MovePanels/Move2" to="PAGES/MOVES" method="_on_move_focus_entered"]
+[connection signal="focus_exited" from="PAGES/MOVES/MovePanels/Move2" to="PAGES/MOVES" method="_on_move_focus_exited"]
+[connection signal="focus_entered" from="PAGES/MOVES/MovePanels/Move3" to="PAGES/MOVES" method="_on_move_focus_entered"]
+[connection signal="focus_exited" from="PAGES/MOVES/MovePanels/Move3" to="PAGES/MOVES" method="_on_move_focus_exited"]
+[connection signal="focus_entered" from="PAGES/MOVES/MovePanels/Move4" to="PAGES/MOVES" method="_on_move_focus_entered"]
+[connection signal="focus_exited" from="PAGES/MOVES/MovePanels/Move4" to="PAGES/MOVES" method="_on_move_focus_exited"]
+[connection signal="focus_entered" from="PAGES/MOVES/Move0" to="PAGES/MOVES" method="_on_move_focus_entered"]
+[connection signal="focus_exited" from="PAGES/MOVES/Move0" to="PAGES/MOVES" method="_on_move_focus_exited"]
+
+[editable path="GENERAL/Nombre"]
+[editable path="GENERAL/Nivel"]
+[editable path="GENERAL/lObjeto"]
+[editable path="GENERAL/dObjeto"]
+[editable path="PAGES/DATA/Labels/lNumDex"]
+[editable path="PAGES/DATA/Labels/lEspecie"]
+[editable path="PAGES/DATA/Labels/lTipo"]
+[editable path="PAGES/DATA/Labels/lEO"]
+[editable path="PAGES/DATA/Labels/lID"]
+[editable path="PAGES/DATA/Labels/lExperiencia"]
+[editable path="PAGES/DATA/dNumDex"]
+[editable path="PAGES/DATA/dEspecie"]
+[editable path="PAGES/DATA/dEO"]
+[editable path="PAGES/DATA/dID"]
+[editable path="PAGES/DATA/dExperiencia"]
+[editable path="PAGES/DATA/lSigNivel"]
+[editable path="PAGES/DATA/dSigNivel"]
+[editable path="PAGES/TRAINER/Labels/LabelNaturaleza"]
+[editable path="PAGES/TRAINER/Labels/FechaCaptura"]
+[editable path="PAGES/TRAINER/Labels/RutaCaptura"]
+[editable path="PAGES/TRAINER/Labels/NivelCaptura"]
+[editable path="PAGES/TRAINER/DescNaturaleza"]
+[editable path="PAGES/TRAINER/Naturaleza"]
+[editable path="PAGES/STATS/lPS"]
+[editable path="PAGES/STATS/dPS"]
+[editable path="PAGES/STATS/LabelStats/lAtaque"]
+[editable path="PAGES/STATS/LabelStats/lDefensa"]
+[editable path="PAGES/STATS/LabelStats/lAtEsp"]
+[editable path="PAGES/STATS/LabelStats/lDefEsp"]
+[editable path="PAGES/STATS/LabelStats/Velocidad"]
+[editable path="PAGES/STATS/ValueStats/dAtaque"]
+[editable path="PAGES/STATS/ValueStats/dDefensa"]
+[editable path="PAGES/STATS/ValueStats/dAtEsp"]
+[editable path="PAGES/STATS/ValueStats/dDefEsp"]
+[editable path="PAGES/STATS/ValueStats/dVelocidad"]
+[editable path="PAGES/STATS/lHabilidad"]
+[editable path="PAGES/STATS/dHabilidad"]

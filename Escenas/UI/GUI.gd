@@ -24,9 +24,8 @@ var next = false
 #onready var options = get_node("OPTIONS")
 @onready var menu = $MAIN_MENU
 @onready var battle:BattleUI = $BATTLE
-@onready var chs = $CHOICES
 @onready var choices:ChoicesContainer = $ChoicesContainer
-@onready var party = $PARTY
+@onready var party:Party = $PARTY
 #onready var bag = get_node("BAG")
 @onready var transition = $TRANSITION
 @onready var levelUp = $LEVELUP
@@ -89,7 +88,11 @@ func showMessageYesNo(message:String, closeAtEnd:bool = true) -> int:
 		msg.setText("")
 	
 	return selectedOption
-
+	
+func showPartyMoveSelection(pokemon:PokemonInstance, learningMove:MoveInstance):
+	var moveIndexSelected = await party.showMoveSelection(pokemon, learningMove)
+	return moveIndexSelected
+	
 
 func showMsg(text : String, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
 	msg.show_msgBattle(text, showIcon, _waitTime, waitInput)
@@ -109,25 +112,25 @@ func show_msg(text="", wait = null, obj = null, sig="", _choices_options = [], _
 				msg.connect("finished", Callable(self, "show_choices"))
 				
 	msg.show_msg(text,wait,obj,sig, close)#choices_options.size() == 0 or ((choices_options[0] == null or choices_options[0].size() == 0) and close == true))
-
-func show_choices():
-	for c in choices_options[0]:
-		#print("add choice")
-		if !chs.has_user_signal(c):
-			chs.add_user_signal(c)
-		chs.connect(c, Callable(self, "add_choice_cmd"))
-		chs.add_choice(c)
-
-	chs.show_choices(choices_options[1], choices_options[2])
-	await chs.exit
-	chs.clear_choices()
-	msg.clear_msg()
-	
-	for c in choices_options[0]:
-		chs.disconnect(c, Callable(self, "add_choice_cmd"))
-
-	close_msg()
-	
+#
+#func show_choices():
+	#for c in choices_options[0]:
+		##print("add choice")
+		#if !chs.has_user_signal(c):
+			#chs.add_user_signal(c)
+		#chs.connect(c, Callable(self, "add_choice_cmd"))
+		#chs.add_choice(c)
+#
+	#chs.show_choices(choices_options[1], choices_options[2])
+	#await chs.exit
+	#chs.clear_choices()
+	#msg.clear_msg()
+	#
+	#for c in choices_options[0]:
+		#chs.disconnect(c, Callable(self, "add_choice_cmd"))
+#
+	#close_msg()
+	#
 	
 	
 func add_choice_cmd(c):
@@ -160,7 +163,7 @@ func show_menu():
 	#menu.set_process(false)
 
 func isVisible():
-	return msg.is_visible() || chs.is_visible() || menu.is_visible() || party.is_visible() || battle.is_visible() || transition.is_visible()# || $INTRO.is_visible() || bag.is_visible() || transition.is_visible()#|| options.is_visible()
+	return msg.is_visible() || menu.is_visible() || party.is_visible() || battle.is_visible() || transition.is_visible()# || $INTRO.is_visible() || bag.is_visible() || transition.is_visible()#|| options.is_visible()
 
 #func _on_text_speed_changed(speed):
 #	get_node("MSG/Timer 2").set_wait_time(CONST.TEXT_SPEEDS[speed])
@@ -195,7 +198,7 @@ func showParty():
 	await GUI.fadeIn(3)
 	menu.close()
 	party.loadParty(GAME_DATA.party)
-	party.open(CONST.PARTY_MODES.MENU)
+	party.open(Party.Modes.MENU)
 	await party.exit
 	menu.open()
 	await GUI.fadeOut(3)

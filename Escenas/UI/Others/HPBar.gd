@@ -71,15 +71,15 @@ func updateHP(hp: int):
 	updated.emit()
 	
 func updateEXP(exp):
-	while pokemon.totalExp < exp:
-		var end:int = expBar.getValueEnd(exp)
-		await expBar.animate_value(pokemon.totalExp, end)
-		pokemon.totalExp = end
-		if expBar.isNewLevel():
-			#expBar.levelUP.emit()
-			await pokemon.levelUP()
-			#await pokemon.levelChanged
-			print("AAAAAAAAAA" +str(pokemon.totalExp))
+	#while pokemon.totalExp < exp:
+	var end:int = expBar.getValueEnd(exp)
+	await expBar.animate_value(pokemon.totalExp, end)
+	pokemon.totalExp = end
+	if expBar.isNewLevel():
+		#expBar.levelUP.emit()
+		await pokemon.levelUP()
+		#await pokemon.levelChanged
+		print("AAAAAAAAAA" +str(pokemon.totalExp))
 	updated.emit()	
 	
 #func updateEXP(exp: int):

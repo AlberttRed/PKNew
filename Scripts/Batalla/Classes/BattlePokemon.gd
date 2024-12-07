@@ -213,6 +213,7 @@ var battleMessageMiddleAlName: String:
 #func create(_pokemon : PokemonInstance, _IA: BattleIA):
 func _init(_pokemon: PokemonInstance, _IA: BattleIA = null):
 	instance = _pokemon
+	instance.newMoveLearned.connect(learnMove)
 			#bp.isWild = _participant.type == CONST.BATTLER_TYPES.WILD_POKEMON
 		#bp.controllable = _controllable
 	#instance.battleInstance = self
@@ -439,9 +440,12 @@ func exitBattle():
 	actionSelected.emit()
 	
 func giveExp(expGained:int):
+	var newTotalExp:int = totalExp+expGained
 	if inBattle:
-		HPbar.updateEXP(totalExp+expGained)
-		await HPbar.updated
+		while totalExp < newTotalExp:
+			HPbar.updateEXP(newTotalExp)
+			await HPbar.updated
+			
 	else:
 		var remainingExp:int = expGained
 		while remainingExp > 0:
@@ -644,11 +648,14 @@ func hasMoveEffect(moveCode:BattleEffect.Moves) -> bool:
 	#activeEffectsFlags.erase(delete)
 
 func levelUP():
-	instance.levelUP()
+	await instance.levelUP()
 	if inBattle:
 		HPbar.updateUI()
 	await GUI.battle.msgBox.showLevelUpMessage(self, level)
 	await GUI.battle.msgBox.showLevelUpStats(self)
+	await instance.checkNewLevelMoveLearned()
+	if instance.newLearningMove != null:
+		await learnMove(instance.newLearningMove)
 	levelChanged.emit()
 
 func hasItemEquipped(item_id:int):
@@ -699,6 +706,48 @@ func playAnimation(animName:String, animParams:Dictionary={}):
 func initAbility():
 	if abilityEffect!=null and !hasWorkingEffect(abilityEffect.name):
 		addBattleEffect(abilityEffect)
+
+func learnMove(move:MoveInstance):
+	if moves.size() == 4:
+		var learnOption:bool = await GUI.battle.msgBox.showLearnMoveMessage(self, move)
+		if learnOption:
+			var moveIndexToForget = await GUI.showPartyMoveSelection(instance, move)
+			if moveIndexToForget == null:
+				var msgOption2:int = await GUI.battle.showMessageYesNo("Prefieres que no aprenda " + move.Name + "?")
+				if msgOption2 == MessageBox.YES:
+					await GUI.battle.showMessageInput("¡" + Name + " no aprendió " + move.Name + "!")
+					return
+				else:
+					await learnMove(move)
+			else:
+				await GUI.battle.msgBox.showReplacedMoveMessage(self, instance.movements[moveIndexToForget], move)
+				await replaceMove(moveIndexToForget, move)
+	else:
+		await GUI.battle.showMessageInput("¡" + Name + " aprendió " + move.Name + "!")
+		await addMove(move)
+
+	
+func addMove(_move):
+	if moves.size() == 4:
+		assert(false, "Pokemon already has 4 moves")
+	if _move is MoveInstance:
+		moves.push_back(BattleMove.new(_move, self))
+		instance.addMove(_move)
+	elif _move is BattleMove:
+		moves.push_back(_move)
+		instance.addMove(_move.instance)
+	else:
+		assert(false, "Invalid move class at addMove")
+
+func replaceMove(index:int, _move):
+	if _move is MoveInstance:
+		moves[index] = BattleMove.new(_move, self)
+		instance.movements[index] = _move
+	elif _move is BattleMove:
+		moves[index] = _move
+		instance.movements[index] = _move.instance
+	else:
+		assert(false, "Invalid move class at addMove")
 
 func get_path_to(node:Node2D):
 	return battleSpot.get_path_to(node)
