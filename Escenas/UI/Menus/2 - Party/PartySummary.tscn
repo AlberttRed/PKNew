@@ -1,11 +1,8 @@
-[gd_scene load_steps=47 format=3 uid="uid://gdxd2a726tc0"]
+[gd_scene load_steps=43 format=3 uid="uid://gdxd2a726tc0"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/PartySummary.gd" id="1_re5et"]
-[ext_resource type="PackedScene" path="res://Escenas/UI/Fonts/font_summary_LetraBlanca.tscn" id="1_rwu2n"]
-[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="2_eg5aj"]
 [ext_resource type="Texture2D" uid="uid://c8kpj8jre1qao" path="res://Escenas/UI/Menus/Resources/male_icon.png" id="3_h6xl0"]
 [ext_resource type="Texture2D" uid="uid://b6hiwscxkv33j" path="res://Escenas/UI/Menus/Resources/summaryball00.png" id="4_tua3y"]
-[ext_resource type="PackedScene" uid="uid://b6ocpidj2td0g" path="res://Escenas/UI/Fonts/font_summary_LetraNegra.tscn" id="5_lb2gy"]
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="6_q0ixx"]
 [ext_resource type="Texture2D" uid="uid://cbto5m75tk38f" path="res://Sprites/Iconos/icon025.png" id="7_li5g0"]
 [ext_resource type="Texture2D" uid="uid://danwumq4xmbxq" path="res://Escenas/UI/Menus/Resources/summary1.png" id="8_omywj"]
@@ -50,14 +47,6 @@ region_rect = Rect2(0, 0, 512, 384)
 texture = ExtResource("15_nad7y")
 region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="LabelSettings" id="LabelSettings_e6ab3"]
-line_spacing = 10.0
-font = ExtResource("2_eg5aj")
-font_size = 26
-font_color = Color(0.25098, 0.25098, 0.25098, 1)
-shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-shadow_offset = Vector2(0, 2)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p3amy"]
 texture = ExtResource("28_a5s0k")
 region_rect = Rect2(0, 0, 512, 384)
@@ -85,6 +74,7 @@ region_rect = Rect2(0, 0, 512, 384)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_re5et")
+metadata/_edit_vertical_guides_ = [236.0, 402.0]
 
 [node name="GENERAL" type="Control" parent="."]
 visible = false
@@ -93,27 +83,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Nombre" parent="GENERAL" instance=ExtResource("1_rwu2n")]
-layout_mode = 0
+[node name="Nombre" parent="GENERAL" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 offset_left = 45.0
-offset_top = 65.0
-offset_right = 194.0
-offset_bottom = 96.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-
-[node name="Outline" parent="GENERAL/Nombre" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+offset_top = 61.0
+offset_right = 196.0
+offset_bottom = 91.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "Pikachu"
 
 [node name="Genero" type="Sprite2D" parent="GENERAL"]
 position = Vector2(183, 77)
@@ -124,28 +102,15 @@ texture = ExtResource("3_h6xl0")
 position = Vector2(29, 76)
 texture = ExtResource("4_tua3y")
 
-[node name="Nivel" parent="GENERAL" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 46.185
-offset_top = 96.174
-offset_right = 237.185
-offset_bottom = 124.174
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+[node name="Nivel" parent="GENERAL" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
+offset_left = 46.0
+offset_top = 92.0
+offset_right = 131.0
+offset_bottom = 122.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-
-[node name="Outline" parent="GENERAL/Nivel" index="0"]
-offset_right = 1.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+text = "63"
 
 [node name="Status" type="Sprite2D" parent="GENERAL"]
 position = Vector2(145, 107)
@@ -157,52 +122,24 @@ region_rect = Rect2(0, 16, 44, 16)
 position = Vector2(99.7798, 204.815)
 texture = ExtResource("7_li5g0")
 
-[node name="lObjeto" parent="GENERAL" instance=ExtResource("1_rwu2n")]
-layout_mode = 0
+[node name="lObjeto" parent="GENERAL" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 offset_left = 19.0
-offset_top = 324.0
-offset_right = 168.0
-offset_bottom = 355.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+offset_top = 320.0
+offset_right = 170.0
+offset_bottom = 350.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
 text = "Objeto"
 
-[node name="Outline" parent="GENERAL/lObjeto" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Objeto"
-
-[node name="dObjeto" parent="GENERAL" instance=ExtResource("1_rwu2n")]
-layout_mode = 0
+[node name="dObjeto" parent="GENERAL" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 offset_left = 19.0
-offset_top = 357.21
-offset_right = 168.0
-offset_bottom = 388.21
-theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
+offset_top = 353.0
+offset_right = 170.0
+offset_bottom = 383.0
+theme_override_colors/default_color = Color(0.690196, 0.690196, 0.690196, 1)
 theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Ninguno"
-
-[node name="Outline" parent="GENERAL/dObjeto" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_colors/font_shadow_color = Color(0.815686, 0.815686, 0.784314, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
 text = "Ninguno"
 
 [node name="PAGES" type="Control" parent="."]
@@ -211,7 +148,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="DATA" type="Panel" parent="PAGES"]
-visible = false
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 384.0
@@ -219,241 +155,123 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_ev6ym")
 script = ExtResource("10_ix7fs")
 metadata/_edit_lock_ = true
 
-[node name="Titulo" type="Label" parent="PAGES/DATA"]
-layout_mode = 0
+[node name="Título" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
 offset_left = 25.0
-offset_top = 20.0
-offset_right = 216.0
-offset_bottom = 46.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+offset_top = 16.0
+offset_right = 229.0
+offset_bottom = 48.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
 text = "DATOS"
-
-[node name="Titulo" type="Label" parent="PAGES/DATA/Titulo"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "DATOS"
+metadata/_edit_lock_ = true
 
 [node name="Labels" type="VBoxContainer" parent="PAGES/DATA"]
 layout_mode = 0
-offset_left = 237.548
-offset_top = 83.1698
-offset_right = 477.548
-offset_bottom = 269.17
+offset_left = 236.0
+offset_top = 80.0
+offset_right = 476.0
+offset_bottom = 270.0
+theme_override_constants/separation = 2
+metadata/_edit_lock_ = true
 
-[node name="lNumDex" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+[node name="lNumDex" parent="PAGES/DATA/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Nº Dex"
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "N.º Pokedex"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/Labels/lNumDex" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Nº Dex"
-
-[node name="lEspecie" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+[node name="lEspecie" parent="PAGES/DATA/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Especie"
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "Nombre"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/Labels/lEspecie" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Especie"
-
-[node name="lTipo" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+[node name="lTipo" parent="PAGES/DATA/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
 text = "Tipo"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/Labels/lTipo" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Tipo"
-
-[node name="lEO" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+[node name="lEO" parent="PAGES/DATA/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
 text = "EO"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/Labels/lEO" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "EO"
-
-[node name="lID" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+[node name="lID" parent="PAGES/DATA/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Nº ID"
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "N.º ID"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/Labels/lID" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Nº ID"
-
-[node name="lExperiencia" parent="PAGES/DATA/Labels" instance=ExtResource("1_rwu2n")]
+[node name="lExperiencia" parent="PAGES/DATA/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Puntos de Experiencia"
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "Ptos. Exp."
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/Labels/lExperiencia" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Puntos de Experiencia"
-
-[node name="dNumDex" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 370.413
-offset_top = 83.9602
-offset_right = 503.413
-offset_bottom = 109.96
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+[node name="dNumDex" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
+offset_left = 392.0
+offset_top = 80.0
+offset_right = 477.0
+offset_bottom = 110.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "025"
-horizontal_alignment = 1
+text = "[center]025"
+align = 1
 
-[node name="Outline" parent="PAGES/DATA/dNumDex" index="0"]
-layout_direction = 2
-offset_right = 133.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "025"
-horizontal_alignment = 1
-
-[node name="dEspecie" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
+[node name="dEspecie" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
 offset_left = 368.0
-offset_top = 116.0
-offset_right = 501.0
-offset_bottom = 142.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+offset_top = 112.0
+offset_right = 500.0
+offset_bottom = 140.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Pikachu"
-horizontal_alignment = 1
-
-[node name="Outline" parent="PAGES/DATA/dEspecie" index="0"]
-offset_right = 133.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Pikachu"
-horizontal_alignment = 1
+text = "[center]KRABBY"
+align = 1
 
 [node name="Tipos" type="HBoxContainer" parent="PAGES/DATA"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 368.842
-offset_top = 145.158
-offset_right = -11.158
-offset_bottom = -209.843
+offset_left = 368.0
+offset_top = 146.0
+offset_right = -11.0
+offset_bottom = -209.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="pTipo1" type="Panel" parent="PAGES/DATA/Tipos"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fk2ns")
+metadata/_edit_lock_ = true
 
 [node name="dTipo1" type="Sprite2D" parent="PAGES/DATA/Tipos/pTipo1"]
 position = Vector2(32, 14)
 texture = ExtResource("9_wfs1f")
 vframes = 24
+frame = 11
+metadata/_edit_lock_ = true
 
 [node name="pTipo2" type="Panel" parent="PAGES/DATA/Tipos"]
 visible = false
@@ -461,148 +279,79 @@ custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_styles/panel = SubResource("StyleBoxEmpty_slrel")
+metadata/_edit_lock_ = true
 
 [node name="dTipo2" type="Sprite2D" parent="PAGES/DATA/Tipos/pTipo2"]
 position = Vector2(32, 14)
 texture = ExtResource("9_wfs1f")
 vframes = 24
+metadata/_edit_lock_ = true
 
-[node name="dEO" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 368.0
-offset_top = 180.0
-offset_right = 501.0
+[node name="dEO" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
+offset_left = 373.0
+offset_top = 176.0
+offset_right = 493.0
 offset_bottom = 206.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Rojo"
-horizontal_alignment = 1
+text = "[center]Kevin"
+align = 1
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/dEO" index="0"]
-offset_right = 133.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+[node name="dID" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
+offset_left = 380.0
+offset_top = 208.0
+offset_right = 488.0
+offset_bottom = 238.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Rojo"
-horizontal_alignment = 1
+text = "[center]14645"
+align = 1
+metadata/_edit_lock_ = true
 
-[node name="dID" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 368.0
-offset_top = 213.0
-offset_right = 501.0
-offset_bottom = 239.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+[node name="dExperiencia" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
+offset_left = 350.0
+offset_top = 272.0
+offset_right = 490.0
+offset_bottom = 302.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "55720"
-horizontal_alignment = 1
+text = "[right]17576"
+align = 2
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/DATA/dID" index="0"]
-offset_right = 133.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+[node name="lSigNivel" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+layout_mode = 2
+offset_left = 236.0
+offset_top = 304.0
+offset_right = 476.0
+offset_bottom = 334.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+text = "Nivel siguiente"
+metadata/_edit_lock_ = true
+
+[node name="dSigNivel" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
+offset_left = 323.0
+offset_top = 336.0
+offset_right = 490.0
+offset_bottom = 366.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "55720"
-horizontal_alignment = 1
-
-[node name="dExperiencia" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 369.706
-offset_top = 274.869
-offset_right = 502.706
-offset_bottom = 300.869
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "250047"
-horizontal_alignment = 1
-
-[node name="Outline" parent="PAGES/DATA/dExperiencia" index="0"]
-offset_right = 133.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "250047"
-horizontal_alignment = 1
-
-[node name="lSigNivel" parent="PAGES/DATA" instance=ExtResource("1_rwu2n")]
-layout_mode = 0
-offset_left = 238.0
-offset_top = 309.0
-offset_right = 478.0
-offset_bottom = 336.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Para subir de nivel"
-
-[node name="Outline" parent="PAGES/DATA/lSigNivel" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Para subir de nivel"
-
-[node name="dSigNivel" parent="PAGES/DATA" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 368.078
-offset_top = 342.281
-offset_right = 501.078
-offset_bottom = 368.281
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "12097"
-horizontal_alignment = 1
-
-[node name="Outline" parent="PAGES/DATA/dSigNivel" index="0"]
-offset_right = 133.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "12097"
-horizontal_alignment = 1
+text = "[right]12097
+"
+align = 2
+metadata/_edit_lock_ = true
 
 [node name="exp_bar" type="Node2D" parent="PAGES/DATA"]
 position = Vector2(357, 377)
 script = ExtResource("10_uruff")
 metadata/_edit_vertical_guides_ = [-205.084]
+metadata/_edit_lock_ = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="PAGES/DATA/exp_bar"]
 offset_left = 1.0
@@ -631,176 +380,80 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_amjfa")
 script = ExtResource("17_c1vnc")
 metadata/_edit_lock_ = true
 
-[node name="Titulo" type="Label" parent="PAGES/TRAINER"]
-layout_mode = 0
+[node name="Título" parent="PAGES/TRAINER" instance=ExtResource("30_vhko7")]
 offset_left = 25.0
-offset_top = 20.0
-offset_right = 216.0
-offset_bottom = 46.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+offset_top = 16.0
+offset_right = 229.0
+offset_bottom = 48.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
 text = "NOTAS ENTRENADOR"
-
-[node name="Titulo" type="Label" parent="PAGES/TRAINER/Titulo"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "NOTAS ENTRENADOR"
+metadata/_edit_lock_ = true
 
 [node name="Labels" type="VBoxContainer" parent="PAGES/TRAINER"]
 layout_mode = 0
-offset_left = 242.048
-offset_top = 83.365
-offset_right = 482.048
-offset_bottom = 203.365
+offset_left = 232.0
+offset_top = 78.0
+offset_right = 490.0
+offset_bottom = 202.0
+metadata/_edit_lock_ = true
 
-[node name="LabelNaturaleza" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+[node name="LabelNaturaleza" parent="PAGES/TRAINER/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
 text = "Naturaleza"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/TRAINER/Labels/LabelNaturaleza" index="0"]
-offset_right = 1.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Naturaleza"
-
-[node name="FechaCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+[node name="FechaCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
 text = "18 de Nov. de 2018"
 
-[node name="Outline" parent="PAGES/TRAINER/Labels/FechaCaptura" index="0"]
-offset_right = 1.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "18 de Nov. de 2018"
-
-[node name="RutaCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+[node name="RutaCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+theme_override_colors/default_color = Color(0.972549, 0.219608, 0.12549, 1)
 theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Intro"
+text = "Ruta 1"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/TRAINER/Labels/RutaCaptura" index="0"]
-offset_right = 1.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
-theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Intro"
-
-[node name="NivelCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("5_lb2gy")]
+[node name="NivelCaptura" parent="PAGES/TRAINER/Labels" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
 text = "Encontrado con Nv. 63."
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/TRAINER/Labels/NivelCaptura" index="0"]
-offset_right = 1.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+[node name="DescNaturaleza" parent="PAGES/TRAINER" instance=ExtResource("30_vhko7")]
+layout_mode = 2
+offset_left = 232.0
+offset_top = 238.0
+offset_right = 490.0
+offset_bottom = 363.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Encontrado con Nv. 63."
+theme_override_constants/line_separation = 8
+text = "Siempre tiene el oído alerta."
+metadata/_edit_lock_ = true
 
-[node name="DescNaturaleza" parent="PAGES/TRAINER" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 243.0
-offset_top = 245.0
-offset_right = 505.0
-offset_bottom = 291.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Muy persistente."
-
-[node name="Outline" parent="PAGES/TRAINER/DescNaturaleza" index="0"]
-offset_right = 1.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Muy persistente."
-
-[node name="Naturaleza" parent="PAGES/TRAINER" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 360.452
-offset_top = 84.99
-offset_right = 600.452
-offset_bottom = 110.99
-theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
+[node name="Naturaleza" parent="PAGES/TRAINER" instance=ExtResource("30_vhko7")]
+layout_mode = 2
+offset_left = 356.0
+offset_top = 78.0
+offset_right = 614.0
+offset_bottom = 111.0
+theme_override_colors/default_color = Color(0.972549, 0.219608, 0.12549, 1)
 theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Seria."
-
-[node name="Outline" parent="PAGES/TRAINER/Naturaleza" index="0"]
-offset_right = 1.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.972549, 0.219608, 0.12549, 1)
-theme_override_colors/font_shadow_color = Color(0.878431, 0.596078, 0.564706, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Seria."
+text = "Agitada."
+metadata/_edit_lock_ = true
 
 [node name="STATS" type="Panel" parent="PAGES"]
+visible = false
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 384.0
@@ -808,91 +461,45 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_8itae")
 script = ExtResource("19_pigrk")
 metadata/_edit_lock_ = true
 
-[node name="Titulo" type="Label" parent="PAGES/STATS"]
+[node name="Título" parent="PAGES/STATS" instance=ExtResource("30_vhko7")]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 20.0
-offset_right = 215.0
-offset_bottom = 46.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+offset_top = 17.0
+offset_right = 228.0
+offset_bottom = 49.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
 text = "CARACTERÍSTICAS"
+metadata/_edit_lock_ = true
 
-[node name="Titulo" type="Label" parent="PAGES/STATS/Titulo"]
+[node name="lPS" parent="PAGES/STATS" instance=ExtResource("30_vhko7")]
 layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "CARACTERÍSTICAS"
-
-[node name="lPS" parent="PAGES/STATS" instance=ExtResource("1_rwu2n")]
-layout_mode = 2
 offset_left = 246.0
-offset_top = 80.0
-offset_right = 342.0
-offset_bottom = 103.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+offset_top = 76.0
+offset_right = 351.0
+offset_bottom = 108.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.411765, 0.411765, 0.411765, 1)
 text = "PS"
 metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/lPS" index="0"]
+[node name="dPS" parent="PAGES/STATS" instance=ExtResource("30_vhko7")]
 layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "PS
-"
-
-[node name="dPS" parent="PAGES/STATS" instance=ExtResource("5_lb2gy")]
-layout_mode = 0
-offset_left = 394.0
-offset_top = 80.0
-offset_right = 478.0
-offset_bottom = 100.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+offset_left = 369.0
+offset_top = 76.0
+offset_right = 474.0
+offset_bottom = 108.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "150/150"
-horizontal_alignment = 2
+text = "[right]235/235"
+align = 2
 metadata/_edit_lock_ = true
-
-[node name="Outline" parent="PAGES/STATS/dPS" index="0"]
-layout_direction = 3
-offset_right = 24.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "150/150"
-horizontal_alignment = 2
 
 [node name="health_bar" type="Node2D" parent="PAGES/STATS"]
 position = Vector2(289, 63)
 script = ExtResource("16_p6hxq")
 metadata/_edit_vertical_guides_ = [-205.084]
+metadata/_edit_lock_ = true
 
 [node name="lblHP" type="Label" parent="PAGES/STATS/health_bar"]
 visible = false
@@ -921,331 +528,142 @@ tint_progress = Color(0.0941176, 0.752941, 0.12549, 1)
 [node name="LabelStats" type="VBoxContainer" parent="PAGES/STATS"]
 layout_mode = 0
 offset_left = 246.0
-offset_top = 125.0
-offset_right = 342.0
-offset_bottom = 281.0
+offset_top = 120.0
+offset_right = 355.0
+offset_bottom = 246.0
+theme_override_constants/separation = 2
 metadata/_edit_lock_ = true
 
-[node name="lAtaque" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+[node name="lAtaque" parent="PAGES/STATS/LabelStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.411765, 0.411765, 0.411765, 1)
 text = "Ataque"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/LabelStats/lAtaque" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Ataque"
-
-[node name="lDefensa" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+[node name="lDefensa" parent="PAGES/STATS/LabelStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.411765, 0.411765, 0.411765, 1)
 text = "Defensa"
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/LabelStats/lDefensa" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Defensa"
-
-[node name="lAtEsp" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+[node name="lAtEsp" parent="PAGES/STATS/LabelStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.411765, 0.411765, 0.411765, 1)
 text = "At. Esp."
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/LabelStats/lAtEsp" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "At. Esp."
-
-[node name="lDefEsp" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+[node name="lDefEsp" parent="PAGES/STATS/LabelStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.411765, 0.411765, 0.411765, 1)
 text = "Def. Esp."
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/LabelStats/lDefEsp" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Def. Esp."
-
-[node name="Velocidad" parent="PAGES/STATS/LabelStats" instance=ExtResource("1_rwu2n")]
+[node name="lVelocidad" parent="PAGES/STATS/LabelStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.411765, 0.411765, 0.411765, 1)
 text = "Velocidad"
-
-[node name="Outline" parent="PAGES/STATS/LabelStats/Velocidad" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Velocidad"
+metadata/_edit_lock_ = true
 
 [node name="ValueStats" type="VBoxContainer" parent="PAGES/STATS"]
 layout_mode = 0
 offset_left = 360.0
-offset_top = 125.0
+offset_top = 120.0
 offset_right = 456.0
-offset_bottom = 281.0
+offset_bottom = 262.0
+theme_override_constants/separation = 2
+metadata/_edit_lock_ = true
 
-[node name="dAtaque" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+[node name="dAtaque" parent="PAGES/STATS/ValueStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
+text = "[right]63"
+align = 2
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/ValueStats/dAtaque" index="0"]
-layout_direction = 3
-offset_right = 24.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
-
-[node name="dDefensa" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+[node name="dDefensa" parent="PAGES/STATS/ValueStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
+text = "[right]63"
+align = 2
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/ValueStats/dDefensa" index="0"]
-layout_direction = 3
-offset_right = 24.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
-
-[node name="dAtEsp" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+[node name="dAtEsp" parent="PAGES/STATS/ValueStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
+text = "[right]63"
+align = 2
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/ValueStats/dAtEsp" index="0"]
-layout_direction = 3
-offset_right = 24.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
-
-[node name="dDefEsp" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+[node name="dDefEsp" parent="PAGES/STATS/ValueStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
+text = "[right]63"
+align = 2
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/ValueStats/dDefEsp" index="0"]
-layout_direction = 3
-offset_right = 24.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
-
-[node name="dVelocidad" parent="PAGES/STATS/ValueStats" instance=ExtResource("5_lb2gy")]
+[node name="dVelocidad" parent="PAGES/STATS/ValueStats" instance=ExtResource("30_vhko7")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
+text = "[right]63"
+align = 2
+metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/ValueStats/dVelocidad" index="0"]
-layout_direction = 3
-offset_right = 24.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 2
-
-[node name="lHabilidad" parent="PAGES/STATS" instance=ExtResource("1_rwu2n")]
+[node name="lHabilidad" parent="PAGES/STATS" instance=ExtResource("30_vhko7")]
 layout_mode = 0
 offset_left = 222.0
-offset_top = 288.0
-offset_right = 371.0
-offset_bottom = 319.0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
+offset_top = 284.0
+offset_right = 327.0
+offset_bottom = 316.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.411765, 0.411765, 0.411765, 1)
 text = "Habilidad"
 metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/lHabilidad" index="0"]
-layout_mode = 0
-theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
-theme_override_colors/font_shadow_color = Color(0.407843, 0.407843, 0.407843, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Habilidad"
-
-[node name="dHabilidad" parent="PAGES/STATS" instance=ExtResource("5_lb2gy")]
+[node name="dHabilidad" parent="PAGES/STATS" instance=ExtResource("30_vhko7")]
 layout_mode = 0
 offset_left = 360.0
-offset_top = 288.0
-offset_right = 504.0
-offset_bottom = 308.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+offset_top = 284.0
+offset_right = 534.0
+offset_bottom = 316.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Elec. Estática"
+text = "Entusiasmo"
 metadata/_edit_lock_ = true
 
-[node name="Outline" parent="PAGES/STATS/dHabilidad" index="0"]
-layout_direction = 2
-offset_right = 24.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Elec. Estática"
-
-[node name="DescHabilidad" type="Label" parent="PAGES/STATS"]
+[node name="DescHabilidad" parent="PAGES/STATS" instance=ExtResource("30_vhko7")]
 layout_mode = 0
 offset_left = 222.0
-offset_top = 322.0
-offset_right = 501.0
-offset_bottom = 379.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
+offset_top = 316.0
+offset_right = 510.0
+offset_bottom = 380.0
+theme_override_colors/default_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Paraliza con el contacto."
-label_settings = SubResource("LabelSettings_e6ab3")
-autowrap_mode = 3
-clip_text = true
-text_overrun_behavior = 1
-max_lines_visible = 2
+theme_override_constants/line_separation = 8
+text = "Aumenta el Ataque, pero reduce la precisión."
 metadata/_edit_lock_ = true
 
-[node name="Outline" type="Label" parent="PAGES/STATS/DescHabilidad"]
-layout_direction = 2
-layout_mode = 0
-offset_right = 279.0
-offset_bottom = 57.0
-theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
-theme_override_colors/font_shadow_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_constants/line_spacing = 10
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 0
-theme_override_fonts/font = ExtResource("2_eg5aj")
-theme_override_font_sizes/font_size = 26
-text = "Paraliza con el contacto."
-autowrap_mode = 3
-clip_text = true
-text_overrun_behavior = 2
-max_lines_visible = 2
-
 [node name="MOVES" type="Panel" parent="PAGES"]
+visible = false
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 384.0
@@ -1678,41 +1096,3 @@ metadata/_edit_lock_ = true
 [connection signal="focus_exited" from="PAGES/MOVES/MovePanels/Move4" to="PAGES/MOVES" method="_on_move_focus_exited"]
 [connection signal="focus_entered" from="PAGES/MOVES/Move0" to="PAGES/MOVES" method="_on_move_focus_entered"]
 [connection signal="focus_exited" from="PAGES/MOVES/Move0" to="PAGES/MOVES" method="_on_move_focus_exited"]
-
-[editable path="GENERAL/Nombre"]
-[editable path="GENERAL/Nivel"]
-[editable path="GENERAL/lObjeto"]
-[editable path="GENERAL/dObjeto"]
-[editable path="PAGES/DATA/Labels/lNumDex"]
-[editable path="PAGES/DATA/Labels/lEspecie"]
-[editable path="PAGES/DATA/Labels/lTipo"]
-[editable path="PAGES/DATA/Labels/lEO"]
-[editable path="PAGES/DATA/Labels/lID"]
-[editable path="PAGES/DATA/Labels/lExperiencia"]
-[editable path="PAGES/DATA/dNumDex"]
-[editable path="PAGES/DATA/dEspecie"]
-[editable path="PAGES/DATA/dEO"]
-[editable path="PAGES/DATA/dID"]
-[editable path="PAGES/DATA/dExperiencia"]
-[editable path="PAGES/DATA/lSigNivel"]
-[editable path="PAGES/DATA/dSigNivel"]
-[editable path="PAGES/TRAINER/Labels/LabelNaturaleza"]
-[editable path="PAGES/TRAINER/Labels/FechaCaptura"]
-[editable path="PAGES/TRAINER/Labels/RutaCaptura"]
-[editable path="PAGES/TRAINER/Labels/NivelCaptura"]
-[editable path="PAGES/TRAINER/DescNaturaleza"]
-[editable path="PAGES/TRAINER/Naturaleza"]
-[editable path="PAGES/STATS/lPS"]
-[editable path="PAGES/STATS/dPS"]
-[editable path="PAGES/STATS/LabelStats/lAtaque"]
-[editable path="PAGES/STATS/LabelStats/lDefensa"]
-[editable path="PAGES/STATS/LabelStats/lAtEsp"]
-[editable path="PAGES/STATS/LabelStats/lDefEsp"]
-[editable path="PAGES/STATS/LabelStats/Velocidad"]
-[editable path="PAGES/STATS/ValueStats/dAtaque"]
-[editable path="PAGES/STATS/ValueStats/dDefensa"]
-[editable path="PAGES/STATS/ValueStats/dAtEsp"]
-[editable path="PAGES/STATS/ValueStats/dDefEsp"]
-[editable path="PAGES/STATS/ValueStats/dVelocidad"]
-[editable path="PAGES/STATS/lHabilidad"]
-[editable path="PAGES/STATS/dHabilidad"]

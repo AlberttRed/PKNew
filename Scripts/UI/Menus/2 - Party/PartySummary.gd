@@ -44,8 +44,7 @@ func loadPokemonInfo(pokemon:PokemonInstance):
 		page.loadPokemonInfo(pokemon)
 
 func loadGeneralInfo(pokemon:PokemonInstance):
-	generalInfo.get_node("Nombre").text = pokemon.Name
-	generalInfo.get_node("Nombre/Outline").text = pokemon.Name
+	generalInfo.get_node("Nombre").setText(pokemon.Name)
 	
 	if pokemon.gender == CONST.GENEROS.MACHO:
 		generalInfo.get_node("Genero").texture = load("res://Escenas/UI/Menus/Resources/male_icon.png")
@@ -68,8 +67,7 @@ func loadGeneralInfo(pokemon:PokemonInstance):
 	#--- falta pokeball
 	#--- falta objecte
 	#--- falta barra exp
-	generalInfo.get_node("Nivel").text = str(pokemon.level)
-	generalInfo.get_node("Nivel/Outline").text = str(pokemon.level)
+	generalInfo.get_node("Nivel").setText(pokemon.level)
 	generalInfo.get_node("Sprite").texture = pokemon.battle_front_sprite#load("res://Sprites/Batalla/Battlers/" + str(pokemon.pkm_id).pad_zeros(3) + ".png")
 	
 func closeSummary(page:int):

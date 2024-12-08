@@ -187,8 +187,12 @@ var fainted : bool = false :
 	get:
 		return hp_actual == 0
 		
-var EVs = []
-var IVs = []
+var EVs:Array[int]:
+	get:
+		return [hp_EVs, attack_EVs, defense_EVs, spAttack_EVs, spDefense_EVs, speed_EVs] 
+var IVs:Array[int]:
+	get:
+		return [hp_IVs, attack_IVs, defense_IVs, spAttack_IVs, spDefense_IVs, speed_IVs]
 var personality = "" #setget set_personality,get_personality
 var trainer:Battler #Indica l'entrenador del pokemon(si en té)
 var learningMoves:Array[PokemonLearningMove] #Indicates the list of moves this pokemon is capable to learn
@@ -276,6 +280,7 @@ func _ready():
 	totalExp = actualLevelExpBase
 	if randomize_pokemon || randomize_stats:
 		randomize_pkmn()
+	personality = get_personality_text()
 #	print("patata")
 #	set_info()
 	loadLearningMoves()
@@ -289,7 +294,7 @@ func _ready():
 #	defense = get_defense()  
 #	special_attack = get_special_attack() #
 #	special_defense  = get_special_defense()
-#
+#	
 #	EVs = [hp_EVs, attack_EVs, defense_EVs, spAttack_EVs, spDefense_EVs, speed_EVs] 
 #	IVs = [hp_IVs, attack_IVs, defense_IVs, spAttack_IVs, spDefense_IVs, speed_IVs]
 #	personality = get_personality_text()
@@ -318,8 +323,8 @@ func init_pokemon():
 #	special_attack = get_special_attack() #
 #	special_defense  = get_special_defense()
 
-	EVs = [hp_EVs, attack_EVs, defense_EVs, spAttack_EVs, spDefense_EVs, speed_EVs] 
-	IVs = [hp_IVs, attack_IVs, defense_IVs, spAttack_IVs, spDefense_IVs, speed_IVs]
+	#EVs = [hp_EVs, attack_EVs, defense_EVs, spAttack_EVs, spDefense_EVs, speed_EVs] 
+	#IVs = [hp_IVs, attack_IVs, defense_IVs, spAttack_IVs, spDefense_IVs, speed_IVs]
 	personality = get_personality_text()
 	print_pokemon_base()
 func randomize_pkmn():

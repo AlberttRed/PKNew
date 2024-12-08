@@ -4,11 +4,9 @@ func open():
 	show()
 
 func loadPokemonInfo(pokemon:PokemonInstance):
-	$dNumDex.text = str(pokemon.pkm_id).pad_zeros(3)
-	$dNumDex/Outline.text = str(pokemon.pkm_id).pad_zeros(3)
+	$dNumDex.setText(str(pokemon.pkm_id).pad_zeros(3))
 	
-	$dEspecie.text = pokemon.Name
-	$dEspecie/Outline.text = pokemon.Name
+	$dEspecie.setText(pokemon.Name)
 	$Tipos/pTipo1/dTipo1.vframes = 1
 	$Tipos/pTipo1/dTipo1.texture = pokemon.type_a.image#frame = pokemon.type_a
 
@@ -19,26 +17,20 @@ func loadPokemonInfo(pokemon:PokemonInstance):
 	else:
 		$Tipos/pTipo2.visible = false
 	
-	$dEO.text = pokemon.original_trainer
-	$dEO/Outline.text = pokemon.original_trainer
+	$dEO.setText(pokemon.original_trainer)
 	
-	$dID.text = str(pokemon.trainer_id)
-	$dID/Outline.text = str(pokemon.trainer_id)
+	$dID.setText(str(pokemon.trainer_id))
 	
-	$dExperiencia.text = str(pokemon.totalExp)
-	$dExperiencia/Outline.text = str(pokemon.totalExp)
+	$dExperiencia.setText(str(pokemon.totalExp))
 	
-	$dSigNivel.text = str(pokemon.nextLevelExpBase - pokemon.totalExp)
-	$dSigNivel/Outline.text = str(pokemon.nextLevelExpBase - pokemon.totalExp)
+	$dSigNivel.setText(str(pokemon.nextLevelExpBase - pokemon.totalExp))
 
 	$exp_bar.init(pokemon)
 	
 func clear():
-	$dNumDex.text = ""
-	$dNumDex/Outline.text = ""
+	$dNumDex.setText("")
 	
-	$dEspecie.text = ""
-	$dEspecie/Outline.text = ""
+	$dEspecie.setText("")
 	$Tipos/pTipo1/dTipo1.vframes = 2
 	$Tipos/pTipo1/dTipo1.texture = ""
 
@@ -47,16 +39,12 @@ func clear():
 	$Tipos/pTipo2/dTipo2.vframes = 2
 	$Tipos/pTipo2/dTipo2.texture = ""
 	
-	$dEO.text = ""
-	$dEO/Outline.text = ""
+	$dEO.setText("")
 	
-	$dID.text = ""
-	$dID/Outline.text = ""
+	$dID.setText("")
 	
-	$dExperiencia.text = ""
-	$dExperiencia/Outline.text = ""
+	$dExperiencia.setText("")
 	
-	$dSigNivel.text = ""
-	$dSigNivel/Outline.text = ""
+	$dSigNivel.setText("")
 
 	$exp_bar.clear()

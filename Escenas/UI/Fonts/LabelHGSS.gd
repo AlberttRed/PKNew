@@ -55,11 +55,14 @@ func _ready():
 	$Outline.set("spacing_top", topSpacing)
 	$Outline2.set("spacing_top", topSpacing)
 
+func _draw() -> void:
 	$Outline.position = Vector2(0, 0)
-	$Outline.size = size
+	$Outline.size = self.size
+	$Outline.custom_minimum_size = self.size
 	$Outline2.position = Vector2(0, 0)
-	$Outline2.size = size
-		
+	$Outline2.size = self.size
+	$Outline2.custom_minimum_size = self.size
+	
 func setText(_text):
 	var algn = ""
 	match align:
@@ -70,7 +73,6 @@ func setText(_text):
 		2:
 			algn = "[right]"
 	self.text = algn+str(_text)
-			
 func updateNextLine():
 	nextLineStop += 1
 	
