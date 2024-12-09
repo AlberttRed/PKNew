@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://tvaj44dxdptn"
+path="res://.godot/imported/hp numbers.png-9064b46e86f0a11b2dc0eed9d76c9ae6.fontdata"
+
+[deps]
+
+source_file="res://Escenas/UI/Fonts/hp numbers.png"
+dest_files=["res://.godot/imported/hp numbers.png-9064b46e86f0a11b2dc0eed9d76c9ae6.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray()
+kerning_pairs=PackedStringArray()
+columns=5
+rows=2
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=2

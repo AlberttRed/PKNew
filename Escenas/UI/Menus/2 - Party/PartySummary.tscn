@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://gdxd2a726tc0"]
+[gd_scene load_steps=42 format=3 uid="uid://gdxd2a726tc0"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/PartySummary.gd" id="1_re5et"]
 [ext_resource type="Texture2D" uid="uid://c8kpj8jre1qao" path="res://Escenas/UI/Menus/Resources/male_icon.png" id="3_h6xl0"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://vp3788sffcg4" path="res://Escenas/UI/Menus/Resources/summary3.PNG" id="15_nad7y"]
 [ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="16_p6hxq"]
 [ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/SummaryPages/PartySummaryTrainer.gd" id="17_c1vnc"]
-[ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="17_re6e6"]
 [ext_resource type="Texture2D" uid="uid://ctnjnkfpilrj8" path="res://Sprites/Pictures/HPsummary_background.png" id="18_0pyjn"]
 [ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/SummaryPages/PartySummaryStats.gd" id="19_pigrk"]
 [ext_resource type="Texture2D" uid="uid://cdb6j2ubvprkw" path="res://Sprites/Pictures/HPsummary_overlay.png" id="19_qbgrh"]
@@ -85,6 +84,7 @@ offset_bottom = 40.0
 
 [node name="Nombre" parent="GENERAL" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 30)
+layout_mode = 0
 offset_left = 45.0
 offset_top = 61.0
 offset_right = 196.0
@@ -104,6 +104,7 @@ texture = ExtResource("4_tua3y")
 
 [node name="Nivel" parent="GENERAL" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 28)
+layout_mode = 0
 offset_left = 46.0
 offset_top = 92.0
 offset_right = 131.0
@@ -124,6 +125,7 @@ texture = ExtResource("7_li5g0")
 
 [node name="lObjeto" parent="GENERAL" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 30)
+layout_mode = 0
 offset_left = 19.0
 offset_top = 320.0
 offset_right = 170.0
@@ -134,6 +136,7 @@ text = "Objeto"
 
 [node name="dObjeto" parent="GENERAL" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 30)
+layout_mode = 0
 offset_left = 19.0
 offset_top = 353.0
 offset_right = 170.0
@@ -156,6 +159,7 @@ script = ExtResource("10_ix7fs")
 metadata/_edit_lock_ = true
 
 [node name="Título" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
+layout_mode = 0
 offset_left = 25.0
 offset_top = 16.0
 offset_right = 229.0
@@ -224,6 +228,7 @@ metadata/_edit_lock_ = true
 
 [node name="dNumDex" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 28)
+layout_mode = 0
 offset_left = 392.0
 offset_top = 80.0
 offset_right = 477.0
@@ -235,6 +240,7 @@ align = 1
 
 [node name="dEspecie" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 28)
+layout_mode = 0
 offset_left = 368.0
 offset_top = 112.0
 offset_right = 500.0
@@ -289,6 +295,7 @@ metadata/_edit_lock_ = true
 
 [node name="dEO" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 28)
+layout_mode = 0
 offset_left = 373.0
 offset_top = 176.0
 offset_right = 493.0
@@ -301,6 +308,7 @@ metadata/_edit_lock_ = true
 
 [node name="dID" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 28)
+layout_mode = 0
 offset_left = 380.0
 offset_top = 208.0
 offset_right = 488.0
@@ -313,6 +321,7 @@ metadata/_edit_lock_ = true
 
 [node name="dExperiencia" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 28)
+layout_mode = 0
 offset_left = 350.0
 offset_top = 272.0
 offset_right = 490.0
@@ -336,6 +345,7 @@ metadata/_edit_lock_ = true
 
 [node name="dSigNivel" parent="PAGES/DATA" instance=ExtResource("30_vhko7")]
 custom_minimum_size = Vector2(0, 28)
+layout_mode = 0
 offset_left = 323.0
 offset_top = 336.0
 offset_right = 490.0
@@ -381,6 +391,7 @@ script = ExtResource("17_c1vnc")
 metadata/_edit_lock_ = true
 
 [node name="Título" parent="PAGES/TRAINER" instance=ExtResource("30_vhko7")]
+layout_mode = 0
 offset_left = 25.0
 offset_top = 16.0
 offset_right = 229.0
@@ -453,7 +464,6 @@ text = "Agitada."
 metadata/_edit_lock_ = true
 
 [node name="STATS" type="Panel" parent="PAGES"]
-visible = false
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 384.0
@@ -501,13 +511,10 @@ script = ExtResource("16_p6hxq")
 metadata/_edit_vertical_guides_ = [-205.084]
 metadata/_edit_lock_ = true
 
-[node name="lblHP" type="Label" parent="PAGES/STATS/health_bar"]
+[node name="lblHP" parent="PAGES/STATS/health_bar" instance=ExtResource("30_vhko7")]
 visible = false
-offset_left = 11.1186
-offset_top = 10.3219
-offset_right = 61.1186
-offset_bottom = 33.3219
-theme = ExtResource("17_re6e6")
+offset_right = 73.0
+offset_bottom = 32.0
 text = "45/45"
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="PAGES/STATS/health_bar"]

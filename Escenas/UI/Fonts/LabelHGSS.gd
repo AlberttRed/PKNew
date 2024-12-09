@@ -31,6 +31,7 @@ var messageHasFinished:bool:
 func _ready():
 	setText(text)
 	var textFont = get("default_font")# get("theme_override_fonts/normal_font")
+	var textNormalFont = get("theme_override_fonts/normal_font")
 	var fontSize = get("default_font_size")# get("theme_override_font_sizes/normal_font_size")
 	var fontColor = get("theme_override_colors/default_color")
 	var outlineColor = get("theme_override_colors/font_shadow_color")
@@ -54,6 +55,12 @@ func _ready():
 	
 	$Outline.set("spacing_top", topSpacing)
 	$Outline2.set("spacing_top", topSpacing)
+	
+	$Outline.theme = theme
+	$Outline2.theme = theme
+	
+	$Outline.set("theme_override_fonts/normal_font", textNormalFont)
+	$Outline2.set("theme_override_fonts/normal_font", textNormalFont)
 
 func _draw() -> void:
 	$Outline.position = Vector2(0, 0)
@@ -107,3 +114,9 @@ func _set(name, value):
 			if messageHasFinished or nextLine != actualLine:
 				line_displayed.emit()
 				lastLine = actualLine
+		"theme_override_colors/default_color":
+				$Outline.set("theme_override_colors/default_color", value)
+				$Outline2.set("theme_override_colors/default_color", value)
+		"theme_override_colors/font_shadow_color":
+				$Outline.set("theme_override_colors/font_shadow_color", value)
+				$Outline2.set("theme_override_colors/font_shadow_color", value)

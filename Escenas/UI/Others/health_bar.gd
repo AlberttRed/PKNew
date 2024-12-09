@@ -5,7 +5,7 @@ signal updated
 var total_hp :int = 0
 var actual_hp :int = 0
 
-@onready var lblHP:Label = $lblHP
+@onready var lblHP:RichTextLabel = $lblHP
 @onready var progressBar:TextureProgressBar = $TextureProgressBar
 
 func init(pokemon : PokemonInstance):
@@ -19,9 +19,7 @@ func updateUI(pokemon : PokemonInstance):
 	total_hp = pokemon.hp_total
 	$TextureProgressBar.max_value = total_hp
 	$TextureProgressBar.value = actual_hp
-	$lblHP.text = str(actual_hp) + "/" + str(total_hp)
-	if($lblHP.has_node("Outline")):
-		$lblHP.get_node("Outline").text = str(actual_hp) + "/" + str(total_hp)
+	$lblHP.setText(str(actual_hp) + "/" + str(total_hp))
 	update_color()
 	
 func update_color():
@@ -51,7 +49,7 @@ func animate_value(start, end):
 	await tween.finished
 	
 func set_count_text(value):
-	$lblHP.text = str(round(value)) + "/" + str(total_hp)
+	$lblHP.setText(str(round(value)) + "/" + str(total_hp))
 	update_color()
 
 func clear():

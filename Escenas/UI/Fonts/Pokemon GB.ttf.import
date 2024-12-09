@@ -13,8 +13,9 @@ dest_files=["res://.godot/imported/Pokemon GB.ttf-8a25c863a652f05b6c6781cb10d745
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

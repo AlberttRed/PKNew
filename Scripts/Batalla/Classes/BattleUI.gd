@@ -195,8 +195,7 @@ func _input(event):
 			cmdLuchar.grab_focus()
 			
 func setPanelActionsText(text:String):
-	$PanelActions/Label.text = text
-	$PanelActions/Label/Label2.text = text
+	$PanelActions/Label.setText(text)
 			
 func showMessageWait(text:String, waitTime:float):#, showIcon : bool = true, _waitTime : float = 0.0, waitInput:bool = false):
 	showPanel($PanelMessageBox)
@@ -239,7 +238,7 @@ func showMovesPanel(rememberFocus = false):
 	#await GUI.party.exit
 	#cmdPokemon.grab_focus()
 	
-func showParty(canQuit:bool=true) -> int: #Modificarem el showParty dle BattleUI, enlloc de ferho en el GUI
+func showParty(canQuit:bool=true): #Modificarem el showParty dle BattleUI, enlloc de ferho en el GUI
 	var selectedPokemon:BattlePokemon
 	await GUI.fadeIn(3)
 	GUI.party.canQuit = canQuit
@@ -268,7 +267,7 @@ func initMovesPanel():
 
 	for m in controller.active_pokemon.moves:
 		panels[i].visible = true
-		panels[i].get_node("Label").text = m.Name
+		panels[i].get_node("Label").setText(m.Name)
 		panels[i].get("theme_override_styles/panel").region_rect.position.y = (46 * (m.type.id-1))
 		i += 1
 		
@@ -354,20 +353,20 @@ func updateMoveInfoPanel(move:BattleMove):
 	if move != null:
 		$PanelMoves/MoveType.vframes = 1
 		$PanelMoves/MoveType.texture = move.type.image
-		$PanelMoves/lblPPs.text = "PP: " + str(move.pp_actual) + "/" + str(move.pp_total)
+		$PanelMoves/lblPPs.setText("PP: " + str(move.pp_actual) + "/" + str(move.pp_total))
 		
 		if move.pp_actual == 0:
-			$PanelMoves/lblPPs.add_theme_color_override("font_color", Color("FF4A4A"))
-			$PanelMoves/lblPPs.add_theme_color_override("font_shadow_color", Color("8C3131"))
+			$PanelMoves/lblPPs.set("theme_override_colors/default_color", Color("FF4A4A"))
+			$PanelMoves/lblPPs.set("theme_override_colors/font_shadow_color", Color("8C3131"))
 		elif move.pp_actual > 0 && float(move.pp_actual) <= move.pp_total/4.0:
-			$PanelMoves/lblPPs.add_theme_color_override("font_color", Color("FF8C21"))
-			$PanelMoves/lblPPs.add_theme_color_override("font_shadow_color", Color("944A18"))
+			$PanelMoves/lblPPs.set("theme_override_colors/default_color", Color("FF8C21"))
+			$PanelMoves/lblPPs.set("theme_override_colors/font_shadow_color", Color("944A18"))
 		elif float(move.pp_actual) > move.pp_total/4.0 && float(move.pp_actual) <= move.pp_total/2.0:
-			$PanelMoves/lblPPs.add_theme_color_override("font_color", Color("FFC600"))
-			$PanelMoves/lblPPs.add_theme_color_override("font_shadow_color", Color("946B00"))
+			$PanelMoves/lblPPs.set("theme_override_colors/default_color", Color("FFC600"))
+			$PanelMoves/lblPPs.set("theme_override_colors/font_shadow_color", Color("946B00"))
 		else:
-			$PanelMoves/lblPPs.remove_theme_color_override("font_color")
-			$PanelMoves/lblPPs.remove_theme_color_override("font_shadow_color")
+			$PanelMoves/lblPPs.set("theme_override_colors/default_color", Color("585850"))
+			$PanelMoves/lblPPs.set("theme_override_colors/font_shadow_color", Color("a8b8b8"))
 
 	
 	

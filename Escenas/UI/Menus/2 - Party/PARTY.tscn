@@ -144,7 +144,6 @@ offset_left = 0.0
 offset_right = 256.0
 focus_neighbor_right = NodePath("../PKMN_1")
 focus_neighbor_bottom = NodePath("../PKMN_2")
-metadata/_edit_lock_ = true
 
 [node name="PKMN_1" parent="." instance=ExtResource("19_xxnex")]
 layout_mode = 0
@@ -155,7 +154,6 @@ offset_bottom = 114.0
 focus_neighbor_left = NodePath("../PKMN_0")
 focus_neighbor_bottom = NodePath("../PKMN_3")
 theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
-metadata/_edit_lock_ = true
 
 [node name="PKMN_2" parent="." instance=ExtResource("19_xxnex")]
 layout_mode = 0
@@ -167,7 +165,6 @@ focus_neighbor_top = NodePath("../PKMN_0")
 focus_neighbor_right = NodePath("../PKMN_3")
 focus_neighbor_bottom = NodePath("../PKMN_4")
 theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
-metadata/_edit_lock_ = true
 
 [node name="PKMN_3" parent="." instance=ExtResource("19_xxnex")]
 layout_mode = 0
@@ -179,7 +176,6 @@ focus_neighbor_left = NodePath("../PKMN_2")
 focus_neighbor_top = NodePath("../PKMN_1")
 focus_neighbor_bottom = NodePath("../PKMN_5")
 theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
-metadata/_edit_lock_ = true
 
 [node name="PKMN_4" parent="." instance=ExtResource("19_xxnex")]
 layout_mode = 0
@@ -190,7 +186,6 @@ offset_bottom = 290.0
 focus_neighbor_top = NodePath("../PKMN_2")
 focus_neighbor_right = NodePath("../PKMN_5")
 theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
-metadata/_edit_lock_ = true
 
 [node name="PKMN_5" parent="." instance=ExtResource("19_xxnex")]
 layout_mode = 0
@@ -201,7 +196,6 @@ offset_bottom = 306.0
 focus_neighbor_left = NodePath("../PKMN_4")
 focus_neighbor_top = NodePath("../PKMN_3")
 theme_override_styles/panel = SubResource("StyleBoxTexture_dn8fn")
-metadata/_edit_lock_ = true
 
 [node name="Salir" type="Panel" parent="."]
 layout_mode = 0
@@ -266,9 +260,9 @@ one_shot = true
 [node name="Label" parent="FIXED_MSG" instance=ExtResource("31")]
 layout_mode = 0
 offset_left = 13.899
-offset_top = 20.848
+offset_top = 16.848
 offset_right = 521.899
-offset_bottom = 97.848
+offset_bottom = 93.848
 text = "Elige a un Pokémon."
 
 [node name="ACTIONS" type="PanelContainer" parent="."]

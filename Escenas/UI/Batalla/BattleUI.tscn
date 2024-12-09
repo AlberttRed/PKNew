@@ -1,22 +1,19 @@
-[gd_scene load_steps=80 format=3 uid="uid://dmdm304dmklh8"]
+[gd_scene load_steps=77 format=3 uid="uid://dmdm304dmklh8"]
 
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="1_35cnb"]
 [ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleUI.gd" id="1_syfy0"]
 [ext_resource type="StyleBox" uid="uid://cpxaac6mtjqnu" path="res://Escenas/UI/Batalla/Resources/BattleActions_Panel.tres" id="3_7u5r2"]
 [ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleField.gd" id="3_44m5u"]
 [ext_resource type="StyleBox" uid="uid://bgsm216aqcccn" path="res://Escenas/UI/Batalla/Resources/BattleMoves_Panel.tres" id="4_1pp74"]
-[ext_resource type="Theme" uid="uid://bugfcogjtje8h" path="res://Escenas/UI/Fonts/fontMessageBox.tres" id="4_441j1"]
 [ext_resource type="Texture2D" uid="uid://vxedaqbf3pad" path="res://Escenas/UI/Batalla/Resources/Sprites/battleCommandButtons.png" id="4_l76bn"]
 [ext_resource type="Texture2D" uid="uid://jp48dg7huvv" path="res://Sprites/Batalla/Battlebacks/enemybaseField.png" id="6_yaj7x"]
 [ext_resource type="Texture2D" uid="uid://bpjm37rtjwm8e" path="res://Sprites/Batalla/567.png" id="9_2td6s"]
 [ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="9_yhn83"]
 [ext_resource type="Texture2D" uid="uid://pbvisvp5jwv4" path="res://Sprites/Batalla/019.png" id="10_db7kv"]
 [ext_resource type="Script" path="res://Escenas/UI/Textbox/MessageBox.gd" id="10_dtmuf"]
-[ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="10_gjl27"]
 [ext_resource type="FontFile" uid="uid://rdvuqsu77j27" path="res://Escenas/UI/Fonts/pkmnemn.ttf" id="10_o3o5j"]
 [ext_resource type="Texture2D" uid="uid://coiimjb2x6u06" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFightButtons.png" id="10_wa1kd"]
 [ext_resource type="Texture2D" uid="uid://bmucqisxae21h" path="res://Sprites/Batalla/battle_shadow.png" id="10_yvtq8"]
-[ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="11_a22gy"]
 [ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="11_mjwwj"]
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="11_ne00b"]
 [ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="11_sxhgc"]
@@ -45,6 +42,9 @@
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="26_tk2h0"]
 [ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="27_cqio0"]
 [ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="28_q32p6"]
+[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="30_r8nu8"]
+[ext_resource type="Texture2D" uid="uid://6s4ko21ivsiy" path="res://Sprites/Pictures/Nv_icon_black.png" id="31_li2jl"]
+[ext_resource type="FontFile" uid="uid://bwwk8ekl3u4o7" path="res://Escenas/UI/Fonts/Pokemon GB.ttf" id="32_qlq8q"]
 [ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleParticipant.gd" id="35_5kxgh"]
 [ext_resource type="Texture2D" uid="uid://dx7t7y2tum7mu" path="res://Sprites/Pictures/trback000.png" id="36_bvlcl"]
 [ext_resource type="Texture2D" uid="uid://6cpfkdqyugvc" path="res://Sprites/Pictures/trback001.png" id="37_nlq6k"]
@@ -127,29 +127,6 @@ _data = {
 "Typing": SubResource("Animation_mbf3k")
 }
 
-[sub_resource type="Theme" id="Theme_uti51"]
-default_font = ExtResource("10_o3o5j")
-default_font_size = 26
-Label/colors/font_color = Color(0.313726, 0.313726, 0.345098, 1)
-Label/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/colors/font_shadow_color = Color(0.627451, 0.627451, 0.658824, 1)
-Label/constants/line_spacing = 3
-Label/constants/outline_size = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/constants/shadow_outline_size = 1
-Label/font_sizes/Size = 19
-RichTextLabel/colors/default_color = Color(0.313726, 0.313726, 0.345098, 1)
-RichTextLabel/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/colors/font_shadow_color = Color(0.627451, 0.627451, 0.658824, 1)
-RichTextLabel/constants/line_separation = 0
-RichTextLabel/constants/outline_size = 0
-RichTextLabel/constants/shadow_offset_x = 2
-RichTextLabel/constants/shadow_offset_y = 0
-RichTextLabel/constants/shadow_outline_size = 1
-RichTextLabel/constants/table_h_separation = 3
-RichTextLabel/constants/table_v_separation = 3
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4064g"]
 texture = ExtResource("10_wa1kd")
 axis_stretch_horizontal = 1
@@ -194,97 +171,13 @@ shader = ExtResource("22_2sebl")
 shader_parameter/cutoff = 38.994
 shader_parameter/VIEWPORT_HEIGHT = 384.0
 
-[sub_resource type="Theme" id="Theme_mb2ww"]
-default_font = ExtResource("10_gjl27")
-default_font_size = 26
-Label/colors/font_color = Color(0.282353, 0.282353, 0.282353, 1)
-Label/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/constants/line_spacing = 3
-Label/constants/outline_size = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/constants/shadow_outline_size = 1
-Label/font_sizes/Size = 19
-RichTextLabel/colors/default_color = Color(0.282353, 0.282353, 0.282353, 1)
-RichTextLabel/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/constants/line_separation = 0
-RichTextLabel/constants/outline_size = 0
-RichTextLabel/constants/shadow_offset_x = 2
-RichTextLabel/constants/shadow_offset_y = 0
-RichTextLabel/constants/shadow_outline_size = 1
-RichTextLabel/constants/table_h_separation = 3
-RichTextLabel/constants/table_v_separation = 3
+[sub_resource type="FontVariation" id="FontVariation_kynk5"]
+base_font = ExtResource("32_qlq8q")
+spacing_top = 4
 
-[sub_resource type="Theme" id="Theme_1pgp4"]
-default_font = ExtResource("10_gjl27")
-default_font_size = 26
-Label/colors/font_color = Color(0.188235, 0.376471, 0.847059, 1)
-Label/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/constants/line_spacing = 3
-Label/constants/outline_size = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/constants/shadow_outline_size = 1
-Label/font_sizes/Size = 19
-RichTextLabel/colors/default_color = Color(0.282353, 0.282353, 0.282353, 1)
-RichTextLabel/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/constants/line_separation = 0
-RichTextLabel/constants/outline_size = 0
-RichTextLabel/constants/shadow_offset_x = 2
-RichTextLabel/constants/shadow_offset_y = 0
-RichTextLabel/constants/shadow_outline_size = 1
-RichTextLabel/constants/table_h_separation = 3
-RichTextLabel/constants/table_v_separation = 3
-
-[sub_resource type="Theme" id="Theme_klgm5"]
-default_font = ExtResource("10_gjl27")
-default_font_size = 26
-Label/colors/font_color = Color(0.282353, 0.282353, 0.282353, 1)
-Label/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/constants/line_spacing = 3
-Label/constants/outline_size = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/constants/shadow_outline_size = 1
-Label/font_sizes/Size = 19
-RichTextLabel/colors/default_color = Color(0.282353, 0.282353, 0.282353, 1)
-RichTextLabel/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/constants/line_separation = 0
-RichTextLabel/constants/outline_size = 0
-RichTextLabel/constants/shadow_offset_x = 2
-RichTextLabel/constants/shadow_offset_y = 0
-RichTextLabel/constants/shadow_outline_size = 1
-RichTextLabel/constants/table_h_separation = 3
-RichTextLabel/constants/table_v_separation = 3
-
-[sub_resource type="Theme" id="Theme_rl63v"]
-default_font = ExtResource("10_gjl27")
-default_font_size = 26
-Label/colors/font_color = Color(0.188235, 0.376471, 0.847059, 1)
-Label/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-Label/constants/line_spacing = 3
-Label/constants/outline_size = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/constants/shadow_outline_size = 1
-Label/font_sizes/Size = 19
-RichTextLabel/colors/default_color = Color(0.282353, 0.282353, 0.282353, 1)
-RichTextLabel/colors/font_outline_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/colors/font_shadow_color = Color(0.721569, 0.721569, 0.721569, 1)
-RichTextLabel/constants/line_separation = 0
-RichTextLabel/constants/outline_size = 0
-RichTextLabel/constants/shadow_offset_x = 2
-RichTextLabel/constants/shadow_offset_y = 0
-RichTextLabel/constants/shadow_outline_size = 1
-RichTextLabel/constants/table_h_separation = 3
-RichTextLabel/constants/table_v_separation = 3
+[sub_resource type="Theme" id="Theme_4f188"]
+default_font = SubResource("FontVariation_kynk5")
+default_font_size = 16
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_rl54q"]
 
@@ -320,7 +213,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_syfy0")
-metadata/_edit_vertical_guides_ = [-240.0]
+metadata/_edit_vertical_guides_ = [-240.0, 616.0]
 
 [node name="Background" type="Sprite2D" parent="." node_paths=PackedStringArray("parentField")]
 z_index = -2
@@ -330,6 +223,7 @@ script = ExtResource("3_44m5u")
 parentField = NodePath(".")
 
 [node name="PanelActions" type="Panel" parent="."]
+visible = false
 z_index = 6
 z_as_relative = false
 layout_mode = 1
@@ -346,47 +240,13 @@ grow_vertical = 0
 theme_override_styles/panel = ExtResource("3_7u5r2")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="RichTextLabel" parent="PanelActions"]
-auto_translate_mode = 2
+[node name="Label" parent="PanelActions" instance=ExtResource("30_r8nu8")]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 23.0
-offset_right = 227.0
-offset_bottom = 72.0
-size_flags_stretch_ratio = 5.0
-theme = ExtResource("4_441j1")
-theme_override_constants/line_separation = 7
-text = "¿Qué debería hacer
-Pikachu?"
-scroll_active = false
-autowrap_mode = 0
-meta_underlined = false
-visible_characters_behavior = 1
-structured_text_bidi_override = 5
-metadata/_edit_lock_ = true
-
-[node name="Label2" type="RichTextLabel" parent="PanelActions/Label"]
-auto_translate_mode = 2
-layout_mode = 0
-offset_right = 204.0
-offset_bottom = 49.0
-size_flags_stretch_ratio = 5.0
-theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
-theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
-theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/line_separation = 7
-theme_override_fonts/normal_font = ExtResource("10_gjl27")
-theme_override_font_sizes/normal_font_size = 26
-text = "¿Qué debería hacer
-Pikachu?"
-scroll_active = false
-autowrap_mode = 0
-meta_underlined = false
-visible_characters_behavior = 1
-structured_text_bidi_override = 5
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 232.0
+offset_bottom = 82.0
+text = "¿Qué debería hacer Pikachu?"
 
 [node name="Commands" type="Node2D" parent="PanelActions"]
 metadata/_edit_lock_ = true
@@ -432,6 +292,7 @@ focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ey4ts")
 
 [node name="PanelMessageBox" type="Panel" parent="."]
+visible = false
 z_index = 6
 z_as_relative = false
 layout_mode = 0
@@ -554,15 +415,15 @@ grow_vertical = 0
 theme_override_styles/panel = ExtResource("4_1pp74")
 metadata/_edit_lock_ = true
 
-[node name="lblPPs" type="Label" parent="PanelMoves"]
+[node name="lblPPs" parent="PanelMoves" instance=ExtResource("30_r8nu8")]
 layout_mode = 0
-offset_left = 408.333
-offset_top = 54.2571
-offset_right = 490.333
-offset_bottom = 77.2571
-theme = SubResource("Theme_uti51")
-text = "PP: 40/40"
-metadata/_edit_lock_ = true
+offset_left = 404.0
+offset_top = 54.0
+offset_right = 492.0
+offset_bottom = 86.0
+theme_override_fonts/normal_font = ExtResource("10_o3o5j")
+text = "[center]PP: 40/40"
+align = 1
 
 [node name="MoveType" type="Sprite2D" parent="PanelMoves"]
 position = Vector2(448, 33.6)
@@ -583,18 +444,14 @@ focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4064g")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="PanelMoves/Moves/Move1"]
+[node name="Label" parent="PanelMoves/Moves/Move1" instance=ExtResource("30_r8nu8")]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 8.0
-offset_right = 172.0
-offset_bottom = 38.0
-theme = SubResource("Theme_uti51")
-theme_override_font_sizes/font_size = 26
-text = "Onda Trueno"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_lock_ = true
+offset_top = 10.0
+offset_right = 192.0
+offset_bottom = 44.0
+theme_override_fonts/normal_font = ExtResource("10_o3o5j")
+text = "[center]Onda Trueno"
+align = 1
 
 [node name="Move2" type="Panel" parent="PanelMoves/Moves"]
 visible = false
@@ -606,18 +463,14 @@ focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_16ta8")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="PanelMoves/Moves/Move2"]
+[node name="Label" parent="PanelMoves/Moves/Move2" instance=ExtResource("30_r8nu8")]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 8.0
-offset_right = 172.0
-offset_bottom = 38.0
-theme = SubResource("Theme_uti51")
-theme_override_font_sizes/font_size = 26
-text = "Placaje"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_lock_ = true
+offset_top = 10.0
+offset_right = 192.0
+offset_bottom = 44.0
+theme_override_fonts/normal_font = ExtResource("10_o3o5j")
+text = "[center]Placaje"
+align = 1
 
 [node name="Move3" type="Panel" parent="PanelMoves/Moves"]
 visible = false
@@ -629,18 +482,14 @@ focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_jc8kh")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="PanelMoves/Moves/Move3"]
+[node name="Label" parent="PanelMoves/Moves/Move3" instance=ExtResource("30_r8nu8")]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 8.0
-offset_right = 172.0
-offset_bottom = 38.0
-theme = SubResource("Theme_uti51")
-theme_override_font_sizes/font_size = 26
-text = "Placaje"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_lock_ = true
+offset_top = 10.0
+offset_right = 192.0
+offset_bottom = 44.0
+theme_override_fonts/normal_font = ExtResource("10_o3o5j")
+text = "[center]Placaje"
+align = 1
 
 [node name="Move4" type="Panel" parent="PanelMoves/Moves"]
 visible = false
@@ -652,18 +501,14 @@ focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_681qx")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="PanelMoves/Moves/Move4"]
+[node name="Label" parent="PanelMoves/Moves/Move4" instance=ExtResource("30_r8nu8")]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 8.0
-offset_right = 172.0
-offset_bottom = 38.0
-theme = SubResource("Theme_uti51")
-theme_override_font_sizes/font_size = 26
-text = "Placaje"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_lock_ = true
+offset_top = 10.0
+offset_right = 192.0
+offset_bottom = 44.0
+theme_override_fonts/normal_font = ExtResource("10_o3o5j")
+text = "[center]Placaje"
+align = 1
 
 [node name="ChoicesContainer" parent="." instance=ExtResource("13_5ly3f")]
 visible = false
@@ -719,10 +564,9 @@ position = Vector2(-8, 84)
 scale = Vector2(1.125, 1.125)
 texture = ExtResource("10_yvtq8")
 
-[node name="PokemonB" type="Node2D" parent="playerBase" node_paths=PackedStringArray("HPbar")]
+[node name="PokemonB" type="Node2D" parent="playerBase"]
 position = Vector2(288, 0)
 script = ExtResource("20_yu0i4")
-HPbar = NodePath("../HPBarB")
 
 [node name="Sprite" type="Sprite2D" parent="playerBase/PokemonB"]
 z_index = 2
@@ -745,34 +589,37 @@ texture = ExtResource("20_loxkp")
 script = ExtResource("19_osmde")
 metadata/_edit_lock_ = true
 
-[node name="Name" type="BoxContainer" parent="playerBase/HPBarA"]
-offset_left = -89.6
-offset_top = -41.2
-offset_right = 4.39999
-offset_bottom = -1.19998
-metadata/_edit_lock_ = true
+[node name="lblName" parent="playerBase/HPBarA" instance=ExtResource("30_r8nu8")]
+offset_left = -90.0
+offset_top = -35.0
+offset_right = 52.0
+offset_bottom = -8.0
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "TYPHLOSION"
 
-[node name="lblName" type="Label" parent="playerBase/HPBarA/Name"]
-layout_mode = 2
-theme = SubResource("Theme_mb2ww")
-text = "Pikachu"
-metadata/_edit_lock_ = true
+[node name="lblGender" parent="playerBase/HPBarA" instance=ExtResource("30_r8nu8")]
+offset_left = 53.0
+offset_top = -37.0
+offset_right = 140.0
+offset_bottom = -12.0
+theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "♂"
 
-[node name="lblGender" type="Label" parent="playerBase/HPBarA/Name"]
-layout_mode = 2
-theme = SubResource("Theme_1pgp4")
-text = "♀"
-metadata/_edit_lock_ = true
+[node name="lblNv" type="Sprite2D" parent="playerBase/HPBarA"]
+position = Vector2(77.5, -20)
+texture = ExtResource("31_li2jl")
 
-[node name="lblLevel" type="Label" parent="playerBase/HPBarA"]
-offset_left = 65.8297
-offset_top = -30.1561
-offset_right = 126.83
-offset_bottom = -4.15611
-theme = ExtResource("11_a22gy")
-theme_override_constants/shadow_offset_x = 2
-text = "Nv20"
-metadata/_edit_lock_ = true
+[node name="lblLevel" parent="playerBase/HPBarA" instance=ExtResource("30_r8nu8")]
+offset_left = 86.0
+offset_top = -31.0
+offset_right = 204.0
+offset_bottom = -13.0
+theme = SubResource("Theme_4f188")
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "20"
 
 [node name="Status" type="Sprite2D" parent="playerBase/HPBarA"]
 position = Vector2(-50, 1)
@@ -786,9 +633,15 @@ position = Vector2(0, 1)
 metadata/_edit_lock_ = true
 
 [node name="lblHP" parent="playerBase/HPBarA/health_bar" index="0"]
-offset_left = 37.2831
-offset_right = 87.2831
-metadata/_edit_lock_ = true
+offset_left = -4.0
+offset_top = 8.0
+offset_right = 114.0
+offset_bottom = 26.0
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+theme_override_font_sizes/normal_font_size = 16
+text = "[center]1/232"
+align = 1
 
 [node name="TextureProgressBar" parent="playerBase/HPBarA/health_bar" index="1"]
 offset_left = -26.0082
@@ -823,39 +676,42 @@ metadata/_edit_lock_ = true
 visible = false
 z_index = 6
 z_as_relative = false
-position = Vector2(526, -3)
+position = Vector2(770, -3)
 texture = ExtResource("20_loxkp")
 script = ExtResource("19_osmde")
 metadata/_edit_lock_ = true
 
-[node name="Name" type="BoxContainer" parent="playerBase/HPBarB"]
-offset_left = -89.6
-offset_top = -41.2
-offset_right = 4.39999
-offset_bottom = -1.19998
-metadata/_edit_lock_ = true
+[node name="lblName" parent="playerBase/HPBarB" instance=ExtResource("30_r8nu8")]
+offset_left = -90.0
+offset_top = -35.0
+offset_right = 52.0
+offset_bottom = -8.0
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "TYPHLOSION"
 
-[node name="lblName" type="Label" parent="playerBase/HPBarB/Name"]
-layout_mode = 2
-theme = SubResource("Theme_mb2ww")
-text = "Pikachu"
-metadata/_edit_lock_ = true
+[node name="lblGender" parent="playerBase/HPBarB" instance=ExtResource("30_r8nu8")]
+offset_left = 53.0
+offset_top = -37.0
+offset_right = 140.0
+offset_bottom = -12.0
+theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "♂"
 
-[node name="lblGender" type="Label" parent="playerBase/HPBarB/Name"]
-layout_mode = 2
-theme = SubResource("Theme_1pgp4")
-text = "♀"
-metadata/_edit_lock_ = true
+[node name="lblNv" type="Sprite2D" parent="playerBase/HPBarB"]
+position = Vector2(77.5, -20)
+texture = ExtResource("31_li2jl")
 
-[node name="lblLevel" type="Label" parent="playerBase/HPBarB"]
-offset_left = 65.8297
-offset_top = -30.1561
-offset_right = 126.83
-offset_bottom = -4.15611
-theme = ExtResource("11_a22gy")
-theme_override_constants/shadow_offset_x = 2
-text = "Nv20"
-metadata/_edit_lock_ = true
+[node name="lblLevel" parent="playerBase/HPBarB" instance=ExtResource("30_r8nu8")]
+offset_left = 86.0
+offset_top = -31.0
+offset_right = 204.0
+offset_bottom = -13.0
+theme = SubResource("Theme_4f188")
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "20"
 
 [node name="Status" type="Sprite2D" parent="playerBase/HPBarB"]
 position = Vector2(-50, 1)
@@ -869,9 +725,15 @@ position = Vector2(0, 1)
 metadata/_edit_lock_ = true
 
 [node name="lblHP" parent="playerBase/HPBarB/health_bar" index="0"]
-offset_left = 37.2831
-offset_right = 87.2831
-metadata/_edit_lock_ = true
+offset_left = -4.0
+offset_top = 8.0
+offset_right = 114.0
+offset_bottom = 26.0
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+theme_override_font_sizes/normal_font_size = 15
+text = "[center]232/232"
+align = 1
 
 [node name="TextureProgressBar" parent="playerBase/HPBarB/health_bar" index="1"]
 offset_left = -26.0082
@@ -956,11 +818,10 @@ position = Vector2(2, 32)
 scale = Vector2(1.125, 1.125)
 texture = ExtResource("10_yvtq8")
 
-[node name="PokemonB" type="Node2D" parent="enemyBase" node_paths=PackedStringArray("HPbar")]
+[node name="PokemonB" type="Node2D" parent="enemyBase"]
 visible = false
 position = Vector2(96, -48)
 script = ExtResource("20_yu0i4")
-HPbar = NodePath("../HPBarB")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/PokemonB"]
@@ -980,35 +841,15 @@ z_as_relative = false
 position = Vector2(-386, -45)
 texture = ExtResource("18_fvfel")
 script = ExtResource("19_osmde")
-metadata/_edit_lock_ = true
 
-[node name="Name" type="BoxContainer" parent="enemyBase/HPBarA"]
-offset_left = -104.838
-offset_top = -30.4085
-offset_right = 7.16205
-offset_bottom = 9.5915
-
-[node name="lblName" type="Label" parent="enemyBase/HPBarA/Name"]
-layout_mode = 2
-theme = SubResource("Theme_klgm5")
-text = "Alomomola"
-metadata/_edit_lock_ = true
-
-[node name="lblGender" type="Label" parent="enemyBase/HPBarA/Name"]
-layout_mode = 2
-theme = SubResource("Theme_rl63v")
-text = "♂"
-metadata/_edit_lock_ = true
-
-[node name="lblLevel" type="Label" parent="enemyBase/HPBarA"]
-offset_left = 47.9226
-offset_top = -18.9308
-offset_right = 108.923
-offset_bottom = 7.06921
-theme = ExtResource("11_a22gy")
-theme_override_constants/shadow_offset_x = 2
-text = "Nv20"
-metadata/_edit_lock_ = true
+[node name="lblName" parent="enemyBase/HPBarA" instance=ExtResource("30_r8nu8")]
+offset_left = -105.0
+offset_top = -24.0
+offset_right = 37.0
+offset_bottom = 3.0
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "RATTATA"
 
 [node name="Status" type="Sprite2D" parent="enemyBase/HPBarA"]
 position = Vector2(-68, 13)
@@ -1032,42 +873,45 @@ offset_top = -8.43386
 offset_right = 105.509
 offset_bottom = 31.5661
 
+[node name="lblGender" parent="enemyBase/HPBarA" instance=ExtResource("30_r8nu8")]
+offset_left = 36.0
+offset_top = -28.0
+offset_right = 123.0
+offset_bottom = -3.0
+theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "♀"
+
+[node name="lblNv" type="Sprite2D" parent="enemyBase/HPBarA"]
+position = Vector2(60.5, -9)
+texture = ExtResource("31_li2jl")
+
+[node name="lblLevel" parent="enemyBase/HPBarA" instance=ExtResource("30_r8nu8")]
+offset_left = 69.0
+offset_top = -20.0
+offset_right = 187.0
+offset_bottom = -2.0
+theme = SubResource("Theme_4f188")
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "20"
+
 [node name="HPBarB" type="Sprite2D" parent="enemyBase"]
 visible = false
 z_index = 6
 z_as_relative = false
-position = Vector2(-144, -45)
+position = Vector2(-386, -45)
 texture = ExtResource("18_fvfel")
 script = ExtResource("19_osmde")
-metadata/_edit_lock_ = true
 
-[node name="Name" type="BoxContainer" parent="enemyBase/HPBarB"]
-offset_left = -104.838
-offset_top = -30.4085
-offset_right = 7.16205
-offset_bottom = 9.5915
-
-[node name="lblName" type="Label" parent="enemyBase/HPBarB/Name"]
-layout_mode = 2
-theme = SubResource("Theme_klgm5")
-text = "Alomomola"
-metadata/_edit_lock_ = true
-
-[node name="lblGender" type="Label" parent="enemyBase/HPBarB/Name"]
-layout_mode = 2
-theme = SubResource("Theme_rl63v")
-text = "♂"
-metadata/_edit_lock_ = true
-
-[node name="lblLevel" type="Label" parent="enemyBase/HPBarB"]
-offset_left = 47.9226
-offset_top = -18.9308
-offset_right = 108.923
-offset_bottom = 7.06921
-theme = ExtResource("11_a22gy")
-theme_override_constants/shadow_offset_x = 2
-text = "Nv20"
-metadata/_edit_lock_ = true
+[node name="lblName" parent="enemyBase/HPBarB" instance=ExtResource("30_r8nu8")]
+offset_left = -105.0
+offset_top = -24.0
+offset_right = 37.0
+offset_bottom = 3.0
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "RATTATA"
 
 [node name="Status" type="Sprite2D" parent="enemyBase/HPBarB"]
 position = Vector2(-68, 13)
@@ -1090,6 +934,29 @@ offset_left = -26.4909
 offset_top = -8.43386
 offset_right = 105.509
 offset_bottom = 31.5661
+
+[node name="lblGender" parent="enemyBase/HPBarB" instance=ExtResource("30_r8nu8")]
+offset_left = 36.0
+offset_top = -28.0
+offset_right = 123.0
+offset_bottom = -3.0
+theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "♀"
+
+[node name="lblNv" type="Sprite2D" parent="enemyBase/HPBarB"]
+position = Vector2(60.5, -9)
+texture = ExtResource("31_li2jl")
+
+[node name="lblLevel" parent="enemyBase/HPBarB" instance=ExtResource("30_r8nu8")]
+offset_left = 69.0
+offset_top = -20.0
+offset_right = 187.0
+offset_bottom = -2.0
+theme = SubResource("Theme_4f188")
+theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
+text = "20"
 
 [node name="Party" type="Node2D" parent="enemyBase"]
 

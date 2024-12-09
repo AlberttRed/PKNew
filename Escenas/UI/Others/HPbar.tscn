@@ -1,21 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://ta05jv33ns50"]
+[gd_scene load_steps=9 format=3 uid="uid://ta05jv33ns50"]
 
 [ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="1_lywt1"]
+[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="2_5oqg0"]
 [ext_resource type="Texture2D" uid="uid://dqhrc65l8u6am" path="res://Sprites/Pictures/HPbar_background.png" id="3_1t77b"]
+[ext_resource type="FontFile" uid="uid://bwwk8ekl3u4o7" path="res://Escenas/UI/Fonts/Pokemon GB.ttf" id="3_3qbah"]
 [ext_resource type="Texture2D" uid="uid://cdus0uhl7tnql" path="res://Sprites/Pictures/HPbar_overlay.png" id="3_q3l73"]
-[ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="4_df7g3"]
 [ext_resource type="Texture2D" uid="uid://x2gt17sm1nc5" path="res://Sprites/Pictures/HPbar_progress.png" id="5_3p84r"]
+
+[sub_resource type="FontVariation" id="FontVariation_kynk5"]
+base_font = ExtResource("3_3qbah")
+spacing_top = 4
+
+[sub_resource type="Theme" id="Theme_4f188"]
+default_font = SubResource("FontVariation_kynk5")
+default_font_size = 16
 
 [node name="health_bar" type="Node2D"]
 script = ExtResource("1_lywt1")
 metadata/_edit_vertical_guides_ = [-205.084]
 
-[node name="lblHP" type="Label" parent="."]
-offset_left = 11.1186
-offset_top = 10.3219
-offset_right = 61.1186
-offset_bottom = 33.3219
-theme = ExtResource("4_df7g3")
+[node name="lblHP" parent="." instance=ExtResource("2_5oqg0")]
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 519.0
+offset_bottom = 86.0
+theme = SubResource("Theme_4f188")
+theme_override_colors/default_color = Color(0.313726, 0.313726, 0.345098, 1)
+theme_override_colors/font_shadow_color = Color(0.627451, 0.627451, 0.658824, 1)
 text = "45/45"
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]

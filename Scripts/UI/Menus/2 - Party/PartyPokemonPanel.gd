@@ -34,12 +34,9 @@ func loadPokemon(pokemon:PokemonInstance):
 	self.pokemon = pokemon
 	focus_mode = FocusMode.FOCUS_ALL
 	
-	$Nombre.text = pokemon.Name
-	$Nombre/Outline.text = pokemon.Name
+	$Nombre.setText(pokemon.Name)
 	
-	$Nivel.text = "Nv." + str(pokemon.level)
-	$Nivel/Outline.text = "Nv." + str(pokemon.level)
-	
+	$dNv.setText(str(pokemon.level))
 	
 	if pokemon.fainted:
 		$Status.visible = true
@@ -80,7 +77,7 @@ func select():
 		
 	if pokemon.fainted:
 		type = "fainted_sel"
-	elif mode == Party.Modes.MENU:
+	elif mode != Party.Modes.SWAP:
 		type = "normal_sel"
 	elif mode == Party.Modes.SWAP:
 		if swapping:

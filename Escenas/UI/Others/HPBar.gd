@@ -19,17 +19,17 @@ func init(_pokemon : BattlePokemon):
 
 
 func updateUI():
-	get_node("Name/lblName").text = pokemon.Name
-	get_node("lblLevel").text = "Nv" + str(pokemon.level)
-	#hPBarNode.get_node("lblHP").text = str(pokemonInstance.hp_actual) + "/" + str(pokemonInstance.hp_total)
+	get_node("lblName").setText(pokemon.Name)
+	get_node("lblLevel").setText(str(pokemon.level))
+	#hPBarNode.get_node("lblHP").setText(str(pokemonInstance.hp_actual) + "/" + str(pokemonInstance.hp_total)
 	if pokemon.gender == CONST.GENEROS.HEMBRA:
-		get_node("Name/lblGender").text = "♀"
-		get_node("Name/lblGender").theme.set("Label/colors/font_color", Color("FF5D2C"))
+		get_node("lblGender").setText("♀")
+		get_node("lblGender").theme.set("Label/colors/font_color", Color("FF5D2C"))
 	elif pokemon.gender == CONST.GENEROS.MACHO:
-		get_node("Name/lblGender").text = "♂"
-		get_node("Name/lblGender").theme.set("Label/colors/font_color", Color("3465DF"))#0.97254902124405, 0.34509804844856, 0.15686275064945))
+		get_node("lblGender").setText("♂")
+		get_node("lblGender").theme.set("Label/colors/font_color", Color("3465DF"))#0.97254902124405, 0.34509804844856, 0.15686275064945))
 	else:
-		get_node("Name/lblGender").text = ""
+		get_node("lblGender").setText("")
 	
 	updateStatusUI()
 	healthBar.updateUI(pokemon.instance)
@@ -44,9 +44,9 @@ func updateUI():
 	
 
 func clearUI():
-	get_node("Name/lblName").text = ""
-	get_node("lblLevel").text = ""
-	get_node("Name/lblGender").text = ""
+	get_node("lblName").setText("")
+	get_node("lblLevel").setText("")
+	get_node("lblGender").setText("")
 	statusUI.hide()
 	get_node("health_bar").clear()
 	if has_node("exp_bar"):
