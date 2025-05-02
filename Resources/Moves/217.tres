@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bjd6r65wwcrxm"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://bjd6r65wwcrxm"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_sjdd7"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_sjdd7"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_w17cs"]
 
 [resource]
@@ -29,8 +29,8 @@ Inflicts regular damage with 120 power |    10%
 Heals the target for 1/4 its max HP    |    20%
 
 On average, this move inflicts regular damage with 52 power and heals the target for 1/20 its max HP."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -45,4 +45,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://builx4h8fyunr"]
 
-[ext_resource type="Texture2D" uid="uid://dcjoqu0rtrmoh" path="res://Sprites/Tilesets/Animated tiles/Landing Dust/jump_landing_dust.png" id="1_lnivp"]
-[ext_resource type="Script" path="res://Scripts/Animaciones/PlayerAnimatedEffect.gd" id="2_abyvm"]
+[ext_resource type="Texture2D" uid="uid://bqh0s0a5aials" path="res://Sprites/Tilesets/Animated tiles/Landing Dust/jump_landing_dust.png" id="1_lnivp"]
+[ext_resource type="Script" uid="uid://clql5hkxrij51" path="res://Scripts/Animaciones/PlayerAnimatedEffect.gd" id="2_abyvm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75c15"]
 atlas = ExtResource("1_lnivp")
@@ -17,7 +17,16 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qtk0l"]
 animations = [{
-"frames": [SubResource("AtlasTexture_75c15"), SubResource("AtlasTexture_5yn02"), SubResource("AtlasTexture_w52og")],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75c15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yn02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w52og")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0

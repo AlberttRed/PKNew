@@ -1,48 +1,48 @@
-[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://dsw3prjibjsk5"]
+[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://cidtchhjef1li"]
 
-[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_5dk7l"]
-[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_1f8uf"]
-[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_vrt20"]
-[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="4_myydk"]
-[ext_resource type="Resource" uid="uid://b5h0i8wbbp1lp" path="res://Resources/Types/14.tres" id="5_gpshx"]
+[ext_resource type="Texture2D" uid="uid://bt20co3c7ndt7" path="res://Sprites/Batalla/BattlersAtlas/Gen1Atlas.png" id="1_knb1u"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_3p63s"]
+[ext_resource type="Texture2D" uid="uid://ho0xrpwbwl0i" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_jcd83"]
+[ext_resource type="Script" uid="uid://drjps1mdvnkde" path="res://Database/Classes/pokemon_resource.gd" id="4_evc4p"]
+[ext_resource type="Resource" uid="uid://b5h0i8wbbp1lp" path="res://Resources/Types/14.tres" id="5_7vws5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bmud5"]
-atlas = ExtResource("1_5dk7l")
-region = Rect2(1172, 10672, 160, 118)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekdku"]
+atlas = ExtResource("1_knb1u")
+region = Rect2(1272, 2512, 160, 118)
 margin = Rect2(0, 42, 0, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lbqq5"]
-atlas = ExtResource("1_5dk7l")
-region = Rect2(4, 10928, 160, 118)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlw8i"]
+atlas = ExtResource("1_knb1u")
+region = Rect2(1104, 2400, 160, 118)
 margin = Rect2(0, 42, 0, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbwv0"]
-atlas = ExtResource("1_5dk7l")
-region = Rect2(956, 14552, 144, 120)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v0js"]
+atlas = ExtResource("1_knb1u")
+region = Rect2(172, 3572, 144, 120)
 margin = Rect2(6, 22, 16, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ddule"]
-atlas = ExtResource("1_5dk7l")
-region = Rect2(1260, 14624, 144, 120)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmk3e"]
+atlas = ExtResource("1_knb1u")
+region = Rect2(1596, 3640, 144, 120)
 margin = Rect2(6, 22, 16, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s602x"]
-atlas = ExtResource("2_1f8uf")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uv2rr"]
+atlas = ExtResource("2_3p63s")
 region = Rect2(372, 264, 18, 30)
 margin = Rect2(6, 2, 14, 2)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eber0"]
-atlas = ExtResource("3_vrt20")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci6x7"]
+atlas = ExtResource("3_jcd83")
 region = Rect2(4, 476, 116, 42)
 margin = Rect2(8, 18, 12, 22)
 
 [resource]
 resource_name = "64 - Kadabra"
-script = ExtResource("4_myydk")
+script = ExtResource("4_evc4p")
 id = 64
 internal_name = "kadabra"
 Name = "Kadabra"
-type_a = ExtResource("5_gpshx")
+type_a = ExtResource("5_7vws5")
 base_exprience = 140
 height = 13.0
 weight = 565.0
@@ -51,9 +51,9 @@ abilities = ["28", "39", "98"]
 forms = []
 held_items_id = ["225"]
 held_items_rarity = [5.0]
-learn_type = ["4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "1", "4", "4", "4", "4", "4", "4", "1", "1", "4", "1", "1", "4", "4", "1", "4", "1", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "1", "1", "3", "4", "3", "4", "4", "4", "3", "4", "4", "3", "1", "4", "4", "4", "4", "4", "4", "4", "1", "3", "4", "4", "4", "4", "3", "4", "1", "3", "3", "4", "1", "4", "4"]
-learn_lvl = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 27, 0, 0, 0, 0, 0, 0, 1, 38, 0, 1, 19, 0, 0, 31, 0, 42, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 43, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 24, 0, 0]
-learn_move_id = ["5", "7", "8", "9", "25", "29", "34", "36", "38", "50", "60", "66", "68", "69", "86", "91", "92", "93", "94", "99", "100", "101", "102", "104", "105", "113", "115", "117", "118", "129", "130", "134", "138", "148", "149", "156", "161", "164", "168", "171", "173", "174", "182", "192", "203", "207", "213", "214", "216", "218", "219", "223", "227", "231", "237", "240", "241", "244", "247", "248", "259", "263", "264", "269", "271", "272", "277", "278", "282", "285", "289", "290", "324", "347", "351", "356", "357", "363", "373", "374", "384", "385", "409", "412", "427", "428", "433", "445", "447", "451", "472", "473", "477", "478", "492", "496", "502", "590", "605"]
+learn_type = ["4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "1", "4", "4", "4", "4", "4", "4", "1", "1", "1", "4", "1", "1", "4", "4", "1", "4", "1", "4", "4", "4", "4", "1", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "4", "4", "4", "4", "1", "1", "3", "4", "3", "4", "4", "4", "3", "4", "4", "3", "1", "4", "4", "4", "4", "4", "4", "4", "1", "3", "4", "4", "4", "4", "3", "4", "1", "3", "3", "4", "1", "4", "4"]
+learn_lvl = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 27, 0, 0, 0, 0, 0, 0, 1, 38, 6, 0, 1, 19, 0, 0, 31, 0, 42, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 43, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 24, 0, 0]
+learn_move_id = ["5", "7", "8", "9", "25", "29", "34", "36", "38", "50", "60", "66", "68", "69", "86", "91", "92", "93", "94", "95", "99", "100", "101", "102", "104", "105", "113", "115", "117", "118", "129", "130", "134", "138", "148", "149", "156", "161", "164", "168", "171", "173", "174", "182", "192", "203", "207", "213", "214", "216", "218", "219", "223", "227", "231", "237", "240", "241", "244", "247", "248", "259", "263", "264", "269", "271", "272", "277", "278", "282", "285", "289", "290", "324", "347", "351", "356", "357", "363", "373", "374", "384", "385", "409", "412", "427", "428", "433", "445", "447", "451", "472", "473", "477", "478", "492", "496", "502", "590", "605"]
 hp_base = 40
 attack_base = 35
 defense_base = 30
@@ -74,8 +74,8 @@ is_baby = false
 hatch_counter = 20
 has_gender_differences = true
 forms_switchable = false
-growth_rate_id = 1
-egg_group_a_id = 0
+growth_rate_id = 4
+egg_group_a_id = "8"
 egg_group_b_id = 0
 evol_method = []
 evol_lvl = []
@@ -87,9 +87,9 @@ habitat_id = 1
 battlerPlayerY = 0
 battlerEnemyY = 0
 battlerAltitude = 0
-icon_sprite = SubResource("AtlasTexture_eber0")
-footprint_sprite = SubResource("AtlasTexture_s602x")
-battle_front_sprite = SubResource("AtlasTexture_ddule")
-battle_back_sprite = SubResource("AtlasTexture_lbqq5")
-battle_front_shiny_sprite = SubResource("AtlasTexture_kbwv0")
-battle_back_shiny_sprite = SubResource("AtlasTexture_bmud5")
+icon_sprite = SubResource("AtlasTexture_ci6x7")
+footprint_sprite = SubResource("AtlasTexture_uv2rr")
+battle_front_sprite = SubResource("AtlasTexture_mmk3e")
+battle_back_sprite = SubResource("AtlasTexture_hlw8i")
+battle_front_shiny_sprite = SubResource("AtlasTexture_4v0js")
+battle_back_shiny_sprite = SubResource("AtlasTexture_ekdku")

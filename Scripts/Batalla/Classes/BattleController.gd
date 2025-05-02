@@ -59,19 +59,20 @@ func initBattle():
 
 	await GUI.initBattleTransition()
 	UI.initUI(self)
-	if rules.weather != CONST.WEATHER.NONE:
+	if rules.weather != BattleRules.BattleWeather.NONE:
 		pass
 		#addPersistentWeather(rules.weather)
 	#Temporalment ho fem aixi, quan fem les animacions d'entrada etc es canviarà
 	initActivePokemons()
-	await GUI.battle.playAnimation("START_BATTLE_GRASS")
+	#GUI.battle.get_node("AnimationController").get_animation("Battle_GeneralAnimations/START_BATTLE").set_length(4.1)
+	await GUI.battle.playAnimation("START_BATTLE")
 	#await GUI.battle.playAnimation("RESET")
 	stage = CONST.BATTLE_STAGES.SELECT_ACTION
 	print("enemy size: " + str(enemySide.activePokemons.size()))
 	
-	if rules.type == CONST.BATTLE_TYPES.WILD:
+	if rules.type == BattleRules.BattleTypes.WILD:
 		await startWildBattle()
-	elif rules.type == CONST.BATTLE_TYPES.TRAINER:
+	elif rules.type == BattleRules.BattleTypes.TRAINER:
 		await startTrainerBattle()
 	
 	#await showActivePokemons()
@@ -133,9 +134,9 @@ func takeTurn():
 func initActivePokemons():
 	var pk_per_side : int = 0
 	var pk_per_part : int = 0
-	if rules.mode == CONST.BATTLE_MODES.SINGLE:
+	if rules.mode == BattleRules.BattleModes.SINGLE:
 		pk_per_side = 1
-	elif rules.mode == CONST.BATTLE_MODES.SINGLE:
+	elif rules.mode == BattleRules.BattleModes.DOUBLE:
 		pk_per_side = 2
 	
 	for s in sides:
@@ -246,16 +247,16 @@ func orderPokemonByActionPriority():
 func startWildBattle():
 	for p:BattleSpot in enemySide.battleSpots:
 		await p.showHPBar()
-	if enemySide.activePokemons.size() == 1:
-		await GUI.battle.showMessageWait("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!", 1.5)
+	await GUI.battle.showWildBattleMessage()
+	#if enemySide.activePokemons.size() == 1:
+		#await GUI.battle.showMessageWait("¡Un " + enemySide.activePokemons[0].Name + " salvaje te corta el paso!", 1.5)
 		#await GUI.get_tree().create_timer(1.5).timeout
 	await playerSide.showActivePokemons()
 	
 func startTrainerBattle():
-	pass
-	
-	#await enemySide.showActivePokemons()
-	#await playerSide.showActivePokemons()
+	await enemySide.showActivePokemons()
+	await playerSide.showActivePokemons()
+
 
 #Funció que ordena els actions de cada pokemon actiu segons prioritat, per saber en quin ordre s'executarà cada atac/acció
 func sortChoices(a : BattleSpot, b : BattleSpot):

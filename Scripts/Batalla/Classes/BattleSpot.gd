@@ -3,6 +3,7 @@ extends Node2D
 class_name BattleSpot
 
 @onready var sprite:Sprite2D = $Sprite
+@onready var shadow:Sprite2D = $Shadow
 #@onready var animPlayer = $AnimationPlayer
 
 var participant : BattleParticipant# Indica a quin participant pertany (entrenador)
@@ -33,6 +34,7 @@ func _ready():
 
 func initSprite(type : CONST.BATTLE_SIDES):
 	sprite.visible = activePokemon.isWild
+	shadow.visible = activePokemon.isWild
 	if type == CONST.BATTLE_SIDES.PLAYER:
 		#var sprite2:Texture2D = activePokemon.back_sprite as Texture2D
 		var texture:Texture2D = ImageTexture.new().create_from_image(activePokemon.back_sprite.atlas.get_image().get_region(activePokemon.back_sprite.region))
@@ -91,12 +93,12 @@ func loadActivePokemon(pokemon:BattlePokemon):
 	activePokemon.initAbility()
 	GUI.battle.controller.newTurn.connect(func(): activePokemon.turnsInBattle +=1)
 	if activePokemon.sideType == CONST.BATTLE_SIDES.PLAYER:
-		if GUI.battle.controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
+		if GUI.battle.controller.rules.mode == BattleRules.BattleModes.SINGLE:
 			self.position = CONST.BATTLE.BACK_SINGLE_SPRITE_POS
 		#pokemon.reparent($playerBase)
 		#pokemon.get_node("Shadow").visible=false
 	elif activePokemon.sideType == CONST.BATTLE_SIDES.ENEMY:
-		if GUI.battle.controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
+		if GUI.battle.controller.rules.mode == BattleRules.BattleModes.SINGLE:
 			self.position = CONST.BATTLE.FRONT_SINGLE_SPRITE_POS
 		#pokemon.reparent($enemyBase)
 		$Shadow.visible=true

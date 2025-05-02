@@ -27,9 +27,9 @@
 [ext_resource type="AnimationLibrary" uid="uid://casxsbdqp031y" path="res://Objetos/Batalla/Animaciones/Moves/Battle_PokemonAnimations.res" id="14_fs88f"]
 [ext_resource type="Texture2D" uid="uid://x51xp6oodf4j" path="res://Sprites/Batalla/Moves Animations/TackleFrames.png" id="15_hdus1"]
 [ext_resource type="Texture2D" uid="uid://dqkmrnqhdrcvb" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFoeBoxS.png" id="18_fvfel"]
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated_OLD.gdshader" id="25_cf0hm"]
+[ext_resource type="Shader" uid="uid://dnct46qnrvs47" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated_OLD.gdshader" id="25_cf0hm"]
 [ext_resource type="Texture2D" uid="uid://b885sbd6lqnnc" path="res://Sprites/Batalla/Moves AnimationsOLD/eb601.png" id="25_sac00"]
-[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattlePokemon.gd" id="26_0gypr"]
+[ext_resource type="Script" uid="uid://dxebx3g20f712" path="res://Scripts/Batalla/Classes/BattlePokemon.gd" id="26_0gypr"]
 [ext_resource type="AnimationLibrary" uid="uid://2mrp3w2yg84c" path="res://Objetos/Batalla/Animaciones/Moves/Battle_MovesAnimations.res" id="27_q4f0d"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb151"]
@@ -173,8 +173,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_asufp"]
 _data = {
-"RESET": SubResource("Animation_oagxi"),
-"ffff": SubResource("Animation_7iofk")
+&"RESET": SubResource("Animation_oagxi"),
+&"ffff": SubResource("Animation_7iofk")
 }
 
 [sub_resource type="Theme" id="Theme_mb2ww"]
@@ -360,7 +360,7 @@ tracks/10/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4aqf6"]
 _data = {
-"RESET": SubResource("Animation_rg5mx")
+&"RESET": SubResource("Animation_rg5mx")
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8nwnv"]

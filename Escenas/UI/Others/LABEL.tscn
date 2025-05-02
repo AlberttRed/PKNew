@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://sp0h1eaqfqlh"]
 
 [ext_resource type="FontFile" uid="uid://c77fumf0mpx74" path="res://Escenas/UI/Textbox/Resources/HGSS_Font_StyleOLD.tres" id="1"]
-[ext_resource type="Script" path="res://Escenas/UI/Others/LABEL.gd" id="2"]
+[ext_resource type="Script" uid="uid://dc2514trcw6th" path="res://Escenas/UI/Others/LABEL.gd" id="2"]
 
 [node name="Label" type="Label"]
 offset_right = 476.0

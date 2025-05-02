@@ -1,9 +1,9 @@
 [gd_scene load_steps=43 format=3 uid="uid://ce6e5sm515005"]
 
-[ext_resource type="Script" path="res://Scripts/Event/Event.gd" id="1_2roho"]
+[ext_resource type="Script" uid="uid://b4hc6kw06wyx8" path="res://Scripts/Event/Event.gd" id="1_2roho"]
 [ext_resource type="Texture2D" uid="uid://b8v3bj2nw2qd" path="res://Sprites/Overworlds/Characters/trchar000.png" id="1_fchs2"]
 [ext_resource type="Texture2D" uid="uid://bc6ts2cvg8esb" path="res://Scripts/Event/square.png" id="2_v8811"]
-[ext_resource type="Script" path="res://Scripts/Event/Event_page.gd" id="3_h0cj0"]
+[ext_resource type="Script" uid="uid://bfxdputsfja3s" path="res://Scripts/Event/Event_page.gd" id="3_h0cj0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m30hk"]
 size = Vector2(30, 30)
@@ -353,19 +353,19 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qa2bo"]
 _data = {
-"IdleDown": SubResource("Animation_lrmm7"),
-"IdleLeft": SubResource("Animation_62l6y"),
-"IdleRight": SubResource("Animation_fhy1s"),
-"IdleUp": SubResource("Animation_xdp8q"),
-"RESET": SubResource("Animation_p5v13"),
-"TurnDown": SubResource("Animation_npoxa"),
-"TurnLeft": SubResource("Animation_akdca"),
-"TurnRight": SubResource("Animation_5nbto"),
-"TurnUp": SubResource("Animation_fjuc3"),
-"WalkDown": SubResource("Animation_mwhlj"),
-"WalkLeft": SubResource("Animation_6otjy"),
-"WalkRight": SubResource("Animation_my5vd"),
-"WalkUp": SubResource("Animation_y4x13")
+&"IdleDown": SubResource("Animation_lrmm7"),
+&"IdleLeft": SubResource("Animation_62l6y"),
+&"IdleRight": SubResource("Animation_fhy1s"),
+&"IdleUp": SubResource("Animation_xdp8q"),
+&"RESET": SubResource("Animation_p5v13"),
+&"TurnDown": SubResource("Animation_npoxa"),
+&"TurnLeft": SubResource("Animation_akdca"),
+&"TurnRight": SubResource("Animation_5nbto"),
+&"TurnUp": SubResource("Animation_fjuc3"),
+&"WalkDown": SubResource("Animation_mwhlj"),
+&"WalkLeft": SubResource("Animation_6otjy"),
+&"WalkRight": SubResource("Animation_my5vd"),
+&"WalkUp": SubResource("Animation_y4x13")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gkksw"]

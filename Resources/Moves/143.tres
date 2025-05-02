@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://trk07oewq0gr"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://trk07oewq0gr"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_u0hds"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_u0hds"]
 [ext_resource type="Resource" uid="uid://cvbopjxbt76ho" path="res://Resources/Types/03.tres" id="2_v83l7"]
 
 [resource]
@@ -21,8 +21,8 @@ damage_class_id = 2
 effect_entries = "User charges for one turn before attacking.  Has a $effect_chance% chance to make the target flinch. Inflicts regular damage.  User charges for one turn before attacking.  Critical hit chance is one level higher than normal.  Has a $effect_chance% chance to make the target flinch.
 
 This move cannot be selected by sleep talk."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -37,4 +37,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 30
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

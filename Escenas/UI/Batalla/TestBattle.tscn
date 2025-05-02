@@ -1,0 +1,242 @@
+[gd_scene load_steps=3 format=3 uid="uid://clrnq0wq7bjw7"]
+
+[ext_resource type="Script" uid="uid://bwe0qtrqtjqpu" path="res://Scripts/Batalla/Classes/TestBattle.gd" id="1_tse6d"]
+[ext_resource type="PackedScene" uid="uid://c22wi0px6h3ic" path="res://Objetos/Trainer.tscn" id="2_rfkpo"]
+
+[node name="TestBattle" type="Node2D"]
+script = ExtResource("1_tse6d")
+
+[node name="Player" parent="." instance=ExtResource("2_rfkpo")]
+
+[node name="pkm1" parent="Player" index="0"]
+randomize_pokemon = true
+pokemon = null
+level = 57
+hp_EVs = 207
+attack_EVs = 190
+defense_EVs = 101
+spAttack_EVs = 89
+spDefense_EVs = 86
+speed_EVs = 2
+hp_IVs = 11
+attack_IVs = 15
+defense_IVs = 8
+spAttack_IVs = 31
+speed_IVs = 5
+ability_id = 85
+nature_id = 13
+
+[node name="pkm2" parent="Player" index="1"]
+randomize_pokemon = true
+pokemon = null
+level = 14
+hp_EVs = 207
+attack_EVs = 6
+defense_EVs = 44
+spAttack_EVs = 246
+spDefense_EVs = 92
+speed_EVs = 251
+hp_IVs = 5
+attack_IVs = 15
+defense_IVs = 31
+spAttack_IVs = 30
+spDefense_IVs = 29
+speed_IVs = 31
+ability_id = 228
+nature_id = 15
+
+[node name="pkm3" parent="Player" index="2"]
+randomize_pokemon = true
+pokemon = null
+level = 10
+hp_EVs = 35
+attack_EVs = 26
+defense_EVs = 235
+spAttack_EVs = 42
+spDefense_EVs = 81
+speed_EVs = 62
+hp_IVs = 4
+attack_IVs = 30
+defense_IVs = 2
+spAttack_IVs = 10
+spDefense_IVs = 23
+speed_IVs = 1
+ability_id = 208
+nature_id = 8
+
+[node name="pkm4" parent="Player" index="3"]
+randomize_pokemon = true
+pokemon = null
+level = 93
+gender = 1
+hp_EVs = 144
+attack_EVs = 164
+defense_EVs = 143
+spAttack_EVs = 229
+spDefense_EVs = 228
+speed_EVs = 159
+hp_IVs = 27
+defense_IVs = 2
+spAttack_IVs = 27
+spDefense_IVs = 5
+speed_IVs = 4
+ability_id = 84
+nature_id = 2
+
+[node name="pkm5" parent="Player" index="4"]
+randomize_pokemon = true
+pokemon = null
+level = 61
+hp_EVs = 241
+attack_EVs = 171
+defense_EVs = 250
+spAttack_EVs = 54
+spDefense_EVs = 101
+speed_EVs = 90
+attack_IVs = 13
+defense_IVs = 13
+spAttack_IVs = 23
+spDefense_IVs = 27
+speed_IVs = 8
+ability_id = 144
+nature_id = 5
+
+[node name="pkm6" parent="Player" index="5"]
+randomize_pokemon = true
+pokemon = null
+level = 24
+hp_EVs = 55
+attack_EVs = 92
+defense_EVs = 182
+spAttack_EVs = 248
+spDefense_EVs = 10
+speed_EVs = 72
+hp_IVs = 25
+attack_IVs = 12
+defense_IVs = 23
+spAttack_IVs = 7
+spDefense_IVs = 20
+speed_IVs = 29
+ability_id = 72
+nature_id = 7
+
+[node name="SingleTrainer" parent="." instance=ExtResource("2_rfkpo")]
+
+[node name="pkm1" parent="SingleTrainer" index="0"]
+randomize_pokemon = true
+pokemon = null
+level = 95
+hp_EVs = 170
+attack_EVs = 73
+defense_EVs = 136
+spAttack_EVs = 19
+spDefense_EVs = 30
+speed_EVs = 39
+hp_IVs = 8
+attack_IVs = 9
+defense_IVs = 30
+spAttack_IVs = 25
+spDefense_IVs = 10
+ability_id = 8
+nature_id = 20
+
+[node name="pkm2" parent="SingleTrainer" index="1"]
+randomize_pokemon = true
+pokemon = null
+level = 46
+hp_EVs = 41
+attack_EVs = 98
+defense_EVs = 24
+spAttack_EVs = 115
+spDefense_EVs = 155
+speed_EVs = 170
+hp_IVs = 25
+attack_IVs = 18
+defense_IVs = 9
+spAttack_IVs = 21
+spDefense_IVs = 9
+speed_IVs = 3
+ability_id = 102
+nature_id = 13
+
+[node name="pkm3" parent="SingleTrainer" index="2"]
+randomize_pokemon = true
+pokemon = null
+level = 88
+gender = 1
+hp_EVs = 200
+attack_EVs = 228
+defense_EVs = 122
+spAttack_EVs = 126
+spDefense_EVs = 126
+speed_EVs = 179
+hp_IVs = 18
+attack_IVs = 1
+defense_IVs = 6
+spAttack_IVs = 27
+spDefense_IVs = 31
+speed_IVs = 11
+ability_id = 149
+nature_id = 20
+
+[node name="pkm4" parent="SingleTrainer" index="3"]
+randomize_pokemon = true
+pokemon = null
+level = 9
+gender = 1
+hp_EVs = 17
+attack_EVs = 54
+defense_EVs = 62
+spAttack_EVs = 12
+spDefense_EVs = 55
+speed_EVs = 131
+hp_IVs = 6
+attack_IVs = 28
+defense_IVs = 18
+spAttack_IVs = 18
+spDefense_IVs = 19
+speed_IVs = 1
+ability_id = 105
+nature_id = 2
+
+[node name="pkm5" parent="SingleTrainer" index="4"]
+randomize_pokemon = true
+pokemon = null
+level = 38
+gender = 1
+hp_EVs = 196
+attack_EVs = 65
+defense_EVs = 7
+spAttack_EVs = 127
+spDefense_EVs = 169
+speed_EVs = 21
+hp_IVs = 24
+attack_IVs = 23
+defense_IVs = 14
+spAttack_IVs = 16
+spDefense_IVs = 13
+speed_IVs = 23
+ability_id = 47
+nature_id = 11
+
+[node name="pkm6" parent="SingleTrainer" index="5"]
+randomize_pokemon = true
+pokemon = null
+level = 73
+hp_EVs = 148
+attack_EVs = 12
+defense_EVs = 215
+spAttack_EVs = 99
+spDefense_EVs = 241
+speed_EVs = 79
+hp_IVs = 27
+attack_IVs = 6
+defense_IVs = 4
+spAttack_IVs = 30
+spDefense_IVs = 14
+speed_IVs = 26
+ability_id = 212
+nature_id = 18
+
+[editable path="Player"]
+[editable path="SingleTrainer"]

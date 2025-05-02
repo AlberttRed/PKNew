@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://8xaclt27g1po"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://8xaclt27g1po"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_u3txy"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_u3txy"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_sl5y6"]
 
 [resource]
@@ -22,8 +22,8 @@ effect_entries = "Prevents the target from leaving battle. The target cannot swi
 The target may still escape by using baton pass, u turn, or a shed shell.
 
 Both the user and the target pass on this effect with baton pass."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13
@@ -38,4 +38,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

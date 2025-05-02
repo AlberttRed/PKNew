@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dkj24vtdvvcla"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://dkj24vtdvvcla"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_yoal4"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_yoal4"]
 [ext_resource type="Resource" uid="uid://cvbopjxbt76ho" path="res://Resources/Types/03.tres" id="2_bouca"]
 
 [resource]
@@ -34,8 +34,8 @@ This move cannot be used while gravity is in effect.
 This move cannot be selected by sleep talk.
 
 *Bug*: If gravity is used during a double or triple battle while this move is in effect, this move is not correctly canceled on the target, and it remains high in the air indefinitely.  As this move prevents the target from acting, the only way to subsequently remove it from the field is to faint it."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -50,4 +50,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

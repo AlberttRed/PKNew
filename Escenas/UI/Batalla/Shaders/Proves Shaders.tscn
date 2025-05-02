@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://1eq2b508h8gx"]
 
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNInOut.gdshader" id="1_21etc"]
+[ext_resource type="Shader" uid="uid://bkupicbkwj83c" path="res://Escenas/UI/Batalla/Shaders/PKMNInOut.gdshader" id="1_21etc"]
 [ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_p8f88"]
 
 [sub_resource type="Texture2DRD" id="Texture2DRD_mb4bx"]
@@ -9,11 +9,11 @@
 shader = ExtResource("1_21etc")
 shader_parameter/displacement = Vector2(1, 0)
 shader_parameter/velocity = Vector2(1, 1)
+shader_parameter/noise = SubResource("Texture2DRD_mb4bx")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0
 shader_parameter/scale = 1.0
 shader_parameter/pos = 1.0
-shader_parameter/noise = SubResource("Texture2DRD_mb4bx")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ahfj"]
 atlas = ExtResource("1_p8f88")

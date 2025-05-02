@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bqjj24te0tb7r"]
 
 [ext_resource type="Texture2D" uid="uid://ds2qgg6nf0bky" path="res://Sprites/UI/Textbox/choice dp.png" id="1_pm1k3"]
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/LevelUP/LEVELUP.gd" id="2_g4n0e"]
+[ext_resource type="Script" uid="uid://daftf14e4vfjt" path="res://Escenas/UI/Textbox/LevelUP/LEVELUP.gd" id="2_g4n0e"]
 [ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="6_r050p"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3nmwb"]

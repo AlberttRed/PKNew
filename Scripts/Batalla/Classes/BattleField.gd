@@ -8,7 +8,7 @@ var activeBattleEffects : Array[BattleEffect]
 
 var side : BattleSide:
 	set(s):
-		if type != CONST.BATTLE_TYPES.NONE:
+		if type != BattleRules.BattleTypes.NONE:
 			side = s
 			pokemonSpotA.setSide(s)
 			pokemonSpotB.setSide(s)
@@ -23,7 +23,7 @@ var hpBarA:HPBar
 var hpBarB:HPBar
 
 func _ready() -> void:
-	if type != CONST.BATTLE_TYPES.NONE:
+	if type != BattleRules.BattleTypes.NONE:
 		pokemonSpotA = $PokemonA
 		pokemonSpotB = $PokemonB
 		trainerSpotA = $TrainerA

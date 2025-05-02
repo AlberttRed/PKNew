@@ -1,18 +1,18 @@
 [gd_scene load_steps=42 format=3 uid="uid://cye8qm5ppvnuv"]
 
-[ext_resource type="Script" path="res://Scripts/Event/Event.gd" id="1_d7nup"]
-[ext_resource type="Texture2D" uid="uid://kmtb5d1kws0f" path="res://Scripts/Event/square.png" id="2_vlf78"]
+[ext_resource type="Script" uid="uid://b4hc6kw06wyx8" path="res://Scripts/Event/Event.gd" id="1_d7nup"]
+[ext_resource type="Texture2D" uid="uid://bc6ts2cvg8esb" path="res://Scripts/Event/square.png" id="2_vlf78"]
 [ext_resource type="Animation" uid="uid://cm3f2bwpf4en" path="res://Animaciones/Overworld/Events/Close_Door.tres" id="3_q8iqg"]
 [ext_resource type="Animation" uid="uid://dk6cgxsdv1b00" path="res://Animaciones/Overworld/Events/Open_Door.tres" id="4_4itpm"]
-[ext_resource type="Script" path="res://Scripts/Event/Event_page.gd" id="5_jwhkp"]
-[ext_resource type="Texture2D" uid="uid://bymi2hk4qeox7" path="res://Sprites/Eventos/Doors/door2.png" id="6_5xq1h"]
+[ext_resource type="Script" uid="uid://bfxdputsfja3s" path="res://Scripts/Event/Event_page.gd" id="5_jwhkp"]
+[ext_resource type="Texture2D" uid="uid://csw044hjgw43b" path="res://Sprites/Eventos/Doors/door2.png" id="6_5xq1h"]
 [ext_resource type="PackedScene" uid="uid://dav37i87qd54k" path="res://Objetos/Event/Event Commands/cmd_play_animation_event.scn" id="7_84pbb"]
-[ext_resource type="Script" path="res://Scripts/Event/Event Commands/cmd_setThrough.gd" id="9_82xhf"]
+[ext_resource type="Script" uid="uid://b4bu0p0mn7cg1" path="res://Scripts/Event/Event Commands/cmd_setThrough.gd" id="9_82xhf"]
 [ext_resource type="PackedScene" uid="uid://bppv4km3r4exp" path="res://Objetos/Event/Event Commands/cmd_move.tscn" id="10_uiia1"]
 [ext_resource type="PackedScene" uid="uid://c2tgkbsj2b41n" path="res://Objetos/Event/Event Commands/cmd_setTransparent.scn" id="11_hsi16"]
 [ext_resource type="PackedScene" uid="uid://d3ghw6lnmom5a" path="res://Objetos/Event/Event Commands/cmd_FadeToBlack.tscn" id="12_mh5u2"]
 [ext_resource type="PackedScene" uid="uid://1wph4c700mo0" path="res://Objetos/Event/Event Commands/cmd_teleport_to_scene.tscn" id="13_a6pyo"]
-[ext_resource type="Texture2D" uid="uid://h5yk2cdnc8ub" path="res://Sprites/Eventos/Doors/door1.png" id="14_wj8dw"]
+[ext_resource type="Texture2D" uid="uid://24c8tkmwful7" path="res://Sprites/Eventos/Doors/door1.png" id="14_wj8dw"]
 [ext_resource type="PackedScene" uid="uid://cd07v4sy8ygfq" path="res://Objetos/Event/Event Commands/cmd_FadeToNormal.tscn" id="15_dkuws"]
 [ext_resource type="PackedScene" uid="uid://bttphp3qmoer" path="res://Objetos/Event/Event Commands/cmd_wait_move_completion.scn" id="18_61wxq"]
 
@@ -21,8 +21,8 @@ size = Vector2(30, 30)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ghx7l"]
 _data = {
-"Close_Door": ExtResource("3_q8iqg"),
-"Open_Door": ExtResource("4_4itpm")
+&"Close_Door": ExtResource("3_q8iqg"),
+&"Open_Door": ExtResource("4_4itpm")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gkksw"]

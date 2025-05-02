@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://pin0cwa50xxi"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://pin0cwa50xxi"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_2x1s3"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_2x1s3"]
 [ext_resource type="Resource" uid="uid://bwo42s77xcpqt" path="res://Resources/Types/07.tres" id="2_klsqd"]
 
 [resource]
@@ -20,8 +20,8 @@ effect_chance = 10
 priority = 0
 damage_class_id = 3
 effect_entries = "Has a $effect_chance% chance to lower the target's Special Defense by one stage. Inflicts regular damage.  Has a $effect_chance% chance to lower the target's Special Defense by one stage."
-stat_change_ids = [5]
-stat_change_valors = [-1]
+stat_change_ids = Array[int]([5])
+stat_change_valors = Array[int]([-1])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 6
@@ -36,4 +36,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 10
 contact_flag = false
-move_effect = 1

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://xp0h07awrdj3"]
+[gd_resource type="Resource" script_class="BattleIA_Easy" load_steps=2 format=3 uid="uid://xp0h07awrdj3"]
 
-[ext_resource type="Script" path="res://Scripts/Battle IAs/BattleIA_Easy.gd" id="1_em4pf"]
+[ext_resource type="Script" uid="uid://6k8bbs5uq6d5" path="res://Scripts/Battle IAs/BattleIA_Easy.gd" id="1_em4pf"]
 
 [resource]
 script = ExtResource("1_em4pf")

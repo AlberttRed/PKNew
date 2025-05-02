@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bpegpem5d7eqb"]
 
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.gd" id="1_emp6i"]
+[ext_resource type="Script" uid="uid://b6hjk3etruhqx" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.gd" id="1_emp6i"]
 [ext_resource type="Texture2D" uid="uid://dnu7djupfw2o" path="res://Escenas/UI/Menus/Resources/arrowSpriteOK2.png" id="2_1ptbf"]
 [ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="2_kvkhq"]
 

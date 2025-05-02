@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://crgl3j13qe0yp"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://crgl3j13qe0yp"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_yth3u"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_yth3u"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_3383y"]
 
 [resource]
@@ -18,8 +18,8 @@ effect_chance = 100
 priority = 0
 damage_class_id = 1
 effect_entries = "Lowers the target's Defense by one stage. Lowers the target's Defense by one stage."
-stat_change_ids = [3]
-stat_change_valors = [-1]
+stat_change_ids = Array[int]([3])
+stat_change_valors = Array[int]([-1])
 target_id = 11
 meta_ailment_id = 0
 meta_category_id = 2
@@ -34,4 +34,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 100
 contact_flag = false
-move_effect = 1

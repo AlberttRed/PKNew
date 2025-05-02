@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://8v3t6a1k56mv"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://8v3t6a1k56mv"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_4fwby"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_4fwby"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_g8dgk"]
 
 [resource]
@@ -21,8 +21,8 @@ damage_class_id = 2
 effect_entries = "Hits every turn for 2-3 turns, then confuses the user. Inflicts regular damage.  User is forced to attack with this move for 2–3 turns,selected at random.  After the last hit, the user becomes confused.
 
 safeguard does not protect against the confusion from this move."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 8
 meta_ailment_id = 0
 meta_category_id = 0
@@ -37,4 +37,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cv7timbi1gh1h"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://cv7timbi1gh1h"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_s2hp3"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_s2hp3"]
 [ext_resource type="Resource" uid="uid://dhburvcqxnam0" path="res://Resources/Types/06.tres" id="2_mpwlp"]
 
 [resource]
@@ -21,8 +21,8 @@ damage_class_id = 1
 effect_entries = "Prevents any multi-target moves from hitting friendly Pokémon this turn. Moves with multiple targets will not hit friendly Pokémon for the remainder of this turn.  If the user is last to act this turn, this move will fail.
 
 This move cannot be selected by assist or metronome."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 4
 meta_ailment_id = 0
 meta_category_id = 11
@@ -37,4 +37,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

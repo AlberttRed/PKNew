@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cg0kncuwkhf3k"]
 
 [ext_resource type="StyleBox" uid="uid://b85wj0urm5qlf" path="res://Escenas/UI/Menus/Resources/panel_MAIN_MENU.tres" id="1_wfvsi"]
-[ext_resource type="Script" path="res://Escenas/UI/Menus/MAIN_MENU.gd" id="2_ause3"]
+[ext_resource type="Script" uid="uid://ch3h38tcs8062" path="res://Escenas/UI/Menus/MAIN_MENU.gd" id="2_ause3"]
 [ext_resource type="FontFile" path="res://Escenas/UI/Fonts/new_dynamicfont.tres" id="2_c8ow2"]
 [ext_resource type="Texture2D" uid="uid://dxjprukv0p71t" path="res://Escenas/UI/Menus/Resources/selarrow.png" id="2_uvu8h"]
 

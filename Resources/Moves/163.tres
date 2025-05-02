@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://4lysh07o5f40"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://4lysh07o5f40"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_8756w"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_8756w"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_v0ii3"]
 
 [resource]
@@ -19,8 +19,8 @@ effect_chance = 0
 priority = 0
 damage_class_id = 2
 effect_entries = "Has an increased chance for a critical hit. Inflicts regular damage.  User's critical hit rate is one level higher when using this move."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -35,4 +35,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

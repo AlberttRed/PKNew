@@ -110,7 +110,7 @@ func doTargetAllOther():
 	doTargetEnemies()
 
 func doTargetSeleccionar():
-	if GUI.battle.controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
+	if GUI.battle.controller.rules.mode == BattleRules.BattleModes.SINGLE:
 		addTarget(move.pokemon.listEnemies[0].battleSpot)
 		return
 	if controllable:

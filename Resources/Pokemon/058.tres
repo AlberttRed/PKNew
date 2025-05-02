@@ -1,48 +1,48 @@
-[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://bxxqhm4xv3qye"]
+[gd_resource type="Resource" script_class="Pokemon" load_steps=12 format=3 uid="uid://ecgfsyytloay"]
 
-[ext_resource type="Texture2D" uid="uid://b04droeg6er07" path="res://Sprites/Batalla/BattlersAtlas.png" id="1_nhoh3"]
-[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_f4tvp"]
-[ext_resource type="Texture2D" uid="uid://bofgkpgabteiy" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_fh6al"]
-[ext_resource type="Script" path="res://Database/Classes/pokemon_resource.gd" id="4_tq0t7"]
-[ext_resource type="Resource" uid="uid://d3pw7574qhbn3" path="res://Resources/Types/10.tres" id="5_n6fjf"]
+[ext_resource type="Texture2D" uid="uid://bt20co3c7ndt7" path="res://Sprites/Batalla/BattlersAtlas/Gen1Atlas.png" id="1_cw1y4"]
+[ext_resource type="Texture2D" uid="uid://bu2m3wq1emkah" path="res://Sprites/Iconos/PokemonFootprintsAtlas.png" id="2_fvwff"]
+[ext_resource type="Texture2D" uid="uid://ho0xrpwbwl0i" path="res://Sprites/Iconos/PokemonIconsAtlas.png" id="3_c2rod"]
+[ext_resource type="Script" uid="uid://drjps1mdvnkde" path="res://Database/Classes/pokemon_resource.gd" id="4_vv7np"]
+[ext_resource type="Resource" uid="uid://d3pw7574qhbn3" path="res://Resources/Types/10.tres" id="5_od4cf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1h083"]
-atlas = ExtResource("1_nhoh3")
-region = Rect2(496, 18200, 118, 122)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bm7g3"]
+atlas = ExtResource("1_cw1y4")
+region = Rect2(1872, 4476, 118, 122)
 margin = Rect2(20, 38, 42, 38)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_16wey"]
-atlas = ExtResource("1_nhoh3")
-region = Rect2(864, 18164, 118, 122)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l47r"]
+atlas = ExtResource("1_cw1y4")
+region = Rect2(1744, 4476, 118, 122)
 margin = Rect2(20, 38, 42, 38)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_blj3i"]
-atlas = ExtResource("1_nhoh3")
-region = Rect2(332, 26108, 92, 98)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxa3t"]
+atlas = ExtResource("1_cw1y4")
+region = Rect2(1780, 6060, 92, 98)
 margin = Rect2(34, 32, 68, 62)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_srohk"]
-atlas = ExtResource("1_nhoh3")
-region = Rect2(756, 26100, 92, 98)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xgnn"]
+atlas = ExtResource("1_cw1y4")
+region = Rect2(1268, 6084, 92, 98)
 margin = Rect2(34, 32, 68, 62)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tlpq4"]
-atlas = ExtResource("2_f4tvp")
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoi13"]
+atlas = ExtResource("2_fvwff")
 region = Rect2(344, 500, 20, 20)
 margin = Rect2(6, 4, 12, 12)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_idmof"]
-atlas = ExtResource("3_fh6al")
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7nm3"]
+atlas = ExtResource("3_c2rod")
 region = Rect2(544, 1248, 106, 40)
 margin = Rect2(10, 20, 22, 24)
 
 [resource]
 resource_name = "58 - Growlithe"
-script = ExtResource("4_tq0t7")
+script = ExtResource("4_vv7np")
 id = 58
 internal_name = "growlithe"
 Name = "Growlithe"
-type_a = ExtResource("5_n6fjf")
+type_a = ExtResource("5_od4cf")
 base_exprience = 70
 height = 7.0
 weight = 190.0
@@ -74,8 +74,8 @@ is_baby = false
 hatch_counter = 20
 has_gender_differences = false
 forms_switchable = false
-growth_rate_id = "1"
-egg_group_a_id = "5"
+growth_rate_id = 1
+egg_group_a_id = 0
 egg_group_b_id = 0
 evol_method = []
 evol_lvl = []
@@ -87,9 +87,9 @@ habitat_id = 1
 battlerPlayerY = 0
 battlerEnemyY = 0
 battlerAltitude = 0
-icon_sprite = SubResource("AtlasTexture_idmof")
-footprint_sprite = SubResource("AtlasTexture_tlpq4")
-battle_front_sprite = SubResource("AtlasTexture_srohk")
-battle_back_sprite = SubResource("AtlasTexture_16wey")
-battle_front_shiny_sprite = SubResource("AtlasTexture_blj3i")
-battle_back_shiny_sprite = SubResource("AtlasTexture_1h083")
+icon_sprite = SubResource("AtlasTexture_l7nm3")
+footprint_sprite = SubResource("AtlasTexture_eoi13")
+battle_front_sprite = SubResource("AtlasTexture_0xgnn")
+battle_back_sprite = SubResource("AtlasTexture_3l47r")
+battle_front_shiny_sprite = SubResource("AtlasTexture_cxa3t")
+battle_back_shiny_sprite = SubResource("AtlasTexture_bm7g3")

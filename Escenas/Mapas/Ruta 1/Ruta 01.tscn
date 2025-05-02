@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://c3s7eg3cmenf4"]
 
-[ext_resource type="Script" path="res://Scripts/Map.gd" id="1_rwiut"]
+[ext_resource type="Script" uid="uid://corloqks7avnr" path="res://Scripts/Map.gd" id="1_rwiut"]
 [ext_resource type="TileSet" uid="uid://bsfofmep7ocxk" path="res://Resources/Tilesets/TileSet_Outdoor.tres" id="2_4xp8j"]
-[ext_resource type="Script" path="res://Scripts/Map/AreaEncounter.gd" id="4_n3s40"]
+[ext_resource type="Script" uid="uid://430fr56cfy2b" path="res://Scripts/Map/AreaEncounter.gd" id="4_n3s40"]
 [ext_resource type="PackedScene" uid="uid://c8u60si14h61v" path="res://Objetos/Map/MapAreaEncounter.tscn" id="20_o7m8r"]
-[ext_resource type="Script" path="res://Scripts/Map/MapPokemonEncounter.gd" id="21_wv7iv"]
+[ext_resource type="Script" uid="uid://b28v4rham7je7" path="res://Scripts/Map/MapPokemonEncounter.gd" id="21_wv7iv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vyhk5"]
 size = Vector2(1144, 1280)

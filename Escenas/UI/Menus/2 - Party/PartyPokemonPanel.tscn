@@ -1,11 +1,11 @@
 [gd_scene load_steps=43 format=3 uid="uid://b6bvq2kmkv5sh"]
 
 [ext_resource type="Texture2D" uid="uid://dhhhrgpxjqs0m" path="res://Escenas/UI/Menus/Resources/partyPanelRound.png" id="1_ltqyh"]
-[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/PartyPokemonPanel.gd" id="1_yj2sw"]
+[ext_resource type="Script" uid="uid://tnsuggorgj6d" path="res://Scripts/UI/Menus/2 - Party/PartyPokemonPanel.gd" id="1_yj2sw"]
 [ext_resource type="Texture2D" uid="uid://br1wcbty0sihu" path="res://Escenas/UI/Menus/Resources/partyPanelRoundSel.png" id="3_xf4p8"]
 [ext_resource type="Texture2D" uid="uid://cfr1vpq8pfv7x" path="res://Sprites/Pictures/statuses.PNG" id="4_m8t2i"]
 [ext_resource type="Texture2D" uid="uid://ngraee8t1sem" path="res://Escenas/UI/Menus/Resources/partyPanelRoundFnt.png" id="4_xi400"]
-[ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="5_40ocy"]
+[ext_resource type="Script" uid="uid://c6q8oci1y3ho8" path="res://Escenas/UI/Others/health_bar.gd" id="5_40ocy"]
 [ext_resource type="Texture2D" uid="uid://ddwbe6qsu8yqo" path="res://Escenas/UI/Menus/Resources/partyPanelRoundSelFnt.png" id="5_otvqm"]
 [ext_resource type="Texture2D" uid="uid://lmdx6hpah1a2" path="res://Sprites/Pictures/HPparty_background.png" id="6_fdxfp"]
 [ext_resource type="Texture2D" uid="uid://bytcw8mm87lsx" path="res://Escenas/UI/Menus/Resources/partyPanelRoundSwap.png" id="6_uai6d"]

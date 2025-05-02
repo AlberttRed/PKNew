@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://byldef6021bv5"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://byldef6021bv5"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_7yf61"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_7yf61"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_fsler"]
 
 [resource]
@@ -21,8 +21,8 @@ damage_class_id = 3
 effect_entries = "If the user is holding a appropriate plate or drive, the damage inflicted will match it. Inflicts regular damage.  If the user is holding a plate or a drive, this move's type is the type corresponding to that item.
 
 Note: This effect is technically shared by both techno blast and judgment; however, Techno Blast is only affected by drives, and Judgment is only affected by plates."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -37,4 +37,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bbcxc1lmycivd"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://bbcxc1lmycivd"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_rm232"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_rm232"]
 [ext_resource type="Resource" uid="uid://dp2vqsim555sq" path="res://Resources/Types/11.tres" id="2_1a3fx"]
 
 [resource]
@@ -19,8 +19,8 @@ effect_chance = 0
 priority = 0
 damage_class_id = 3
 effect_entries = "With Grass Pledge, halves opposing Pokémon's Speed for four turns. Inflicts regular damage.  If a friendly Pokémon used grass pledge earlier this turn, all opposing Pokémon have halved Speed for four turns (including this one)."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -35,4 +35,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

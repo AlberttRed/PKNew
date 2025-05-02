@@ -16,7 +16,7 @@ warnings/check_invalid_track_paths=false
 
 config/name="Pokemon2DNEW"
 run/main_scene="res://Objetos/AutoLoads/SCENE_MANAGER.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"
 
 [autoload]
@@ -26,9 +26,9 @@ CONST="*res://Scripts/AutoLoads/CONST.gd"
 INPUT="*res://Objetos/AutoLoads/INPUT.scn"
 EVENTS_CONDITIONS="*res://Objetos/AutoLoads/EVENTS_CONDITIONS.tscn"
 DB="*res://Database/Data/DBManager.tscn"
-GUI="*res://Escenas/UI/GUI.tscn"
-GAME_DATA="*res://Scripts/AutoLoads/GAME_DATA.gd"
 SignalManager="*res://Scripts/AutoLoads/SignalManager.gd"
+GAME_DATA="*res://Scripts/AutoLoads/GAME_DATA.gd"
+GUI="*res://Escenas/UI/GUI.tscn"
 REMOTE_MOVEMENT="*res://Objetos/RemoteMovement.tscn"
 
 [display]

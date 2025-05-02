@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c0njj2ydft1ai"]
 
 [ext_resource type="Texture2D" uid="uid://d1ixfl4m0q715" path="res://Sprites/Tilesets/Animated tiles/Grass Step/Grass_Step.png" id="1_0772e"]
-[ext_resource type="Script" path="res://Scripts/Animaciones/PlayerAnimatedEffect.gd" id="2_abyvm"]
+[ext_resource type="Script" uid="uid://clql5hkxrij51" path="res://Scripts/Animaciones/PlayerAnimatedEffect.gd" id="2_abyvm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyvl5"]
 atlas = ExtResource("1_0772e")

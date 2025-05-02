@@ -24,7 +24,8 @@ func playAnimation(animation, _animParams:Dictionary = {}, _root:Node = get_pare
 		await _playAnimationByName(animation, _animParams, custom_blend, custom_speed, from_end)
 	else:
 		assert(false, "Invalid 'animation' param for function playAnimation")
-		
+	#await SignalManager.Animations.finished_animation
+	
 func _playAnimationByName(name: StringName = "", _animParams:Dictionary = {}, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false):
 	var animPlayer : BattleAnimationPlayer = newAnimationPlayer()
 	animParams = _animParams

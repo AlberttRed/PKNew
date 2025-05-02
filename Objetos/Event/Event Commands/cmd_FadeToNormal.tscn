@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cd07v4sy8ygfq"]
 
-[ext_resource type="Script" path="res://Scripts/Event/Event Commands/cmd_FadeToNormal.gd" id="1_sfgsn"]
+[ext_resource type="Script" uid="uid://bk1hon88qyq5l" path="res://Scripts/Event/Event Commands/cmd_FadeToNormal.gd" id="1_sfgsn"]
 
 [node name="cmd_FadeToNormal" type="Node"]
-script = ExtResource( "1_sfgsn" )
+script = ExtResource("1_sfgsn")

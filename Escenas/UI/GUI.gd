@@ -24,6 +24,7 @@ var next = false
 #onready var options = get_node("OPTIONS")
 @onready var menu = $MAIN_MENU
 @onready var battle:BattleUI = $BATTLE
+@onready var BattleNew:BattleScene = $BattleNew
 @onready var choices:ChoicesContainer = $ChoicesContainer
 @onready var party:Party = $PARTY
 #onready var bag = get_node("BAG")

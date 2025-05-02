@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gundf746lv3f"]
 
-[ext_resource type="Script" path="res://Scripts/Event/Event Conditions/exit_door.gd" id="1_5m0ls"]
+[ext_resource type="Script" uid="uid://tkprh7uq7vjh" path="res://Scripts/Event/Event Conditions/exit_door.gd" id="1_5m0ls"]
 
 [node name="Conditions" type="Node"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=39 format=3 uid="uid://dkjekvml5fqpp"]
 
 [ext_resource type="Texture2D" uid="uid://d2i5gus8tvoi" path="res://Escenas/UI/Menus/Resources/partybg.PNG" id="1_ew7hq"]
-[ext_resource type="Script" path="res://Scripts/UI/Menus/2 - Party/PARTY.gd" id="2"]
+[ext_resource type="Script" uid="uid://bc6ijbantqyn" path="res://Scripts/UI/Menus/2 - Party/PARTY.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://c63bjwkcpr1fj" path="res://Escenas/UI/Menus/Resources/partyPanelRect.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://cir5wh26i3pxl" path="res://Escenas/UI/Menus/Resources/partyCancel.png" id="15"]
 [ext_resource type="Texture2D" uid="uid://dvk3qjfw5vfa5" path="res://Escenas/UI/Menus/Resources/partyCancelSelNarrow.png" id="16"]
@@ -12,13 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="29"]
 [ext_resource type="Animation" uid="uid://bs3ia4xub3d1f" path="res://Animaciones/UI/next_animation.tres" id="30"]
 [ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="31"]
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/ChoicesContainer.gd" id="34_jh3e5"]
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.gd" id="35_8iy16"]
+[ext_resource type="Script" uid="uid://c45gn3647dnh4" path="res://Escenas/UI/Textbox/Choices/ChoicesContainer.gd" id="34_jh3e5"]
+[ext_resource type="Script" uid="uid://b6hjk3etruhqx" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.gd" id="35_8iy16"]
 [ext_resource type="PackedScene" uid="uid://gdxd2a726tc0" path="res://Escenas/UI/Menus/2 - Party/PartySummary.tscn" id="36_o5y3j"]
 [ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="57_0h8r4"]
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/MessageBox.gd" id="58_foh34"]
+[ext_resource type="Script" uid="uid://biesvrjn28e2r" path="res://Escenas/UI/Textbox/MessageBox.gd" id="58_foh34"]
 [ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="59_1wbce"]
-[ext_resource type="Script" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="60_mee08"]
+[ext_resource type="Script" uid="uid://cby4ac35hy5f" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="60_mee08"]
 [ext_resource type="Animation" uid="uid://beugpt1ql5na2" path="res://Escenas/UI/Textbox/Resources/next_animation.tres" id="61_2e7d1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oj2bc"]
@@ -58,7 +58,7 @@ region_rect = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1eve6"]
 _data = {
-"Idle": ExtResource("30")
+&"Idle": ExtResource("30")
 }
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_12vyg"]
@@ -121,10 +121,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5i0nh"]
 _data = {
-"Idle": ExtResource("61_2e7d1"),
-"RESET": SubResource("Animation_bs852"),
-"Scroll": SubResource("Animation_8ajbi"),
-"Typing": SubResource("Animation_mbf3k")
+&"Idle": ExtResource("61_2e7d1"),
+&"RESET": SubResource("Animation_bs852"),
+&"Scroll": SubResource("Animation_8ajbi"),
+&"Typing": SubResource("Animation_mbf3k")
 }
 
 [node name="PARTY" type="Panel"]

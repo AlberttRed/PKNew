@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bwmd4c7fbmjy4"]
+
+[node name="BattleEffectManager" type="Node"]

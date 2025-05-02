@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3r7lkhevx7ww"]
 
-[ext_resource type="Script" path="res://Scripts/Event/Event Commands/cmd_teleport.gd" id="1_r4ffs"]
+[ext_resource type="Script" uid="uid://bpk8sfcvowuts" path="res://Scripts/Event/Event Commands/cmd_teleport.gd" id="1_r4ffs"]
 
 [node name="cmd_teleport" type="Node"]
-script = ExtResource( "1_r4ffs" )
+script = ExtResource("1_r4ffs")

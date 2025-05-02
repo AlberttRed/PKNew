@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://x6l4xw21q6jm"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://x6l4xw21q6jm"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_13lsj"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_13lsj"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_a2ict"]
 
 [resource]
@@ -23,8 +23,8 @@ effect_entries = "Target sleeps at the end of the next turn. Puts the target to 
 If the target is protected by safeguard when this move is used, this move will fail.
 
 insomnia and vital spirit prevent the sleep if the target has either at the end of the next turn, but will not cause this move to fail on use."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 14
 meta_category_id = 1
@@ -39,4 +39,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

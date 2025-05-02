@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://g132tolsupvw"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://g132tolsupvw"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_iwafj"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_iwafj"]
 [ext_resource type="Resource" uid="uid://ces0u5nv45fpj" path="res://Resources/Types/13.tres" id="2_aw4r5"]
 
 [resource]
@@ -20,8 +20,8 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Raises the Defense and Special Defense of all friendly Pokémon with plus or minus by one stage. Raises the Defense and Special Defense of all friendly Pokémon with plus or minus by one stage."
-stat_change_ids = [3, 5]
-stat_change_valors = [1, 1]
+stat_change_ids = Array[int]([3, 5])
+stat_change_valors = Array[int]([1, 1])
 target_id = 13
 meta_ailment_id = 0
 meta_category_id = 2
@@ -36,4 +36,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

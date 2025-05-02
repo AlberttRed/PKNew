@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dt2kdxtl4udvi"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://dt2kdxtl4udvi"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_q1dfo"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_q1dfo"]
 [ext_resource type="Resource" uid="uid://d3pw7574qhbn3" path="res://Resources/Types/10.tres" id="2_v8gib"]
 
 [resource]
@@ -29,8 +29,8 @@ Up to 4× the target's weight     |    80
 Up to 5× the target's weight     |   100
 More than 5× the target's weight |   120
 "
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -45,4 +45,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1
