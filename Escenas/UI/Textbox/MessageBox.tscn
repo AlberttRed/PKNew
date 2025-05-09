@@ -61,9 +61,13 @@ _data = {
 }
 
 [node name="MSG" type="Panel"]
-offset_top = 288.0
-offset_right = 512.0
-offset_bottom = 384.0
+custom_minimum_size = Vector2(512, 96)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_styles/panel = ExtResource("1_1g85p")
 script = ExtResource("2_re8jy")
 
@@ -177,5 +181,5 @@ wait_time = 0.05
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 root_node = NodePath("../next")
 libraries = {
-"": SubResource("AnimationLibrary_5i0nh")
+&"": SubResource("AnimationLibrary_5i0nh")
 }

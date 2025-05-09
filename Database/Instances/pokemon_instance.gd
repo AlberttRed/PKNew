@@ -590,6 +590,10 @@ func getSpDefenseStat(_level:int):
 func getSpeedStat(_level:int):
 	return int(float(int( 5.0 + (( float(_level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
 
+func to_battle_pokemon(ai: BattleIA_Refactor = null) -> BattlePokemon_Refactor:
+	var bp = BattlePokemon_Refactor.new(self, ai)
+	bp.is_wild = self.isWild
+	return bp
 #func hasMove(move_id):
 #	for m in movements:
 #		if m.id == move_id:

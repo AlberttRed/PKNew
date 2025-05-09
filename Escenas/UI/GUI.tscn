@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://du3d20hvxfop2" path="res://Escenas/UI/Textbox/Choices/ChoicesContainer.tscn" id="9_8efuo"]
 [ext_resource type="Texture2D" uid="uid://cp3p5plvvv4sj" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="10_gmw6c"]
 [ext_resource type="Texture2D" uid="uid://dnu7djupfw2o" path="res://Escenas/UI/Menus/Resources/arrowSpriteOK2.png" id="11_klrg4"]
-[ext_resource type="PackedScene" uid="uid://notumsye5rrv" path="res://Escenas/UI/Batalla/New BattleSystem/Battle.tscn" id="13_n4y00"]
+[ext_resource type="PackedScene" uid="uid://notumsye5rrv" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/Battle.tscn" id="13_n4y00"]
 [ext_resource type="PackedScene" uid="uid://bpegpem5d7eqb" path="res://Escenas/UI/Textbox/Choices/ChoicePanel.tscn" id="13_navh0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b8aew"]

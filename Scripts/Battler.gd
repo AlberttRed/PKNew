@@ -75,22 +75,20 @@ func print_pokemon_team():
 
 
 func to_battle_participant() -> BattleParticipant_Refactor:
-	var p = BattleParticipant_Refactor.new()
+	var p := BattleParticipant_Refactor.new()
 	p.trainer_id = trainer_id
 	p.name = name
 	p.is_player = is_playable  # o false si es un NPC
 	p.ai_controller = battleIA
-	p.sprite_path = null  # si usás sprites por entrenador
+	#p.sprite_path = null  # si usás sprites por entrenador
 	p.is_trainer = (type != CONST.BATTLER_TYPES.WILD_POKEMON)
 	p.pokemon_team = []
-
-	for pok in party:
-		var battle_pokemon = BattlePokemon.new(pok, battleIA)
-		battle_pokemon.isWild = (type == CONST.BATTLER_TYPES.WILD_POKEMON)
+	
+	for pok:PokemonInstance in party:
+		var battle_pokemon := pok.to_battle_pokemon() #BattlePokemon_Refactor.new(pok, battleIA)
 		battle_pokemon.controllable = is_playable
 		battle_pokemon.participant = p
-		p.pokemon_team.append(battle_pokemon)
-
+		p.add_pokemon(battle_pokemon)
 	return p
 	
 #func initPokemonTeam():

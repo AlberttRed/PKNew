@@ -6,15 +6,15 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await wildSingleBattle()
-	#await wildBattle()
-	get_tree().quit()
+	#await wildBattle_OLD()
+	await wildDoubleBattle()
+	#get_tree().quit()
 	
 func wildSingleBattle():
 	var wildPokemon:PokemonInstance = PokemonInstance.new().create(true) 
 	wildPokemon.isWild = true
 	
-	var wildParticipant: BattleParticipant_Refactor = BattleParticipantWild_Refactor.new([wildPokemon])
+	var wildParticipant: BattleParticipant_Refactor = BattleParticipantWild_Refactor.new([wildPokemon.to_battle_pokemon()])
 	var playerParticipant: BattleParticipant_Refactor = player.to_battle_participant()
 
 	var rules = BattleRules.new(
@@ -23,6 +23,23 @@ func wildSingleBattle():
 	)
 
 	GUI.BattleNew.start_battle([playerParticipant], [wildParticipant], rules)
+	
+	
+func wildDoubleBattle():
+	var wildPokemon:PokemonInstance = PokemonInstance.new().create(true) 
+	wildPokemon.isWild = true
+	var wildPokemon2:PokemonInstance = PokemonInstance.new().create(true) 
+	wildPokemon2.isWild = true
+	
+	var wildParticipant: BattleParticipant_Refactor = BattleParticipantWild_Refactor.new([wildPokemon.to_battle_pokemon(), wildPokemon2.to_battle_pokemon()])
+	var playerParticipant: BattleParticipant_Refactor = player.to_battle_participant()
+
+	var rules = BattleRules.new(
+		BattleRules.BattleTypes.WILD,
+		BattleRules.BattleModes.DOUBLE  
+	)
+
+	GUI.BattleNew.start_battle([playerParticipant], [wildParticipant], rules)	
 	
 func singleTrainerBattle():
 	pass

@@ -462,4 +462,3 @@ func checkMoveStatus():
 		move_state = MoveState.WALK
 	
 	#colliding = is_colliding()
-

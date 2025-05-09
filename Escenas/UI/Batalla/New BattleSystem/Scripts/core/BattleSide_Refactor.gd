@@ -12,7 +12,7 @@ const MAX_PARTY_SIZE := 6
 var type: Types  # PLAYER / ENEMY / etc.
 var participants: Array[BattleParticipant_Refactor] = []
 var isWild: bool = false
-var pokemonParty : Array[BattlePokemon]
+var pokemonParty : Array[BattlePokemon_Refactor]
 var escapeAttempts:int #Player attemps to exit the battle. If a Move is selected, the attemps counter will restart
 var escapedBattle:bool
 
@@ -33,9 +33,9 @@ func add_participant(participant: BattleParticipant_Refactor) -> void:
 	participant.side = self
 	participants.append(participant)
 	
-func get_active_pokemons() -> Array[BattlePokemon]:
-	var actives := []
-	for p in participants:
+func get_active_pokemons() -> Array[BattlePokemon_Refactor]:
+	var actives:Array[BattlePokemon_Refactor] = []
+	for p:BattleParticipant_Refactor in participants:
 		actives += p.get_active_pokemons()
 	return actives
 
@@ -45,12 +45,13 @@ func load_party():
 	var num_pk_per_participant: int = floor(MAX_PARTY_SIZE / num_part)
 	var total_added := 0
 
-	for part in participants:
+	for part:BattleParticipant_Refactor in participants:
 		var added_for_this_participant := 0
-		for pk in part.pokemonTeam:
+		for pk:BattlePokemon_Refactor in part.pokemon_team:
 			if added_for_this_participant < num_pk_per_participant and total_added < 6:
 				pk.inBattleParty = true
-				pokemonParty.append(pk)
+				self.pokemonParty.append(pk)
+				pk.side = self
 				added_for_this_participant += 1
 				total_added += 1
 			if total_added >= 6:
@@ -95,11 +96,11 @@ func get_max_active_per_participant(rules: BattleRules) -> Dictionary:
 # Se asigna como 'inBattle' a los seleccionados según el modo (1vs1, 2vs2, etc.)
 func assign_active_pokemons(rules: BattleRules) -> void:
 	var max_per_participant := get_max_active_per_participant(rules)
-	var allowed_pokemon := pokemonParty
+	var allowed_pokemon := self.pokemonParty
 
 	# Reset: marcar todos como fuera de combate
 	for pk in allowed_pokemon:
-		pk.inBattle = false
+		pk.in_battle = false
 
 	# Asignación
 	for p in participants:
@@ -108,7 +109,7 @@ func assign_active_pokemons(rules: BattleRules) -> void:
 		
 		for pk in p.pokemon_team:
 			if pk in allowed_pokemon and not pk.fainted and assigned < max_allowed:
-				pk.inBattle = true
+				pk.in_battle = true
 				assigned += 1
 				
 # Prepara el BattleSide para el combate:

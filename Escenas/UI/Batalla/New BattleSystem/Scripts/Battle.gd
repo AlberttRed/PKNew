@@ -1,0 +1,66 @@
+extends Node2D
+class_name BattleScene
+
+@onready var battle_controller: BattleController_Refactor = $BattleController
+@onready var battle_ui: BattleUI_Refactor = $BattleUI
+
+# Inicia un nuevo combate con los participantes y reglas especificadas.
+# Prepara ambos lados, aplica reglas, y sincroniza con la UI.
+func start_battle(player_participants: Array[BattleParticipant_Refactor], enemy_participants: Array[BattleParticipant_Refactor], rules: BattleRules):
+	# Crea y configura el controlador
+	battle_controller.ui = battle_ui
+	battle_controller.setup_sides(player_participants, enemy_participants, rules)
+	battle_ui.setup_for_sides(battle_controller.player_side, battle_controller.enemy_side, rules)
+	
+	 # Iniciar la secuencia de inicio del combate
+	await play_transition()
+	await show_trainers_and_pokemon()
+	await show_hp_bars()
+	show_action_menu()
+	
+	# Iniciar la lógica del combate
+	await battle_controller.start_battle()
+	
+func play_transition():
+	# Placeholder para la transición de entrada
+	await get_tree().create_timer(0.5).timeout
+
+func show_trainers_and_pokemon():
+	if battle_controller.rules.type == BattleRules.BattleTypes.TRAINER:
+		# Mostrar sprites de los entrenadores
+		battle_ui.show_trainer_sprites()
+		await get_tree().create_timer(0.5).timeout
+
+		# Mostrar mensajes de introducción
+		await battle_ui.show_message("¡[Nombre del entrenador] te desafía a un combate!")
+		await get_tree().create_timer(0.5).timeout
+
+		# Mostrar Pokémon del enemigo
+		await battle_ui.show_enemy_pokemon(battle_controller.enemy_side.get_active_pokemons(), battle_controller.rules)
+		await get_tree().create_timer(0.5).timeout
+
+		# Mostrar Pokémon del jugador
+		await battle_ui.show_player_pokemon(battle_controller.player_side.get_active_pokemons(), battle_controller.rules)
+		await get_tree().create_timer(0.5).timeout
+	else:
+		# Combate contra Pokémon salvaje
+		await battle_ui.show_enemy_pokemon(battle_controller.enemy_side.get_active_pokemons(), battle_controller.rules)
+		await get_tree().create_timer(0.5).timeout
+
+		# Mostrar mensaje de introducción
+		await battle_ui.show_message("¡Un [Nombre del Pokémon] salvaje apareció!")
+		await get_tree().create_timer(0.5).timeout
+
+		# Mostrar Pokémon del jugador
+		await battle_ui.show_player_pokemon(battle_controller.player_side.get_active_pokemons(), battle_controller.rules)
+		await get_tree().create_timer(0.5).timeout
+
+	
+func show_hp_bars():
+	await battle_ui.show_enemy_hp_bar(battle_controller.enemy_side.get_active_pokemons())
+	await get_tree().create_timer(0.5).timeout
+	await battle_ui.show_player_hp_bar(battle_controller.player_side.get_active_pokemons())
+	await get_tree().create_timer(0.5).timeout
+	
+func show_action_menu():
+	battle_ui.show_action_menu()

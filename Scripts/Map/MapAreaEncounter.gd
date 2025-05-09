@@ -50,29 +50,29 @@ func get_random_wild_participant(count: int = 1) -> BattleParticipantWild_Refact
 
 
 func getPokemonEncounter():
-	
-	var wildParticipant = get_random_wild_participant()	
-	var playerParticipant = GLOBAL.PLAYER.trainer.to_battle_participant()
-	
+	pass
+	#var wildParticipant = get_random_wild_participant()	
+	#var playerParticipant = GLOBAL.PLAYER.trainer.to_battle_participant()
+	#
 	#var enemyBattler : Battler = Battler.new().create(CONST.BATTLER_TYPES.WILD_POKEMON, [pkmn], BattleIA_Wild.new())
-	
-	var rules = BattleRules.new(
-		BattleRules.BattleTypes.WILD,
-		BattleRules.BattleModes.SINGLE  # o DOUBLE si hace falta
-	)
-
-	GUI.BattleScene.start_battle([playerParticipant], [wildParticipant], rules)
-	
-	var bc : BattleController = BattleController.new(br)
-	#var bs_player : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.PLAYER)
-	#var bs_enemy : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.ENEMY)
-	bc.playerSide.addParticipant(GLOBAL.PLAYER.trainer, true)
-	bc.enemySide.addParticipant(enemyBattler, false)
-	bc.enemySide.isWild = true
-	
-	bc.playerSide.initSide(br)
-	bc.enemySide.initSide(br)
-	await bc.initBattle()
+	#
+	#var rules = BattleRules.new(
+		#BattleRules.BattleTypes.WILD,
+		#BattleRules.BattleModes.SINGLE  # o DOUBLE si hace falta
+	#)
+#
+	#GUI.BattleScene.start_battle([playerParticipant], [wildParticipant], rules)
+	#
+	#var bc : BattleController = BattleController.new(rules)
+	##var bs_player : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.PLAYER)
+	##var bs_enemy : BattleSide = BattleSide.new(CONST.BATTLE_SIDES.ENEMY)
+	#bc.playerSide.addParticipant(GLOBAL.PLAYER.trainer, true)
+	#bc.enemySide.addParticipant(enemyBattler, false)
+	#bc.enemySide.isWild = true
+	#
+	#bc.playerSide.initSide(rules)
+	#bc.enemySide.initSide(rules)
+	#await bc.initBattle()
 	
 
 func getPokemon():
