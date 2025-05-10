@@ -10,7 +10,7 @@ func start_battle(player_participants: Array[BattleParticipant_Refactor], enemy_
 	# Crea y configura el controlador
 	battle_controller.ui = battle_ui
 	battle_controller.setup_sides(player_participants, enemy_participants, rules)
-	battle_ui.setup_for_sides(battle_controller.player_side, battle_controller.enemy_side, rules)
+	battle_ui.setup_sides(battle_controller.player_side, battle_controller.enemy_side, rules)
 	
 	 # Iniciar la secuencia de inicio del combate
 	await play_transition()

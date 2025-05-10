@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://djqyc10nosdl"]
+[gd_scene load_steps=21 format=3 uid="uid://djqyc10nosdl"]
 
 [ext_resource type="Script" uid="uid://fue81u7lotyd" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/ui/BattleUI_Refactor.gd" id="1_cwigb"]
+[ext_resource type="Script" uid="uid://ciwn5vywclehe" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/ui/BattleMessageController_Refactor.gd" id="2_gtgo1"]
 [ext_resource type="PackedScene" uid="uid://ui53do2ck5tn" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/FieldUI.tscn" id="2_yxxch"]
 [ext_resource type="PackedScene" uid="uid://dkjekvml5fqpp" path="res://Escenas/UI/Menus/2 - Party/PARTY.tscn" id="3_kpt17"]
 [ext_resource type="PackedScene" uid="uid://btj5i08qahepp" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/ActionMenu.tscn" id="4_hkwg8"]
@@ -52,6 +53,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cwigb")
 
+[node name="MessageController" type="Node" parent="."]
+script = ExtResource("2_gtgo1")
+
 [node name="FieldUI" parent="." instance=ExtResource("2_yxxch")]
 layout_mode = 1
 
@@ -60,10 +64,12 @@ visible = false
 layout_mode = 0
 
 [node name="ActionsMenu" parent="." instance=ExtResource("4_hkwg8")]
+visible = false
 layout_mode = 1
 
 [node name="MessageBox" parent="." instance=ExtResource("5_alpup")]
 visible = false
+z_index = 6
 layout_mode = 1
 
 [node name="MovesMenu" parent="." instance=ExtResource("6_x8cud")]

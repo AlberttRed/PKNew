@@ -74,9 +74,9 @@ func apply_z_order_for_mode(mode: int) -> void:
 			$EnemyBase/PokemonSpotB.z_index = 0
 
 		BattleRules.BattleModes.DOUBLE:
-			# En combate doble, SpotA debe estar delante (más "cerca" de cámara)
-			$PlayerBase/PokemonSpotA.z_index = 2
-			$PlayerBase/PokemonSpotB.z_index = 1
+			# En combate doble, en player el SpotA debe estar por detrás, y en enemy por delante (más "cerca" de cámara)
+			$PlayerBase/PokemonSpotA.z_index = 1
+			$PlayerBase/PokemonSpotB.z_index = 2
 			$EnemyBase/PokemonSpotA.z_index = 2
 			$EnemyBase/PokemonSpotB.z_index = 1
 

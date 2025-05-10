@@ -119,3 +119,10 @@ func prepare_for_battle(rules: BattleRules) -> void:
 	assert(!participants.is_empty(), "BattleSide sin participantes")
 	load_party()
 	assign_active_pokemons(rules)
+
+# Devuelve los nombres de los entrenadores del side
+func get_trainer_names() -> Array[String]:
+	var names: Array[String] = []
+	for p in participants:
+			names.append(p.name)
+	return names

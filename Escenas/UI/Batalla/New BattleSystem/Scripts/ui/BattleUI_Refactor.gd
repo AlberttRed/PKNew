@@ -2,16 +2,17 @@ extends Control
 
 class_name BattleUI_Refactor
 
+@onready var message_controller:BattleMessageController_Refactor = $MessageController
 @onready var field_ui:FieldUI = $FieldUI
 @onready var party_ui = $PartyUI
-@onready var action_menu = $ActionsMenu
-@onready var message_box = $MessageBox
-@onready var move_menu = $MovesMenu
+@onready var actions_menu = $ActionsMenu
+@onready var message_box:MessageBox = $MessageBox
+@onready var moves_menu = $MovesMenu
 
 func _ready() -> void:
 	visible = false
 
-func setup_for_sides(player_side: BattleSide_Refactor, enemy_side: BattleSide_Refactor, rules: BattleRules) -> void:
+func setup_sides(player_side: BattleSide_Refactor, enemy_side: BattleSide_Refactor, rules: BattleRules) -> void:
 	field_ui.setup_spots(player_side, enemy_side, rules)
 	field_ui.position_battlespots_for_mode(rules.mode)
 	#party_ui.load_party(player_side.pokemonParty)

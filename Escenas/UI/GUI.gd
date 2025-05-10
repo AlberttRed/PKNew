@@ -164,7 +164,7 @@ func show_menu():
 	#menu.set_process(false)
 
 func isVisible():
-	return msg.is_visible() || menu.is_visible() || party.is_visible() || battle.is_visible() || transition.is_visible()# || $INTRO.is_visible() || bag.is_visible() || transition.is_visible()#|| options.is_visible()
+	return msg.is_visible() || menu.is_visible() || party.is_visible() || battle.is_visible() || transition.is_visible() || BattleNew.visible# || $INTRO.is_visible() || bag.is_visible() || transition.is_visible()#|| options.is_visible()
 
 #func _on_text_speed_changed(speed):
 #	get_node("MSG/Timer 2").set_wait_time(CONST.TEXT_SPEEDS[speed])

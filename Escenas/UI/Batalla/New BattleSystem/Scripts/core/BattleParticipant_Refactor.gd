@@ -4,7 +4,9 @@ class_name BattleParticipant_Refactor
 
 var trainer_id: int = -1  # -1 o algún valor especial para salvajes
 var is_player: bool = false
-var name: String = ""
+var name: String = "":
+	get:
+		return name if name != null else ""
 var ai_controller: BattleIA_Refactor = null  # null si es jugador
 var sprite_path: String = ""  # Opcional, si usás esto para mostrar el entrenador
 var is_trainer: bool = true  # Nuevo flag, por compatibilidad futura

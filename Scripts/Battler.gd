@@ -77,7 +77,7 @@ func print_pokemon_team():
 func to_battle_participant() -> BattleParticipant_Refactor:
 	var p := BattleParticipant_Refactor.new()
 	p.trainer_id = trainer_id
-	p.name = name
+	p.name = name if name != null else ""
 	p.is_player = is_playable  # o false si es un NPC
 	p.ai_controller = battleIA
 	#p.sprite_path = null  # si usás sprites por entrenador

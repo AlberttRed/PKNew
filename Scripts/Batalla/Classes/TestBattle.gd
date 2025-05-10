@@ -7,6 +7,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#await wildBattle_OLD()
+	#await wildSingleBattle()
 	await wildDoubleBattle()
 	#get_tree().quit()
 	

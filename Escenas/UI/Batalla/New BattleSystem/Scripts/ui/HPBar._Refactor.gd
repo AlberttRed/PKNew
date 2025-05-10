@@ -29,16 +29,16 @@ func init(_pokemon: BattlePokemon_Refactor) -> void:
 	update_ui()
 
 func update_ui() -> void:
-	lbl_name.text = pokemon.get_name()
-	lbl_level.text = str(pokemon.get_level())
-
+	lbl_name.setText(pokemon.get_name())
+	lbl_level.setText(pokemon.get_level())
+	print(pokemon.get_name() +":" + str(pokemon.base_data.gender))
 	match pokemon.base_data.gender:
 		CONST.GENEROS.HEMBRA:
-			lbl_gender.text = "♀"
-			lbl_gender.add_theme_color_override("font_color", Color("FF5D2C"))
+			lbl_gender.setText("♀")
+			lbl_gender.set("theme_override_colors/default_color", Color("FF5D2C"))
 		CONST.GENEROS.MACHO:
-			lbl_gender.text = "♂"
-			lbl_gender.add_theme_color_override("font_color", Color("3465DF"))
+			lbl_gender.setText("♂")
+			lbl_gender.set("theme_override_colors/default_color", Color("3465DF"))
 		_:
 			lbl_gender.text = ""
 

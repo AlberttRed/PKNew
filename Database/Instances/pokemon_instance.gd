@@ -338,7 +338,7 @@ func randomize_pkmn():
 		base = load("res://Resources/Pokemon/"+str(randi_range(1, 151)).pad_zeros(3)+".tres")
 		#pkm_id = randi_range(1, DB.get_node("Pokemons").get_children().size())
 		level = randi_range(1, 100)
-		gender = randi_range(0,1) # TO DO funció per obtenir gender segons percentatge de la especie pokemon
+		gender = calculateGender()
 	
 		ability_id = randi_range(1, 232)
 		nature_id = randi_range(1, 25)
