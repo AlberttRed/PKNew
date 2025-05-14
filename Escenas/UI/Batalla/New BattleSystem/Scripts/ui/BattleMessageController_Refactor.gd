@@ -6,8 +6,7 @@ func get_intro_messages(
 	player_pokemon: Array[BattlePokemon_Refactor],
 	enemy_pokemon: Array[BattlePokemon_Refactor],
 	player_trainers: Array[String],
-	enemy_trainers: Array[String]
-) -> Array[Dictionary]:
+	enemy_trainers: Array[String]) -> Array[Dictionary]:
 	var messages: Array[Dictionary] = []
 
 	match rules.mode:
@@ -78,3 +77,36 @@ func get_intro_messages(
 				})
 
 	return messages
+
+func get_damage_result_messages(choice: BattleMoveChoice_Refactor, dmg: DamageResult, target: BattlePokemon_Refactor) -> Array[Dictionary]:
+	var messages: Array[Dictionary] = []
+
+	if dmg.is_critical:
+		messages.append({ "type": "input", "text": "¡Golpe crítico!" })
+
+	if dmg.is_super_effective():
+		messages.append({ "type": "input", "text": "¡Es muy eficaz!" })
+	elif dmg.is_not_very_effective():
+		messages.append({ "type": "input", "text": "No es muy eficaz..." })
+	elif dmg.is_ineffective():
+		messages.append({ "type": "input", "text": "No afecta a %s..." % target.nickname })
+
+	return messages
+	
+func get_failed_move_message(user: BattlePokemon_Refactor) -> Dictionary:
+	return {
+		"type": "input",
+		"text": "¡El ataque de %s falló!" % [user.get_name()]
+	}
+
+func get_multi_hit_message(num_hits: int) -> Dictionary:
+	return {
+		"type": "input",
+		"text": "N.º de golpes: %d." % num_hits
+	}
+
+func get_faint_message(pokemon: BattlePokemon_Refactor) -> Dictionary:
+	return {
+		"type": "input",
+		"text": "%s se ha debilitado." % pokemon.nickname
+	}

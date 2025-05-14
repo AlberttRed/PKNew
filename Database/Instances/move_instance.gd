@@ -98,5 +98,20 @@ func _init(_move_id : int = -1) -> void:
 func is_type(type): return type == "Move" or self.is_type(type)
 func    get_type(): return "Move"
 
+func to_battle_move(pokemon: BattlePokemon_Refactor) -> BattleMove_Refactor:
+	return BattleMove_Refactor.new(self, pokemon)
+
+func get_target_id() -> int:
+	return base.target_id
+	
+func get_max_hits() -> int:
+	return base.meta_max_hits
+
+func get_min_hits() -> int:
+	return base.meta_min_hits
+
+func get_critical_rate() -> int:
+	return base.meta_crit_rate
+
 func print_move():
 	print(" ------ " + str(Name) + " " + str(pp_actual) + "/" + str(pp) + " PP ------ ")

@@ -37,3 +37,21 @@ func selectTargets():
 	var target_index = randi_range(0, pokemon.listEnemies.size()-1)
 	SignalManager.Battle.selectTarget.emit([pokemon.listEnemies[target_index].battleSpot])
 	#return BattleMoveChoice.new(pokemon.moves[move_index], [pokemon.listEnemies[target_index]])
+
+func decide_action(pokemon:BattlePokemon_Refactor) -> BattleChoice_Refactor:
+	var moves = pokemon.get_available_moves()
+	if moves.is_empty():
+		return BattleChoice_Refactor.new()  # fallback
+
+	var index = randi() % moves.size()
+	var move = moves[index]
+
+	var choice = BattleMoveChoice_Refactor.new()
+	choice.move_index = index
+	choice.pokemon = pokemon
+
+	var target_handler = BattleTarget_Refactor.new(move)
+	await target_handler.select_targets()
+	choice.target_handler = target_handler
+
+	return choice

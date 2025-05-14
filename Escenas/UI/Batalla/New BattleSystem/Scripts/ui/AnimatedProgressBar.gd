@@ -14,11 +14,12 @@ var max_value: int = 0
 
 
 func _ready() -> void:
-	set_values(100, 100)  # HP actual, HP total
-	await get_tree().create_timer(1.0).timeout  # Espera 1 segundo
-	await animate_to(35)  # Baja a 35, con animación
-	await get_tree().create_timer(1.0).timeout
-	await animate_to(80)
+	pass
+	#set_values(100, 100)  # HP actual, HP total
+	#await get_tree().create_timer(1.0).timeout  # Espera 1 segundo
+	#await animate_to(35)  # Baja a 35, con animación
+	#await get_tree().create_timer(1.0).timeout
+	#await animate_to(80)
 	
 func set_values(current: int, max: int) -> void:
 	current_value = current

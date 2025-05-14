@@ -46,6 +46,10 @@ func add_pokemon_team(pokemon_list: Array[BattlePokemon_Refactor]) -> void:
 	for pk in pokemon_list:
 		add_pokemon(pk)
 
+func decide_action_for(pokemon: BattlePokemon_Refactor) -> BattleChoice_Refactor:
+	if ai_controller:
+		return await ai_controller.decide_action(pokemon)
+	return await pokemon.decide_random_action()  # fallback aleatorio
 
 
 func get_active_pokemons() -> Array[BattlePokemon_Refactor]:

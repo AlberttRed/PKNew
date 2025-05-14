@@ -1,25 +1,26 @@
 extends Control
 
 class_name FieldUI
-
-# Asigna los Pokémon activos de cada lado a sus posiciones visuales
-func setup_spots(player_side: BattleSide_Refactor, enemy_side: BattleSide_Refactor, rules: BattleRules) -> void:
-	var player_actives = player_side.get_active_pokemons()
-	var enemy_actives = enemy_side.get_active_pokemons()
-
-	# Asignar spots del jugador
-	for i in player_actives.size():
-		var spot := get_player_spot(i)
-		if spot:
-			spot.load_active_pokemon(player_actives[i], rules)
-
-	# Asignar spots del enemigo
-	for i in enemy_actives.size():
-		var spot := get_enemy_spot(i)
-		if spot:
-			spot.load_active_pokemon(enemy_actives[i], rules)
 	
-	apply_z_order_for_mode(rules.mode)
+func get_player_spots_for_mode(mode: int) -> Array[BattleSpot_Refactor]:
+	match mode:
+		BattleRules.BattleModes.SINGLE:
+			return [$PlayerBase/PokemonSpotA]
+		BattleRules.BattleModes.DOUBLE:
+			return [$PlayerBase/PokemonSpotA, $PlayerBase/PokemonSpotB]
+	return []
+
+func get_enemy_spots_for_mode(mode: int) -> Array[BattleSpot_Refactor]:
+	match mode:
+		BattleRules.BattleModes.SINGLE:
+			return [$EnemyBase/PokemonSpotA]
+		BattleRules.BattleModes.DOUBLE:
+			return [$EnemyBase/PokemonSpotA, $EnemyBase/PokemonSpotB]
+	return []
+
+func get_all_spots_for_mode(mode: int) -> Array[BattleSpot_Refactor]:
+	return get_player_spots_for_mode(mode) + get_enemy_spots_for_mode(mode)
+
 
 func get_player_spot(index: int) -> BattleSpot_Refactor:
 	match index:

@@ -289,7 +289,7 @@ func _ready():
 #	set_info()
 	loadLearningMoves()
 	load_moves()
-	hp_actual = 1#hp_total
+	hp_actual = hp_total
 	print_pokemon_base()
 #	hp_total = get_total_hp()
 #	hp_actual = int(float(hp_total) / randf_range(1, 6))
@@ -315,7 +315,7 @@ func init_pokemon():
 		push_error("No s'ha seleccionat un genere pel pokémon " + Name)
 		#set_info()
 	load_moves()
-	hp_actual = 1#hp_total
+	hp_actual = hp_total
 	#ability_id = CONST.ABILITIES.INTIMIDATE
 
 #
@@ -568,32 +568,36 @@ func levelUP():
 	var hpAdd = ceil(hp_actual * (incrHP/100.0))
 	hp_actual =  hp_actual + hpAdd
 
-func getHPStat(_level:int):
+func getHPStat(_level:int = level):
 	return int( (float(_level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + _level + 10
 
-func getAttackStat(_level:int):
+func getAttackStat(_level:int = level):
 	return int(float(int( 5.0 + (( float(_level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
 
 	
-func getDefenseStat(_level:int):
+func getDefenseStat(_level:int = level):
 	return int(float(int( 5.0 + (( float(_level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
 
 
-func getSpAttackStat(_level:int):
+func getSpAttackStat(_level:int = level):
 	return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
 
 
-func getSpDefenseStat(_level:int):
+func getSpDefenseStat(_level:int = level):
 	return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
 
 
-func getSpeedStat(_level:int):
+func getSpeedStat(_level:int = level):
 	return int(float(int( 5.0 + (( float(_level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
 
+
 func to_battle_pokemon(ai: BattleIA_Refactor = null) -> BattlePokemon_Refactor:
-	var bp = BattlePokemon_Refactor.new(self, ai)
-	bp.is_wild = self.isWild
-	return bp
+	var battle_pokemon = BattlePokemon_Refactor.new(self, ai)
+	battle_pokemon.is_wild = self.isWild
+	battle_pokemon.prepare_battle_moves()
+	return battle_pokemon
+
+
 #func hasMove(move_id):
 #	for m in movements:
 #		if m.id == move_id:

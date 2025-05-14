@@ -11,6 +11,9 @@ const MAX_PARTY_SIZE := 6
 
 var type: Types  # PLAYER / ENEMY / etc.
 var participants: Array[BattleParticipant_Refactor] = []
+var battle_spots: Array[BattleSpot_Refactor]
+var opponent_side: BattleSide_Refactor = null
+
 var isWild: bool = false
 var pokemonParty : Array[BattlePokemon_Refactor]
 var escapeAttempts:int #Player attemps to exit the battle. If a Move is selected, the attemps counter will restart
@@ -109,6 +112,7 @@ func assign_active_pokemons(rules: BattleRules) -> void:
 		
 		for pk in p.pokemon_team:
 			if pk in allowed_pokemon and not pk.fainted and assigned < max_allowed:
+				pk.controllable = p.is_player
 				pk.in_battle = true
 				assigned += 1
 				
@@ -126,3 +130,4 @@ func get_trainer_names() -> Array[String]:
 	for p in participants:
 			names.append(p.name)
 	return names
+	
