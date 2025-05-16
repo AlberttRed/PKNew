@@ -9,8 +9,10 @@ class_name BattleUI_Refactor
 @onready var message_box:MessageBox = $MessageBox
 @onready var moves_menu = $MovesMenu
 @onready var target_selector_ui = $TargetSelectorUI
+@onready var result_display := BattleResultDisplay.new()
 
 func _ready() -> void:
+	result_display.ui = self
 	visible = false
 
 func show_trainer_sprites():
@@ -37,16 +39,16 @@ func show_player_pokemon(pokemons: Array[BattlePokemon_Refactor], rules: BattleR
 
 func show_enemy_hp_bar(pokemons: Array[BattlePokemon_Refactor]):
 	if pokemons.size() >= 1:
-		$FieldUI/EnemyBase/HPBarA.visible = true
+		$FieldUI/EnemyBase/PokemonSpotA/HPBar.visible = true
 	if pokemons.size() >= 2:
-		$FieldUI/EnemyBase/HPBarB.visible = true
+		$FieldUI/EnemyBase/PokemonSpotB/HPBar.visible = true
 	# Mostrar la barra de vida del Pokémon enemigo
 
 func show_player_hp_bar(pokemons: Array[BattlePokemon_Refactor]):
 	if pokemons.size() >= 1:
-		$FieldUI/PlayerBase/HPBarA.visible = true
+		$FieldUI/PlayerBase/PokemonSpotA/HPBar.visible = true
 	if pokemons.size() >= 2:
-		$FieldUI/PlayerBase/HPBarB.visible = true
+		$FieldUI/PlayerBase/PokemonSpotB/HPBar.visible = true
 	# Mostrar la barra de vida del Pokémon del jugador
 
 func get_player_spots_for_mode(mode: int) -> Array[BattleSpot_Refactor]:
@@ -110,11 +112,53 @@ func request_target_selection(target: BattleTarget_Refactor) -> void:
 
 	target_selector_ui.show_targets(candidates)
 
+	
+func play_intro_sequence(rules,player_pokemon,enemy_pokemon,player_trainers,enemy_trainers) -> void:
+	var intro_messages = message_controller.get_intro_messages(
+		rules,
+		player_pokemon,
+		enemy_pokemon,
+		player_trainers,
+		enemy_trainers
+	)
 
-func show_message(text: String):
-	pass
-	# Mostrar un mensaje en pantalla y esperar la confirmación del jugador
+	for msg in intro_messages:
+		await show_message_from_dict(msg)
+	
 
-func show_action_menu():
-	pass
-	# Mostrar el menú de acciones para que el jugador elija su próximo movimiento
+		# Opcional: insertar animaciones si lo necesitas más adelante
+		# if msg.type == "send_out_enemy":
+		#     await enemy_side.play_entry_animation(enemy_pokemon)
+		# elif msg.type == "send_out_player":
+		#     await player_side.play_entry_animation(player_pokemon)
+
+	# Aquí podrías activar el menú o iniciar la siguiente fase del combate
+	actions_menu.show()
+	
+func show_used_move_message(user: BattlePokemon_Refactor, move: BattleMove_Refactor) -> void:
+	await show_message_from_dict(message_controller.get_used_move_message(user, move))
+	
+func show_failed_move_message(user: BattlePokemon_Refactor) -> void:
+	await show_message_from_dict(message_controller.get_failed_move_message(user))
+
+func show_multi_hit_message(num_hits: int) -> void:
+	await show_message_from_dict(message_controller.get_multi_hit_message(num_hits))
+
+func show_effectiveness_message(result: BattleMoveResult, target: BattlePokemon_Refactor) -> void:
+	await show_message_from_dict(message_controller.get_effectiveness_message(result, target))
+
+func show_critical_hit_message() -> void:
+	await show_message_from_dict(message_controller.get_critical_hit_message())
+
+
+# Manda el mensaje a mostrar al MessageBox según el tipo de mensaje devuleto por el MessageController
+func show_message_from_dict(msg: Dictionary) -> void:
+	if msg == null or msg.is_empty():
+		return
+	match msg.type:
+		"input":
+			await message_box.show_input(msg.text)
+		"wait":
+			await message_box.show_wait(msg.text, msg.get("wait_time", 1.0))
+		"no_close":
+			await message_box.show_no_close(msg.text)

@@ -59,6 +59,7 @@ theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
 text = "20"
 
 [node name="Status" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-50, 1)
 texture = ExtResource("6_67vy7")
 region_enabled = true

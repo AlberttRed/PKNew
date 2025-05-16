@@ -85,7 +85,8 @@ func _sort_choices(a: BattleChoice_Refactor, b: BattleChoice_Refactor) -> bool:
 
 func handle_result(choice: BattleChoice_Refactor, result) -> void:
 	if choice is BattleMoveChoice_Refactor:
-		await handle_move_result(choice, result)
+		await battle_controller.ui.result_display.display_move_result(result, choice)
+		#await handle_move_result(choice, result)
 
 	# elif choice is BattleSwitchChoice_Refactor:
 	#	await handle_switch_result(choice, result)
@@ -98,47 +99,51 @@ func handle_result(choice: BattleChoice_Refactor, result) -> void:
 
 	else:
 		push_warning("handle_result: tipo de choice no reconocido o aún no implementado.")
-
-func handle_move_result(choice: BattleMoveChoice_Refactor, result: BattleMoveResult) -> void:
-	var user = choice.pokemon
-	var move = choice.get_move()
-	var message_controller:= battle_controller.get_message_controller()
-	# ⚠️ Animación general del movimiento (comentado por ahora)
-	# await animation_controller.play_move_animation(user, move, result.targets)
-
-	if result.missed:
-		var missed_target := result.targets[0].get_active_pokemon()
-		var msg:Dictionary = message_controller.get_failed_move_message(user)
-		await battle_controller.show_message_from_dict(msg)
-		return
-
-
-	for spot:BattleSpot_Refactor in result.targets:
-		var pokemon := spot.get_active_pokemon()
-		var dmg_list = result.damage_results.get(pokemon, [])
-
-		for dmg in dmg_list:
-			# ⚠️ Animación de golpe (se deberá mover al AnimationController)
-			await spot.play_hit_animation()
-
-
-			# ⚠️ Reducción visual de HP 
-			await spot.apply_damage(dmg)
-
-			# Mostrar mensajes (eficacia, crítico...)
-			for msg in message_controller.get_damage_result_messages(choice, dmg, pokemon):
-				await battle_controller.show_message_from_dict(msg)
-
-		if dmg_list.size() > 1:
-			var multi_hit_msg := message_controller.get_multi_hit_message(dmg_list.size())
-			await battle_controller.show_message_from_dict(multi_hit_msg)
-
-		if pokemon.get_hp() == 0:
-			var faint_msg := message_controller.get_faint_message(pokemon)
-			await battle_controller.show_message_from_dict(faint_msg)
-
-			# ⚠️ Animación de debilitamiento (comentado por ahora)
-			# await animation_controller.play_faint_animation(pokemon)
+#
+#func handle_move_result(choice: BattleMoveChoice_Refactor, result: BattleMoveResult) -> void:
+	#var user = choice.pokemon
+	#var move = choice.get_move()
+	#var message_controller:= battle_controller.get_message_controller()
+#
+	#var used_msg := message_controller.get_used_move_message(move, user)
+	#await battle_controller.show_message_from_dict(used_msg)
+#
+	## ⚠️ Animación general del movimiento (comentado por ahora)
+	## await animation_controller.play_move_animation(user, move, result.targets)
+#
+	#if result.missed:
+		#var missed_target := result.targets[0].get_active_pokemon()
+		#var msg:Dictionary = message_controller.get_failed_move_message(user)
+		#await battle_controller.show_message_from_dict(msg)
+		#return
+#
+#
+	#for spot:BattleSpot_Refactor in result.targets:
+		#var pokemon := spot.get_active_pokemon()
+		#var dmg_list = result.get_damage_results_for(pokemon)#result.damage_results.get(pokemon, [])
+#
+		#for dmg in dmg_list:
+			## ⚠️ Animación de golpe (se deberá mover al AnimationController)
+			#await spot.play_hit_animation()
+#
+#
+			## ⚠️ Reducción visual de HP 
+			#await spot.apply_damage(dmg)
+#
+			## Mostrar mensajes (eficacia, crítico...)
+			#for msg in message_controller.get_damage_result_messages(choice, dmg, pokemon):
+				#await battle_controller.show_message_from_dict(msg)
+#
+		#if dmg_list.size() > 1:
+			#var multi_hit_msg := message_controller.get_multi_hit_message(dmg_list.size())
+			#await battle_controller.show_message_from_dict(multi_hit_msg)
+#
+		#if pokemon.get_hp() == 0:
+			#var faint_msg := message_controller.get_faint_message(pokemon)
+			#await battle_controller.show_message_from_dict(faint_msg)
+#
+			## ⚠️ Animación de debilitamiento (comentado por ahora)
+			## await animation_controller.play_faint_animation(pokemon)
 
 
 func end_turn():
@@ -147,7 +152,6 @@ func end_turn():
 	#await battle_controller.end_turn()
 
 func print_turn_debug_log(choices: Array[BattleChoice_Refactor], results: Dictionary) -> void:
-	# Mostrar log de los resultados
 	for choice in choices:
 		if choice is BattleMoveChoice_Refactor and results.has(choice):
 			var result: BattleMoveResult = results[choice]
@@ -158,10 +162,23 @@ func print_turn_debug_log(choices: Array[BattleChoice_Refactor], results: Dictio
 				var missed_target := result.targets[0].get_active_pokemon().get_name()
 				print("%s usará %s contra %s pero fallará." % [user, move, missed_target])
 			else:
-				for spot in result.targets:
-					var target := spot.get_active_pokemon().get_name()
-					var dmg_list = result.damage_results.get(spot.get_active_pokemon(), [])
-					var total = 0
-					for dmg in dmg_list:
-						total += dmg.damage
-					print("%s usará %s contra %s con un daño total de %d." % [user, move, target, total])
+				# Agrupamos por target
+				var grouped := {}
+				for impact in result.impact_results:
+					var t := impact.target
+					if not grouped.has(t):
+						grouped[t] = { "damage": 0, "healing": 0 }
+					
+					if impact is MoveImpactResult.Damage:
+						grouped[t].damage += impact.amount
+					elif impact is MoveImpactResult.Heal:
+						grouped[t].healing += impact.amount
+
+				# Mostrar resumen por objetivo
+				for target:BattlePokemon_Refactor in grouped.keys():
+					var tname := target.get_name()
+					var entry = grouped[target]
+					if entry.damage > 0:
+						print("%s usará %s contra %s e infligirá %d de daño." % [user, move, tname, entry.damage])
+					if entry.healing > 0:
+						print("%s usará %s y curará %d PS a %s." % [user, move, entry.healing, tname])

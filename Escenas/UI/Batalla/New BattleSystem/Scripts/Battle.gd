@@ -47,10 +47,6 @@ func show_trainers_and_pokemon():
 		await battle_ui.show_enemy_pokemon(battle_controller.enemy_side.get_active_pokemons(), battle_controller.rules)
 		await get_tree().create_timer(0.5).timeout
 
-		# Mostrar mensaje de introducción
-		await battle_ui.show_message("¡Un [Nombre del Pokémon] salvaje apareció!")
-		await get_tree().create_timer(0.5).timeout
-
 		# Mostrar Pokémon del jugador
 		await battle_ui.show_player_pokemon(battle_controller.player_side.get_active_pokemons(), battle_controller.rules)
 		await get_tree().create_timer(0.5).timeout
@@ -63,4 +59,5 @@ func show_hp_bars():
 	await get_tree().create_timer(0.5).timeout
 	
 func show_action_menu():
-	battle_ui.show_action_menu()
+	pass
+	

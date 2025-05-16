@@ -78,21 +78,27 @@ func get_intro_messages(
 
 	return messages
 
-func get_damage_result_messages(choice: BattleMoveChoice_Refactor, dmg: DamageResult, target: BattlePokemon_Refactor) -> Array[Dictionary]:
-	var messages: Array[Dictionary] = []
-
-	if dmg.is_critical:
-		messages.append({ "type": "input", "text": "¡Golpe crítico!" })
-
-	if dmg.is_super_effective():
-		messages.append({ "type": "input", "text": "¡Es muy eficaz!" })
-	elif dmg.is_not_very_effective():
-		messages.append({ "type": "input", "text": "No es muy eficaz..." })
-	elif dmg.is_ineffective():
-		messages.append({ "type": "input", "text": "No afecta a %s..." % target.nickname })
-
-	return messages
+func get_effectiveness_message(result: BattleMoveResult, target: BattlePokemon_Refactor) -> Dictionary:
+	if result.is_super_effective_for(target):
+		return { "type": "input", "text": "¡Es muy eficaz!" }
+	elif result.is_not_very_effective_for(target):
+		return { "type": "input", "text": "No es muy eficaz..." }
+	elif result.is_ineffective_for(target):
+		return { "type": "input", "text": "No afecta a %s..." % target.get_name() }
 	
+	return {}
+	
+func get_critical_hit_message() -> Dictionary:
+	return { "type": "input", "text": "¡Golpe crítico!" }
+
+func get_used_move_message(user: BattlePokemon_Refactor, move: BattleMove_Refactor) -> Dictionary:
+	return {
+		"type": "wait",
+		"text": "¡%s ha usado %s!" % [user.get_name(), move.get_name()],
+		"wait_time": 0.5
+	}
+
+
 func get_failed_move_message(user: BattlePokemon_Refactor) -> Dictionary:
 	return {
 		"type": "input",

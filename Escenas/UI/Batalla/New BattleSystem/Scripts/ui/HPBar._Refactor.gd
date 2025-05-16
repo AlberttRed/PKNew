@@ -92,7 +92,7 @@ func _set_player_single_box():
 	spr_level.position = Vector2(57.5, -20.0)
 	lbl_level.visible = true
 	lbl_level.position = Vector2(70, -31)
-	status_ui.visible = true
+	status_ui.visible = false
 	status_ui.position = Vector2(-50, 1)
 	health_bar.visible = true
 	health_bar.set_value_visible(true)
@@ -109,7 +109,7 @@ func _set_player_double_box():
 	spr_level.position = Vector2(57.5, -8.0)
 	lbl_level.visible = true
 	lbl_level.position = Vector2(70, -19)
-	status_ui.visible = true
+	status_ui.visible = false
 	status_ui.position = Vector2(-50, 13)
 	health_bar.visible = true
 	health_bar.set_value_visible(false)
@@ -126,7 +126,7 @@ func _set_enemy_single_box():
 	spr_level.position = Vector2(40.5, -9.0)
 	lbl_level.visible = true
 	lbl_level.position = Vector2(45, -20)
-	status_ui.visible = true
+	status_ui.visible = false
 	status_ui.position = Vector2(-68, 13)
 	health_bar.visible = true
 	health_bar.set_value_visible(false)
@@ -143,7 +143,7 @@ func _set_enemy_double_box():
 	spr_level.position = Vector2(39.5, -8.0)
 	lbl_level.visible = true
 	lbl_level.position = Vector2(52, -19)
-	status_ui.visible = true
+	status_ui.visible = false
 	status_ui.position = Vector2(-68, 13)
 	health_bar.visible = true
 	health_bar.set_value_visible(false)

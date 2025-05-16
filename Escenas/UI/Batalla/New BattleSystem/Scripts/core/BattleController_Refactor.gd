@@ -68,36 +68,9 @@ func start_battle() -> void:
 	ui.visible = true  # Si estaba oculto por defecto
 	turn_controller.battle_controller = self
 	print("Combate iniciado (test)")
-	await play_intro_sequence()
+	await ui.play_intro_sequence(rules,player_side.get_active_pokemons(),enemy_side.get_active_pokemons(),player_side.get_trainer_names(),enemy_side.get_trainer_names())
 	await turn_controller.start_turn_loop()
-	
-func play_intro_sequence():
-	var player_pokemon = player_side.get_active_pokemons()
-	var enemy_pokemon = enemy_side.get_active_pokemons()
-	var player_trainers = player_side.get_trainer_names()
-	var enemy_trainers = enemy_side.get_trainer_names()
 
-	var intro_messages = ui.message_controller.get_intro_messages(
-		rules,
-		player_pokemon,
-		enemy_pokemon,
-		player_trainers,
-		enemy_trainers
-	)
-
-	for msg in intro_messages:
-		await show_message_from_dict(msg)
-	
-
-		# Opcional: insertar animaciones si lo necesitas más adelante
-		# if msg.type == "send_out_enemy":
-		#     await enemy_side.play_entry_animation(enemy_pokemon)
-		# elif msg.type == "send_out_player":
-		#     await player_side.play_entry_animation(player_pokemon)
-
-	# Aquí podrías activar el menú o iniciar la siguiente fase del combate
-	ui.actions_menu.show()
-	
 
 func get_active_battle_spots() -> Array[BattleSpot_Refactor]:
 	var spots: Array[BattleSpot_Refactor] = []
@@ -120,16 +93,6 @@ func assign_opponent_sides():
 func battle_finished() -> bool:
 	# Lógica real pendiente
 	return false
-
-# Manda el mensaje a mostrar al MessageBox según el tipo de mensaje devuleto por el MessageController
-func show_message_from_dict(msg: Dictionary) -> void:
-	match msg.type:
-		"input":
-			await ui.message_box.show_input(msg.text)
-		"wait":
-			await ui.message_box.show_wait(msg.text, msg.get("wait_time", 1.0))
-		"no_close":
-			await ui.message_box.show_no_close(msg.text)
 
 func get_message_controller() -> BattleMessageController_Refactor:
 	return ui.message_controller

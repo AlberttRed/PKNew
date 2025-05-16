@@ -45,8 +45,9 @@ func animate_to(new_value: int) -> void:
 	if show_label:
 		tween.tween_method(set_label_value , current_value, new_value, animate_duration)
 	current_value = new_value
-	tween.finished.connect(func(): updated.emit())
-
+	#tween.finished.connect(func(): updated.emit())
+	await tween.finished
+	
 func set_label_value(value: float) -> void:
 	lbl_value.setText("%d/%d" % [round(value), max_value])
 	update_color()

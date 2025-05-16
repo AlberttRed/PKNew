@@ -1,10 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://ui53do2ck5tn"]
+[gd_scene load_steps=18 format=3 uid="uid://ui53do2ck5tn"]
 
 [ext_resource type="Script" uid="uid://rdhfue55dpvn" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/ui/FieldUI.gd" id="1_n4ij7"]
 [ext_resource type="Texture2D" uid="uid://cku13gor2s5k7" path="res://Sprites/Batalla/Battlebacks/battlebgFieldNight.png" id="2_bpnwx"]
 [ext_resource type="Texture2D" uid="uid://bwca4j4ndf05j" path="res://Sprites/Batalla/Battlebacks/playerbaseFieldNight.png" id="3_35p23"]
 [ext_resource type="Texture2D" uid="uid://b4fvdupruunae" path="res://Sprites/Batalla/025b.png" id="5_35p23"]
-[ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="5_jrakn"]
 [ext_resource type="PackedScene" uid="uid://bctyl7571gj7l" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleSpot_Refactor.tscn" id="5_ymflm"]
 [ext_resource type="Texture2D" uid="uid://bx227x378u0s2" path="res://Sprites/Batalla/017b.png" id="6_e18v2"]
 [ext_resource type="Texture2D" uid="uid://bx4phn4fibjve" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxD.png" id="6_xmfry"]
@@ -12,30 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://ghyefcbolgsf" path="res://Sprites/Batalla/007.png" id="23_e18v2"]
 [ext_resource type="Texture2D" uid="uid://dltm5uv6db8c" path="res://Sprites/Batalla/025.png" id="23_ymflm"]
 [ext_resource type="Texture2D" uid="uid://dchco7b8i0o8" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFoeBoxD.png" id="24_xmfry"]
-[ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="27_jr5t4"]
-[ext_resource type="Script" uid="uid://dt6level30sj8" path="res://Escenas/UI/Others/HPBar.gd" id="28_gie0o"]
-[ext_resource type="Texture2D" uid="uid://6s4ko21ivsiy" path="res://Sprites/Pictures/Nv_icon_black.png" id="29_857x8"]
-[ext_resource type="FontFile" uid="uid://bwwk8ekl3u4o7" path="res://Escenas/UI/Fonts/Pokemon GB.ttf" id="30_qs0ir"]
-[ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="31_lgxos"]
-[ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="32_hjtdi"]
-[ext_resource type="Script" uid="uid://beg2cyqfecq1h" path="res://Escenas/UI/Others/exp_bar.gd" id="33_a7f4j"]
-[ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="34_v0au8"]
-[ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="35_5t3q8"]
-[ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="36_62b2p"]
 [ext_resource type="Script" uid="uid://dppptpht3hnyx" path="res://Scripts/Batalla/Classes/BattleParticipant.gd" id="37_wukqu"]
 [ext_resource type="Texture2D" uid="uid://dx7t7y2tum7mu" path="res://Sprites/Pictures/trback000.png" id="38_3nbt5"]
 [ext_resource type="Texture2D" uid="uid://6cpfkdqyugvc" path="res://Sprites/Pictures/trback001.png" id="39_xa6db"]
 [ext_resource type="Texture2D" uid="uid://dqkmrnqhdrcvb" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFoeBoxS.png" id="43_b6gim"]
 [ext_resource type="Texture2D" uid="uid://cubck6nvldnr0" path="res://Sprites/Pictures/trainer005.png" id="44_fx3em"]
 [ext_resource type="Texture2D" uid="uid://bswf5x8a3euym" path="res://Sprites/Pictures/trainer006.png" id="45_3vgjn"]
-
-[sub_resource type="FontVariation" id="FontVariation_kynk5"]
-base_font = ExtResource("30_qs0ir")
-spacing_top = 4
-
-[sub_resource type="Theme" id="Theme_4f188"]
-default_font = SubResource("FontVariation_kynk5")
-default_font_size = 16
 
 [node name="FieldUI" type="Control"]
 z_as_relative = false
@@ -192,189 +173,6 @@ metadata/_edit_lock_ = true
 position = Vector2(238, 17)
 gizmo_extents = 50.0
 metadata/_edit_lock_ = true
-
-[node name="HPBarA" type="Sprite2D" parent="PlayerBase"]
-visible = false
-z_index = 6
-z_as_relative = false
-position = Vector2(770, -3)
-texture = ExtResource("27_jr5t4")
-script = ExtResource("28_gie0o")
-metadata/_edit_lock_ = true
-
-[node name="lblName" parent="PlayerBase/HPBarA" instance=ExtResource("5_jrakn")]
-offset_left = -90.0
-offset_top = -35.0
-offset_right = 52.0
-offset_bottom = -8.0
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "TYPHLOSION"
-
-[node name="lblGender" parent="PlayerBase/HPBarA" instance=ExtResource("5_jrakn")]
-offset_left = 53.0
-offset_top = -37.0
-offset_right = 140.0
-offset_bottom = -12.0
-theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "♂"
-
-[node name="lblNv" type="Sprite2D" parent="PlayerBase/HPBarA"]
-position = Vector2(77.5, -20)
-texture = ExtResource("29_857x8")
-
-[node name="lblLevel" parent="PlayerBase/HPBarA" instance=ExtResource("5_jrakn")]
-offset_left = 86.0
-offset_top = -31.0
-offset_right = 204.0
-offset_bottom = -13.0
-theme = SubResource("Theme_4f188")
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "20"
-
-[node name="Status" type="Sprite2D" parent="PlayerBase/HPBarA"]
-position = Vector2(-50, 1)
-texture = ExtResource("31_lgxos")
-region_enabled = true
-region_rect = Rect2(0, 16, 44, 16)
-metadata/_edit_lock_ = true
-
-[node name="health_bar" parent="PlayerBase/HPBarA" instance=ExtResource("32_hjtdi")]
-position = Vector2(0, 1)
-metadata/_edit_lock_ = true
-
-[node name="lblHP" parent="PlayerBase/HPBarA/health_bar" index="0"]
-offset_left = -4.0
-offset_top = 8.0
-offset_right = 114.0
-offset_bottom = 26.0
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-theme_override_font_sizes/normal_font_size = 16
-text = "[center]1/232"
-align = 1
-
-[node name="TextureProgressBar" parent="PlayerBase/HPBarA/health_bar" index="1"]
-offset_left = -26.0082
-offset_top = -8.20206
-offset_right = 105.992
-offset_bottom = 31.7979
-metadata/_edit_lock_ = true
-
-[node name="exp_bar" type="Node2D" parent="PlayerBase/HPBarA"]
-position = Vector2(-55, 36.25)
-script = ExtResource("33_a7f4j")
-metadata/_edit_vertical_guides_ = [-205.084]
-metadata/_edit_lock_ = true
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PlayerBase/HPBarA/exp_bar"]
-offset_left = -39.0
-offset_top = -7.0
-offset_right = 161.0
-offset_bottom = 10.0
-scale = Vector2(1, 0.960005)
-max_value = 0.0
-step = 0.1
-stretch_margin_left = 1
-texture_under = ExtResource("34_v0au8")
-texture_over = ExtResource("35_5t3q8")
-texture_progress = ExtResource("36_62b2p")
-metadata/_edit_lock_ = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerBase/HPBarA/exp_bar"]
-
-[node name="HPBarB" type="Sprite2D" parent="PlayerBase"]
-z_index = 6
-z_as_relative = false
-position = Vector2(770, -3)
-texture = ExtResource("27_jr5t4")
-script = ExtResource("28_gie0o")
-metadata/_edit_lock_ = true
-
-[node name="lblName" parent="PlayerBase/HPBarB" instance=ExtResource("5_jrakn")]
-offset_left = -90.0
-offset_top = -35.0
-offset_right = 52.0
-offset_bottom = -8.0
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "TYPHLOSION"
-
-[node name="lblGender" parent="PlayerBase/HPBarB" instance=ExtResource("5_jrakn")]
-offset_left = 53.0
-offset_top = -37.0
-offset_right = 140.0
-offset_bottom = -12.0
-theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "♂"
-
-[node name="lblNv" type="Sprite2D" parent="PlayerBase/HPBarB"]
-position = Vector2(77.5, -20)
-texture = ExtResource("29_857x8")
-
-[node name="lblLevel" parent="PlayerBase/HPBarB" instance=ExtResource("5_jrakn")]
-offset_left = 86.0
-offset_top = -31.0
-offset_right = 204.0
-offset_bottom = -13.0
-theme = SubResource("Theme_4f188")
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "20"
-
-[node name="Status" type="Sprite2D" parent="PlayerBase/HPBarB"]
-position = Vector2(-50, 1)
-texture = ExtResource("31_lgxos")
-region_enabled = true
-region_rect = Rect2(0, 16, 44, 16)
-metadata/_edit_lock_ = true
-
-[node name="health_bar" parent="PlayerBase/HPBarB" instance=ExtResource("32_hjtdi")]
-position = Vector2(0, 1)
-metadata/_edit_lock_ = true
-
-[node name="lblHP" parent="PlayerBase/HPBarB/health_bar" index="0"]
-offset_left = -4.0
-offset_top = 8.0
-offset_right = 114.0
-offset_bottom = 26.0
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-theme_override_font_sizes/normal_font_size = 15
-text = "[center]32/32"
-align = 1
-
-[node name="TextureProgressBar" parent="PlayerBase/HPBarB/health_bar" index="1"]
-offset_left = -26.0082
-offset_top = -8.20206
-offset_right = 105.992
-offset_bottom = 31.7979
-metadata/_edit_lock_ = true
-
-[node name="exp_bar" type="Node2D" parent="PlayerBase/HPBarB"]
-position = Vector2(-55, 36.25)
-script = ExtResource("33_a7f4j")
-metadata/_edit_vertical_guides_ = [-205.084]
-metadata/_edit_lock_ = true
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PlayerBase/HPBarB/exp_bar"]
-offset_left = -39.0
-offset_top = -7.0
-offset_right = 161.0
-offset_bottom = 10.0
-scale = Vector2(1, 0.960005)
-max_value = 0.0
-step = 0.1
-stretch_margin_left = 1
-texture_under = ExtResource("34_v0au8")
-texture_over = ExtResource("35_5t3q8")
-texture_progress = ExtResource("36_62b2p")
-metadata/_edit_lock_ = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerBase/HPBarB/exp_bar"]
 
 [node name="Party" type="Node2D" parent="PlayerBase"]
 visible = false
@@ -572,128 +370,6 @@ position = Vector2(-238, -23)
 gizmo_extents = 50.0
 metadata/_edit_lock_ = true
 
-[node name="HPBarA" type="Sprite2D" parent="EnemyBase"]
-visible = false
-z_index = 6
-z_as_relative = false
-position = Vector2(-386, -45)
-texture = ExtResource("43_b6gim")
-script = ExtResource("28_gie0o")
-
-[node name="lblName" parent="EnemyBase/HPBarA" instance=ExtResource("5_jrakn")]
-offset_left = -105.0
-offset_top = -24.0
-offset_right = 37.0
-offset_bottom = 3.0
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "RATTATA"
-
-[node name="Status" type="Sprite2D" parent="EnemyBase/HPBarA"]
-position = Vector2(-68, 13)
-texture = ExtResource("31_lgxos")
-region_enabled = true
-region_rect = Rect2(0, 16, 44, 16)
-metadata/_edit_lock_ = true
-
-[node name="health_bar" parent="EnemyBase/HPBarA" instance=ExtResource("32_hjtdi")]
-position = Vector2(-18, 13)
-metadata/_edit_lock_ = true
-
-[node name="lblHP" parent="EnemyBase/HPBarA/health_bar" index="0"]
-offset_left = 37.2831
-offset_right = 87.2831
-
-[node name="TextureProgressBar" parent="EnemyBase/HPBarA/health_bar" index="1"]
-offset_left = -26.4909
-offset_top = -8.43386
-offset_right = 105.509
-offset_bottom = 31.5661
-
-[node name="lblGender" parent="EnemyBase/HPBarA" instance=ExtResource("5_jrakn")]
-offset_left = 36.0
-offset_top = -28.0
-offset_right = 123.0
-offset_bottom = -3.0
-theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "♀"
-
-[node name="lblNv" type="Sprite2D" parent="EnemyBase/HPBarA"]
-position = Vector2(60.5, -9)
-texture = ExtResource("29_857x8")
-
-[node name="lblLevel" parent="EnemyBase/HPBarA" instance=ExtResource("5_jrakn")]
-offset_left = 69.0
-offset_top = -20.0
-offset_right = 187.0
-offset_bottom = -2.0
-theme = SubResource("Theme_4f188")
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "20"
-
-[node name="HPBarB" type="Sprite2D" parent="EnemyBase"]
-z_index = 6
-z_as_relative = false
-position = Vector2(-386, -45)
-texture = ExtResource("43_b6gim")
-script = ExtResource("28_gie0o")
-
-[node name="lblName" parent="EnemyBase/HPBarB" instance=ExtResource("5_jrakn")]
-offset_left = -105.0
-offset_top = -24.0
-offset_right = 37.0
-offset_bottom = 3.0
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "RATTATA"
-
-[node name="Status" type="Sprite2D" parent="EnemyBase/HPBarB"]
-position = Vector2(-68, 13)
-texture = ExtResource("31_lgxos")
-region_enabled = true
-region_rect = Rect2(0, 16, 44, 16)
-metadata/_edit_lock_ = true
-
-[node name="health_bar" parent="EnemyBase/HPBarB" instance=ExtResource("32_hjtdi")]
-position = Vector2(-18, 13)
-metadata/_edit_lock_ = true
-
-[node name="lblHP" parent="EnemyBase/HPBarB/health_bar" index="0"]
-visible = false
-offset_left = 37.2831
-offset_right = 87.2831
-
-[node name="TextureProgressBar" parent="EnemyBase/HPBarB/health_bar" index="1"]
-offset_left = -26.4909
-offset_top = -8.43386
-offset_right = 105.509
-offset_bottom = 31.5661
-
-[node name="lblGender" parent="EnemyBase/HPBarB" instance=ExtResource("5_jrakn")]
-offset_left = 16.0
-offset_top = -28.0
-offset_right = 103.0
-offset_bottom = -3.0
-theme_override_colors/default_color = Color(0.188235, 0.376471, 0.847059, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "♀"
-
-[node name="lblNv" type="Sprite2D" parent="EnemyBase/HPBarB"]
-position = Vector2(40.5, -9)
-texture = ExtResource("29_857x8")
-
-[node name="lblLevel" parent="EnemyBase/HPBarB" instance=ExtResource("5_jrakn")]
-offset_left = 49.0
-offset_top = -20.0
-offset_right = 167.0
-offset_bottom = -2.0
-theme = SubResource("Theme_4f188")
-theme_override_colors/default_color = Color(0.301961, 0.301961, 0.301961, 1)
-theme_override_colors/font_shadow_color = Color(0.745098, 0.745098, 0.745098, 1)
-text = "100"
-
 [node name="Party" type="Node2D" parent="EnemyBase"]
 visible = false
 
@@ -738,9 +414,6 @@ position = Vector2(352, 110)
 gizmo_extents = 50.0
 metadata/_edit_lock_ = true
 
-[connection signal="value_changed" from="PlayerBase/HPBarA/exp_bar/TextureProgressBar" to="PlayerBase/HPBarA/exp_bar" method="_on_value_changed"]
-[connection signal="value_changed" from="PlayerBase/HPBarB/exp_bar/TextureProgressBar" to="PlayerBase/HPBarB/exp_bar" method="_on_value_changed"]
-
 [editable path="PlayerBase/PokemonSpotA"]
 [editable path="PlayerBase/PokemonSpotA/HPBar"]
 [editable path="PlayerBase/PokemonSpotA/HPBar/health_bar"]
@@ -749,8 +422,6 @@ metadata/_edit_lock_ = true
 [editable path="PlayerBase/PokemonSpotB/HPBar"]
 [editable path="PlayerBase/PokemonSpotB/HPBar/health_bar"]
 [editable path="PlayerBase/PokemonSpotB/HPBar/exp_bar"]
-[editable path="PlayerBase/HPBarA/health_bar"]
-[editable path="PlayerBase/HPBarB/health_bar"]
 [editable path="EnemyBase/PokemonSpotA"]
 [editable path="EnemyBase/PokemonSpotA/HPBar"]
 [editable path="EnemyBase/PokemonSpotA/HPBar/health_bar"]
@@ -759,5 +430,3 @@ metadata/_edit_lock_ = true
 [editable path="EnemyBase/PokemonSpotB/HPBar"]
 [editable path="EnemyBase/PokemonSpotB/HPBar/health_bar"]
 [editable path="EnemyBase/PokemonSpotB/HPBar/exp_bar"]
-[editable path="EnemyBase/HPBarA/health_bar"]
-[editable path="EnemyBase/HPBarB/health_bar"]

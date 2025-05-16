@@ -32,24 +32,31 @@ func resolve() -> BattleMoveResult:
 		result.missed = true
 		return result
 
-	var target := result.targets[0].get_active_pokemon() # asumimos 1v1 por ahora
-
-	# Calcular si acierta el movimiento (una vez para todo el movimiento)
-	if not AccuracyUtils.check_hit(get_move(), pokemon, target):
-		result.missed = true
-		return result
-
-	# Calcular número de golpes (1 por defecto, o 2-5 si multigolpe)
-	var num_hits := get_move().get_number_of_hits() # este método lo puedes adaptar luego
+	# Número de golpes se calcula una vez por ejecución del movimiento
+	var num_hits := get_move().get_number_of_hits()
 	result.num_hits = num_hits
 	print("Num. hits: " + str(num_hits))
-	var dmg_list: Array[DamageResult] = []
-	for i in num_hits:
-		if target.is_fainted():
-			break
 
-		var dmg := DamageCalculator_Gen5.calculate(get_move(), pokemon, target)
-		dmg_list.append(dmg)
+	# Recorremos cada target individualmente
+	for spot in result.targets:
+		var target := spot.get_active_pokemon()
 
-	result.damage_results[target] = dmg_list
+		# Comprobamos si acierta contra este target
+		if not AccuracyUtils.check_hit(get_move(), pokemon, target):
+			continue  # Falló contra este objetivo, no genera impactos
+
+		# Instanciamos la lógica de la categoría para este target
+		var logic: MoveCategoryLogic = get_move().get_category_logic()
+		logic.move = get_move()
+		logic.user = pokemon
+		logic.target = target
+		logic.num_hits = num_hits
+
+		for i in num_hits:
+			if target.is_fainted():
+				break  # No seguir golpeando si ya se debilitó
+
+			var impacts: Array[MoveImpactResult] = await logic.execute_impact()
+			result.impact_results.append_array(impacts)
+
 	return result

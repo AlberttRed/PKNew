@@ -84,7 +84,7 @@ func get_opponent_side() -> BattleSide_Refactor:
 func has_active_pokemon() -> bool:
 	return pokemon != null and not pokemon.is_fainted()
 
-func apply_damage(damage: DamageResult) -> void:
+func apply_damage(damage: MoveImpactResult.Damage) -> void:
 	if get_active_pokemon() == null:
 		return
 

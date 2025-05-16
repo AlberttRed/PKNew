@@ -7,6 +7,23 @@ enum DamageClass {
 	SPECIAL = 3	
 }
 
+enum MoveCategory {
+	DAMAGE,
+	AILMENT,
+	NET_GOOD_STATS,
+	HEAL,
+	DAMAGE_AILMENT,
+	SWAGGER,
+	DAMAGE_LOWER,
+	DAMAGE_RAISE,
+	DAMAGE_HEAL,
+	OHKO,
+	WHOLE_FIELD_EFFECT,
+	FIELD_EFFECT,
+	FORCE_SWITCH,
+	UNIQUE
+}
+
 var base_data: MoveInstance
 var pokemon: BattlePokemon_Refactor
 
@@ -52,6 +69,15 @@ func is_depleted() -> bool:
 
 func get_priority() -> int:
 	return base_data.priority
+	
+func get_category() -> MoveCategory:
+	return base_data.get_category_id()
+	
+func get_drain_percentage() -> int:
+	return base_data.get_drain_percentage()
+
+func get_heal_amount() -> int:
+	return base_data.get_heal_amount()
 
 func get_number_of_hits() -> int:
 	var min_hits = get_min_hits()
@@ -75,7 +101,6 @@ func get_number_of_hits() -> int:
 	# En otros casos (ej: 2–3 golpes), elegimos al azar dentro del rango
 	return randi_range(min_hits, max_hits)
 
-
 func is_multi_hit() -> bool:
 	return base_data.get_max_hits() > 1
 	
@@ -87,6 +112,52 @@ func get_min_hits() -> int:
 
 func get_critical_rate() -> int:
 	return base_data.get_critical_rate()
+	
+func get_category_logic() -> MoveCategoryLogic:
+	match get_category():
+		MoveCategory.DAMAGE:
+			return MoveCategoryDamage.new()
+		MoveCategory.AILMENT:
+			return MoveCategoryAilment.new()
+		MoveCategory.NET_GOOD_STATS:
+			return MoveCategoryNetGoodStats.new()
+		MoveCategory.HEAL:
+			return MoveCategoryHeal.new()
+		MoveCategory.DAMAGE_AILMENT:
+			return MoveCategoryDamageAilment.new()
+		MoveCategory.SWAGGER:
+			return MoveCategorySwagger.new()
+		MoveCategory.DAMAGE_LOWER:
+			return MoveCategoryDamageLower.new()
+		MoveCategory.DAMAGE_RAISE:
+			return MoveCategoryDamageRaise.new()
+		MoveCategory.DAMAGE_HEAL:
+			return MoveCategoryDamageHeal.new()
+		MoveCategory.OHKO:
+			return MoveCategoryOhko.new()
+		MoveCategory.WHOLE_FIELD_EFFECT:
+			return MoveCategoryWholeFieldEffect.new()
+		MoveCategory.FIELD_EFFECT:
+			return MoveCategoryFieldEffect.new()
+		MoveCategory.FORCE_SWITCH:
+			return MoveCategoryForceSwitch.new()
+		MoveCategory.UNIQUE:
+			return MoveCategoryUnique.new()
+		_:
+			push_warning("Move category no implementada: %s" % str(get_category()))
+			return MoveCategoryLogic.new()
+
+# Calcula el daño infligido a un objetivo según la generación activa
+func calculate_damage(target: BattlePokemon_Refactor) -> MoveImpactResult.Damage:
+	assert(pokemon != null, "El movimiento no tiene asignado un 'pokemon' (usuario)")
+	return DamageCalculator_Gen5.calculate(self, pokemon, target)
+
+
+# Calcula la curación para este movimiento (puede ser auto-curación o por drenaje)
+func calculate_healing(target: BattlePokemon_Refactor, damage_taken: int = 0) -> MoveImpactResult.Heal:
+	assert(pokemon != null, "El movimiento no tiene asignado un 'pokemon' (usuario)")
+	return HealingCalculator.calculate(self, pokemon, target, damage_taken)
+
 
 # Placeholder para más adelante
 func apply(target: BattleSpot_Refactor):

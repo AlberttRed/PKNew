@@ -143,8 +143,8 @@ func decide_random_action() -> BattleChoice_Refactor:
 
 	return choice
 
-func take_damage(damage: DamageResult) -> void:
-	hp -= damage.damage
+func take_damage(damage: MoveImpactResult.Damage) -> void:
+	hp -= damage.amount
 	hp = max(hp, 0)
 
 
