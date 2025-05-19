@@ -1,0 +1,2 @@
+extends BattleEffect_Refactor
+class_name BattleWeatherEffect_Refactor

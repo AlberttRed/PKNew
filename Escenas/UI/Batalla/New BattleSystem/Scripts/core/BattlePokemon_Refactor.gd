@@ -21,6 +21,8 @@ var sp_attack: int
 var sp_defense: int
 var speed: int
 
+var ability: Ability = null
+
 var accuracy_stage: int = 0
 var evasion_stage: int = 0
 var critical_stage: int = 0
@@ -40,6 +42,7 @@ func _init(_pokemon: PokemonInstance, _IA: BattleIA_Refactor = null):
 	sp_attack = base_data.getSpAttackStat()
 	sp_defense = base_data.getSpDefenseStat()
 	speed = base_data.getSpeedStat()
+	ability = base_data.get_ability_resource()
 
 	#status = base_data.status
 	#status_turns = base_data.status_turns

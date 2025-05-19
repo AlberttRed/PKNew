@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://djfye3bvjsx02"]
+
+[ext_resource type="Script" path="res://Database/Classes/Ability.gd" id="1_v4i76"]
+
+[resource]
+script = ExtResource("1_v4i76")
+id = 22
+internal_name = "intimidate"
+display_name = "Intimidación"
+description = "Baja el Ataque del rival."

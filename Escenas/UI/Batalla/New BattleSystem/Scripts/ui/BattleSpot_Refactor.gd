@@ -48,6 +48,11 @@ func load_active_pokemon(_pokemon: BattlePokemon_Refactor, rules: BattleRules) -
 
 	# Mostrar el spot completo
 	self.visible = true
+	if _pokemon.ability and _pokemon.ability.effect_resource:
+		var effect = pokemon.ability.effect_resource.duplicate()
+		effect.source = pokemon
+		BattleEffectController.register_effect(effect, pokemon)
+
 
 func get_active_pokemon() -> BattlePokemon_Refactor:
 	return pokemon

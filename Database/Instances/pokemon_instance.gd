@@ -597,6 +597,14 @@ func to_battle_pokemon(ai: BattleIA_Refactor = null) -> BattlePokemon_Refactor:
 	battle_pokemon.prepare_battle_moves()
 	return battle_pokemon
 
+func get_ability_resource() -> Ability:
+	var prefix = "%03d-" % ability_id
+	var dir = DirAccess.open("res://Resources/Abilities")
+	if dir:
+		for file in dir.get_files():
+			if file.begins_with(prefix) and file.ends_with(".tres"):
+				return load("res://Resources/Abilities/" + file)
+	return null
 
 #func hasMove(move_id):
 #	for m in movements:
