@@ -147,8 +147,14 @@ func get_category_logic() -> MoveCategoryLogic:
 			push_warning("Move category no implementada: %s" % str(get_category()))
 			return MoveCategoryLogic.new()
 
+func get_ailment() -> Ailment:
+	return base_data.get_ailment()
+	
+func get_ailment_chance() -> float:
+	return 100.0 if base_data.get_ailment_chance() == 0 else (float(base_data.get_ailment_chance()) / 100.0)
+
 # Calcula el daño infligido a un objetivo según la generación activa
-func calculate_damage(target: BattlePokemon_Refactor) -> MoveImpactResult.Damage:
+func calculate_damage(target: BattlePokemon_Refactor) -> DamageEffect:
 	assert(pokemon != null, "El movimiento no tiene asignado un 'pokemon' (usuario)")
 	return DamageCalculator_Gen5.calculate(self, pokemon, target)
 

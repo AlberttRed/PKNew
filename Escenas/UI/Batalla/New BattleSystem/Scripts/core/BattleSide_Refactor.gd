@@ -130,4 +130,11 @@ func get_trainer_names() -> Array[String]:
 	for p in participants:
 			names.append(p.name)
 	return names
-	
+
+func _to_string() -> String:
+	if type == Types.PLAYER:
+		return "Player"
+	elif type == Types.ENEMY:
+		return "Enemy"
+	else:
+		return "None"

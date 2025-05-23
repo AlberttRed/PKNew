@@ -1,7 +1,7 @@
 extends MoveCategoryLogic
 class_name MoveCategoryWholeFieldEffect
 
-func execute_impact():
+func execute():
 	push_warning("MoveCategoryWholeFieldEffect not implemented")
-	return []  as Array[MoveImpactResult]
+	return []  
 	#await move.apply_field_effect()

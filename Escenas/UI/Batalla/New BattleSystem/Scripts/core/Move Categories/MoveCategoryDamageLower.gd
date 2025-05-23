@@ -1,9 +1,9 @@
 extends MoveCategoryLogic
 class_name MoveCategoryDamageLower
 
-func execute_impact():
+func execute():
 	push_warning("MoveCategoryDamageLower not implemented")
-	return []  as Array[MoveImpactResult]
+	return []  
 	#if move.inflicts_damage():
 		#await move.calculate_damage()
 		#await move.do_damage()

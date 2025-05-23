@@ -62,6 +62,10 @@ func clear_ui() -> void:
 func update_hp(hp: int) -> void:
 	await health_bar.animate_to(hp)
 	updated.emit()
+	
+func reduce_hp_by(hp: int) -> void:
+	await health_bar.animate_to(health_bar.current_value - hp)
+	updated.emit()
 
 func update_exp(exp: int) -> void:
 	await exp_bar.animate_to(exp)
@@ -150,3 +154,7 @@ func _set_enemy_double_box():
 	health_bar.position = Vector2(-44, 5)
 	exp_bar.visible = false
 #endregion
+
+func set_status_icon(texture: Texture2D):
+	$Status.texture = texture
+	$Status.visible = texture != null

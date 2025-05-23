@@ -23,6 +23,7 @@ func new_turn():
 
 func select_actions():
 	collected_choices.clear()
+	print_active_effects_log()
 	# Recorremos todos los BattleSpots activos en ambos lados del combate
 	for spot:BattleSpot_Refactor in battle_controller.get_active_battle_spots():
 		var p:BattlePokemon_Refactor = spot.get_active_pokemon()
@@ -44,7 +45,10 @@ func execute_turn():
 	#Calculamos y resolvemos las acciones seleccionadas por cada pokémon activo
 	for choice:BattleChoice_Refactor in ordered_choices:
 		if choice.pokemon.is_fainted():
-			return
+			continue
+		await BattleEffectController.process_phase(choice.pokemon, battle_controller.ui, BattleEffect_Refactor.Phases.ON_BEFORE_MOVE)
+		if !choice.pokemon.can_act_this_turn:
+			continue
 		var move_result = await choice.resolve()
 		results[choice] = move_result
 	
@@ -55,6 +59,9 @@ func execute_turn():
 		if results.has(choice):
 			await handle_result(choice, results[choice])
 
+	for p in battle_controller.get_all_active_pokemon():
+		await BattleEffectController.process_phase(p, battle_controller.ui, BattleEffect_Refactor.Phases.ON_END_TURN)
+		
 func order_choices(battle_choices: Array[BattleChoice_Refactor]) -> Array[BattleChoice_Refactor]:
 	battle_choices.sort_custom(_sort_choices)
 	print(">>> Orden de ejecución:")
@@ -85,8 +92,8 @@ func _sort_choices(a: BattleChoice_Refactor, b: BattleChoice_Refactor) -> bool:
 
 func handle_result(choice: BattleChoice_Refactor, result) -> void:
 	if choice is BattleMoveChoice_Refactor:
-		await battle_controller.ui.result_display.display_move_result(result, choice)
-		#await handle_move_result(choice, result)
+		#await battle_controller.ui.result_display.display_move_result(result, choice)
+		await handle_move_result(choice, result)
 
 	# elif choice is BattleSwitchChoice_Refactor:
 	#	await handle_switch_result(choice, result)
@@ -100,7 +107,15 @@ func handle_result(choice: BattleChoice_Refactor, result) -> void:
 	else:
 		push_warning("handle_result: tipo de choice no reconocido o aún no implementado.")
 #
-#func handle_move_result(choice: BattleMoveChoice_Refactor, result: BattleMoveResult) -> void:
+func handle_move_result(choice: BattleMoveChoice_Refactor, result: BattleMoveResult) -> void:
+
+	await battle_controller.ui.show_used_move_message(choice.pokemon, choice.get_move())
+	
+	for effect in result.effects:
+		effect.apply()
+	for effect in result.effects:
+		print("visualize " + choice.get_move().get_name())
+		await effect.visualize(battle_controller.ui)
 	#var user = choice.pokemon
 	#var move = choice.get_move()
 	#var message_controller:= battle_controller.get_message_controller()
@@ -150,35 +165,80 @@ func end_turn():
 	pass
 	# Aquí iría lógica futura de efectos, clima, estados...
 	#await battle_controller.end_turn()
-
+	
 func print_turn_debug_log(choices: Array[BattleChoice_Refactor], results: Dictionary) -> void:
 	for choice in choices:
 		if choice is BattleMoveChoice_Refactor and results.has(choice):
-			var result: BattleMoveResult = results[choice]
+			var result = results[choice]
+			if not result.has_method("effects"):
+				continue
+
+			var effects: Array = result.effects
 			var user := choice.pokemon.get_name()
 			var move = choice.get_move().get_name()
 
-			if result.missed:
-				var missed_target := result.targets[0].get_active_pokemon().get_name()
+			if effects.size() == 1 and effects[0] is MissEffect:
+				var missed_target = effects[0].target.get_name()
 				print("%s usará %s contra %s pero fallará." % [user, move, missed_target])
 			else:
-				# Agrupamos por target
 				var grouped := {}
-				for impact in result.impact_results:
-					var t := impact.target
-					if not grouped.has(t):
-						grouped[t] = { "damage": 0, "healing": 0 }
-					
-					if impact is MoveImpactResult.Damage:
-						grouped[t].damage += impact.amount
-					elif impact is MoveImpactResult.Heal:
-						grouped[t].healing += impact.amount
 
-				# Mostrar resumen por objetivo
-				for target:BattlePokemon_Refactor in grouped.keys():
-					var tname := target.get_name()
+				for effect in effects:
+					var inner_effects = effect.sub_effects if effect.has("sub_effects") else [effect]
+
+					for e in inner_effects:
+						if e is DamageEffect:
+							var t = e.target
+							if not grouped.has(t):
+								grouped[t] = { "damage": 0, "healing": 0 }
+							grouped[t].damage += e.amount
+						#elif e is HealEffect:
+							#var t = e.target
+							#if not grouped.has(t):
+								#grouped[t] = { "damage": 0, "healing": 0 }
+							#grouped[t].healing += e.amount
+
+				for target in grouped.keys():
+					var tname = target.get_name()
 					var entry = grouped[target]
 					if entry.damage > 0:
 						print("%s usará %s contra %s e infligirá %d de daño." % [user, move, tname, entry.damage])
 					if entry.healing > 0:
 						print("%s usará %s y curará %d PS a %s." % [user, move, entry.healing, tname])
+
+func print_active_effects_log():
+	print("====== Battle Effects Log ======")
+	print("Field Effects:")
+	var field_effects = BattleEffectController.get_field_effects()
+	if field_effects.is_empty():
+		print("   (sin efectos de Campo)")
+	else:
+		for e in field_effects:
+			var name = e.get_script().resource_path.get_file().get_basename()
+			print("     · %s" % name)
+
+	for spot in battle_controller.get_active_battle_spots():
+		var pokemon = spot.get_active_pokemon()
+		var team = pokemon.side.to_string()
+		print("- %s [%s]" % [pokemon.get_name(), team])
+
+		var pokemon_effects = BattleEffectController.get_pokemon_effects(pokemon)
+		var side_effects = BattleEffectController.get_side_effects(pokemon)
+
+		if pokemon_effects.is_empty():
+			print("   (sin efectos Pokémon)")
+		else:
+			print("   Pokémon Effects:")
+			for e in pokemon_effects:
+				var name = e.get_script().resource_path.get_file().get_basename()
+				print("     · %s" % name)
+
+		if side_effects.is_empty():
+			print("   (sin efectos de Side)")
+		else:
+			print("   Side Effects:")
+			for e in side_effects:
+				var name = e.get_script().resource_path.get_file().get_basename()
+				print("     · %s" % name)
+
+	print("================================")

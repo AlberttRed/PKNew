@@ -1,7 +1,7 @@
 extends MoveCategoryLogic
 class_name MoveCategoryForceSwitch
 
-func execute_impact():
+func execute():
 	push_warning("MoveCategoryForceSwitch not implemented")
-	return []  as Array[MoveImpactResult]
+	return []  
 	#await move.force_switch_target()

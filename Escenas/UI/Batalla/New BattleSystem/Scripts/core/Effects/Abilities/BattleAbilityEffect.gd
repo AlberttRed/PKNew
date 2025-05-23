@@ -1,2 +1,0 @@
-extends BattleEffect_Refactor
-class_name BattleAbilityEffect_Refactor

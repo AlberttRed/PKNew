@@ -1,7 +1,22 @@
-[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://b4dy6swywq5g3"]
+[gd_resource type="Resource" script_class="Move" load_steps=7 format=3 uid="uid://b4dy6swywq5g3"]
 
 [ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_gk08d"]
+[ext_resource type="Resource" uid="uid://c74kascyu4hfe" path="res://Resources/Ailments/PARALYSIS.tres" id="1_smfbv"]
+[ext_resource type="Script" uid="uid://ctn5nkcm5a6ci" path="res://Database/Classes/Ailment.gd" id="2_efsk1"]
 [ext_resource type="Resource" uid="uid://ces0u5nv45fpj" path="res://Resources/Types/13.tres" id="2_udncc"]
+
+[sub_resource type="Resource" id="Resource_vpu8r"]
+metadata/__load_path__ = "res://Scripts/core/Battle Effects/Persistent/ParalysisAilmentEffect.gd"
+
+[sub_resource type="Ailment" id="Ailment_2kajh"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_efsk1")
+id = "paralysis"
+display_name = "Parálisis"
+description = ""
+is_persistent = true
+effect = SubResource("Resource_vpu8r")
 
 [resource]
 resource_name = "609 - Moflete Estático"
@@ -35,3 +50,4 @@ meta_ailment_chance = 100
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
+ailment = ExtResource("1_smfbv")

@@ -122,5 +122,11 @@ func get_drain_percentage():
 func get_heal_amount():
 	return base.meta_healing
 	
+func get_ailment() -> Ailment:
+	return base.ailment
+	
+func get_ailment_chance() -> int:
+	return base.meta_ailment_chance
+	
 func print_move():
 	print(" ------ " + str(Name) + " " + str(pp_actual) + "/" + str(pp) + " PP ------ ")

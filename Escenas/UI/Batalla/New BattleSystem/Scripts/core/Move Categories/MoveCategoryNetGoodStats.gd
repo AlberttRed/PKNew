@@ -1,7 +1,7 @@
 extends MoveCategoryLogic
 class_name MoveCategoryNetGoodStats
 
-func execute_impact():
+func execute() -> Array[ImmediateBattleEffect]:
 	push_warning("MoveCategoryNetGoodStats not implemented")
-	return []  as Array[MoveImpactResult]
+	return []
 	#await move.apply_stat_changes_to_user()

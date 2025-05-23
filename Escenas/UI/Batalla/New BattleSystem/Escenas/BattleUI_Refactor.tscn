@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://djqyc10nosdl"]
 
 [ext_resource type="Script" uid="uid://fue81u7lotyd" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/ui/BattleUI_Refactor.gd" id="1_cwigb"]
-[ext_resource type="Script" uid="uid://ciwn5vywclehe" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/ui/BattleMessageController_Refactor.gd" id="2_gtgo1"]
+[ext_resource type="Script" uid="uid://ciwn5vywclehe" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/ui/BattleMessageController.gd" id="2_gtgo1"]
 [ext_resource type="PackedScene" uid="uid://ui53do2ck5tn" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/FieldUI.tscn" id="2_yxxch"]
 [ext_resource type="PackedScene" uid="uid://bwgrjg6m68rr" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleSelectorUI.tscn" id="3_0scdk"]
 [ext_resource type="PackedScene" uid="uid://dkjekvml5fqpp" path="res://Escenas/UI/Menus/2 - Party/PARTY.tscn" id="3_kpt17"]

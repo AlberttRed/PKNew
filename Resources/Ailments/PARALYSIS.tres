@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ailment" load_steps=5 format=3 uid="uid://c74kascyu4hfe"]
+
+[ext_resource type="Script" uid="uid://ctn5nkcm5a6ci" path="res://Database/Classes/Ailment.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="1_a8pb5"]
+[ext_resource type="Script" uid="uid://iyf3wks88soe" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/core/Battle Effects/Persistent/Ailments/ParalysisAilmentEffect.gd" id="1_g0t8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0t8o"]
+atlas = ExtResource("1_a8pb5")
+region = Rect2(0, 48, 44, 16)
+
+[resource]
+script = ExtResource("1")
+id = "paralysis"
+display_name = "Parálisis"
+description = ""
+icon = SubResource("AtlasTexture_g0t8o")
+is_persistent = true
+effect = ExtResource("1_g0t8o")

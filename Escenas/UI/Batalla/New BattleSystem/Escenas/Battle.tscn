@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bybfgh7ww27bx" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/Battle.gd" id="1_a264m"]
 [ext_resource type="PackedScene" uid="uid://bdngld0rn1skh" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleController_Refactor.tscn" id="2_7jfdv"]
 [ext_resource type="Script" uid="uid://djporkfgtlwc" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/core/Controllers/BattleTurnController.gd" id="3_a264m"]
-[ext_resource type="PackedScene" uid="uid://bwmd4c7fbmjy4" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleEffectManager_Refactor.tscn" id="4_8xxs4"]
+[ext_resource type="PackedScene" uid="uid://bwmd4c7fbmjy4" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleEffectController.tscn" id="4_a264m"]
 [ext_resource type="PackedScene" uid="uid://2fe0unp8wxi3" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleAnimationController_Refactor.tscn" id="5_ynq7s"]
 [ext_resource type="PackedScene" uid="uid://djqyc10nosdl" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleUI_Refactor.tscn" id="6_uikay"]
 
@@ -15,7 +15,7 @@ script = ExtResource("1_a264m")
 [node name="TurnController" type="Node" parent="BattleController"]
 script = ExtResource("3_a264m")
 
-[node name="BattleEffectManager" parent="." instance=ExtResource("4_8xxs4")]
+[node name="BattleEffectController" parent="." instance=ExtResource("4_a264m")]
 
 [node name="BattleAnimationController" parent="." instance=ExtResource("5_ynq7s")]
 

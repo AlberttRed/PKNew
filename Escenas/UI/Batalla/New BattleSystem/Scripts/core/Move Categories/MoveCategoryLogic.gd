@@ -8,5 +8,5 @@ var user: BattlePokemon_Refactor
 var target: BattlePokemon_Refactor
 var num_hits: int = 1
 
-func execute_impact() -> Array[MoveImpactResult]:
+func execute() -> Array[ImmediateBattleEffect]:
 	return []

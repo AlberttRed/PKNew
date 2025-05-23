@@ -111,7 +111,7 @@ func startText():
 		#finishedAllText.connect(func(): finished.emit())
 	
 	#$AnimationPlayer.play("Typing")
-	writeText()
+	await writeText()
 	
 func selectOption(): #(ui_accept)
 	print("selected")
@@ -198,7 +198,7 @@ func showMessage(message = null):
 	label.text = getNextMessage()
 	$next.hide()
 	self.show()
-	startText()
+	await startText()
 	await finished
 		
 func close():

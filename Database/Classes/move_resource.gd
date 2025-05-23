@@ -34,6 +34,7 @@ class_name Move
 @export var meta_flinch_chance : int = 0 # % de que un atac fagi retrocedir  al rival
 @export var meta_stat_chance : int = 0 # % de que un atac pugi o baixi els stats
 @export var contact_flag : bool = false
+@export var ailment : Ailment = null
 
 func _init():
 	add_user_signal("move_done")

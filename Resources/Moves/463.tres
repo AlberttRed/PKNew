@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://fsqxdp1qd731"]
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://fsqxdp1qd731"]
 
+[ext_resource type="Resource" uid="uid://bdh8a5rhvppwm" path="res://Resources/Ailments/TRAP.tres" id="1_ey2vp"]
 [ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_v1bom"]
 [ext_resource type="Resource" uid="uid://d3pw7574qhbn3" path="res://Resources/Types/10.tres" id="2_pf8e2"]
 
@@ -39,3 +40,4 @@ meta_ailment_chance = 100
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
+ailment = ExtResource("1_ey2vp")

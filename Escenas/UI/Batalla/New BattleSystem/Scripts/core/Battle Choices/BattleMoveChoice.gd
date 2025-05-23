@@ -23,40 +23,64 @@ func get_main_target():
 	if target_handler:
 		return target_handler.get_actual_target()
 	return null
-	
-func resolve() -> BattleMoveResult:
-	var result := BattleMoveResult.new()
-	result.targets = target_handler.selected_targets if target_handler else []
+#
+#func resolve() -> Array[ImmediateBattleEffect]:
+	#var all_effects: Array[ImmediateBattleEffect] = []
+#
+	#var targets = target_handler.selected_targets if target_handler else []
+	#if targets.is_empty():
+		#return all_effects  # Nada que hacer
+#
+	#var num_hits := get_move().get_number_of_hits()
+	#print("Num. hits: " + str(num_hits))
+#
+	#for spot in targets:
+		#var target := spot.get_active_pokemon()
+#
+		#if not AccuracyUtils.check_hit(get_move(), pokemon, target):
+			#all_effects.append(MissEffect.new(pokemon, target))
+			#continue
+#
+		#var logic: MoveCategoryLogic = get_move().get_category_logic()
+		#logic.move = get_move()
+		#logic.user = pokemon
+		#logic.target = target
+		#logic.num_hits = num_hits
+#
+		#for i in num_hits:
+			#if target.is_fainted():
+				#break
+#
+			#var effects: Array[ImmediateBattleEffect] = logic.execute()
+			#all_effects.append_array(effects)
+#
+	#return all_effects
 
-	if result.targets.is_empty():
-		result.missed = true
+func resolve() -> BattleMoveResult:
+	var all_effects: Array[ImmediateBattleEffect] = []
+	var result := BattleMoveResult.new()
+	var targets = target_handler.selected_targets if target_handler else []
+
+	if targets.is_empty():
 		return result
 
-	# Número de golpes se calcula una vez por ejecución del movimiento
-	var num_hits := get_move().get_number_of_hits()
-	result.num_hits = num_hits
-	print("Num. hits: " + str(num_hits))
-
-	# Recorremos cada target individualmente
-	for spot in result.targets:
+	for spot in targets:
 		var target := spot.get_active_pokemon()
 
-		# Comprobamos si acierta contra este target
 		if not AccuracyUtils.check_hit(get_move(), pokemon, target):
-			continue  # Falló contra este objetivo, no genera impactos
+			all_effects.append(MissEffect.new(pokemon))
+			continue
 
-		# Instanciamos la lógica de la categoría para este target
-		var logic: MoveCategoryLogic = get_move().get_category_logic()
-		logic.move = get_move()
-		logic.user = pokemon
-		logic.target = target
-		logic.num_hits = num_hits
+		var num_hits := get_move().get_number_of_hits()
 
-		for i in num_hits:
-			if target.is_fainted():
-				break  # No seguir golpeando si ya se debilitó
-
-			var impacts: Array[MoveImpactResult] = await logic.execute_impact()
-			result.impact_results.append_array(impacts)
-
+		if num_hits > 1:
+			var multi := MultiHitEffect.new(pokemon, target, get_move(), num_hits)
+			all_effects.append(multi)
+		else:
+			var logic = get_move().get_category_logic()
+			logic.move = get_move()
+			logic.user = pokemon
+			logic.target = target
+			all_effects.append_array(logic.execute())
+	result.effects = all_effects
 	return result

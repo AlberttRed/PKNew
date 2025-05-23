@@ -8,10 +8,10 @@ class_name BattleIA_Wild_Refactor
 #pero en aquests casos farem una IA especifica per ells.
 	
 func selectAction():
-	if pokemon.ability == BattleEffect.Abilities.RETIRADA:
-		if pokemon.HPperectageLeft <= 0.5:
-			pokemon.exitBattle()
-			return
+	#if pokemon.ability == BattleEffect.Abilities.RETIRADA:
+		#if pokemon.HPperectageLeft <= 0.5:
+			#pokemon.exitBattle()
+			#return
 	
 	pokemon.selectMove()
 	

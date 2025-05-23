@@ -1,11 +1,14 @@
 class_name BattlePokemon_Refactor
 
+signal status_changed
+
 var base_data: PokemonInstance
 var ai_controller: BattleIA_Refactor
 var participant: BattleParticipant_Refactor
 var side: BattleSide_Refactor = null
 var battle_spot: BattleSpot_Refactor = null
 
+var can_act_this_turn: bool = true
 var in_battle:bool = false
 var inBattleParty:bool = false
 var controllable: bool
@@ -27,7 +30,7 @@ var accuracy_stage: int = 0
 var evasion_stage: int = 0
 var critical_stage: int = 0
 
-var status: String = ""
+var status: Ailment = null
 var status_turns: int = 0
 
 var selectedBattleChoice: BattleChoice_Refactor
@@ -63,6 +66,7 @@ func setIA(_IA:BattleIA_Refactor):
 
 func init_turn() -> void:
 	selectedBattleChoice = null
+	can_act_this_turn = true
 	# Si más adelante agregas efectos temporales, pueden resetearse aquí
 	
 func _to_string() -> String:
@@ -146,11 +150,19 @@ func decide_random_action() -> BattleChoice_Refactor:
 
 	return choice
 
-func take_damage(damage: MoveImpactResult.Damage) -> void:
+func take_damage(damage: DamageEffect) -> void:
 	hp -= damage.amount
 	hp = max(hp, 0)
 
+func set_status(new_status: Ailment):
+	if not new_status.is_persistent:
+		push_warning("Intentando asignar un ailment volátil como status.")
+		return
 
+	if status == new_status:
+		return
+
+	status = new_status
 
 
 #func select_action() -> void:

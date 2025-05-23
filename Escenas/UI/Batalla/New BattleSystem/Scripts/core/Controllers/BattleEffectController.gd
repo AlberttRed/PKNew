@@ -1,63 +1,138 @@
-extends Node
 class_name BattleEffectController
+extends Node
 
-var ui_ref: BattleUIRef = BattleUIRef.new()
+# 🔁 Singleton interno
+static var _instance: BattleEffectController
 
-var field_effects: Array[BattleEffect] = []
-var side_effects: Dictionary = {} # {BattleSide: Array[BattleEffect]}
-var pokemon_effects: Dictionary = {} # {BattlePokemon: Array[BattleEffect]}
+func _ready():
+	_instance = self
 
-func set_ui(message_box, result_display):
-	ui_ref.message_box = message_box
-	ui_ref.result_display = result_display
+static func get_instance() -> BattleEffectController:
+	if _instance == null:
+		push_warning("BattleEffectController.get_instance() llamado antes de inicializarse.")
+	return _instance
 
-func register_effect(effect: BattleEffect, source_pokemon: BattlePokemon):
-	effect.battle_ui = ui_ref
-	match effect.scope:
-		BattleEffect_Refactor.Scope.FIELD:
-			register_field_effect(effect)
-		BattleEffect_Refactor.Scope.SIDE:
-			register_side_effect(effect, source_pokemon.owner_side)
-		BattleEffect_Refactor.Scope.POKEMON:
-			register_pokemon_effect(effect, source_pokemon)
+# 📦 API pública
+static func add_pokemon_effect(pokemon, effect: PersistentBattleEffect):
+	get_instance()._add_pokemon_effect(pokemon, effect)
 
+static func remove_pokemon_effect(pokemon, effect: PersistentBattleEffect):
+	get_instance()._remove_pokemon_effect(pokemon, effect)
 
-func register_field_effect(effect: BattleEffect):
-	if not field_effects.has(effect):
-		field_effects.append(effect)
+static func add_side_effect(side: String, effect: PersistentBattleEffect):
+	get_instance()._add_side_effect(side, effect)
 
-func register_side_effect(effect: BattleEffect, side):
-	if not side_effects.has(side):
-		side_effects[side] = []
-	if not side_effects[side].has(effect):
-		side_effects[side].append(effect)
+static func remove_side_effect(side: String, effect: PersistentBattleEffect):
+	get_instance()._remove_side_effect(side, effect)
 
-func register_pokemon_effect(effect: BattleEffect, pokemon):
+static func add_field_effect(effect: PersistentBattleEffect):
+	get_instance()._add_field_effect(effect)
+
+static func remove_field_effect(effect: PersistentBattleEffect):
+	get_instance()._remove_field_effect(effect)
+	
+static func has_effect_for(pokemon, effect_instance: PersistentBattleEffect) -> bool:
+	return effect_instance != null and get_instance()._has_effect_for(pokemon, effect_instance)
+
+static func get_all_effects_for(pokemon):
+	return get_instance()._get_all_effects_for(pokemon)
+
+static func get_pokemon_effects(pokemon):
+	return get_instance()._get_pokemon_effects(pokemon)
+
+static func get_side_effects(pokemon):
+	return get_instance()._get_side_effects(pokemon)
+
+static func get_field_effects():
+	return get_instance()._get_field_effects()
+
+static func get_all_active_effects() -> Array[PersistentBattleEffect]:
+	return get_instance()._get_all_active_effects()
+
+static func process_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
+	return await get_instance()._process_phase(pokemon, ui, phase)
+
+static func cleanup():
+	var instance = get_instance()
+	instance.pokemon_effects.clear()
+	instance.field_effects.clear()
+	instance.side_effects.clear()
+	_instance = null
+
+# 🔐 Datos internos
+var pokemon_effects: Dictionary = {}
+var field_effects: Array[PersistentBattleEffect] = []
+var side_effects: Dictionary = { "Player": [], "Enemy": [] }
+
+# 🔧 Métodos internos
+func _add_pokemon_effect(pokemon, effect: PersistentBattleEffect):
 	if not pokemon_effects.has(pokemon):
 		pokemon_effects[pokemon] = []
-	if not pokemon_effects[pokemon].has(effect):
-		pokemon_effects[pokemon].append(effect)
+	pokemon_effects[pokemon].append(effect)
 
-func get_all_effects_for(pokemon) -> Array:
-	var all_effects: Array = []
-	all_effects += pokemon_effects.get(pokemon, [])
-	all_effects += side_effects.get(pokemon.owner_side, [])
-	all_effects += field_effects
-	return all_effects
+func _remove_pokemon_effect(pokemon, effect: PersistentBattleEffect):
+	if not pokemon_effects.has(pokemon):
+		return
+	var target_class = effect.get_script().get_global_name()
+	pokemon_effects[pokemon] = pokemon_effects[pokemon].filter(func(e): return e.get_script().get_global_name() != target_class)
+	if pokemon_effects[pokemon].is_empty():
+		pokemon_effects.erase(pokemon)
 
-func apply_on_turn_start(pokemon):
-	for effect in get_all_effects_for(pokemon):
-		if effect.has_method("on_turn_start"):
-			await effect.on_turn_start()
+func _add_side_effect(side: String, effect: PersistentBattleEffect):
+	if not side_effects.has(side):
+		side_effects[side] = []
+	side_effects[side].append(effect)
 
-func apply_on_turn_end(pokemon):
-	for effect in get_all_effects_for(pokemon):
-		if effect.has_method("on_turn_end"):
-			await effect.on_turn_end()
+func _remove_side_effect(side: String, effect: PersistentBattleEffect):
+	if not side_effects.has(side):
+		return
+	var target_class = effect.get_script().get_global_name()
+	side_effects[side] = side_effects[side].filter(func(e): return e.get_script().get_global_name() != target_class)
+	if side_effects[side].is_empty():
+		side_effects.erase(side)
 
-func apply_on_calculate_damage(pokemon, move, base_damage: int) -> int:
-	var final_damage = base_damage
-	for effect in get_all_effects_for(pokemon):
-		if effect.has_method("on_calculate_damage"):
-			final_damage = effect.on_calculate_damage(pokemon, move, final_damage)
-	return final_damage
+func _add_field_effect(effect: PersistentBattleEffect):
+	field_effects.append(effect)
+
+func _remove_field_effect(effect: PersistentBattleEffect):
+	var target_class = effect.get_script().get_global_name()
+	field_effects = field_effects.filter(func(e): return e.get_script().get_global_name() != target_class)
+	
+func _has_effect_for(pokemon, effect: PersistentBattleEffect) -> bool:
+	var target_class = effect.get_script().get_global_name()
+	var all = _get_all_effects_for(pokemon)
+	return all.any(func(e): return e.get_script().get_global_name() == target_class)
+
+func _get_all_effects_for(pokemon) -> Array[PersistentBattleEffect]:
+	var result: Array[PersistentBattleEffect] = []
+	result.append_array(_get_pokemon_effects(pokemon))
+	result.append_array(_get_side_effects(pokemon))
+	result.append_array(_get_field_effects())
+	return result
+
+func _get_pokemon_effects(pokemon):
+	if pokemon_effects.has(pokemon):
+		return pokemon_effects[pokemon].duplicate()
+	return []
+
+func _get_side_effects(pokemon:BattlePokemon_Refactor):
+	var side = pokemon.side.to_string()
+	if side_effects.has(side):
+		return side_effects[side].duplicate()
+	return []
+
+func _get_field_effects() -> Array[PersistentBattleEffect]:
+	return field_effects.duplicate()
+
+func _get_all_active_effects() -> Array[PersistentBattleEffect]:
+	var result: Array[PersistentBattleEffect] = []
+	result.append_array(field_effects)
+	for list in side_effects.values():
+		result.append_array(list)
+	for list in pokemon_effects.values():
+		result.append_array(list)
+	return result
+
+func _process_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
+	for effect in _get_all_effects_for(pokemon):
+		await effect.on_phase(pokemon, ui, phase)

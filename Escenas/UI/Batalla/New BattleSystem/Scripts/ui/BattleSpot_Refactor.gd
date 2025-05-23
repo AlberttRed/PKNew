@@ -11,14 +11,6 @@ var tween: Tween
 @onready var hp_bar: HPBar_Refactor = $HPBar
 @onready var hp_bar_pos_single: Marker2D = $Positions/HPBarPos_Single
 @onready var hp_bar_pos_double: Marker2D = $Positions/HPBarPos_Double
-
-func set_pokemon(p: BattlePokemon_Refactor) -> void:
-	pokemon = p
-	if pokemon.side.type == BattleSide_Refactor.Types.PLAYER:
-		sprite.texture = pokemon.get_back_sprite()
-	else:
-		sprite.texture = pokemon.get_front_sprite()
-	show()
 	
 func load_active_pokemon(_pokemon: BattlePokemon_Refactor, rules: BattleRules) -> void:
 	self.pokemon = _pokemon
@@ -33,7 +25,8 @@ func load_active_pokemon(_pokemon: BattlePokemon_Refactor, rules: BattleRules) -
 
 	# Posicionar sprite si hiciera falta (ya tenías set_sprite_position)
 	#set_sprite_position()
-
+	if not pokemon.status_changed.is_connected(_on_status_changed):
+		pokemon.status_changed.connect(_on_status_changed)
 	# Mostrar sombra si es salvaje
 	shadow.visible = self.pokemon.is_wild
 
@@ -43,6 +36,7 @@ func load_active_pokemon(_pokemon: BattlePokemon_Refactor, rules: BattleRules) -
 	# Inicializar y posicionar HPBar
 	hp_bar.init(self.pokemon)
 	hp_bar.setup_for(self.pokemon.side.type, rules.mode)
+	hp_bar.set_status_icon(pokemon.status.icon if pokemon.status else null)
 	position_hp_bar(rules.mode)
 	hp_bar.visible = true
 
@@ -51,7 +45,7 @@ func load_active_pokemon(_pokemon: BattlePokemon_Refactor, rules: BattleRules) -
 	if _pokemon.ability and _pokemon.ability.effect_resource:
 		var effect = pokemon.ability.effect_resource.duplicate()
 		effect.source = pokemon
-		BattleEffectController.register_effect(effect, pokemon)
+		#BattleEffectController_Refactor.add_pokemon_effect(pokemon, effect)
 
 
 func get_active_pokemon() -> BattlePokemon_Refactor:
@@ -89,14 +83,15 @@ func get_opponent_side() -> BattleSide_Refactor:
 func has_active_pokemon() -> bool:
 	return pokemon != null and not pokemon.is_fainted()
 
-func apply_damage(damage: MoveImpactResult.Damage) -> void:
+func apply_damage(decrease_value = null) -> void:
 	if get_active_pokemon() == null:
 		return
-
-	get_active_pokemon().take_damage(damage)
 	
 	if hp_bar:
-		await hp_bar.update_hp(get_active_pokemon().hp)
+		if decrease_value:
+			await hp_bar.reduce_hp_by(decrease_value)
+		else:
+			await hp_bar.update_hp(get_active_pokemon().hp)
 
 func play_hit_animation() -> void:
 	if not is_visible():
@@ -117,3 +112,7 @@ func play_enter_animation():
 	# Simple animación de entrada, si querés algo visual
 	# Podés conectarlo luego con AnimationPlayer o con tween
 	pass
+
+func _on_status_changed():
+	var icon := pokemon.status.icon if pokemon.status else null
+	hp_bar.set_status_icon(icon)

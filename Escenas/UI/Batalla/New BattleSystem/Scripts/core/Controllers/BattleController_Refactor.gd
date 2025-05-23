@@ -81,6 +81,9 @@ func get_active_battle_spots() -> Array[BattleSpot_Refactor]:
 				spots.append(spot)
 
 	return spots
+	
+func get_all_active_pokemon():
+	return get_active_battle_spots().map(func(spot:BattleSpot_Refactor): return spot.pokemon as BattlePokemon_Refactor) as Array[BattlePokemon_Refactor]
 
 func assign_opponent_sides():
 	if sides.size() != 2:
@@ -94,7 +97,7 @@ func battle_finished() -> bool:
 	# Lógica real pendiente
 	return false
 
-func get_message_controller() -> BattleMessageController_Refactor:
+func get_message_controller() -> BattleMessageController:
 	return ui.message_controller
 
 
