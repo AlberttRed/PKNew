@@ -49,8 +49,26 @@ static func get_field_effects():
 static func get_all_active_effects() -> Array[PersistentBattleEffect]:
 	return get_instance()._get_all_active_effects()
 
-static func process_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
-	return await get_instance()._process_phase(pokemon, ui, phase)
+static func process_phase(pokemon, phase: BattleEffect_Refactor.Phases):
+	await get_instance()._process_phase(pokemon, phase)
+
+static func process_global_phase(phase: BattleEffect_Refactor.Phases):
+	await get_instance()._process_global_phase(phase)
+
+static func apply_phase(pokemon: BattlePokemon_Refactor, phase: BattleEffect_Refactor.Phases):
+	return await get_instance()._apply_phase(pokemon, phase)
+
+static func visualize_phase(pokemon: BattlePokemon_Refactor, phase: BattleEffect_Refactor.Phases):
+	return await get_instance()._visualize_phase(pokemon, phase)
+
+static func apply_global_phase(phase: BattleEffect_Refactor.Phases) -> void:
+	await get_instance()._apply_global_phase(phase)
+
+static func visualize_global_phase(phase: BattleEffect_Refactor.Phases) -> void:
+	await get_instance()._visualize_global_phase(phase)
+
+static func set_ui(_ui:BattleUI_Refactor):
+	get_instance().ui = _ui
 
 static func cleanup():
 	var instance = get_instance()
@@ -63,6 +81,7 @@ static func cleanup():
 var pokemon_effects: Dictionary = {}
 var field_effects: Array[PersistentBattleEffect] = []
 var side_effects: Dictionary = { "Player": [], "Enemy": [] }
+var ui: BattleUI_Refactor
 
 # 🔧 Métodos internos
 func _add_pokemon_effect(pokemon, effect: PersistentBattleEffect):
@@ -108,6 +127,7 @@ func _get_all_effects_for(pokemon) -> Array[PersistentBattleEffect]:
 	result.append_array(_get_pokemon_effects(pokemon))
 	result.append_array(_get_side_effects(pokemon))
 	result.append_array(_get_field_effects())
+	result.sort_custom(func(a, b): return b.get_priority() - a.get_priority())
 	return result
 
 func _get_pokemon_effects(pokemon):
@@ -133,6 +153,47 @@ func _get_all_active_effects() -> Array[PersistentBattleEffect]:
 		result.append_array(list)
 	return result
 
-func _process_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
+func _process_phase(pokemon: BattlePokemon_Refactor, phase: BattleEffect_Refactor.Phases):
+	apply_phase(pokemon, phase)
+	await visualize_phase(pokemon, phase)
+	
+func _process_global_phase(phase: BattleEffect_Refactor.Phases):
+	for effect in field_effects:
+		effect.apply_phase(null, phase)
+	for effect in field_effects:
+		await effect.visualize_phase(null, ui, phase)
+		if effect.has_finished(): remove_field_effect(effect)
+	for side in side_effects.keys():
+		for effect in side_effects[side]:
+			effect.apply_phase(null, phase)
+		for effect in side_effects[side]:
+			await effect.visualize_phase(null, ui, phase)
+			if effect.has_finished(): remove_side_effect(side, effect)
+			
+func _apply_phase(pokemon, phase):
 	for effect in _get_all_effects_for(pokemon):
-		await effect.on_phase(pokemon, ui, phase)
+		effect.apply_phase(pokemon, phase)
+
+func _visualize_phase(pokemon, phase):
+	for effect in _get_all_effects_for(pokemon):
+		await effect.visualize_phase(pokemon, ui, phase)
+		if effect.has_finished(): remove_pokemon_effect(pokemon, effect)
+			
+
+func _apply_global_phase(phase: BattleEffect_Refactor.Phases) -> void:
+	for effect in field_effects:
+		await effect.apply_phase(null, phase)
+
+	for side in side_effects.keys():
+		for effect in side_effects[side]:
+			# Nota: puedes pasar el "lado" como string si lo necesita
+			await effect.apply_phase(null, phase)
+
+func _visualize_global_phase(phase: BattleEffect_Refactor.Phases) -> void:
+	for effect in field_effects:
+		await effect.visualize_phase(null, ui, phase)
+		if effect.has_finished(): remove_field_effect(effect)
+	for side in side_effects.keys():
+		for effect in side_effects[side]:
+			await effect.visualize_phase(null, ui, phase)
+			if effect.has_finished(): remove_side_effect(side, effect)

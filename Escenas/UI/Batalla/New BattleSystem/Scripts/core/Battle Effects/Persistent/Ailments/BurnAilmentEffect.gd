@@ -1,11 +1,11 @@
 class_name BurnAilmentEffect
 extends PersistentBattleEffect
 
-func on_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
-	if phase != BattleEffect_Refactor.Phases.ON_END_TURN:
+func apply_phase(pokemon:BattlePokemon_Refactor, phase: Phases) -> void: 
+	if phase != BattleEffect_Refactor.Phases.ON_END_POKEMON_TURN:
 		return
 
-	var dmg:int = ceil(pokemon.get_max_hp() / 16.0)
+	var dmg:int = ceil(pokemon.total_hp / 16.0)
 
 	var burn_effect := DamageEffect.new(null, pokemon, null, dmg)
 	burn_effect.show_effectiveness = false
@@ -14,5 +14,12 @@ func on_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: Bat
 
 	pokemon.take_damage(burn_effect)
 
+func visualize_phase(pokemon:BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: Phases) -> void:
+	if phase != BattleEffect_Refactor.Phases.ON_END_POKEMON_TURN:
+		return
+
 	await ui.show_ailment_effect_message(pokemon, source)
 	await pokemon.battle_spot.apply_damage()
+	
+func get_priority() -> int:
+	return 10

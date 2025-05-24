@@ -9,6 +9,7 @@ class_name BattleScene
 func start_battle(player_participants: Array[BattleParticipant_Refactor], enemy_participants: Array[BattleParticipant_Refactor], rules: BattleRules):
 	# Crea y configura el controlador
 	battle_controller.ui = battle_ui
+	BattleEffectController.set_ui(battle_ui)
 	battle_controller.setup_sides(player_participants, enemy_participants, rules)
 	battle_controller.assign_active_pokemons_to_spots() 
 

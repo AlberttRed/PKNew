@@ -100,7 +100,7 @@ func get_ailment_effect_message(user:BattlePokemon_Refactor, ailment:Ailment) ->
 		"sleep":
 			msg = "%s está dormido como un tronco." % [user.get_name()]
 		"confusion":
-			msg = "¡Está tan confuso que se hirió a si mismo!" % [user.get_name()]
+			msg = "¡Está tan confuso que se hirió a si mismo!"
 		_:
 			push_warning("Invalid AIlment or not implemented on get_ailment_effect_message()")
 			return {}
@@ -115,7 +115,7 @@ func get_ailment_previous_effect_message(user:BattlePokemon_Refactor, ailment:Ai
 	var msg:String = ""
 	match ailment.id:
 		"confusion":
-			msg = "¡Está tan confuso que se hirió a si mismo!" % [user.get_name()]
+			msg = "¡%s está confuso!" % [user.get_name()]
 		_:
 			push_warning("Invalid AIlment or not implemented on get_ailment_effect_message()")
 			return {}

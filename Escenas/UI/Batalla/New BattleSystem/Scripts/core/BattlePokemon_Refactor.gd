@@ -155,7 +155,7 @@ func take_damage(damage: DamageEffect) -> void:
 	hp = max(hp, 0)
 
 func set_status(new_status: Ailment):
-	if not new_status.is_persistent:
+	if new_status and !new_status.is_persistent:
 		push_warning("Intentando asignar un ailment volátil como status.")
 		return
 

@@ -46,9 +46,6 @@ func execute_turn():
 	for choice:BattleChoice_Refactor in ordered_choices:
 		if choice.pokemon.is_fainted():
 			continue
-		await BattleEffectController.process_phase(choice.pokemon, battle_controller.ui, BattleEffect_Refactor.Phases.ON_BEFORE_MOVE)
-		if !choice.pokemon.can_act_this_turn:
-			continue
 		var move_result = await choice.resolve()
 		results[choice] = move_result
 	
@@ -58,10 +55,10 @@ func execute_turn():
 	for choice in ordered_choices:
 		if results.has(choice):
 			await handle_result(choice, results[choice])
-
-	for p in battle_controller.get_all_active_pokemon():
-		await BattleEffectController.process_phase(p, battle_controller.ui, BattleEffect_Refactor.Phases.ON_END_TURN)
-		
+	
+	# Aplicar efectos de fin de turno
+	await BattleEffectController.process_global_phase(BattleEffect_Refactor.Phases.ON_END_BATTLE_TURN)
+	
 func order_choices(battle_choices: Array[BattleChoice_Refactor]) -> Array[BattleChoice_Refactor]:
 	battle_choices.sort_custom(_sort_choices)
 	print(">>> Orden de ejecución:")
@@ -92,7 +89,6 @@ func _sort_choices(a: BattleChoice_Refactor, b: BattleChoice_Refactor) -> bool:
 
 func handle_result(choice: BattleChoice_Refactor, result) -> void:
 	if choice is BattleMoveChoice_Refactor:
-		#await battle_controller.ui.result_display.display_move_result(result, choice)
 		await handle_move_result(choice, result)
 
 	# elif choice is BattleSwitchChoice_Refactor:
@@ -103,11 +99,19 @@ func handle_result(choice: BattleChoice_Refactor, result) -> void:
 
 	# BattleRunChoice:
 	# 	await handle_run_result(choice, result)
-
 	else:
 		push_warning("handle_result: tipo de choice no reconocido o aún no implementado.")
+		
+	await BattleEffectController.process_phase(choice.pokemon, BattleEffect_Refactor.Phases.ON_END_POKEMON_TURN)
+
 #
 func handle_move_result(choice: BattleMoveChoice_Refactor, result: BattleMoveResult) -> void:
+
+	# Aplicar y visualizar efectos previos al movimiento (como confusión, paralizado)
+	await BattleEffectController.process_phase(choice.pokemon, BattleEffect_Refactor.Phases.ON_BEFORE_MOVE)
+
+	if(!choice.pokemon.can_act_this_turn):
+		return
 
 	await battle_controller.ui.show_used_move_message(choice.pokemon, choice.get_move())
 	
@@ -116,6 +120,10 @@ func handle_move_result(choice: BattleMoveChoice_Refactor, result: BattleMoveRes
 	for effect in result.effects:
 		print("visualize " + choice.get_move().get_name())
 		await effect.visualize(battle_controller.ui)
+		
+	# Aplicar y visualizar efectos posteriores al movimiento (como veneno, quemadura)
+	await BattleEffectController.process_phase(choice.pokemon, BattleEffect_Refactor.Phases.ON_AFTER_MOVE)
+
 	#var user = choice.pokemon
 	#var move = choice.get_move()
 	#var message_controller:= battle_controller.get_message_controller()

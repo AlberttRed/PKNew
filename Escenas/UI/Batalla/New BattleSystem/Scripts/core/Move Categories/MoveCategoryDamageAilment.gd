@@ -10,7 +10,7 @@ func execute() -> Array[ImmediateBattleEffect]:
 
 	# Efecto de estado (si hay posibilidad de aplicar un ailment)
 	if !damage_effect.is_ineffective() and move.get_ailment() and 0 < move.get_ailment_chance():
-		var ailment_effect := ApplyAilmentEffect.new(target, move.get_ailment(), false)
+		var ailment_effect := ApplyAilmentEffect.new(target, move.get_ailment(), {"min_turns": move.get_min_turns(), "max_turns": move.get_max_turns()}, false)
 		if ailment_effect.is_valid:
 			effects.append(ailment_effect)
 

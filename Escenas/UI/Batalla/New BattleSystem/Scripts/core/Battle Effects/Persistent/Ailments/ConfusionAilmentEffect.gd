@@ -1,27 +1,41 @@
 class_name ConfusionAilmentEffect
 extends PersistentBattleEffect
 
-var turns_left := randi_range(2, 5)
+func check_effect_success():
+	effect_success = randf() < 0.5
+	
+func apply_phase(pokemon:BattlePokemon_Refactor, phase: Phases) -> void: 
+	if phase != Phases.ON_BEFORE_MOVE or !pokemon.can_act_this_turn:
+		return
+	
+	next_turn()
 
-func on_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
-	if phase != BattleEffect_Refactor.Phases.ON_BEFORE_MOVE:
+	if has_finished():
 		return
 
-	if turns_left <= 0:
-		await ui.show_end_ailment_message(pokemon, source)
-		BattleEffectController.remove_pokemon_effect(pokemon, self)
-		return
+	check_effect_success()
 
-	await ui.show_ailment_previous_effect_message(pokemon, source)
-	turns_left -= 1
-
-	if randf() < 0.5:
+	if effect_success:
 		return  # Puede actuar normalmente
 	else:
-		var damage:int = ceil(pokemon.get_max_hp() / 8.0)
+		var damage:int = ceil(pokemon.total_hp / 8.0)
 		var effect := DamageEffect.new(pokemon, pokemon, null, damage)
 		effect.show_effectiveness = false
 		pokemon.take_damage(effect)
+		pokemon.can_act_this_turn = false
+
+func visualize_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: Phases):
+	if phase != Phases.ON_BEFORE_MOVE or !pokemon.can_act_this_turn:
+		return
+
+	if has_finished():
+		await ui.show_end_ailment_message(pokemon, source)
+		return
+
+	await ui.show_ailment_previous_effect_message(pokemon, source)
+
+	if effect_success:
+		return  # Puede actuar normalmente
+	else:
 		await ui.show_ailment_effect_message(pokemon, source)
 		await pokemon.battle_spot.apply_damage()
-		pokemon.can_act_this_turn = false

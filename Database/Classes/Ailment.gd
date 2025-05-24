@@ -8,5 +8,5 @@ extends Resource
 @export var is_persistent: bool = true  # Si persiste fuera de combate o al hacer switch
 @export var effect: Resource = null        # Script del PersistentBattleEffect asociado
 
-func get_effect():
-	return effect.new(self) if effect != null else null
+func get_effect(_min_turn = null, _max_turn = null):
+	return effect.new(self,_min_turn,_max_turn) if effect != null else null

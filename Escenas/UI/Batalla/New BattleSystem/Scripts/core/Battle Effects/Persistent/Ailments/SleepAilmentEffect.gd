@@ -1,15 +1,25 @@
 class_name SleepAilmentEffect
 extends PersistentBattleEffect
 
-var turns_left := randi_range(1, 3)
-
-func on_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
+func apply_phase(pokemon, phase: Phases) -> void: 
 	if phase != BattleEffect_Refactor.Phases.ON_BEFORE_MOVE:
 		return
-	if turns_left <= 0:
+	
+	next_turn()
+	
+	if has_finished():
+		pokemon.set_status(null)
+	else:
+		pokemon.can_act_this_turn = false 
+
+func visualize_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases):
+	if phase != BattleEffect_Refactor.Phases.ON_BEFORE_MOVE:
+		return
+	if has_finished():
 		await ui.show_end_ailment_message(pokemon, source)
-		BattleEffectController.remove_pokemon_effect(pokemon, self) 
+		pokemon.status_changed.emit()
 	else:
 		await ui.show_ailment_effect_message(pokemon, source)
-		turns_left -= 1
-		pokemon.can_act_this_turn = false 
+
+func get_priority() -> int:
+	return 10

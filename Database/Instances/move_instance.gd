@@ -109,6 +109,12 @@ func get_max_hits() -> int:
 
 func get_min_hits() -> int:
 	return base.meta_min_hits
+	
+func get_max_turns() -> int:
+	return base.meta_max_turns
+
+func get_min_turns() -> int:
+	return base.meta_min_turns
 
 func get_critical_rate() -> int:
 	return base.meta_crit_rate
