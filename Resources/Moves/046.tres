@@ -24,6 +24,7 @@ effect_entries = "Immediately ends wild battles.  Forces trainers to switch Pok√
 Doesn't affect Pok√©mon with suction cups or under the effect of ingrain."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 12

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Nature" load_steps=2 format=3 uid="uid://blf34gc7qi5qa"]
+
+[ext_resource type="Script" uid="uid://c6r1u85k7bu3u" path="res://Database/Classes/Nature.gd" id="1_8t8yh"]
+
+[resource]
+script = ExtResource("1_8t8yh")
+id = "quirky"
+display_name = "Rara"
+increased_stat = 3
+decreased_stat = 3

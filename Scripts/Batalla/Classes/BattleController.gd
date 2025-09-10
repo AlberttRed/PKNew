@@ -31,7 +31,7 @@ var active_pokemon : BattlePokemon: # Indica el pokémon actiu que està fent el
 	get:
 		return activeBattleSpot.activePokemon
 var turnPokemonOrder : Array[BattleSpot]
-var effects : BattleEffectController
+var effects : BattleEffectControllerOLD
 #var activeWeathereffect : BattleWeatherEffect = null # CONST.WEATHER = CONST.WEATHER.NONE #Només pot haver-hi un tipus de Weather actiu a la vegada
 var activeWeather
 var field:BattleField:
@@ -46,7 +46,7 @@ var expHandler:BattleExperienceHandler = BattleExperienceHandler.new()
 	
 func _init(_battleRules : BattleRules):
 	rules = _battleRules
-	effects = BattleEffectController.new(self)
+	effects = BattleEffectControllerOLD.new(self)
 	UI.playerField._init()
 	UI.enemyField._init()
 	#playerSide = BattleSide.new(UI.playerField)
@@ -224,10 +224,10 @@ func setSides():
 #func addPersistentWeather(weather:CONST.WEATHER):
 	#activeWeathereffect = BattleWeatherEffect.getWeather(weather).new()
 	#
-func addTemporaryWeather(weather:BattleEffect.Weather, minTurns: int, maxTurns: int):
-	var newWeather:BattleEffect = BattleEffect.getWeather(weather).new()
-	newWeather.minTurns = minTurns
-	newWeather.maxTurns = maxTurns
+#func addTemporaryWeather(weather:BattleEffect.Weather, minTurns: int, maxTurns: int):
+	#var newWeather:BattleEffect = BattleEffect.getWeather(weather).new()
+	#newWeather.minTurns = minTurns
+	#newWeather.maxTurns = maxTurns
 
 #func removeWeather(weather:CONST.WEATHER = CONST.WEATHER.NONE):
 	#if weather != CONST.NONE:

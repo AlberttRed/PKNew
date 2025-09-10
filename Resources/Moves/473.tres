@@ -21,6 +21,7 @@ damage_class_id = 3
 effect_entries = "Inflicts damage based on the target's Defense, not Special Defense. Inflicts regular damage.  Damage calculation always uses the target's Defense, regardless of this move's damage class."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

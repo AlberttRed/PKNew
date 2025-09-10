@@ -21,6 +21,7 @@ damage_class_id = 3
 effect_entries = "If there be weather, this move has doubled power and the weather's type. Inflicts regular damage.  If a weather move is active, this move has double power, and its type becomes the type of the weather move.  shadow sky is typeless for the purposes of this move."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

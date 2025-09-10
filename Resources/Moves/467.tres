@@ -25,6 +25,7 @@ This move ignores the effects of detect and protect.
 This move cannot be selected by sleep talk."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

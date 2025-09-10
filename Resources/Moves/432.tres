@@ -24,6 +24,9 @@ effect_entries = "Lowers the target's evasion by one stage.  Removes field effec
 If the target is protected by mist, it will prevent the evasion change, then be removed by this move."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+6: -1
+})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

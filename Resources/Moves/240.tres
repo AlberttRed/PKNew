@@ -36,6 +36,7 @@ Pokémon with forecast become water.
 Pokémon with dry skin heal 1/8 max HP, Pokémon with hydration are cured of major status effects, and Pokémon with rain dish heal 1/16 max HP at the end of each turn."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10

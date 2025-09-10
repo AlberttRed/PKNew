@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://ccgm7ksf004gf"]
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://ccgm7ksf004gf"]
 
+[ext_resource type="Resource" uid="uid://bdh8a5rhvppwm" path="res://Resources/Ailments/TRAP.tres" id="1_11sat"]
 [ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_rbtp1"]
 [ext_resource type="Resource" uid="uid://bwo42s77xcpqt" path="res://Resources/Types/07.tres" id="2_poi8v"]
 
@@ -25,6 +26,7 @@ Has a 3/8 chance each to hit 2 or 3 times, and a 1/8 chance each to hit 4 or 5 t
 rapid spin cancels this effect."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 8
 meta_category_id = 4
@@ -39,3 +41,4 @@ meta_ailment_chance = 100
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
+ailment = ExtResource("1_11sat")

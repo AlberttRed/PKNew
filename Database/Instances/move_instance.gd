@@ -109,6 +109,12 @@ func get_max_hits() -> int:
 
 func get_min_hits() -> int:
 	return base.meta_min_hits
+	
+func get_max_turns() -> int:
+	return base.meta_max_turns
+
+func get_min_turns() -> int:
+	return base.meta_min_turns
 
 func get_critical_rate() -> int:
 	return base.meta_crit_rate
@@ -121,6 +127,15 @@ func get_drain_percentage():
 	
 func get_heal_amount():
 	return base.meta_healing
+	
+func get_ailment() -> Ailment:
+	return base.ailment
+	
+func get_ailment_chance() -> int:
+	return base.meta_ailment_chance
+	
+func get_stat_changes() -> Dictionary[StatTypes.Stat, int]:
+	return base.stat_changes
 	
 func print_move():
 	print(" ------ " + str(Name) + " " + str(pp_actual) + "/" + str(pp) + " PP ------ ")

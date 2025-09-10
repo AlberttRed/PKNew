@@ -20,8 +20,11 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Raises the user's Special Attack by three stages. Raises the user's Special Attack by three stages."
-stat_change_ids = Array[int]([4])
-stat_change_valors = Array[int]([3])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+2: 3
+})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 2

@@ -23,6 +23,7 @@ effect_entries = "Resets all Pokémon's stats, accuracy, and evasion. Removes st
 This does not count as a stat reduction for the purposes of clear body or white smoke."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10

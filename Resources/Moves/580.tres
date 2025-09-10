@@ -24,6 +24,7 @@ effect_entries = "For five turns, heals all Pokémon on the ground for 1/16 max 
 Changes nature power to energy ball."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10

@@ -25,6 +25,7 @@ The user may be hit by pursuit when it switches out, if it has been targeted and
 This move may be used even if the user is under the effect of ingrain.  ingrain's effect will end."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

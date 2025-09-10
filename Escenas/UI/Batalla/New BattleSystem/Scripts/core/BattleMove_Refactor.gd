@@ -110,6 +110,12 @@ func get_max_hits() -> int:
 func get_min_hits() -> int:
 	return base_data.get_min_hits()
 
+func get_max_turns() -> int:
+	return base_data.get_max_turns()
+
+func get_min_turns() -> int:
+	return base_data.get_min_turns()
+	
 func get_critical_rate() -> int:
 	return base_data.get_critical_rate()
 	
@@ -147,8 +153,24 @@ func get_category_logic() -> MoveCategoryLogic:
 			push_warning("Move category no implementada: %s" % str(get_category()))
 			return MoveCategoryLogic.new()
 
+func get_ailment() -> Ailment:
+	return base_data.get_ailment()
+	
+func get_ailment_chance() -> float:
+	return 100.0 if base_data.get_ailment_chance() == 0 else (float(base_data.get_ailment_chance()) / 100.0)
+
+func get_stat_changes() -> Dictionary[StatTypes.Stat, int]:
+	return base_data.get_stat_changes()
+
+func get_stat_change_value(stat: StatTypes.Stat) -> int:
+	return get_stat_changes()[stat]
+
+func get_effectiveness_against_pokemon(target: BattlePokemon_Refactor) -> float:
+	return get_type().get_effectiveness_against_pokemon(target)
+
+
 # Calcula el daño infligido a un objetivo según la generación activa
-func calculate_damage(target: BattlePokemon_Refactor) -> MoveImpactResult.Damage:
+func calculate_damage(target: BattlePokemon_Refactor) -> DamageEffect:
 	assert(pokemon != null, "El movimiento no tiene asignado un 'pokemon' (usuario)")
 	return DamageCalculator_Gen5.calculate(self, pokemon, target)
 

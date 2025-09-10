@@ -21,6 +21,7 @@ damage_class_id = 1
 effect_entries = "User faints.  Its replacement has its HP fully restored and any major status effect removed. User faints.  Its replacement's HP is fully restored, and any major status effect is removed.  If the replacement Pokémon is immediately fainted by a switch-in effect, the next replacement is healed by this move instead."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

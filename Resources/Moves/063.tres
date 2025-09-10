@@ -21,6 +21,7 @@ damage_class_id = 3
 effect_entries = "User foregoes its next turn to recharge. Inflicts regular damage.  User loses its next turn to \"recharge\", and cannot attack or switch out during that turn."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

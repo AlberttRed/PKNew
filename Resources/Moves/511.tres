@@ -20,6 +20,7 @@ damage_class_id = 1
 effect_entries = "Makes the target act last this turn. Forces the target to act last this turn, regardless of Speed or move priority.  If the target has already acted this turn, this move will fail."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

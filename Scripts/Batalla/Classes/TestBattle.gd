@@ -3,6 +3,8 @@ extends Node2D
 #Battlers
 @onready var player: Battler = $Player
 @onready var singleTrainer: Battler = $SingleTrainer
+@onready var wildPokemons = $WildPokemons.get_children() 
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,10 +14,10 @@ func _ready() -> void:
 	#get_tree().quit()
 	
 func wildSingleBattle():
-	var wildPokemon:PokemonInstance = PokemonInstance.new().create(true) 
-	wildPokemon.isWild = true
+	#var wildPokemon:PokemonInstance = PokemonInstance.new().create(true) 
+	#wildPokemon.isWild = true
 	
-	var wildParticipant: BattleParticipant_Refactor = BattleParticipantWild_Refactor.new([wildPokemon.to_battle_pokemon()])
+	var wildParticipant: BattleParticipant_Refactor = BattleParticipantWild_Refactor.new([wildPokemons[0].to_battle_pokemon()])
 	var playerParticipant: BattleParticipant_Refactor = player.to_battle_participant()
 
 	var rules = BattleRules.new(
@@ -27,12 +29,12 @@ func wildSingleBattle():
 	
 	
 func wildDoubleBattle():
-	var wildPokemon:PokemonInstance = PokemonInstance.new().create(true) 
-	wildPokemon.isWild = true
-	var wildPokemon2:PokemonInstance = PokemonInstance.new().create(true) 
-	wildPokemon2.isWild = true
-	
-	var wildParticipant: BattleParticipant_Refactor = BattleParticipantWild_Refactor.new([wildPokemon.to_battle_pokemon(), wildPokemon2.to_battle_pokemon()])
+	#var wildPokemon:PokemonInstance = PokemonInstance.new().create(true) 
+	#wildPokemon.isWild = true
+	#var wildPokemon2:PokemonInstance = PokemonInstance.new().create(true) 
+	#wildPokemon2.isWild = true
+	#
+	var wildParticipant: BattleParticipant_Refactor = BattleParticipantWild_Refactor.new([wildPokemons[0].to_battle_pokemon(), wildPokemons[1].to_battle_pokemon()])
 	var playerParticipant: BattleParticipant_Refactor = player.to_battle_participant()
 
 	var rules = BattleRules.new(

@@ -21,6 +21,7 @@ damage_class_id = 1
 effect_entries = "Changes the target's type to Water. Changes the target to pure water-type until it leaves the field.  If the target has multitype, this move will fail."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

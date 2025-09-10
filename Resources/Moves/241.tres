@@ -44,6 +44,7 @@ Pokémon with dry skin lose 1/8 max HP at the end of each turn.
 Pokémon with solar power have their original Special Attack raised by 50% but lose 1/8 their max HP at the end of each turn."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10

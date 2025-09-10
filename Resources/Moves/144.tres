@@ -25,6 +25,7 @@ choice band, choice scarf, and choice specs stay in effect, and the user must se
 This move cannot be copied by mirror move, nor forced by encore."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

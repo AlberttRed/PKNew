@@ -21,6 +21,7 @@ damage_class_id = 1
 effect_entries = "User's type changes to the type of one of its moves at random. User's type changes to the type of one of its moves, selected at random.  hidden power and weather ball are treated as normal.  Only moves with a different type are eligible, and curse is never eligible.  If the user has no suitable moves, this move will fail."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

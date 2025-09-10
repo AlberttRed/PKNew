@@ -23,6 +23,7 @@ effect_entries = "Hits once for every conscious Pokémon the trainer has. Inflic
 This effect breaks through wonder guard."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

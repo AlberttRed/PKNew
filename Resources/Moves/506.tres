@@ -21,6 +21,7 @@ damage_class_id = 3
 effect_entries = "Has double power if the target has a major status ailment. Inflicts regular damage.  If the target has a major status ailment, this move has double power."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

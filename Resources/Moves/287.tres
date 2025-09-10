@@ -22,6 +22,7 @@ damage_class_id = 1
 effect_entries = "Cleanses the user of a burn, paralysis, or poison. Removes a burn, paralysis, or poison from the user."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

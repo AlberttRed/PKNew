@@ -1,8 +1,8 @@
 extends MoveCategoryLogic
 class_name MoveCategorySwagger
 
-func execute_impact():
+func execute():
 	push_warning("MoveCategorySwagger not implemented")
-	return []  as Array[MoveImpactResult]
+	return []  
 	#await move.raise_target_stat()
 	#await move.cause_confusion()

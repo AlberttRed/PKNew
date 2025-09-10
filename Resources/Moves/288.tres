@@ -21,6 +21,7 @@ damage_class_id = 1
 effect_entries = "If the user faints this turn, the PP of the move that fainted it drops to 0. If the user faints before it next acts, the move that fainted it will have its PP dropped to 0.  End-of-turn damage does not trigger this effect."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

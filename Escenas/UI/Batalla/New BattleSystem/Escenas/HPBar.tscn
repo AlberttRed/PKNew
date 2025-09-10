@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dniko84d5byyb"]
+[gd_scene load_steps=12 format=3 uid="uid://dniko84d5byyb"]
 
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="1_pin0n"]
 [ext_resource type="Script" uid="uid://bpc8w47kho03v" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/ui/HPBar._Refactor.gd" id="2_pin0n"]
 [ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="3_smnl1"]
 [ext_resource type="Texture2D" uid="uid://6s4ko21ivsiy" path="res://Sprites/Pictures/Nv_icon_black.png" id="4_stmy4"]
 [ext_resource type="FontFile" uid="uid://bwwk8ekl3u4o7" path="res://Escenas/UI/Fonts/Pokemon GB.ttf" id="5_ump82"]
-[ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="6_67vy7"]
 [ext_resource type="PackedScene" uid="uid://b0ajmrb8a7e0r" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/AnimatedProgressBar.tscn" id="7_pin0n"]
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="9_83cp1"]
 [ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="10_7xxgi"]
@@ -61,8 +60,6 @@ text = "20"
 [node name="Status" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-50, 1)
-texture = ExtResource("6_67vy7")
-region_enabled = true
 region_rect = Rect2(0, 16, 44, 16)
 metadata/_edit_lock_ = true
 

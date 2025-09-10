@@ -1,5 +1,6 @@
-extends MoveCategoryLogic
 class_name MoveCategoryDamage
+extends MoveCategoryLogic
 
-func execute_impact() -> Array[MoveImpactResult]:
-	return [move.calculate_damage(target)]
+func execute() -> Array[ImmediateBattleEffect]:
+	return [ApplyDamageEffect.new(user, target, move)]
+	#return [move.calculate_damage(target)]

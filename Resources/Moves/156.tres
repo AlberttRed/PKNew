@@ -24,6 +24,7 @@ effect_entries = "User sleeps for two turns, completely healing itself. User fal
 This move fails if the Pokémon cannot fall asleep due to uproar, insomnia, or vital spirit.  It also fails if the Pokémon is at full health or is already asleep."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

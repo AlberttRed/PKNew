@@ -34,6 +34,7 @@ Magnitude | Power | Chance
 This move has double power against Pokémon currently underground due to dig."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 9
 meta_ailment_id = 0
 meta_category_id = 0

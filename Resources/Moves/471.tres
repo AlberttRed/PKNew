@@ -24,6 +24,7 @@ effect_entries = "Averages Attack and Special Attack with the target. Averages t
 This effect applies before any other persistent changes to unmodified Attack or Special Attack, such as flower gift during sunny day."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

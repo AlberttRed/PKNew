@@ -23,6 +23,7 @@ effect_entries = "Inflicts regular damage and can hit Dig users. Inflicts regula
 If the target is in the first turn of dig, this move will hit with double power."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 9
 meta_ailment_id = 0
 meta_category_id = 0

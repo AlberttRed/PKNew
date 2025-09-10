@@ -27,6 +27,7 @@ The user may still use u turn to leave the field.
 This effect can be passed with baton pass."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 21
 meta_category_id = 1

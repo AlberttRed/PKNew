@@ -22,6 +22,7 @@ damage_class_id = 3
 effect_entries = "Hits any Pokémon that shares a type with the user. Inflicts regular damage.  Only Pokémon that share a type with the user will take damage from this move."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 9
 meta_ailment_id = 0
 meta_category_id = 0

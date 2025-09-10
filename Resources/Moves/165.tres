@@ -27,6 +27,7 @@ This move's recoil is not treated as recoil for the purposes of anything that af
 This move cannot be copied by mimic, mirror move, or sketch, nor selected by assist or metronome, nor forced by encore."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 8
 meta_ailment_id = 0
 meta_category_id = 0

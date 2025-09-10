@@ -2,7 +2,7 @@ extends Control
 
 class_name BattleUI_Refactor
 
-@onready var message_controller:BattleMessageController_Refactor = $MessageController
+@onready var message_controller:BattleMessageController = $MessageController
 @onready var field_ui:FieldUI = $FieldUI
 @onready var party_ui = $PartyUI
 @onready var actions_menu = $ActionsMenu
@@ -144,11 +144,32 @@ func show_failed_move_message(user: BattlePokemon_Refactor) -> void:
 func show_multi_hit_message(num_hits: int) -> void:
 	await show_message_from_dict(message_controller.get_multi_hit_message(num_hits))
 
-func show_effectiveness_message(result: BattleMoveResult, target: BattlePokemon_Refactor) -> void:
-	await show_message_from_dict(message_controller.get_effectiveness_message(result, target))
+func show_effectiveness_message(result: DamageEffect) -> void:
+	await show_message_from_dict(message_controller.get_effectiveness_message(result))
 
 func show_critical_hit_message() -> void:
 	await show_message_from_dict(message_controller.get_critical_hit_message())
+
+func show_start_ailment_message(user: BattlePokemon_Refactor, ailment: Ailment) -> void:
+	await show_message_from_dict(message_controller.get_start_ailment_message(user, ailment))
+
+func show_end_ailment_message(user: BattlePokemon_Refactor, ailment: Ailment) -> void:
+	await show_message_from_dict(message_controller.get_end_ailment_message(user, ailment))
+
+func show_ailment_effect_message(user: BattlePokemon_Refactor, ailment: Ailment) -> void:
+	await show_message_from_dict(message_controller.get_ailment_effect_message(user, ailment))
+
+func show_already_ailment_message(user: BattlePokemon_Refactor, ailment: Ailment, same_status: bool) -> void:
+	await show_message_from_dict(message_controller.get_already_ailment_message(user, ailment, same_status))
+
+func show_ailment_previous_effect_message(user: BattlePokemon_Refactor, ailment: Ailment) -> void:
+	await show_message_from_dict(message_controller.get_ailment_previous_effect_message(user, ailment))
+
+func show_stat_stage_change_message(pokemon: BattlePokemon_Refactor, stat: StatTypes.Stat, amount: int):
+	await show_message_from_dict(message_controller.get_stat_stage_change_message(pokemon, stat, amount))
+
+func show_ability_effect_message(user: BattlePokemon_Refactor, target: BattlePokemon_Refactor, ability: Ability) -> void:
+	await show_message_from_dict(message_controller.get_ability_effect_message(user, target, ability))
 
 
 # Manda el mensaje a mostrar al MessageBox según el tipo de mensaje devuleto por el MessageController

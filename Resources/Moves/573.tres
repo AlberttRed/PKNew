@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://c361corr032xj"]
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://c361corr032xj"]
 
 [ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_e6loq"]
+[ext_resource type="Resource" uid="uid://djlu5d7nxiwrg" path="res://Resources/Ailments/FREEZE.tres" id="1_qf5hp"]
 [ext_resource type="Resource" uid="uid://ctaiklw776yao" path="res://Resources/Types/15.tres" id="2_k7np2"]
 
 [resource]
@@ -24,6 +25,7 @@ effect_entries = "Super-effective against water. Inflicts regular damage.  This 
 The target's other type will affect damage as usual.  If this move's type is changed, it remains super-effective against Water regardless of its type."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 3
 meta_category_id = 4
@@ -38,3 +40,4 @@ meta_ailment_chance = 10
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
+ailment = ExtResource("1_qf5hp")

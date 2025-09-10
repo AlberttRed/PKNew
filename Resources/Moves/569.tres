@@ -22,6 +22,7 @@ damage_class_id = 1
 effect_entries = "Changes all normal moves to electric moves for the rest of the turn. Changes all Pokémon's normal moves to electric moves for the rest of the turn."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10

@@ -22,6 +22,7 @@ damage_class_id = 1
 effect_entries = "Averages Defense and Special Defense with the target. Averages the user's unmodified Defense with the target's unmodified Defense; the value becomes the unmodified Defense for both Pokémon. Unmodified Special Defense is averaged the same way."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

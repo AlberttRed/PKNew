@@ -19,8 +19,11 @@ effect_chance = 30
 priority = 0
 damage_class_id = 3
 effect_entries = "Has a $effect_chance% chance to lower the target's Special Attack by one stage. Inflicts regular damage.  Has a $effect_chance% chance to lower the target's Special Attack by one stage."
-stat_change_ids = Array[int]([4])
-stat_change_valors = Array[int]([-1])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+2: -1
+})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 6

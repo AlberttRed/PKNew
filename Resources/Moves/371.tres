@@ -21,6 +21,7 @@ damage_class_id = 2
 effect_entries = "Power is doubled if the target has already moved this turn. Inflicts regular damage.  If the target uses a move or switches out this turn before this move is used, this move has double power."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

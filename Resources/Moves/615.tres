@@ -22,6 +22,7 @@ damage_class_id = 2
 effect_entries = "Prevents the target from leaving battle. Inflicts regular damage.  Traps the target."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 11
 meta_ailment_id = 0
 meta_category_id = 0

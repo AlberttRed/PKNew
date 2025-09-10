@@ -9,8 +9,12 @@ class_name BattleScene
 func start_battle(player_participants: Array[BattleParticipant_Refactor], enemy_participants: Array[BattleParticipant_Refactor], rules: BattleRules):
 	# Crea y configura el controlador
 	battle_controller.ui = battle_ui
+	BattleEffectController.set_ui(battle_ui)
 	battle_controller.setup_sides(player_participants, enemy_participants, rules)
 	battle_controller.assign_active_pokemons_to_spots() 
+	
+	for pokemon:BattlePokemon_Refactor in battle_controller.get_all_active_pokemon():
+		pokemon.log_pokemon_stats()
 
 	 # Iniciar la secuencia de inicio del combate
 	await play_transition()
@@ -43,15 +47,16 @@ func show_trainers_and_pokemon():
 		await battle_ui.show_player_pokemon(battle_controller.player_side.get_active_pokemons(), battle_controller.rules)
 		await get_tree().create_timer(0.5).timeout
 	else:
-		# Combate contra Pokémon salvaje
-		await battle_ui.show_enemy_pokemon(battle_controller.enemy_side.get_active_pokemons(), battle_controller.rules)
-		await get_tree().create_timer(0.5).timeout
-
-		# Mostrar Pokémon del jugador
-		await battle_ui.show_player_pokemon(battle_controller.player_side.get_active_pokemons(), battle_controller.rules)
-		await get_tree().create_timer(0.5).timeout
-
-	
+		pass
+		## Combate contra Pokémon salvaje
+		#await battle_ui.show_enemy_pokemon(battle_controller.enemy_side.get_active_pokemons(), battle_controller.rules)
+		#await get_tree().create_timer(0.5).timeout
+#
+		## Mostrar Pokémon del jugador
+		#await battle_ui.show_player_pokemon(battle_controller.player_side.get_active_pokemons(), battle_controller.rules)
+		#await get_tree().create_timer(0.5).timeout
+#
+	#
 func show_hp_bars():
 	await battle_ui.show_enemy_hp_bar(battle_controller.enemy_side.get_active_pokemons())
 	await get_tree().create_timer(0.5).timeout

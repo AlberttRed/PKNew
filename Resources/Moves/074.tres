@@ -19,8 +19,12 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Raises the user's Attack and Special Attack by one stage. Raises the user's Attack and Special Attack by one stage each.  During sunny day, raises both stats by two stages."
-stat_change_ids = Array[int]([2, 4])
-stat_change_valors = Array[int]([1, 1])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+0: 1,
+2: 1
+})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 2

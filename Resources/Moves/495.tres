@@ -23,6 +23,7 @@ effect_entries = "Makes the target act next this turn. The target will act next 
 If the target has already acted this turn, this move will fail."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

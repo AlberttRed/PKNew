@@ -20,8 +20,11 @@ effect_chance = 100
 priority = 0
 damage_class_id = 3
 effect_entries = "Lowers the user's Special Attack by two stages after inflicting damage. Inflicts regular damage, then lowers the user's Special Attack by two stages."
-stat_change_ids = Array[int]([4])
-stat_change_valors = Array[int]([-2])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+2: -2
+})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 7

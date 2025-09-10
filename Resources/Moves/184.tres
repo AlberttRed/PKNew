@@ -18,8 +18,11 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Lowers the target's Speed by two stages. Lowers the target's Speed by two stages."
-stat_change_ids = Array[int]([6])
-stat_change_valors = Array[int]([-2])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+4: -2
+})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 2

@@ -25,6 +25,7 @@ If the target is holding a jaboca berry or rowap berry, the berry is still remov
 If this move is super effective and the target is holding a berry that can reduce this move's damage, it will do so, and will not be stolen."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

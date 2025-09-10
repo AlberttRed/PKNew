@@ -23,6 +23,7 @@ effect_entries = "Permanently becomes the target's last used move. Permanently r
 This move cannot be copied by mimic or mirror move, nor selected by assist or metronome, nor forced by encore."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

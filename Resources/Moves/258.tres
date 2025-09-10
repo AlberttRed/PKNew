@@ -29,6 +29,7 @@ moonlight, morning sun, and synthesis heal only 1/4 of the user's max HP.
 Pokémon with snow cloak are exempt from this effect's damage."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10

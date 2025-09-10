@@ -21,6 +21,7 @@ damage_class_id = 3
 effect_entries = "Inflicts more damage when the user has more HP remaining, with a maximum of 150 power. Inflicts regular damage.  Power increases with the user's remaining HP and is given by `150 * HP / max HP`, to a maximum of 150 when the user has full HP."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 11
 meta_ailment_id = 0
 meta_category_id = 0

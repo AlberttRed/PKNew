@@ -23,6 +23,7 @@ effect_entries = "Randomly selects and uses any move in the game. Selects any mo
 This move cannot be copied by mimic or mirror move, nor selected by assist, metronome, or sleep talk."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

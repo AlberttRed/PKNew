@@ -24,6 +24,7 @@ effect_entries = "Protects all friendly Pokémon from non-damaging moves. Protec
 Unlike other blocking moves, this move may be used consecutively without its chance of success falling."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 4
 meta_ailment_id = 0
 meta_category_id = 11

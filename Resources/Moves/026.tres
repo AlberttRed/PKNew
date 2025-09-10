@@ -24,6 +24,7 @@ effect_entries = "If the user misses, it takes half the damage it would have inf
 This move cannot be used while gravity is in effect."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

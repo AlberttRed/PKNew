@@ -28,6 +28,7 @@ If the user steals psych up, it will target the Pokémon that used psych up.  If
 This move cannot be copied by mirror move, nor selected by assist or metronome."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

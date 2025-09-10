@@ -24,6 +24,7 @@ effect_entries = "Power doubles every turn this move is used in succession after
 If the user has used defense curl since entering the field, this move has double power."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

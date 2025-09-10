@@ -22,6 +22,7 @@ damage_class_id = 1
 effect_entries = "Prevents the target from scoring critical hits for five turns. For five turns, opposing Pokémon cannot score critical hits."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 4
 meta_ailment_id = 0
 meta_category_id = 11

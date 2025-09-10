@@ -23,6 +23,7 @@ effect_entries = "Has a $effect_chance% chance to make the target flinch. Inflic
 Power is doubled against Pokémon that have used minimize since entering the field."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

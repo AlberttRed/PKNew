@@ -26,6 +26,7 @@ For all other purposes, this move is pure Fighting-type.  If this move's type is
 If the target has used minimize since entering battle, this move has double power and will never miss."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

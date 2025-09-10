@@ -20,8 +20,11 @@ damage_class_id = 1
 effect_entries = "Raises the user's evasion by two stages. Raises the user's evasion by two stages.
 
 stomp and steamroller have double power against Pokémon that have used this move since entering the field."
-stat_change_ids = Array[int]([8])
-stat_change_valors = Array[int]([2])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+6: 2
+})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 2

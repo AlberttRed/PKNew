@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ailment" load_steps=5 format=3 uid="uid://l318umt6ltd1"]
+
+[ext_resource type="Script" uid="uid://ctn5nkcm5a6ci" path="res://Database/Classes/Ailment.gd" id="1"]
+[ext_resource type="Script" uid="uid://d0eygd0bl6j3i" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/core/Battle Effects/Persistent/Ailments/BurnAilmentEffect.gd" id="1_o50ic"]
+[ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="2_q4ruq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onjun"]
+atlas = ExtResource("2_q4ruq")
+region = Rect2(0, 32, 44, 16)
+
+[resource]
+script = ExtResource("1")
+id = "burn"
+display_name = "Quemar"
+description = ""
+icon = SubResource("AtlasTexture_onjun")
+is_persistent = true
+effect = ExtResource("1_o50ic")
