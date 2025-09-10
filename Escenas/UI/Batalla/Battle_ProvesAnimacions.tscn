@@ -1,11 +1,12 @@
-[gd_scene load_steps=79 format=3 uid="uid://c1wojnk4gqpx0"]
+[gd_scene load_steps=80 format=3 uid="uid://c1wojnk4gqpx0"]
 
-[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleUI.gd" id="1_y88u2"]
+[ext_resource type="Script" uid="uid://dpce0vg5kf35x" path="res://Scripts/Batalla/Classes/BattleUI.gd" id="1_y88u2"]
 [ext_resource type="Texture2D" uid="uid://ca8mod1oyik6o" path="res://Sprites/Batalla/Battlebacks/battlebgField.png" id="2_4n17r"]
 [ext_resource type="Texture2D" uid="uid://ynuynks1px8n" path="res://Sprites/Pictures/TallGrassBattle.png" id="2_tckos"]
 [ext_resource type="StyleBox" uid="uid://cpxaac6mtjqnu" path="res://Escenas/UI/Batalla/Resources/BattleActions_Panel.tres" id="3_51j8k"]
 [ext_resource type="Texture2D" uid="uid://d16fjjtqlc7s7" path="res://Sprites/Pictures/TallGrassLeafBattle.png" id="3_gitpq"]
 [ext_resource type="Theme" uid="uid://bugfcogjtje8h" path="res://Escenas/UI/Fonts/fontMessageBox.tres" id="4_sh5bn"]
+[ext_resource type="Script" uid="uid://balbq3x6xpdg8" path="res://Scripts/Batalla/Classes/BattleField.gd" id="5_dn2mr"]
 [ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="5_syydx"]
 [ext_resource type="Texture2D" uid="uid://vxedaqbf3pad" path="res://Escenas/UI/Batalla/Resources/Sprites/battleCommandButtons.png" id="6_f5daf"]
 [ext_resource type="PackedScene" uid="uid://qdbwxwx6vpy2" path="res://Escenas/UI/Textbox/MSG_OLD.tscn" id="7_r06ls"]
@@ -14,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bwtv36mb8w2lm" path="res://Escenas/UI/Menus/Resources/types.png" id="10_yq8b8"]
 [ext_resource type="Texture2D" uid="uid://coiimjb2x6u06" path="res://Escenas/UI/Batalla/Resources/Sprites/battleFightButtons.png" id="11_2m3sr"]
 [ext_resource type="Texture2D" uid="uid://4suianjdpdca" path="res://Sprites/Batalla/Battlebacks/playerbaseField.png" id="13_xdjkr"]
-[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleSpot.gd" id="14_ctpen"]
+[ext_resource type="Script" uid="uid://df8jm624xu1jy" path="res://Scripts/Batalla/Classes/BattleSpot.gd" id="14_ctpen"]
 [ext_resource type="Material" uid="uid://d11gerbjif732" path="res://Escenas/UI/Batalla/Shaders/StatUpDown.tres" id="15_7jxtj"]
 [ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="15_u4r5y"]
 [ext_resource type="Texture2D" uid="uid://dk116xfkakhg7" path="res://Sprites/Batalla/Moves Animations/OverlayStatDown.png" id="16_2xajv"]
@@ -26,21 +27,21 @@
 [ext_resource type="Texture2D" uid="uid://dbto76y0cchev" path="res://Sprites/Batalla/456b.png" id="20_4dsbn"]
 [ext_resource type="AnimationLibrary" uid="uid://btf1cle7g0a06" path="res://Objetos/Batalla/Animaciones/Moves/Battle_CommonAnimations.res" id="21_hvvvm"]
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="22_k631i"]
-[ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="23_0408d"]
+[ext_resource type="Script" uid="uid://dt6level30sj8" path="res://Escenas/UI/Others/HPBar.gd" id="23_0408d"]
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="24_b8gr0"]
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated_OLD.gdshader" id="24_ugc0i"]
+[ext_resource type="Shader" uid="uid://dnct46qnrvs47" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated_OLD.gdshader" id="24_ugc0i"]
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="25_tsveh"]
 [ext_resource type="Texture2D" uid="uid://bbdfi7fvce4p6" path="res://Sprites/Batalla/Moves Animations/SleepFrames.png" id="26_2cntd"]
 [ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="26_3ufge"]
 [ext_resource type="AnimationLibrary" uid="uid://cao4my3byeek6" path="res://Objetos/Batalla/Animaciones/Moves/Battle_WeatherAnimations.res" id="26_twkn7"]
 [ext_resource type="Texture2D" uid="uid://dqrw0rkefbit3" path="res://Sprites/Batalla/Moves Animations/RainFrames.png" id="27_4gi5o"]
-[ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="27_jbt43"]
+[ext_resource type="Script" uid="uid://beg2cyqfecq1h" path="res://Escenas/UI/Others/exp_bar.gd" id="27_jbt43"]
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="28_14p7c"]
 [ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="29_8onyt"]
 [ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="30_f6qhl"]
 [ext_resource type="Texture2D" uid="uid://jp48dg7huvv" path="res://Sprites/Batalla/Battlebacks/enemybaseField.png" id="31_j5f6p"]
 [ext_resource type="Texture2D" uid="uid://pbvisvp5jwv4" path="res://Sprites/Batalla/019.png" id="32_uw6fa"]
-[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleParticipant.gd" id="33_5u4xe"]
+[ext_resource type="Script" uid="uid://dppptpht3hnyx" path="res://Scripts/Batalla/Classes/BattleParticipant.gd" id="33_5u4xe"]
 [ext_resource type="Texture2D" uid="uid://dx7t7y2tum7mu" path="res://Sprites/Pictures/trback000.png" id="33_cv2ry"]
 [ext_resource type="Texture2D" uid="uid://bmucqisxae21h" path="res://Sprites/Batalla/battle_shadow.png" id="33_f8vih"]
 [ext_resource type="Texture2D" uid="uid://6cpfkdqyugvc" path="res://Sprites/Pictures/trback001.png" id="34_inom0"]
@@ -905,8 +906,8 @@ resource_name = "aaaa"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u7jj6"]
 _data = {
-"RESET": SubResource("Animation_1ti30"),
-"aaaa": SubResource("Animation_6moud")
+&"RESET": SubResource("Animation_1ti30"),
+&"aaaa": SubResource("Animation_6moud")
 }
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xn6jk"]
@@ -1338,7 +1339,7 @@ tracks/24/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x12qw"]
 _data = {
-"RESET": SubResource("Animation_mw2hc")
+&"RESET": SubResource("Animation_mw2hc")
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8nwnv"]
@@ -1814,7 +1815,7 @@ tracks/34/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ueb16"]
 _data = {
-"RESET": SubResource("Animation_g7jor")
+&"RESET": SubResource("Animation_g7jor")
 }
 
 [node name="BATTLE" type="Control"]
@@ -1898,19 +1899,21 @@ texture = ExtResource("3_gitpq")
 z_index = -2
 texture = ExtResource("2_4n17r")
 centered = false
+script = ExtResource("5_dn2mr")
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
 libraries = {
-"": SubResource("AnimationLibrary_u7jj6"),
-"Ailments": ExtResource("16_xv8xw"),
-"General": ExtResource("19_ch81s"),
-"Moves": ExtResource("18_tly4n"),
-"Pokemon": ExtResource("19_g4kk5"),
-"Weather": ExtResource("26_twkn7")
+&"": SubResource("AnimationLibrary_u7jj6"),
+&"Ailments": ExtResource("16_xv8xw"),
+&"General": ExtResource("19_ch81s"),
+&"Moves": ExtResource("18_tly4n"),
+&"Pokemon": ExtResource("19_g4kk5"),
+&"Weather": ExtResource("26_twkn7")
 }
 
 [node name="AnimationFrames" type="Node2D" parent="Background"]
+visible = false
 z_index = 3
 
 [node name="Fade" type="Sprite2D" parent="Background/AnimationFrames"]
@@ -2093,7 +2096,6 @@ grow_vertical = 0
 metadata/_edit_lock_ = true
 
 [node name="Label" parent="PanelMessageBox" index="0"]
-auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2111,7 +2113,6 @@ text = "hhhhhhhhhhhhhhhhhhhh
 hhhhhhhhhhhh"
 
 [node name="Label2" parent="PanelMessageBox/Label" index="1"]
-auto_translate_mode = 2
 layout_mode = 3
 offset_right = 452.0
 offset_bottom = 56.0
@@ -2266,6 +2267,7 @@ metadata/_edit_lock_ = true
 [node name="playerBase" type="Node2D" parent="."]
 z_index = -1
 position = Vector2(476, 240)
+script = ExtResource("5_dn2mr")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="playerBase"]
@@ -2288,12 +2290,12 @@ metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/PokemonA"]
 libraries = {
-"": SubResource("AnimationLibrary_u7jj6"),
-"Ailments": ExtResource("16_xv8xw"),
-"General": ExtResource("19_ch81s"),
-"Moves": ExtResource("18_tly4n"),
-"Pokemon": ExtResource("19_g4kk5"),
-"Weather": ExtResource("26_twkn7")
+&"": SubResource("AnimationLibrary_u7jj6"),
+&"Ailments": ExtResource("16_xv8xw"),
+&"General": ExtResource("19_ch81s"),
+&"Moves": ExtResource("18_tly4n"),
+&"Pokemon": ExtResource("19_g4kk5"),
+&"Weather": ExtResource("26_twkn7")
 }
 
 [node name="Pokeball" type="Sprite2D" parent="playerBase/PokemonA"]
@@ -2382,8 +2384,8 @@ metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/PokemonB"]
 libraries = {
-"Ailments": ExtResource("16_xv8xw"),
-"Common": ExtResource("21_hvvvm")
+&"Ailments": ExtResource("16_xv8xw"),
+&"Common": ExtResource("21_hvvvm")
 }
 
 [node name="Shadow" type="Sprite2D" parent="playerBase/PokemonB"]
@@ -2475,11 +2477,11 @@ metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/HPBarA"]
 libraries = {
-"": SubResource("AnimationLibrary_u7jj6"),
-"Ailments": ExtResource("16_xv8xw"),
-"General": ExtResource("19_ch81s"),
-"Moves": ExtResource("18_tly4n"),
-"Pokemon": ExtResource("19_g4kk5")
+&"": SubResource("AnimationLibrary_u7jj6"),
+&"Ailments": ExtResource("16_xv8xw"),
+&"General": ExtResource("19_ch81s"),
+&"Moves": ExtResource("18_tly4n"),
+&"Pokemon": ExtResource("19_g4kk5")
 }
 
 [node name="HPBarB" type="Sprite2D" parent="playerBase"]
@@ -2566,7 +2568,6 @@ metadata/_edit_lock_ = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="playerBase/HPBarB/exp_bar"]
 
 [node name="TrainerA" type="Node2D" parent="playerBase"]
-visible = false
 position = Vector2(0, -109)
 script = ExtResource("33_5u4xe")
 
@@ -2590,6 +2591,7 @@ hframes = 5
 [node name="enemyBase" type="Node2D" parent="."]
 z_index = -1
 position = Vector2(-252, 112)
+script = ExtResource("5_dn2mr")
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase"]
@@ -2611,6 +2613,7 @@ texture = ExtResource("17_kiipe")
 [node name="Sprite" type="Sprite2D" parent="enemyBase/PokemonA"]
 z_index = 1
 z_as_relative = false
+position = Vector2(262, 93)
 texture = ExtResource("32_uw6fa")
 region_rect = Rect2(0, 0, 160, 160)
 
@@ -2622,12 +2625,12 @@ texture = ExtResource("33_f8vih")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase/PokemonA"]
 libraries = {
-"": SubResource("AnimationLibrary_x12qw"),
-"Ailments": ExtResource("16_xv8xw"),
-"General": ExtResource("19_ch81s"),
-"Moves": ExtResource("18_tly4n"),
-"Pokemon": ExtResource("19_g4kk5"),
-"Weather": SubResource("AnimationLibrary_8nwnv")
+&"": SubResource("AnimationLibrary_x12qw"),
+&"Ailments": ExtResource("16_xv8xw"),
+&"General": ExtResource("19_ch81s"),
+&"Moves": ExtResource("18_tly4n"),
+&"Pokemon": ExtResource("19_g4kk5"),
+&"Weather": SubResource("AnimationLibrary_8nwnv")
 }
 
 [node name="PokemonB" type="Node2D" parent="enemyBase"]
@@ -2649,8 +2652,8 @@ texture = ExtResource("33_f8vih")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase/PokemonB"]
 libraries = {
-"Ailments": ExtResource("16_xv8xw"),
-"Common": ExtResource("21_hvvvm")
+&"Ailments": ExtResource("16_xv8xw"),
+&"Common": ExtResource("21_hvvvm")
 }
 
 [node name="HPBarA" type="Sprite2D" parent="enemyBase"]
@@ -2775,8 +2778,18 @@ position = Vector2(331, -29)
 script = ExtResource("33_5u4xe")
 
 [node name="Sprite" type="Sprite2D" parent="enemyBase/TrainerA"]
-position = Vector2(262, 93)
+position = Vector2(64, -58)
 texture = ExtResource("40_1uavv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase/TrainerA"]
+libraries = {
+&"": SubResource("AnimationLibrary_x12qw"),
+&"Ailments": ExtResource("16_xv8xw"),
+&"General": ExtResource("19_ch81s"),
+&"Moves": ExtResource("18_tly4n"),
+&"Pokemon": ExtResource("19_g4kk5"),
+&"Weather": SubResource("AnimationLibrary_8nwnv")
+}
 
 [node name="TrainerB" type="Node2D" parent="enemyBase"]
 position = Vector2(331, 102)
@@ -2797,9 +2810,9 @@ theme_override_styles/panel = ExtResource("3_51j8k")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ueb16"),
-"Battle_GeneralAnimations": ExtResource("19_ch81s"),
-"GLOBAL": ExtResource("49_35s1f")
+&"": SubResource("AnimationLibrary_ueb16"),
+&"Battle_GeneralAnimations": ExtResource("19_ch81s"),
+&"GLOBAL": ExtResource("49_35s1f")
 }
 
 [node name="AnimationFrames" parent="AnimationPlayer" instance=ExtResource("53_x3am0")]

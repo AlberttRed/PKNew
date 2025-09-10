@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://dpxmshyhvldxr"]
 
 [ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="1_tqnl1"]
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/MessageBox.gd" id="2_slpxt"]
+[ext_resource type="Script" uid="uid://biesvrjn28e2r" path="res://Escenas/UI/Textbox/MessageBox.gd" id="2_slpxt"]
 [ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="3_k0ji6"]
 [ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="4_413x0"]
-[ext_resource type="Script" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="4_lgo3r"]
+[ext_resource type="Script" uid="uid://cby4ac35hy5f" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="4_lgo3r"]
 [ext_resource type="Animation" uid="uid://beugpt1ql5na2" path="res://Escenas/UI/Textbox/Resources/next_animation.tres" id="5_lrerp"]
 
 [sub_resource type="Theme" id="Theme_x4phv"]
@@ -69,9 +69,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5i0nh"]
 _data = {
-"Idle": ExtResource("5_lrerp"),
-"RESET": SubResource("Animation_bs852"),
-"Typing": SubResource("Animation_mbf3k")
+&"Idle": ExtResource("5_lrerp"),
+&"RESET": SubResource("Animation_bs852"),
+&"Typing": SubResource("Animation_mbf3k")
 }
 
 [node name="MSG" type="Panel"]

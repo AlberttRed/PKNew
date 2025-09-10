@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dkb88k6a7pqkf"]
 
-[ext_resource type="Script" path="res://Database/Classes/pokemon_move.gd" id="1_1rs17"]
+[ext_resource type="Script" uid="uid://bwqtkkqtkaa2m" path="res://Database/Classes/pokemon_move.gd" id="1_1rs17"]
 
 [node name="Moves" type="Node"]
 

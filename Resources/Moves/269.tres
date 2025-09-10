@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://guhquc54sw6w"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://guhquc54sw6w"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_0oep8"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_0oep8"]
 [ext_resource type="Resource" uid="uid://cue4l3iv6vhdx" path="res://Resources/Types/17.tres" id="2_jqvv6"]
 
 [resource]
@@ -23,8 +23,9 @@ effect_entries = "For the next few turns, the target can only use damaging moves
 assist, copycat, me first, metronome, mirror move, and sleep talk do not directly inflict damage and thus may not be used.
 
 bide, counter, endeavor, metal burst, and mirror coat are allowed."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13
@@ -39,4 +40,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

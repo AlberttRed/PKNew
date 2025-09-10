@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://brvsn2vfev6ng"]
 
 [ext_resource type="StyleBox" uid="uid://08dr8fiwcu28" path="res://Escenas/UI/Textbox/Resources/HGSS_MessageBox_Style.tres" id="1_1g85p"]
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/MessageBox.gd" id="2_re8jy"]
+[ext_resource type="Script" uid="uid://biesvrjn28e2r" path="res://Escenas/UI/Textbox/MessageBox.gd" id="2_re8jy"]
 [ext_resource type="FontFile" uid="uid://b4cnpphtc5ais" path="res://Escenas/UI/Fonts/pkmnhgss.ttf" id="3_15orl"]
-[ext_resource type="Script" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="4_icamg"]
+[ext_resource type="Script" uid="uid://cby4ac35hy5f" path="res://Escenas/UI/Fonts/LabelHGSS.gd" id="4_icamg"]
 [ext_resource type="Texture2D" uid="uid://dqwll3ib4o5n2" path="res://Escenas/UI/Textbox/Resources/next.png" id="5_ugtco"]
 [ext_resource type="Animation" uid="uid://beugpt1ql5na2" path="res://Escenas/UI/Textbox/Resources/next_animation.tres" id="6_thy6l"]
 
@@ -54,16 +54,20 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5i0nh"]
 _data = {
-"Idle": ExtResource("6_thy6l"),
-"RESET": SubResource("Animation_bs852"),
-"Scroll": SubResource("Animation_8ajbi"),
-"Typing": SubResource("Animation_mbf3k")
+&"Idle": ExtResource("6_thy6l"),
+&"RESET": SubResource("Animation_bs852"),
+&"Scroll": SubResource("Animation_8ajbi"),
+&"Typing": SubResource("Animation_mbf3k")
 }
 
 [node name="MSG" type="Panel"]
-offset_top = 288.0
-offset_right = 512.0
-offset_bottom = 384.0
+custom_minimum_size = Vector2(512, 96)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_styles/panel = ExtResource("1_1g85p")
 script = ExtResource("2_re8jy")
 
@@ -177,5 +181,5 @@ wait_time = 0.05
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 root_node = NodePath("../next")
 libraries = {
-"": SubResource("AnimationLibrary_5i0nh")
+&"": SubResource("AnimationLibrary_5i0nh")
 }

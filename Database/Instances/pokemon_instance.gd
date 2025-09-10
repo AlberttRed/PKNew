@@ -7,8 +7,8 @@ signal newMoveLearned
 
 @export var randomize_pokemon: bool = false
 @export var randomize_stats: bool = false
-
-@export var base : Resource
+@export var isWild : bool
+var base : Pokemon
 #var battleInstance : BattlePokemon
 
 var pkm_id : int = 0 :
@@ -18,13 +18,10 @@ var pkm_id : int = 0 :
 		pkm_id = value 
 var Name : String :
 	get:
-		if nickname != "":
-			return nickname
-		else:
-			return base.Name.to_upper()
+		return base.Name.to_upper()
 	set(value):
 		Name = value 
-#@export_enum("None, Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Caterpie, Metapod, Butterfree, Weedle, Kakuna, Beedrill, Pidgey, Pidgeotto, Pidgeot, Rattata, Raticate, Spearow, Fearow, Ekans, Arbok, Pikachu, Raichu, Sandshrew, Sandslash, Nidoran♀, Nidorina, Nidoqueen, Nidoran♂, Nidorino, Nidoking, Clefairy, Clefable, Vulpix, Ninetales, Jigglypuff, Wigglytuff, Zubat, Golbat, Oddish, Gloom, Vileplume, Paras, Parasect, Venonat, Venomoth, Diglett, Dugtrio, Meowth, Persian, Psyduck, Golduck, Mankey, Primeape, Growlithe, Arcanine, Poliwag, Poliwhirl, Poliwrath, Abra, Kadabra, Alakazam, Machop, Machoke, Machamp, Bellsprout, Weepinbell, Victreebel, Tentacool, Tentacruel, Geodude, Graveler, Golem, Ponyta, Rapidash, Slowpoke, Slowbro, Magnemite, Magneton, Farfetch’d, Doduo, Dodrio, Seel, Dewgong, Grimer, Muk, Shellder, Cloyster, Gastly, Haunter, Gengar, Onix, Drowzee, Hypno, Krabby, Kingler, Voltorb, Electrode, Exeggcute, Exeggutor, Cubone, Marowak, Hitmonlee, Hitmonchan, Lickitung, Koffing, Weezing, Rhyhorn, Rhydon, Chansey, Tangela, Kangaskhan, Horsea, Seadra, Goldeen, Seaking, Staryu, Starmie, Mr. Mime, Scyther, Jynx, Electabuzz, Magmar, Pinsir, Tauros, Magikarp, Gyarados, Lapras, Ditto, Eevee, Vaporeon, Jolteon, Flareon, Porygon, Omanyte, Omastar, Kabuto, Kabutops, Aerodactyl, Snorlax, Articuno, Zapdos, Moltres, Dratini, Dragonair, Dragonite, Mewtwo") var pkm_id = 0
+@export_enum("None", "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetch’d", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "Mr. Mime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo") var pokemon = 0
 var nickname:String = ""
 @export_range(1, 100) var level: int = 1 
 @export_enum("Sin indicar", "Macho", "Hembra", "Sin Genero") var gender = 0:
@@ -48,54 +45,54 @@ var types : Array[Type] :
 		return [base.type_a as Type, base.type_b as Type]
 	set(value):
 		types = value 	
-var isWild : bool
+
 
 var status = CONST.STATUS.OK
 
 var hp_actual: int = 0 
-var hp_total : int = 0:
-	get:
-		#return int(10.0 + (float(level) / 100.0 * ((float(base.hp_base) * 2.0) + float(hp_IVs) + float(hp_EVs) ) ) + float(level) ) 
-		print(int(float(hp_EVs) / 4.0))
-		print(str(int( (float(level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + level + 10 )) 
-		#return int( (float(level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + level + 10
-		return getHPStat(level)
-	set(value):
-		hp_total = value 
-var attack : int: 
-	get:
-		#return int(float(int( 5.0 + (( float(level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
-		return getAttackStat(level)
-	set(value):
-		attack = value 
-var defense : int: 
-	get:
-		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + float(defense_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
-		#return int(float(int( 5.0 + (( float(level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
-		return getDefenseStat(level)
-	set(value):
-		defense = value 
-var special_attack : int:
-	get:
-		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + float(spAttack_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
-		#return int(float(int( 5.0 + (( float(level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
-		return getSpAttackStat(level)
-	set(value):
-		special_attack = value 
-var special_defense : int:
-	get:
-		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + float(spDefense_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
-		#return int(float(int( 5.0 + (( float(level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
-		return getSpDefenseStat(level)
-	set(value):
-		special_defense = value 
-var speed : int:
-	get:
-		#return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + float(speed_EVs) ) ) ) )) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
-		#return int(float(int( 5.0 + (( float(level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
-		return getSpeedStat(level)
-	set(value):
-		speed = value 
+#var hp_total : int = 0:
+	#get:
+		##return int(10.0 + (float(level) / 100.0 * ((float(base.hp_base) * 2.0) + float(hp_IVs) + float(hp_EVs) ) ) + float(level) ) 
+		#print(int(float(hp_EVs) / 4.0))
+		#print(str(int( (float(level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + level + 10 )) 
+		##return int( (float(level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + level + 10
+		#return getHPStat(level)
+	#set(value):
+		#hp_total = value 
+#var attack : int: 
+	#get:
+		##return int(float(int( 5.0 + (( float(level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
+		#return getAttackStat(level)
+	#set(value):
+		#attack = value 
+#var defense : int: 
+	#get:
+		##return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + float(defense_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
+		##return int(float(int( 5.0 + (( float(level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
+		#return getDefenseStat(level)
+	#set(value):
+		#defense = value 
+#var special_attack : int:
+	#get:
+		##return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + float(spAttack_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
+		##return int(float(int( 5.0 + (( float(level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
+		#return getSpAttackStat(level)
+	#set(value):
+		#special_attack = value 
+#var special_defense : int:
+	#get:
+		##return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + float(spDefense_EVs) ) ) ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
+		##return int(float(int( 5.0 + (( float(level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
+		#return getSpDefenseStat(level)
+	#set(value):
+		#special_defense = value 
+#var speed : int:
+	#get:
+		##return int(float(int(( 5.0 + ( float(level) / 100.0 * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + float(speed_EVs) ) ) ) )) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
+		##return int(float(int( 5.0 + (( float(level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
+		#return getSpeedStat(level)
+	#set(value):
+		#speed = value 
 
 var battlerPlayerY: int:
 	get:
@@ -158,7 +155,15 @@ var ability_slot: int = 0 #Al crear un pokemon,se li donarà aleatoriament l'slo
 #IMPORTANT -- S'ha de sumar 1 l'ability_id ja que comença per 0
 @export_enum("NONE", "HEDOR", "LLOVIZNA", "IMPULSO", "ARMADURA_BATALLA", "ROBUSTEZ", "HUMEDAD","FLEXIBILIDAD","VELO_ARENA","ELEC_ESTATICA","ABSORBE_ELEC","ABSORBE_AGUA","DESPISTE","ACLIMATACION","OJO_COMPUESTO","INSOMNIO","CAMBIO_COLOR","INMUNIDAD","ABSORBE_FUEGO","POLVO_ESCUDO","RITMO_PROPIO","VENTOSAS","INTIMIDACION","SOMBRA_TRAMPA","PIEL_TOSCA","SUPERGUARDA","LEVITACION","EFECTO_ESPORA","SINCRONIA","CUERPO_PURO","CURA_NATURAL","PARARRAYOS","DICHA","NADO_RAPIDO","CLOROFILA","ILUMINACION","RASTRO","POTENCIA","PUNTO_TOXICO","FOCO_INTERNO","ESCUDO_MAGMA","VELO_AGUA","IMAN","INSONORIZAR","CURA_LLUVIA","CHORRO_ARENA","PRESION","SEBO","MADRUGAR","CUERPO_LLAMA","FUGA","VISTA_LINCE","CORTE_FUERTE","RECOGIDA","AUSENTE","ENTUSIASMO","GRAN_ENCANTO","MAS","MENOS","PREDICCION","VISCOSIDAD","MUDAR","AGALLAS","ESCAMA_ESPECIAL","LODO_LIQUIDO","ESPESURA","MAR_LLAMAS","TORRENTE","ENJAMBRE","CABEZA_ROCA","SEQUIA","TRAMPA_ARENA","ESPIRITU_VITAL","HUMO_BLANCO","ENERGIA_PURA","CAPARAZON","BUCLE_AIRE","TUMBOS","ELECTROMOTOR","RIVALIDAD","IMPASIBLE","MANTO_NIVEO","GULA","IRASCIBLE","LIVIANO","IGNIFUGO","SIMPLE","PIEL_SECA","DESCARGA","PUNO_FERREO","ANTIDOTO","ADAPTABLE","ENCADENADO","HIDRATACION","PODER_SOLAR","PIES_RAPIDOS","NORMALIDAD","FRANCOTIRADOR","MURO_MAGICO","INDEFENSO","REZAGADO","EXPERTO","DEFENSA_HOJA","ZOQUETE","ROMPEMOLDES","AFORTUNADO","RESQUICIO","ANTICIPACION","ALERTA","IGNORANTE","CROMOLENTE","FILTRO","INICIO_LENTO","INTREPIDO","COLECTOR","GELIDO","ROCA_SOLIDA","NEVADA","RECOGEMIEL","CACHEO","AUDAZ","MULTITIPO","DON_FLORAL","MAL_SUENO","HURTO","POTENCIA_BRUTA","RESPONDON","NERVIOSISMO","COMPETITIVO","FLAQUEZA","CUERPO_MALDITO","ALMA_CURA","COMPIESCOLTA","ARMADURA_FRAGIL","METAL_PESADO","METAL_LIVIANO","COMPENSACION","IMPETU_TOXICO","IMPETU_ARDIENTE","COSECHA","TELEPATIA","VELETA","FUNDA","TOQUE_TOXICO","REGENERACION","SACAPECHO","IMPETU_ARENA","PIEL_MILAGRO","CALCULO_FINAL","ILUSION","IMPOSTOR","ALLANAMIENTO","MOMIA","AUTOESTIMA","JUSTICIERO","COBARDIA","ESPEJO_MAGICO","HERBIVORO","BROMISTA","PODER_ARENA","PUNTA_ACERO","MODO_DARUMA","TINOVICTORIA","TURBOLLAMA","TERRAVOLTAJE","VELO_AROMA","VELO_FLOR","CARRILLO","MUTATIPO","PELAJE_RECIO","PRESTIDIGITADOR","ANTIBALAS","TENACIDAD","MANDIBULA_FUERTE","PIEL_HELADA","VELO_DULCE","CAMBIO_TACTICO","ALAS_VENDAVAL","MEGADISPARADOR","MANTO_FRONDOSO","SIMBIOSIS","GARRA_DURA","PIEL_FEERICA","BABA","PIEL_CELESTE","AMOR_FILIAL","AURA_OSCURA","AURA_FEERICA","ROMPEAURA","MAR_DEL_ALBOR","TIERRA_DEL_OCASO","RAFAGA_DELTA","FIRMEZA","HUIDA","RETIRADA","HIDRORREFUERZO","ENSANAMIENTO","ESCUDO_LIMITADO","VIGILANTE","POMPA","ACERO_TEMPLADO","COLERA","QUITANIEVES","REMOTO","VOZ_FLUIDA","PRIMER_AUXILIO","PIEL_ELECTRICA","COLA_SURF","BANCO","DISFRAZ","FUERTE_AFECTO","AGRUPAMIENTO","CORROSION","LETARGO_PERENNE","REGIA_PRESENCIA","REVES","PAREJA_DE_BAILE","BATERIA","PELUCHE","CUERPO_VIVIDO","CORANIMA","RIZOS_REBELDES","RECEPTOR","REACCION_QUIMICA","ULTRAIMPULSO","SISTEMA_ALFA","ELECTROGENESIS","PSICOGENESIS","NEBULOGENESIS","HERBOGENESIS","GUARDIA_METALICA","GUARDIA_ESPECTRO","ARMADURA_PRISMA") var ability_id : int #setget set_ability,get_ability
 #@export_enum("NONE", "HEDOR", "LLOVIZNA", "IMPULSO", "ARMADURA_BATALLA", "ROBUSTEZ", HUMEDAD , FLEXIBILIDAD , VELO_ARENA , ELEC_ESTATICA , ABSORBE_ELEC , ABSORBE_AGUA , DESPISTE , ACLIMATACION , OJO_COMPUESTO , INSOMNIO , CAMBIO_COLOR , INMUNIDAD , ABSORBE_FUEGO , POLVO_ESCUDO , RITMO_PROPIO , VENTOSAS , INTIMIDACION , SOMBRA_TRAMPA , PIEL_TOSCA , SUPERGUARDA , LEVITACION , EFECTO_ESPORA , SINCRONIA , CUERPO_PURO , CURA_NATURAL , PARARRAYOS , DICHA , NADO_RAPIDO , CLOROFILA , ILUMINACION , RASTRO , POTENCIA , PUNTO_TOXICO , FOCO_INTERNO , ESCUDO_MAGMA , VELO_AGUA , IMAN , INSONORIZAR , CURA_LLUVIA , CHORRO_ARENA , PRESION , SEBO , MADRUGAR , CUERPO_LLAMA , FUGA , VISTA_LINCE , CORTE_FUERTE , RECOGIDA , AUSENTE , ENTUSIASMO , GRAN_ENCANTO , MAS , MENOS , PREDICCION , VISCOSIDAD , MUDAR , AGALLAS , ESCAMA_ESPECIAL , LODO_LIQUIDO , ESPESURA , MAR_LLAMAS , TORRENTE , ENJAMBRE , CABEZA_ROCA , SEQUIA , TRAMPA_ARENA , ESPIRITU_VITAL , HUMO_BLANCO , ENERGIA_PURA , CAPARAZON , BUCLE_AIRE , TUMBOS , ELECTROMOTOR , RIVALIDAD , IMPASIBLE , MANTO_NIVEO , GULA , IRASCIBLE , LIVIANO , IGNIFUGO , SIMPLE , PIEL_SECA , DESCARGA , PUNO_FERREO , ANTIDOTO , ADAPTABLE , ENCADENADO , HIDRATACION , PODER_SOLAR , PIES_RAPIDOS , NORMALIDAD , FRANCOTIRADOR , MURO_MAGICO , INDEFENSO , REZAGADO , EXPERTO , DEFENSA_HOJA , ZOQUETE , ROMPEMOLDES , AFORTUNADO , RESQUICIO , ANTICIPACION , ALERTA , IGNORANTE , CROMOLENTE , FILTRO , INICIO_LENTO , INTREPIDO , COLECTOR , GELIDO , ROCA_SOLIDA , NEVADA , RECOGEMIEL , CACHEO , AUDAZ , MULTITIPO , DON_FLORAL , MAL_SUENO , HURTO , POTENCIA_BRUTA , RESPONDON , NERVIOSISMO , COMPETITIVO , FLAQUEZA , CUERPO_MALDITO , ALMA_CURA , COMPIESCOLTA , ARMADURA_FRAGIL , METAL_PESADO , METAL_LIVIANO , COMPENSACION , IMPETU_TOXICO , IMPETU_ARDIENTE , COSECHA , TELEPATIA , VELETA , FUNDA , TOQUE_TOXICO , REGENERACION , SACAPECHO , IMPETU_ARENA , PIEL_MILAGRO , CALCULO_FINAL , ILUSION , IMPOSTOR , ALLANAMIENTO , MOMIA , AUTOESTIMA , JUSTICIERO , COBARDIA , ESPEJO_MAGICO , HERBIVORO , BROMISTA , PODER_ARENA , PUNTA_ACERO , MODO_DARUMA , TINOVICTORIA , TURBOLLAMA , TERRAVOLTAJE , VELO_AROMA , VELO_FLOR , CARRILLO , MUTATIPO , PELAJE_RECIO , PRESTIDIGITADOR , ANTIBALAS , TENACIDAD , MANDIBULA_FUERTE , PIEL_HELADA , VELO_DULCE , CAMBIO_TACTICO , ALAS_VENDAVAL , MEGADISPARADOR , MANTO_FRONDOSO , SIMBIOSIS , GARRA_DURA , PIEL_FEERICA , BABA , PIEL_CELESTE , AMOR_FILIAL , AURA_OSCURA , AURA_FEERICA , ROMPEAURA , MAR_DEL_ALBOR , TIERRA_DEL_OCASO , RAFAGA_DELTA , FIRMEZA , HUIDA , RETIRADA , HIDRORREFUERZO , ENSANAMIENTO , ESCUDO_LIMITADO , VIGILANTE , POMPA , ACERO_TEMPLADO , COLERA , QUITANIEVES , REMOTO , VOZ_FLUIDA , PRIMER_AUXILIO , PIEL_ELECTRICA , COLA_SURF , BANCO , DISFRAZ , FUERTE_AFECTO , AGRUPAMIENTO , CORROSION , LETARGO_PERENNE , REGIA_PRESENCIA , REVES , PAREJA_DE_BAILE , BATERIA , PELUCHE , CUERPO_VIVIDO , CORANIMA , RIZOS_REBELDES , RECEPTOR , REACCION_QUIMICA , ULTRAIMPULSO , SISTEMA_ALFA , ELECTROGENESIS , PSICOGENESIS , NEBULOGENESIS , HERBOGENESIS , GUARDIA_METALICA , GUARDIA_ESPECTRO , ARMADURA_PRISMA ") var ability_id : int #setget set_ability,get_ability
-@export_enum("NONE", "ACTIVA", "AFABLE", "AGITADA", "ALEGRE", "ALOCADA", "AMABLE", "AUDAZ", "CAUTA", "DÓCIL", "FIRME", "FLOJA", "FUERTE", "GROSERA", "HURAÑA", "INGENUA", "MANSA", "MIEDOSA", "MODESTA", "OSADA", "PÍCARA", "PLÁCIDA", "RARA", "SERENA", "SERIA", "TÍMIDA") var nature_id #setget set_naturaleza,get_naturaleza
+#@export_enum("NONE", "ACTIVA", "AFABLE", "AGITADA", "ALEGRE", "ALOCADA", "AMABLE", "AUDAZ", "CAUTA", "DÓCIL", "FIRME", "FLOJA", "FUERTE", "GROSERA", "HURAÑA", "INGENUA", "MANSA", "MIEDOSA", "MODESTA", "OSADA", "PÍCARA", "PLÁCIDA", "RARA", "SERENA", "SERIA", "TÍMIDA") var nature_id #setget set_naturaleza,get_naturaleza
+#@export_enum("HARDY", "LONELY", "BRAVE", "ADAMANT", "NAUGHTY",
+			 #"BOLD", "DOCILE", "RELAXED", "IMPISH", "LAX",
+			 #"TIMID", "HASTY", "SERIOUS", "JOLLY", "NAIVE",
+			 #"MODEST", "MILD", "QUIET", "BASHFUL", "RASH",
+			 #"CALM", "GENTLE", "SASSY", "CAREFUL", "QUIRKY")
+@export var nature_id: NatureTypes.Nature = NatureTypes.Nature.SERIOUS#"SERIOUS"  # valor por defecto
+
+
 @export var held_item_id: int
 
 var battle_front_sprite:
@@ -187,12 +192,12 @@ var fainted : bool = false :
 	get:
 		return hp_actual == 0
 		
-var EVs:Array[int]:
-	get:
-		return [hp_EVs, attack_EVs, defense_EVs, spAttack_EVs, spDefense_EVs, speed_EVs] 
-var IVs:Array[int]:
-	get:
-		return [hp_IVs, attack_IVs, defense_IVs, spAttack_IVs, spDefense_IVs, speed_IVs]
+#var EVs:Array[int]:
+	#get:
+		#return [hp_EVs, attack_EVs, defense_EVs, spAttack_EVs, spDefense_EVs, speed_EVs] 
+#var IVs:Array[int]:
+	#get:
+		#return [hp_IVs, attack_IVs, defense_IVs, spAttack_IVs, spDefense_IVs, speed_IVs]
 var personality = "" #setget set_personality,get_personality
 var trainer:Battler #Indica l'entrenador del pokemon(si en té)
 var learningMoves:Array[PokemonLearningMove] #Indicates the list of moves this pokemon is capable to learn
@@ -228,13 +233,18 @@ var battle_position
 var movements : Array[MoveInstance] = []
 var newLearningMove : MoveInstance
 
-var mod_attack = 0
-var mod_defense = 0
-var mod_speed = 0
-var mod_hp = 0
-var mod_special = 0
 
-func create(_randomize_stats : bool = true, _pkmn_id : int = -1, _level : int = -1, _gender : int = -1, _ability_id : int = -1, _nature_id : int = -1):
+
+var base_stats: Dictionary[StatTypes.Stat, int] 
+
+var evs: Dictionary[StatTypes.Stat, int] 
+
+var ivs: Dictionary[StatTypes.Stat, int] 
+
+var nature: Nature
+var ability: Ability
+
+func create(_randomize_stats : bool = true, _pkmn_id : int = -1, _level : int = -1, _gender : int = -1, _ability_id : int = -1, _nature_id : NatureTypes.Nature = NatureTypes.Nature.NONE):
 	
 
 	if _pkmn_id == -1:
@@ -259,12 +269,14 @@ func create(_randomize_stats : bool = true, _pkmn_id : int = -1, _level : int = 
 		ability_id = calculateAbility().to_int()
 	else:
 		ability_id = _ability_id
+	
+	ability = get_ability_resource()
 		
-	if _nature_id == -1:
+	if _nature_id == NatureTypes.Nature.NONE:
 		randomize()
-		nature_id = randi_range(1, 25)
+		nature = load_nature_by_id(NatureTypes.get_random_nature())
 	else:
-		nature_id = _nature_id
+		nature = load_nature_by_id(nature_id)
 		
 	randomize_stats = _randomize_stats	
 	#print(pkm_id.keys()[pkm_id])
@@ -273,20 +285,27 @@ func create(_randomize_stats : bool = true, _pkmn_id : int = -1, _level : int = 
 	return self
 	
 func _ready():
-	print("loading " + base.Name)
+
 	add_user_signal("hp_updated")
 #	if base != null:
 #		init_pokemon()
-	totalExp = actualLevelExpBase
 	if randomize_pokemon || randomize_stats:
 		randomize_pkmn()
+	else:
+		print("res://Resources/Pokemon/"+str(pokemon).pad_zeros(3)+".tres")
+		base = load("res://Resources/Pokemon/"+str(pokemon).pad_zeros(3)+".tres")
+	
+	nature = load_nature_by_id(nature_id)
+	ability = get_ability_resource()
+	
+	load_stats()
+	totalExp = actualLevelExpBase
 	personality = get_personality_text()
 #	print("patata")
 #	set_info()
 	loadLearningMoves()
 	load_moves()
-	hp_actual = 1#hp_total
-	print_pokemon_base()
+	hp_actual = get_final_stat(StatTypes.Stat.HP)
 #	hp_total = get_total_hp()
 #	hp_actual = int(float(hp_total) / randf_range(1, 6))
 #	attack = get_attack()  
@@ -311,7 +330,9 @@ func init_pokemon():
 		push_error("No s'ha seleccionat un genere pel pokémon " + Name)
 		#set_info()
 	load_moves()
-	hp_actual = 1#hp_total
+	hp_actual = get_final_stat(StatTypes.Stat.HP)
+	
+	load_stats()
 	#ability_id = CONST.ABILITIES.INTIMIDATE
 
 #
@@ -326,14 +347,15 @@ func init_pokemon():
 	#EVs = [hp_EVs, attack_EVs, defense_EVs, spAttack_EVs, spDefense_EVs, speed_EVs] 
 	#IVs = [hp_IVs, attack_IVs, defense_IVs, spAttack_IVs, spDefense_IVs, speed_IVs]
 	personality = get_personality_text()
-	print_pokemon_base()
+
 func randomize_pkmn():
 	
 	if randomize_pokemon:
 		randomize()
+		base = load("res://Resources/Pokemon/"+str(randi_range(1, 151)).pad_zeros(3)+".tres")
 		#pkm_id = randi_range(1, DB.get_node("Pokemons").get_children().size())
 		level = randi_range(1, 100)
-		gender = randi_range(0,1) # TO DO funció per obtenir gender segons percentatge de la especie pokemon
+		gender = calculateGender()
 	
 		ability_id = randi_range(1, 232)
 		nature_id = randi_range(1, 25)
@@ -433,7 +455,9 @@ func loadLearningMoves():
 		print(base.learn_lvl[i])
 		learningMoves.push_back(PokemonLearningMove.new(base.learn_move_id[i] as int, base.learn_type[i] as int,base.learn_lvl[i] as int))
 		
-		
+
+
+
 #Calcula aleatoriament quin genero tindrà aquest pokemon, a partir del seu gender_rate
 #a l'hora de generar un pokemon nou
 func calculateGender():
@@ -464,16 +488,16 @@ func calculateAbility():
 	
 
 	
-func get_highest_IV() -> int:
+func get_highest_IV() -> StatTypes.Stat:
 	var highest_valor = -1
-	var highest_IVs = []
-	for iv in range(IVs.size()):
+	var highest_IVs:Array[StatTypes.Stat] = []
+	for iv in ivs:
 		#print(str(iv) + ": " + str(IVs[iv])) 
-		if IVs[iv] > highest_valor:
+		if ivs[iv] > highest_valor:
 			highest_IVs.clear()
 			highest_IVs.push_back(iv)
-			highest_valor = IVs[iv]
-		elif IVs[iv] == highest_valor:
+			highest_valor = ivs[iv]
+		elif ivs[iv] == highest_valor:
 			highest_IVs.push_back(iv)
 	#print("return ivs: " + str(highest_IVs))
 	return highest_IVs[randi() % highest_IVs.size()]
@@ -483,31 +507,37 @@ func get_personality_text():
 #	for n in range(5*highest_IV):
 	#print(get_name() + ": " + str(highest_IV))
 	for f in CONST.Personality_Table[highest_IV]:
-		if f[0].has(IVs[highest_IV]):
+		if f[0].has(ivs[highest_IV]):
 			return f[1]
 
 
-func print_pokemon():
-	print("----------- " + Name + " Nv. " + str(level) + " -----------")
-	print("+++++ STATS +++++")
-	print("HP: " + str(hp_actual) + "/" + str(hp_total))
-	print("ATTACK: " + str(attack))
-	print("DEFENSE: " + str(defense))
-	print("SP. ATTACK: " + str(special_attack))
-	print("SP. DEFENSE: " + str(special_defense))
-	print("SPEED: " + str(speed))
-	
-	
-func print_pokemon_base():
-	print("----------- " + Name + " -----------")
-	print("+++++ BASE STATS +++++")
-	print("HP: " + str(base.hp_base) )
-	print("ATTACK: " + str(base.attack_base))
-	print("DEFENSE: " + str(base.defense_base))
-	print("SP. ATTACK: " + str(base.special_attack_base))
-	print("SP. DEFENSE: " + str(base.special_defense_base))
-	print("SPEED: " + str(base.speed_base))
-	
+func log_pokemon_stats() -> void:
+	var level = self.level
+	var nature = self.nature
+	print("===== POKÉMON STATS LOG =====")
+	print("Especie: %s | Nivel: %d | Naturaleza: %s" %
+		[self.Name, self.level, self.nature.display_name if self.nature else "Desconocida"])
+
+	for stat in [
+		StatTypes.Stat.HP,
+		StatTypes.Stat.ATTACK,
+		StatTypes.Stat.DEFENSE,
+		StatTypes.Stat.SP_ATTACK,
+		StatTypes.Stat.SP_DEFENSE,
+		StatTypes.Stat.SPEED
+	]:
+		var base = self.get_base_stat(stat)
+		var iv = self.get_iv(stat)
+		var ev = self.get_ev(stat)
+		var final = self.get_final_stat(stat)
+		var modifier = nature.get_stat_multiplier(stat) if nature else 1.0
+		var icon = "↑" if modifier > 1.0 else "↓" if modifier < 1.0 else "–"
+		var stat_name = StatTypes.stat_to_string(stat)
+
+		print("%-17s Base: %3d | IV: %2d | EV: %3d | Total: %3d | %s" %
+			[stat_name + ":", base, iv, ev, final, icon])
+	print("==============================")
+
 	
 func print_moves():
 	print("+++++ MOVIMIENTOS +++++")
@@ -532,7 +562,63 @@ func print_moves():
 
 #func get_types():
 #	return [DB.pokemons[pkm_id].type_a, DB.pokemons[pkm_id].type_b]
-#
+
+func get_base_stat(stat: StatTypes.Stat) -> int:
+	return base_stats.get(stat, 0)
+
+func get_iv(stat: StatTypes.Stat) -> int:
+	return ivs.get(stat, 0)
+
+func get_ev(stat: StatTypes.Stat) -> int:
+	return evs.get(stat, 0)
+	
+func get_final_stat(stat: StatTypes.Stat, _level: int = self.level) -> int:
+	var base = get_base_stat(stat)
+	var iv = get_iv(stat)
+	var ev = get_ev(stat)
+
+	var total = ((2 * base + iv + int(ev / 4)) * _level) / 100
+
+	if stat == StatTypes.Stat.HP:
+		return int(total) + _level + 10
+	else:
+		var multiplier = 1.0
+		if nature:
+			multiplier = nature.get_stat_multiplier(stat)
+		return int((total + 5) * multiplier)
+
+func load_stats():
+	self.base_stats = {
+	StatTypes.Stat.ATTACK: base.attack_base,
+	StatTypes.Stat.DEFENSE: base.defense_base,
+	StatTypes.Stat.SP_ATTACK: base.special_attack_base,
+	StatTypes.Stat.SP_DEFENSE: base.special_defense_base,
+	StatTypes.Stat.SPEED: base.speed_base,
+	StatTypes.Stat.HP: base.hp_base,
+	StatTypes.Stat.ACCURACY: 100,  # precisión base por defecto
+	StatTypes.Stat.EVASION: 100    # evasión base por defecto
+	}
+
+	self.evs = {
+	StatTypes.Stat.ATTACK: attack_EVs,
+	StatTypes.Stat.DEFENSE: defense_EVs,
+	StatTypes.Stat.SP_ATTACK: spAttack_EVs,
+	StatTypes.Stat.SP_DEFENSE: spDefense_EVs,
+	StatTypes.Stat.SPEED: speed_EVs,
+	StatTypes.Stat.HP: hp_EVs 
+}
+
+# Si necesitas EVs distintos (aunque normalmente son fijos por especie)
+	self.ivs = {
+	StatTypes.Stat.ATTACK: attack_IVs,
+	StatTypes.Stat.DEFENSE: defense_IVs,
+	StatTypes.Stat.SP_ATTACK: spAttack_IVs,
+	StatTypes.Stat.SP_DEFENSE: spDefense_IVs,
+	StatTypes.Stat.SPEED: speed_IVs,
+	StatTypes.Stat.HP: hp_IVs 
+}
+
+
 func is_status(s):
 	return status == s
 	
@@ -543,7 +629,7 @@ func hasAlly():
 	return ally != null
 	
 func hasFullHealth():
-	return hp_actual == hp_total
+	return hp_actual == get_final_stat(StatTypes.Stat.HP)
 	
 func updateStats():
 	pass
@@ -555,35 +641,60 @@ func checkNewLevelMoveLearned():
 		newLearningMove = newMove.getMove()
 	
 func levelUP():
-	var previousHP:float = hp_total
+	var previousHP:float = get_final_stat(StatTypes.Stat.HP)
 	level += 1
 	updateStats()
-	var newHP:float = hp_total
+	var newHP:float = get_final_stat(StatTypes.Stat.HP)
 	var incrHP:float = (newHP - previousHP) / previousHP * 100.0
 	var hpAdd = ceil(hp_actual * (incrHP/100.0))
 	hp_actual =  hp_actual + hpAdd
+#
+#func getHPStat(_level:int = level):
+	#return int( (float(_level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + _level + 10
+#
+#func getAttackStat(_level:int = level):
+	#return int(float(int( 5.0 + (( float(_level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
+#
+	#
+#func getDefenseStat(_level:int = level):
+	#return int(float(int( 5.0 + (( float(_level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
+#
+#
+#func getSpAttackStat(_level:int = level):
+	#return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
+#
+#
+#func getSpDefenseStat(_level:int = level):
+	#return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
+#
+#
+#func getSpeedStat(_level:int = level):
+	#return int(float(int( 5.0 + (( float(_level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
 
-func getHPStat(_level:int):
-	return int( (float(_level) * ((float(base.hp_base) * 2.0) + float(hp_IVs) + int(float(hp_EVs) / 4.0) ) ) / 100.0 ) + _level + 10
 
-func getAttackStat(_level:int):
-	return int(float(int( 5.0 + (( float(_level) * ( (float(base.attack_base) * 2.0) + float(attack_IVs) + int(float(attack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATA][nature_id]))
+func to_battle_pokemon(ai: BattleIA_Refactor = null) -> BattlePokemon_Refactor:
+	var battle_pokemon = BattlePokemon_Refactor.new(self, ai)
+	battle_pokemon.is_wild = self.isWild
+	battle_pokemon.prepare_battle_moves()
+	return battle_pokemon
 
-	
-func getDefenseStat(_level:int):
-	return int(float(int( 5.0 + (( float(_level) * ( (float(base.defense_base) * 2.0) + float(defense_IVs) + int(float(defense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEF][nature_id]))
+func get_ability_resource() -> Ability:
+	var prefix = "%03d-" % ability_id
+	var dir = DirAccess.open("res://Resources/Abilities")
+	if dir:
+		for file in dir.get_files():
+			if file.begins_with(prefix) and file.ends_with(".tres"):
+				return load("res://Resources/Abilities/" + file)
+	return null
+
+func load_nature_by_id(_nature_id: NatureTypes.Nature) -> Nature:
+	var path = "res://Resources/Natures/%s.tres" % NatureTypes.get_id(_nature_id).to_upper()
+	if ResourceLoader.exists(path):
+		return load(path)
+	push_error("Nature not found: %s" % _nature_id)
+	return null
 
 
-func getSpAttackStat(_level:int):
-	return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_attack_base) * 2.0) + float(spAttack_IVs) + int(float(spAttack_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.ATAESP][nature_id]))
-
-
-func getSpDefenseStat(_level:int):
-	return int(float(int( 5.0 + (( float(_level) * ( (float(base.special_defense_base) * 2.0) + float(spDefense_IVs) + int(float(spDefense_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.DEFESP][nature_id]))
-
-
-func getSpeedStat(_level:int):
-	return int(float(int( 5.0 + (( float(_level) * ( (float(base.speed_base) * 2.0) + float(speed_IVs) + int(float(speed_EVs) / 4.0) ) ) / 100.0 ))) * float(CONST.stat_effects_Natures[CONST.STATS.VEL][nature_id]))
 
 #func hasMove(move_id):
 #	for m in movements:

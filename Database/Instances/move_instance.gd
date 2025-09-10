@@ -98,5 +98,44 @@ func _init(_move_id : int = -1) -> void:
 func is_type(type): return type == "Move" or self.is_type(type)
 func    get_type(): return "Move"
 
+func to_battle_move(pokemon: BattlePokemon_Refactor) -> BattleMove_Refactor:
+	return BattleMove_Refactor.new(self, pokemon)
+
+func get_target_id() -> int:
+	return base.target_id
+	
+func get_max_hits() -> int:
+	return base.meta_max_hits
+
+func get_min_hits() -> int:
+	return base.meta_min_hits
+	
+func get_max_turns() -> int:
+	return base.meta_max_turns
+
+func get_min_turns() -> int:
+	return base.meta_min_turns
+
+func get_critical_rate() -> int:
+	return base.meta_crit_rate
+	
+func get_category_id() -> int:
+	return base.meta_category_id
+
+func get_drain_percentage():
+	return base.meta_drain
+	
+func get_heal_amount():
+	return base.meta_healing
+	
+func get_ailment() -> Ailment:
+	return base.ailment
+	
+func get_ailment_chance() -> int:
+	return base.meta_ailment_chance
+	
+func get_stat_changes() -> Dictionary[StatTypes.Stat, int]:
+	return base.stat_changes
+	
 func print_move():
 	print(" ------ " + str(Name) + " " + str(pp_actual) + "/" + str(pp) + " PP ------ ")

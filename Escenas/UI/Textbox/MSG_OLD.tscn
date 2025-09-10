@@ -8,7 +8,7 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5i0nh"]
 _data = {
-"Idle": ExtResource("5")
+&"Idle": ExtResource("5")
 }
 
 [node name="MSG" type="Panel"]

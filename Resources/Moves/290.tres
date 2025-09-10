@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://v5ynqi3us6c"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://v5ynqi3us6c"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_l0i0e"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_l0i0e"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_aujig"]
 
 [resource]
@@ -49,8 +49,9 @@ Sunny Park     | Puts target to sleep
 Sunset         | Lowers target's accuracy by one stage
 Waterfall      | Puts target to sleep
 "
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -65,4 +66,3 @@ meta_ailment_chance = 30
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

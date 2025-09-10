@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b7hij2dc75fct"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://b7hij2dc75fct"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_nbgmv"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_nbgmv"]
 [ext_resource type="Resource" uid="uid://dp2vqsim555sq" path="res://Resources/Types/11.tres" id="2_h4cgp"]
 
 [resource]
@@ -25,8 +25,9 @@ During the immune turn, surf, and whirlpool still hit the user normally, and the
 The user may be hit during its immune turn if under the effect of lock on, mind reader, or no guard.
 
 This move cannot be selected by sleep talk."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -41,4 +42,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

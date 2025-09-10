@@ -24,6 +24,7 @@ var next = false
 #onready var options = get_node("OPTIONS")
 @onready var menu = $MAIN_MENU
 @onready var battle:BattleUI = $BATTLE
+@onready var BattleNew:BattleScene = $BattleNew
 @onready var choices:ChoicesContainer = $ChoicesContainer
 @onready var party:Party = $PARTY
 #onready var bag = get_node("BAG")
@@ -163,7 +164,7 @@ func show_menu():
 	#menu.set_process(false)
 
 func isVisible():
-	return msg.is_visible() || menu.is_visible() || party.is_visible() || battle.is_visible() || transition.is_visible()# || $INTRO.is_visible() || bag.is_visible() || transition.is_visible()#|| options.is_visible()
+	return msg.is_visible() || menu.is_visible() || party.is_visible() || battle.is_visible() || transition.is_visible() || BattleNew.visible# || $INTRO.is_visible() || bag.is_visible() || transition.is_visible()#|| options.is_visible()
 
 #func _on_text_speed_changed(speed):
 #	get_node("MSG/Timer 2").set_wait_time(CONST.TEXT_SPEEDS[speed])

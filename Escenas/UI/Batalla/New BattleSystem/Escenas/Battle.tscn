@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://notumsye5rrv"]
+
+[ext_resource type="Script" uid="uid://bybfgh7ww27bx" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/Battle.gd" id="1_a264m"]
+[ext_resource type="PackedScene" uid="uid://bdngld0rn1skh" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleController_Refactor.tscn" id="2_7jfdv"]
+[ext_resource type="Script" uid="uid://djporkfgtlwc" path="res://Escenas/UI/Batalla/New BattleSystem/Scripts/core/Controllers/BattleTurnController.gd" id="3_a264m"]
+[ext_resource type="PackedScene" uid="uid://bwmd4c7fbmjy4" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleEffectController.tscn" id="4_a264m"]
+[ext_resource type="PackedScene" uid="uid://2fe0unp8wxi3" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleAnimationController_Refactor.tscn" id="5_ynq7s"]
+[ext_resource type="PackedScene" uid="uid://djqyc10nosdl" path="res://Escenas/UI/Batalla/New BattleSystem/Escenas/BattleUI_Refactor.tscn" id="6_uikay"]
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_a264m")
+
+[node name="BattleController" parent="." instance=ExtResource("2_7jfdv")]
+
+[node name="TurnController" type="Node" parent="BattleController"]
+script = ExtResource("3_a264m")
+
+[node name="BattleEffectController" parent="." instance=ExtResource("4_a264m")]
+
+[node name="BattleAnimationController" parent="." instance=ExtResource("5_ynq7s")]
+
+[node name="BattleUI" parent="." instance=ExtResource("6_uikay")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 512.0
+offset_bottom = 384.0
+grow_horizontal = 1
+grow_vertical = 1

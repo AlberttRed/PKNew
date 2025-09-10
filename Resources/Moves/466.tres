@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://g60g4otq3v3v"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://g60g4otq3v3v"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_ebpp7"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_ebpp7"]
 [ext_resource type="Resource" uid="uid://cuafndafgcgqe" path="res://Resources/Types/08.tres" id="2_wl5y6"]
 
 [resource]
@@ -20,8 +20,15 @@ effect_chance = 10
 priority = 0
 damage_class_id = 3
 effect_entries = "Has a $effect_chance% chance to raise all of the user's stats by one stage. Inflicts regular damage. Has a $effect_chance% chance to raise all of the user's stats one stage."
-stat_change_ids = [2, 3, 4, 5, 6]
-stat_change_valors = [1, 1, 1, 1, 1]
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1
+})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 7
@@ -36,4 +43,3 @@ meta_ailment_chance = 10
 meta_flinch_chance = 0
 meta_stat_chance = 10
 contact_flag = false
-move_effect = 1

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://djnmfeu3jf0ah"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://djnmfeu3jf0ah"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_6pebr"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_6pebr"]
 [ext_resource type="Resource" uid="uid://dhburvcqxnam0" path="res://Resources/Types/06.tres" id="2_nhjok"]
 
 [resource]
@@ -24,8 +24,9 @@ effect_entries = "Changes the weather to a sandstorm for five turns. Changes the
 solar beam's power is halved.
 
 moonlight, morning sun, and synthesis only heal 1/4 the user's max HP."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10
@@ -40,4 +41,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

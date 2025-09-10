@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=3 uid="uid://b00rre42t84el"]
 
-[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattleSide.gd" id="1_b3xq5"]
+[ext_resource type="Script" uid="uid://b7epkl6dq2lwb" path="res://Scripts/Batalla/Classes/BattleSide.gd" id="1_b3xq5"]
 [ext_resource type="Texture2D" uid="uid://4suianjdpdca" path="res://Sprites/Batalla/Battlebacks/playerbaseField.png" id="2_74ecx"]
-[ext_resource type="Script" path="res://Scripts/Batalla/Classes/BattlePokemon.gd" id="3_qehyw"]
+[ext_resource type="Script" uid="uid://dxebx3g20f712" path="res://Scripts/Batalla/Classes/BattlePokemon.gd" id="3_qehyw"]
 [ext_resource type="Texture2D" uid="uid://k8kwqyrcx6jf" path="res://Sprites/Batalla/007b.png" id="4_0qb0s"]
 [ext_resource type="AnimationLibrary" uid="uid://d0lwk37ojtsv7" path="res://Objetos/Batalla/Animaciones/Moves/Battle_AilmentAnimations.res" id="5_ynb46"]
 [ext_resource type="AnimationLibrary" uid="uid://6y11gonugprj" path="res://Objetos/Batalla/Animaciones/Moves/GLOBAL.res" id="6_5abkt"]
@@ -11,12 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://dbto76y0cchev" path="res://Sprites/Batalla/456b.png" id="9_17bg5"]
 [ext_resource type="AnimationLibrary" uid="uid://btf1cle7g0a06" path="res://Objetos/Batalla/Animaciones/Moves/Battle_CommonAnimations.res" id="10_yjthu"]
 [ext_resource type="Texture2D" uid="uid://o3yeqavmh4fw" path="res://Escenas/UI/Batalla/Resources/Sprites/battlePlayerBoxS.png" id="11_fsvpf"]
-[ext_resource type="Script" path="res://Escenas/UI/Others/HPBar.gd" id="12_2na15"]
+[ext_resource type="Script" uid="uid://dt6level30sj8" path="res://Escenas/UI/Others/HPBar.gd" id="12_2na15"]
 [ext_resource type="FontFile" uid="uid://bg2qmq8nwewnl" path="res://Escenas/UI/Fonts/pkmnem.ttf" id="13_pb385"]
 [ext_resource type="Theme" uid="uid://cymojubdtrrlf" path="res://Escenas/UI/Fonts/fontHPBar.tres" id="14_6t0i4"]
 [ext_resource type="Texture2D" uid="uid://gb6woyyif7fx" path="res://Escenas/UI/Batalla/Resources/Sprites/battleStatuses.png" id="15_7yk2a"]
 [ext_resource type="PackedScene" uid="uid://ta05jv33ns50" path="res://Escenas/UI/Others/HPbar.tscn" id="16_u0ve1"]
-[ext_resource type="Script" path="res://Escenas/UI/Others/exp_bar.gd" id="17_6ibhd"]
+[ext_resource type="Script" uid="uid://beg2cyqfecq1h" path="res://Escenas/UI/Others/exp_bar.gd" id="17_6ibhd"]
 [ext_resource type="Texture2D" uid="uid://ds2nqorvg7ok" path="res://Sprites/Pictures/EXPbar_background.png" id="18_pn6qi"]
 [ext_resource type="Texture2D" uid="uid://dbnnetnk6i26s" path="res://Sprites/Pictures/EXPbar_overlay.png" id="19_1q6o7"]
 [ext_resource type="Texture2D" uid="uid://0ldm4ismhwn8" path="res://Sprites/Pictures/EXPbar_progress.png" id="20_2r3ei"]
@@ -26,7 +26,7 @@ resource_name = "aaaa"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u7jj6"]
 _data = {
-"aaaa": SubResource("Animation_6moud")
+&"aaaa": SubResource("Animation_6moud")
 }
 
 [sub_resource type="Theme" id="Theme_mb2ww"]

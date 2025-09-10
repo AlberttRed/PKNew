@@ -1,6 +1,6 @@
 [gd_scene load_steps=126 format=3 uid="uid://8qp0j6uye30u"]
 
-[ext_resource type="Script" path="res://Scripts/Map.gd" id="1_f6xhj"]
+[ext_resource type="Script" uid="uid://corloqks7avnr" path="res://Scripts/Map.gd" id="1_f6xhj"]
 [ext_resource type="TileSet" uid="uid://bsfofmep7ocxk" path="res://Resources/Tilesets/TileSet_Outdoor.tres" id="2_pq15f"]
 [ext_resource type="PackedScene" uid="uid://cye8qm5ppvnuv" path="res://Objetos/Event/Door.tscn" id="12_7iqpb"]
 [ext_resource type="Texture2D" uid="uid://csw044hjgw43b" path="res://Sprites/Eventos/Doors/door2.png" id="13_drltp"]
@@ -9,12 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://b07wtt5uc411m" path="res://Sprites/Overworlds/Characters/trchar042.png" id="15_o2noa"]
 [ext_resource type="PackedScene" uid="uid://c3s4inepag5j5" path="res://Objetos/Event/Event Commands/cmd_msg.scn" id="15_wa5xo"]
 [ext_resource type="PackedScene" uid="uid://bppv4km3r4exp" path="res://Objetos/Event/Event Commands/cmd_move.tscn" id="19_6wcc7"]
-[ext_resource type="Script" path="res://Scripts/Event/Event.gd" id="21_vwu3f"]
+[ext_resource type="Script" uid="uid://b4hc6kw06wyx8" path="res://Scripts/Event/Event.gd" id="21_vwu3f"]
 [ext_resource type="Texture2D" uid="uid://bc6ts2cvg8esb" path="res://Scripts/Event/square.png" id="22_74iuw"]
 [ext_resource type="Animation" uid="uid://cm3f2bwpf4en" path="res://Animaciones/Overworld/Events/Close_Door.tres" id="23_b2xco"]
-[ext_resource type="Script" path="res://Scripts/Event/Event Commands/cmd_setThrough.gd" id="24_e3y4v"]
+[ext_resource type="Script" uid="uid://b4bu0p0mn7cg1" path="res://Scripts/Event/Event Commands/cmd_setThrough.gd" id="24_e3y4v"]
 [ext_resource type="Animation" uid="uid://dk6cgxsdv1b00" path="res://Animaciones/Overworld/Events/Open_Door.tres" id="24_jcblm"]
-[ext_resource type="Script" path="res://Scripts/Event/Event_page.gd" id="25_qlbtw"]
+[ext_resource type="Script" uid="uid://bfxdputsfja3s" path="res://Scripts/Event/Event_page.gd" id="25_qlbtw"]
 [ext_resource type="PackedScene" uid="uid://dav37i87qd54k" path="res://Objetos/Event/Event Commands/cmd_play_animation_event.scn" id="27_fajmx"]
 [ext_resource type="PackedScene" uid="uid://c2tgkbsj2b41n" path="res://Objetos/Event/Event Commands/cmd_setTransparent.scn" id="31_iq7va"]
 [ext_resource type="PackedScene" uid="uid://d3ghw6lnmom5a" path="res://Objetos/Event/Event Commands/cmd_FadeToBlack.tscn" id="32_ra1rw"]
@@ -30,8 +30,8 @@ size = Vector2(30, 30)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ghx7l"]
 _data = {
-"Close_Door": ExtResource("23_b2xco"),
-"Open_Door": ExtResource("24_jcblm")
+&"Close_Door": ExtResource("23_b2xco"),
+&"Open_Door": ExtResource("24_jcblm")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gkksw"]
@@ -130,8 +130,8 @@ size = Vector2(32, 32)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5bwr"]
 _data = {
-"Close_Door": ExtResource("23_b2xco"),
-"Open_Door": ExtResource("24_jcblm")
+&"Close_Door": ExtResource("23_b2xco"),
+&"Open_Door": ExtResource("24_jcblm")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32qy3"]
@@ -569,19 +569,19 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qa2bo"]
 _data = {
-"IdleDown": SubResource("Animation_lrmm7"),
-"IdleLeft": SubResource("Animation_62l6y"),
-"IdleRight": SubResource("Animation_fhy1s"),
-"IdleUp": SubResource("Animation_xdp8q"),
-"RESET": SubResource("Animation_p5v13"),
-"TurnDown": SubResource("Animation_npoxa"),
-"TurnLeft": SubResource("Animation_akdca"),
-"TurnRight": SubResource("Animation_5nbto"),
-"TurnUp": SubResource("Animation_fjuc3"),
-"WalkDown": SubResource("Animation_mwhlj"),
-"WalkLeft": SubResource("Animation_6otjy"),
-"WalkRight": SubResource("Animation_my5vd"),
-"WalkUp": SubResource("Animation_y4x13")
+&"IdleDown": SubResource("Animation_lrmm7"),
+&"IdleLeft": SubResource("Animation_62l6y"),
+&"IdleRight": SubResource("Animation_fhy1s"),
+&"IdleUp": SubResource("Animation_xdp8q"),
+&"RESET": SubResource("Animation_p5v13"),
+&"TurnDown": SubResource("Animation_npoxa"),
+&"TurnLeft": SubResource("Animation_akdca"),
+&"TurnRight": SubResource("Animation_5nbto"),
+&"TurnUp": SubResource("Animation_fjuc3"),
+&"WalkDown": SubResource("Animation_mwhlj"),
+&"WalkLeft": SubResource("Animation_6otjy"),
+&"WalkRight": SubResource("Animation_my5vd"),
+&"WalkUp": SubResource("Animation_y4x13")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0wipn"]
@@ -855,19 +855,19 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_okmvs"]
 _data = {
-"IdleDown": SubResource("Animation_ge5ii"),
-"IdleLeft": SubResource("Animation_xt3q8"),
-"IdleRight": SubResource("Animation_otbf1"),
-"IdleUp": SubResource("Animation_fxv4s"),
-"RESET": SubResource("Animation_ib5v2"),
-"TurnDown": SubResource("Animation_cihoq"),
-"TurnLeft": SubResource("Animation_08wer"),
-"TurnRight": SubResource("Animation_4tjtk"),
-"TurnUp": SubResource("Animation_sova8"),
-"WalkDown": SubResource("Animation_04tes"),
-"WalkLeft": SubResource("Animation_u2joy"),
-"WalkRight": SubResource("Animation_x4cs5"),
-"WalkUp": SubResource("Animation_aaiij")
+&"IdleDown": SubResource("Animation_ge5ii"),
+&"IdleLeft": SubResource("Animation_xt3q8"),
+&"IdleRight": SubResource("Animation_otbf1"),
+&"IdleUp": SubResource("Animation_fxv4s"),
+&"RESET": SubResource("Animation_ib5v2"),
+&"TurnDown": SubResource("Animation_cihoq"),
+&"TurnLeft": SubResource("Animation_08wer"),
+&"TurnRight": SubResource("Animation_4tjtk"),
+&"TurnUp": SubResource("Animation_sova8"),
+&"WalkDown": SubResource("Animation_04tes"),
+&"WalkLeft": SubResource("Animation_u2joy"),
+&"WalkRight": SubResource("Animation_x4cs5"),
+&"WalkUp": SubResource("Animation_aaiij")
 }
 
 [node name="Pueblo Paleta" type="Node2D"]

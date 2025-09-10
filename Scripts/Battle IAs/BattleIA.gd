@@ -9,7 +9,7 @@ func _init(_active_pokemon : BattlePokemon = null):
 	
 func assign_pokemon(_active_pokemon : BattlePokemon = null):
 	pokemon = _active_pokemon
-	
+
 func pokemon_assigned():
 	return pokemon != null	
 	

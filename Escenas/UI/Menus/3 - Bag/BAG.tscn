@@ -1,120 +1,170 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=45 format=3 uid="uid://dinytohew40wy"]
 
-[ext_resource path="res://ui/Pictures/bagbg1.png" type="Texture" id=1]
-[ext_resource path="res://ui/BAG.gd" type="Script" id=2]
-[ext_resource path="res://ui/Pictures/bagbg2.png" type="Texture" id=3]
-[ext_resource path="res://ui/Pictures/bagbg3.png" type="Texture" id=4]
-[ext_resource path="res://ui/Pictures/bagbg4.png" type="Texture" id=5]
-[ext_resource path="res://ui/Pictures/bagbg5.png" type="Texture" id=6]
-[ext_resource path="res://ui/Pictures/bagbg6.png" type="Texture" id=7]
-[ext_resource path="res://ui/Pictures/bagbg7.png" type="Texture" id=8]
-[ext_resource path="res://ui/Pictures/bagbg8.png" type="Texture" id=9]
-[ext_resource path="res://ui/selarrow.png" type="Texture" id=10]
-[ext_resource path="res://ui/LABEL.tscn" type="PackedScene" id=11]
-[ext_resource path="res://font/pkmnem.ttf" type="DynamicFontData" id=12]
-[ext_resource path="res://ui/RichTextLabel.gd" type="Script" id=13]
-[ext_resource path="res://ui/HGSS_Font_Style.tres" type="DynamicFont" id=14]
-[ext_resource path="res://ui/Pictures/bag1.PNG" type="Texture" id=15]
-[ext_resource path="res://ui/Pictures/bagSlider.png" type="Texture" id=16]
-[ext_resource path="res://ui/Pictures/leftarrow.png" type="Texture" id=17]
-[ext_resource path="res://ui/Pictures/rightarrow.png" type="Texture" id=18]
-[ext_resource path="res://ui/Pictures/bagSel.png" type="Texture" id=19]
-[ext_resource path="res://Sprites/Icons/itemBack.png" type="Texture" id=20]
-[ext_resource path="res://ui/choice 1_old.png" type="Texture" id=21]
-[ext_resource path="res://ui/next.png" type="Texture" id=22]
-[ext_resource path="res://ui/next_animation.tres" type="Animation" id=23]
-[ext_resource path="res://ui/RichTextLabel.tscn" type="PackedScene" id=24]
-[ext_resource path="res://ui/ACTIONS.tscn" type="PackedScene" id=25]
+[sub_resource type="StyleBoxTexture" id="1"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="Resource" id="Resource_4fhag"]
+metadata/__load_path__ = "res://ui/BAG.gd"
 
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="2"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="3"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=4]
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="4"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="5"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=6]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="6"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="7"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=8]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="8"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxTexture" id=9]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 512, 384 )
+[sub_resource type="StyleBoxTexture" id="9"]
+region_rect = Rect2(0, 0, 512, 384)
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id="10"]
 
-[sub_resource type="StyleBoxTexture" id=11]
-texture = ExtResource( 10 )
-region_rect = Rect2( 0, 0, 14, 32 )
-margin_left = 12.0
+[sub_resource type="StyleBoxTexture" id="11"]
 expand_margin_top = 1.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 14, 32)
 draw_center = false
 
-[sub_resource type="DynamicFont" id=20]
-size = 26
-outline_color = Color( 0.337255, 0.12549, 0.12549, 1 )
-use_mipmaps = true
-font_data = ExtResource( 12 )
+[sub_resource type="Resource" id="Resource_grqo2"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
 
-[sub_resource type="DynamicFont" id=21]
-size = 26
-outline_color = Color( 0.337255, 0.12549, 0.12549, 1 )
-use_mipmaps = true
-font_data = ExtResource( 12 )
+[sub_resource type="FontFile" id="20"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
-[sub_resource type="StyleBoxTexture" id=14]
-texture = ExtResource( 21 )
-region_rect = Rect2( 0, 0, 48, 48 )
-margin_left = 32.0
-margin_right = 32.0
-margin_top = 32.0
-margin_bottom = 32.0
+[sub_resource type="Resource" id="Resource_ayl8s"]
+metadata/__load_path__ = "res://ui/RichTextLabel.gd"
+
+[sub_resource type="Resource" id="Resource_e6crg"]
+metadata/__load_path__ = "res://ui/HGSS_Font_Style.tres"
+
+[sub_resource type="FontFile" id="21"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="Resource" id="Resource_30c1w"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_lt7b6"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_a4t3p"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_4u8ie"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_np34i"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_cfif2"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_jsvg3"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_1xett"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_wlo52"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_7vcgv"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_jv0oj"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_3q5gc"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_3sl54"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_dlgox"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_fa3jj"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_i187p"]
+metadata/__load_path__ = "res://ui/LABEL.tscn"
+
+[sub_resource type="Resource" id="Resource_1qv6l"]
+metadata/__load_path__ = "res://ui/Pictures/bag1.PNG"
+
+[sub_resource type="Resource" id="Resource_sx3e8"]
+metadata/__load_path__ = "res://ui/Pictures/bagSlider.png"
+
+[sub_resource type="Resource" id="Resource_pt3n0"]
+metadata/__load_path__ = "res://ui/Pictures/leftarrow.png"
+
+[sub_resource type="Resource" id="Resource_j43at"]
+metadata/__load_path__ = "res://ui/Pictures/rightarrow.png"
+
+[sub_resource type="Resource" id="Resource_c6352"]
+metadata/__load_path__ = "res://ui/Pictures/bagSel.png"
+
+[sub_resource type="Resource" id="Resource_1xe8y"]
+metadata/__load_path__ = "res://Sprites/Icons/itemBack.png"
+
+[sub_resource type="StyleBoxTexture" id="14"]
+region_rect = Rect2(0, 0, 48, 48)
+
+[sub_resource type="Resource" id="Resource_p3d3t"]
+metadata/__load_path__ = "res://ui/next.png"
+
+[sub_resource type="Resource" id="Resource_684n2"]
+metadata/__load_path__ = "res://ui/next_animation.tres"
+
+[sub_resource type="Resource" id="Resource_jjk3h"]
+metadata/__load_path__ = "res://ui/RichTextLabel.tscn"
+
+[sub_resource type="Resource" id="Resource_tmogu"]
+metadata/__load_path__ = "res://ui/ACTIONS.tscn"
 
 [node name="BAG" type="Panel"]
 margin_left = 0.371427
 margin_top = -0.229492
 margin_right = 512.371
 margin_bottom = 383.771
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
+custom_styles/panel = SubResource("1")
+script = SubResource("Resource_4fhag")
 __meta__ = {
 "_edit_lock_": true
 }
-sprite_Bag1 = SubResource( 2 )
-sprite_Bag2 = SubResource( 3 )
-sprite_Bag3 = SubResource( 4 )
-sprite_Bag4 = SubResource( 5 )
-sprite_Bag5 = SubResource( 6 )
-sprite_Bag6 = SubResource( 7 )
-sprite_Bag7 = SubResource( 8 )
-sprite_Bag8 = SubResource( 9 )
-style_actions_empty = SubResource( 10 )
-style_actions_selected = SubResource( 11 )
+sprite_Bag1 = SubResource("2")
+sprite_Bag2 = SubResource("3")
+sprite_Bag3 = SubResource("4")
+sprite_Bag4 = SubResource("5")
+sprite_Bag5 = SubResource("6")
+sprite_Bag6 = SubResource("7")
+sprite_Bag7 = SubResource("8")
+sprite_Bag8 = SubResource("9")
+style_actions_empty = SubResource("10")
+style_actions_selected = SubResource("11")
 
-[node name="Categoria" parent="." instance=ExtResource( 11 )]
+[node name="Categoria" parent="."]
 margin_left = 35.7635
 margin_top = 167.515
 margin_right = 147.763
@@ -130,19 +180,19 @@ margin_bottom = 379.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
-custom_fonts/normal_font = SubResource( 20 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource("20")
+custom_colors/default_color = Color(1, 1, 1, 1)
+custom_colors/font_color_shadow = Color(0, 0, 0, 1)
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 0
 custom_constants/line_separation = 13
 tab_size = 2
 text = "La Poké Ball definitiva. Atrapa cualquier Pokémon salvaje y no falla nunca."
 scroll_active = false
-script = ExtResource( 13 )
+script = SubResource("Resource_ayl8s")
 font_size = 26
-outline_color = Color( 1, 1, 1, 1 )
-text_font = ExtResource( 14 )
+outline_color = Color(1, 1, 1, 1)
+text_font = SubResource("Resource_e6crg")
 
 [node name="Outline" type="RichTextLabel" parent="Descripcion"]
 margin_right = 508.0
@@ -150,9 +200,9 @@ margin_bottom = 77.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_stretch_ratio = 0.0
-custom_fonts/normal_font = SubResource( 21 )
-custom_colors/default_color = Color( 0.345098, 0.345098, 0.313726, 1 )
-custom_colors/font_color_shadow = Color( 0.658824, 0.721569, 0.721569, 1 )
+custom_fonts/normal_font = SubResource("21")
+custom_colors/default_color = Color(0.345098, 0.345098, 0.313726, 1)
+custom_colors/font_color_shadow = Color(0.658824, 0.721569, 0.721569, 1)
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 2
 custom_constants/line_separation = 13
@@ -165,12 +215,12 @@ margin_top = 19.0
 margin_right = 460.0
 margin_bottom = 268.0
 
-[node name="Item1" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item1" parent="ItemList"]
 margin_right = 265.0
 margin_bottom = 27.0
 text = "CERRAR MOCHILA"
 
-[node name="Quantity" parent="ItemList/Item1" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item1"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -182,13 +232,13 @@ margin_bottom = 24.5
 text = ""
 align = 2
 
-[node name="Item2" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item2" parent="ItemList"]
 margin_top = 31.0
 margin_right = 265.0
 margin_bottom = 58.0
 text = ""
 
-[node name="Quantity" parent="ItemList/Item2" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item2"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -200,13 +250,13 @@ margin_bottom = 24.5
 text = ""
 align = 2
 
-[node name="Item3" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item3" parent="ItemList"]
 margin_top = 62.0
 margin_right = 265.0
 margin_bottom = 89.0
 text = ""
 
-[node name="Quantity" parent="ItemList/Item3" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item3"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -218,13 +268,13 @@ margin_bottom = 24.5
 text = ""
 align = 2
 
-[node name="Item4" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item4" parent="ItemList"]
 margin_top = 93.0
 margin_right = 265.0
 margin_bottom = 120.0
 text = ""
 
-[node name="Quantity" parent="ItemList/Item4" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item4"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -236,13 +286,13 @@ margin_bottom = 24.5
 text = ""
 align = 2
 
-[node name="Item5" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item5" parent="ItemList"]
 margin_top = 124.0
 margin_right = 265.0
 margin_bottom = 151.0
 text = ""
 
-[node name="Quantity" parent="ItemList/Item5" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item5"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -254,13 +304,13 @@ margin_bottom = 24.5
 text = ""
 align = 2
 
-[node name="Item6" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item6" parent="ItemList"]
 margin_top = 155.0
 margin_right = 265.0
 margin_bottom = 182.0
 text = ""
 
-[node name="Quantity" parent="ItemList/Item6" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item6"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -272,13 +322,13 @@ margin_bottom = 24.5
 text = ""
 align = 2
 
-[node name="Item7" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item7" parent="ItemList"]
 margin_top = 186.0
 margin_right = 265.0
 margin_bottom = 213.0
 text = ""
 
-[node name="Quantity" parent="ItemList/Item7" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item7"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -290,13 +340,13 @@ margin_bottom = 24.5
 text = ""
 align = 2
 
-[node name="Item8" parent="ItemList" instance=ExtResource( 11 )]
+[node name="Item8" parent="ItemList"]
 margin_top = 217.0
 margin_right = 265.0
 margin_bottom = 249.0
 text = ""
 
-[node name="Quantity" parent="ItemList/Item8" instance=ExtResource( 11 )]
+[node name="Quantity" parent="ItemList/Item8"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -309,30 +359,30 @@ text = ""
 align = 2
 
 [node name="Mochila_Sprite" type="Sprite" parent="."]
-position = Vector2( 88.7812, 83.8941 )
-texture = ExtResource( 15 )
+position = Vector2(88.7812, 83.8941)
+texture = SubResource("Resource_1qv6l")
 
 [node name="Slider" type="Sprite" parent="."]
-position = Vector2( 487.368, 60 )
-texture = ExtResource( 16 )
+position = Vector2(487.368, 60)
+texture = SubResource("Resource_sx3e8")
 
 [node name="L_Arrow" type="Sprite" parent="."]
-position = Vector2( 17.3984, 88.8973 )
-texture = ExtResource( 17 )
+position = Vector2(17.3984, 88.8973)
+texture = SubResource("Resource_pt3n0")
 vframes = 8
 
 [node name="R_Arrow" type="Sprite" parent="."]
-position = Vector2( 159.122, 88.8973 )
-texture = ExtResource( 18 )
+position = Vector2(159.122, 88.8973)
+texture = SubResource("Resource_j43at")
 vframes = 8
 
 [node name="Select" type="Sprite" parent="."]
-position = Vector2( 325, 36 )
-texture = ExtResource( 19 )
+position = Vector2(325, 36)
+texture = SubResource("Resource_c6352")
 
 [node name="Item_Sprite" type="Sprite" parent="."]
-position = Vector2( 48, 337 )
-texture = ExtResource( 20 )
+position = Vector2(48, 337)
+texture = SubResource("Resource_1xe8y")
 
 [node name="MSG" type="Panel" parent="."]
 visible = false
@@ -341,13 +391,13 @@ margin_right = 370.0
 margin_bottom = 384.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource("14")
 
 [node name="next" type="Sprite" parent="MSG"]
 editor/display_folded = true
 visible = false
-position = Vector2( 491, 69 )
-texture = ExtResource( 22 )
+position = Vector2(491, 69)
+texture = SubResource("Resource_p3d3t")
 hframes = 4
 frame = 3
 __meta__ = {
@@ -356,22 +406,21 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MSG/next"]
 root_node = NodePath("")
-anims/Idle = ExtResource( 23 )
+anims/Idle = SubResource("Resource_684n2")
 
 [node name="Timer 2" type="Timer" parent="MSG"]
 wait_time = 0.05
 one_shot = true
 
-[node name="RichTextLabel" parent="MSG" instance=ExtResource( 24 )]
+[node name="RichTextLabel" parent="MSG"]
 margin_left = 17.0
 margin_top = 20.0
 margin_right = 352.0
 margin_bottom = 51.0
 
-[node name="ACTIONS" parent="." instance=ExtResource( 25 )]
+[node name="ACTIONS" parent="."]
 editor/display_folded = true
 visible = false
 
 [editable path="MSG/RichTextLabel"]
-
 [editable path="ACTIONS"]

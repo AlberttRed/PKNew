@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://ccjvsetsjg4tw"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://ccjvsetsjg4tw"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_uclwi"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_uclwi"]
 [ext_resource type="Resource" uid="uid://sw6nw4833hji" path="res://Resources/Types/01.tres" id="2_ahu8v"]
 
 [resource]
@@ -19,8 +19,9 @@ effect_chance = 30
 priority = 0
 damage_class_id = 3
 effect_entries = "Has a $effect_chance% chance to make the target flinch.  Only works if the user is sleeping. Only usable if the user is sleeping.  Inflicts regular damage.  Has a $effect_chance% chance to make the target flinch."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -35,4 +36,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 30
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

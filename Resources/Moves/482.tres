@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://hm4bi13gevu7"]
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://hm4bi13gevu7"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_3irnw"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_3irnw"]
+[ext_resource type="Resource" uid="uid://d3gp5fdyknbo7" path="res://Resources/Ailments/POISON.tres" id="1_iu42j"]
 [ext_resource type="Resource" uid="uid://0qhj5bvapu6l" path="res://Resources/Types/04.tres" id="2_oo617"]
 
 [resource]
@@ -19,8 +20,9 @@ effect_chance = 10
 priority = 0
 damage_class_id = 3
 effect_entries = "Has a $effect_chance% chance to poison the target. Inflicts regular damage.  Has a $effect_chance% chance to poison the target."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 9
 meta_ailment_id = 5
 meta_category_id = 4
@@ -35,4 +37,4 @@ meta_ailment_chance = 10
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1
+ailment = ExtResource("1_iu42j")

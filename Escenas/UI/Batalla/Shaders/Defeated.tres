@@ -1,11 +1,11 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cjke06i77cedl"]
 
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated.gdshader" id="1_yy5dh"]
+[ext_resource type="Shader" uid="uid://bd8d04uvs4wqv" path="res://Escenas/UI/Batalla/Shaders/PKMNDefeated.gdshader" id="1_yy5dh"]
 [ext_resource type="Texture2D" uid="uid://bjcor0r3tfvqs" path="res://Objetos/Batalla/Animaciones/Resources/Transition Masks/022-Normal02.png" id="2_kek7h"]
 
 [resource]
 shader = ExtResource("1_yy5dh")
 shader_parameter/cutoff = 0.0
 shader_parameter/smooth_size = 0.0
-shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/mask = ExtResource("2_kek7h")
+shader_parameter/color = Color(1, 1, 1, 1)

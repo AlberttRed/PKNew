@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1wph4c700mo0"]
 
-[ext_resource type="Script" path="res://Scripts/Event/Event Commands/cmd_teleport_to_scene.gd" id="1_00sib"]
+[ext_resource type="Script" uid="uid://d2kp8j16uodu4" path="res://Scripts/Event/Event Commands/cmd_teleport_to_scene.gd" id="1_00sib"]
 
 [node name="cmd_teleport_to_scene" type="Node"]
 script = ExtResource("1_00sib")

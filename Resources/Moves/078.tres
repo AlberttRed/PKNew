@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://7djwq67oy6q5"]
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://7djwq67oy6q5"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_yyan2"]
+[ext_resource type="Resource" uid="uid://c74kascyu4hfe" path="res://Resources/Ailments/PARALYSIS.tres" id="1_bq46g"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_yyan2"]
 [ext_resource type="Resource" uid="uid://dekni3p3d2804" path="res://Resources/Types/12.tres" id="2_bn58m"]
 
 [resource]
@@ -18,8 +19,9 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Paralyzes the target. Paralyzes the target."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 1
 meta_category_id = 1
@@ -34,4 +36,4 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1
+ailment = ExtResource("1_bq46g")

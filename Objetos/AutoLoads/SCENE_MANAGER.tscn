@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://de3q1517d5jfm"]
 
-[ext_resource type="Script" path="res://Scripts/AutoLoads/SCENE_MANAGER.gd" id="1_f4cv2"]
+[ext_resource type="Script" uid="uid://cwet760rb38nm" path="res://Scripts/AutoLoads/SCENE_MANAGER.gd" id="1_f4cv2"]
 [ext_resource type="PackedScene" uid="uid://8qp0j6uye30u" path="res://Escenas/Mapas/Pueblo Paleta/Pueblo Paleta.tscn" id="2_oi75r"]
 [ext_resource type="Animation" uid="uid://d13qjmg5g40fp" path="res://Animaciones/Overworld/General/FadeToBlack.tres" id="3_12epv"]
 [ext_resource type="Animation" uid="uid://s10l5huqcog" path="res://Animaciones/Overworld/General/FadeToNormal.tres" id="4_8au3q"]
@@ -22,9 +22,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bqr54"]
 _data = {
-"FadeToBlack": ExtResource("3_12epv"),
-"FadeToNormal": ExtResource("4_8au3q"),
-"RESET": SubResource("Animation_stqkf")
+&"FadeToBlack": ExtResource("3_12epv"),
+&"FadeToNormal": ExtResource("4_8au3q"),
+&"RESET": SubResource("Animation_stqkf")
 }
 
 [node name="SceneManager" type="Node2D"]

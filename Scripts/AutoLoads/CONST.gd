@@ -55,12 +55,15 @@ const functions = {}
 
 const NaturesName = ["None", "Activa", "Afable", "Agitada", "Alegre", "Alocada", "Amable", "Audaz", "Cauta", "Dócil", "Firme", "Floja", "Fuerte", "Grosera", "Huraña", "Ingenua", "Mansa", "Miedosa", "Modesta", "Osada", "Pícara", "Plácida", "Rara", "Serena", "Seria", "Tímida"]
 #
-const Personality_Table = [ [[[0, 5, 10, 15, 20, 25, 30],"Le encanta comer."], [[1, 6, 11, 16, 21, 26, 31],"A menudo se duerme."], [[2, 7, 12, 17, 22, 27],"Duerme mucho."], [[3, 8, 13, 18, 23, 28],"Suele desordenar cosas."], [[4, 9, 14, 19, 24, 29],"Le gusta relajarse."]], # HP
+const Personality_Table = [ 
 							[[[0, 5, 10, 15, 20, 25, 30],"Orgulloso de su fuerza."], [[1, 6, 11, 16, 21, 26, 31],"Le gusta revolverse."], [[2, 7, 12, 17, 22, 27],"A veces se enfada."], [[3, 8, 13, 18, 23, 28],"Le gusta luchar."], [[4, 9, 14, 19, 24, 29],"Tiene mal genio."]], # ATAQUE
 							[[[0, 5, 10, 15, 20, 25, 30],"Cuerpo resistente."], [[1, 6, 11, 16, 21, 26, 31],"Es buen fajador."], [[2, 7, 12, 17, 22, 27],"Muy persistente."], [[3, 8, 13, 18, 23, 28],"Muy resistente."], [[4, 9, 14, 19, 24, 29],"Muy perseverante."]], # DEFENSA
 							[[[0, 5, 10, 15, 20, 25, 30],"Extremadamente curioso."], [[1, 6, 11, 16, 21, 26, 31],"Le gusta hacer travesuras."], [[2, 7, 12, 17, 22, 27],"Muy astuto."], [[3, 8, 13, 18, 23, 28],"A menudo está en Babia."], [[4, 9, 14, 19, 24, 29],"Muy melindroso."]], # ATAQUE ESPECIAL
 							[[[0, 5, 10, 15, 20, 25, 30],"Voluntarioso."], [[1, 6, 11, 16, 21, 26, 31],"Es algo orgulloso."], [[2, 7, 12, 17, 22, 27],"Muy insolente."], [[3, 8, 13, 18, 23, 28],"Odia perder."], [[4, 9, 14, 19, 24, 29],"Un poco cabezota."]],  # DEFENSA ESPECIAL
-							[[[0, 5, 10, 15, 20, 25, 30],"Le gusta correr."], [[1, 6, 11, 16, 21, 26, 31],"Siempre tiene el oído alerta."], [[2, 7, 12, 17, 22, 27],"Impetuoso y bobo."], [[3, 8, 13, 18, 23, 28],"Es un poco payaso."], [[4, 9, 14, 19, 24, 29],"Huye rápido."] ]] # VELOCIDAD
+							[[[0, 5, 10, 15, 20, 25, 30],"Le gusta correr."], [[1, 6, 11, 16, 21, 26, 31],"Siempre tiene el oído alerta."], [[2, 7, 12, 17, 22, 27],"Impetuoso y bobo."], [[3, 8, 13, 18, 23, 28],"Es un poco payaso."], [[4, 9, 14, 19, 24, 29],"Huye rápido."]], # VELOCIDAD
+							[], [],
+							[[[0, 5, 10, 15, 20, 25, 30],"Le encanta comer."], [[1, 6, 11, 16, 21, 26, 31],"A menudo se duerme."], [[2, 7, 12, 17, 22, 27],"Duerme mucho."], [[3, 8, 13, 18, 23, 28],"Suele desordenar cosas."], [[4, 9, 14, 19, 24, 29],"Le gusta relajarse."]] # HP
+						]
 
 ##							   None   Activa  Afable   Agitada Alegre Alocada Amable Audaz Cauta  Dócil  Firme  Floja  Fuerte Grosera Huraña  Ingenua  Mansa   Miedosa   Modesta   Osada   Pícara   Plácida   Rara   Serena   Seria   Tímida
 const stat_effects_Natures = [ [], [1, 	1, 		1, 		1,		1,		1,		1,	  1.1,	1,		1,	  1.1,	 1,		 1,		1,		1.1,	 1,		 1,		0.9,	   0.9,		0.9,	1.1,	   1,		1,	  0.9,		1,		1], # ATAQUE
@@ -139,11 +142,11 @@ class BATTLE:
 	const BACK_POKEMONB_SPRITE_POS = Vector2(288, 0)   #SI HA DE SUMAR EL DOBLE DEL VALOR BattlerPlayerY DE L ESSENTIALS ??
 
 	
-	const BACK_SINGLE_TRAINER_POS = Vector2(262,93) #Vector2(256,-16) 
+	const BACK_SINGLE_TRAINER_POS = Vector2(262,-16) #Vector2(256,-16) 
 	const BACK_DOUBLE1_TRAINER_POS = Vector2(-144,-80) 
 	const BACK_DOUBLE2_TRAINER_POS = Vector2(224,-80) 
 	
-	const FRONT_SINGLE_TRAINER_POS = Vector2(64,-58) 
+	const FRONT_SINGLE_TRAINER_POS = Vector2(122, 8)#Vector2(64,-58) 
 	const FRONT_DOUBLE1_TRAINER_POS = Vector2(38, -58)
 	const FRONT_DOUBLE2_TRAINER_POS = Vector2(84, -58)
 	
@@ -168,13 +171,13 @@ class BATTLE:
 	const SINGLE_FRONT_SLOT = 3
 	const DOUBLE_FRONT_SLOT_1 = 4
 	const DOUBLE_FRONT_SLOT_2 = 5
-	
-enum BATTLE_MODES {
-	NONE,
-	SINGLE,
-	DOUBLE,
-	TRIPLE
-}
+	#
+#enum BATTLE_MODES {
+	#NONE,
+	#SINGLE,
+	#DOUBLE,
+	#TRIPLE
+#}
 
 enum BATTLE_SIDES {
 	NONE,
@@ -183,11 +186,7 @@ enum BATTLE_SIDES {
 }
 	
 	
-enum BATTLE_TYPES {
-	NONE,
-	WILD,
-	TRAINER
-}
+
 
 enum BATTLE_ACTIONS {
 	LUCHAR,
@@ -230,18 +229,18 @@ enum DAMAGE_CLASS {
 	
 }
 	
-enum WEATHER {
-	NONE,
-	SOLEADO = 1,
-	SOL_ABRASADOR = 2,
-	LLUVIOSO = 3,
-	DILUVIO = 4,
-	TORM_ARENA = 5,
-	GRANIZO = 6,
-	NIEBLA = 7,
-	TURBULENCIAS = 8,
-	LLUVIA_DIAMANTES = 9
-}
+#enum WEATHER {
+	#NONE,
+	#SOLEADO = 1,
+	#SOL_ABRASADOR = 2,
+	#LLUVIOSO = 3,
+	#DILUVIO = 4,
+	#TORM_ARENA = 5,
+	#GRANIZO = 6,
+	#NIEBLA = 7,
+	#TURBULENCIAS = 8,
+	#LLUVIA_DIAMANTES = 9
+#}
 	#
 #enum TARGETS {
 	#NONE,

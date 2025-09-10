@@ -57,6 +57,34 @@ func _ready():
 func setText(_text):
 	label.text = _text
 	
+func show_custom(text: String, config := {}):
+	waitInput = config.get("waitInput", true)
+	closeAtEnd = config.get("closeAtEnd", true)
+	waitTime = config.get("waitTime", 0.0)
+	await showMessage(text)
+
+func show_input(text: String):
+	await show_custom(text, {
+		"waitInput": true,
+		"closeAtEnd": true,
+		"waitTime": 0.0
+	})
+
+func show_wait(text: String, wait_time: float):
+	await show_custom(text, {
+		"waitInput": false,
+		"closeAtEnd": true,
+		"waitTime": wait_time
+	})
+
+func show_no_close(text: String):
+	await show_custom(text, {
+		"waitInput": true,
+		"closeAtEnd": false,
+		"waitTime": 0.0
+	})
+
+	
 func writeText():
 	set_physics_process(true)
 	while label.visible_characters < label.get_total_character_count():
@@ -69,7 +97,8 @@ func writeText():
 	
 	
 func startText():
-	GUI.accept.connect(selectOption)
+	enable_input_handling()
+	#GUI.accept.connect(selectOption)
 	#GUI.cancel.connect(cancelOption)
 	label.line_displayed.connect(newLine)
 	finsihedTyping.connect(_finishedMessage)
@@ -82,9 +111,10 @@ func startText():
 		#finishedAllText.connect(func(): finished.emit())
 	
 	#$AnimationPlayer.play("Typing")
-	writeText()
+	await writeText()
 	
 func selectOption(): #(ui_accept)
+	print("selected")
 	if messageHasFinished:
 		if waitInput:
 			close()
@@ -96,6 +126,7 @@ func selectOption(): #(ui_accept)
 				resumeText()	
 
 func cancelOption(): #(ui_cancel)
+		print("cancel")
 		if messageHasFinished:
 			if waitInput:
 				close()
@@ -167,7 +198,7 @@ func showMessage(message = null):
 	label.text = getNextMessage()
 	$next.hide()
 	self.show()
-	startText()
+	await startText()
 	await finished
 		
 func close():
@@ -176,8 +207,9 @@ func close():
 	finished.emit()
 	
 func clear():
-	if GUI.accept.is_connected(selectOption):
-		GUI.accept.disconnect(selectOption)
+	disable_input_handling()
+	#if GUI.accept.is_connected(selectOption):
+		#GUI.accept.disconnect(selectOption)
 	#GUI.cancel.disconnect(cancelOption)
 	if label.line_displayed.is_connected(newLine):
 		label.line_displayed.disconnect(newLine)
@@ -205,3 +237,15 @@ func updateScroll(startingPosition:int, finalPosition:int):
 	
 func onFinish():
 	clear()
+
+func enable_input_handling():
+	if not GUI.accept.is_connected(Callable(self, "selectOption")):
+		GUI.accept.connect(Callable(self, "selectOption"))
+	if not GUI.cancel.is_connected(Callable(self, "cancelOption")):
+		GUI.cancel.connect(Callable(self, "cancelOption"))
+
+func disable_input_handling():
+	if GUI.accept.is_connected(Callable(self, "selectOption")):
+		GUI.accept.disconnect(Callable(self, "selectOption"))
+	if GUI.cancel.is_connected(Callable(self, "cancelOption")):
+		GUI.cancel.disconnect(Callable(self, "cancelOption"))

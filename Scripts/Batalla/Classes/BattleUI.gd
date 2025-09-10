@@ -66,9 +66,9 @@ func initUI(_controller):
 	playerField.position = CONST.BATTLE.PLAYER_BASE_INITIALPOSITION
 	enemyField.position = CONST.BATTLE.ENEMY_BASE_INITIALPOSITION
 	
-	if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
+	if controller.rules.mode == BattleRules.BattleModes.SINGLE:
 		initSingleBattleUI()
-	elif controller.rules.mode == CONST.BATTLE_MODES.DOUBLE:
+	elif controller.rules.mode == BattleRules.BattleModes.DOUBLE:
 		initDoubleBattleUI()
 	
 	msgBox = BattleMessageController.new()#$PanelMessageBox)
@@ -91,10 +91,25 @@ func clear():
 	playAnimation("RESET")
 	GUI.resetMessageBox()
 	SignalManager.Battle.Animations.playAnimation.disconnect(playAnimation)
-	if controller.rules.mode == CONST.BATTLE_MODES.SINGLE:
+	if controller.rules.mode == BattleRules.BattleModes.SINGLE:
 		clearSingleBattleUI()
-	elif controller.rules.mode == CONST.BATTLE_MODES.DOUBLE:
+	elif controller.rules.mode == BattleRules.BattleModes.DOUBLE:
 		clearDoubleBattleUI()
+		
+func showTrainerBattleMessage():
+	if controller.rules.type == BattleRules.BattleTypes.NONE:
+		return
+		
+	if controller.rules.type == BattleRules.BattleTypes.TRAINER:
+		await showMessageWait("Preparate para un desafío a manos de... ¡DOMINGUERO JUAN!", 1.5)
+
+func showWildBattleMessage():
+	if controller.rules.type == BattleRules.BattleTypes.NONE:
+		return
+		
+	if controller.rules.type == BattleRules.BattleTypes.WILD:
+		if controller.enemySide.activePokemons.size() == 1:
+			await showMessageWait("¡Un " + controller.enemySide.activePokemons[0].Name + " salvaje te corta el paso!", 1.5)
 
 #func initSingleBattleUI():
 	#$playerBase/PokemonPlayerA.visible = false
@@ -114,16 +129,16 @@ func clear():
 	
 func initSingleBattleUI():
 	$playerBase/TrainerA.sprite.visible = true
-	$playerBase/TrainerA.get_node("Sprite").position = CONST.BATTLE.BACK_SINGLE_TRAINER_POS
+	$playerBase/TrainerA.position = CONST.BATTLE.BACK_SINGLE_TRAINER_POS
 	$playerBase/HPBarA.position = CONST.BATTLE.SINGLE_PLAYERHPBAR_A_INITIALPOSITION
 	$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_A_INITIALPOSITION
 	
-	if controller.rules.type == CONST.BATTLE_TYPES.WILD:
-		pass
+	if controller.rules.type == BattleRules.BattleTypes.WILD:
+		$enemyBase/TrainerA.sprite.visible = false
 		#$enemyBase/HPBarA.position = CONST.BATTLE.SINGLE_ENEMYHPBAR_FINALPOSITION
-	elif controller.rules.type == CONST.BATTLE_TYPES.TRAINER:
+	elif controller.rules.type == BattleRules.BattleTypes.TRAINER:
 		$enemyBase/TrainerA.sprite.visible = true
-		$enemyBase/TrainerA.sprite.position = CONST.BATTLE.FRONT_SINGLE_TRAINER_POS
+		$enemyBase/TrainerA.position = CONST.BATTLE.FRONT_SINGLE_TRAINER_POS
 	#playerSide.pokemonSpotA.hide()
 	#enemySide.pokemonSpotA.hide()
 	#$playerBase/PokemonPlayerA.visible = false
@@ -185,7 +200,7 @@ func _input(event):
 		elif onMovesPanel():
 				print("Move selected")
 				if controller.active_pokemon.selected_move.pp_actual == 0:
-					await GUI.battle.showMessage("¡No quedan PP para este movimiento!", false, 2.0)
+					await showMessageWait("¡No quedan PP para este movimiento!", 2.0)
 					selectMove.emit(true)
 				else:
 					moveSelected.emit(controller.active_pokemon.selected_move)
@@ -227,6 +242,7 @@ func showMovesPanel(rememberFocus = false):
 		latestMovePanel.grab_focus()
 	else:
 		pnlMove1.grab_focus()
+	
 		#
 #func showConfirmationPanel():
 	#var array:Array[String] = ["SI","NO"]
@@ -426,3 +442,25 @@ func playAnimation(animation, animParams:Dictionary = {}, _root:Node = self):
 	
 func stopAnimation(animation:String):
 	animController.stopAnimation(animation)
+
+func playBattleTransition():
+	match controller.rules.environment:
+		BattleRules.BattleEnvironments.FIELD:
+			pass
+		BattleRules.BattleEnvironments.GRASS:
+			playAnimation("BATTLE_TRANSITION_GRASS")
+		BattleRules.BattleEnvironments.WATER:
+			pass
+		BattleRules.BattleEnvironments.CAVE:
+			pass
+	
+func showBattleBases():
+	if controller.rules.type == BattleRules.BattleTypes.WILD:
+		#$AnimationPlayer.get_animation("Battle_GeneralAnimations/START_BATTLE").length = 3.2
+		playAnimation("SHOW_BASES_WILD")
+	elif controller.rules.type == BattleRules.BattleTypes.TRAINER:
+		#$AnimationController.get_animation("Battle_GeneralAnimations/START_BATTLE").length = 4.1
+		playAnimation("SHOW_BASES_TRAINER")
+	else:
+		printerr("BATTLE TYPE NOT SELECTED")
+	

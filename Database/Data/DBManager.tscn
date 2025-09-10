@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvny5mlib8cou"]
 
-[ext_resource type="Script" path="res://Database/Data/DBManager.gd" id="1_bbx67"]
+[ext_resource type="Script" uid="uid://b2txsnv8boy71" path="res://Database/Data/DBManager.gd" id="1_bbx67"]
 [ext_resource type="PackedScene" uid="uid://hi4qob8eqj6a" path="res://Database/Data/Pokemon/DBPokemons.tscn" id="1_kpsja"]
 [ext_resource type="PackedScene" uid="uid://dkb88k6a7pqkf" path="res://Database/Data/Moves/DBMoves.tscn" id="2_gb7wf"]
 [ext_resource type="PackedScene" uid="uid://c8sedjik7k7tb" path="res://Database/Data/Items/DBItems.tscn" id="3_knkek"]

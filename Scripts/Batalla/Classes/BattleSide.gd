@@ -70,7 +70,7 @@ func initSide(rules: BattleRules):
 		#field.pokemonSpotA.setSide(self)
 		field.pokemonSpotA.HPbar = field.hpBarA
 		field.pokemonSpotA.show()
-		if rules.mode == CONST.BATTLE_MODES.DOUBLE:
+		if rules.mode == BattleRules.BattleModes.DOUBLE:
 			field.pokemonSpotB.setParticipant(participants[0])
 			#field.pokemonSpotB.setSide(self)
 			#pokemonSpotB.HPbar = field.hpBarB

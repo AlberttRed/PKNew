@@ -1,6 +1,7 @@
 extends Node
 class_name Battler
 
+@export var trainer_id : int
 @export var type : CONST.BATTLER_TYPES
 @export var battleIA : Resource = null
 @export var Name: String
@@ -49,7 +50,7 @@ func _ready():
 			addPokemonToParty(p)
 
 func addPokemonToParty(p:PokemonInstance):
-	if type == CONST.BATTLE_TYPES.TRAINER:
+	if type == CONST.BATTLER_TYPES.TRAINER:
 		p.trainer = self
 	party.push_back(p)
 	
@@ -71,7 +72,25 @@ func print_pokemon_team():
 		print(" ")
 		p.print_moves()
 		print(" ")
-		
+
+
+func to_battle_participant() -> BattleParticipant_Refactor:
+	var p := BattleParticipant_Refactor.new()
+	p.trainer_id = trainer_id
+	p.name = name if name != null else ""
+	p.is_player = is_playable  # o false si es un NPC
+	p.ai_controller = battleIA
+	#p.sprite_path = null  # si usás sprites por entrenador
+	p.is_trainer = (type != CONST.BATTLER_TYPES.WILD_POKEMON)
+	p.pokemon_team = []
+	
+	for pok:PokemonInstance in party:
+		var battle_pokemon := pok.to_battle_pokemon() #BattlePokemon_Refactor.new(pok, battleIA)
+		battle_pokemon.controllable = is_playable
+		battle_pokemon.participant = p
+		p.add_pokemon(battle_pokemon)
+	return p
+	
 #func initPokemonTeam():
 #	for p in get_children():
 #		p.create()

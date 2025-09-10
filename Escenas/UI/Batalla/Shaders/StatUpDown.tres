@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d11gerbjif732"]
 
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/StatUpDown.gdshader" id="1_lkdgm"]
+[ext_resource type="Shader" uid="uid://g4tfa4yhmwcq" path="res://Escenas/UI/Batalla/Shaders/StatUpDown.gdshader" id="1_lkdgm"]
 [ext_resource type="Texture2D" uid="uid://dk116xfkakhg7" path="res://Sprites/Batalla/Moves Animations/OverlayStatDown.png" id="2_sosmq"]
 
 [resource]

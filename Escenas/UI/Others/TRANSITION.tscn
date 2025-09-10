@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://qp2b8byf71vg"]
 
-[ext_resource type="Script" path="res://Escenas/UI/Others/TRANSITION.gd" id="1_24moy"]
+[ext_resource type="Script" uid="uid://bj47ys5d1dd2e" path="res://Escenas/UI/Others/TRANSITION.gd" id="1_24moy"]
 [ext_resource type="AnimationLibrary" uid="uid://cyhe1thfto66n" path="res://Objetos/Batalla/Animaciones/General/Battle_Transitions.res" id="3_4e35e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joivn"]
@@ -83,7 +83,7 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3bto"]
 _data = {
-"RESET": SubResource("Animation_lvmvf")
+&"RESET": SubResource("Animation_lvmvf")
 }
 
 [node name="TRANSITION" type="Panel"]

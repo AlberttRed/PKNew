@@ -1,14 +1,8 @@
-[gd_scene load_steps=57 format=3 uid="uid://b6jd5v84qimwd"]
+[gd_scene load_steps=51 format=3 uid="uid://b6jd5v84qimwd"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_xby2u"]
+[ext_resource type="Script" uid="uid://bx1e74ilc3y3" path="res://Scripts/Player.gd" id="1_xby2u"]
 [ext_resource type="Texture2D" uid="uid://b8v3bj2nw2qd" path="res://Sprites/Overworlds/Characters/trchar000.png" id="2_1dqiu"]
 [ext_resource type="PackedScene" uid="uid://c22wi0px6h3ic" path="res://Objetos/Trainer.tscn" id="3_ad010"]
-[ext_resource type="Resource" uid="uid://dh2bhrexble5f" path="res://Resources/Pokemon/001.tres" id="4_si8k2"]
-[ext_resource type="Resource" uid="uid://clr20wqayq5dp" path="res://Resources/Pokemon/025.tres" id="5_yjsrq"]
-[ext_resource type="Resource" uid="uid://0libuajxgq7q" path="res://Resources/Pokemon/029.tres" id="6_2tyfx"]
-[ext_resource type="Resource" uid="uid://cw6u8tdqk3g46" path="res://Resources/Pokemon/041.tres" id="7_f55aq"]
-[ext_resource type="Resource" uid="uid://clk6u1qre2p20" path="res://Resources/Pokemon/066.tres" id="8_cupxi"]
-[ext_resource type="Resource" uid="uid://dym3bm6a6y040" path="res://Resources/Pokemon/074.tres" id="9_t0ncu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m30hk"]
 size = Vector2(30, 30)
@@ -475,24 +469,24 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0jgqw"]
 _data = {
-"IdleDown": SubResource("Animation_tg222"),
-"IdleLeft": SubResource("Animation_wwnrt"),
-"IdleRight": SubResource("Animation_cuhgb"),
-"IdleUp": SubResource("Animation_4q6cx"),
-"RESET": SubResource("Animation_bc1ss"),
-"RunDown": SubResource("Animation_jdoyh"),
-"RunLeft": SubResource("Animation_guhw5"),
-"RunRight": SubResource("Animation_y2x52"),
-"RunUp": SubResource("Animation_xb65g"),
-"TurnDown": SubResource("Animation_tlk12"),
-"TurnLeft": SubResource("Animation_we7qa"),
-"TurnRight": SubResource("Animation_pa4gi"),
-"TurnUp": SubResource("Animation_jcppi"),
-"WalkDown": SubResource("Animation_2et1i"),
-"WalkLeft": SubResource("Animation_8xjyb"),
-"WalkRight": SubResource("Animation_c6jr7"),
-"WalkUp": SubResource("Animation_i7psf"),
-"aaaa": SubResource("Animation_fil3n")
+&"IdleDown": SubResource("Animation_tg222"),
+&"IdleLeft": SubResource("Animation_wwnrt"),
+&"IdleRight": SubResource("Animation_cuhgb"),
+&"IdleUp": SubResource("Animation_4q6cx"),
+&"RESET": SubResource("Animation_bc1ss"),
+&"RunDown": SubResource("Animation_jdoyh"),
+&"RunLeft": SubResource("Animation_guhw5"),
+&"RunRight": SubResource("Animation_y2x52"),
+&"RunUp": SubResource("Animation_xb65g"),
+&"TurnDown": SubResource("Animation_tlk12"),
+&"TurnLeft": SubResource("Animation_we7qa"),
+&"TurnRight": SubResource("Animation_pa4gi"),
+&"TurnUp": SubResource("Animation_jcppi"),
+&"WalkDown": SubResource("Animation_2et1i"),
+&"WalkLeft": SubResource("Animation_8xjyb"),
+&"WalkRight": SubResource("Animation_c6jr7"),
+&"WalkUp": SubResource("Animation_i7psf"),
+&"aaaa": SubResource("Animation_fil3n")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gkksw"]
@@ -630,7 +624,7 @@ shape = SubResource("RectangleShape2D_m30hk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0jgqw")
+&"": SubResource("AnimationLibrary_0jgqw")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -659,7 +653,7 @@ position = Vector2(16, 16)
 [node name="Trainer" parent="." instance=ExtResource("3_ad010")]
 
 [node name="pkm1" parent="Trainer" index="0"]
-base = ExtResource("4_si8k2")
+pokemon = 1
 level = 5
 gender = 1
 hp_EVs = 87
@@ -678,7 +672,7 @@ ability_id = 62
 nature_id = 19
 
 [node name="pkm2" parent="Trainer" index="1"]
-base = ExtResource("5_yjsrq")
+pokemon = 25
 level = 7
 gender = 2
 hp_EVs = 160
@@ -697,7 +691,7 @@ ability_id = 22
 nature_id = 12
 
 [node name="pkm3" parent="Trainer" index="2"]
-base = ExtResource("6_2tyfx")
+pokemon = 29
 level = 6
 gender = 1
 hp_EVs = 142
@@ -716,7 +710,7 @@ ability_id = 172
 nature_id = 6
 
 [node name="pkm4" parent="Trainer" index="3"]
-base = ExtResource("7_f55aq")
+pokemon = 41
 level = 5
 gender = 1
 hp_EVs = 89
@@ -735,7 +729,7 @@ ability_id = 231
 nature_id = 11
 
 [node name="pkm5" parent="Trainer" index="4"]
-base = ExtResource("8_cupxi")
+pokemon = 66
 level = 6
 gender = 1
 hp_EVs = 5
@@ -754,7 +748,7 @@ ability_id = 7
 nature_id = 9
 
 [node name="pkm6" parent="Trainer" index="5"]
-base = ExtResource("9_t0ncu")
+pokemon = 74
 level = 8
 gender = 1
 hp_EVs = 218

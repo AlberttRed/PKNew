@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ta05jv33ns50"]
 
-[ext_resource type="Script" path="res://Escenas/UI/Others/health_bar.gd" id="1_lywt1"]
+[ext_resource type="Script" uid="uid://c6q8oci1y3ho8" path="res://Escenas/UI/Others/health_bar.gd" id="1_lywt1"]
 [ext_resource type="PackedScene" uid="uid://c4ex854x6yq5d" path="res://Escenas/UI/Fonts/LabelHGSS.tscn" id="2_5oqg0"]
 [ext_resource type="Texture2D" uid="uid://dqhrc65l8u6am" path="res://Sprites/Pictures/HPbar_background.png" id="3_1t77b"]
 [ext_resource type="FontFile" uid="uid://bwwk8ekl3u4o7" path="res://Escenas/UI/Fonts/Pokemon GB.ttf" id="3_3qbah"]

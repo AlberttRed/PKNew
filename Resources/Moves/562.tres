@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://vhvj5qrrpyi1"]
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://vhvj5qrrpyi1"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_e75bw"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_e75bw"]
 [ext_resource type="Resource" uid="uid://0qhj5bvapu6l" path="res://Resources/Types/04.tres" id="2_obis6"]
 
 [resource]
@@ -24,8 +24,9 @@ effect_entries = "Can only be used after the user has eaten a berry. Inflicts re
 After the user eats a berry, it may use this move any number of times until the end of the battle, even if it switches out.  Eating a held berry, eating a berry via bug bite or pluck, or being the target of a Flung berry will enable this move.  Feeding a Pokémon a berry from the bag or using natural gift will not.
 
 If the trainer chooses this move when it cannot be used, the choice is rejected outright and the trainer must choose another move."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0
@@ -40,4 +41,3 @@ meta_ailment_chance = 0
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1

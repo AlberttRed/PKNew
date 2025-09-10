@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bvyjtyg2y32es"]
 
-[ext_resource type="Shader" path="res://Escenas/UI/Batalla/Shaders/BattleBackroundSlider.gdshader" id="1_rdpcc"]
+[ext_resource type="Shader" uid="uid://dgadkiycyfmpe" path="res://Escenas/UI/Batalla/Shaders/BattleBackroundSlider.gdshader" id="1_rdpcc"]
 
 [resource]
 shader = ExtResource("1_rdpcc")
-shader_parameter/Direction = Vector2(0.0120482, 0)
+shader_parameter/Direction = Vector2(0.307229, 0)
 shader_parameter/Speed = 0.75

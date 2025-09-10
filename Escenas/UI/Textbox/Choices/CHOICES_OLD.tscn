@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c3hp5o2kge4fg"]
 
 [ext_resource type="Texture2D" uid="uid://cp3p5plvvv4sj" path="res://Escenas/UI/Textbox/Choices/Resources/choice 1_old.png" id="1_rrlxn"]
-[ext_resource type="Script" path="res://Escenas/UI/Textbox/Choices/CHOICES_OLD.gd" id="2_tqecu"]
+[ext_resource type="Script" uid="uid://csdojt7htkoxf" path="res://Escenas/UI/Textbox/Choices/CHOICES_OLD.gd" id="2_tqecu"]
 [ext_resource type="Texture2D" uid="uid://cmeoqv04gsb84" path="res://Escenas/UI/Textbox/Choices/Resources/selarrow.png" id="3_6vm7l"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kommp"]

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://iohyicww5b07"]
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://iohyicww5b07"]
 
-[ext_resource type="Script" path="res://Database/Classes/move_resource.gd" id="1_87t1t"]
+[ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_87t1t"]
+[ext_resource type="Resource" uid="uid://cgmfhfx43byjx" path="res://Resources/Ailments/CONFUSION.tres" id="1_uphta"]
 [ext_resource type="Resource" uid="uid://b5h0i8wbbp1lp" path="res://Resources/Types/14.tres" id="2_s5pxs"]
 
 [resource]
@@ -18,8 +19,9 @@ effect_chance = 10
 priority = 0
 damage_class_id = 3
 effect_entries = "Has a $effect_chance% chance to confuse the target. Inflicts regular damage.  Has a $effect_chance% chance to confuse the target."
-stat_change_ids = []
-stat_change_valors = []
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 6
 meta_category_id = 4
@@ -34,4 +36,4 @@ meta_ailment_chance = 10
 meta_flinch_chance = 0
 meta_stat_chance = 0
 contact_flag = false
-move_effect = 1
+ailment = ExtResource("1_uphta")

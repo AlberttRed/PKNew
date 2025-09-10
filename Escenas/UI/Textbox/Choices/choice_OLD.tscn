@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://co08ksrvsm8lg"]
 
-[ext_resource type="Texture2D" uid="uid://bd7c5m6ia6ppn" path="res://Escenas/UI/Textbox/Choices/Resources/selarrow.png" id="1_qep8p"]
+[ext_resource type="Texture2D" uid="uid://cmeoqv04gsb84" path="res://Escenas/UI/Textbox/Choices/Resources/selarrow.png" id="1_qep8p"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ulqxp"]
 texture = ExtResource("1_qep8p")
-margin_left = 12.0
 expand_margin_top = 2.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
