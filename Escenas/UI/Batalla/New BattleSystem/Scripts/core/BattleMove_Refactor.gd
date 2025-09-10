@@ -159,6 +159,16 @@ func get_ailment() -> Ailment:
 func get_ailment_chance() -> float:
 	return 100.0 if base_data.get_ailment_chance() == 0 else (float(base_data.get_ailment_chance()) / 100.0)
 
+func get_stat_changes() -> Dictionary[StatTypes.Stat, int]:
+	return base_data.get_stat_changes()
+
+func get_stat_change_value(stat: StatTypes.Stat) -> int:
+	return get_stat_changes()[stat]
+
+func get_effectiveness_against_pokemon(target: BattlePokemon_Refactor) -> float:
+	return get_type().get_effectiveness_against_pokemon(target)
+
+
 # Calcula el daño infligido a un objetivo según la generación activa
 func calculate_damage(target: BattlePokemon_Refactor) -> DamageEffect:
 	assert(pokemon != null, "El movimiento no tiene asignado un 'pokemon' (usuario)")

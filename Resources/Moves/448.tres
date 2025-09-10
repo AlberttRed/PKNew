@@ -24,6 +24,7 @@ effect_entries = "Has a higher chance to confuse the target when the recorded so
 This move cannot be copied by mimic, mirror move, or sketch, nor selected by assist, metronome, or sleep talk."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 6
 meta_category_id = 4

@@ -21,6 +21,7 @@ damage_class_id = 3
 effect_entries = "Inflicts double damage if the target is Poisoned. Inflicts regular damage.  If the target is poisoned, this move has double power."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

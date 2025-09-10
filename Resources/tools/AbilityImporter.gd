@@ -4,6 +4,8 @@ extends EditorScript
 const ABILITY_PATH := "res://Resources/Abilities/"
 const ABILITY_CLASS := preload("res://Database/Classes/Ability.gd")
 
+var enum_entries := ["\tNONE = 0"]
+
 func _run():
 	print("🔄 Importando habilidades desde PokeAPI...")
 
@@ -34,17 +36,30 @@ func _run():
 				ability.description = flavor["flavor_text"].replace("\n", " ").strip_edges()
 				break
 
-		var filename = "%03d-%s.tres" % [ability.id, ability.internal_name.to_upper().replace("_", "-")]
-		var save_path = ABILITY_PATH + filename
+		#var filename = "%03d-%s.tres" % [ability.id, ability.internal_name.to_upper().replace("_", "-")]
+		#var save_path = ABILITY_PATH + filename
+#
+		#var err = ResourceSaver.save(ability, save_path)
+		#if err != OK:
+			#print("❌ Error guardando: " + save_path)
+		#else:
+			#print("✅ Guardada: " + filename)
 
-		var err = ResourceSaver.save(ability, save_path)
-		if err != OK:
-			print("❌ Error guardando: " + save_path)
-		else:
-			print("✅ Guardada: " + filename)
-
+		var enum_name = ability.internal_name.to_upper().replace("-", "_")
+		enum_entries.append("\t%s" % [enum_name])
+	_print_enum_file()
 	print("🎉 ¡Importación de habilidades completada!")
 
+func _print_enum_file():
+	var enum_code = "## Auto-generado por import_ability.gd\n"
+	enum_code += "enum AbilityID {\n"
+	enum_code += ",\n".join(enum_entries) + "\n"
+
+	enum_code += "}\n"
+
+	print(enum_code)
+		
+		
 func get_json(uri: String) -> String:
 	var http = HTTPClient.new()
 	var err = http.connect_to_host("pokeapi.co", 443, TLSOptions.client())

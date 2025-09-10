@@ -165,6 +165,13 @@ func show_already_ailment_message(user: BattlePokemon_Refactor, ailment: Ailment
 func show_ailment_previous_effect_message(user: BattlePokemon_Refactor, ailment: Ailment) -> void:
 	await show_message_from_dict(message_controller.get_ailment_previous_effect_message(user, ailment))
 
+func show_stat_stage_change_message(pokemon: BattlePokemon_Refactor, stat: StatTypes.Stat, amount: int):
+	await show_message_from_dict(message_controller.get_stat_stage_change_message(pokemon, stat, amount))
+
+func show_ability_effect_message(user: BattlePokemon_Refactor, target: BattlePokemon_Refactor, ability: Ability) -> void:
+	await show_message_from_dict(message_controller.get_ability_effect_message(user, target, ability))
+
+
 # Manda el mensaje a mostrar al MessageBox según el tipo de mensaje devuleto por el MessageController
 func show_message_from_dict(msg: Dictionary) -> void:
 	if msg == null or msg.is_empty():

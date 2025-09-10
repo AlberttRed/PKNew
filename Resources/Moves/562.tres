@@ -26,6 +26,7 @@ After the user eats a berry, it may use this move any number of times until the 
 If the trainer chooses this move when it cannot be used, the choice is rejected outright and the trainer must choose another move."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

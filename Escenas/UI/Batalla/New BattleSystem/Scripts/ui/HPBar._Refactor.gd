@@ -22,7 +22,7 @@ func init(_pokemon: BattlePokemon_Refactor) -> void:
 	pokemon = _pokemon
 
 	# Inicializar barras
-	health_bar.set_values(pokemon.base_data.hp_actual, pokemon.base_data.hp_total)
+	health_bar.set_values(pokemon.hp, pokemon.total_hp)
 	exp_bar.set_values(pokemon.base_data.totalExp, pokemon.base_data.nextLevelExpBase)
 
 	# Inicializar UI general

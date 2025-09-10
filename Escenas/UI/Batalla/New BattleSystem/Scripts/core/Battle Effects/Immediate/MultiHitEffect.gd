@@ -28,7 +28,7 @@ func _init(_user, _target, _move, _num_hits):
 
 		for e in effects:
 			# Evitar que cada golpe muestre el mensaje de efectividad individualmente
-			if e is DamageEffect:
+			if e is ApplyDamageEffect:
 				e.show_effectiveness = false
 			sub_effects.append(e)
 
@@ -43,15 +43,5 @@ func visualize(ui:BattleUI_Refactor):
 	if num_hits > 1:
 		await ui.show_multi_hit_message(num_hits)
 
-	# Mostrar mensaje de efectividad (solo una vez, si aplica)
-	#var dynamic_array: Array = sub_effects
-	#var first_effective = dynamic_array.find(func(e):
-		#return e is DamageEffect and e.effectiveness != 1.0
-	#)
-	var first_effective = (sub_effects as Array).find(func(e):
-		return e is DamageEffect and e.effectiveness != 1.0
-	)
-
-	if first_effective != -1:
-		var eff := (sub_effects[first_effective] as DamageEffect)
-		ui.show_effectiveness_message(eff)
+	
+	await ui.show_effectiveness_message(sub_effects[0].damage)

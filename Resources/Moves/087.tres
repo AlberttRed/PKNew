@@ -26,6 +26,7 @@ During rain dance, this move has 100% accuracy.  It also has a (100 - accuracy)%
 During sunny day, this move has 50% accuracy."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 1
 meta_category_id = 4

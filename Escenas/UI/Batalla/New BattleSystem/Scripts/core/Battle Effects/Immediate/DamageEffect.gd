@@ -10,7 +10,7 @@ var is_critical := false
 var effectiveness := 1.0
 var show_effectiveness := true
 
-func _init(_user, _target, _move, _amount):
+func _init(_user: BattlePokemon_Refactor, _target: BattlePokemon_Refactor, _move: BattleMove_Refactor, _amount:int):
 	user = _user
 	target = _target
 	move = _move
@@ -24,12 +24,6 @@ func visualize(ui:BattleUI_Refactor):
 	if !is_ineffective():
 		await target.battle_spot.play_hit_animation()
 		await target.battle_spot.apply_damage(amount)
-
-		if is_critical:
-			await ui.show_critical_hit_message()
-
-	if show_effectiveness:
-		await ui.show_effectiveness_message(self)
 			
 func is_super_effective() -> bool:
 	return effectiveness > 1.0

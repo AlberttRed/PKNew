@@ -1,32 +1,27 @@
-class_name RainWeatherEffect
 extends PersistentBattleEffect
+class_name RainWeatherEffect
 
-var duration := 5
+var started:bool = false
 
-func _init():
-	pass
+func apply_phase(_pokemon: BattlePokemon_Refactor, phase: Phases) -> void:
+	if phase == Phases.ON_END_BATTLE_TURN:
+		turns_left -= 1
+		if turns_left <= 0:
+			BattleEffectController.remove_field_effect(self)
 
-func on_phase(pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: BattleEffect_Refactor.Phases) -> bool:
-	if phase == BattleEffect_Refactor.Phases.ON_ENTRY_BEGIN:
-		await ui.messagebox.show_message("¡Comenzó a llover!")
-		await ui.weather.play("rain")
+func visualize_phase(_pokemon: BattlePokemon_Refactor, ui: BattleUI_Refactor, phase: Phases) -> void:
+	if phase == Phases.ON_ENTRY:
+		await ui.show_message_from_dict({
+			"type": "wait",
+			"text": "¡Comenzó a llover!",
+			"wait_time": 1.5
+		})
+	elif phase == Phases.ON_END_BATTLE_TURN:
+		await ui.show_message_from_dict({
+			"type": "wait",
+			"text": "La lluvia sigue cayendo.",
+			"wait_time": 1.0
+		})
 
-	elif phase == BattleEffect_Refactor.Phases.ON_END_TURN:
-		duration -= 1
-		if duration <= 0:
-			await ui.messagebox.show_message("¡La lluvia ha cesado!")
-			#BattleEffectController_Refactor.remove_field_effect(self)
-		else:
-			await ui.messagebox.show_message("¡Sigue lloviendo!")
-	return true
-
-func on_modifier(modifier_type: int, move, user, target, value):
-	if modifier_type != BattleEffect_Refactor.Modifiers.MOVE_POWER:
-		return value
-
-	var move_type = move.get_type().id
-	if move_type == "water":
-		return value * 1.5
-	elif move_type == "fire":
-		return value * 0.5
-	return value
+func get_priority() -> int:
+	return 5

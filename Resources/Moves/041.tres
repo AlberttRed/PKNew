@@ -23,6 +23,7 @@ damage_class_id = 2
 effect_entries = "Hits twice in the same turn.  Has a $effect_chance% chance to poison the target. Inflicts regular damage.  Hits twice in the same turn.  Has a $effect_chance% chance to poison the target."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 5
 meta_category_id = 4

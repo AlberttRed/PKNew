@@ -21,6 +21,7 @@ damage_class_id = 1
 effect_entries = "Copies the user's ability onto the target. Changes the target's ability to match the user's.  This effect ends when the target leaves battle."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 13

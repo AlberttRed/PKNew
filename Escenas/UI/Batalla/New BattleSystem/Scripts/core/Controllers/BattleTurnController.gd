@@ -8,6 +8,8 @@ var current_turn := 0
 var collected_choices: Array[BattleChoice_Refactor] = []
 
 func start_turn_loop():
+	for pokemon in battle_controller.get_all_active_pokemon():	
+		await BattleEffectController.process_phase(pokemon, BattleEffect_Refactor.Phases.ON_ENTRY)
 	while not battle_controller.battle_finished():
 		await new_turn()
 		await select_actions()
@@ -23,6 +25,7 @@ func new_turn():
 
 func select_actions():
 	collected_choices.clear()
+	print_stat_stages_log()
 	print_active_effects_log()
 	# Recorremos todos los BattleSpots activos en ambos lados del combate
 	for spot:BattleSpot_Refactor in battle_controller.get_active_battle_spots():
@@ -250,3 +253,24 @@ func print_active_effects_log():
 				print("     · %s" % name)
 
 	print("================================")
+
+
+func print_stat_stages_log() -> void:
+	for spot in battle_controller.get_active_battle_spots():
+		var pokemon = spot.get_active_pokemon()
+		var name = pokemon.get_display_name()
+		print("[Estadísticas modificadas para %s]" % name)
+
+		var stages = pokemon.stat_stages
+		var any_modified := false
+
+		for stat in StatTypes.Stat.values():
+			var stage = stages.get_stat(stat)
+			if stage != 0:
+				any_modified = true
+				var icon = "↑" if stage > 0 else "↓"
+				var stat_name = StatTypes.stat_to_string(stat).capitalize()
+				print("  %s: %s %+d" % [stat_name, icon, stage])
+
+		if not any_modified:
+			print("  (Sin modificaciones activas)")

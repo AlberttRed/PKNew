@@ -23,6 +23,7 @@ damage_class_id = 1
 effect_entries = "Prevents target from restoring its HP for five turns. For the next five turns, the target may not use any moves that only restore HP, and move effects that heal the target are disabled.  Moves that steal HP may still be used, but will only inflict damage and not heal the target."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 11
 meta_ailment_id = 15
 meta_category_id = 1

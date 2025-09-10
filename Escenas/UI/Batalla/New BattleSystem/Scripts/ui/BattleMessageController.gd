@@ -2,6 +2,7 @@ extends Node
 class_name BattleMessageController
 
 var AilmentMessages = BattleMessageAilment.new()
+var AbilityMessages = BattleMessageAbility.new()
 
 
 func get_intro_messages(
@@ -115,12 +116,68 @@ func get_ailment_effect_message(user:BattlePokemon_Refactor, ailment:Ailment) ->
 
 func get_ailment_previous_effect_message(user:BattlePokemon_Refactor, ailment:Ailment) -> Dictionary:
 	return AilmentMessages.get_ailment_previous_effect_message(user, ailment)
+	
+func get_ability_effect_message(user:BattlePokemon_Refactor, target:BattlePokemon_Refactor, ability:Ability) -> Dictionary:
+	return AbilityMessages.get_ability_effect_message(user, target, ability)
+
+func get_stat_stage_change_message(pokemon: BattlePokemon_Refactor, stat: StatTypes.Stat, amount: int) -> Dictionary:
+	if amount == 0:
+		return {}
+
+	var name := get_display_name(pokemon)
+	var stat_name := get_stat_display_name(stat)
+	var verb := ""
+	var msg := ""
+
+	if amount > 1:
+		verb = "subió mucho"
+	elif amount == 1:
+		verb = "subió"
+	elif amount < -1:
+		verb = "bajó mucho"
+	elif amount == -1:
+		verb = "bajó"
+	
+	msg =  "¡%s %s %s!" % [stat_name, get_possessive_name(pokemon), verb]
+	
+	return {
+		"type": "wait",
+		"text": msg,
+		"wait_time": 0.5
+	}
+
+func get_stat_display_name(stat: StatTypes.Stat) -> String:
+	match stat:
+		StatTypes.Stat.ATTACK: return "Ataque"
+		StatTypes.Stat.DEFENSE: return "Defensa"
+		StatTypes.Stat.SP_ATTACK: return "At. Esp."
+		StatTypes.Stat.SP_DEFENSE: return "Def. Esp."
+		StatTypes.Stat.SPEED: return "Velocidad"
+		StatTypes.Stat.ACCURACY: return "Precisión"
+		StatTypes.Stat.EVASION: return "Evasión"
+		_: return "Estadística"
 
 func get_failed_move_message(user: BattlePokemon_Refactor) -> Dictionary:
 	return {
 		"type": "input",
 		"text": "¡El ataque de %s falló!" % [user.get_name()]
 	}
+	
+static func get_display_name(pokemon: BattlePokemon_Refactor) -> String:
+	if pokemon.controllable:
+		return pokemon.get_display_name()
+	elif pokemon.is_wild:
+		return "el %s salvaje" % pokemon.get_name()
+	else:
+		return "el %s rival" % pokemon.get_name()
+
+static func get_possessive_name(pokemon: BattlePokemon_Refactor) -> String:
+	if pokemon.controllable:
+		return "de %s" % pokemon.get_display_name()
+	elif pokemon.is_wild:
+		return "del %s salvaje" % pokemon.get_name()
+	else:
+		return "del %s rival" % pokemon.get_name()
 
 func get_multi_hit_message(num_hits: int) -> Dictionary:
 	return {

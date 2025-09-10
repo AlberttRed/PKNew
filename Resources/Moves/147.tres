@@ -21,6 +21,7 @@ damage_class_id = 1
 effect_entries = "Puts the target to sleep. Puts the target to sleep."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 2
 meta_category_id = 1

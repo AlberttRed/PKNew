@@ -24,6 +24,7 @@ effect_entries = "Moves have 100% accuracy against the target for three turns. F
 This effect is removed by gravity.  If Gravity is already in effect, this move will fail."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = -1
 meta_category_id = 1

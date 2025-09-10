@@ -26,6 +26,7 @@ If the target is protected by safeguard when this move is used, this move will f
 insomnia and vital spirit prevent the sleep if the target has either at the end of the next turn, but will not cause this move to fail on use."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 14
 meta_category_id = 1

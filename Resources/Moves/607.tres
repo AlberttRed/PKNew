@@ -21,6 +21,7 @@ damage_class_id = 1
 effect_entries = "Does nothing. Does nothing."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 3
 meta_ailment_id = 0
 meta_category_id = 13

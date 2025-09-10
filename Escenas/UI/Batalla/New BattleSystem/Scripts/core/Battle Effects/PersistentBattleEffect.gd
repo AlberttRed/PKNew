@@ -5,7 +5,7 @@ var source # Ailment/Ability/Weather
 var effect_success:bool
 var turns_left:int
 
-func _init(_source, _min_turns, _max_turns) -> void:
+func _init(_source, _min_turns = null, _max_turns = null) -> void:
 	source = _source
 	if _min_turns and _max_turns:
 		turns_left = randi_range(_min_turns, _max_turns)

@@ -25,6 +25,7 @@ Pokémon cannot use rest during this effect.
 This move cannot be selected by sleep talk."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 8
 meta_ailment_id = 0
 meta_category_id = 0

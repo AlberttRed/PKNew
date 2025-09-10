@@ -26,6 +26,7 @@ This move will not select assist, chatter, circle throw, copycat, counter, covet
 This move cannot be copied by mirror move, nor selected by metronome or sleep talk."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

@@ -25,6 +25,7 @@ effect_entries = "Super-effective against water. Inflicts regular damage.  This 
 The target's other type will affect damage as usual.  If this move's type is changed, it remains super-effective against Water regardless of its type."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 3
 meta_category_id = 4

@@ -32,6 +32,7 @@ PP remaining | Power
 If this move is activated by another move, the activating move's PP is used to calculate power."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 0
 meta_category_id = 0

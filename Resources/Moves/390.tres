@@ -30,6 +30,7 @@ This move does not trigger synchronize, unless the Pokémon with synchronize was
 Pokémon entering the field due to baton pass are not affected by this effect."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 6
 meta_ailment_id = 0
 meta_category_id = 11

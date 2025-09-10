@@ -25,6 +25,7 @@ var sp_defense: int
 var speed: int
 
 var ability: Ability = null
+var nature: Nature = null
 
 var accuracy_stage: int = 0
 var evasion_stage: int = 0
@@ -33,19 +34,22 @@ var critical_stage: int = 0
 var status: Ailment = null
 var status_turns: int = 0
 
+var stat_stages := StatStages.new()
+
 var selectedBattleChoice: BattleChoice_Refactor
 
 func _init(_pokemon: PokemonInstance, _IA: BattleIA_Refactor = null):
 	base_data = _pokemon
 	controllable = (_IA == null)
 	hp = base_data.hp_actual
-	total_hp = base_data.getHPStat()
-	attack = base_data.getAttackStat()
-	defense = base_data.getDefenseStat()
-	sp_attack = base_data.getSpAttackStat()
-	sp_defense = base_data.getSpDefenseStat()
-	speed = base_data.getSpeedStat()
-	ability = base_data.get_ability_resource()
+	total_hp = get_final_stat(StatTypes.Stat.HP)
+	attack = get_final_stat(StatTypes.Stat.ATTACK)
+	defense = get_final_stat(StatTypes.Stat.DEFENSE)
+	sp_attack = get_final_stat(StatTypes.Stat.SP_ATTACK)
+	sp_defense = get_final_stat(StatTypes.Stat.SP_DEFENSE)
+	speed = get_final_stat(StatTypes.Stat.SPEED)
+	ability = base_data.ability
+	nature = base_data.nature
 
 	#status = base_data.status
 	#status_turns = base_data.status_turns
@@ -90,24 +94,27 @@ func get_front_sprite():
 	
 
 func get_hp() -> int:
-	return base_data.hp_actual
+	return hp
 
 func get_attack() -> int:
-	return base_data.attack
+	return attack
 
 func get_defense() -> int:
-	return base_data.defense
+	return defense
 
 func get_sp_attack() -> int:
-	return base_data.special_attack
+	return sp_attack
 
 func get_sp_defense() -> int:
-	return base_data.special_defense
+	return sp_defense
 
 func get_speed() -> int:
-	return base_data.speed
+	return speed
 	
 func get_name() -> String:
+	return base_data.Name
+		
+func get_display_name() -> String:
 	if !base_data.nickname.is_empty():
 		return base_data.nickname
 	else:
@@ -164,11 +171,22 @@ func set_status(new_status: Ailment):
 
 	status = new_status
 
+func get_base_stat(stat: StatTypes.Stat) -> int:
+	return base_data.get_base_stat(stat)
 
-#func select_action() -> void:
-	#if controllable:
-		#await BattleUIRef.actions_menu.show_for(self)
-		#selectedBattleChoice = await actionSelected
-		#BattleUIRef.actions_menu.hide()
-	#else:
-		#selectedBattleChoice = decide_ai_action()
+func get_iv(stat: StatTypes.Stat) -> int:
+	return base_data.get_iv(stat)
+
+func get_ev(stat: StatTypes.Stat) -> int:
+	return base_data.get_ev(stat)
+
+func get_final_stat(stat: StatTypes.Stat, level: int = base_data.level) -> int:
+	return base_data.get_final_stat(stat, level)
+
+func get_modified_stat(stat: StatTypes.Stat) -> float:
+	var final = get_final_stat(stat)
+	var multiplier = stat_stages.get_multiplier(stat)
+	return final * multiplier
+
+func log_pokemon_stats():
+	base_data.log_pokemon_stats()

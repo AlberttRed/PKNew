@@ -27,6 +27,7 @@ If a Pokémon under this effect uses bug bite or pluck on a Pokémon holding a b
 This effect is passed by baton pass."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 19
 meta_category_id = 1

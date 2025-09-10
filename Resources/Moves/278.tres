@@ -23,6 +23,7 @@ effect_entries = "User recovers the item it last used up. User recovers the last
 Items taken or given away by covet, knock off, switcheroo, thief, or trick may not be recovered."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

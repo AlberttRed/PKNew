@@ -18,8 +18,11 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Raises the user's evasion by one stage. Raises the user's evasion by one stage."
-stat_change_ids = Array[int]([8])
-stat_change_valors = Array[int]([1])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+6: 1
+})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 2

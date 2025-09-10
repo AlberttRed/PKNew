@@ -19,8 +19,11 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Raises the user's Special Defense by one stage.  User's Electric moves have doubled power next turn. Raises the user's Special Defense by one stage.  If the user uses an electric move next turn, its power will be doubled."
-stat_change_ids = Array[int]([5])
-stat_change_valors = Array[int]([1])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+3: 1
+})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 2

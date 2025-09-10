@@ -23,6 +23,7 @@ effect_entries = "Has a $effect_chance% chance to put the target to sleep. Infli
 If the user is a meloetta, it will toggle between Aria and Pirouette Forme."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 11
 meta_ailment_id = 2
 meta_category_id = 4

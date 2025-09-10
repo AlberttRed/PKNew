@@ -49,6 +49,14 @@ func get_effectiveness_against(type) -> float:
 	
 	print(Name + " is normal againgst " + type.Name)
 	return 1.0
+	
+func get_effectiveness_against_pokemon(pokemon: BattlePokemon_Refactor) -> float:
+	var t1 = pokemon.get_type1()
+	var t2 = pokemon.get_type2()
+	var eff1 = get_effectiveness_against(t1)
+	var eff2 = get_effectiveness_against(t2) if t2 != null and t2 != t1 else 1.0
+	return eff1 * eff2
+
 			
 func _to_string() -> String:
 	return "%s (%s)" % [Name, id]

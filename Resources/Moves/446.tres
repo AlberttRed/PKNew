@@ -23,6 +23,7 @@ effect_entries = "Causes damage when opposing Pokémon switch in. Spreads sharp 
 rapid spin removes this effect from its user's side of the field."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 6
 meta_ailment_id = 0
 meta_category_id = 11

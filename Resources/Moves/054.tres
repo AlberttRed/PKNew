@@ -25,6 +25,7 @@ guard swap, heart swap, and power swap may still be used.
 defog used by an opponent will end this effect."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 4
 meta_ailment_id = 0
 meta_category_id = 11

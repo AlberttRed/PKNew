@@ -20,8 +20,11 @@ effect_chance = 0
 priority = 0
 damage_class_id = 1
 effect_entries = "Raises the target's Special Attack by one stage and confuses the target. Raises the target's Special Attack by one stage, then confuses it."
-stat_change_ids = Array[int]([4])
-stat_change_valors = Array[int]([1])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+2: 1
+})
 target_id = 10
 meta_ailment_id = 6
 meta_category_id = 5

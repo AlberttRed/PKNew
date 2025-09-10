@@ -23,6 +23,7 @@ effect_entries = "For five turns, slower Pokémon will act before faster Pokémo
 Pokémon holding full incense, lagging tail, or quick claw and Pokémon with stall ignore this effect."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 12
 meta_ailment_id = 0
 meta_category_id = 10

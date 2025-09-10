@@ -8,4 +8,4 @@ func execute() -> Array[ImmediateBattleEffect]:
 	var heal_result := move.calculate_healing(target, damage_result.amount)
 
 	#Devolvemos el impacto del daño, y luego el impacto de la curación
-	return[]# [damage_result,heal_result]
+	return []

@@ -2,6 +2,7 @@ class_name BattleEffect_Refactor
 extends RefCounted
 
 enum Phases {
+	ON_ENTRY,
 	ON_INIT_BATTLE_TURN,
 	ON_INIT_POKEMON_TURN,
 	ON_BEFORE_MOVE,

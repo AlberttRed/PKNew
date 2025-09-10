@@ -23,6 +23,7 @@ effect_entries = "User swaps Attack and Defense. The user's original Attack and 
 This effect is passed on by baton pass."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 7
 meta_ailment_id = 0
 meta_category_id = 13

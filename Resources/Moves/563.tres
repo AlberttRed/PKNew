@@ -20,8 +20,12 @@ effect_chance = 100
 priority = 0
 damage_class_id = 1
 effect_entries = "Raises the Attack and Special Attack of all grass Pokémon in battle. Raises the Attack and Special Attack of all grass Pokémon in battle."
-stat_change_ids = Array[int]([2, 4])
-stat_change_valors = Array[int]([1, 1])
+stat_change_ids = Array[int]([])
+stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({
+0: 1,
+2: 1
+})
 target_id = 14
 meta_ailment_id = 0
 meta_category_id = 2

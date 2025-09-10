@@ -1,18 +1,8 @@
-[gd_resource type="Resource" script_class="Move" load_steps=6 format=3 uid="uid://baoyq4m33lkgt"]
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://baoyq4m33lkgt"]
 
 [ext_resource type="Resource" uid="uid://l318umt6ltd1" path="res://Resources/Ailments/BURN.tres" id="1_4h4fs"]
 [ext_resource type="Script" uid="uid://dn7q7tk3occ58" path="res://Database/Classes/move_resource.gd" id="1_h2lro"]
-[ext_resource type="Script" uid="uid://ctn5nkcm5a6ci" path="res://Database/Classes/Ailment.gd" id="2_44146"]
 [ext_resource type="Resource" uid="uid://d3pw7574qhbn3" path="res://Resources/Types/10.tres" id="2_i3mvs"]
-
-[sub_resource type="Ailment" id="Ailment_s8aj4"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_44146")
-id = ""
-display_name = ""
-description = ""
-is_persistent = true
 
 [resource]
 resource_name = "7 - Puño Fuego"
@@ -31,6 +21,7 @@ damage_class_id = 2
 effect_entries = "Has a $effect_chance% chance to burn the target. Inflicts regular damage.  Has a $effect_chance% chance to burn the target."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 10
 meta_ailment_id = 4
 meta_category_id = 4

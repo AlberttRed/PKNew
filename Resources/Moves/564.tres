@@ -24,6 +24,7 @@ effect_entries = "Covers the opposing field, lowering opponents' Speed by one st
 Pokémon in the air, such as flying-types and those with levitate, are unaffected.  rapid spin removes Sticky Web from the user's side of the field; defog removes it from both sides."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 6
 meta_ailment_id = 0
 meta_category_id = 11

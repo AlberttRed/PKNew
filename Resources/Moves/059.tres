@@ -23,6 +23,7 @@ effect_entries = "Has a $effect_chance% chance to freeze the target. Inflicts re
 During hail, this move has 100% accuracy.  It also has a (100 - accuracy)% chance to break through the protection of protect and detect."
 stat_change_ids = Array[int]([])
 stat_change_valors = Array[int]([])
+stat_changes = Dictionary[int, int]({})
 target_id = 11
 meta_ailment_id = 3
 meta_category_id = 4
